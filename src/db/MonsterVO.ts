@@ -9,6 +9,7 @@ class MonsterVO {
     }
 
     public isMonster = true;
+    public coinAdd = 0;
 
     public width: number;
     public height: number;

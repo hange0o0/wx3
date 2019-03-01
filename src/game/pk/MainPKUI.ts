@@ -240,7 +240,7 @@ class MainPKUI extends game.BaseItem {
         this.visible = false;
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         PKVideoCon.getInstance().remove();
-        PKManager.getInstance().testSendResult();
+        //PKManager.getInstance().testSendResult();
 
 
         this.dispatchEventWith('visible_change')
@@ -482,7 +482,7 @@ class MainPKUI extends game.BaseItem {
             }
 
 
-            PKManager.getInstance().testSendResult();  //可能看录像
+            //PKManager.getInstance().testSendResult();  //可能看录像
 
             if(this.shareStr)
             {

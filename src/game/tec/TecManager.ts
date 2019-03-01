@@ -32,4 +32,17 @@ class TecManager {
         var oo = this.tecBase[id]
         return Math.floor(oo.v1 + Math.pow(lv,oo.v2)*oo.v3);
     }
+
+    public getDefForce(){
+        return this.getTecLevel(31)*10
+    }
+    public getAtkForce(){
+        return this.getTecLevel(32)*10
+    }
+    public getTeamCost(){
+        return this.getTecLevel(33)+20
+    }
+    public getTeamNum(){
+        return this.getTecLevel(34)+4
+    }
 }

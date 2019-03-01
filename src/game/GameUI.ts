@@ -52,7 +52,11 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.rankBtn,this.onRank)
 
         this.scroller.viewport = this.list
-        this.list.itemRenderer = MainWorkItem;
+        this.list.itemRendererFunction = (data)=>{
+            if(data.def)
+                return DefUI;
+            return MainWorkItem;
+        };
 
 
     }
@@ -186,7 +190,7 @@ class GameUI extends game.BaseUI {
     }
     public reInitList(){
         this.list.dataProvider = new eui.ArrayCollection([
-            {id:1},{id:2}
+            {def:true},{id:1},{id:2},{id:3}
         ])
     }
 

@@ -54,7 +54,7 @@ class CoinGameUI extends game.BaseUI {
 
         this.addBtnEvent(this.pkBtn,this.onPK)
         this.addBtnEvent(this.resetBtn,this.reset)
-        this.addBtnEvent(this.tipsBtn,this.onTips)
+        //this.addBtnEvent(this.tipsBtn,this.onTips)
 
         this.chooseList.addEventListener('start_drag',this.onDragStart,this);
         this.chooseList.addEventListener('end_drag',this.onDragEnd,this);
@@ -206,39 +206,39 @@ class CoinGameUI extends game.BaseUI {
         this.renewTitle();
     }
 
-    public onTips(){
-        if(UM.tipsLevel == this.level)
-        {
-            this.showTips();
-            return;
-        }
-        if(this.level <= 10)
-        {
-            MyWindow.Confirm('本关可免费或得提示，但你确定不再想一下吗？',(b)=>{
-                if(b==1)
-                {
-                    UM.tipsLevel = this.level;
-                    this.showTips()
-                }
-            },['再想想','要提示']);
-            return;
-        }
-        var cost = Math.min(2000,Math.ceil(this.level/20)*100)
-        MyWindow.Confirm('确定花费'+cost+'金币得到提示答案吗？',(b)=>{
-            if(b==1)
-            {
-               if(UM.coin < cost)
-               {
-                   MyWindow.Alert('金币不足！')
-                   return;
-               }
-                UM.addCoin(-cost);
-                UM.tipsLevel = this.level;
-                this.showTips()
-
-            }
-        },['再想想','要提示']);
-    }
+    //public onTips(){
+    //    if(UM.tipsLevel == this.level)
+    //    {
+    //        this.showTips();
+    //        return;
+    //    }
+    //    if(this.level <= 10)
+    //    {
+    //        MyWindow.Confirm('本关可免费或得提示，但你确定不再想一下吗？',(b)=>{
+    //            if(b==1)
+    //            {
+    //                UM.tipsLevel = this.level;
+    //                this.showTips()
+    //            }
+    //        },['再想想','要提示']);
+    //        return;
+    //    }
+    //    var cost = Math.min(2000,Math.ceil(this.level/20)*100)
+    //    MyWindow.Confirm('确定花费'+cost+'金币得到提示答案吗？',(b)=>{
+    //        if(b==1)
+    //        {
+    //           if(UM.coin < cost)
+    //           {
+    //               MyWindow.Alert('金币不足！')
+    //               return;
+    //           }
+    //            UM.addCoin(-cost);
+    //            UM.tipsLevel = this.level;
+    //            this.showTips()
+    //
+    //        }
+    //    },['再想想','要提示']);
+    //}
 
     private showTips(){
         var list:any = this.question.list2.split(',')
@@ -401,16 +401,16 @@ class CoinGameUI extends game.BaseUI {
         this.renewTitle();
         this.showQuestion();
         this.setChooseList();
-        if(UM.tipsLevel == this.level)
-        {
-            this.showTips();
-        }
-        else
-        {
+        //if(UM.tipsLevel == this.level)
+        //{
+        //    this.showTips();
+        //}
+        //else
+        //{
             this.getTipsIcon.visible = false;
 
 
-            var oo = SharedObjectManager.getInstance().getMyValue('coin_game_value')
+            var oo = SharedObjectManager.getInstance().getMyValue('coin_game_value');
             if(oo && oo.key == this.level)
             {
                 var arr = oo.value.split(',');
@@ -418,7 +418,7 @@ class CoinGameUI extends game.BaseUI {
                 {
                     arr[i] = {id:MonsterVO.getObject(arr[i]).id,list:arr};
                 }
-                this.dataProvider.source = arr
+                this.dataProvider.source = arr;
                 this.dataProvider.refresh();
                 this.onItemChange();
             }
@@ -426,7 +426,7 @@ class CoinGameUI extends game.BaseUI {
             {
                 this.reset();
             }
-        }
+        //}
     }
 
     public reset(){

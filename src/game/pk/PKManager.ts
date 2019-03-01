@@ -93,6 +93,9 @@ class PKManager {
         //index = index%mapNum || mapNum;
         return 'map'+2+'_jpg'
     }
+    public getDefBG(){
+        return 'map'+1+'_jpg'
+    }
 
     public getTodayIndex(){
         var t = this.beginTime;
@@ -565,7 +568,6 @@ class PKManager {
                 def:MonsterManager.getInstance().createDefSave(),
                 monster:MonsterManager.getInstance().monsterData,
                 tec:TecManager.getInstance().tecData,
-                energy:UM.energy,
                 chapterLevel:UM.chapterLevel,
                 coinObj:UM.coinObj,
                 guideFinish:UM.guideFinish,

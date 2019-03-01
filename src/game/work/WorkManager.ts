@@ -62,8 +62,15 @@ class WorkManager {
     }
 
     public getWorkCoin(id){
+        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getTecLevel(21)/100 + MonsterManager.getInstance().getWorkAdd(id)));
+    }
+
+    //基础挖矿效率
+    public getBaseWorkCoin(id){
         var vo = MonsterVO.getObject(id);
-        return Math.ceil((this.getWorkCD(id)/10000 + vo.cost)*(1+TecManager.getInstance().getTecLevel(21)/100 + MonsterManager.getInstance().getWorkAdd(id)));
+        if(!vo.coinAdd)
+            vo.coinAdd =  Math.ceil(this.getWorkCD(id)/1000 + vo.cost/2 + vo.level/2)
+        return vo.coinAdd;
     }
 
     public onTimer(){
@@ -79,7 +86,6 @@ class WorkManager {
                 UM.addCoin(this.getWorkCoin(oo.id),true);
             }
         }
-        WorkManager.getInstance().getWorkCD(1)/10000
     }
 
     public getWorkList(index){

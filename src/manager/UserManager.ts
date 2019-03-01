@@ -24,7 +24,6 @@ class UserManager {
     public energy: any;
     public chapterLevel: number = 0;
     public friendNew: any = {};
-    public energy:any = {};
     public coinObj:{
         loginTime,
         loginDays,
@@ -236,7 +235,7 @@ class UserManager {
 
     private orginUserData(){
          return {
-             loginTime:TM.now(),   //$
+             loginTime:TM.now() - 3600,   //$
              coin:300,   //$
              coinwin:0,   //$
              win:0,   //$
@@ -244,6 +243,7 @@ class UserManager {
              guideFinish:false,
              chapterLevel:1,
              tipsLevel:0,
+             def:'1#0,48#0',
              work:['1#0#0#1','2#0#0#1','3#0#0#1','4#0#0#1','70#0#0#1','48#0#0#1'], //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间

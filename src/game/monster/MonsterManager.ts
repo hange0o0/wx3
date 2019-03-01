@@ -41,6 +41,7 @@ class MonsterManager {
         return def.join(',');
     }
 
+
     public getMonsterLevel(id){
         if(!this.monsterData[id])
             return 0;
