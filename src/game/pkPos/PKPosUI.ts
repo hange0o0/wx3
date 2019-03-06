@@ -1,30 +1,35 @@
-class CoinGameUI extends game.BaseUI {
+class PKPosUI extends game.BaseUI {
 
-    private static _instance: CoinGameUI;
-    public static getInstance(): CoinGameUI {
+    private static _instance: PKPosUI;
+    public static getInstance(): PKPosUI {
         if(!this._instance)
-            this._instance = new CoinGameUI();
+            this._instance = new PKPosUI();
         return this._instance;
     }
 
     private topUI: TopUI;
     private bottomUI: BottomUI;
+    private mainCon: eui.Group;
     private con: eui.Group;
     private bg: eui.Image;
+    private forceText: eui.Label;
+    private chooseGroup: eui.Group;
+    private desText: eui.Label;
+    private chooseList: eui.List;
     private scroller: eui.Scroller;
     private list: eui.List;
-    private chooseList: eui.List;
     private btnGroup: eui.Group;
-    private tipsBtn: eui.Group;
-    private getTipsIcon: eui.Image;
     private resetBtn: eui.Group;
+    private okBtn: eui.Group;
     private pkBtn: eui.Group;
     private costText: eui.Label;
-    private desText: eui.Label;
 
 
 
-    private dragTarget = new CoinGameChooseItem()
+
+
+
+    private dragTarget = new PKPosChooseItem()
 
 
     private monsterArr = []
@@ -36,7 +41,7 @@ class CoinGameUI extends game.BaseUI {
     public question = {"list1":"1,11,44,6,72,4,16","list2":"42,73,17,10,73","seed":19348313264,"cost":30}
     public constructor() {
         super();
-        this.skinName = "CoinGameUISkin";
+        this.skinName = "PKPosUISkin";
     }
 
     public childrenCreated() {
@@ -45,16 +50,15 @@ class CoinGameUI extends game.BaseUI {
         this.bottomUI.setHide(this.onClose,this);
 
 
-        this.chooseList.itemRenderer = CoinGameChooseItem
+        this.chooseList.itemRenderer = PKPosChooseItem
         this.chooseList.dataProvider = this.dataProvider = new eui.ArrayCollection();
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = CoinGameListItem
+        this.list.itemRenderer = PKPosListItem
         this.list.dataProvider =  this.chooseDataProvider = new eui.ArrayCollection()
 
-        this.addBtnEvent(this.pkBtn,this.onPK)
-        this.addBtnEvent(this.resetBtn,this.reset)
-        //this.addBtnEvent(this.tipsBtn,this.onTips)
+        this.addBtnEvent(this.pkBtn,this.onPK);
+        this.addBtnEvent(this.resetBtn,this.reset);
 
         this.chooseList.addEventListener('start_drag',this.onDragStart,this);
         this.chooseList.addEventListener('end_drag',this.onDragEnd,this);
@@ -122,7 +126,6 @@ class CoinGameUI extends game.BaseUI {
         {
             this.dragTarget.showDragState(0)
         }
-
     }
 
     private onDragEnd(e){
@@ -206,40 +209,6 @@ class CoinGameUI extends game.BaseUI {
         this.renewTitle();
     }
 
-    //public onTips(){
-    //    if(UM.tipsLevel == this.level)
-    //    {
-    //        this.showTips();
-    //        return;
-    //    }
-    //    if(this.level <= 10)
-    //    {
-    //        MyWindow.Confirm('本关可免费或得提示，但你确定不再想一下吗？',(b)=>{
-    //            if(b==1)
-    //            {
-    //                UM.tipsLevel = this.level;
-    //                this.showTips()
-    //            }
-    //        },['再想想','要提示']);
-    //        return;
-    //    }
-    //    var cost = Math.min(2000,Math.ceil(this.level/20)*100)
-    //    MyWindow.Confirm('确定花费'+cost+'金币得到提示答案吗？',(b)=>{
-    //        if(b==1)
-    //        {
-    //           if(UM.coin < cost)
-    //           {
-    //               MyWindow.Alert('金币不足！')
-    //               return;
-    //           }
-    //            UM.addCoin(-cost);
-    //            UM.tipsLevel = this.level;
-    //            this.showTips()
-    //
-    //        }
-    //    },['再想想','要提示']);
-    //}
-
     private showTips(){
         var list:any = this.question.list2.split(',')
         for(var i=0;i<list.length;i++)
@@ -250,7 +219,7 @@ class CoinGameUI extends game.BaseUI {
         this.dataProvider.source = list;
         this.dataProvider.refresh();
         this.onItemChange();
-        this.getTipsIcon.visible = true;
+
     }
 
 
@@ -299,7 +268,7 @@ class CoinGameUI extends game.BaseUI {
         }
     }
 
-    public showQuestion() {
+    public showEnemy() {
         while(this.monsterArr.length > 0)
         {
             PKMonsterMV.freeItem(this.monsterArr.pop());
@@ -399,7 +368,7 @@ class CoinGameUI extends game.BaseUI {
         this.level = UM.chapterLevel;
         this.question = PKManager.getInstance().getChapterData();
         this.renewTitle();
-        this.showQuestion();
+        this.showEnemy();
         this.setChooseList();
         //if(UM.tipsLevel == this.level)
         //{
@@ -407,7 +376,7 @@ class CoinGameUI extends game.BaseUI {
         //}
         //else
         //{
-            this.getTipsIcon.visible = false;
+
 
 
             var oo = SharedObjectManager.getInstance().getMyValue('coin_game_value');

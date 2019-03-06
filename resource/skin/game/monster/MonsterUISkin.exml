@@ -1,3 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="MonsterUISkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="MonsterUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
+	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+	<e:Scroller id="scroller" left="0" right="0" top="360" bottom="100" bounces="false">
+		<e:Group>
+			<e:List id="list" width="200" height="200" x="96" y="96">
+				<e:layout>
+					<e:VerticalLayout paddingLeft="20" gap="20" paddingBottom="20" paddingTop="20"/>
+				</e:layout>
+			</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:List id="topList" width="640" height="280" x="0" y="70" includeIn="s1">
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:List>
+	<e:Image source="bg9_png" scale9Grid="12,12,4,5" x="0" y="60" width="640" height="300" includeIn="s1"/>
 </e:Skin>

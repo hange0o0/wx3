@@ -63,7 +63,7 @@ class FightUI extends game.BaseUI {
             this.energyText.text = DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5)
             this.energyText.textColor = 0xFF0000
         }
-        this.logRedMC.visible = FightManager.getInstance().isRed();
+
     }
 
 
@@ -78,17 +78,25 @@ class FightUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.renew();
+        FightManager.getInstance().renewSearch();
+        this.logRedMC.visible = false;
+        this.renewIng();
+        this.renewSearch();
         this.renewEnergy()
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }
 
-    private onTimer(){
-       this.renewEnergy()
+
+    public renewIng(){
+        this.list.dataProvider = new eui.ArrayCollection(FightManager.getInstance().getAtkList())
     }
 
-    public renew(){
+    public renewSearch(){
+        this.list2.dataProvider = new eui.ArrayCollection(FightManager.getInstance().searchRobot)
+    }
 
+    private onTimer(){
+       this.renewEnergy()
     }
 
 }

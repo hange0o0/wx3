@@ -1,7 +1,7 @@
-class CoinGameChooseItem extends game.BaseItem {
+class PKPosChooseItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "CoinGameChooseItemSkin";
+        this.skinName = "PKPosChooseItemSkin";
     }
 
     private bg: eui.Image;
@@ -63,7 +63,7 @@ class CoinGameChooseItem extends game.BaseItem {
 
 
     private onInfo(){
-        CoinGameUI.getInstance().stopDrag();
+        PKPosUI.getInstance().stopDrag();
         DragManager.getInstance().endDrag();
         var arr = [];
         for(var i=0;i<this.data.list.length;i++)
@@ -74,7 +74,7 @@ class CoinGameChooseItem extends game.BaseItem {
     }
 
     private onClick(){
-         CoinGameUI.getInstance().deleteItem(this.data)
+        PKPosUI.getInstance().deleteItem(this.data)
     }
 
     public dataChanged(){

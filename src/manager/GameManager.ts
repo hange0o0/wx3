@@ -91,7 +91,8 @@ class GameManager {
             EM.dispatch(GameEvent.client.pass_day);
         }
 
-        WorkManager.getInstance().onTimer()
+        WorkManager.getInstance().onTimer();
+        FightManager.getInstance().onTimer();
         EM.dispatch(GameEvent.client.timer);
 
         //if(UM.friendtime == 0){  //拿过日志了

@@ -546,6 +546,6 @@ class PKMonsterData {
     public getSkillValue(index,needForce=false){
         var PD = PKData.getInstance();
 
-        return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).force:0)
+        return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).getMonsterForce(this.id):0)
     }
 }

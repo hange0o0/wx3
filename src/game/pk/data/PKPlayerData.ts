@@ -6,7 +6,8 @@ class PKPlayerData {
     public head;
     public hp; //城堡的血量
     public type//类型
-    public force;//怪的基础属性
+    private force;//怪的基础属性
+    public mforce;//怪的基础属性
     public teamData:PKTeamData   //对应队伍
 
     public autoList
@@ -39,7 +40,7 @@ class PKPlayerData {
     }
 
     public getMonsterForce(mid?){
-        return this.force
+        return this.force + (this.mforce[mid] || 0)
     }
 
     public addMonster(){
@@ -56,7 +57,7 @@ class PKPlayerData {
         var atkRota = this.teamData.atkRota;
         var x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
         PKData.getInstance().addMonster({
-            force:this.force,
+            force:this.getMonsterForce(mid),
             mid:mid,
             owner:this.id,
             atkRota:atkRota,

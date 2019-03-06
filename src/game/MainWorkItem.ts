@@ -6,11 +6,8 @@ class MainWorkItem extends game.BaseItem {
 
     private con: eui.Group;
     private bg: eui.Image;
-    private numText: eui.Label;
-    private desText: eui.Label;
-    private setBtn: eui.Image;
     private redMC: eui.Image;
-    private lockText: eui.Label;
+
 
 
 
@@ -40,8 +37,8 @@ class MainWorkItem extends game.BaseItem {
         else
         {
             this.currentState = 'lock'
-            this.lockText.text = '1111'
         }
+        this.bg.source = PKManager.getInstance().getWorkBG(this.data.id)
     }
 
     private showList() {
@@ -68,7 +65,7 @@ class MainWorkItem extends game.BaseItem {
             //item.currentMV.scaleX = Math.abs(item.currentMV.scaleX);
             //if(this.teamID == 1)
             //    item.currentMV.scaleX *= -1
-            item.bottom = 50+vo.height*0.1 - 2 + 4*Math.random();
+            item.bottom = 30+vo.height*0.4 - 2 + 4*Math.random();
             item['w'] = vo.width
             item['workState'] = 0;
             this.monsterArr.push(item);
@@ -82,7 +79,7 @@ class MainWorkItem extends game.BaseItem {
         }
 
         this.onE()
-        this.bg.source = PKManager.getInstance().getWorkBG(this.data.id)
+
 
 
         var max = WM.getWorkNum();
@@ -92,15 +89,13 @@ class MainWorkItem extends game.BaseItem {
         else
             localMax = localMax%10;
 
-        this.numText.text = arr.length + '/' + localMax;
-        this.desText.text = '矿坑' + this.data.id;
         this.redMC.visible = arr.length < localMax && MonsterManager.getInstance().getFreeMonster().length > 0
     }
 
     public onE(){
         if(this.currentState == 'lock')
             return
-        var t = UM.nowMS();
+        var t = TM.nowMS();
         var WM = WorkManager.getInstance();
         for(var i=0;i<this.monsterArr.length;i++)
         {

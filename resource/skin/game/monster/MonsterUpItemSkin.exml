@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MonsterUpItemSkin" width="180" height="280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:MonsterItem id="item" x="0" y="0" skinName="MonsterItemSkin"/>
+	<e:Label id="text" text="Label" y="208" horizontalCenter="0" size="24"/>
+	<e:Group id="rateBar" horizontalCenter="0" bottom="0">
+		<e:Image source="bar_bg_png" x="0" y="0" width="158"/>
+		<e:Image id="barMC" source="bar1_png" x="2" y="2" width="154"/>
+		<e:Label id="rateText" text="00:00:00" size="24" textColor="0xE5C68E" horizontalCenter="0" verticalCenter="20" stroke="2"/>
+	</e:Group>
+</e:Skin>

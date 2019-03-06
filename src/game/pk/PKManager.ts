@@ -73,6 +73,30 @@ class PKManager {
 
     public roundData;
 
+    public randomNick(){
+        return Math.random()+''
+    }
+    public setHead(img,head){
+        var wx = window['wx'];
+        if(!wx)
+        {
+            img.source = 'icon_test_png'
+            return
+        }
+        img.source = 'icon_test_png'
+        wx.cloud.downloadFile({
+            fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
+            //fileID: 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/level/level_'+tempIndex+'.txt',
+            success: res => {
+                console.log(res);
+                img.source = res.tempFilePath;
+            },
+            fail: err => {
+                console.log(err)
+            }
+        })
+    }
+
     public getPKBG(showData?){
         showData = showData || this.getCurrentData()
         var mapNum = 7
@@ -91,10 +115,13 @@ class PKManager {
     public getWorkBG(index){
         //var mapNum = 7
         //index = index%mapNum || mapNum;
-        return 'map'+2+'_jpg'
+        return 'map'+6+'_jpg'
     }
     public getDefBG(){
-        return 'map'+1+'_jpg'
+        return 'map'+2+'_jpg'
+    }
+    public getDefBGFront(){
+        return 'map'+2+'__png'
     }
 
     public getTodayIndex(){
@@ -502,38 +529,23 @@ class PKManager {
     }
 
     //取PK结果
-    public getPKResult(data,fun){
-        if(this.pkResult[data.key])
-        {
-            fun(this.pkResult[data.key]);
-            return ;
-        }
-
-        //var day = Math.floor(data.key/1000)
-        //var index = Math.floor(data.key%1000)
-        //this.loadLevelData(day,(levelData)=>{
-        //    var arr = levelData.split('\n')
-            var showData = this.getLevelData(data.key)//JSON.parse(arr[index]);
-            var costData = this.getCost(showData.seed,999999)
-            var force1 = this.getForceAdd(costData.cost1 + data.teamCost1) + this.baseForce;
-            var force2 = this.getForceAdd(costData.cost2 + data.teamCost2) + this.baseForce
-
-            PKData.instanceIndex = 2;
-            var PD = PKData.getInstance();
-            PD.init({
-                seed:showData.seed,
-                players:[
-                    {id:1,gameid:'team1',team:1,force:force1,hp:1,autolist:showData.list1},
-                    {id:2,gameid:'team2',team:2,force:force2,hp:1,autolist:showData.list2}
-                ]
-            });
-            PD.quick = true;
-            PD.start();
-            PKCode.getInstance().onStep()
-            this.pkResult[data.key] = PD.getPKResult();
-            fun(PD.getPKResult());
-            PKData.instanceIndex = 1;
-        //})
+    public getPKResult(data){
+        PKData.instanceIndex = 2;
+        var PD = PKData.getInstance();
+        PD.init({
+            seed:data.seed,
+            players:[
+                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.fmorce1},
+                {id:2,gameid:'team2',team:2,force:data.force1,hp:1,autolist:data.list2,mforce:data.fmorce2}
+            ]
+        });
+        PD.quick = true;
+        PD.start();
+        PKCode.getInstance().onStep()
+        this.pkResult[data.key] = PD.getPKResult();
+        var result = PD.getPKResult();
+        PKData.instanceIndex = 1;
+        return result;
     }
 
     ////保证已加载了
@@ -565,7 +577,8 @@ class PKManager {
                 diamond:UM.diamond,
                 energy:UM.energy,
                 work:WorkManager.getInstance().getWorkSave(),
-                def:MonsterManager.getInstance().createDefSave(),
+                def:MonsterManager.getInstance().defList,
+                fight:FightManager.getInstance().getFightSave(),
                 monster:MonsterManager.getInstance().monsterData,
                 tec:TecManager.getInstance().tecData,
                 chapterLevel:UM.chapterLevel,

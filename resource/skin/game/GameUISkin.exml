@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="GameUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="0" right="0" top="0" bottom="0"/>
+	<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="0" right="0" top="0" bottom="0" visible="false"/>
+	<e:Rect left="0" right="0" top="0" bottom="0"/>
 	<e:Image source="title_bg4_png" x="0" width="640" fillMode="repeat" scaleY="-1" y="77"/>
     <e:Group id="coinGroup" x="5" y="15">
 			<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="200" scaleX="1.1" scaleY="1.1"/>
@@ -62,10 +63,11 @@
 			</e:Group>
 	<e:Scroller id="scroller" width="640" x="0" top="75" bottom="100" bounces="false">
 		<e:Group>
-			<e:layout>
-				<e:VerticalLayout gap="0"/>
-			</e:layout>
-			<e:List id="list" width="200" height="200" x="132" y="337"/>
+			<e:List id="list" width="200" height="200" x="132" y="337">
+				<e:layout>
+					<e:VerticalLayout gap="0"/>
+				</e:layout>
+			</e:List>
 		</e:Group>
 	</e:Scroller>
 			</e:Skin>

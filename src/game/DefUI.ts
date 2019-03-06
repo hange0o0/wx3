@@ -2,10 +2,14 @@ class DefUI extends game.BaseItem{
 
     private con: eui.Group;
     private bg: eui.Image;
-    private numText: eui.Label;
-    private desText: eui.Label;
-    private setBtn: eui.Image;
     private redMC: eui.Image;
+    private forceText: eui.Label;
+    private numText: eui.Label;
+    private costText: eui.Label;
+    private bgFront: eui.Image;
+
+
+
 
 
 
@@ -18,8 +22,8 @@ class DefUI extends game.BaseItem{
 
     public childrenCreated() {
         super.childrenCreated();
-        this.desText.text = '防守阵容'
-        this.addBtnEvent(this.setBtn,this.onSet)
+        //this.desText.text = '防守阵容'
+        //this.addBtnEvent(this.setBtn,this.onSet)
     }
 
     private onSet(){
@@ -35,14 +39,14 @@ class DefUI extends game.BaseItem{
         var teamCost = TecManager.getInstance().getTeamCost();
         var teamNum = TecManager.getInstance().getTeamNum();
 
-        var arr = MonsterManager.getInstance().defList;
+        var arr = MonsterManager.getInstance().getDefArr();
         var cost = 0;
 
         var des = Math.min(500/(arr.length-1),80)
         var begin = (640-des*(arr.length-1))/2
         for(var i=0;i<arr.length;i++)
         {
-            var id = arr[i].id;
+            var id = arr[i];
             var vo = MonsterVO.getObject(id);
             cost += vo.cost;
             var item = PKMonsterMV.createItem();
@@ -50,7 +54,7 @@ class DefUI extends game.BaseItem{
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1;
-            item.bottom = 30+vo.height*0.5 - 3 + 6*Math.random()// + Math.random()*80
+            item.bottom = -10+vo.height*0.8 - 3 + 6*Math.random()// + Math.random()*80
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);
@@ -64,8 +68,12 @@ class DefUI extends game.BaseItem{
         }
 
         this.bg.source = PKManager.getInstance().getDefBG()
+        this.bgFront.source = PKManager.getInstance().getDefBGFront()
 
-        this.numText.text = 'num:' + arr.length + '/'+ teamNum  + '  cost: ' + cost + '/' + teamCost
+        this.numText.text = arr.length + '/'+ teamNum;
+        this.costText.text = cost + '/' + teamCost;
+        this.forceText.text = UM.getForce() + '';
+
 
         this.redMC.visible = arr.length < teamNum || cost < teamCost;
     }

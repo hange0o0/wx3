@@ -67,24 +67,28 @@ class UserManager {
         WorkManager.getInstance().initWork(data.work)
         TecManager.getInstance().initTec(data.tec)
         MonsterManager.getInstance().initMonster(data.monster,data.def)
+        FightManager.getInstance().initFight(data.fight)
 
         this.history = SharedObjectManager.getInstance().getMyValue('history') || [];
         if(this.history.length > 20)
             this.history.length = 20;
 
+        //统一计算一下数据
+        FightManager.getInstance().onTimer();
+        WorkManager.getInstance().onTimer();
         this.testPassDay();
 
         this.lastForce = this.getForce();
     }
 
-    //降低时间数据的位数
-    public now(){
-        return TM.now() - UM.loginTime
-    }
-
-    public nowMS(){
-        return TM.nowMS() - UM.loginTime*1000;
-    }
+    ////降低时间数据的位数
+    //public now(){
+    //    return TM.now() - UM.loginTime
+    //}
+    //
+    //public nowMS(){
+    //    return TM.nowMS() - UM.loginTime*1000;
+    //}
 
     public getForce(){
         var force = 0;
@@ -235,7 +239,7 @@ class UserManager {
 
     private orginUserData(){
          return {
-             loginTime:TM.now() - 3600,   //$
+             loginTime:TM.now(),   //$
              coin:300,   //$
              coinwin:0,   //$
              win:0,   //$
@@ -243,7 +247,9 @@ class UserManager {
              guideFinish:false,
              chapterLevel:1,
              tipsLevel:0,
-             def:'1#0,48#0',
+             fight:{},
+             energy:{v:0,t:0},
+             def:'1,48,2,3,4,5,6,7,9,10',
              work:['1#0#0#1','2#0#0#1','3#0#0#1','4#0#0#1','70#0#0#1','48#0#0#1'], //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间

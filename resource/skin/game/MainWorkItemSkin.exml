@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="MainWorkItemSkin" width="640" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,lock"  height.lock="180" height.normal="350">
+<e:Skin class="MainWorkItemSkin" width="640" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,lock">
 	<w:Config id="1693728fc32"/>
-	<e:Image source="bg14_png" scale9Grid="32,32,3,6" includeIn="lock" left="0" right="0" top="0" bottom="0"/>
-	<e:Group id="con" left="0" right="0" top="0" bottom="0" scrollEnabled="true" touchChildren="false" includeIn="normal">
-		<e:Image id="bg" horizontalCenter="0" bottom="0" x="320" y="300" scaleX="1" scaleY="1"/>
-		<e:Image source="house1_png" x="485.2" y="65" scaleX="0.8" scaleY="0.8"/>
-		<e:Image source="house2_png" includeIn="normal" x="126" y="92" scaleX="-1.5" scaleY="1.5"/>
+	<e:Group left="0" right="0" scrollEnabled="true" touchChildren="false" height="380" bottom="0">
+		<e:Image id="bg" horizontalCenter="0" bottom="-100" x="320" y="300" scaleX="1" scaleY="1"/>
+		<e:Group id="con" left="0" right="0" top="0" bottom="0"/>
+		<e:Image source="dig_pass_png" x="0" scale9Grid="80,96,480,15" y="-106"/>
+		<e:Image source="dig_pass_png" x="0" scale9Grid="80,96,480,15" bottom="-69"/>
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0"/>
 	</e:Group>
-	<e:Group x="0" y="0" includeIn="normal">
-		<e:Image source="black3_png" y="0" x="0" width="640" height="50"/>
-		<e:Label id="numText" text="1/10" verticalCenter="0" right="60" size="24"/>
-		<e:Label id="desText" text="1/10" verticalCenter="0" size="24" x="10"/>
-		<e:Image id="setBtn" source="icon_setting_png" scaleX="0.8" scaleY="0.8" verticalCenter="0" right="10"/>
-		<e:Image source="red_mc_png" right="0" top="0" id="redMC"/>
-	</e:Group>
-	<e:Image source="icon_lock_png" scaleX="2" scaleY="2" verticalCenter="-20" horizontalCenter="0" includeIn="lock"/>
-	<e:Label id="lockText" text="Label" includeIn="lock" horizontalCenter="0" verticalCenter="30"/>
+	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="0" horizontalCenter="0" scaleX="2" scaleY="2"/>
+	<e:Image source="red_mc_png" right="0" id="redMC" y="30"/>
 </e:Skin>

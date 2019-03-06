@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PKPosUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin" locked="true"/>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0" locked="true"/>
+	<e:Group id="mainCon" x="0" top="60" bottom="100">
+		<e:Group id="con" x="0" width="640" height="350" y="0" scrollEnabled="true">
+			<e:Image id="bg" horizontalCenter="0" bottom="0"/>
+			<e:Group x="0" y="0" width="150">
+				<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
+				<e:Label id="forceText" text="123456" size="24" x="0" y="0" textColor="0xFFECA5" stroke="2"/>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="bottom"/>
+				</e:layout>
+			</e:Group>
+		</e:Group>
+		<e:Group x="0" y="350" height="100%" width="100%">
+			<e:Image source="bg14_png" scale9Grid="32,32,3,6" width="100%" height="100%" x="0" y="0"/>
+			<e:Group left="0" right="0" top="0" bottom="0">
+				<e:Group id="chooseGroup" x="0" y="0" width="610" height="180">
+					<e:Image left="0" right="0" top="0" bottom="0" source="border2_png" scale9Grid="11,11,7,5"/>
+					<e:Label id="desText" text="点击下方头像加入怪物，长按可查看详情" horizontalCenter="0" size="24" textColor="0xffefaa" verticalCenter="0"/>
+					<e:List id="chooseList" horizontalCenter="0" verticalCenter="0">
+					<e:layout>
+						<e:TileLayout requestedColumnCount="6" horizontalGap="4" verticalGap="4"/>
+					</e:layout>
+					</e:List>
+				</e:Group>
+				<e:Scroller id="scroller" width="640" x="0" bounces="false" top="0" y="200" height="100%">
+					<e:Group>
+					<e:List id="list" x="67" y="43">
+						<e:layout>
+						<e:TileLayout requestedColumnCount="6" paddingTop="10" paddingLeft="10" paddingBottom="10" horizontalGap="10" verticalGap="10"/>
+						</e:layout>
+					</e:List>
+					<e:layout>
+						<e:HorizontalLayout horizontalAlign="center" gap="10" paddingTop="10" paddingBottom="10"/>
+					</e:layout>
+					</e:Group>
+				</e:Scroller>
+				<e:layout>
+					<e:VerticalLayout gap="10" horizontalAlign="center" paddingTop="15"/>
+				</e:layout>
+			</e:Group>
+			<e:Image source="bg18_png" scale9Grid="34,32,3,6" touchEnabled="false" left="0" right="0" top="0" bottom="0"/>
+		</e:Group>
+		<e:layout>
+			<e:VerticalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="btnGroup" right="20" bottom="10">
+		<e:Group id="resetBtn" x="246" y="0" width="100" height="80">
+			<e:Image source="icon_atk3_png" y="0" horizontalCenter="0" scaleX="0.9" scaleY="0.9"/>
+			<e:Label text="重置" bottom="0" horizontalCenter="0" size="24" stroke="2." textColor="0xffe0c4"/>
+		</e:Group>
+		<e:Group id="okBtn" x="256" y="10" width="100" height="80">
+			<e:Image y="0" horizontalCenter="0" source="icon_right_png"/>
+			<e:Label text="保存" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xFFE0C4"/>
+		</e:Group>
+		<e:Group id="pkBtn" x="149" y="6" width="100" height="80">
+			<e:Image source="icon_atk2_png" y="0" horizontalCenter="0" scaleX="0.8" scaleY="0.8"/>
+			<e:Label text="出战" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xffe0c4"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+	<e:Group height="40" touchChildren="false" touchEnabled="false" bottom="100" horizontalCenter="0" locked="true">
+		<e:Image source="black_bg_png" left="0" right="0" top="0" bottom="0" scale9Grid="43,7,7,42"/>
+		<e:Label id="costText" text="剩余费用：12" verticalCenter="0" left="40" right="40" size="24" multiline="false"/>
+	</e:Group>
+
+</e:Skin>

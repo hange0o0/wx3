@@ -14,18 +14,23 @@ class RobotVO{
             forceRate:0.5,
             level:1,
             lastTime:t,
-            nick:t,
-            head:t,
+            distanceTime:180 + Math.floor(1000*Math.random()),
+            list:'1,2,3,4,5',
+            nick:PKManager.getInstance().randomNick(),
+            head:Math.ceil(Math.random()*1000),
         })
         robot.gameid = 'robot' + TM.now() +'_'+ this.index;
         RobotVO.change = true;
+        return robot;
     }
 
     public gameid
-    public force//ÏÔÊ¾Õ½Á¦
-    public forceRate //Êµ¼ÊÕ½Á¦Õ¼±È
-    public level//ÏÔÊ¾µÈ¼¶
-    public lastTime//³õÊ¼»¯Ê±¼ä
+    public force//æˆ˜åŠ›
+    public forceRate //å®é™…æˆ˜åŠ›æ¯”ä¾‹
+    public level//æ˜¾ç¤ºç­‰çº§
+    public lastTime//æœ€åä¸€æ¬¡æ›´æ–°
+    public distanceTime//å‡ºæˆ˜éœ€è¦æ—¶é—´
+    public list//å‡ºæˆ˜é˜Ÿåˆ—
     public nick
     public head
 
@@ -34,7 +39,6 @@ class RobotVO{
         {
             this.fill(oo);
         }
-
     }
 
     //public getSaveObj(){
@@ -44,6 +48,7 @@ class RobotVO{
     //        forceRate:this.forceRate,
     //        level:this.level,
     //        lastTime:this.lastTime,
+    //        distanceTime:this.distanceTime,
     //        nick:this.nick,
     //        head:this.head,
     //    }
@@ -91,4 +96,5 @@ class RobotVO{
     public getFightForce(){
         return  Math.floor(this.force*this.forceRate)
     }
+
 }

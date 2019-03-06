@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ChapterItemSkin" width="100" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+	<e:Label id="numText" text="1" textColor="0xffd1a5" size="50" maxWidth="160" verticalAlign="middle" textAlign="left" horizontalCenter="0" verticalCenter="-15" bold="true"/>
+	<e:Group id="con" y="80" horizontalCenter="0">
+		<e:Image id="s0" source="start1_png" x="0" y="0"/>
+		<e:Image source="start1_png" x="10" y="10" id="s1"/>
+		<e:Image source="start1_png" x="20" y="20" id="s2"/>
+		<e:layout>
+			<e:HorizontalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

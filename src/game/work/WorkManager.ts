@@ -8,9 +8,9 @@ class WorkManager {
         return this._instance;
     }
 
-    public workHideTime = 3000;//挖矿时间
-    public workStart = 70
-    public workLen = 500
+    public workHideTime =0//3000;//挖矿时间
+    public workStart = 0//70
+    public workLen = 800//500
     public workList = []
 
     public initWork(arr){
@@ -20,7 +20,6 @@ class WorkManager {
             var temp = arr[i].split('#');
             this.workList.push({
                 id:temp[0],
-                bornTime:parseInt(temp[1])*1000,    //单位，ms
                 resetTime:parseInt(temp[2])*1000,  //单位，ms
                 index:temp[3]
             })
@@ -32,7 +31,7 @@ class WorkManager {
         for(var i=0;i<this.workList.length;i++)
         {
             var oo = this.workList[i];
-            def.push(oo.id+'#'+Math.floor(oo.bornTime/1000)+'#'+Math.floor(oo.resetTime/1000)+'#'+oo.index);
+            def.push(oo.id+'#'+Math.floor(oo.resetTime/1000)+'#'+oo.index);
         }
         return def.join(',');
     }
@@ -73,18 +72,33 @@ class WorkManager {
         return vo.coinAdd;
     }
 
-    public onTimer(){
-        var t = UM.nowMS();
+    //传入的是秒
+    public onTimer(t=0){
+        var t = t*1000 || TM.nowMS();
+        var cd24 = 24*3600*1000;
         for(var i=0;i<this.workList.length;i++)
         {
             var oo = this.workList[i];
+            if(!oo.resetTime)
+            {
+                oo.resetTime = t;
+                continue;
+            }
+            if(t < oo.resetTime)//这个时间点已计算过了
+                continue;
             var workCD = this.getWorkCD(oo.id);
-            var num = Math.floor((t - oo.resetTime)/ workCD)
+            var isOver24 = (t - oo.resetTime) > cd24
+            if(isOver24)
+                var num = Math.floor(cd24 / workCD)
+            else
+                var num = Math.floor((t - oo.resetTime)/ workCD)
             if(num)
             {
                 oo.resetTime += num*workCD;
-                UM.addCoin(this.getWorkCoin(oo.id),true);
+                UM.addCoin(this.getWorkCoin(oo.id)*num,true);
             }
+            if(isOver24)
+                oo.resetTime = t;
         }
     }
 

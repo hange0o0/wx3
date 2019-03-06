@@ -5,6 +5,7 @@ class GameEvent {
         INFO_CHANGE:'INFO_CHANGE',
         CHAPTER_CHANGE:'CHAPTER_CHANGE',
         HISTORY_CHANGE:'HISTORY_CHANGE',
+        FIGHT_CHANGE:'FIGHT_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

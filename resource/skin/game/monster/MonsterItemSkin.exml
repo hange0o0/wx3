@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="MonsterItemSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="MonsterItemSkin" width="180" height="250" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="bg2" source="border_8_png" scale9Grid="12,12,76,76" left="0" right="0" height="210" y="0"/>
+	<e:Group id="cardGroup" y="10" width="160" height="190" x="10" scrollEnabled="true">
+		<e:Image id="bg" source="border_8_png" scale9Grid="12,12,76,76" bottom="-80" horizontalCenter="0"/>
+	</e:Group>
+	<e:Label id="text" text="Label" horizontalCenter="0" size="24" bottom="8"/>
+	<e:Image source="bg17_png" scale9Grid="12,5,54,31" width="80" x="0" bottom="40"/>
+	<e:Label id="lvText" text="lv.30" size="24" x="8" stroke="1" bottom="48" textColor="0xffe0ad"/>
+	<e:Image source="bg17_png" right="0" top="0" scaleX="-1" scaleY="-1" scale9Grid="12,5,54,31" width="70"/>
+	<e:Label id="numText" text="x30" y="8" size="24" right="8" textColor="0xffe0ad"/>
 </e:Skin>

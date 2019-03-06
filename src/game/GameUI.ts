@@ -72,7 +72,7 @@ class GameUI extends game.BaseUI {
 
     }
     private onChapter(){
-        CoinGameUI.getInstance().show();
+        //CoinGameUI.getInstance().show();
     }
 
     private renewSound(){
@@ -80,7 +80,8 @@ class GameUI extends game.BaseUI {
     }
 
     public onMail(){
-        LogUI.getInstance().show();
+        FightUI.getInstance().show()
+        //LogUI.getInstance().show();
         //this.mainPKUI.hide();
         //this.team1.visible = this.team2.visible = !this.mainPKUI.visible
     }
@@ -189,9 +190,13 @@ class GameUI extends game.BaseUI {
          MyTool.renewList(this.list)
     }
     public reInitList(){
-        this.list.dataProvider = new eui.ArrayCollection([
-            {def:true},{id:1},{id:2},{id:3}
-        ])
+        var arr:any =  [{def:true}]
+        var max = WorkManager.getInstance().getOpenWork()+1
+        for(var i=0;i<max;i++)
+        {
+            arr.push({id:i+1})
+        }
+        this.list.dataProvider = new eui.ArrayCollection(arr)
     }
 
     private onCoinChange(){

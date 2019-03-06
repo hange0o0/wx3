@@ -1528,6 +1528,46 @@
 			"name":"house2_png",
 			"type":"image",
 			"url":"game_assets/house2.png"
+		},
+		{
+			"name":"dig_pass_png",
+			"type":"image",
+			"url":"game_assets/dig_pass.png"
+		},
+		{
+			"name":"map2__png",
+			"type":"image",
+			"url":"game_assets2/map/map2_.png"
+		},
+		{
+			"name":"map7__png",
+			"type":"image",
+			"url":"game_assets2/map/map7_.png"
+		},
+		{
+			"name":"map1__png",
+			"type":"image",
+			"url":"game_assets2/map/map1_.png"
+		},
+		{
+			"name":"map3__png",
+			"type":"image",
+			"url":"game_assets2/map/map3_.png"
+		},
+		{
+			"name":"map4__png",
+			"type":"image",
+			"url":"game_assets2/map/map4_.png"
+		},
+		{
+			"name":"map5__png",
+			"type":"image",
+			"url":"game_assets2/map/map5_.png"
+		},
+		{
+			"name":"black4_png",
+			"type":"image",
+			"url":"game_assets/png32/black4.png"
 		}
 	]
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="WorkUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="ChapterUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
@@ -12,4 +12,11 @@
 			</e:List>
 		</e:Group>
 	</e:Scroller>
+	<e:Group x="0" y="60">
+		<e:Image source="bg8_png" x="0" y="0" height="60" width="640"/>
+		<e:Label id="titleText" text="Label" size="24" textColor="0xffdaa8" horizontalCenter="0.5" verticalCenter="-3"/>
+		<e:Image id="rightBtn" source="arrow1_png" verticalCenter="-3" right="10" scaleY="0.8" scaleX="0.8"/>
+		<e:Image id="leftBtn" source="arrow1_png" verticalCenter="-3" scaleX="-0.8" scaleY="0.8" left="11"/>
+	</e:Group>
+
 </e:Skin>

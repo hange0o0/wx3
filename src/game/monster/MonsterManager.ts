@@ -10,35 +10,42 @@ class MonsterManager {
 
     private numCost = [10,50,100,200,500,1000,2000,5000,10000]
     public monsterData;  //{lv,num};
-    public defList = [];
+    public defList = '';
 
 
 
     public initMonster(data,def){
         this.monsterData = data || {};
-
-        if(def)
-        {
-            var list = def.split(',')
-            for(var i=0;i<list.length;i++)
-            {
-                var temp = list[i].split('#')
-                this.defList.push({
-                    id:temp[0],
-                    bornTime:parseInt(temp[1]),
-                })
-            }
-        }
+        this.defList = def || '';
     }
 
-    public createDefSave(){
-        var def = []
-        for(var i=0;i<this.defList.length;i++)
+    /////////////////////////////////// def //////////////////////
+    public getDefNumObj(){
+        var obj = {};
+        var list = this.defList.split(',');
+        for(var i=0;i<list.length;i++)
         {
-            var oo = this.defList[i];
-            def.push(oo.id+'#'+oo.bornTime);
+            obj[list[i]] = (obj[list[i]] || 0) + 1;
         }
-        return def.join(',');
+        return obj;
+    }
+
+    public getDefArr(){
+        return this.defList?this.defList.split(','):[];
+    }
+    /////////////////////////////////// def end //////////////////////
+
+    //生成战斗用的怪物战力数据
+    public getMonsterPKForce(list)
+    {
+        var arr = list.split(',')
+        var oo = {};
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i];
+            oo[id] = this.getForceAdd(id)
+        }
+        return oo;
     }
 
 
@@ -60,7 +67,7 @@ class MonsterManager {
         return  Math.floor(Math.pow(lv + vo.level/10,2.5)*10);
     }
 
-    //最多10只
+    //最多10只分身
     public getNumCost(id,num?){
         num = num || this.getMonsterNum(id)+1;
         return this.numCost[num-1];
@@ -96,23 +103,22 @@ class MonsterManager {
         return arr;
     }
 
-    public getDefNumObj(){
-        return {};
-    }
+
 
     public getFreeMonster(isTestRed?){
          var arr = this.getOpenMonster();
         var defNum = this.getDefNumObj();
+        var fightNum = FightManager.getInstance().getFightNumObj();
         var workNum = WorkManager.getInstance().getNumObj();
         var returnArr = [];
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
             var maxNum = this.getMonsterNum(id)
-            var useNum = (defNum[id] || 0) + (workNum[id] || 0)
+            var useNum = (defNum[id] || 0) + (workNum[id] || 0) + (fightNum[id] || 0);
             if(maxNum > useNum)
             {
-                returnArr.push(arr[i]);
+                returnArr.push({vo:arr[i],num:maxNum-useNum});
                 if(isTestRed)
                     return returnArr;
             }

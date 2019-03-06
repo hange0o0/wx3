@@ -1,7 +1,7 @@
-class CoinGameListItem extends game.BaseItem {
+class PKPosListItem extends game.BaseItem {
     public constructor() {
         super();
-        this.skinName = "CoinGameListItemSkin";
+        this.skinName = "PKPosListItemSkin";
     }
 
     private bg: eui.Image;
@@ -37,14 +37,14 @@ class CoinGameListItem extends game.BaseItem {
     private onClick(){
         if(this.stopClick)
             return;
-          CoinGameUI.getInstance().addChoose(this.data.id)
+          PKPosUI.getInstance().addChoose(this.data.id)
     }
 
     public dataChanged(){
         //this.indexText.text = this.data.index;
         var vo = MonsterVO.getObject(this.data.id)
         this.bg.source = vo.getBG()
-        this.stopClick = CoinGameUI.getInstance().leaveCost < vo.cost || CoinGameUI.getInstance().getChooseNum() >= 10;
+        this.stopClick = PKPosUI.getInstance().leaveCost < vo.cost || PKPosUI.getInstance().getChooseNum() >= 10;
         this.mc.source = vo.getImage(this.stopClick)
         this.costText.text = vo.cost +'';
     }

@@ -11,13 +11,7 @@ class TecUI extends game.BaseUI {
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private list: eui.List;
-    private list2: eui.List;
-    private energyText: eui.Label;
-    private addBtn: eui.Image;
-    private searchBtn: eui.Group;
-    private searchText: eui.Label;
-    private logBtn: eui.Group;
-    private logRedMC: eui.Image;
+
 
 
 
@@ -30,26 +24,12 @@ class TecUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
-        this.topUI.setTitle('¬”∂·ÕÊº“')
+        this.topUI.setTitle('ÁßëÊäÄÂçáÁ∫ß')
 
         this.list.itemRenderer = FightingItem
-        this.list2.itemRenderer = FightItem
-
-
-        this.addBtnEvent(this.addBtn,this.onAddEnergy)
-        this.addBtnEvent(this.logBtn,this.onLog)
-        this.addBtnEvent(this.searchBtn,this.onSearch)
-    }
-
-    private onAddEnergy(){
 
     }
-    private onLog(){
 
-    }
-    private onSearch(){
-
-    }
 
 
     public show(){
