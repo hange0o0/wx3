@@ -117,11 +117,18 @@ class PKManager {
         //index = index%mapNum || mapNum;
         return 'map'+6+'_jpg'
     }
+
+    private getDefBGID(){
+        var id =  TM.now()%7 || 1
+        if(id == 6)
+            id = 1;
+        return id;
+    }
     public getDefBG(){
-        return 'map'+2+'_jpg'
+        return 'map'+this.getDefBGID()+'_jpg'
     }
     public getDefBGFront(){
-        return 'map'+2+'__png'
+        return 'map'+this.getDefBGID()+'__png'
     }
 
     public getTodayIndex(){

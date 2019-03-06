@@ -28,8 +28,6 @@ class MainWorkMonsterItem extends PKMonsterMV {
         this.coinMC.scaleX = this.coinMC.scaleY = 0.6;
         this.addChild(this.coinMC)
         this.coinMC.anchorOffsetX = this.coinMC.anchorOffsetY = 46/2
-
-
     }
 
     public load(id){

@@ -39,6 +39,8 @@ class PKPosUI extends game.BaseUI {
 
     public level = 1;
     public question = {"list1":"1,11,44,6,72,4,16","list2":"42,73,17,10,73","seed":19348313264,"cost":30}
+
+    public dataIn;
     public constructor() {
         super();
         this.skinName = "PKPosUISkin";
@@ -66,12 +68,31 @@ class PKPosUI extends game.BaseUI {
 
 
         this.addBtnEvent(this.con,this.onMClick)
-        MainPKUI.instance.addEventListener('visible_change',this.onMainVisibleChange,this)
         this.reset();
 
         this.stage.addChild(this.dragTarget);
         this.dragTarget.initDragItem();
         MyTool.removeMC(this.dragTarget);
+    }
+
+    private onMClick(e){
+        var x = e.stageX;
+        var y = e.stageY;
+
+        for(var i=this.monsterArr.length-1;i>=0;i--)
+        {
+            var mc = this.monsterArr[i];
+            if(mc.currentMV.hitTestPoint(x,y,true))
+            {
+                var list = [];
+                for(var j=0;j<this.monsterArr.length;j++)
+                {
+                    list.push(this.monsterArr[j].id)
+                }
+                CardInfoUI.getInstance().show(mc.id,list,i);
+                break;
+            }
+        }
     }
 
     public stopDrag(){
@@ -171,101 +192,62 @@ class PKPosUI extends game.BaseUI {
         }
     }
 
-    private setChooseList() {
-        var arr = [];
-        var arr2 = [];
-        var answer = this.question.list2.split(',')
-        var data = MonsterVO.data;
-        for (var s in data) {
-            if (answer.indexOf(s) == -1) {
-                arr2.push(data[s])
-            }
-            else {
-                arr.push(data[s])
-            }
-        }
-        ArrayUtil.sortByField(arr2,['id'],[0])
-        var PKM = PKManager.getInstance();
-        PKM.randomSeed = (this.question.seed * 1.66);
-        while (arr.length < 18)
-        {
-            var index = Math.floor(PKM.random()*arr2.length)
-            arr.push(arr2[index])
-            arr2.splice(index,1);
-        }
-        ArrayUtil.sortByField(arr,['cost','type'],[0,0])
-        for(var i=0;i<arr.length;i++)
-        {
-            arr[i] = {id:arr[i].id,list:arr,index:i};
-        }
-        this.chooseDataProvider.source = arr;
-        this.chooseDataProvider.refresh();
-    }
-
-    private onMainVisibleChange(){
-        if(!this.stage)
-            return;
-        this.btnGroup.visible = !MainPKUI.instance.visible
-        this.renewTitle();
-    }
-
-    private showTips(){
-        var list:any = this.question.list2.split(',')
-        for(var i=0;i<list.length;i++)
-        {
-            list[i] = {id:list[i],list:list} ;
-        }
-        //console.log(list)
-        this.dataProvider.source = list;
-        this.dataProvider.refresh();
+    public addChoose(id){
+        this.dataProvider.addItem({id:id,list:this.dataProvider.source})
         this.onItemChange();
-
     }
+
+    public deleteItem(data){
+        var index = this.dataProvider.getItemIndex(data)
+        this.dataProvider.removeItemAt(index);
+        this.onItemChange()
+    }
+
+    private onItemChange(){
+        if(this.dataIn.cost)
+        {
+            var cost = this.getMyCost();
+            this.leaveCost = (this.dataIn.cost - cost)
+            this.costText.text = '剩余费用：' + this.leaveCost
+        }
+        MyTool.renewList(this.list)
+        this.desText.visible = this.getChooseNum() == 0
+    }
+
+    public getChooseNum(){
+        return this.dataProvider.length;
+    }
+
 
 
     public onPK(){
-        var myList = this.getMyList();
-        if(!myList)
-        {
-            MyWindow.ShowTips('请点击上方头像配置你的队伍')
-            return;
-        }
-        this.addChild(MainPKUI.instance);
-        MainPKUI.instance.top = 60
-        MainPKUI.instance.bottom = 100
-        MainPKUI.instance.show({
-            level:this.level,
-            isPK:true,
-            list1:this.question.list1,
-            list2:myList,
-            seed:this.question.seed,
-            force1:10000,
-            force2:10000
-        });
 
-        this.btnGroup.visible = false
-
-        SharedObjectManager.getInstance().setMyValue('coin_game_value',{key:this.level,value:myList})
     }
 
-    private onMClick(e){
-        var x = e.stageX;
-        var y = e.stageY;
 
-        for(var i=this.monsterArr.length-1;i>=0;i--)
-        {
-            var mc = this.monsterArr[i];
-            if(mc.currentMV.hitTestPoint(x,y,true))
-            {
-                var list = [];
-                for(var j=0;j<this.monsterArr.length;j++)
-                {
-                    list.push(this.monsterArr[j].id)
-                }
-                CardInfoUI.getInstance().show(mc.id,list,i);
-                break;
-            }
-        }
+
+
+
+    public onClose(){
+        this.hide();
+    }
+
+
+    public show(dataIn?){
+        this.dataIn = dataIn;
+        super.show()
+    }
+
+    public hide() {
+        super.hide();
+    }
+
+
+
+    public onShow(){
+
+        this.renew();
+        this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.renew)
     }
 
     public showEnemy() {
@@ -300,68 +282,42 @@ class PKPosUI extends game.BaseUI {
         }
         this.bg.source = PKManager.getInstance().getPKBG(this.question)
     }
-
-    public onClose(){
-        if(MainPKUI.instance.visible && MainPKUI.instance.parent == this)
-        {
-            MainPKUI.instance.hide();
-            return;
-        }
-        this.hide();
-    }
-
-
-    public show(){
-        PKManager.getInstance().loadChapterData(()=>{
-            super.show()
-        },true)
-
-    }
-
-    public hide() {
-        super.hide();
-    }
-
-    public addChoose(id){
-        this.dataProvider.addItem({id:id,list:this.dataProvider.source})
-        this.onItemChange();
-    }
-
-    public deleteItem(data){
-        var index = this.dataProvider.getItemIndex(data)
-        this.dataProvider.removeItemAt(index);
-        this.onItemChange()
-    }
-
-    private onItemChange(){
-         var cost = this.getMyCost();
-        this.leaveCost = (this.question.cost - cost)
-        this.costText.text = '剩余费用：' + this.leaveCost
-        MyTool.renewList(this.list)
-        this.desText.visible = cost == 0
-    }
-
-    public getChooseNum(){
-        return this.dataProvider.length;
-    }
-
-    public onShow(){
-
-        this.renew();
-        this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.renew)
-    }
-
-    //private onChapterChange(){
-    //    PKManager.getInstance().loadChapterData(Math.ceil(UM.chapterLevel/100),()=>{
-    //        super.show()
-    //    },true)
-    //}
-
     private renewTitle(){
         if(MainPKUI.instance.visible && MainPKUI.instance.dataIn.isPK)
             this.topUI.setTitle('关卡解迷 - 第'+MainPKUI.instance.dataIn.level+'关')
         else
             this.topUI.setTitle('关卡解迷 - 第'+this.level+'关')
+    }
+
+    private setChooseList() {
+        var arr = [];
+        var arr2 = [];
+        var answer = this.question.list2.split(',')
+        var data = MonsterVO.data;
+        for (var s in data) {
+            if (answer.indexOf(s) == -1) {
+                arr2.push(data[s])
+            }
+            else {
+                arr.push(data[s])
+            }
+        }
+        ArrayUtil.sortByField(arr2,['id'],[0])
+        var PKM = PKManager.getInstance();
+        PKM.randomSeed = (this.question.seed * 1.66);
+        while (arr.length < 18)
+        {
+            var index = Math.floor(PKM.random()*arr2.length)
+            arr.push(arr2[index])
+            arr2.splice(index,1);
+        }
+        ArrayUtil.sortByField(arr,['cost','type'],[0,0])
+        for(var i=0;i<arr.length;i++)
+        {
+            arr[i] = {id:arr[i].id,list:arr,index:i};
+        }
+        this.chooseDataProvider.source = arr;
+        this.chooseDataProvider.refresh();
     }
 
     private renew(){
@@ -370,32 +326,8 @@ class PKPosUI extends game.BaseUI {
         this.renewTitle();
         this.showEnemy();
         this.setChooseList();
-        //if(UM.tipsLevel == this.level)
-        //{
-        //    this.showTips();
-        //}
-        //else
-        //{
 
-
-
-            var oo = SharedObjectManager.getInstance().getMyValue('coin_game_value');
-            if(oo && oo.key == this.level)
-            {
-                var arr = oo.value.split(',');
-                for(var i=0;i<arr.length;i++)
-                {
-                    arr[i] = {id:MonsterVO.getObject(arr[i]).id,list:arr};
-                }
-                this.dataProvider.source = arr;
-                this.dataProvider.refresh();
-                this.onItemChange();
-            }
-            else
-            {
-                this.reset();
-            }
-        //}
+        this.reset();
     }
 
     public reset(){

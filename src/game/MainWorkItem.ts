@@ -39,6 +39,7 @@ class MainWorkItem extends game.BaseItem {
             this.currentState = 'lock'
         }
         this.bg.source = PKManager.getInstance().getWorkBG(this.data.id)
+        //this.visible = false
     }
 
     private showList() {
