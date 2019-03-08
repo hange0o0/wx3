@@ -3,4 +3,5 @@
 	<e:Image id="bg" source="border_6_png" left="0" right="0" top="0" bottom="0"/>
 	<e:Image id="mc" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>
 	<e:Label id="costText" text="12" size="24" right="5" bottom="5" stroke="3"/>
+	<e:Label id="numText" text="12" size="20" stroke="3" left="5" y="5"/>
 </e:Skin>

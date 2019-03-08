@@ -34,6 +34,20 @@ class MonsterManager {
         return this.defList?this.defList.split(','):[];
     }
     /////////////////////////////////// def end //////////////////////
+    //取队伍战力
+    public getMyListForce(list,isAtk?){
+        if(!list)
+            return 0;
+        var count = 0;
+        var force = isAtk?TecManager.getInstance().getAtkForce():TecManager.getInstance().getDefForce();
+        var arr = list.split(',');
+        for(var i=0;i<arr.length;i++)
+        {
+            var vo = MonsterVO.getObject(arr[i]);
+            count += vo.cost*(1+(force + this.getForceAdd(vo.id))/100)
+        }
+        return count;
+    }
 
     //生成战斗用的怪物战力数据
     public getMonsterPKForce(list)
@@ -103,6 +117,15 @@ class MonsterManager {
         return arr;
     }
 
+    //取空闲怪物数据
+    public getEmptyNum(id){
+        var defNum = this.getDefNumObj();
+        var fightNum = FightManager.getInstance().getFightNumObj();
+        var workNum = WorkManager.getInstance().getNumObj();
+        var maxNum = this.getMonsterNum(id)
+        var useNum = (defNum[id] || 0) + (workNum[id] || 0) + (fightNum[id] || 0);
+        return maxNum - useNum;
+    }
 
 
     public getFreeMonster(isTestRed?){

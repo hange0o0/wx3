@@ -12,7 +12,10 @@ class PKPosUI extends game.BaseUI {
     private mainCon: eui.Group;
     private con: eui.Group;
     private bg: eui.Image;
+    private otherForceText: eui.Label;
     private forceText: eui.Label;
+    private numText: eui.Label;
+    private costText: eui.Label;
     private chooseGroup: eui.Group;
     private desText: eui.Label;
     private chooseList: eui.List;
@@ -22,7 +25,8 @@ class PKPosUI extends game.BaseUI {
     private resetBtn: eui.Group;
     private okBtn: eui.Group;
     private pkBtn: eui.Group;
-    private costText: eui.Label;
+
+
 
 
 
@@ -35,10 +39,14 @@ class PKPosUI extends game.BaseUI {
     private monsterArr = []
     private dataProvider:eui.ArrayCollection
     private chooseDataProvider:eui.ArrayCollection
-    public leaveCost = 0
 
-    public level = 1;
-    public question = {"list1":"1,11,44,6,72,4,16","list2":"42,73,17,10,73","seed":19348313264,"cost":30}
+    //public level = 1;
+    //public question = {"list1":"1,11,44,6,72,4,16","list2":"42,73,17,10,73","seed":19348313264,"cost":30}
+
+    public emptyNum = {}; //空闲怪的数量
+    public maxCost = 0  //最大消耗
+    public maxNum = 0 //最大数量
+    public currentCost = 0 //当前消耗
 
     public dataIn;
     public constructor() {
@@ -194,47 +202,69 @@ class PKPosUI extends game.BaseUI {
 
     public addChoose(id){
         this.dataProvider.addItem({id:id,list:this.dataProvider.source})
+        this.addFreeMonsterNum(id,-1)
         this.onItemChange();
     }
 
     public deleteItem(data){
         var index = this.dataProvider.getItemIndex(data)
+        this.addFreeMonsterNum(data.id,1)
         this.dataProvider.removeItemAt(index);
         this.onItemChange()
     }
 
     private onItemChange(){
-        if(this.dataIn.cost)
+        if(this.dataIn.isPK)
         {
-            var cost = this.getMyCost();
-            this.leaveCost = (this.dataIn.cost - cost)
-            this.costText.text = '剩余费用：' + this.leaveCost
+            var cost = this.currentCost = this.getMyCost();
+            this.costText.text = '费用：' + cost + '/' + this.maxCost;
+            this.numText.text = '数量：' + this.getChooseNum() + '/' + this.maxNum;
+            this.forceText.text = '战力：' + this.getForce();
         }
         MyTool.renewList(this.list)
         this.desText.visible = this.getChooseNum() == 0
+    }
+
+    public getForce(){
+        return MonsterManager.getInstance().getMyListForce(this.getMyList(),this.dataIn.isAtk)
     }
 
     public getChooseNum(){
         return this.dataProvider.length;
     }
 
+    public getFreeMonsterNum(id){
+          return this.emptyNum[id] || 0
+    }
 
-
-    public onPK(){
-
+    public addFreeMonsterNum(id,num){
+        this.emptyNum[id] = this.getFreeMonsterNum(id) + num;
     }
 
 
 
-
+    public onPK(){
+        this.dataIn.fun && this.dataIn.fun(this.getMyList())
+    }
 
     public onClose(){
         this.hide();
     }
 
-
+     /*
+     title
+     enemy:{list,seed,force}
+     chooseList//已选中列表，已在list中扣除
+     isPK
+      isAtk
+      maxCost
+      maxNum
+     fun
+      */
     public show(dataIn?){
         this.dataIn = dataIn;
+        this.maxCost = this.dataIn.maxCost || 9999;
+        this.maxNum = this.dataIn.maxNum || 0;
         super.show()
     }
 
@@ -255,7 +285,15 @@ class PKPosUI extends game.BaseUI {
         {
             PKMonsterMV.freeItem(this.monsterArr.pop());
         }
-        var arr = this.question.list1.split(',')
+
+        if(!this.dataIn.enemy)
+        {
+            MyTool.removeMC(this.con);
+            return;
+        }
+        this.mainCon.addChild(this.con);
+
+        var arr = this.dataIn.enemy.list.split(',')
         arr.reverse();
         var des = Math.min(500/(arr.length-1),80)
         var begin = (640-des*(arr.length-1))/2
@@ -280,53 +318,76 @@ class PKPosUI extends game.BaseUI {
         {
             this.con.addChild(sortList[i]);
         }
-        this.bg.source = PKManager.getInstance().getPKBG(this.question)
+        this.bg.source = PKManager.getInstance().getPKBG(this.dataIn.enemy.seed);
     }
     private renewTitle(){
-        if(MainPKUI.instance.visible && MainPKUI.instance.dataIn.isPK)
-            this.topUI.setTitle('关卡解迷 - 第'+MainPKUI.instance.dataIn.level+'关')
-        else
-            this.topUI.setTitle('关卡解迷 - 第'+this.level+'关')
+        this.topUI.setTitle(this.dataIn.title || '布阵')
     }
 
-    private setChooseList() {
-        var arr = [];
-        var arr2 = [];
-        var answer = this.question.list2.split(',')
-        var data = MonsterVO.data;
-        for (var s in data) {
-            if (answer.indexOf(s) == -1) {
-                arr2.push(data[s])
-            }
-            else {
-                arr.push(data[s])
-            }
-        }
-        ArrayUtil.sortByField(arr2,['id'],[0])
-        var PKM = PKManager.getInstance();
-        PKM.randomSeed = (this.question.seed * 1.66);
-        while (arr.length < 18)
+    private renewDownList() {
+        var list = MonsterManager.getInstance().getFreeMonster();
+        var obj = {};
+        this.emptyNum = {};
+        for(var i=0;i<list.length;i++)
         {
-            var index = Math.floor(PKM.random()*arr2.length)
-            arr.push(arr2[index])
-            arr2.splice(index,1);
+            obj[list[i].vo.id] = true;
+            this.emptyNum[list[i].vo.id] = list[i].num;
+            list[i] = list[i].vo;
         }
-        ArrayUtil.sortByField(arr,['cost','type'],[0,0])
-        for(var i=0;i<arr.length;i++)
+        if(this.dataIn.chooseList)
         {
-            arr[i] = {id:arr[i].id,list:arr,index:i};
+            var temp = this.dataIn.chooseList.split(',');
+            for(var i=0;i<temp.length;i++)
+            {
+                if(!obj[temp[i]])
+                    list.push(MonsterVO.getObject(temp[i]))
+            }
         }
-        this.chooseDataProvider.source = arr;
+
+
+        ArrayUtil.sortByField(list,['cost','type'],[0,0])
+        for(var i=0;i<list.length;i++)
+        {
+            list[i] = {id:list[i].id,list:list,index:i};
+        }
+        this.chooseDataProvider.source = list;
         this.chooseDataProvider.refresh();
     }
 
+    private renewTopList(){
+        var layOut:any = this.chooseList.layout;
+        if(this.maxNum > 6)
+        {
+            layOut.requestedColumnCount = 6
+            layOut.requestedRowCount = 2
+            this.chooseGroup.height = 220;
+        }
+        else
+        {
+            layOut.requestedColumnCount = this.maxNum;
+            layOut.requestedRowCount = 1
+            this.chooseGroup.height = 120;
+        }
+        var list = this.dataIn.chooseList?this.dataIn.chooseList.split(','):[];
+        for(var i=0;i<list.length;i++)
+        {
+            list[i] = {id:list[i],list:list} ;
+        }
+        this.dataProvider.source = list;
+        this.dataProvider.refresh();
+        this.onItemChange();
+    }
+
     private renew(){
-        this.level = UM.chapterLevel;
-        this.question = PKManager.getInstance().getChapterData();
+        if(this.dataIn.isPK)
+            this.currentState = 'pk';
+        else
+            this.currentState = 'normal';
+
         this.renewTitle();
         this.showEnemy();
-        this.setChooseList();
-
+        this.renewDownList();
+        this.renewTopList();
         this.reset();
     }
 

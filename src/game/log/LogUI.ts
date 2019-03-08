@@ -35,11 +35,6 @@ class LogUI extends game.BaseUI {
     }
 
     public onClose(){
-        if(MainPKUI.instance.visible && MainPKUI.instance.parent == this)
-        {
-            MainPKUI.instance.hide();
-            return;
-        }
         this.hide();
     }
 
@@ -75,20 +70,7 @@ class LogUI extends game.BaseUI {
 
 
     public showHistory(userData,roundData){
-        var PKM = PKManager.getInstance();
-        var costData = PKM.getCost(roundData.seed,60*10)
-        this.addChild(MainPKUI.instance);
-        MainPKUI.instance.top = 60
-        MainPKUI.instance.bottom = 100
-        MainPKUI.instance.show({
-            key:userData.key,
-            list1:roundData.list1,
-            list2:roundData.list2,
-            seed:roundData.seed,
-            showData:userData,
-            force1:PKM.getForceAdd(costData.cost1 + userData.teamCost1) + PKM.baseForce,
-            force2:PKM.getForceAdd(costData.cost2 + userData.teamCost2) + PKM.baseForce
-        });
+
 
     }
 

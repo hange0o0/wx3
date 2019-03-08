@@ -96,15 +96,15 @@ class GameUI extends game.BaseUI {
 
     private callShow(){
         this.loadText.text = '初始化中'
-        var index = PKManager.getInstance().getTodayIndex();
-        PKManager.getInstance().loadLevelData(()=>{
+        //var index = PKManager.getInstance().getTodayIndex();
+        //PKManager.getInstance().loadLevelData(()=>{
         //PKManager.getInstance().loadLevelData(index,(data)=>{
             //PKManager.getInstance().initData(index,data);
             setTimeout(()=>{
                 this.haveLoadFinish = true;
                 this.initData();
             },1000)
-        })
+        //})
     }
 
 

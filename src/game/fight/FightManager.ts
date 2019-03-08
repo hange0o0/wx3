@@ -159,7 +159,7 @@ class FightManager {
             var oo:any = this.fightingArr[i];
             var robot = oo.robot;
             var cd = t - oo.time;
-            if(!oo.result) //未有结果
+            if(!oo.result && !oo.backTime) //未有结果
             {
                 if(cd > robot.distanceTime)//要计算结果
                 {
@@ -170,7 +170,16 @@ class FightManager {
                     this.notReadLog.push(oo.time)
                 }
             }
-            if(oo.type == 'atk' && cd > robot.distanceTime*2)//移除队列
+            if(oo.backTime)
+            {
+                 if(oo.backTime <= t)
+                 {
+                     this.fightingArr.splice(i,1);
+                     i--;
+                     b = true
+                 }
+            }
+            else if(oo.type == 'atk' && cd > robot.distanceTime*2)//移除队列
             {
                 //加钱
                 if(oo.result == 2)
@@ -238,6 +247,17 @@ class FightManager {
         }
         pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(oo.list2);
         return pkObj;
+    }
+
+    public addAtkList(list,robot){
+        robot.lastAtk = TM.now();
+        this.fightingArr.push({
+            time: robot.lastAtk,
+            type:'atk',
+            list:list,
+            seed:Math.floor(Math.random()*10000000000),
+            robot:robot
+        })
     }
 
 

@@ -2,5 +2,13 @@
 <e:Skin class="FightItemSkin" width="180" height="240" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
 	<e:Image id="headMC" width="150" height="150" x="15" y="15"/>
-	<e:Label id="nameText" text="Label" horizontalCenter="0.5" textColor="0xffd1a5" size="24" verticalCenter="81" maxWidth="160" verticalAlign="middle" textAlign="left"/>
+	<e:Label id="nameText" text="Label" horizontalCenter="1" textColor="0xffd1a5" size="24" verticalCenter="98" verticalAlign="middle" textAlign="center" width="160" height="30"/>
+	<e:Group y="173" horizontalCenter="0">
+		<e:Image source="icon_clock_png" x="5" y="0"/>
+		<e:Label id="cdText" text="Label" textColor="0xFFD1A5" size="24" verticalAlign="middle" textAlign="center" x="0" y="36"/>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Label id="lvText" text="Label" x="20.04" y="138.23" size="24" textColor="0xffe6af"/>
 </e:Skin>

@@ -14,7 +14,7 @@ class RobotVO{
             forceRate:0.5,
             level:1,
             lastTime:t,
-            distanceTime:180 + Math.floor(1000*Math.random()),
+            distanceTime:10,//180 + Math.floor(1000*Math.random()),
             list:'1,2,3,4,5',
             nick:PKManager.getInstance().randomNick(),
             head:Math.ceil(Math.random()*1000),
@@ -33,6 +33,7 @@ class RobotVO{
     public list//出战队列
     public nick
     public head
+    public lastAtk//最近一次攻击时间
 
     public constructor(oo?){
         if(oo)

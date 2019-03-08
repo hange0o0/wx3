@@ -221,7 +221,7 @@ if(window["wx"])
     wx.onShow(function(res){
         if(!GameManager.stage)
             return;
-        if(PKManager.getInstance().isPKing && !MainPKUI.instance.finish)
+        if(PKManager.getInstance().isPKing && !MainPKUI.getInstance().finish)
             SoundManager.getInstance().playSound('pkbg');
         else
             SoundManager.getInstance().playSound('bg');

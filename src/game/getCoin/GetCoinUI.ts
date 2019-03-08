@@ -35,11 +35,6 @@ class GetCoinUI extends game.BaseUI {
     }
 
     public onClose(){
-        if(MainPKUI.instance.visible && MainPKUI.instance.parent == this)
-        {
-            MainPKUI.instance.hide();
-            return;
-        }
         this.hide();
     }
 
@@ -54,7 +49,6 @@ class GetCoinUI extends game.BaseUI {
     }
 
     public hide() {
-        MainPKUI.instance.hide();
         super.hide();
         GameUI.getInstance().onTimer();
     }

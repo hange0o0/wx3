@@ -119,7 +119,7 @@ class PKCardInfoUI extends game.BaseContainer {
         this.dataIn = v;
         var vo:any = CM.getCardVO(this.dataIn.mid)
 
-        this.bg.source = PKManager.getInstance().getPKBG()
+        this.bg.source = PKManager.getInstance().getPKBG(1)
         this.heroItem.load(this.dataIn.mid)
         this.heroItem.stand();
 

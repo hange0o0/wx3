@@ -84,8 +84,13 @@ class FightUI extends game.BaseUI {
         this.renewSearch();
         this.renewEnergy()
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.onFightChange)
     }
 
+    private onFightChange(){
+        this.renewIng();
+        MyTool.renewList(this.list2);
+    }
 
     public renewIng(){
         this.list.dataProvider = new eui.ArrayCollection(FightManager.getInstance().getAtkList())
@@ -97,6 +102,7 @@ class FightUI extends game.BaseUI {
 
     private onTimer(){
        this.renewEnergy()
+        MyTool.runListFun(this.list,'onTimer');
     }
 
 }

@@ -70,9 +70,10 @@ class DefUI extends game.BaseItem{
         this.bg.source = PKManager.getInstance().getDefBG()
         this.bgFront.source = PKManager.getInstance().getDefBGFront()
 
-        this.numText.text = arr.length + '/'+ teamNum;
-        this.costText.text = cost + '/' + teamCost;
-        this.forceText.text = UM.getForce() + '';
+
+        this.numText.text = '数量：' + arr.length + '/'+ teamNum;
+        this.costText.text =  '费用：' +cost + '/' + teamCost;
+        this.forceText.text = '战力：' + MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false)
 
 
         this.redMC.visible = arr.length < teamNum || cost < teamCost;

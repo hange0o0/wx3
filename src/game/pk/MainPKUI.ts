@@ -1,22 +1,25 @@
-class MainPKUI extends game.BaseItem {
-    public static instance;
+class MainPKUI extends game.BaseUI {
+    private static _instance:MainPKUI;
+    public static getInstance() {
+        if (!this._instance) this._instance = new MainPKUI();
+        return this._instance;
+    }
+
     public constructor() {
         super();
         this.skinName = "MainPKUISkin";
-        MainPKUI.instance = this;
     }
 
     private con: eui.Group;
-    private scroller: eui.Scroller;
-    public list1: eui.List;
     private lineMC: eui.Rect;
+    private scroller: eui.Scroller;
+    private list1: eui.List;
     private list2: eui.List;
-    private teamCost1Text: eui.Label;
-    private cost1Text: eui.Label;
-    private forceText1: eui.Label;
-    private teamCost2Text: eui.Label;
-    private costText2: eui.Label;
-    private forceText2: eui.Label;
+    private cost1Group: eui.Group;
+    private force1Text: eui.Label;
+    private cost2Group: eui.Group;
+    private force2Text: eui.Label;
+    private cdGroup: eui.Group;
     private timeText: eui.Label;
     private winGroup: eui.Group;
     private winText: eui.Label;
@@ -25,18 +28,17 @@ class MainPKUI extends game.BaseItem {
     private des2: eui.Label;
     private failGroup: eui.Group;
     private failText: eui.Label;
-    private cost1Group: eui.Group;
-    private cost2Group: eui.Group;
     private btnGroup: eui.Group;
-    public cdGroup: eui.Group;
     private backBtn: eui.Button;
-    private replayBtn: eui.Button;
     private doubleBtn: eui.Button;
+    private replayBtn: eui.Button;
     private addSpeedBtn: eui.Group;
     private speedMC: eui.Image;
     private speedMC2: eui.Image;
     private hurt1: eui.Image;
     private hurt2: eui.Image;
+
+
 
 
 
@@ -167,7 +169,7 @@ class MainPKUI extends game.BaseItem {
         item[funName] && item[funName]();
     }
 
-    public show(data){
+    public show(data?){
         PKManager.getInstance().isPKing = true
 
         this.dataIn = data,
@@ -190,38 +192,12 @@ class MainPKUI extends game.BaseItem {
 
         if(this.dataIn.isPK)
         {
-            this.currentState = 's2'
         }
         else
         {
-            this.currentState = 's1'
             var showData = this.dataIn.showData;
             var green = 0x66ff66
             var white = 0xFFEDC9
-
-
-            var costData = PKManager.getInstance().getCost(this.dataIn.seed,60*10)
-            var teamCost1 =  Math.floor(costData.cost1 + showData.teamCost1)
-            var teamCost2 =  Math.floor(costData.cost2 + showData.teamCost2)
-            this.teamCost1Text.text = NumberUtil.addNumSeparator(teamCost1)
-            this.teamCost2Text.text = NumberUtil.addNumSeparator(teamCost2)
-            this.teamCost1Text.textColor = teamCost1 > teamCost2 ? green:white
-            this.teamCost2Text.textColor = teamCost1 < teamCost2 ? green:white
-
-
-            this.forceText1.text = NumberUtil.addNumSeparator(this.dataIn.force1)
-            this.forceText2.text = NumberUtil.addNumSeparator(this.dataIn.force2)
-
-            this.forceText1.textColor = this.dataIn.force1 > this.dataIn.force2 ? green:white
-            this.forceText2.textColor = this.dataIn.force1 < this.dataIn.force2 ? green:white
-
-
-            this.cost1Text.text = '1 队打赏：' + NumberUtil.addNumSeparator(showData.cost1)
-            this.costText2.text = '2 队打赏：' + NumberUtil.addNumSeparator(showData.cost2)
-            this.cost1Group.visible = showData.cost1 > 0
-            this.cost2Group.visible = showData.cost2 > 0
-            this.cost1Text.textColor = showData.cost1 > showData.cost2 ? green:white
-            this.costText2.textColor = showData.cost1 < showData.cost2 ? green:white
         }
 
 
@@ -245,13 +221,6 @@ class MainPKUI extends game.BaseItem {
 
         this.dispatchEventWith('visible_change')
     }
-
-    //public renew(){
-    //    var pkvideo = PKVideoCon.getInstance()
-    //    if(pkvideo.parent != this.con)
-    //        this.reset();
-    //    this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-    //}
 
     public onReplay(){
 
@@ -431,58 +400,7 @@ class MainPKUI extends game.BaseItem {
                     this.backBtn.label = '重试'
                 }
             }
-            else
-            {
-                if(this.dataIn.key)
-                    PKManager.getInstance().pkResult[this.dataIn.key] = PD.getPKResult();
-                if(result == 3)
-                {
-                    this.delayShowResult(this.failGroup);
 
-                    this.failText.text = '平手，庄家通吃'
-                }
-                else if(this.dataIn.showData.cost1 || this.dataIn.showData.cost2)
-                {
-                    if(this.dataIn.showData['cost' + result])
-                    {
-                        this.desGroup['callVisible'] = true
-                        var addCoin = PKManager.getInstance().getAddCoin(this.dataIn.showData,result)
-                        this.winText.text = '胜利'
-                        this.delayShowResult(this.winGroup);
-                        if(this.dataIn.isMain)
-                        {
-                            var isFinish = PKManager.getInstance().getFinishTimeByKey(this.dataIn.key) <= TM.now();
-                            if(isFinish)
-                                this.des1.text = '恭喜获得'
-                            else
-                                this.des1.text = '等待到帐'
-                        }
-                        else
-                            this.des1.text = '恭喜获得'
-
-                        this.des2.text = 'x' + NumberUtil.addNumSeparator(addCoin)
-                        if(addCoin)
-                        {
-                            this.shareStr = '轻松赚取'+addCoin+'金，这个游戏对我来说太简单了!'
-                        }
-                    }
-                    else
-                    {
-                        this.delayShowResult(this.failGroup);
-                        this.failText.text = '失败'
-                    }
-                }
-                else
-                {
-                    this.delayShowResult(this.winGroup);
-                    this.winText.text = result +  '队获胜'
-                    this.desGroup['callVisible'] = false
-
-                }
-            }
-
-
-            //PKManager.getInstance().testSendResult();  //可能看录像
 
             if(this.shareStr)
             {
@@ -529,22 +447,7 @@ class MainPKUI extends game.BaseItem {
 
     public delayShowResult(mc)
     {
-
         clearTimeout(this.resultTimer);
-        if(this.isQuick)
-        {
-            SoundManager.getInstance().playSound('bg');
-            if(this.dataIn.isMain && this.dataIn.key != PKManager.getInstance().getCurrentKey())
-            {
-                this.hide();
-                return;
-            }
-            mc.visible = true;
-            mc.scaleX = mc.scaleY = 1;
-            this.desGroup.visible = this.desGroup['callVisible'];
-            this.btnGroup.visible = true
-            return;
-        }
 
         this.resultTimer = setTimeout(()=>{
             PKVideoCon.getInstance().resetAllMVSpeed();
@@ -559,18 +462,11 @@ class MainPKUI extends game.BaseItem {
                 SoundManager.getInstance().playSound('bg');
                 this.desGroup.visible = this.desGroup['callVisible'];
             })
-            if(this.dataIn.isMain && this.dataIn.key != PKManager.getInstance().getCurrentKey())
-            {
-                tw.wait(2000).call(()=>{
-                    this.hide();
-                })
-            }
-            else
-            {
-                tw.call(()=>{
-                    this.btnGroup.visible = true
-                })
-            }
+
+            tw.call(()=>{
+                this.btnGroup.visible = true
+            })
+
         },1000)
     }
 }
