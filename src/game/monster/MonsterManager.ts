@@ -70,6 +70,7 @@ class MonsterManager {
     }
 
     public getMonsterNum(id){
+        return 3;
         if(!this.monsterData[id])
             return 1;
         return this.monsterData[id].num || 1;

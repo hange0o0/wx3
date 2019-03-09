@@ -174,6 +174,7 @@ class FightManager {
             {
                  if(oo.backTime <= t)
                  {
+                     robot.lastAtk = 0;
                      this.fightingArr.splice(i,1);
                      i--;
                      b = true
@@ -186,6 +187,10 @@ class FightManager {
                 {
                     oo.addCoin = this.getFightCoin(oo.pkObj.list2,oo.pkObj.force2,oo.pkObj.mforce2)
                     coinArr.push({time:oo.time + robot.distanceTime*2,oo:oo})
+                }
+                else
+                {
+                    robot.lastAtk = 0;
                 }
                 this.fightingArr.splice(i,1);
                 i--;
@@ -245,7 +250,7 @@ class FightManager {
             pkObj.list2 = MonsterManager.getInstance().defList;
             pkObj.force2 = TecManager.getInstance().getDefForce();
         }
-        pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(oo.list2);
+        pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(pkObj.list2);
         return pkObj;
     }
 

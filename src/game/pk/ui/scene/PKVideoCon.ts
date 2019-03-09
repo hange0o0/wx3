@@ -36,11 +36,11 @@ class PKVideoCon extends game.BaseContainer {
 
     }
 
-    public init(showData?){
+    public init(dataIn){
         this.bg.visible = !this.isHang;
 
         if(this.bg.visible)
-            this.bg.source = PKManager.getInstance().getPKBG(showData);
+            this.bg.source = PKManager.getInstance().getPKBG(dataIn.seed);
 
         this.remove();
 

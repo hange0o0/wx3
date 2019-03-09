@@ -8,6 +8,7 @@ class PKTeamData {
 
 
 
+
     public hp  = 0 //城堡的血
     public def  = 0
     public autoDef  = 0//10 //防守方增加防御

@@ -260,6 +260,7 @@ class PKPosUI extends game.BaseUI {
       maxCost
       maxNum
      fun
+     noEmpty
       */
     public show(dataIn?){
         this.dataIn = dataIn;

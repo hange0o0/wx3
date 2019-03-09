@@ -6,8 +6,11 @@ class PKPosListItem extends game.BaseItem {
 
     private bg: eui.Image;
     private mc: eui.Image;
+    private numBar: eui.Image;
+    private levelText: eui.Label;
     private costText: eui.Label;
-    private numText: eui.Label;
+
+
 
 
 
@@ -50,7 +53,8 @@ class PKPosListItem extends game.BaseItem {
         this.stopClick = num <= 0 || (ui.maxCost - ui.currentCost < vo.cost) ||( ui.getChooseNum() >= ui.maxNum);
         this.mc.source = vo.getImage(this.stopClick)
         this.costText.text = vo.cost +'';
-        this.numText.text = 'x' + num + ''
+        this.numBar.width =  num*8
+        this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(this.data.id) + ''
     }
 
 }

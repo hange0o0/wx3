@@ -10,14 +10,17 @@ class FightUI extends game.BaseUI {
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
+    private scrollGroup: eui.Group;
     private list: eui.List;
-    private list2: eui.List;
     private energyText: eui.Label;
     private addBtn: eui.Image;
-    private searchBtn: eui.Group;
-    private searchText: eui.Label;
+    private cdText: eui.Label;
+    private refreshBtn: eui.Image;
+    private list2: eui.List;
     private logBtn: eui.Group;
     private logRedMC: eui.Image;
+
+
 
 
 
@@ -38,7 +41,7 @@ class FightUI extends game.BaseUI {
 
         this.addBtnEvent(this.addBtn,this.onAddEnergy)
         this.addBtnEvent(this.logBtn,this.onLog)
-        this.addBtnEvent(this.searchBtn,this.onSearch)
+        this.addBtnEvent(this.refreshBtn,this.onSearch)
     }
 
     private onAddEnergy(){
@@ -93,7 +96,14 @@ class FightUI extends game.BaseUI {
     }
 
     public renewIng(){
-        this.list.dataProvider = new eui.ArrayCollection(FightManager.getInstance().getAtkList())
+        var arr = FightManager.getInstance().getAtkList();
+        if(arr.length == 0)
+        {
+            MyTool.removeMC(this.list);
+            return;
+        }
+        this.scrollGroup.addChildAt(this.list,0);
+        this.list.dataProvider = new eui.ArrayCollection(arr)
     }
 
     public renewSearch(){

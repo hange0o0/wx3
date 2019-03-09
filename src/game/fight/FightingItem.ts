@@ -3,7 +3,11 @@ class FightingItem extends game.BaseItem{
     private headMC: eui.Image;
     private nameText: eui.Label;
     private desText: eui.Label;
+    private cdText: eui.Label;
     private btn: eui.Button;
+    private awardGroup: eui.Group;
+    private coinText: eui.Label;
+
 
 
 
@@ -38,6 +42,7 @@ class FightingItem extends game.BaseItem{
         }
         else
         {
+            this.data.pkObj.isReplay = true;
              MainPKUI.getInstance().show(this.data.pkObj)
         }
     }
@@ -46,34 +51,41 @@ class FightingItem extends game.BaseItem{
         var robot = this.data.robot;
         PKManager.getInstance().setHead(this.headMC,robot.head)
         this.nameText.text = robot.nick;
-        if(this.data.result)
-        {
-            this.btn.label = '查看'
-        }
-        else
-        {
-            this.btn.label = '撤回'
-        }
-
         this.onTimer();
     }
 
     public onTimer(){
         var cd =  TM.now() - this.data.time;
         var robot = this.data.robot;
+        this.awardGroup.visible = false;
         if(this.data.result)
         {
             cd = robot.distanceTime*2 - cd;
             if(this.data.result == 2)
-                this.desText.text = '战斗胜利，正在返回(' + DateUtil.getStringBySecond(cd).substr(-5)+')';
+            {
+                this.desText.text = '战斗胜利，正在返回';
+                this.awardGroup.visible = true;
+                this.coinText.text = this.data.addCoin
+            }
             else
-                this.desText.text = '进攻失利，正在返回(' + DateUtil.getStringBySecond(cd).substr(-5)+')';
+                this.desText.text = '进攻失利，正在返回';
+            this.btn.label = '查看'
+            this.currentState = 's1'
+        }
+        else if(this.data.backTime)
+        {
+            cd = this.data.backTime - TM.now();
+            this.desText.text = '正在撤回中'
+            this.currentState = 's2'
         }
         else
         {
             cd = robot.distanceTime - cd;
-            this.desText.text = '正在前往目的地(' + DateUtil.getStringBySecond(cd).substr(-5)+')'
+            this.desText.text = '正在前往目的地'
+            this.btn.label = '撤回'
+            this.currentState = 's1'
         }
+        this.cdText.text = DateUtil.getStringBySecond(cd).substr(-5);
     }
 
 

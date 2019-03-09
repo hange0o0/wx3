@@ -14,7 +14,7 @@ class RobotVO{
             forceRate:0.5,
             level:1,
             lastTime:t,
-            distanceTime:10,//180 + Math.floor(1000*Math.random()),
+            distanceTime:5,//180 + Math.floor(1000*Math.random()),
             list:'1,2,3,4,5',
             nick:PKManager.getInstance().randomNick(),
             head:Math.ceil(Math.random()*1000),
@@ -54,6 +54,13 @@ class RobotVO{
     //        head:this.head,
     //    }
     //}
+
+    public isAtking(){
+        return this.lastAtk && this.lastAtk+2*this.distanceTime > TM.now()
+    }
+    public isAtked(){
+        return this.lastAtk > 0;
+    }
 
     public fill(data){
          for(var s in data)

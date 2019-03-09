@@ -54,7 +54,6 @@
 		"resource/skin/game/MainWorkItemSkin.exml",
 		"resource/skin/game/monster/MonsterItemSkin.exml",
 		"resource/skin/game/monster/MonsterUISkin.exml",
-		"resource/skin/game/monster/MonsterUpItemSkin.exml",
 		"resource/skin/game/pk/MainPKItemSkin.exml",
 		"resource/skin/game/pk/MainPKUISkin.exml",
 		"resource/skin/game/pk/ui/scene/PKAddStateSkin.exml",

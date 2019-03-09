@@ -31,6 +31,8 @@ class PKMonsterData {
     public addSpeed  = 0//速度改变百分比
     public manaHp  = 0//魔盾
 
+    private force;//初始战力
+
 
 
     private skillTimes=0//技能使用的次数
@@ -79,6 +81,7 @@ class PKMonsterData {
         var mvo = MonsterVO.getObject(this.mid);
         var add = mvo.getAdd(obj.force,this.getOwner().type);
         var maxAdd = obj.maxHpAdd || 1;
+        this.force = obj.force;
 
         this.hp = Math.floor(mvo.hp * add * maxAdd);
         this.atk = Math.floor(mvo.atk * add);
@@ -103,10 +106,7 @@ class PKMonsterData {
         //this.def += this.getVO().def;
     }
 
-    public getForce(){
-        var mvo = this.getVO();
-        return Math.round((this.hp/mvo.hp*(1+this.def/100) + this.atk/mvo.atk*0.8 + this.speed/mvo.speed*0.5)*mvo.cost*10);
-    }
+
 
     //根据属性相克，取攻击比例
     public getAtkRate(defender:PKMonsterData){
@@ -547,5 +547,10 @@ class PKMonsterData {
         var PD = PKData.getInstance();
 
         return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).getMonsterForce(this.id):0)
+    }
+
+    public getForce(){
+        var mvo = this.getVO();
+        return mvo.cost*(1+this.force/100)*(0.4*this.atk/mvo.atk+0.4*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.2)
     }
 }

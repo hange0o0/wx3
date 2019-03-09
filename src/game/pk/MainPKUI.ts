@@ -32,11 +32,18 @@ class MainPKUI extends game.BaseUI {
     private backBtn: eui.Button;
     private doubleBtn: eui.Button;
     private replayBtn: eui.Button;
+    private bottomBar: eui.Group;
+    private hpBar1: eui.Image;
+    private hpBar2: eui.Image;
     private addSpeedBtn: eui.Group;
     private speedMC: eui.Image;
     private speedMC2: eui.Image;
     private hurt1: eui.Image;
     private hurt2: eui.Image;
+    private bottomUI: BottomUI;
+    private topUI: TopUI;
+
+
 
 
 
@@ -56,6 +63,7 @@ class MainPKUI extends game.BaseUI {
     public list2Data
     public resultTimer
     public isQuick
+    public lastRenewTime = 0;
 
 
 
@@ -63,6 +71,8 @@ class MainPKUI extends game.BaseUI {
 
     public childrenCreated() {
         super.childrenCreated();
+
+        this.bottomUI.setHide(this.hide,this);
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
         this.addBtnEvent(this.backBtn,this.onBack)
@@ -171,15 +181,15 @@ class MainPKUI extends game.BaseUI {
 
     public show(data?){
         PKManager.getInstance().isPKing = true
-
         this.dataIn = data,
-        this.visible = true;
+        super.show();
+    }
+
+    public onShow(){
 
         PKData.getInstance().playSpeed = 1;
         this.renewSpeedBtn();
-        this.addSpeedBtn.visible = !this.dataIn.noSpeed
-
-
+        this.bottomBar.visible = true
         if(this.dataIn.isMain)
         {
             MyTool.removeMC(this.backBtn)
@@ -189,43 +199,22 @@ class MainPKUI extends game.BaseUI {
             this.btnGroup.addChildAt(this.backBtn,0)
             this.backBtn.label = '关闭'
         }
-
-        if(this.dataIn.isPK)
-        {
-        }
-        else
-        {
-            var showData = this.dataIn.showData;
-            var green = 0x66ff66
-            var white = 0xFFEDC9
-        }
-
-
-
-
-        this.reset();
         this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-
-        this.dispatchEventWith('visible_change')
+        this.reset();
     }
 
     public hide(){
         PKManager.getInstance().isPKing = false
         SoundManager.getInstance().playSound('bg');
-        //console.log('hide' , egret.getTimer())
-        this.visible = false;
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         PKVideoCon.getInstance().remove();
-        //PKManager.getInstance().testSendResult();
-
-
-        this.dispatchEventWith('visible_change')
+       super.hide();
     }
 
     public onReplay(){
 
         this.dataIn.passTime = 0;
-        this.addSpeedBtn.visible = true;
+        this.bottomBar.visible = true;
         this.reset();
         this.renewSpeedBtn();
     }
@@ -239,6 +228,15 @@ class MainPKUI extends game.BaseUI {
     }
 
     public reset(){
+        if(this.dataIn.isReplay)
+        {
+            this.currentState = 's2'
+            this.topUI.setTitle(this.dataIn.title || '回放')
+        }
+        else
+        {
+            this.currentState = 's1'
+        }
 
         PKVideoCon.getInstance().x = -(PKConfig.floorWidth + PKConfig.appearPos*2 - 640)/2;
         //this.stopScrollTimer = 0;
@@ -259,14 +257,14 @@ class MainPKUI extends game.BaseUI {
         var data = {
             seed:this.dataIn.seed,
             players:[
-                {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1},
-                {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2}
+                {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1},
+                {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2}
             ]
         };
 
         this.scroller.viewport.scrollV = 0;
-        var list1 = this.list1Data = this.dataIn.list1.split(',');
-        var list2 = this.list2Data = this.dataIn.list2.split(',');
+        var list1 = this.list1Data = this.dataIn.list1?this.dataIn.list1.split(','):[];
+        var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
         this.resetList(list1)
         this.resetList(list2)
@@ -289,6 +287,9 @@ class MainPKUI extends game.BaseUI {
 
 
         PD.start();
+        this.lastRenewTime = 0;
+        this.renewForce();
+        this.renewHp(true);
         this.onStep()
         this.isQuick = false;
         if(PD.isGameOver)
@@ -358,10 +359,16 @@ class MainPKUI extends game.BaseUI {
 
         PC.onStep();
         PKVideoCon.getInstance().action();
+
+
+
         this.timeText.text = Math.floor(PD.actionTime/1000) + ''
+        this.testRenew();
         if(PD.isGameOver)
         {
-            this.addSpeedBtn.visible = false;
+            this.renewForce();
+            this.renewHp();
+            this.bottomBar.visible = false;
             PD.playSpeed = 1;
             
 
@@ -371,8 +378,8 @@ class MainPKUI extends game.BaseUI {
             this.desGroup['callVisible'] = false
             PKBulletManager.getInstance().freeAll();
             var result = PD.getPKResult();
-            if(this.dataIn.isPK)
-            {
+            //if(this.dataIn.isPK)
+            //{
                 if(result == 1)
                 {
                     this.delayShowResult(this.failGroup);
@@ -399,7 +406,7 @@ class MainPKUI extends game.BaseUI {
                     this.failText.text = '平手'
                     this.backBtn.label = '重试'
                 }
-            }
+            //}
 
 
             if(this.shareStr)
@@ -442,6 +449,48 @@ class MainPKUI extends game.BaseUI {
                 }
 
             }
+        }
+    }
+
+    private testRenew(){
+        if(PKData.getInstance().actionTime - this.lastRenewTime > 200)
+        {
+            this.lastRenewTime = PKData.getInstance().actionTime
+            this.renewForce();
+            this.renewHp();
+        }
+    }
+
+    private renewForce(){
+        var forceObj = PKData.getInstance().getForceData();
+        var force1 =  Math.round(forceObj[1] || 0);
+        var force2 =  Math.round(forceObj[2] || 0);
+        var green = 0x66ff66
+        var white = 0xFFEDC9
+        this.force1Text.text = force1 + ''
+        this.force2Text.text = force2 + ''
+        this.force1Text.textColor = force1 > force2 ?green:white
+        this.force2Text.textColor = force2 > force1 ?green:white
+    }
+
+    private renewHp(isInit?){
+        var forceObj = PKData.getInstance().getHpData();
+        var hpRate1 =  (forceObj[1] || 0)/(forceObj['1_max'] || 1)
+        var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
+
+        var w1 = 300 * Math.min(1,hpRate1)
+        var w2 = 300 * Math.min(1,hpRate2)
+        egret.Tween.removeTweens(this.hpBar1)
+        egret.Tween.removeTweens(this.hpBar2)
+        if(isInit)
+        {
+            this.hpBar1.width = w1
+            this.hpBar2.width = w2
+        }
+        else
+        {
+            egret.Tween.get(this.hpBar1).to({width:w1},150)
+            egret.Tween.get(this.hpBar2).to({width:w2},150)
         }
     }
 

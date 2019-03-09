@@ -1568,6 +1568,16 @@
 			"name":"black4_png",
 			"type":"image",
 			"url":"game_assets/png32/black4.png"
+		},
+		{
+			"name":"hp_bar_jpg",
+			"type":"image",
+			"url":"game_assets/hp_bar.jpg"
+		},
+		{
+			"name":"num_bar_jpg",
+			"type":"image",
+			"url":"game_assets/num_bar.jpg"
 		}
 	]
 }

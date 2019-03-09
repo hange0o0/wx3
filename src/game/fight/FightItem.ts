@@ -20,6 +20,11 @@ class FightItem extends game.BaseItem{
     }
 
     private onClick(){
+        if(this.data.isAtked())
+        {
+            return;
+        }
+
         PKPosUI.getInstance().show({
             title:'进攻布阵',
             chooseList:PKManager.getInstance().getLastAtkList(),
@@ -31,7 +36,7 @@ class FightItem extends game.BaseItem{
                 PKPosUI.getInstance().hide();
                 FightManager.getInstance().addAtkList(list,this.data);
                 this.dataChanged();
-                MyWindow.ShowTips('队伍出发了！')
+                EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
             },
         })
     }
@@ -41,6 +46,7 @@ class FightItem extends game.BaseItem{
          this.nameText.text = this.data.nick
         this.lvText.text = 'LV.' + this.data.level
         this.cdText.text = DateUtil.getStringBySecond(this.data.distanceTime).substr(-5);
+
     }
 
 

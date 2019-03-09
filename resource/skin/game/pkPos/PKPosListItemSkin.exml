@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKPosListItemSkin" width="95" height="95" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PKPosListItemSkin" width="95" height="115" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image id="bg" source="border_6_png" left="0" right="0" top="0" bottom="0"/>
-	<e:Image id="mc" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>
-	<e:Label id="costText" text="12" size="24" right="5" bottom="5" stroke="3"/>
-	<e:Label id="numText" text="12" size="20" stroke="3" left="5" y="5"/>
+	<e:Image id="mc" width="80" height="80" horizontalCenter="0" y="8"/>
+	<e:Image source="black3_png" left="0" right="0" bottom="0" height="28" alpha="0.5"/>
+	<e:Image id="numBar" source="num_bar_jpg" x="6" y="93" fillMode="repeat" width="80"/>
+	<e:Label id="levelText" text="lv.12" size="18" stroke="3" bottom="6" right="6"/>
+	<e:Group x="-5" y="-5">
+		<e:Image source="icon_cost_png" x="1" y="0"/>
+		<e:Label id="costText" text="12" y="12" size="18" width="25" textAlign="center" stroke="2" bold="true" horizontalCenter="0.5"/>
+	</e:Group>
 </e:Skin>

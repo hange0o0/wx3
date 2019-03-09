@@ -192,10 +192,35 @@ class PKData extends egret.EventDispatcher{
         for(var s in this.monsterList)
         {
             var monsterData:PKMonsterData = this.monsterList[s];
+            if(monsterData.die)
+                continue;
             var temaID = monsterData.getOwner().teamData.id;
             if(!forceObj[temaID])
                 forceObj[temaID] = 0;
             forceObj[temaID] += monsterData.getForce()
+        }
+        return forceObj;
+    }
+
+    public getHpData(){
+        var forceObj = {};
+        for(var s in this.monsterList)
+        {
+            var monsterData:PKMonsterData = this.monsterList[s];
+            if(monsterData.die)
+                continue;
+            var temaID = monsterData.getOwner().teamData.id;
+            if(!forceObj[temaID])
+                forceObj[temaID] = 0;
+            forceObj[temaID] += monsterData.hp
+        }
+        for(var s in this.playerObj)
+        {
+            var temaID = this.playerObj[s].teamData.id;
+            if(!forceObj[temaID])
+                forceObj[temaID] = 0;
+            forceObj[temaID+'_max'] = this.playerObj[s].maxTeamHp
+            forceObj[temaID] += this.playerObj[s].getLeaveHp();
         }
         return forceObj;
     }

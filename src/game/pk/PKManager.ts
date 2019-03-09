@@ -74,7 +74,7 @@ class PKManager {
     public roundData;
 
     public randomNick(){
-        return Math.random()+''
+        return 'nick' + Math.floor(Math.random()*1000)
     }
     public setHead(img,head){
         var wx = window['wx'];
@@ -537,8 +537,8 @@ class PKManager {
         PD.init({
             seed:data.seed,
             players:[
-                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.fmorce1},
-                {id:2,gameid:'team2',team:2,force:data.force1,hp:1,autolist:data.list2,mforce:data.fmorce2}
+                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1},
+                {id:2,gameid:'team2',team:2,force:data.force1,hp:1,autolist:data.list2,mforce:data.mforce2}
             ]
         });
         PD.quick = true;
@@ -616,7 +616,7 @@ class PKManager {
 
     public onChapterWin(level){
         if(UM.chapterLevel != level)
-            return;
+            return 0;
         var cost = Math.min(2000,Math.ceil(level/20)*100)/2
         UM.addCoin(cost);
         UM.chapterLevel ++;

@@ -3,19 +3,14 @@
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
 	<e:Rect id="indexMC" width="20" height="100%" x="0" y="0"/>
 	<e:Image id="headMC" width="120" height="120" x="20" verticalCenter="0"/>
-	<e:Label id="nameText" text="Label" x="160" y="10"/>
-	<e:Label id="desText" text="Label" y="55" size="24" textColor="0xE5C68E" left="160" right="180"/>
-	<e:Group id="upGroup" y="8" right="10" visible="false">
+	<e:Label id="nameText" text="Label" x="160" y="10" textColor="0xfff6db"/>
+	<e:Label id="desText" text="Label" y="55" size="24" left="160" right="180" textColor="0x5a3909"/>
+	<e:Group id="upGroup" y="8" right="10">
 		<e:Group y="0" x="0">
 			<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>
 			<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
 			<e:Label id="valueText" text="Label" size="24" verticalCenter="0" right="10"/>
 		</e:Group>
 		<e:Button id="upBtn" label="Button" skinName="Btn1Skin" width="150" x="0" y="46"/>
-	</e:Group>
-	<e:Group id="rateBar" right="8" verticalCenter="-6">
-		<e:Image source="bar_bg_png" x="0" y="0" width="158"/>
-		<e:Image id="barMC" source="bar1_png" x="2" y="2" width="154"/>
-		<e:Label id="rateText" text="00:00:00" size="24" textColor="0xe5c68e" y="45" horizontalCenter="0"/>
 	</e:Group>
 </e:Skin>

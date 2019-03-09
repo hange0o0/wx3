@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="FightingItemSkin" width="640" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="FightingItemSkin" width="600" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
 	<e:Image id="headMC" width="100" height="100" x="10" verticalCenter="0"/>
-	<e:Label id="nameText" text="Label" x="125" y="10"/>
-	<e:Label id="desText" text="Label" x="125" y="60" size="24" textColor="0xe5c68e"/>
-	<e:Button id="btn" label="撤回" skinName="Btn1Skin" right="10" width="120" verticalCenter="0"/>
+	<e:Label id="nameText" text="Label" x="125" y="11.96" bold="true"/>
+	<e:Label id="desText" text="Label" x="125" y="50" size="24" textColor="0x5a3909"/>
+	<e:Label id="cdText" text="00:00" y="15" size="24" textColor="0xf4e5cb" right="10" width="120" textAlign="center" verticalCenter.s2="0"/>
+	<e:Button id="btn" label="撤回" skinName="Btn1Skin" right="10" width="120" y="44" includeIn="s1"/>
+	<e:Group id="awardGroup" x="125" y="81.81">
+		<e:Label text="掠夺资源：" x="0" y="0" size="24" textColor="0x5A3909"/>
+		<e:Image source="icon_coin_png" x="23" y="32" scaleX="0.6" scaleY="0.6"/>
+		<e:Label id="coinText" text="x123" x="10" y="10" size="24" textColor="0x5A3909"/>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
 </e:Skin>

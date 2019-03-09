@@ -13,7 +13,8 @@ class PKPlayerData {
     public autoList
     public maxPlayer
 
-
+    public maxTeamHp = 0
+    public monsterHpList = [];
 
     constructor(obj?){
         if(obj)
@@ -33,10 +34,30 @@ class PKPlayerData {
             this[key] = obj[key];
         }
 
-        this.autoList = obj['autolist'].split(',');
+        if(obj['autolist'])
+            this.autoList = obj['autolist'].split(',');
+        else
+            this.autoList = [];
+        this.maxTeamHp = 0;
+        for(var i=0;i<this.autoList.length;i++)
+        {
+            var vo = MonsterVO.getObject(this.autoList[i]);
+            var hp = Math.floor(vo.hp*(1+this.getMonsterForce()/100));
+            this.monsterHpList.push(hp);
+            this.maxTeamHp += hp;
+        }
         this.maxPlayer = this.autoList.length;
-        MonsterVO.getObject(this.autoList[0]).preLoad();
+        this.autoList[0] && MonsterVO.getObject(this.autoList[0]).preLoad();
         //console.log(this.autoList)
+    }
+
+    public getLeaveHp(){
+        var count = 0;
+        for(var i=0;i<this.monsterHpList.length;i++)
+        {
+            count += this.monsterHpList[i];
+        }
+        return count;
     }
 
     public getMonsterForce(mid?){
@@ -49,6 +70,7 @@ class PKPlayerData {
             return;
 
         var mid = this.autoList.shift();
+        this.monsterHpList.shift();
         if(this.autoList[0])
         {
             MonsterVO.getObject(this.autoList[0]).preLoad();

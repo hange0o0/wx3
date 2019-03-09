@@ -68,7 +68,6 @@
 		"bin-debug/game/monster/MonsterItem.js",
 		"bin-debug/game/monster/MonsterManager.js",
 		"bin-debug/game/monster/MonsterUI.js",
-		"bin-debug/game/monster/MonsterUpItem.js",
 		"bin-debug/game/pk/AniManager.js",
 		"bin-debug/game/pk/MainPKItem.js",
 		"bin-debug/Platform.js",
