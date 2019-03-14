@@ -35,7 +35,7 @@ class MonsterManager {
     }
     /////////////////////////////////// def end //////////////////////
     //取队伍战力
-    public getMyListForce(list,isAtk?){
+    public getMyListForce(list,isAtk?,addBuff = true){
         if(!list)
             return 0;
         var count = 0;
@@ -46,7 +46,7 @@ class MonsterManager {
             var vo = MonsterVO.getObject(arr[i]);
             count += vo.cost*(1+(force + this.getForceAdd(vo.id))/100)
         }
-        return count;
+        return Math.floor(count);
     }
 
     //生成战斗用的怪物战力数据

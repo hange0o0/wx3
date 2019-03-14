@@ -90,12 +90,14 @@ class MainWorkItem extends game.BaseItem {
         else
             localMax = localMax%10;
 
-        this.redMC.visible = arr.length < localMax && MonsterManager.getInstance().getFreeMonster().length > 0
+        this.redMC.visible = arr.length < localMax && MonsterManager.getInstance().getFreeMonster(true).length > 0
     }
 
     public onE(){
         if(this.currentState == 'lock')
             return
+        if(!this.visible || !GameUI.getInstance().visible)
+            return;
         var t = TM.nowMS();
         var WM = WorkManager.getInstance();
         for(var i=0;i<this.monsterArr.length;i++)

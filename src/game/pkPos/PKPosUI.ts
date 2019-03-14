@@ -68,6 +68,7 @@ class PKPosUI extends game.BaseUI {
         this.list.dataProvider =  this.chooseDataProvider = new eui.ArrayCollection()
 
         this.addBtnEvent(this.pkBtn,this.onPK);
+        this.addBtnEvent(this.okBtn,this.onSave);
         this.addBtnEvent(this.resetBtn,this.reset);
 
         this.chooseList.addEventListener('start_drag',this.onDragStart,this);
@@ -135,21 +136,22 @@ class PKPosUI extends game.BaseUI {
             for(var i=0;i<this.chooseList.numChildren;i++)
             {
                 var mc:any = this.chooseList.getChildAt(i);
-                if(mc.visible && mc.hitTestPoint(x,y))
+                if(mc.visible && mc.hitMC.hitTestPoint(x,y))
                 {
                     if(mc.data == this.dragTarget.data)
                     {
                         this.dragTarget.showDragState(0);
-                        break;
+                        return;
                     }
                     var p = mc.globalToLocal(x,y);
                     if(p.x < mc.width/4 || p.x > mc.width/4*3)
                         this.dragTarget.showDragState(2);
                     else
                         this.dragTarget.showDragState(1)
-                    break
+                    return
                 }
             }
+            this.dragTarget.showDragState(0)
         }
         else
         {
@@ -163,37 +165,40 @@ class PKPosUI extends game.BaseUI {
         MyTool.removeMC(this.dragTarget)
         var x = this.dragTarget.x + this.dragTarget.width/2
         var y = this.dragTarget.y + this.dragTarget.height/2
-        for(var i=0;i<this.chooseList.numChildren;i++)
+        if(this.chooseList.hitTestPoint(x,y))
         {
-            var mc:any = this.chooseList.getChildAt(i);
-            if(mc.visible && mc.hitTestPoint(x,y))
+            for(var i=0;i<this.chooseList.numChildren;i++)
             {
-                if(mc.data == this.dragTarget.data)
+                var mc:any = this.chooseList.getChildAt(i);
+                if(mc.visible && mc.hitMC.hitTestPoint(x,y))
+                {
+                    if(mc.data == this.dragTarget.data)
+                        break
+                    var currentIndex =  this.dataProvider.source.indexOf(mc.data)// this.chooseList会有不存在数组中数据的显示对象
+                    var index = this.dataProvider.source.indexOf(this.dragTarget.data)
+                    var p = mc.globalToLocal(x,y);
+                    if(p.x < mc.width/4 || p.x > mc.width/4*3)//insert
+                    {
+                        var targetIndex = p.x < mc.width/4?currentIndex:currentIndex+1;
+                        if(targetIndex == index)
+                            break;
+                        this.dataProvider.removeItemAt(index)
+                        if(targetIndex > index)
+                            targetIndex --;
+                        this.dataProvider.addItemAt(this.dragTarget.data,targetIndex)
+                    }
+                    else//swap
+                    {
+                        this.dataProvider.source[index] = mc.data
+                        this.dataProvider.source[currentIndex] = this.dragTarget.data
+                    }
+
+                    this.dataProvider.refresh();
                     break
-                var currentIndex =  this.dataProvider.source.indexOf(mc.data)// this.chooseList会有不存在数组中数据的显示对象
-                var index = this.dataProvider.source.indexOf(this.dragTarget.data)
-                var p = mc.globalToLocal(x,y);
-                if(p.x < mc.width/4 || p.x > mc.width/4*3)//insert
-                {
-                    var targetIndex = p.x < mc.width/4?currentIndex:currentIndex+1;
-                    if(targetIndex == index)
-                        break;
-                    this.dataProvider.removeItemAt(index)
-                    if(targetIndex > index)
-                        targetIndex --;
-                    this.dataProvider.addItemAt(this.dragTarget.data,targetIndex)
                 }
-                else//swap
-                {
-                    this.dataProvider.source[index] = mc.data
-                    this.dataProvider.source[currentIndex] = this.dragTarget.data
-                }
-
-
-                this.dataProvider.refresh();
-                break
             }
         }
+
         for(var i=0;i<this.chooseList.numChildren;i++) {
             var mc:any = this.chooseList.getChildAt(i);
             mc.setChoose(false);
@@ -244,6 +249,17 @@ class PKPosUI extends game.BaseUI {
 
 
     public onPK(){
+        var list = this.getMyList();
+        if(!list)
+        {
+            MyWindow.ShowTips('队列阵容不可为空')
+            return;
+        }
+        var baseForce = MonsterManager.getInstance().getMyListForce(this.getMyList(),this.dataIn.isAtk,false)
+        UM.maxForce = Math.max(UM.maxForce,baseForce);
+        this.dataIn.fun && this.dataIn.fun(list)
+    }
+    public onSave(){
         this.dataIn.fun && this.dataIn.fun(this.getMyList())
     }
 
@@ -292,23 +308,28 @@ class PKPosUI extends game.BaseUI {
             MyTool.removeMC(this.con);
             return;
         }
-        this.mainCon.addChild(this.con);
+        this.mainCon.addChildAt(this.con,0);
 
         var arr = this.dataIn.enemy.list.split(',')
         arr.reverse();
         var des = Math.min(500/(arr.length-1),80)
         var begin = (640-des*(arr.length-1))/2
+        var count = 0;
+        var force = this.dataIn.enemy.force || 0;
+
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i]
             var vo = MonsterVO.getObject(id);
             var item = PKMonsterMV.createItem();
+            count += vo.cost*(1+force/100);
+            console.log(count)
             this.con.addChild(item);
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1.2;
             item.currentMV.scaleX = -Math.abs(item.currentMV.scaleX);
-            item.bottom = 0+vo.height*1.2 - 5 + 10*Math.random()// + Math.random()*80
+            item.bottom = -30+vo.height*1 - 5 + 10*Math.random()// + Math.random()*80
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);
@@ -319,7 +340,12 @@ class PKPosUI extends game.BaseUI {
         {
             this.con.addChild(sortList[i]);
         }
-        this.bg.source = PKManager.getInstance().getPKBG(this.dataIn.enemy.seed);
+        if(this.dataIn.enemy.bgid)
+            this.bg.source = 'map'+this.dataIn.enemy.bgid+'_jpg';
+        else
+            this.bg.source = PKManager.getInstance().getPKBG(this.dataIn.enemy.seed);
+
+        this.otherForceText.text = '' + Math.floor(count);
     }
     private renewTitle(){
         this.topUI.setTitle(this.dataIn.title || '布阵')
@@ -357,17 +383,17 @@ class PKPosUI extends game.BaseUI {
 
     private renewTopList(){
         var layOut:any = this.chooseList.layout;
-        if(this.maxNum > 6)
+        if(this.maxNum > 7)
         {
-            layOut.requestedColumnCount = 6
+            layOut.requestedColumnCount = 7
             layOut.requestedRowCount = 2
-            this.chooseGroup.height = 220;
+            this.chooseGroup.height = 200;
         }
         else
         {
             layOut.requestedColumnCount = this.maxNum;
             layOut.requestedRowCount = 1
-            this.chooseGroup.height = 120;
+            this.chooseGroup.height = 110;
         }
         var list = this.dataIn.chooseList?this.dataIn.chooseList.split(','):[];
         for(var i=0;i<list.length;i++)

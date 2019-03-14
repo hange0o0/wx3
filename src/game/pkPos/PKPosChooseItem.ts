@@ -4,12 +4,11 @@ class PKPosChooseItem extends game.BaseItem {
         this.skinName = "PKPosChooseItemSkin";
     }
 
+    public hitMC: eui.Rect;
     private bg: eui.Image;
     private mc: eui.Image;
     private insertMC: eui.Image;
     private changeMC: eui.Image;
-    private costText: eui.Label;
-    private levelText: eui.Label;
 
 
 
@@ -85,8 +84,8 @@ class PKPosChooseItem extends game.BaseItem {
         var vo = MonsterVO.getObject(this.data.id)
         this.bg.source = vo.getBG()
         this.mc.source = vo.getImage()
-        this.costText.text = vo.cost +'';
-        this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(this.data.id) + ''
+        //this.costText.text = vo.cost +'';
+        //this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(this.data.id) + ''
     }
 
     public setChoose(b){

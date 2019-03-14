@@ -533,14 +533,6 @@ class PKMonsterData {
         this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
         MBase.getData(this.mid).onRemove(this);
         PKData.getInstance().actionRecord.push('die|' + PKData.getInstance().actionTime + '|' + this.id + '|' + this.passEnd)
-
-        //if(this.skillTemp[210] == 1)
-        //{
-        //    var oo:PKBuffData = new PKBuffData()
-        //    oo.user = this;
-        //    oo.id = 210;
-        //    SBase.getData(oo.id).onIll(oo);
-        //}
     }
 
     public getSkillValue(index,needForce=false){
@@ -551,6 +543,8 @@ class PKMonsterData {
 
     public getForce(){
         var mvo = this.getVO();
-        return mvo.cost*(1+this.force/100)*(0.4*this.atk/mvo.atk+0.4*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.2)
+        if(mvo.atk)
+            return mvo.cost*(1+this.force/100)*(0.4*this.atk/mvo.atk+0.4*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.2)
+        return mvo.cost*(1+this.force/100)*(0.6*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.4)
     }
 }

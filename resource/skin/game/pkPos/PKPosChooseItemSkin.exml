@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKPosChooseItemSkin" width="95" height="95" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PKPosChooseItemSkin" width="80" height="80" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="hitMC" left="-4" right="0" top="0" bottom="0" visible="false"/>
 	<e:Image id="bg" source="border_6_png" left="0" right="0" top="0" bottom="0"/>
-	<e:Image id="mc" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>
+	<e:Image id="mc" width="70" height="70" horizontalCenter="0" verticalCenter="0"/>
 	<e:Image id="insertMC" source="arror4_png" y="-80" horizontalCenter="0" anchorOffsetX="27" anchorOffsetY="30" visible="false"/>
 	<e:Image id="changeMC" source="change_icon_png" y="-80" anchorOffsetX="22" anchorOffsetY="18" horizontalCenter="0" scaleX="1.4" scaleY="1.4" visible="false"/>
-	<e:Group x="-5" y="-5">
-		<e:Image source="icon_cost_png" x="1" y="0"/>
-		<e:Label id="costText" text="12" y="12" size="18" width="25" textAlign="center" stroke="2" bold="true" horizontalCenter="0.5"/>
-	</e:Group>
-	<e:Label id="levelText" text="lv.12" size="18" stroke="3" bottom="6" right="6"/>
 </e:Skin>

@@ -18,7 +18,11 @@ class ChapterUI extends game.BaseUI {
 
 
 
+
     private dataProvider:eui.ArrayCollection
+    private page = 1;
+    private maxPage = 1;
+    private pageSize = 50;
 
     public constructor() {
         super();
@@ -29,53 +33,51 @@ class ChapterUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('打赏日志')
+        this.topUI.setTitle('扩张版图')
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = LogItem
+        this.list.itemRenderer = ChapterItem
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
 
+        this.addBtnEvent(this.rightBtn,this.onRight)
+        this.addBtnEvent(this.leftBtn,this.onLeft)
+    }
+
+    private onRight(){
+        this.page ++;
+        this.renew();
+    }
+
+    private onLeft(){
+        this.page --;
+        this.renew();
     }
 
     public onClose(){
-
         this.hide();
     }
-
 
     public show(){
         super.show()
     }
 
     public hide() {
-        //MainPKUI.instance.hide();
         super.hide();
-        //GameUI.getInstance().onTimer();
     }
 
     public onShow(){
-        //SoundManager.getInstance().playSound('bg');
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.HISTORY_CHANGE,this.onHistoryChange)
-    }
-
-    private onHistoryChange(){
-        var v = this.scroller.viewport.scrollV;
-        this.renew();
-        this.validateNow();
-        this.scroller.viewport.scrollV = v;
     }
 
     public renew(){
-        this.dataProvider.source = UM.history
+        this.maxPage = Math.ceil(UM.chapterLevel/this.pageSize);
+
+        var arr = PKManager.getInstance().chapterData.slice((this.page-1)*this.pageSize,this.page*this.pageSize);
+        this.titleText.text = '第 ' + NumberUtil.cNum(this.page) + ' 区';
+        this.dataProvider.source = arr
         this.dataProvider.refresh();
-        //this.list.dataProvider = new eui.ArrayCollection(UM.history);
+
+        this.leftBtn.visible = this.page > 1;
+        this.rightBtn.visible = this.page < this.maxPage;
     }
-
-
-    public showHistory(userData,roundData){
-
-
-    }
-
 }

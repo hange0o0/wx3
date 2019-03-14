@@ -47,7 +47,7 @@ class WorkManager {
     }
 
     public getWorkNum(){
-        return TecManager.getInstance().getTecLevel(22) + 3
+        return TecManager.getInstance().getSkillValue(22)
     }
     public getOpenWork(){
         return Math.ceil(this.getWorkNum()/10);
@@ -61,7 +61,7 @@ class WorkManager {
     }
 
     public getWorkCoin(id){
-        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getTecLevel(21)/100 + MonsterManager.getInstance().getWorkAdd(id)));
+        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id)));
     }
 
     //基础挖矿效率

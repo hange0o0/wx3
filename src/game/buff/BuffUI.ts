@@ -1,12 +1,13 @@
-class LogUI extends game.BaseUI {
+class BuffUI extends game.BaseUI {
 
-    private static _instance: LogUI;
-    public static getInstance(): LogUI {
+    private static _instance: BuffUI;
+    public static getInstance(): BuffUI {
         if(!this._instance)
-            this._instance = new LogUI();
+            this._instance = new BuffUI();
         return this._instance;
     }
 
+    private topList: eui.List;
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
@@ -15,23 +16,26 @@ class LogUI extends game.BaseUI {
 
 
 
+
     private dataProvider:eui.ArrayCollection
 
     public constructor() {
         super();
-        this.skinName = "LogUISkin";
+        this.skinName = "BuffUISkin";
     }
 
     public childrenCreated() {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('掠夺日志')
+        this.topUI.setTitle('增益加成')
+
+        this.topList.itemRenderer = BuffItem;
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = LogItem
+        this.list.itemRenderer = BuffListItem
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
-        this.desText.text = '掠夺日志最多只保留3天'
+        //this.desText.text = '掠夺日志最多只保留3天'
 
     }
 

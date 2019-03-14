@@ -7,17 +7,12 @@ class MonsterUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private list: eui.List;
-    private list2: eui.List;
-    private energyText: eui.Label;
-    private addBtn: eui.Image;
-    private searchBtn: eui.Group;
-    private searchText: eui.Label;
-    private logBtn: eui.Group;
-    private logRedMC: eui.Image;
+    private topUI: TopUI;
+    private bottomUI: BottomUI;
+    private workBtn: eui.Group;
+
 
 
 
@@ -30,25 +25,18 @@ class MonsterUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
-        this.topUI.setTitle('ÂÓ¶áÍæ¼Ò')
+        this.topUI.setTitle('æˆ‘çš„æ€ªç‰©')
 
-        this.list.itemRenderer = FightingItem
-        this.list2.itemRenderer = FightItem
+        this.addBtnEvent(this.workBtn,this.onWork)
 
-
-        this.addBtnEvent(this.addBtn,this.onAddEnergy)
-        this.addBtnEvent(this.logBtn,this.onLog)
-        this.addBtnEvent(this.searchBtn,this.onSearch)
+        this.scroller.viewport = this.list;
+        this.list.itemRenderer = MonsterItem
     }
 
-    private onAddEnergy(){
-
-    }
-    private onLog(){
-
-    }
-    private onSearch(){
-
+    private onWork(){
+        SharedObjectManager.getInstance().setMyValue('showWork',true)
+        WorkUI.getInstance().show();
+        this.hide();
     }
 
 
@@ -57,25 +45,23 @@ class MonsterUI extends game.BaseUI {
     }
 
     public hide() {
-        //MainPKUI.instance.hide();
         super.hide();
-        //GameUI.getInstance().onTimer();
     }
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }
 
-    private onTimer(){
-        var v = this.scroller.viewport.scrollV;
-        this.renew();
-        this.validateNow();
-        this.scroller.viewport.scrollV = v;
-    }
 
     public renew(){
-
+        var MM = MonsterManager.getInstance();
+        var list = MM.getOpenMonster();
+        ArrayUtil.sortByField(list,['level','cost','type'],[0,0,0])
+        for(var i=0;i<list.length;i++)
+        {
+            list[i] = {vo:list[i],list:list};
+        }
+        this.list.dataProvider = new eui.ArrayCollection(list);
     }
 
 }

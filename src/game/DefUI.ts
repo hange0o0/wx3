@@ -76,12 +76,35 @@ class DefUI extends game.BaseItem{
         this.forceText.text = '战力：' + MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false)
 
 
-        this.redMC.visible = arr.length < teamNum || cost < teamCost;
+        this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
     }
 
     public onE(){
-
+        if(!this.visible || !GameUI.getInstance().visible)
+            return;
+        this.randomTalk();
     }
+
+
+    private lastTalk = 0
+    public randomTalk(){
+
+        if(PKManager.getInstance().isPKing)
+            return;
+        if(GuideManager.getInstance().isGuiding)
+            return;
+        if(egret.getTimer() < this.lastTalk)
+            return;
+        if(Math.random() > 0.5)
+            return;
+        var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
+        if(item && !item.talkItm)
+        {
+            item.talk();
+            this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*2000);
+        }
+    }
+
 
 
 }

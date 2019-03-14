@@ -8,6 +8,8 @@ class FightManager {
         return this._instance;
     }
 
+    public refreshSearchTime = 4*3600
+
     public notReadLog = [];
 
 
@@ -18,10 +20,13 @@ class FightManager {
     public fightingArr = [];//出战中的人(自己和敌人的)
     public nextBeHitTime = 0
 
+
+
     public constructor(){
         var oo = SharedObjectManager.getInstance().getMyValue('fight')
         if(oo)
         {
+            var t = TM.now() - 3*24*3600;
             this.searchTime = oo.searchTime;
             this.notReadLog = oo.notReadLog;
             this.log = oo.log;
@@ -32,28 +37,42 @@ class FightManager {
             }
             for(var i=0;i<this.log.length;i++)
             {
+                if(this.log[i].time < t)
+                {
+                    this.log.splice(i,1);
+                    i--;
+                    continue;
+                }
                 this.log[i].robot = new RobotVO(this.log[i].robot);
             }
+
+            for(var i=0;i<this.notReadLog.length;i++)
+            {
+                if(this.notReadLog[i] < t)
+                {
+                    this.notReadLog.splice(i,1);
+                    i--;
+                }
+            }
         }
-
-
     }
 
     public renewSearch(force?){
-        if(TM.now() - this.searchTime > 4*3600 || force)
+        if(TM.now() - this.searchTime >= this.refreshSearchTime || force)
         {
             this.searchRobot.length = 0;
             for(var i=0;i<9;i++)
             {
                 this.searchRobot.push(RobotVO.create());
             }
+            this.searchTime = TM.now();
             this.save();
         }
     }
 
     public initFight(data){
         this.nextBeHitTime = data.time || 0;
-       this.fightingArr = data.list || [];
+        this.fightingArr = data.list || [];
         for(var i=0;i<this.fightingArr.length;i++)
         {
             this.fightingArr[i].robot = new RobotVO(this.fightingArr[i].robot);
@@ -129,6 +148,7 @@ class FightManager {
     }
 
     public onTimer(){
+        var b = false
         var t = TM.now();
         var coinArr = [];
         //处理准备打我的
@@ -143,6 +163,7 @@ class FightManager {
             })
             this.resetNextBeHit();
             num++;
+            b=true;
             if(num >= 3)
                 break;
         }
@@ -153,7 +174,6 @@ class FightManager {
         }
 
          //处理出征中的
-        var b = false
         for(var i=0;i<this.fightingArr.length;i++)
         {
             var oo:any = this.fightingArr[i];
@@ -165,9 +185,27 @@ class FightManager {
                 {
                     oo.pkObj = this.getPKObj(oo);
                     oo.result = PKManager.getInstance().getPKResult(oo.pkObj);
-
-                    this.log.push(oo);
+                    this.log.unshift(oo);
+                    oo.logTime = oo.time + robot.distanceTime;
                     this.notReadLog.push(oo.time)
+                    RobotVO.change = true;
+
+                    if(cd - robot.distanceTime < 5)
+                    {
+                        if(oo.type == 'atk')
+                        {
+                            MyWindow.ShowTips('进攻【'+robot.nick+'】' + (oo.result==2?'成功':'失败') + ',队伍正在返回')
+                        }
+                        else if(oo.type == 'def')
+                        {
+                            if(oo.result==1)
+                                MyWindow.ShowTips('【'+robot.nick+'】攻破了我方防御')
+                            else
+                                MyWindow.ShowTips('我方守下了【'+robot.nick+'】的进攻')
+                        }
+                    }
+
+
                 }
             }
             if(oo.backTime)
@@ -178,6 +216,9 @@ class FightManager {
                      this.fightingArr.splice(i,1);
                      i--;
                      b = true
+                     this.onAtkBackFail(oo);
+                     MyWindow.ShowTips('进攻【'+robot.nick+'】的队伍已经返回')
+                     EM.dispatchEventWith(GameEvent.client.MONSTER_WORK_CHANGE)
                  }
             }
             else if(oo.type == 'atk' && cd > robot.distanceTime*2)//移除队列
@@ -191,10 +232,13 @@ class FightManager {
                 else
                 {
                     robot.lastAtk = 0;
+                    this.onAtkBackFail(oo);
                 }
                 this.fightingArr.splice(i,1);
                 i--;
                 b = true
+                MyWindow.ShowTips('进攻【'+robot.nick+'】的队伍已经返回')
+                EM.dispatchEventWith(GameEvent.client.MONSTER_WORK_CHANGE)
             }
             else if(oo.type == 'def' && cd > robot.distanceTime)//移除队列
             {
@@ -227,8 +271,23 @@ class FightManager {
 
         if(b)
         {
+            UM.needUpUser = true;
             RobotVO.change = true;
             EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
+        }
+    }
+
+    public onAtkBackFail(oo){
+        if(oo.atkBack)
+        {
+            for(var i=0;i<this.log.length;i++)
+            {
+                 if(this.log[i].time == oo.atkBack)
+                 {
+                     this.log[i].atkBack = false;
+                     break;
+                 }
+            }
         }
     }
 
@@ -254,15 +313,17 @@ class FightManager {
         return pkObj;
     }
 
-    public addAtkList(list,robot){
+    public addAtkList(list,robot):any{
         robot.lastAtk = TM.now();
-        this.fightingArr.push({
+        var oo = {
             time: robot.lastAtk,
             type:'atk',
             list:list,
             seed:Math.floor(Math.random()*10000000000),
             robot:robot
-        })
+        };
+        this.fightingArr.push(oo)
+        return oo;
     }
 
 

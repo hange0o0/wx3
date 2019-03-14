@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="WorkConItemSkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="WorkConItemSkin" width="620" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%"/>
 	<e:Group y="0" height="50" left="0" right="0" x="0" locked="true">
 		<e:Image source="bg9_png" scale9Grid="12,12,6,5" left="5" right="5" top="5" bottom="0"/>
@@ -7,7 +7,7 @@
 	</e:Group>
 	<e:List id="list" left="10" right="10" top="60" bottom="15">
 		<e:layout>
-			<e:TileLayout/>
+			<e:TileLayout requestedColumnCount="6"/>
 		</e:layout>
 	</e:List>
 	<e:Image id="redMC" source="red_mc_png" y="10" right="0"/>

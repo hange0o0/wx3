@@ -1578,6 +1578,21 @@
 			"name":"num_bar_jpg",
 			"type":"image",
 			"url":"game_assets/num_bar.jpg"
+		},
+		{
+			"name":"common_head_bg_jpg",
+			"type":"image",
+			"url":"game_assets/common_head_bg.jpg"
+		},
+		{
+			"name":"chapter_txt",
+			"type":"text",
+			"url":"chapter.txt"
+		},
+		{
+			"name":"level_txt",
+			"type":"text",
+			"url":"level.txt"
 		}
 	]
 }

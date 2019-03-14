@@ -4,13 +4,14 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 	<e:Group id="mainCon" x="0" top="55" bottom="100">
-		<e:Group id="con" x="0" width="640" height="350" y="0" scrollEnabled="true">
+		<e:Group id="con" x="0" width="640" height="300" y="0" scrollEnabled="true">
 			<e:Image id="bg" horizontalCenter="0" bottom="0"/>
-			<e:Group x="0" y="0" width="150">
+			<e:Image source="black_bg2_png" x="0" y="0" width="320" height="40"/>
+			<e:Group x="0" y="2" width="150">
 				<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
 				<e:Label id="otherForceText" text="123456" size="24" x="0" y="0" textColor="0xFFECA5" stroke="2"/>
 				<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom"/>
+				<e:HorizontalLayout verticalAlign="middle"/>
 				</e:layout>
 			</e:Group>
 		</e:Group>
@@ -80,11 +81,11 @@
 			<e:Image source="icon_atk3_png" y="0" horizontalCenter="0" scaleX="0.9" scaleY="0.9"/>
 			<e:Label text="重置" bottom="0" horizontalCenter="0" size="24" stroke="2." textColor="0xffe0c4"/>
 		</e:Group>
-		<e:Group id="okBtn" x="256" y="10" width="100" height="80">
+		<e:Group id="okBtn" x="256" y="10" width="100" height="80" includeIn="normal">
 			<e:Image y="0" horizontalCenter="0" source="icon_right_png"/>
 			<e:Label text="保存" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xFFE0C4"/>
 		</e:Group>
-		<e:Group id="pkBtn" x="149" y="6" width="100" height="80">
+		<e:Group id="pkBtn" x="149" y="6" width="100" height="80" includeIn="pk">
 			<e:Image source="icon_atk2_png" y="0" horizontalCenter="0" scaleX="0.8" scaleY="0.8"/>
 			<e:Label text="出战" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xffe0c4"/>
 		</e:Group>

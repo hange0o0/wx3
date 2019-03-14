@@ -24,6 +24,11 @@ class FightItem extends game.BaseItem{
         {
             return;
         }
+        if(UM.getEnergy()<1)
+        {
+            MyWindow.ShowTips('体力不足')
+            return;
+        }
 
         PKPosUI.getInstance().show({
             title:'进攻布阵',
@@ -45,7 +50,7 @@ class FightItem extends game.BaseItem{
         PKManager.getInstance().setHead(this.headMC,this.data.head)
          this.nameText.text = this.data.nick
         this.lvText.text = 'LV.' + this.data.level
-        this.cdText.text = DateUtil.getStringBySecond(this.data.distanceTime).substr(-5);
+        this.cdText.text = '路程:' +  DateUtil.getStringBySecond(this.data.distanceTime).substr(-5);
 
     }
 

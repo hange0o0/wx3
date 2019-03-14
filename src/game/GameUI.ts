@@ -12,18 +12,15 @@ class GameUI extends game.BaseUI {
     }
 
     private coinGroup: eui.Group;
+    private shopRedMC: eui.Image;
     private coinText: eui.Label;
     private diamondGroup: eui.Group;
     private diamondText: eui.Label;
     private bottomGroup: eui.Group;
     private rankBtn: eui.Group;
-    private shopBtn: eui.Group;
-    private shopRedMC: eui.Image;
-    private wordGroup: eui.Group;
-    private b1: eui.BitmapLabel;
-    private b2: eui.BitmapLabel;
-    private b3: eui.BitmapLabel;
-    private cdText: eui.Label;
+    private buffBtn: eui.Group;
+    private tecBtn: eui.Group;
+    private monsterBtn: eui.Group;
     private settingBtn: eui.Group;
     private chapterRedMC: eui.Image;
     private mailBtn: eui.Group;
@@ -33,6 +30,9 @@ class GameUI extends game.BaseUI {
     private barMC: eui.Rect;
     private scroller: eui.Scroller;
     private list: eui.List;
+
+
+
 
 
 
@@ -48,8 +48,11 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.soundBtn,this.onSetting)
         this.addBtnEvent(this.settingBtn,this.onChapter)
         this.addBtnEvent(this.mailBtn,this.onMail)
-        this.addBtnEvent(this.shopBtn,this.onShop)
+        this.addBtnEvent(this.coinGroup,this.onShop)
         this.addBtnEvent(this.rankBtn,this.onRank)
+        this.addBtnEvent(this.monsterBtn,this.onMonster)
+        this.addBtnEvent(this.tecBtn,this.onTec)
+        this.addBtnEvent(this.buffBtn,this.onBuff)
 
         this.scroller.viewport = this.list
         this.list.itemRendererFunction = (data)=>{
@@ -57,12 +60,22 @@ class GameUI extends game.BaseUI {
                 return DefUI;
             return MainWorkItem;
         };
-
-
     }
 
+    private onMonster(){
+        if(SharedObjectManager.getInstance().getMyValue('showWork'))
+            WorkUI.getInstance().show();
+        else
+            MonsterUI.getInstance().show();
+    }
+    private onTec(){
+        TecUI.getInstance().show();
+    }
     private onRank(){
         RankUI.getInstance().show();
+    }
+    private onBuff(){
+        BuffUI.getInstance().show();
     }
 
     private onSetting(){
@@ -72,6 +85,7 @@ class GameUI extends game.BaseUI {
 
     }
     private onChapter(){
+        ChapterUI.getInstance().show();
         //CoinGameUI.getInstance().show();
     }
 
@@ -105,6 +119,7 @@ class GameUI extends game.BaseUI {
                 this.initData();
             },1000)
         //})
+        PKManager.getInstance().initData();
     }
 
 
@@ -119,13 +134,15 @@ class GameUI extends game.BaseUI {
         this.renewSound();
         this.loadingGroup.visible = true;
         self.loadText.text = '正在加载素材，请耐心等候..'
-        UserManager.getInstance().getUserInfo(()=>{
+        UM.getUserInfo(()=>{
             this.haveGetInfo = true;
             this.initData();
+            UM.drawSaveData();
         });
         var wx =  window["wx"];
         if(wx)
         {
+
             const loadTask = wx.loadSubpackage({
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
@@ -138,11 +155,13 @@ class GameUI extends game.BaseUI {
             loadTask.onProgressUpdate(res => {
                 self.loadText.text = '正在加载素材，请耐心等候..\n' + res.progress + '%'
             })
+
+
             return;
         }
-
         this.callShow();
     }
+
 
     private initData(){
         if(!this.haveLoadFinish || !this.haveGetInfo)
@@ -160,6 +179,7 @@ class GameUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange)
+        this.addPanelOpenEvent(GameEvent.client.TEC_CHANGE,this.reInitList)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
@@ -189,14 +209,18 @@ class GameUI extends game.BaseUI {
     public renewList(){
          MyTool.renewList(this.list)
     }
-    public reInitList(){
+
+    private getListArr(){
         var arr:any =  [{def:true}]
         var max = WorkManager.getInstance().getOpenWork()+1
         for(var i=0;i<max;i++)
         {
             arr.push({id:i+1})
         }
-        this.list.dataProvider = new eui.ArrayCollection(arr)
+        return arr
+    }
+    public reInitList(){
+        this.list.dataProvider = new eui.ArrayCollection(this.getListArr())
     }
 
     private onCoinChange(){

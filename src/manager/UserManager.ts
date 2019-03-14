@@ -11,11 +11,18 @@ class UserManager {
         return UserManager._instance;
     }
 
+    public needUpUser = false;
     public maxEnergy = 20;
     public onLineAwardCD = [5*60,30*60,3600,2*3600,3*3600]
 
+    public nick
+    public head
+
 
     public isTest;
+    public testVersion = 1//与服务器相同则为测试版本
+    public shareFail;
+
     public gameid: string;
     public dbid: string;
 
@@ -23,6 +30,7 @@ class UserManager {
     public diamond: number = 0;
     public energy: any;
     public chapterLevel: number = 0;
+    public chapterStar: any = {};
     public friendNew: any = {};
     public coinObj:{
         loginTime,
@@ -39,6 +47,7 @@ class UserManager {
     public history = [];
     public initDataTime;
     public loginTime = 0
+    public maxForce = 0
 
 
     public lastForce
@@ -50,6 +59,8 @@ class UserManager {
         this.diamond = data.diamond;
         this.energy = data.energy;
         this.guideFinish = data.guideFinish;
+        this.chapterStar = data.chapterStar;
+        this.maxForce = data.maxForce;
         this.coinObj = data.coinObj || {
                 loginTime:TM.now(),   //登陆时间
                 loginDays:1,   //登陆天数
@@ -108,9 +119,9 @@ class UserManager {
     }
 
 
-    public saveHistory(){
-        SharedObjectManager.getInstance().setMyValue('history',this.history)
-        EM.dispatch(GameEvent.client.HISTORY_CHANGE)
+
+    public get coinText(){
+        return NumberUtil.addNumSeparator(this.coin,2)
     }
 
     public addCoin(v,stopSave?){
@@ -120,8 +131,17 @@ class UserManager {
         if(this.coin < 0)
             this.coin = 0;
         if(!stopSave)
-            PKManager.getInstance().needUpUser = true
+            UM.needUpUser = true;
         EM.dispatch(GameEvent.client.COIN_CHANGE)
+    }
+    public addDiamond(v){
+        if(!v)
+            return;
+        this.diamond += v;
+        if(this.diamond < 0)
+            this.diamond = 0;
+        UM.needUpUser = true;
+        EM.dispatch(GameEvent.client.DIAMOND_CHANGE)
     }
 
 
@@ -141,7 +161,8 @@ class UserManager {
                     complete: (res) => {
                         console.log(res)
                         this.gameid = res.result.openid
-                        this.isTest = res.result.isTest;
+                        this.isTest = res.result.testVersion == this.testVersion;
+                        this.shareFail = res.result.shareFail;
                         //console.log(11)
                         TimeManager.getInstance().initlogin(res.result.time)
                         //console.log(res.result.time)
@@ -245,10 +266,11 @@ class UserManager {
              win:0,   //$
              total:0,   //$
              guideFinish:false,
-             chapterLevel:1,
+             chapterLevel:0,
              tipsLevel:0,
              fight:{},
              energy:{v:0,t:0},
+             chapterStar:{},
              def:'1,48,2,3,4,5,6,7,9,10',
              work:['1#0#0#1','2#0#0#1','3#0#0#1','4#0#0#1','70#0#0#1','48#0#0#1'], //初始1个在工作
              coinObj:{
@@ -278,17 +300,86 @@ class UserManager {
         this.coinObj.onLineAwardNum = 0;
         this.coinObj.shareNum = 0;
         this.coinObj.shareAward = 0;
-        PKManager.getInstance().needUpUser = true;
+        UM.needUpUser = true;
         return true;
     }
 
+    public upDateUserData(){
+        if(!this.needUpUser)
+            return;
+        var wx = window['wx'];
+        if(wx)
+        {
+            var updateData:any = {
+                coin:UM.coin,
+                diamond:UM.diamond,
+                energy:UM.energy,
+                work:WorkManager.getInstance().getWorkSave(),
+                def:MonsterManager.getInstance().defList,
+                fight:FightManager.getInstance().getFightSave(),
+                monster:MonsterManager.getInstance().monsterData,
+                tec:TecManager.getInstance().tecData,
+                chapterLevel:UM.chapterLevel,
+                chapterStar:UM.chapterStar,
+                maxForce:UM.maxForce,
+                coinObj:UM.coinObj,
+                guideFinish:UM.guideFinish,
+            };
+            WXDB.updata('user',updateData)
+        }
+        this.needUpUser = false;
+        FightManager.getInstance().save();
+        //this.upWXData();
+    }
+    //
+    ////如果战力不同则上传数据
+    //public upWXData(){
+    //    var wx = window['wx'];
+    //    if(!wx)
+    //        return;
+    //    var currentForce =  UM.getForce()
+    //    if(currentForce == UM.lastForce)
+    //        return;
+    //    UM.lastForce = currentForce;
+    //    var score = JSON.stringify({"wxgame":{"score":currentForce,"update_time": TM.now()}})
+    //    var upList = [{ key: 'force', value: score}];
+    //    wx.setUserCloudStorage({
+    //        KVDataList: upList,
+    //        success: res => {
+    //            console.log(res);
+    //        },
+    //        fail: res => {
+    //            console.log(res);
+    //        }
+    //    });
+    //}
 
+    public upWXChapter(){
+        var wx = window['wx'];
+        if(!wx)
+            return;
+        var score = JSON.stringify({"wxgame":{"score":UM.chapterLevel,"update_time": TM.now()}})
+        var upList = [{ key: 'chapter', value: score}]; //{ key: 'level', value: UM.chapterLevel + ',' + TM.now()},
+        wx.setUserCloudStorage({
+            KVDataList: upList,
+            success: res => {
+                console.log(res);
+            },
+            fail: res => {
+                console.log(res);
+            }
+        });
+    }
 
     public addEnergy(v){
          if(!v)
             return;
         this.resetEnergy();
+        if(this.energy.v >= this.maxEnergy)
+            this.energy.t = TM.now();
         this.energy.v += v;
+
+        UM.needUpUser = true;
     }
 
     private resetEnergy(){
@@ -318,6 +409,72 @@ class UserManager {
         //if(this.energy.t == TM.now())
         //    return 0;
         return  this.energy.t + v -  TM.now();
+    }
+
+
+    private isRuning = false;
+    public drawSaveData():egret.Bitmap
+    {
+        if(!window['wx'])
+            return;
+        if(this.isRuning) return null;
+        this.isRuning = true;
+
+        platform.openDataContext.postMessage({isDisplay:true, command:"drawSaveData", keys:["getInfo"], myopenid:this.gameid});
+
+        let bb = <egret.Bitmap>platform.openDataContext.createDisplayObject();
+        let bmp = new egret.Bitmap(bb.texture);
+        let tex = new egret.RenderTexture();
+        egret.Tween.get(this,{loop:true}).wait(100).call(this.test,this,[bmp,tex]);
+        return bmp;
+    }
+
+    private test(bmp:egret.Bitmap,tex:egret.RenderTexture)
+    {
+        tex.drawToTexture(bmp,new egret.Rectangle(0,0,3,3));
+        let a = "";
+        for(var k = 0;k<3;k++)
+        {
+            let arr = tex.getPixel32(k,2);
+            for(let j = 0;j<3;j++) a += Number(arr[j] > 127);
+        }
+        let str = String.fromCharCode(parseInt(a,2));
+        if(str == "{")
+        {
+            tex.drawToTexture(bmp,new egret.Rectangle(0,0,bmp.width,bmp.height));
+            let i = 0;
+            let codeStr = "";
+            let _s = "";
+            while(true)
+            {
+                let a = "";
+                for(var k = 0;k<3;k++)
+                {
+                    let i1 = i*3+k;
+                    let x = (i1%bmp.width);
+                    let y = Math.floor(i1/bmp.width);
+                    let arr = tex.getPixel32(x,tex.textureHeight-y-1);
+                    for(let j = 0;j<3;j++) a += Number(arr[j] > 127);
+                }
+                let s = String.fromCharCode(parseInt(a,2));
+                if(s == ":" && _s == "}") break;
+                codeStr += s;
+                _s = s;
+                i++;
+            }
+            tex.dispose();
+            egret.Tween.removeTweens(this);
+            platform.openDataContext.postMessage({type:"clear"});
+            this.isRuning = false;
+
+            let obj = JSON.parse(codeStr); //{isOK:true, data:[]}
+            if(obj.isOK)
+            {
+                this.nick = decodeURIComponent(obj.data.nick);
+                this.head = obj.data.head;
+                console.log(this.nick,this.head)
+            }
+        }
     }
 
 

@@ -13,6 +13,7 @@ class GameManager {
     public lastTouchMC;
 
     public onShowFun
+    public shareFailTime = 0;
 	public constructor() {
         this.timeID = new egret.Timer(1000);
         this.timeID.addEventListener(egret.TimerEvent.TIMER,this.timerun,this);
@@ -203,7 +204,7 @@ if(window["wx"])
     var wx =  window["wx"];
 
     wx.onError(function(res){
-        PKManager.getInstance().upDateUserData();
+        UM.upDateUserData();
         //var str = "onError:" + ("openid:" + _get["openid"] + "--") + res.message + "--" + res.stack;
         //this.sendClientError(str);
     });
@@ -211,7 +212,7 @@ if(window["wx"])
     wx.onHide(function(res){
         if(!GameManager.stage)
             return;
-        PKManager.getInstance().upDateUserData();
+        UM.upDateUserData();
         SoundManager.getInstance().stopBgSound();
         GameManager.stage.dispatchEventWith(egret.Event.DEACTIVATE);
         console.log('hide')

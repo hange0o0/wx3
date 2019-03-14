@@ -48,7 +48,7 @@ class GetCoinItem extends game.BaseItem {
         }
         UM.addCoin(this.addCoin);
         MyWindow.ShowTips('获得金币：'+MyTool.createHtml(this.addCoin,0xFFFF00),3000)
-        PKManager.getInstance().needUpUser = true;
+        UM.needUpUser = true;
         SoundManager.getInstance().playEffect('coin');
 
         switch(this.data.type)

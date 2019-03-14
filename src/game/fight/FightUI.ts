@@ -42,16 +42,34 @@ class FightUI extends game.BaseUI {
         this.addBtnEvent(this.addBtn,this.onAddEnergy)
         this.addBtnEvent(this.logBtn,this.onLog)
         this.addBtnEvent(this.refreshBtn,this.onSearch)
+        this.refreshBtn.visible = !UM.isTest
     }
 
     private onAddEnergy(){
-
+        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+            UM.addEnergy(10);
+        })
+        //MyWindow.Confirm('确定花费 1 钻石补满所有体力吗？',(b)=>{
+        //    if(b==1)
+        //    {
+        //        if(UM.diamond < 0)
+        //        {
+        //            MyWindow.ShowTips('钻石不足')
+        //            return;
+        //        }
+        //        UM.addDiamond(-1);
+        //        UM.fullEnergy();
+        //    }
+        //},['取消','补满']);
     }
     private onLog(){
-
+        LogUI.getInstance().show();
     }
     private onSearch(){
-
+        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+            FightManager.getInstance().renewSearch(true);
+            this.renewSearch();
+        })
     }
 
     private renewEnergy(){
@@ -60,13 +78,14 @@ class FightUI extends game.BaseUI {
         {
             this.energyText.text = energy + '/' + UM.maxEnergy
             this.energyText.textColor = 0xFFE3B7
+            this.addBtn.visible = false
         }
         else
         {
-            this.energyText.text = DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5)
+            this.energyText.text = DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5);
             this.energyText.textColor = 0xFF0000
+            this.addBtn.visible = !UM.isTest
         }
-
     }
 
 
@@ -82,17 +101,24 @@ class FightUI extends game.BaseUI {
 
     public onShow(){
         FightManager.getInstance().renewSearch();
-        this.logRedMC.visible = false;
+
+        this.renewRed();
         this.renewIng();
         this.renewSearch();
         this.renewEnergy()
+        this.onTimer();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.onFightChange)
+    }
+
+    private renewRed(){
+        this.logRedMC.visible = FightManager.getInstance().notReadLog.length > 0;
     }
 
     private onFightChange(){
         this.renewIng();
         MyTool.renewList(this.list2);
+        this.renewRed();
     }
 
     public renewIng(){
@@ -107,12 +133,20 @@ class FightUI extends game.BaseUI {
     }
 
     public renewSearch(){
-        this.list2.dataProvider = new eui.ArrayCollection(FightManager.getInstance().searchRobot)
+        this.list2.dataProvider = new eui.ArrayCollection(FightManager.getInstance().searchRobot);
     }
 
     private onTimer(){
-       this.renewEnergy()
+       this.renewEnergy();
         MyTool.runListFun(this.list,'onTimer');
+        var FM = FightManager.getInstance()
+        if(TM.now() - FM.searchTime >= FM.refreshSearchTime)
+        {
+            FightManager.getInstance().renewSearch();
+            this.renewSearch();
+        }
+        var cd = FM.refreshSearchTime - (TM.now() - FM.searchTime);
+        this.cdText.text = DateUtil.getStringBySecond(cd);
     }
 
 }

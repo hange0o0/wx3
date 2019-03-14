@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="TecItemSkin" width="620" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
-	<e:Rect id="indexMC" width="20" height="100%" x="0" y="0"/>
-	<e:Image id="headMC" width="120" height="120" x="20" verticalCenter="0"/>
+	<e:Rect id="indexMC" width="20" height="116" x="0" verticalCenter="0"/>
+	<e:Image id="headMC" width="116" height="116" x="20" verticalCenter="0"/>
 	<e:Label id="nameText" text="Label" x="160" y="10" textColor="0xfff6db"/>
 	<e:Label id="desText" text="Label" y="55" size="24" left="160" right="180" textColor="0x5a3909"/>
 	<e:Group id="upGroup" y="8" right="10">
@@ -11,6 +11,6 @@
 			<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
 			<e:Label id="valueText" text="Label" size="24" verticalCenter="0" right="10"/>
 		</e:Group>
-		<e:Button id="upBtn" label="Button" skinName="Btn1Skin" width="150" x="0" y="46"/>
+		<e:Button id="upBtn" label="升级" skinName="Btn1Skin" width="150" x="0" y="46"/>
 	</e:Group>
 </e:Skin>

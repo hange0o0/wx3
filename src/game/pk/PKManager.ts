@@ -25,7 +25,6 @@ class PKManager {
     }
 
 
-    public needUpUser = false;
     public baseForce = 10000;
     //public cost1 = 0
     //public cost2 = 0;
@@ -80,10 +79,10 @@ class PKManager {
         var wx = window['wx'];
         if(!wx)
         {
-            img.source = 'icon_test_png'
+            img.source = 'common_head_bg_jpg'
             return
         }
-        img.source = 'icon_test_png'
+        img.source = 'common_head_bg_jpg'
         wx.cloud.downloadFile({
             fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
             //fileID: 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/level/level_'+tempIndex+'.txt',
@@ -95,6 +94,35 @@ class PKManager {
                 console.log(err)
             }
         })
+    }
+
+    //取章节星星数
+    public getChapterStar(id){
+        if(UM.chapterLevel<id)
+            return 0;
+        return UM.chapterStar[id] || 3
+    }
+
+    public setChapterStar(id,star){
+        var lastStar = this.getChapterStar(id);
+        var b = false;
+        if(UM.chapterLevel<id)
+        {
+            UM.chapterLevel = id
+            b = true;
+            UM.upWXChapter();
+        }
+
+        if(lastStar != star)
+        {
+            b = true;
+            if(star == 3)
+                delete UM.chapterStar[id];
+            else
+                UM.chapterStar[id] = star;
+        }
+        if(b)
+            UM.needUpUser = true;
     }
 
     public getPKBG(seed){
@@ -124,6 +152,24 @@ class PKManager {
 
     public getLastAtkList(){
         return '';
+    }
+
+    public initData(){
+        var url = 'resource/chapter.txt';
+        var loader: egret.URLLoader = new egret.URLLoader();
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        loader.once(egret.Event.COMPLETE,()=>{
+            this.chapterData = loader.data.split('\n')
+            for(var i=0;i<this.chapterData.length;i++)
+            {
+                var arr = this.chapterData[i].split('|');
+                this.chapterData[i] = {
+                    id:i+1,
+                    list1:arr[0]
+                }
+            }
+        },this);
+        loader.load(new egret.URLRequest(url));
     }
 
     //public getTodayIndex(){
@@ -410,6 +456,7 @@ class PKManager {
         }
     }
 
+
     //结算投注信息
     //public testSendResult(alertWindow?){
     //    if(this.getCurrentKey() != UM.lastGuess.key)
@@ -568,76 +615,19 @@ class PKManager {
     //    }
     //}
 
-    public upDateUserData(){
-        if(!this.needUpUser)
-            return;
-        var wx = window['wx'];
-        if(wx)
-        {
-            var updateData:any = {
-                coin:UM.coin,
-                diamond:UM.diamond,
-                energy:UM.energy,
-                work:WorkManager.getInstance().getWorkSave(),
-                def:MonsterManager.getInstance().defList,
-                fight:FightManager.getInstance().getFightSave(),
-                monster:MonsterManager.getInstance().monsterData,
-                tec:TecManager.getInstance().tecData,
-                chapterLevel:UM.chapterLevel,
-                coinObj:UM.coinObj,
-                guideFinish:UM.guideFinish,
-            };
-            WXDB.updata('user',updateData)
-        }
-        this.needUpUser = false;
-        this.upWXData();
-    }
 
-    //如果战力不同则上传数据
-    public upWXData(){
-        var wx = window['wx'];
-        if(!wx)
-            return;
-        var currentForce =  UM.getForce()
-        if(currentForce == UM.lastForce)
-            return;
-        UM.lastForce = currentForce;
-        var upList = [{ key: 'force', value: currentForce},{ key: 'forceTime', value: TM.now()}];
-        wx.setUserCloudStorage({
-            KVDataList: upList,
-            success: res => {
-                console.log(res);
-            },
-            fail: res => {
-                console.log(res);
-            }
-        });
-    }
 
-    public onChapterWin(level){
-        if(UM.chapterLevel != level)
-            return 0;
-        var cost = Math.min(2000,Math.ceil(level/20)*100)/2
-        UM.addCoin(cost);
-        UM.chapterLevel ++;
-        EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
-        this.upWXChapter();
-        return cost
-    }
 
-    public upWXChapter(){
-        var wx = window['wx'];
-        if(!wx)
-            return;
-        var upList = [{ key: 'chapter', value: UM.chapterLevel},{ key: 'chapterTime', value: TM.now()}];
-        wx.setUserCloudStorage({
-            KVDataList: upList,
-            success: res => {
-                console.log(res);
-            },
-            fail: res => {
-                console.log(res);
-            }
-        });
-    }
+
+    //public onChapterWin(level){
+    //    if(UM.chapterLevel != level)
+    //        return 0;
+    //    var cost = Math.min(2000,Math.ceil(level/20)*100)/2
+    //    UM.addCoin(cost);
+    //    UM.chapterLevel ++;
+    //    EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
+    //    this.upWXChapter();
+    //    return cost
+    //}
+
 }

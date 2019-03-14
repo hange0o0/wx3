@@ -175,7 +175,7 @@ class GuideManager {
         this.isGuiding = false;
         GuideUI.getInstance().hide();
         UM.guideFinish = true;
-        PKManager.getInstance().needUpUser = true;
+        UM.needUpUser = true;
     }
 
     private addGuideObj(obj){

@@ -2,10 +2,13 @@
 class GameEvent {
     public static client = {
         COIN_CHANGE:'COIN_CHANGE',
+        DIAMOND_CHANGE:'DIAMOND_CHANGE',
         INFO_CHANGE:'INFO_CHANGE',
         CHAPTER_CHANGE:'CHAPTER_CHANGE',
         HISTORY_CHANGE:'HISTORY_CHANGE',
         FIGHT_CHANGE:'FIGHT_CHANGE',
+        MONSTER_WORK_CHANGE:'MONSTER_WORK_CHANGE',
+        TEC_CHANGE:'TEC_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

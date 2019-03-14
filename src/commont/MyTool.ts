@@ -77,7 +77,8 @@ class MyTool {
     public static runListFun(list,funName){
         for(var i=0;i<list.numChildren;i++)
         {
-            list.getChildAt(i)[funName]();
+            var mc = list.getChildAt(i);
+            mc[funName] && mc[funName]();
         }
     }
 
@@ -153,8 +154,27 @@ class MyTool {
        e.currentTarget.visible = true;
     }
 
+    //会去掉未位0
     public static toFixed(v:any,length){
         var str = v.toFixed(length)
+        var char = str.charAt(str.length-1);
+        while(char == '0' || char == '.')
+        {
+            str = str.substr(0,str.length - 1)
+            if(char == '.')
+                break;
+            char = str.charAt(str.length-1);
+        }
+        return str
+    }
+
+    public static toFixed2(v:any,length){
+        var str = v+''//.toFixed(length)
+        var index = str.indexOf('.');
+        if(index != -1)
+            str = str.substr(0,index+1+length)
+        else
+            return str;
         var char = str.charAt(str.length-1);
         while(char == '0' || char == '.')
         {
