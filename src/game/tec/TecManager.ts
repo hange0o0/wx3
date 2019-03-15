@@ -40,7 +40,7 @@ class TecManager {
     public getDes(id){
         var str = this.tecBase[id].des
         var lv = this.getTecLevel(id)+1;
-         switch(id)
+         switch(parseInt(id))
          {
              case 11:
                  return str;
@@ -52,13 +52,12 @@ class TecManager {
              case 33:
              case 34:
                  return str + '\n' + this.getSkillValue(id) + ' -> ' + this.getSkillValue(id,lv) + '';
-
          }
     }
 
     public getSkillValue(id,lv?){
         lv = lv || this.getTecLevel(id)
-        switch(id)
+        switch(parseInt(id))
         {
             case 11: return lv;
             case 21: return lv * 10;
@@ -93,7 +92,7 @@ class TecManager {
         return this.getSkillValue(34)
     }
 
-    public tecUp(id){
+    public tecUp(id,fun?){
        var oo = this.tecBase[id]
         if(oo.type == 'diamond')
         {
@@ -105,6 +104,7 @@ class TecManager {
         }
         this.tecData[id] = this.getTecLevel(id) + 1;
         EM.dispatch(GameEvent.client.TEC_CHANGE)
+        fun && fun();
     }
 
 

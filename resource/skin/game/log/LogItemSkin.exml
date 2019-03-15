@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LogItemSkin" width="640" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
+<e:Skin class="LogItemSkin" width="630" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8" locked="true"/>
 	<e:Image id="headMC" width="100" height="100" x="30" verticalCenter="0"/>
 	<e:Label id="desText" text="Label" x="145" y="48" size="24" textColor="0x5a3909" y.s2="70"/>

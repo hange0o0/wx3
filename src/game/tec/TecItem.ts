@@ -24,7 +24,9 @@ class TecItem extends game.BaseItem{
     }
 
     private onClick(){
-        TecManager.getInstance().tecUp(this.data.id)
+        TecManager.getInstance().tecUp(this.data.id,()=>{
+            this.dataChanged();
+        })
     }
 
     public dataChanged():void {
@@ -32,7 +34,7 @@ class TecItem extends game.BaseItem{
         //{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'diamond',v1:0,v2:0,v3:0},
         this.indexMC.fillColor =  this.typeColor[Math.floor(data.id/10)-1]
         this.headMC.source = Config.localResRoot2 + 'skill/skill'+data.id+'.jpg';
-        this.nameText.text = data.name + '（'+TecManager.getInstance().getTecLevel(data.id)+'）';
+        this.nameText.text = data.name + '（LV.'+TecManager.getInstance().getTecLevel(data.id)+'）';
         this.desText.text = TecManager.getInstance().getDes(data.id);
 
         this.iconMC.source = data.type=='diamond'?'icon_diamond_png':'icon_coin_png'
