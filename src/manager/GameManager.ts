@@ -11,6 +11,7 @@ class GameManager {
     private lastTime: number;
     public lastTouchTime: number;
     public lastTouchMC;
+    public changeUserTime = 0
 
     public onShowFun
     public shareFailTime = 0;
@@ -29,14 +30,23 @@ class GameManager {
     public static container:egret.DisplayObjectContainer;
     public static loadStep
 
+
     public static isLiuHai(){
         return this.stage.stageHeight > 1250;
     }
+    public static paddingTop(){
+        return GameManager.isLiuHai()?50:0
+    }
 
     public static get uiHeight(){
-        var h = this.stage.stageHeight;
+        var h = this.stage.stageHeight - Config.adHeight;
+
         if(this.isLiuHai())
-            return h-50;
+        {
+            if(App.isIphoneX)
+                return h-this.paddingTop()-30;
+            return h-this.paddingTop();
+        }
         return h//Math.min(1136,this.stage.stageHeight);
         //return this.stage.stageHeight;
     }
@@ -51,6 +61,59 @@ class GameManager {
     public init(){
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this);
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this);
+        this.createAD();
+    }
+
+    private createAD(){
+        //Config.adHeight = 200;
+        if(!window['wx'])
+            return;
+        if(GameManager.stage.stageHeight < 1080)
+            return;
+
+
+        var btnw = Math.min(Math.pow(GameManager.stage.stageHeight/1330,1.6)*640,640)
+
+        let scalex = screen.availWidth/640;
+        let scaley = screen.availHeight/GameManager.stage.stageHeight;
+        if(btnw * scalex < 300){ //微信限制广告宽度不能小于300
+            btnw = 300 / scalex;
+        }
+        Config.adHeight =  btnw/640 * 224;
+        var  btny = GameManager.uiHeight;//给广告留的高度
+        var  paddingTop = GameManager.paddingTop();
+        var btnx =  (640-btnw)/2;
+
+        let left = scalex * (btnx);
+        let top = scaley * (btny + paddingTop);
+        let width = scalex * btnw;
+
+        let bannerAd = wx.createBannerAd({
+            adUnitId: 'adunit-d406f443acb5f7d2',
+            style: {
+                left: left,
+                top: top,
+                width: width
+            }
+        })
+        bannerAd.onError(()=>{
+            Config.adHeight = 0
+            GameManager.stage.dispatchEventWith(egret.Event.RESIZE);
+        })
+        bannerAd.onLoad(()=>{
+
+        })
+        bannerAd.onResize((res)=>{
+            var hh = res.height/scalex*(640/btnw);
+            if(Math.abs(hh - 224)/224 > 0.02)
+            {
+                Config.adHeight =  btnw/640 * hh;
+                GameManager.stage.dispatchEventWith(egret.Event.RESIZE);
+                bannerAd.style.top = scaley * (GameManager.uiHeight + paddingTop);
+            }
+            //console.log(res,scalex,scaley,GameManager.stage.stageHeight)
+        })
+        bannerAd.show()
     }
 
     public stopTimer(){
@@ -130,6 +193,16 @@ class App {
     public static touchEvent: string = egret.TouchEvent.TOUCH_TAP;
     
     public constructor() {
+    }
+
+    public static get isIphoneX():boolean{
+        let hh = screen.height, ww = screen.width;
+        if(window['wx']){
+            hh = screen.availHeight, ww = screen.availWidth;
+        }
+        let _iphoneX = /iphone/gi.test(navigator.userAgent) && (hh == 812 && ww == 375);
+        let _iphoneXR = /iphone/gi.test(navigator.userAgent) && (hh == 896 && ww == 414);
+        return _iphoneX || _iphoneXR;
     }
     	
     public static get isMobile():boolean{
@@ -231,6 +304,16 @@ if(window["wx"])
         GameManager.getInstance().onShowFun = null;
         //GameUI.getInstance().cleanTouch();
         console.log('show')
+
+        if(GameManager.getInstance().changeUserTime)
+        {
+            if(TM.now() - GameManager.getInstance().changeUserTime > 30 && !UM.coinObj.shareNum) //停留超过30秒
+            {
+                UM.coinObj.shareNum ++;
+                UM.needUpUser = true;;
+            }
+        }
+        GameManager.getInstance().changeUserTime = 0;
     });
     //wx.exitMiniProgram(function(res){
     //    if(!GameManager.stage)

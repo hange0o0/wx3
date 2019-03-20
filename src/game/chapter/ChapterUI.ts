@@ -11,9 +11,11 @@ class ChapterUI extends game.BaseUI {
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private list: eui.List;
-    private titleText: eui.Label;
+    private energyText: eui.Label;
+    private addBtn: eui.Image;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
+
 
 
 
@@ -23,6 +25,8 @@ class ChapterUI extends game.BaseUI {
     private page = 1;
     private maxPage = 1;
     private pageSize = 50;
+
+
 
     public constructor() {
         super();
@@ -41,6 +45,41 @@ class ChapterUI extends game.BaseUI {
 
         this.addBtnEvent(this.rightBtn,this.onRight)
         this.addBtnEvent(this.leftBtn,this.onLeft)
+        this.addBtnEvent(this.addBtn,this.onAddEnergy)
+    }
+
+    private onAddEnergy(){
+        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+            UM.addEnergy(10);
+        })
+        //MyWindow.Confirm('确定花费 1 钻石补满所有体力吗？',(b)=>{
+        //    if(b==1)
+        //    {
+        //        if(UM.diamond < 0)
+        //        {
+        //            MyWindow.ShowTips('钻石不足')
+        //            return;
+        //        }
+        //        UM.addDiamond(-1);
+        //        UM.fullEnergy();
+        //    }
+        //},['取消','补满']);
+    }
+
+    private renewEnergy(){
+        var energy = UM.getEnergy();
+        if(energy > 0)
+        {
+            this.energyText.text = energy + '/' + UM.maxEnergy
+            this.energyText.textColor = 0xFFE3B7
+            this.addBtn.visible = false
+        }
+        else
+        {
+            this.energyText.text = DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5);
+            this.energyText.textColor = 0xFF0000
+            this.addBtn.visible = !UM.isTest
+        }
     }
 
     private onRight(){
@@ -67,17 +106,36 @@ class ChapterUI extends game.BaseUI {
 
     public onShow(){
         this.renew();
+        this.renewEnergy()
+        this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.onChapterChange)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        this.renewEnergy();
+    }
+
+    private onChapterChange(){
+        MyTool.renewList(this.list);
+        this.renewPage();
+    }
+
+    private renewPage(){
+        this.maxPage = Math.ceil((UM.chapterLevel+1)/this.pageSize);
+        this.leftBtn.visible = this.page > 1;
+        this.rightBtn.visible = this.page < this.maxPage;
     }
 
     public renew(){
-        this.maxPage = Math.ceil(UM.chapterLevel/this.pageSize);
+
 
         var arr = PKManager.getInstance().chapterData.slice((this.page-1)*this.pageSize,this.page*this.pageSize);
-        this.titleText.text = '第 ' + NumberUtil.cNum(this.page) + ' 区';
+        this.topUI.setTitle('扩张版图（' + '第 ' + NumberUtil.cNum(this.page) + ' 区）')
         this.dataProvider.source = arr
         this.dataProvider.refresh();
 
-        this.leftBtn.visible = this.page > 1;
-        this.rightBtn.visible = this.page < this.maxPage;
+        this.renewPage();
+
+
     }
 }

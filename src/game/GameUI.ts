@@ -58,6 +58,8 @@ class GameUI extends game.BaseUI {
         this.list.itemRendererFunction = (data)=>{
             if(data.def)
                 return DefUI;
+            if(data.ad)
+                return ChangeUserUI;
             return MainWorkItem;
         };
     }
@@ -104,6 +106,13 @@ class GameUI extends game.BaseUI {
         GetCoinUI.getInstance().show();
     }
 
+    public scrollToBottom(){
+        this.scroller.viewport.scrollV = this.scroller.viewport.contentHeight - this.scroller.height
+        this.once(egret.Event.ENTER_FRAME,()=>{
+            this.scroller.viewport.scrollV = this.scroller.viewport.contentHeight - this.scroller.height
+        },this)
+    }
+
     public show(){
         super.show();
     }
@@ -131,6 +140,7 @@ class GameUI extends game.BaseUI {
         this.coinText.text = '???'
         this.diamondText.text = '???'
 
+        ChangeUserUI.getAD();
         this.renewSound();
         this.loadingGroup.visible = true;
         self.loadText.text = '正在加载素材，请耐心等候..'
@@ -217,6 +227,7 @@ class GameUI extends game.BaseUI {
         {
             arr.push({id:i+1})
         }
+        arr.push({ad:true});
         return arr
     }
     public reInitList(){

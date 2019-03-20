@@ -255,6 +255,8 @@ class PKPosUI extends game.BaseUI {
             MyWindow.ShowTips('队列阵容不可为空')
             return;
         }
+        if(this.dataIn.autoList)
+            SharedObjectManager.getInstance().setMyValue('lastAtkList',list);
         var baseForce = MonsterManager.getInstance().getMyListForce(this.getMyList(),this.dataIn.isAtk,false)
         UM.maxForce = Math.max(UM.maxForce,baseForce);
         this.dataIn.fun && this.dataIn.fun(list)
@@ -276,6 +278,7 @@ class PKPosUI extends game.BaseUI {
       maxCost
       maxNum
      fun
+     autoList
      noEmpty
       */
     public show(dataIn?){
@@ -294,7 +297,7 @@ class PKPosUI extends game.BaseUI {
     public onShow(){
 
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.renew)
+        //this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.renew)
     }
 
     public showEnemy() {
@@ -395,7 +398,40 @@ class PKPosUI extends game.BaseUI {
             layOut.requestedRowCount = 1
             this.chooseGroup.height = 110;
         }
-        var list = this.dataIn.chooseList?this.dataIn.chooseList.split(','):[];
+        var list = [];
+        if(this.dataIn.chooseList)
+        {
+            list = this.dataIn.chooseList.split(',');
+        }
+        if(this.dataIn.autoList)
+        {
+            var pkList = SharedObjectManager.getInstance().getMyValue('lastAtkList')
+            if(pkList)
+            {
+                var temp = pkList.split(',');
+                var numObj = {}
+                for(var i=0;i<temp.length;i++)
+                {
+                    var id = temp[i];
+                    numObj[id] = (numObj[id] || 0)+1
+                    if(this.getFreeMonsterNum(id) < numObj[id])
+                    {
+                        pkList = null;
+                        break;
+                    }
+                }
+
+                if(pkList)//可上阵
+                {
+                    list = temp;
+                    for(var i=0;i<temp.length;i++)
+                    {
+                        var id = temp[i];
+                        this.addFreeMonsterNum(id,-1);
+                    }
+                }
+            }
+        }
         for(var i=0;i<list.length;i++)
         {
             list[i] = {id:list[i],list:list} ;
@@ -415,10 +451,15 @@ class PKPosUI extends game.BaseUI {
         this.showEnemy();
         this.renewDownList();
         this.renewTopList();
-        this.reset();
+        //this.reset();
     }
 
     public reset(){
+        var arr = this.dataProvider.source;
+        for(var i=0;i<arr.length;i++)
+        {
+            this.addFreeMonsterNum(arr[i].id,1);
+        }
         this.dataProvider.source = [];
         this.dataProvider.refresh();
         this.onItemChange();

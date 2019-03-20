@@ -28,10 +28,8 @@ class GetCoinItem extends game.BaseItem {
         {
             if(this.data.type == 3)
             {
-                UM.coinObj.shareNum ++;
-                ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
-                    this.dataChanged();
-                })
+                GetCoinUI.getInstance().hide();
+                GameUI.getInstance().scrollToBottom();
             }
             else  if(this.data.type == 4)
             {
@@ -137,8 +135,8 @@ class GetCoinItem extends game.BaseItem {
                         this.goWork = true
                     }
                 }
-                this.titleText.text = '告诉我的好友们'
-                this.addCoin = 100;
+                this.titleText.text = '体验任意小程序30秒'
+                this.addCoin = 800;
                 break;
             case 4: // {type:4,title:'邀请X位新的好友'},
                 min = ObjectUtil.objLength(UM.friendNew),

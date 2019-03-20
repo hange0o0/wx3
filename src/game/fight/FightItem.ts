@@ -24,15 +24,15 @@ class FightItem extends game.BaseItem{
         {
             return;
         }
-        if(UM.getEnergy()<1)
-        {
-            MyWindow.ShowTips('体力不足')
-            return;
-        }
+        //if(UM.getEnergy()<1)
+        //{
+        //    MyWindow.ShowTips('体力不足')
+        //    return;
+        //}
 
         PKPosUI.getInstance().show({
             title:'进攻布阵',
-            chooseList:PKManager.getInstance().getLastAtkList(),
+            autoList:true,
             isPK:true,
             isAtk:true,
             maxNum:10,//TecManager.getInstance().getTeamNum(),

@@ -13,8 +13,10 @@ class PKData extends egret.EventDispatcher{
             if (!this.instance2) this.instance2 = new PKData();
             return this.instance2;
         }
-
     }
+
+
+
     public currentState = 'def'
 
     public quick = false//快速算出结果

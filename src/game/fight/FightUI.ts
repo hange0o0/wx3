@@ -7,18 +7,17 @@ class FightUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private scrollGroup: eui.Group;
     private list: eui.List;
-    private energyText: eui.Label;
-    private addBtn: eui.Image;
     private cdText: eui.Label;
     private refreshBtn: eui.Image;
     private list2: eui.List;
     private logBtn: eui.Group;
     private logRedMC: eui.Image;
+    private topUI: TopUI;
+
 
 
 
@@ -39,29 +38,13 @@ class FightUI extends game.BaseUI {
         this.list2.itemRenderer = FightItem
 
 
-        this.addBtnEvent(this.addBtn,this.onAddEnergy)
+
         this.addBtnEvent(this.logBtn,this.onLog)
         this.addBtnEvent(this.refreshBtn,this.onSearch)
         this.refreshBtn.visible = !UM.isTest
     }
 
-    private onAddEnergy(){
-        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
-            UM.addEnergy(10);
-        })
-        //MyWindow.Confirm('确定花费 1 钻石补满所有体力吗？',(b)=>{
-        //    if(b==1)
-        //    {
-        //        if(UM.diamond < 0)
-        //        {
-        //            MyWindow.ShowTips('钻石不足')
-        //            return;
-        //        }
-        //        UM.addDiamond(-1);
-        //        UM.fullEnergy();
-        //    }
-        //},['取消','补满']);
-    }
+
     private onLog(){
         LogUI.getInstance().show();
     }
@@ -72,21 +55,7 @@ class FightUI extends game.BaseUI {
         })
     }
 
-    private renewEnergy(){
-        var energy = UM.getEnergy();
-        if(energy > 0)
-        {
-            this.energyText.text = energy + '/' + UM.maxEnergy
-            this.energyText.textColor = 0xFFE3B7
-            this.addBtn.visible = false
-        }
-        else
-        {
-            this.energyText.text = DateUtil.getStringBySecond(UM.getNextEnergyCD()).substr(-5);
-            this.energyText.textColor = 0xFF0000
-            this.addBtn.visible = !UM.isTest
-        }
-    }
+
 
 
     public show(){
@@ -105,7 +74,7 @@ class FightUI extends game.BaseUI {
         this.renewRed();
         this.renewIng();
         this.renewSearch();
-        this.renewEnergy()
+
         this.onTimer();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.onFightChange)
@@ -137,7 +106,6 @@ class FightUI extends game.BaseUI {
     }
 
     private onTimer(){
-       this.renewEnergy();
         MyTool.runListFun(this.list,'onTimer');
         var FM = FightManager.getInstance()
         if(TM.now() - FM.searchTime >= FM.refreshSearchTime)
@@ -146,7 +114,7 @@ class FightUI extends game.BaseUI {
             this.renewSearch();
         }
         var cd = FM.refreshSearchTime - (TM.now() - FM.searchTime);
-        this.cdText.text = DateUtil.getStringBySecond(cd);
+        this.cdText.text = '离下次刷新还有：' + DateUtil.getStringBySecond(cd);
     }
 
 }

@@ -113,7 +113,7 @@ class PKManager {
             UM.upWXChapter();
         }
 
-        if(lastStar != star)
+        if(lastStar < star)  //升星
         {
             b = true;
             if(star == 3)
@@ -150,9 +150,9 @@ class PKManager {
         return 'map'+this.getDefBGID()+'__png'
     }
 
-    public getLastAtkList(){
-        return '';
-    }
+    //public getLastAtkList(){
+    //    return '';
+    //}
 
     public initData(){
         var url = 'resource/chapter.txt';
@@ -585,7 +585,7 @@ class PKManager {
             seed:data.seed,
             players:[
                 {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1},
-                {id:2,gameid:'team2',team:2,force:data.force1,hp:1,autolist:data.list2,mforce:data.mforce2}
+                {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2}
             ]
         });
         PD.quick = true;

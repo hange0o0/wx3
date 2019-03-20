@@ -22,7 +22,7 @@ class Config {
     public static localResRoot:string = "resource/game_assets/";
     public static localResRoot2:string = "resource/game_assets2/";
 
-
+    public static adHeight = 0
 
     public static openRate = 10;
 

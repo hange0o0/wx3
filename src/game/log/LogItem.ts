@@ -30,7 +30,7 @@ class LogItem extends game.BaseItem {
     private onPKClick(){
         PKPosUI.getInstance().show({
             title:'进攻布阵',
-            chooseList:PKManager.getInstance().getLastAtkList(),
+            autoList:true,
             isPK:true,
             isAtk:true,
             maxNum:TecManager.getInstance().getTeamNum(),

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="GameUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="0" right="0" top="0" bottom="0" visible="false"/>
-	<e:Rect left="0" right="0" top="0" bottom="0"/>
+	<e:Rect left="0" right="0" top="0" bottom="0" fillColor="0x000000"/>
 	<e:Image source="title_bg4_png" x="0" width="640" fillMode="repeat" scaleY="-1" y="77"/>
 	<e:Image source="title_bg4_png" x="-1.52" width="640" fillMode="repeat" bottom="-20"/>
     <e:Group id="bottomGroup" height="100" bottom="2" horizontalCenter="0">

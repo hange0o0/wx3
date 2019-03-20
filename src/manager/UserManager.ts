@@ -11,7 +11,9 @@ class UserManager {
         return UserManager._instance;
     }
 
-    public needUpUser = false;
+    private _needUpUser = false;
+    public get needUpUser(){return this._needUpUser}
+    public set needUpUser(v){this._needUpUser = v;egret.callLater(this.localSave,this)}
     public maxEnergy = 20;
     public onLineAwardCD = [5*60,30*60,3600,2*3600,3*3600]
 
@@ -29,7 +31,7 @@ class UserManager {
     public coin: number = 999;
     public diamond: number = 0;
     public energy: any;
-    public chapterLevel: number = 0;
+    public chapterLevel: number = 0;  //已完成关卡，默认为0
     public chapterStar: any = {};
     public friendNew: any = {};
     public coinObj:{
@@ -52,6 +54,15 @@ class UserManager {
 
     public lastForce
     public fill(data:any):void{
+        var localData = SharedObjectManager.getInstance().getMyValue('localSave')
+        if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
+        {
+            for(var s in localData)
+            {
+                data[s] = localData[s];
+            }
+        }
+
         this.dbid = data._id;
         this.loginTime = data.loginTime || TM.now();
         this.coin = data.coin || 0;
@@ -269,6 +280,7 @@ class UserManager {
              chapterLevel:0,
              tipsLevel:0,
              fight:{},
+             saveTime:0,
              energy:{v:0,t:0},
              chapterStar:{},
              def:'1,48,2,3,4,5,6,7,9,10',
@@ -304,32 +316,42 @@ class UserManager {
         return true;
     }
 
+    private getUpdataData(){
+        return {
+            coin:UM.coin,
+            diamond:UM.diamond,
+            energy:UM.energy,
+            work:WorkManager.getInstance().getWorkSave(),
+            def:MonsterManager.getInstance().defList,
+            fight:FightManager.getInstance().getFightSave(),
+            monster:MonsterManager.getInstance().monsterData,
+            tec:TecManager.getInstance().tecData,
+            chapterLevel:UM.chapterLevel,
+            chapterStar:UM.chapterStar,
+            maxForce:UM.maxForce,
+            coinObj:UM.coinObj,
+            guideFinish:UM.guideFinish,
+            saveTime:TM.now(),
+        };
+    }
+
     public upDateUserData(){
         if(!this.needUpUser)
             return;
         var wx = window['wx'];
         if(wx)
         {
-            var updateData:any = {
-                coin:UM.coin,
-                diamond:UM.diamond,
-                energy:UM.energy,
-                work:WorkManager.getInstance().getWorkSave(),
-                def:MonsterManager.getInstance().defList,
-                fight:FightManager.getInstance().getFightSave(),
-                monster:MonsterManager.getInstance().monsterData,
-                tec:TecManager.getInstance().tecData,
-                chapterLevel:UM.chapterLevel,
-                chapterStar:UM.chapterStar,
-                maxForce:UM.maxForce,
-                coinObj:UM.coinObj,
-                guideFinish:UM.guideFinish,
-            };
+            var updateData:any = this.getUpdataData();;
             WXDB.updata('user',updateData)
         }
         this.needUpUser = false;
         FightManager.getInstance().save();
         //this.upWXData();
+    }
+
+    private localSave(){
+        FightManager.getInstance().save();
+        SharedObjectManager.getInstance().setMyValue('localSave',this.getUpdataData())
     }
     //
     ////如果战力不同则上传数据

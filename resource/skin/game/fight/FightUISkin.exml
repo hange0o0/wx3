@@ -11,14 +11,7 @@
 			</e:List>
 			<e:Group x="0" y="0" height="50">
 				<e:Image source="black3_png" y="0" x="0" width="640" height="50"/>
-				<e:Label text="已搜索到的玩家" verticalCenter="0" size="24" horizontalCenter="0" textColor="0xfcd69c"/>
-				<e:Group width="160" height="50" scaleX="1" scaleY="1" right="0" verticalCenter="4">
-					<e:Image source="border1_png" scale9Grid="28,20,26,2" left="0" right="0" top="0" bottom="0"/>
-					<e:Label id="energyText" text="00:00" x="40" size="24" verticalCenter="-4" textColor="0xFFE3B7"/>
-					<e:Image x="15.75" source="energy_icon_png" scaleX="0.2" scaleY="0.2" verticalCenter="-4"/>
-					<e:Image id="addBtn" source="icon_add2_png" right="6" verticalCenter="-4"/>
-				</e:Group>
-				<e:Group x="10" verticalCenter="0">
+				<e:Group verticalCenter="0" horizontalCenter="0">
 					<e:Image source="icon_clock_png" x="24" y="8"/>
 					<e:Label id="cdText" text="00:00:00" x="20" y="7" size="24"/>
 					<e:Image id="refreshBtn" source="change_icon_png" x="0" y="0"/>
