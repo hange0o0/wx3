@@ -21,10 +21,10 @@ class WorkConItem extends game.BaseItem{
         switch(this.data.type)
         {
             case 'def':
-
+                MonsterManager.getInstance().editDef();
                 break;
             case 'work':
-
+                WorkManager.getInstance().editWork(this.data.index)
                 break;
         }
     }

@@ -584,8 +584,8 @@ class PKManager {
         PD.init({
             seed:data.seed,
             players:[
-                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1},
-                {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2}
+                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1,buff:data.buff1},
+                {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2,buff:data.buff2}
             ]
         });
         PD.quick = true;

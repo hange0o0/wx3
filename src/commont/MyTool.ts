@@ -74,11 +74,11 @@ class MyTool {
             list.getChildAt(i)['dataChanged']();
         }
     }
-    public static runListFun(list,funName){
+    public static runListFun(list,funName,value?){
         for(var i=0;i<list.numChildren;i++)
         {
             var mc = list.getChildAt(i);
-            mc[funName] && mc[funName]();
+            mc[funName] && mc[funName](value);
         }
     }
 

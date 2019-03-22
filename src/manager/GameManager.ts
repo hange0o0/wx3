@@ -157,6 +157,7 @@ class GameManager {
 
         WorkManager.getInstance().onTimer();
         FightManager.getInstance().onTimer();
+        BuffManager.getInstance().onTimer();
         EM.dispatch(GameEvent.client.timer);
 
         //if(UM.friendtime == 0){  //拿过日志了

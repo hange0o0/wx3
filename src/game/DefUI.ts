@@ -23,11 +23,11 @@ class DefUI extends game.BaseItem{
     public childrenCreated() {
         super.childrenCreated();
         //this.desText.text = '防守阵容'
-        //this.addBtnEvent(this.setBtn,this.onSet)
+        this.addBtnEvent(this,this.onClick)
     }
 
-    private onSet(){
-
+    private onClick(){
+        MonsterManager.getInstance().editDef();
     }
 
 

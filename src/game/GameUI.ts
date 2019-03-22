@@ -11,11 +11,6 @@ class GameUI extends game.BaseUI {
         this.skinName = "GameUISkin";
     }
 
-    private coinGroup: eui.Group;
-    private shopRedMC: eui.Image;
-    private coinText: eui.Label;
-    private diamondGroup: eui.Group;
-    private diamondText: eui.Label;
     private bottomGroup: eui.Group;
     private rankBtn: eui.Group;
     private buffBtn: eui.Group;
@@ -24,9 +19,17 @@ class GameUI extends game.BaseUI {
     private settingBtn: eui.Group;
     private chapterRedMC: eui.Image;
     private mailBtn: eui.Group;
+    private coinGroup: eui.Group;
+    private shopRedMC: eui.Image;
+    private coinText: eui.Label;
+    private diamondGroup: eui.Group;
+    private diamondText: eui.Label;
     private soundBtn: eui.Image;
     private loadingGroup: eui.Group;
+    private changeUser: ChangeUserUI;
+    private startBtn: eui.Image;
     private loadText: eui.Label;
+    private barGroup: eui.Group;
     private barMC: eui.Rect;
     private scroller: eui.Scroller;
     private list: eui.List;
@@ -37,8 +40,12 @@ class GameUI extends game.BaseUI {
 
 
 
+
+    private infoBtn:UserInfoBtn
     private haveGetInfo = false;
     private haveLoadFinish = false;
+    private haveGetUser = false;
+    private needShowStartBtn = false;
 
     private firstShow = true;
     public showIndex = -1;
@@ -62,6 +69,55 @@ class GameUI extends game.BaseUI {
                 return ChangeUserUI;
             return MainWorkItem;
         };
+
+        this.infoBtn = new UserInfoBtn(this.startBtn, (res)=>{
+            this.renewInfo(res);
+        }, this, Config.localResRoot + "wx_btn_info.png");
+        this.infoBtn.visible = false;
+        this.startBtn.visible = false;
+    }
+
+    private renewInfo(res?){
+        var wx = window['wx'];
+        if(!wx)
+        {
+            this.haveGetUser = true;
+            this.initData();
+            return;
+        }
+        if(res)
+        {
+            if(!res.userInfo)
+                return;
+            this.infoBtn.visible = false;
+            this.haveGetUser = true;
+            this.initData();
+            UM.renewInfo(res.userInfo)
+            return;
+        }
+        wx.getSetting({
+            success: (res) =>{
+                console.log(res.authSetting)
+                if(res.authSetting["scope.userInfo"])//已授权
+                {
+                    this.haveGetUser = true;
+                    this.initData()
+                    wx.getUserInfo({
+                        success: (res) =>{
+                            var userInfo = res.userInfo
+                            UM.renewInfo(userInfo)
+                            //UM.head = userInfo.avatarUrl
+                            //UM.gender = userInfo.gender || 1 //性别 0：未知、1：男、2：女
+                        }
+                    })
+                }
+                else
+                {
+                    this.needShowStartBtn = true;
+                    //this.infoBtn.visible = true;
+                }
+            }
+        })
     }
 
     private onMonster(){
@@ -119,10 +175,18 @@ class GameUI extends game.BaseUI {
 
     private callShow(){
         this.loadText.text = '初始化中'
+
+
         //var index = PKManager.getInstance().getTodayIndex();
         //PKManager.getInstance().loadLevelData(()=>{
         //PKManager.getInstance().loadLevelData(index,(data)=>{
             //PKManager.getInstance().initData(index,data);
+            if(this.needShowStartBtn)
+            {
+                this.haveLoadFinish = true;
+                this.initData();
+                return;
+            }
             setTimeout(()=>{
                 this.haveLoadFinish = true;
                 this.initData();
@@ -144,10 +208,10 @@ class GameUI extends game.BaseUI {
         this.renewSound();
         this.loadingGroup.visible = true;
         self.loadText.text = '正在加载素材，请耐心等候..'
+        this.renewInfo();
         UM.getUserInfo(()=>{
             this.haveGetInfo = true;
             this.initData();
-            UM.drawSaveData();
         });
         var wx =  window["wx"];
         if(wx)
@@ -163,7 +227,7 @@ class GameUI extends game.BaseUI {
             })
 
             loadTask.onProgressUpdate(res => {
-                self.loadText.text = '正在加载素材，请耐心等候..\n' + res.progress + '%'
+                self.loadText.text = '正在加载素材，请耐心等候..' + res.progress + '%'
             })
 
 
@@ -174,7 +238,17 @@ class GameUI extends game.BaseUI {
 
 
     private initData(){
-        if(!this.haveLoadFinish || !this.haveGetInfo)
+        if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
+        {
+            this.changeUser.dataChanged()
+            this.loadText.text = '点击屏幕受权进入游戏';
+            this.needShowStartBtn = false;
+            this.infoBtn.visible = true;
+            this.barGroup.visible = false;
+            return;
+            //this.loadText.text = '用户授权后可进入游戏'
+        }
+        if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
         GuideManager.getInstance().isGuiding = !UM.guideFinish;
         this.bottomGroup.visible = true;
@@ -185,11 +259,16 @@ class GameUI extends game.BaseUI {
         this.onCoinChange();
         this.onDimaondChange();
         this.renewChapterRed();
+        MyTool.removeMC(this.changeUser);
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange)
+        this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.onDimaondChange)
         this.addPanelOpenEvent(GameEvent.client.TEC_CHANGE,this.reInitList)
+        this.addPanelOpenEvent(GameEvent.client.DEF_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
@@ -227,6 +306,7 @@ class GameUI extends game.BaseUI {
         {
             arr.push({id:i+1})
         }
+        arr[arr.length-1].isLast = true;
         arr.push({ad:true});
         return arr
     }
@@ -238,7 +318,7 @@ class GameUI extends game.BaseUI {
         this.coinText.text = NumberUtil.addNumSeparator(UM.coin);
     }
     private onDimaondChange(){
-        this.diamondText.text = NumberUtil.addNumSeparator(UM.coin);
+        this.diamondText.text = UM.diamond + '';
     }
 
     private renewCoinRed(){

@@ -8,16 +8,16 @@ class UserInfoBtn {
     private isNew:string;
 
     public constructor(btn:eui.Image | eui.Button, fun:Function, parent:game.BaseUI, url:string) {
-        if(DEBUG){
-            if(!(parent instanceof game.BaseUI)){
-                console.error("不支持！");
-                return;
-            }
-            if(btn.parent != parent){
-                console.error("btn 不是在 parent的根下，不支持！");
-                return;
-            }
-        }
+        //if(DEBUG){
+        //    if(!(parent instanceof game.BaseUI)){
+        //        console.error("不支持！");
+        //        return;
+        //    }
+        //    if(btn.parent != parent){
+        //        console.error("btn 不是在 parent的根下，不支持！");
+        //        return;
+        //    }
+        //}
         this.sourceBtn = btn;
         this.parent = parent;
         this.callFun = fun;

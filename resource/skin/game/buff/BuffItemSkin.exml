@@ -3,9 +3,10 @@
 	<e:Group id="con" width="146" height="200" anchorOffsetX="73" anchorOffsetY="100" x="73" y="100">
 		<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
 		<e:Image id="chooseMC" source="border2_png" scale9Grid="12,12,3,3" left="-2" right="-2" top="-2" bottom="-2"/>
+		<e:Image source="icon_add1_png" y="55" horizontalCenter="0.5"/>
 		<e:Image id="headMC" width="120" height="120" y="13" x="13"/>
 		<e:Group y="150" x="10">
-			<e:Image id="icon" source="icon_coin_png" x="0" y="0" scaleX="0.9" scaleY="0.9"/>
+			<e:Image id="icon" x="0" y="0" scaleX="0.9" scaleY="0.9" source="icon_def2_png"/>
 			<e:Label id="rateText" text="+10%" x="54" y="16" bold="true"/>
 			<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
@@ -16,5 +17,5 @@
 			<e:Image id="barMC" source="bar1_png" x="2" y="2"/>
 		</e:Group>
 	</e:Group>
-	<e:Image id="deleteMC" source="icon_error_png" right="-15" top="-15"/>
+	<e:Image id="deleteMC" source="icon_error_png" right="-10" top="-10" scaleX="0.8" scaleY="0.8"/>
 </e:Skin>

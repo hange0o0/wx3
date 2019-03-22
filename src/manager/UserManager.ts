@@ -13,12 +13,13 @@ class UserManager {
 
     private _needUpUser = false;
     public get needUpUser(){return this._needUpUser}
-    public set needUpUser(v){this._needUpUser = v;egret.callLater(this.localSave,this)}
+    public set needUpUser(v){this._needUpUser = v;v && egret.callLater(this.localSave,this)}
     public maxEnergy = 20;
     public onLineAwardCD = [5*60,30*60,3600,2*3600,3*3600]
 
     public nick
     public head
+    public gender
 
 
     public isTest;
@@ -33,7 +34,11 @@ class UserManager {
     public energy: any;
     public chapterLevel: number = 0;  //已完成关卡，默认为0
     public chapterStar: any = {};
-    public friendNew: any = {};
+    //public friendNew: any = {};
+
+    public shareUser: any = {};//buff玩家的数据   openid:{head,nick,time}
+    public buffUser: any = {};//上阵Buff的数据 id:openid
+
     public coinObj:{
         loginTime,
         loginDays,
@@ -46,7 +51,6 @@ class UserManager {
     }
     public guideFinish: boolean = false;
 
-    public history = [];
     public initDataTime;
     public loginTime = 0
     public maxForce = 0
@@ -72,6 +76,8 @@ class UserManager {
         this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
         this.maxForce = data.maxForce;
+        this.buffUser = data.buffUser;
+        this.shareUser = data.shareUser;
         this.coinObj = data.coinObj || {
                 loginTime:TM.now(),   //登陆时间
                 loginDays:1,   //登陆天数
@@ -82,7 +88,7 @@ class UserManager {
                 shareAward:0,   //分享金币次数
                 newAward:0,   //分享金币次数
             };
-        this.friendNew = data.friendNew;
+        //this.friendNew = data.friendNew;
         //this.writeKey = data.writeKey;
 
         this.initDataTime = TM.now();
@@ -91,9 +97,6 @@ class UserManager {
         MonsterManager.getInstance().initMonster(data.monster,data.def)
         FightManager.getInstance().initFight(data.fight)
 
-        this.history = SharedObjectManager.getInstance().getMyValue('history') || [];
-        if(this.history.length > 20)
-            this.history.length = 20;
 
         //统一计算一下数据
         FightManager.getInstance().onTimer();
@@ -101,6 +104,25 @@ class UserManager {
         this.testPassDay();
 
         this.lastForce = this.getForce();
+
+        if(!window['wx'])
+        {
+            this.shareUser = {
+                1:{head:'',nick:'1',time:TM.now()-1*3600},
+                2:{head:'',nick:'2',time:TM.now()-3*3600},
+                3:{head:'',nick:'3',time:TM.now()-5*3600},
+                4:{head:'',nick:'4',time:TM.now()-7*3600},
+                5:{head:'',nick:'5',time:TM.now()-9*3600},
+                6:{head:'',nick:'6',time:TM.now()-11*3600},
+                7:{head:'',nick:'7',time:TM.now()-13*3600},
+            }
+        }
+    }
+
+    public renewInfo(userInfo){
+        this.nick = userInfo.nickName
+        this.head = userInfo.avatarUrl
+        this.gender = userInfo.gender || 1 //性别 0：未知、1：男、2：女
     }
 
     ////降低时间数据的位数
@@ -228,7 +250,7 @@ class UserManager {
         }).get({
             success: (res)=>{
                 var data = res.data[0];
-                this.friendNew = data.friendNew;
+                this.shareUser = data.shareUser;
                 fun && fun();
             }
         })
@@ -283,8 +305,10 @@ class UserManager {
              saveTime:0,
              energy:{v:0,t:0},
              chapterStar:{},
+             buffUser:{},
+             shareUser:{},
              def:'1,48,2,3,4,5,6,7,9,10',
-             work:['1#0#0#1','2#0#0#1','3#0#0#1','4#0#0#1','70#0#0#1','48#0#0#1'], //初始1个在工作
+             work:'1#0#1,2#0#1,3#0#1,4#0#1,70#0#1,48#0#1', //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间
                  loginDays:1,   //登陆天数
@@ -330,6 +354,7 @@ class UserManager {
             chapterStar:UM.chapterStar,
             maxForce:UM.maxForce,
             coinObj:UM.coinObj,
+            buffUser:UM.buffUser,
             guideFinish:UM.guideFinish,
             saveTime:TM.now(),
         };
@@ -434,70 +459,7 @@ class UserManager {
     }
 
 
-    private isRuning = false;
-    public drawSaveData():egret.Bitmap
-    {
-        if(!window['wx'])
-            return;
-        if(this.isRuning) return null;
-        this.isRuning = true;
 
-        platform.openDataContext.postMessage({isDisplay:true, command:"drawSaveData", keys:["getInfo"], myopenid:this.gameid});
-
-        let bb = <egret.Bitmap>platform.openDataContext.createDisplayObject();
-        let bmp = new egret.Bitmap(bb.texture);
-        let tex = new egret.RenderTexture();
-        egret.Tween.get(this,{loop:true}).wait(100).call(this.test,this,[bmp,tex]);
-        return bmp;
-    }
-
-    private test(bmp:egret.Bitmap,tex:egret.RenderTexture)
-    {
-        tex.drawToTexture(bmp,new egret.Rectangle(0,0,3,3));
-        let a = "";
-        for(var k = 0;k<3;k++)
-        {
-            let arr = tex.getPixel32(k,2);
-            for(let j = 0;j<3;j++) a += Number(arr[j] > 127);
-        }
-        let str = String.fromCharCode(parseInt(a,2));
-        if(str == "{")
-        {
-            tex.drawToTexture(bmp,new egret.Rectangle(0,0,bmp.width,bmp.height));
-            let i = 0;
-            let codeStr = "";
-            let _s = "";
-            while(true)
-            {
-                let a = "";
-                for(var k = 0;k<3;k++)
-                {
-                    let i1 = i*3+k;
-                    let x = (i1%bmp.width);
-                    let y = Math.floor(i1/bmp.width);
-                    let arr = tex.getPixel32(x,tex.textureHeight-y-1);
-                    for(let j = 0;j<3;j++) a += Number(arr[j] > 127);
-                }
-                let s = String.fromCharCode(parseInt(a,2));
-                if(s == ":" && _s == "}") break;
-                codeStr += s;
-                _s = s;
-                i++;
-            }
-            tex.dispose();
-            egret.Tween.removeTweens(this);
-            platform.openDataContext.postMessage({type:"clear"});
-            this.isRuning = false;
-
-            let obj = JSON.parse(codeStr); //{isOK:true, data:[]}
-            if(obj.isOK)
-            {
-                this.nick = decodeURIComponent(obj.data.nick);
-                this.head = obj.data.head;
-                console.log(this.nick,this.head)
-            }
-        }
-    }
 
 
 

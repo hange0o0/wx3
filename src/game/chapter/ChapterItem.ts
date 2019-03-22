@@ -52,6 +52,7 @@ class ChapterItem extends game.BaseItem{
                         force1:enemy.force,
                         mforce1:{},
                         list2:list,
+                        buff2:BuffManager.getInstance().getAtkAdd(),
                         force2:TecManager.getInstance().getAtkForce() + 10000,
                         mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
                     }

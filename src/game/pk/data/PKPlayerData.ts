@@ -8,6 +8,7 @@ class PKPlayerData {
     public type//类型
     private force;//怪的基础属性
     public mforce;//怪的基础属性
+    public buff;//buff的加成
     public teamData:PKTeamData   //对应队伍
 
     public autoList
@@ -61,7 +62,7 @@ class PKPlayerData {
     }
 
     public getMonsterForce(mid?){
-        return this.force + (this.mforce[mid] || 0)
+        return (this.force + (this.mforce[mid] || 0))*(1+(this.buff || 0)/100)
     }
 
     public addMonster(){

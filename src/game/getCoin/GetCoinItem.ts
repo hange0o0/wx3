@@ -138,23 +138,23 @@ class GetCoinItem extends game.BaseItem {
                 this.titleText.text = '体验任意小程序30秒'
                 this.addCoin = 800;
                 break;
-            case 4: // {type:4,title:'邀请X位新的好友'},
-                min = ObjectUtil.objLength(UM.friendNew),
-                    max = coinObj.newAward + 1
-                if(min >= max)
-                {
-                    this.goBtn.label = '领取'
-                    this.canAward = true;
-                }
-                else
-                {
-                    this.goBtn.skinName = 'Btn2Skin'
-                    this.goBtn.label = '邀请'
-                    this.goWork = true
-                }
-                this.titleText.text = '邀请'+max+'位新的好友'
-                this.addCoin = 500*max;
-                break;
+            //case 4: // {type:4,title:'邀请X位新的好友'},
+            //    min = ObjectUtil.objLength(UM.friendNew),
+            //        max = coinObj.newAward + 1
+            //    if(min >= max)
+            //    {
+            //        this.goBtn.label = '领取'
+            //        this.canAward = true;
+            //    }
+            //    else
+            //    {
+            //        this.goBtn.skinName = 'Btn2Skin'
+            //        this.goBtn.label = '邀请'
+            //        this.goWork = true
+            //    }
+            //    this.titleText.text = '邀请'+max+'位新的好友'
+            //    this.addCoin = 500*max;
+            //    break;
             case 99: // debug
                 this.titleText.text = '临时加钱'
                 this.addCoin = 1000;

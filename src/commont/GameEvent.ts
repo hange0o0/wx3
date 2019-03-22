@@ -7,8 +7,11 @@ class GameEvent {
         CHAPTER_CHANGE:'CHAPTER_CHANGE',
         HISTORY_CHANGE:'HISTORY_CHANGE',
         FIGHT_CHANGE:'FIGHT_CHANGE',
+        FIGHT_ATK_CHANGE:'FIGHT_ATK_CHANGE',
         MONSTER_WORK_CHANGE:'MONSTER_WORK_CHANGE',
         TEC_CHANGE:'TEC_CHANGE',
+        BUFF_CHANGE:'BUFF_CHANGE',
+        DEF_CHANGE:'DEF_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

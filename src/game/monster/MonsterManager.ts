@@ -33,18 +33,42 @@ class MonsterManager {
     public getDefArr(){
         return this.defList?this.defList.split(','):[];
     }
+
+    public editDef(){
+        PKPosUI.getInstance().show({
+            title:'防守阵容调整',
+            chooseList:this.defList,
+            isPK:true,
+            maxNum:TecManager.getInstance().getTeamNum(),
+            maxCost:TecManager.getInstance().getTeamCost(),
+            fun:(list)=>{
+                PKPosUI.getInstance().hide();
+                if(list != this.defList)
+                {
+                    this.defList = list;
+                    UM.needUpUser = true;
+                    EM.dispatchEventWith(GameEvent.client.DEF_CHANGE)
+                }
+            },
+        })
+    }
     /////////////////////////////////// def end //////////////////////
+
+
     //取队伍战力
     public getMyListForce(list,isAtk?,addBuff = true){
         if(!list)
             return 0;
         var count = 0;
         var force = isAtk?TecManager.getInstance().getAtkForce():TecManager.getInstance().getDefForce();
+        var buffForce = 0;
+        if(addBuff)
+            buffForce = isAtk?BuffManager.getInstance().getAtkAdd():BuffManager.getInstance().getDefAdd();
         var arr = list.split(',');
         for(var i=0;i<arr.length;i++)
         {
             var vo = MonsterVO.getObject(arr[i]);
-            count += vo.cost*(1+(force + this.getForceAdd(vo.id))/100)
+            count += vo.cost*(1+(force + this.getForceAdd(vo.id))/100)*(1+buffForce/100);
         }
         return Math.floor(count);
     }

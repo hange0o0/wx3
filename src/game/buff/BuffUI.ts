@@ -17,7 +17,11 @@ class BuffUI extends game.BaseUI {
 
 
 
+
+
     private dataProvider:eui.ArrayCollection
+    private topDataProvider:eui.ArrayCollection
+    public currentChooseID = '';
 
     public constructor() {
         super();
@@ -28,14 +32,15 @@ class BuffUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('增益加成')
+        this.topUI.setTitle('好友助力')
 
         this.topList.itemRenderer = BuffItem;
+        this.topList.dataProvider = this.topDataProvider = new eui.ArrayCollection();
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = BuffListItem
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
-        //this.desText.text = '掠夺日志最多只保留3天'
+
 
     }
 
@@ -43,34 +48,82 @@ class BuffUI extends game.BaseUI {
         this.hide();
     }
 
+    public share(){
+        ShareTool.share('我需要你们的帮助！！',Config.localResRoot + "share_img_1.jpg",{type:1,from:UM.gameid},()=>{
+            MyWindow.ShowTips('等待好友加入')
+        })
+    }
+
 
     public show(){
-        super.show()
+        UM.renewFriendNew(()=>{
+            super.show()
+        })
     }
 
     public hide() {
-        var red = FightManager.getInstance().notReadLog.length;
-        FightManager.getInstance().notReadLog.length = 0;
         super.hide();
-        if(red)
-            EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
+        this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onUnSelect,this)
     }
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.onHistoryChange)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renew)
     }
 
-    private onHistoryChange(){
-        var v = this.scroller.viewport.scrollV;
-        this.renew();
-        this.validateNow();
-        this.scroller.viewport.scrollV = v;
+    private onTimer(){
+        MyTool.runListFun(this.topList,'onTimer')
+        MyTool.runListFun(this.list,'onTimer')
+    }
+
+    public onUserClick(openid){
+        this.currentChooseID = openid;
+        MyTool.runListFun(this.topList,'onUserClick',openid)
+        MyTool.runListFun(this.list,'onUserClick',openid)
+
+        if(this.currentChooseID)
+        {
+            egret.callLater(()=>{
+                this.once(egret.TouchEvent.TOUCH_TAP,this.onUnSelect,this)
+            },this)
+        }
+    }
+
+    public onUnSelect(){
+        if(this.currentChooseID)
+            this.onUserClick(null);
+    }
+
+
+
+    public getNoUseNum(){
+        return this.dataProvider.source.length
     }
 
     public renew(){
-        ArrayUtil.sortByField(FightManager.getInstance().log,['logTime'],[1])
-        this.dataProvider.source = FightManager.getInstance().log
+        var BM = BuffManager.getInstance();
+        this.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onUnSelect,this)
+        this.currentChooseID = null;
+        var topArr = ObjectUtil.objToArray(BM.buffBase);
+        //this.topList.dataProvider = new eui.ArrayCollection(topArr);
+        //this.topDataProvider.refresh();
+        this.topDataProvider.source = topArr;
+        this.topDataProvider.refresh();
+
+        var t = TM.now();
+        var cd = BM.buffCD
+        var arr = [];
+        for(var s in UM.shareUser)
+        {
+             if(t - UM.shareUser[s].time < cd && !BM.getUserBuff(s))
+             {
+                 UM.shareUser[s].openid = s;
+                 arr.push(UM.shareUser[s])
+             }
+        }
+
+        this.dataProvider.source = arr;
         this.dataProvider.refresh();
     }
 

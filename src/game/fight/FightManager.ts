@@ -218,7 +218,7 @@ class FightManager {
                      b = true
                      this.onAtkBackFail(oo);
                      MyWindow.ShowTips('进攻【'+robot.nick+'】的队伍已经返回')
-                     EM.dispatchEventWith(GameEvent.client.MONSTER_WORK_CHANGE)
+                     EM.dispatchEventWith(GameEvent.client.FIGHT_ATK_CHANGE)
                  }
             }
             else if(oo.type == 'atk' && cd > robot.distanceTime*2)//移除队列
@@ -238,7 +238,7 @@ class FightManager {
                 i--;
                 b = true
                 MyWindow.ShowTips('进攻【'+robot.nick+'】的队伍已经返回')
-                EM.dispatchEventWith(GameEvent.client.MONSTER_WORK_CHANGE)
+                EM.dispatchEventWith(GameEvent.client.FIGHT_ATK_CHANGE)
             }
             else if(oo.type == 'def' && cd > robot.distanceTime)//移除队列
             {
@@ -302,11 +302,13 @@ class FightManager {
         if(oo.type == 'atk')//我是进攻方
         {
             pkObj.list2 = oo.list;
+            pkObj.buff2 = BuffManager.getInstance().getAtkAdd(),
             pkObj.force2 = TecManager.getInstance().getAtkForce();
         }
         else//我是防守方
         {
             pkObj.list2 = MonsterManager.getInstance().defList;
+            pkObj.buff2 = BuffManager.getInstance().getDefAdd(),
             pkObj.force2 = TecManager.getInstance().getDefForce();
         }
         pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(pkObj.list2);

@@ -4,9 +4,11 @@ class MainWorkItem extends game.BaseItem {
         this.skinName = "MainWorkItemSkin";
     }
 
-    private con: eui.Group;
     private bg: eui.Image;
+    private con: eui.Group;
     private redMC: eui.Image;
+    private lastMC: eui.Image;
+
 
 
 
@@ -26,10 +28,17 @@ class MainWorkItem extends game.BaseItem {
 
     public childrenCreated() {
         super.childrenCreated();
-
+        this.addBtnEvent(this,this.onClick)
     }
 
+    private onClick(){
+        if(this.currentState == 'normal')
+            WorkManager.getInstance().editWork(this.data.id)
+    }
+
+
     public dataChanged(){
+        this.lastMC.visible = this.data.isLast;
         if(WorkManager.getInstance().getOpenWork() >= this.data.id)
         {
             this.showList();
@@ -44,6 +53,7 @@ class MainWorkItem extends game.BaseItem {
 
     private showList() {
 
+        console.log(NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2));
         this.currentState = 'normal'
 
         while(this.monsterArr.length > 0)

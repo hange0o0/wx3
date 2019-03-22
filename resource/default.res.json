@@ -1593,6 +1593,11 @@
 			"name":"level_txt",
 			"type":"text",
 			"url":"level.txt"
+		},
+		{
+			"name":"dig_pass2_png",
+			"type":"image",
+			"url":"game_assets/dig_pass2.png"
 		}
 	]
 }

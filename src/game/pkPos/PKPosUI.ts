@@ -272,7 +272,7 @@ class PKPosUI extends game.BaseUI {
      /*
      title
      enemy:{list,seed,force}
-     chooseList//已选中列表，已在list中扣除
+     chooseList//已选中列表，已在list中扣除    string
      isPK
       isAtk
       maxCost
