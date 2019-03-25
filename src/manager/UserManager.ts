@@ -71,7 +71,7 @@ class UserManager {
         this.loginTime = data.loginTime || TM.now();
         this.coin = data.coin || 0;
         this.chapterLevel = data.tipsLevel || 0;
-        this.diamond = data.diamond;
+        this.diamond = data.diamond || 0;
         this.energy = data.energy;
         this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
@@ -91,6 +91,19 @@ class UserManager {
         //this.friendNew = data.friendNew;
         //this.writeKey = data.writeKey;
 
+        if(!window['wx'])
+        {
+            this.shareUser = {
+                1:{head:'',nick:'1',time:TM.now()-1*3600},
+                2:{head:'',nick:'2',time:TM.now()-3*3600},
+                3:{head:'',nick:'3',time:TM.now()-5*3600},
+                4:{head:'',nick:'4',time:TM.now()-7*3600},
+                5:{head:'',nick:'5',time:TM.now()-9*3600},
+                6:{head:'',nick:'6',time:TM.now()-11*3600},
+                7:{head:'',nick:'7',time:TM.now()-13*3600},
+            }
+        }
+
         this.initDataTime = TM.now();
         WorkManager.getInstance().initWork(data.work)
         TecManager.getInstance().initTec(data.tec)
@@ -105,18 +118,7 @@ class UserManager {
 
         this.lastForce = this.getForce();
 
-        if(!window['wx'])
-        {
-            this.shareUser = {
-                1:{head:'',nick:'1',time:TM.now()-1*3600},
-                2:{head:'',nick:'2',time:TM.now()-3*3600},
-                3:{head:'',nick:'3',time:TM.now()-5*3600},
-                4:{head:'',nick:'4',time:TM.now()-7*3600},
-                5:{head:'',nick:'5',time:TM.now()-9*3600},
-                6:{head:'',nick:'6',time:TM.now()-11*3600},
-                7:{head:'',nick:'7',time:TM.now()-13*3600},
-            }
-        }
+
     }
 
     public renewInfo(userInfo){

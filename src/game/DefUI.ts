@@ -54,7 +54,7 @@ class DefUI extends game.BaseItem{
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1;
-            item.bottom = -10+vo.height*0.8 - 3 + 6*Math.random()// + Math.random()*80
+            item.bottom = 20+vo.height*0.3 - 3 + 6*Math.random()// + Math.random()*80
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);

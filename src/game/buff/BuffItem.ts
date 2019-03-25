@@ -112,8 +112,8 @@ class BuffItem extends game.BaseItem{
               }
              else
               {
-                  this.con.rotation = 3
-                  egret.Tween.get(this.con,{loop:true}).to({rotation:-3},100).to({rotation:3},100)
+                  this.con.rotation = 2
+                  egret.Tween.get(this.con,{loop:true}).to({rotation:-2},100).to({rotation:2},100)
               }
          }
     }

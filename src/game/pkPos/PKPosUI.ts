@@ -14,8 +14,9 @@ class PKPosUI extends game.BaseUI {
     private bg: eui.Image;
     private otherForceText: eui.Label;
     private forceText: eui.Label;
-    private numText: eui.Label;
+    private coinText: eui.Label;
     private costText: eui.Label;
+    private numText: eui.Label;
     private chooseGroup: eui.Group;
     private desText: eui.Label;
     private chooseList: eui.List;
@@ -25,6 +26,7 @@ class PKPosUI extends game.BaseUI {
     private resetBtn: eui.Group;
     private okBtn: eui.Group;
     private pkBtn: eui.Group;
+
 
 
 
@@ -136,7 +138,7 @@ class PKPosUI extends game.BaseUI {
             for(var i=0;i<this.chooseList.numChildren;i++)
             {
                 var mc:any = this.chooseList.getChildAt(i);
-                if(mc.visible && mc.hitMC.hitTestPoint(x,y))
+                if(mc.data && mc.visible && mc.hitMC.hitTestPoint(x,y))
                 {
                     if(mc.data == this.dragTarget.data)
                     {
@@ -170,7 +172,7 @@ class PKPosUI extends game.BaseUI {
             for(var i=0;i<this.chooseList.numChildren;i++)
             {
                 var mc:any = this.chooseList.getChildAt(i);
-                if(mc.visible && mc.hitMC.hitTestPoint(x,y))
+                if(mc.data && mc.visible && mc.hitMC.hitTestPoint(x,y))
                 {
                     if(mc.data == this.dragTarget.data)
                         break
@@ -206,7 +208,9 @@ class PKPosUI extends game.BaseUI {
     }
 
     public addChoose(id){
-        this.dataProvider.addItem({id:id,list:this.dataProvider.source})
+        var index = this.getChooseNum();
+        this.dataProvider.removeItemAt(this.dataProvider.length - 1);
+        this.dataProvider.addItemAt({id:id,list:this.dataProvider.source},index)
         this.addFreeMonsterNum(id,-1)
         this.onItemChange();
     }
@@ -215,6 +219,8 @@ class PKPosUI extends game.BaseUI {
         var index = this.dataProvider.getItemIndex(data)
         this.addFreeMonsterNum(data.id,1)
         this.dataProvider.removeItemAt(index);
+        this.dataProvider.addItem(null);
+        this.chooseList.validateNow();
         this.onItemChange()
     }
 
@@ -223,11 +229,17 @@ class PKPosUI extends game.BaseUI {
         {
             var cost = this.currentCost = this.getMyCost();
             this.costText.text = '费用：' + cost + '/' + this.maxCost;
-            this.numText.text = '数量：' + this.getChooseNum() + '/' + this.maxNum;
+
             this.forceText.text = '战力：' + this.getForce();
         }
+        else
+        {
+            this.coinText.text = '产出：' + NumberUtil.addNumSeparator(WorkManager.getInstance().getListHourEarn(this.getMyList()),2) + ' /小时'
+        }
+        this.numText.text = '数量：' + this.getChooseNum() + '/' + this.maxNum;
         MyTool.renewList(this.list)
         this.desText.visible = this.getChooseNum() == 0
+        this.chooseList.visible = !this.desText.visible;
     }
 
     public getForce(){
@@ -235,7 +247,14 @@ class PKPosUI extends game.BaseUI {
     }
 
     public getChooseNum(){
-        return this.dataProvider.length;
+        var count = 0;
+        var arr = this.dataProvider.source;
+        for(var i = 0;i<arr.length;i++)
+        {
+            if(arr[i])
+                count += 1;
+        }
+        return count;
     }
 
     public getFreeMonsterNum(id){
@@ -257,12 +276,19 @@ class PKPosUI extends game.BaseUI {
         }
         if(this.dataIn.autoList)
             SharedObjectManager.getInstance().setMyValue('lastAtkList',list);
-        var baseForce = MonsterManager.getInstance().getMyListForce(this.getMyList(),this.dataIn.isAtk,false)
+        var baseForce = MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
         UM.maxForce = Math.max(UM.maxForce,baseForce);
         this.dataIn.fun && this.dataIn.fun(list)
     }
     public onSave(){
-        this.dataIn.fun && this.dataIn.fun(this.getMyList())
+        var list = this.getMyList();
+        if(list && this.dataIn.isPK)
+        {
+            var baseForce = MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
+            UM.maxForce = Math.max(UM.maxForce,baseForce);
+        }
+
+        this.dataIn.fun && this.dataIn.fun(list)
     }
 
     public onClose(){
@@ -370,7 +396,10 @@ class PKPosUI extends game.BaseUI {
             for(var i=0;i<temp.length;i++)
             {
                 if(!obj[temp[i]])
+                {
                     list.push(MonsterVO.getObject(temp[i]))
+                    obj[temp[i]] = true;
+                }
             }
         }
 
@@ -436,16 +465,29 @@ class PKPosUI extends game.BaseUI {
         {
             list[i] = {id:list[i],list:list} ;
         }
+        while(list.length < this.maxNum)
+            list.push(null)
         this.dataProvider.source = list;
         this.dataProvider.refresh();
         this.onItemChange();
     }
 
     private renew(){
+        this.btnGroup.removeChildren();
+        this.btnGroup.addChild(this.resetBtn)
         if(this.dataIn.isPK)
+        {
             this.currentState = 'pk';
+            if(this.dataIn.isAtk)
+                this.btnGroup.addChild(this.pkBtn)
+            else
+                this.btnGroup.addChild(this.okBtn)
+        }
         else
+        {
             this.currentState = 'normal';
+            this.btnGroup.addChild(this.okBtn)
+        }
 
         this.renewTitle();
         this.showEnemy();
@@ -458,9 +500,13 @@ class PKPosUI extends game.BaseUI {
         var arr = this.dataProvider.source;
         for(var i=0;i<arr.length;i++)
         {
-            this.addFreeMonsterNum(arr[i].id,1);
+            if(arr[i])
+                this.addFreeMonsterNum(arr[i].id,1);
         }
-        this.dataProvider.source = [];
+        arr = [];
+        while(arr.length<this.maxNum)
+            arr.push(null)
+        this.dataProvider.source = arr;
         this.dataProvider.refresh();
         this.onItemChange();
     }
@@ -470,7 +516,8 @@ class PKPosUI extends game.BaseUI {
         var cost = 0;
         for(var i=0;i<arr.length;i++)
         {
-            cost += MonsterVO.getObject(arr[i].id).cost
+            if(arr[i])
+                cost += MonsterVO.getObject(arr[i].id).cost
         }
         return cost;
     }
@@ -480,7 +527,8 @@ class PKPosUI extends game.BaseUI {
         var list = [];
         for(var i=0;i<arr.length;i++)
         {
-            list.push(arr[i].id)
+            if(arr[i])
+                list.push(arr[i].id)
         }
         return list.join(',')
     }

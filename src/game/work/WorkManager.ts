@@ -79,7 +79,7 @@ class WorkManager {
                     b = true
                     this.workList.push({
                         id:newList.pop(),
-                        resetTime:TM.nowMS(),  //单位，ms
+                        resetTime:TM.nowMS()-Math.random()*5000,  //单位，ms
                         index:workIndex
                     })
                 }
@@ -180,6 +180,21 @@ class WorkManager {
            }
         }
         return arr;
+    }
+
+    public getListHourEarn(str){
+        if(!str)
+            return 0;
+        var count = 0
+        var arr = str.split(',')
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i];
+            var v1 = this.getWorkCD(id)
+            var v2 = this.getWorkCoin(id)
+            count += v2*(3600*1000/v1)
+        }
+        return Math.floor(count);
     }
 
     public getHourEarn(index){

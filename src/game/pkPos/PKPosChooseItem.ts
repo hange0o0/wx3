@@ -17,6 +17,7 @@ class PKPosChooseItem extends game.BaseItem {
     private changeTW
 
     public stopMove=true
+    public stopDrag=false
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
@@ -65,21 +66,34 @@ class PKPosChooseItem extends game.BaseItem {
 
 
     private onInfo(){
+        if(!this.data)
+            return;
         PKPosUI.getInstance().stopDrag();
         DragManager.getInstance().endDrag();
         var arr = [];
         for(var i=0;i<this.data.list.length;i++)
         {
-            arr.push(this.data.list[i].id)
+            if(this.data.list[i])
+                arr.push(this.data.list[i].id)
         }
         CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
     }
 
     private onClick(){
-        PKPosUI.getInstance().deleteItem(this.data)
+        if(this.data)
+            PKPosUI.getInstance().deleteItem(this.data)
     }
 
     public dataChanged(){
+        if(!this.data)
+        {
+            this.stopDrag = true;
+            this.currentState = 'empty'
+            return;
+        }
+        this.stopDrag = false;
+        this.currentState = 'normal'
+
         //this.indexText.text = this.data.index;
         var vo = MonsterVO.getObject(this.data.id)
         this.bg.source = vo.getBG()

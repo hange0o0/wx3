@@ -56,6 +56,7 @@ class WorkUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.resetList)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_ATK_CHANGE,this.resetList)
+        this.addPanelOpenEvent(GameEvent.client.DEF_CHANGE,this.resetList)
     }
 
     private onTimer(){

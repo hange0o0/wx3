@@ -2,6 +2,7 @@
 <e:Skin class="BuffItemSkin" width="146" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="con" width="146" height="200" anchorOffsetX="73" anchorOffsetY="100" x="73" y="100">
 		<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+		<e:Image source="border_10_png" y="13" width="120" height="120" horizontalCenter="0"/>
 		<e:Image id="chooseMC" source="border2_png" scale9Grid="12,12,3,3" left="-2" right="-2" top="-2" bottom="-2"/>
 		<e:Image source="icon_add1_png" y="55" horizontalCenter="0.5"/>
 		<e:Image id="headMC" width="120" height="120" y="13" x="13"/>

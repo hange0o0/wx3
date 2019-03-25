@@ -6,8 +6,10 @@ class MainWorkItem extends game.BaseItem {
 
     private bg: eui.Image;
     private con: eui.Group;
+    private coinText: eui.Label;
     private redMC: eui.Image;
     private lastMC: eui.Image;
+
 
 
 
@@ -53,7 +55,7 @@ class MainWorkItem extends game.BaseItem {
 
     private showList() {
 
-        console.log(NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2));
+        this.coinText.text = '时产：' + (NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2)) + ' /小时';
         this.currentState = 'normal'
 
         while(this.monsterArr.length > 0)
@@ -76,7 +78,7 @@ class MainWorkItem extends game.BaseItem {
             //item.currentMV.scaleX = Math.abs(item.currentMV.scaleX);
             //if(this.teamID == 1)
             //    item.currentMV.scaleX *= -1
-            item.bottom = 30+vo.height*0.4 - 2 + 4*Math.random();
+            item.bottom = 10+vo.height*0.4 - 2 + 4*Math.random();
             item['w'] = vo.width
             item['workState'] = 0;
             this.monsterArr.push(item);
