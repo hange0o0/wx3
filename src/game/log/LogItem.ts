@@ -11,9 +11,10 @@ class LogItem extends game.BaseItem {
     private pkBtn: eui.Button;
     private viewBtn: eui.Button;
     private awardGroup: eui.Group;
-    private coinText: eui.Label;
     private awardText: eui.Label;
-    private indexMC: eui.Rect;
+    private coinText: eui.Label;
+    private indexMC: eui.Image;
+
 
     public childrenCreated() {
         super.childrenCreated();
@@ -53,6 +54,7 @@ class LogItem extends game.BaseItem {
         var cd =  TM.now() - this.data.logTime;
         if(this.data.type == 'atk')
         {
+            this.indexMC.source = 'card_battle2_png'
             if(this.data.result == 2)
             {
                 this.currentState = 's1'
@@ -60,32 +62,30 @@ class LogItem extends game.BaseItem {
                 this.awardText.text = '收获：'
                 this.coinText.text = this.data.addCoin
                 this.coinText.textColor = 0x66FF66
-                this.indexMC.fillColor = 0x0000FF
+
             }
             else
             {
                 this.currentState = 's2'
                 this.desText.text = '进攻失利，空手而回！';
-                this.indexMC.fillColor = 0x000099
             }
             this.pkBtn.visible = false
         }
         else
         {
+            this.indexMC.source = 'card_battle_png'
             if(this.data.result == 1)
             {
                 this.currentState = 's1'
                 this.desText.text = '防守失败，夺资源惨被掠!';
                 this.coinText.text = this.data.addCoin
                 this.coinText.textColor = 0xFF6666
-                this.indexMC.fillColor = 0xFF0000
                 this.awardText.text = '损失：'
             }
             else
             {
                 this.currentState = 's2'
                 this.desText.text = '防守成功，喜大普奔！';
-                this.indexMC.fillColor = 0x990000
             }
             this.pkBtn.visible = !this.data.atkBack
         }

@@ -30,12 +30,12 @@ class WorkManager {
     }
 
     public editWork(workIndex){
-        var maxNum = this.getOpenWork();
+        var maxNum = this.getWorkNum();
         var localMax = (workIndex)*10;
         if(localMax >= maxNum)
             localMax = 10;
         else
-            localMax = localMax%10;
+            localMax = maxNum%10;
 
         var workList = this.getWorkList(workIndex);
         var strList = [];

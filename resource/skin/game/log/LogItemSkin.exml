@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="LogItemSkin" width="630" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8" locked="true"/>
-	<e:Image id="headMC" width="100" height="100" x="30" verticalCenter="0"/>
-	<e:Label id="desText" text="Label" x="145" y="48" size="24" textColor="0x5a3909" y.s2="70"/>
-	<e:Label id="nameText" text="Label" x="145" y="10" bold="true"/>
+	<e:Image id="headMC" width="100" height="100" x="10" verticalCenter="0"/>
+	<e:Label id="desText" text="Label" x="125" y="48" size="24" y.s2="60" textColor="0x72470a"/>
+	<e:Label id="nameText" text="Label" x="125" y="10" bold="true" size="26" textColor="0xffe8a5"/>
 	<e:Label id="cdText" text="(3天前)" y="19.06" size="20" textAlign="center" right="15" textColor="0xe0dbd2"/>
-	<e:Group right="10" bottom="10">
+	<e:Group right="10" bottom="10" bottom.s2="15">
 		<e:Button id="pkBtn" label="复仇" width="120" x="0" y="0" scaleX="0.85" scaleY="0.85" skinName="Btn9Skin"/>
 		<e:Button id="viewBtn" label="查看" skinName="Btn1Skin" width="120" x="0" y="0" scaleX="0.85" scaleY="0.85"/>
 		<e:layout>
 			<e:HorizontalLayout/>
 		</e:layout>
 	</e:Group>
-	<e:Group id="awardGroup" x="145" y="81.81" includeIn="s1">
-		<e:Label id="awardText" text="收获：" x="0" y="0" size="24" textColor="0x5A3909"/>
+	<e:Group id="awardGroup" x="125" y="81.81" includeIn="s1">
+		<e:Label id="awardText" text="收获：" x="0" y="0" size="24" textColor="0x72470a"/>
 		<e:Image source="icon_coin_png" x="23" y="32" scaleX="0.6" scaleY="0.6"/>
 		<e:Label id="coinText" text="x123" x="10" y="10" size="24" textColor="0x66ff66"/>
 		<e:layout>
 			<e:HorizontalLayout/>
 		</e:layout>
 	</e:Group>
-	<e:Rect id="indexMC" width="20" height="116" x="0" verticalCenter="0" fillColor="0xff0000"/>
+	<e:Image id="indexMC" source="card_battle2_png" x="0" y="0"/>
 </e:Skin>

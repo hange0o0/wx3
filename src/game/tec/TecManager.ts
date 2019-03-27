@@ -10,7 +10,7 @@ class TecManager {
     public tecBase = {
         11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'lv',v1:0,v2:0,v3:0},
         21:{'name':'挖矿加成',des:'增加挖矿时的金币收益',type:'coin',v1:0,v2:0,v3:0},
-        22:{'name':'挖矿位置',des:'增加一个新的挖矿位置',type:'coin',v1:0,v2:0,v3:0},
+        22:{'name':'矿坑容量',des:'增加一个新的挖矿位置',type:'coin',v1:0,v2:0,v3:0},
         31:{'name':'防守加成',des:'增加防守时的战力加成',type:'coin',v1:0,v2:0,v3:0},
         32:{'name':'进攻加成',des:'增加进攻时的战力加成',type:'coin',v1:0,v2:0,v3:0},
         33:{'name':'战队费用',des:'增加战斗队伍费用上限',type:'coin',v1:0,v2:0,v3:0},
@@ -53,6 +53,10 @@ class TecManager {
              case 34:
                  return str + '\n' + this.getSkillValue(id) + ' -> ' + this.getSkillValue(id,lv) + '';
          }
+    }
+
+    public getUnlockValue(floor){
+        return  (floor-1)*10-3 + 1
     }
 
     public getSkillValue(id,lv?){

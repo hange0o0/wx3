@@ -7,21 +7,9 @@ class MainWorkItem extends game.BaseItem {
     private bg: eui.Image;
     private con: eui.Group;
     private coinText: eui.Label;
+    private desText: eui.Label;
     private redMC: eui.Image;
     private lastMC: eui.Image;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private monsterArr = []
@@ -36,6 +24,8 @@ class MainWorkItem extends game.BaseItem {
     private onClick(){
         if(this.currentState == 'normal')
             WorkManager.getInstance().editWork(this.data.id)
+        else
+            TecUI.getInstance().show();
     }
 
 
@@ -48,6 +38,7 @@ class MainWorkItem extends game.BaseItem {
         else
         {
             this.currentState = 'lock'
+            this.desText.text = '【' + TecManager.getInstance().tecBase[22].name +  '】达到'+TecManager.getInstance().getUnlockValue(this.data.id)+'级后解锁'
         }
         this.bg.source = PKManager.getInstance().getWorkBG(this.data.id)
         //this.visible = false
@@ -100,7 +91,7 @@ class MainWorkItem extends game.BaseItem {
         if(localMax >= max)
             localMax = 10;
         else
-            localMax = localMax%10;
+            localMax = max%10;
 
         this.redMC.visible = arr.length < localMax && MonsterManager.getInstance().getFreeMonster(true).length > 0
     }

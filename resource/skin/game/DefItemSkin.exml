@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DefItemSkin" width="100" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="border_4_png" x="0" y="0" scale9Grid="20,20,8,8" width="100" height="100"/>
+	<e:Image id="mc" width="90" height="90" verticalCenter="0" horizontalCenter="0"/>
+	<e:Image id="maskMC" source="border_4_png" scale9Grid="20,20,8,8" width="94" height="94" horizontalCenter="0" verticalCenter="0"/>
+	<e:Image source="black_bg_png" height="50" scale9Grid="35,7,14,42" bottom="8" scaleX="0.5" scaleY="0.5" width="180" horizontalCenter="0"/>
+	<e:Label id="cdText" text="56:16" horizontalCenter="0" bottom="10" textColor="0xff0000" stroke="2" size="20"/>
+</e:Skin>

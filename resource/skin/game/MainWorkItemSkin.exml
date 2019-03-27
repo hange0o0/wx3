@@ -18,8 +18,9 @@
 	</e:Group>
 	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0"/>
 	<e:Image x="0" scale9Grid="80,96,480,15" source="dig_pass2_png" y="-10"/>
-	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="20" horizontalCenter="0" scaleX="2" scaleY="2"/>
+	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="0" horizontalCenter="0" scaleX="2" scaleY="2"/>
 	<e:Image x="0" scale9Grid="80,96,480,15" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
 	<e:Image source="red_mc_png" right="0" id="redMC" includeIn="normal"/>
 	<e:Image id="lastMC" x="0" scale9Grid="80,96,480,15" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
+	<e:Label id="desText" text="Label" includeIn="lock" textColor="0xeedbc6" horizontalCenter="0" verticalCenter="50"/>
 </e:Skin>

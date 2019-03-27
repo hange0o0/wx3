@@ -2,16 +2,18 @@ class DefUI extends game.BaseItem{
 
     private con: eui.Group;
     private bg: eui.Image;
+    private bgFront: eui.Image;
     private redMC: eui.Image;
     private forceText: eui.Label;
     private numText: eui.Label;
     private costText: eui.Label;
-    private bgFront: eui.Image;
+    private defList: eui.List;
 
 
 
 
 
+    private dataProvider:eui.ArrayCollection
 
     public constructor() {
         super();
@@ -24,6 +26,8 @@ class DefUI extends game.BaseItem{
         super.childrenCreated();
         //this.desText.text = '防守阵容'
         this.addBtnEvent(this,this.onClick)
+        this.defList.itemRenderer = DefItem;
+        this.defList.dataProvider = this.dataProvider = new eui.ArrayCollection();
     }
 
     private onClick(){
@@ -77,12 +81,16 @@ class DefUI extends game.BaseItem{
 
 
         this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
+
+        this.dataProvider.source = FightManager.getInstance().getDefList();
+        this.dataProvider.refresh();
     }
 
     public onE(){
         if(!this.visible || !GameUI.getInstance().visible)
             return;
         this.randomTalk();
+        MyTool.runListFun(this.defList,'onE');
     }
 
 

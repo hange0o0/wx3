@@ -258,7 +258,6 @@ class GameUI extends game.BaseUI {
         this.onTimer();
         this.onCoinChange();
         this.onDimaondChange();
-        this.renewChapterRed();
         MyTool.removeMC(this.changeUser);
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
@@ -269,6 +268,7 @@ class GameUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.DEF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.renewList)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
@@ -333,16 +333,12 @@ class GameUI extends game.BaseUI {
         }
     }
 
-    private renewChapterRed(){
-        this.chapterRedMC.visible = UM.chapterLevel < 2;
-    }
 
     public onVisibleChange(){
         //SoundManager.getInstance().playSound('pkbg');
         if(this.visible)
         {
             this.onTimer();
-            this.renewChapterRed()
         }
         else
         {

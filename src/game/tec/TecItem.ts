@@ -1,6 +1,5 @@
 class TecItem extends game.BaseItem{
 
-    private indexMC: eui.Rect;
     private headMC: eui.Image;
     private nameText: eui.Label;
     private desText: eui.Label;
@@ -12,7 +11,7 @@ class TecItem extends game.BaseItem{
 
 
     public cost;
-    private typeColor = [0xFF0000,0x00FF00,0x0000FF];
+    private typeColor = [0x994400,0xFDD302,0x660000];
     public constructor() {
         super();
         this.skinName = "TecItemSkin";
@@ -32,7 +31,6 @@ class TecItem extends game.BaseItem{
     public dataChanged():void {
         var data = this.data;
         //{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'diamond',v1:0,v2:0,v3:0},
-        this.indexMC.fillColor =  this.typeColor[Math.floor(data.id/10)-1]
         this.headMC.source = Config.localResRoot2 + 'skill/skill'+data.id+'.jpg';
         this.nameText.text = data.name + '（LV.'+TecManager.getInstance().getTecLevel(data.id)+'）';
         this.desText.text = TecManager.getInstance().getDes(data.id);

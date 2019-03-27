@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="DefUISkin" width="640" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Group id="con" left="0" right="0" top="0" bottom="0" scrollEnabled="true" touchChildren="false">
+	<e:Group id="con" left="0" right="0" top="0" bottom="0" scrollEnabled="true" touchChildren="false" locked="true">
 		<e:Image id="bg" horizontalCenter="0" bottom="-50" x="320" y="300" scaleX="1" scaleY="1"/>
 	</e:Group>
 	<e:Image id="bgFront" source="map2__png" x="0" bottom="0"/>
 	<e:Image source="black4_png" x="0" bottom="-3" width="640" height="25"/>
 	<e:Image source="black3_png" y="0" height="50" left="0" right="0"/>
 	<e:Image id="redMC" source="red_mc_png" right="0" x="616" y="10"/>
-	<e:Group y="9" left="10" right="10">
+	<e:Group y="9" left="10" right="10" locked="true">
 		<e:Group x="0" y="0" width="150">
 			<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
 			<e:Label id="forceText" text="123456" size="24" x="0" y="0" textColor="0xffeca5"/>
@@ -33,4 +33,9 @@
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="justify"/>
 		</e:layout>
 	</e:Group>
+	<e:List id="defList" y="60" right="10">
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:List>
 </e:Skin>
