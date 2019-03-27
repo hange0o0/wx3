@@ -229,8 +229,6 @@ class GameUI extends game.BaseUI {
             loadTask.onProgressUpdate(res => {
                 self.loadText.text = '正在加载素材，请耐心等候..' + res.progress + '%'
             })
-
-
             return;
         }
         this.callShow();

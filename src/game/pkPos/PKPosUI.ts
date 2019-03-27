@@ -196,6 +196,7 @@ class PKPosUI extends game.BaseUI {
                     }
 
                     this.dataProvider.refresh();
+                    this.chooseList.validateNow();
                     break
                 }
             }

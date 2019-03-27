@@ -37,7 +37,7 @@ class TecItem extends game.BaseItem{
 
         this.iconMC.source = data.type=='diamond'?'icon_diamond_png':'icon_coin_png'
         this.cost = TecManager.getInstance().getTecCost(data.id)
-        this.valueText.text = this.cost;
+        this.valueText.text = NumberUtil.addNumSeparator(this.cost,2);
         this.renewCost();
     }
 

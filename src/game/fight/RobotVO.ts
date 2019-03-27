@@ -9,15 +9,25 @@ class RobotVO{
             this.key = t
             this.index = 0;
         }
+        var lv = TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)
+        var force = Math.max(20,UM.maxForce)
+        var list = PKManager.getInstance().getRobotList(lv);
+        var list2 = list.split(',')
+        var cost = 0;
+        for(var i=0;i<list2.length;i++)
+        {
+            cost += MonsterVO.getObject(list2[i]).cost;
+        }
+        force = (force/cost-1)*100
+        force = Math.max(0,Math.floor(force*0.9 + force*0.6*Math.random()));
         var robot = new RobotVO({
-            force:100,
-            forceRate:0.5,
-            level:1,
+            force:force,
+            level:lv,
             lastTime:t,
-            distanceTime:5,//180 + Math.floor(1000*Math.random()),
-            list:'1,2,3,4,5',
+            distanceTime:180 + Math.floor((3600-180)*Math.random()),
+            list:list,
             nick:PKManager.getInstance().randomNick(),
-            head:Math.ceil(Math.random()*1000),
+            head:Math.ceil(Math.random()*1189),
         })
         robot.gameid = 'robot' + TM.now() +'_'+ this.index;
         RobotVO.change = true;
@@ -26,7 +36,6 @@ class RobotVO{
 
     public gameid
     public force//战力
-    public forceRate //实际战力比例
     public level//显示等级
     public lastTime//最后一次更新
     public distanceTime//出战需要时间
@@ -71,7 +80,7 @@ class RobotVO{
     }
 
     public reset(){
-        var cd = this.level*120*(1 + Math.random()*2);
+        var cd = Math.pow(this.level,1.5)*100*(1 + Math.random()*2);
         if(TM.now() - this.lastTime > cd)
         {
             var num = Math.floor((TM.now() - this.lastTime)/cd);
@@ -102,7 +111,7 @@ class RobotVO{
     //}
 
     public getFightForce(){
-        return  Math.floor(this.force*this.forceRate)
+        return  this.force
     }
 
 }

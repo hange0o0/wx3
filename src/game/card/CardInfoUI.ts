@@ -52,6 +52,8 @@ class CardInfoUI extends game.BaseWindow {
     public list
     public index
     public data;
+    public coinCost;
+    public diamondCost;
     private pageArr = []
 
     public constructor() {
@@ -65,6 +67,8 @@ class CardInfoUI extends game.BaseWindow {
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.rightBtn,this.onRight)
+        this.addBtnEvent(this.upBtn,this.onUp)
+        this.addBtnEvent(this.copyBtn,this.onCopy)
 
 
         for(var i=0;i<20;i++)
@@ -74,6 +78,14 @@ class CardInfoUI extends game.BaseWindow {
         this.pageGroup.touchChildren = this.pageGroup.touchEnabled = false;
 
         //this.touchEnabled = false;
+    }
+
+    public onUp(){
+
+    }
+
+    public onCopy(){
+
     }
 
     private onLeft(){
@@ -109,15 +121,30 @@ class CardInfoUI extends game.BaseWindow {
 
         this.renew();
 
+
     }
 
     public showFinish(){
          GuideManager.getInstance().testShowGuide()
     }
 
+    public renewCoin(){
+         this.coinText.text = NumberUtil.addNumSeparator(this.coinCost)
+    }
+
+    public renewDiamond(){
+        this.diamondText.text = this.diamondCost + ''
+    }
+
 
 
     public renew(){
+        this.coinCost = MonsterManager.getInstance().getLevelCost(this.data)
+        this.diamondCost = MonsterManager.getInstance().getLevelCost(this.data)
+        this.renewCoin()
+        this.renewDiamond()
+
+
         this.item.renew({
             mid:this.data,
             force:100,

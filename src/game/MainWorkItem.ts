@@ -88,7 +88,7 @@ class MainWorkItem extends game.BaseItem {
 
         var max = WM.getWorkNum();
         var localMax = this.data.id*10;
-        if(localMax >= max)
+        if(localMax <= max)
             localMax = 10;
         else
             localMax = max%10;

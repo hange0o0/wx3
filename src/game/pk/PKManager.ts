@@ -33,6 +33,7 @@ class PKManager {
     public pkResult = {}//所有PK结果的集合
     public levelData = []//关卡数据的集合
     public chapterData = []//关卡数据的集合
+    public nickData = []//昵称
     //public roundTotalData = {}//关卡数据的集合
 
     private beginTime = 1550073600;//2019-2-14 0:0:0
@@ -73,7 +74,7 @@ class PKManager {
     public roundData;
 
     public randomNick(){
-        return 'nick' + Math.floor(Math.random()*1000)
+        return Base64.decode(ArrayUtil.randomOne(this.nickData));
     }
     public setHead(img,head){
         var wx = window['wx'];
@@ -94,6 +95,10 @@ class PKManager {
                 console.log(err)
             }
         })
+    }
+
+    public getRobotList(lv){
+        return '1,2,3,4,5,6'
     }
 
     //取章节星星数
@@ -137,11 +142,11 @@ class PKManager {
         return 'map'+6+'_jpg'
     }
 
-    private getDefBGID(){
-        var id =  TM.now()%7 || 1
-        if(id == 6)
-            id = 1;
-        return id;
+    private getDefBGID(lv?){
+        if(!lv)
+            lv = TecManager.getInstance().getTecLevel(11)
+        var arr = [1,2,3,4,5,7]
+        return arr[lv % arr.length];
     }
     public getDefBG(){
         return 'map'+this.getDefBGID()+'_jpg'
@@ -168,6 +173,14 @@ class PKManager {
                     list1:arr[0]
                 }
             }
+        },this);
+        loader.load(new egret.URLRequest(url));
+
+        var url = 'resource/game_assets2/nick.txt';
+        var loader: egret.URLLoader = new egret.URLLoader();
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        loader.once(egret.Event.COMPLETE,()=>{
+            this.nickData = loader.data.split('\n')
         },this);
         loader.load(new egret.URLRequest(url));
     }

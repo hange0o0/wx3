@@ -32,7 +32,7 @@ class WorkManager {
     public editWork(workIndex){
         var maxNum = this.getWorkNum();
         var localMax = (workIndex)*10;
-        if(localMax >= maxNum)
+        if(localMax <= maxNum)
             localMax = 10;
         else
             localMax = maxNum%10;
@@ -124,7 +124,7 @@ class WorkManager {
         var vo = MonsterVO.getObject(id);
         var disPerSec = Math.round(vo.speed)/10 * (1000/50)
         var cd = this.workLen/disPerSec*1000
-        return Math.floor(cd*2 + 1000);
+        return Math.floor(cd*2 + 2000);
     }
 
     public getWorkCoin(id,t?){
@@ -135,7 +135,7 @@ class WorkManager {
     public getBaseWorkCoin(id){
         var vo = MonsterVO.getObject(id);
         if(!vo.coinAdd)
-            vo.coinAdd =  Math.ceil(this.getWorkCD(id)/1000 + vo.cost/2 + vo.level/2)
+            vo.coinAdd =  Math.ceil(this.getWorkCD(id)/2000 + vo.cost/2 + vo.level/2)
         return vo.coinAdd;
     }
 

@@ -8,7 +8,7 @@ class MonsterManager {
         return this._instance;
     }
 
-    private numCost = [10,50,100,200,500,1000,2000,5000,10000]
+    private numCost = [1,3,6,10,15,21,28,36,45]
     public monsterData;  //{lv,num};
     public defList = '';
 
@@ -103,7 +103,7 @@ class MonsterManager {
     public getLevelCost(id,lv?){
         lv = lv || this.getMonsterLevel(id)+1;
         var vo = MonsterVO.getObject(id);
-        return  Math.floor(Math.pow(lv + vo.level/10,2.5)*10);
+        return  Math.floor(Math.pow(lv + vo.level/10,2.5)*1000);
     }
 
     //最多10只分身
@@ -124,6 +124,20 @@ class MonsterManager {
     {
         var lv = this.getMonsterLevel(id);
         return lv*10;
+    }
+
+    public getAtkAdd(id){
+        var tecForce =TecManager.getInstance().getAtkForce()
+        var buffForce = BuffManager.getInstance().getAtkAdd();
+        var monsterForce = this.getForceAdd(id);
+        return (1+(tecForce + monsterForce)/100)*(1+buffForce/100)
+    }
+
+    public getDefAdd(id){
+        var tecForce =TecManager.getInstance().getDefForce()
+        var buffForce = BuffManager.getInstance().getDefAdd();
+        var monsterForce = this.getForceAdd(id);
+        return (1+(tecForce + monsterForce)/100)*(1+buffForce/100)
     }
 
 
