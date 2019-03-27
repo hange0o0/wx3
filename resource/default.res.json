@@ -1613,6 +1613,11 @@
 			"name":"main_fight_png",
 			"type":"image",
 			"url":"game_assets/main_fight.png"
+		},
+		{
+			"name":"nick_txt",
+			"type":"text",
+			"url":"game_assets2/nick.txt"
 		}
 	]
 }

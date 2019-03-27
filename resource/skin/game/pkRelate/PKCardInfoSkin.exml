@@ -32,11 +32,6 @@
 		<e:Image source="start1_png" x="70" y="70" id="s7"/>
 		<e:Image source="start1_png" x="80" y="80" id="s8"/>
 		<e:Image source="start1_png" x="90" y="90" id="s9"/>
-		<e:Image source="start1_png" x="100" y="100" id="s10"/>
-		<e:Image source="start1_png" x="110" y="110" id="s11"/>
-		<e:Image source="start1_png" x="120" y="120" id="s12"/>
-		<e:Image source="start1_png" x="130" y="130" id="s13"/>
-		<e:Image source="start1_png" x="140" y="140" id="s14"/>
 		<e:layout>
 			<e:HorizontalLayout/>
 		</e:layout>
