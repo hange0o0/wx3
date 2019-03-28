@@ -11,7 +11,7 @@ class MonsterUI extends game.BaseUI {
     private list: eui.List;
     private topUI: TopUI;
     private bottomUI: BottomUI;
-    private workBtn: eui.Group;
+
 
 
 
@@ -27,17 +27,16 @@ class MonsterUI extends game.BaseUI {
         this.bottomUI.setHide(this.hide,this);
         this.topUI.setTitle('我的怪物')
 
-        this.addBtnEvent(this.workBtn,this.onWork)
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = MonsterItem
     }
 
-    private onWork(){
-        SharedObjectManager.getInstance().setMyValue('showWork',true)
-        WorkUI.getInstance().show();
-        this.hide();
-    }
+    //private onWork(){
+    //    SharedObjectManager.getInstance().setMyValue('showWork',true)
+    //    WorkUI.getInstance().show();
+    //    this.hide();
+    //}
 
 
     public show(){

@@ -8,7 +8,7 @@ class TecManager {
         return this._instance;
     }
     public tecBase = {
-        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',v1:0,v2:4,v3:5000},
+        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:25,v1:-70000,v2:4,v3:5000},
         21:{'name':'挖矿加成',des:'增加挖矿时的金币收益',type:'coin',v1:0,v2:3,v3:2000},
         22:{'name':'矿坑容量',des:'增加一个新的挖矿位置',type:'coin',v1:0,v2:3,v3:500},
         31:{'name':'防守加成',des:'增加防守时的战力加成',type:'coin',v1:0,v2:3,v3:2000},
@@ -26,15 +26,13 @@ class TecManager {
 
     public initTec(data){
        this.tecData = data || {};
-        if(!this.tecData.cd)
-        {
-            this.tecData.cd = {v:0,t:0}
-        }
         this.tecList = ObjectUtil.objToArray(this.tecBase);
         for(var s in this.tecBase)
         {
             this.tecBase[s].id = s;
         }
+        if(!this.tecData[11])
+            this.tecData[11] = 1;
     }
 
     public getDes(id){
@@ -66,11 +64,20 @@ class TecManager {
             case 11: return lv;
             case 21: return lv * 10;
             case 22: return lv + 3;
-            case 31: return lv * 10;
-            case 32: return lv * 10;
+            case 31: return this.getForceLevelValue(lv);
+            case 32: return this.getForceLevelValue(lv);
             case 33: return lv + 20;
             case 34: return lv + 4;
         }
+    }
+
+    private getForceLevelValue(lv){
+        var force = 0
+        for(var i=0;i<lv;i++)
+        {
+            force += (i+10)
+        }
+        return force;
     }
 
     public getTecLevel(id){
@@ -100,49 +107,15 @@ class TecManager {
        var oo = this.tecBase[id]
         if(oo.type == 'diamond')
         {
-            UM.addDiamond(this.getTecCost(id))
+            UM.addDiamond(-this.getTecCost(id))
         }
         else
         {
-            UM.addCoin(this.getTecCost(id))
+            UM.addCoin(-this.getTecCost(id))
         }
         this.tecData[id] = this.getTecLevel(id) + 1;
         EM.dispatch(GameEvent.client.TEC_CHANGE)
         fun && fun();
     }
 
-
-    public addSkill(v){
-        if(!v)
-            return;
-        this.resetSkill();
-        if(this.tecData.cd.v >= this.maxSkillNum)
-            this.tecData.cd.t = TM.now();
-        this.tecData.cd.v += v;
-
-        UM.needUpUser = true;
-    }
-
-    private resetSkill(){
-        var v = this.skillCD;
-        var t = TM.now();
-        var add =  Math.floor((t - this.tecData.cd.t)/v)
-        if(add > 0)
-        {
-            this.tecData.cd.v = Math.min(this.maxSkillNum,this.tecData.cd.v + add);
-            this.tecData.cd.t = this.tecData.cd.t + add*v;
-            EM.dispatchEventWith(GameEvent.client.energy_change)
-        }
-    }
-
-    public getSkill(){
-        this.resetSkill();
-        return this.tecData.cd.v;
-    }
-
-    public getNextSkillCD(){
-        var v = this.skillCD;
-        this.resetSkill();
-        return  this.tecData.cd.t + v -  TM.now();
-    }
 }

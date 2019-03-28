@@ -9,7 +9,7 @@ class RobotVO{
             this.key = t
             this.index = 0;
         }
-        var lv = TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)
+        var lv = Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1))
         var force = Math.max(20,UM.maxForce)
         var list = PKManager.getInstance().getRobotList(lv);
         var list2 = list.split(',')
@@ -80,6 +80,8 @@ class RobotVO{
     }
 
     public reset(){
+        if(!this.level)
+            this.level = 1;
         var cd = Math.pow(this.level,1.5)*100*(1 + Math.random()*2);
         if(TM.now() - this.lastTime > cd)
         {

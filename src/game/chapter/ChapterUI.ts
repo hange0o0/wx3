@@ -7,14 +7,17 @@ class ChapterUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private coinText: eui.Label;
     private energyText: eui.Label;
     private addBtn: eui.Image;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
+    private topUI: TopUI;
+    private getCoinBtn: eui.Button;
+
 
 
 
@@ -37,7 +40,7 @@ class ChapterUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('扩张版图')
+        this.topUI.setTitle('收复据点')
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = ChapterItem
@@ -46,6 +49,10 @@ class ChapterUI extends game.BaseUI {
         this.addBtnEvent(this.rightBtn,this.onRight)
         this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.addBtn,this.onAddEnergy)
+        this.addBtnEvent(this.getCoinBtn,()=>{
+            UM.addCoin(ChapterManager.getInstance().getChapterCoin());
+            UM.chapterCoin = 0;
+        })
     }
 
     private onAddEnergy(){
@@ -82,6 +89,12 @@ class ChapterUI extends game.BaseUI {
         }
     }
 
+    private renewCoin(){
+        var coin = ChapterManager.getInstance().getChapterCoin();
+        this.coinText.text = NumberUtil.addNumSeparator(coin,2)
+        this.getCoinBtn.visible = coin > 0
+    }
+
     private onRight(){
         this.page ++;
         this.renew();
@@ -107,12 +120,14 @@ class ChapterUI extends game.BaseUI {
     public onShow(){
         this.renew();
         this.renewEnergy()
+        this.renewCoin()
         this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.onChapterChange)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }
 
     private onTimer(){
         this.renewEnergy();
+        this.renewCoin();
     }
 
     private onChapterChange(){
@@ -128,9 +143,8 @@ class ChapterUI extends game.BaseUI {
 
     public renew(){
 
-
         var arr = PKManager.getInstance().chapterData.slice((this.page-1)*this.pageSize,this.page*this.pageSize);
-        this.topUI.setTitle('扩张版图（' + '第 ' + NumberUtil.cNum(this.page) + ' 区）')
+        this.topUI.setTitle('收复据点 （' + '第 ' + NumberUtil.cNum(this.page) + ' 区）')
         this.dataProvider.source = arr
         this.dataProvider.refresh();
 

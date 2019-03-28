@@ -56,6 +56,7 @@
 		"bin-debug/game/changeUser/ChangeUserUI.js",
 		"bin-debug/game/changeUser/JumpMC.js",
 		"bin-debug/game/chapter/ChapterItem.js",
+		"bin-debug/game/chapter/ChapterManager.js",
 		"bin-debug/game/chapter/ChapterUI.js",
 		"bin-debug/game/common/AwardItem.js",
 		"bin-debug/game/common/AwardUI.js",

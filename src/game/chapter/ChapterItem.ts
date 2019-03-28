@@ -36,7 +36,7 @@ class ChapterItem extends game.BaseItem{
                 force:Math.floor(Math.pow(this.data.id - 1,1.15))
             }
             PKPosUI.getInstance().show({
-                title:'扩张版图-NO.' + this.data.id,
+                title:'收复据点 - NO.' + this.data.id,
                 autoList:true,
                 isPK:true,
                 isAtk:true,
@@ -53,7 +53,7 @@ class ChapterItem extends game.BaseItem{
                         mforce1:{},
                         list2:list,
                         buff2:BuffManager.getInstance().getAtkAdd(),
-                        force2:TecManager.getInstance().getAtkForce() + 10000,
+                        force2:TecManager.getInstance().getAtkForce(),
                         mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
                     }
                     var result = PKManager.getInstance().getPKResult(pkObj);
@@ -63,11 +63,11 @@ class ChapterItem extends game.BaseItem{
                         var hpObj = PKData.getInstance().getHpData();
                         var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
                         if(hpRate2 >= 0.8)
-                            PKManager.getInstance().setChapterStar(this.data.id,3);
+                            ChapterManager.getInstance().setChapterStar(this.data.id,3);
                         else if(hpRate2 >= 0.5)
-                            PKManager.getInstance().setChapterStar(this.data.id,2);
+                            ChapterManager.getInstance().setChapterStar(this.data.id,2);
                         else
-                            PKManager.getInstance().setChapterStar(this.data.id,1);
+                            ChapterManager.getInstance().setChapterStar(this.data.id,1);
                         PKData.instanceIndex = 1;
                     }
                     MainPKUI.getInstance().show(pkObj);
@@ -84,7 +84,7 @@ class ChapterItem extends game.BaseItem{
             return;
         }
         this.currentState = 'normal';
-        var star = PKManager.getInstance().getChapterStar(this.data.id);
+        var star = ChapterManager.getInstance().getChapterStar(this.data.id);
         this.numText.visible = !star;
         this.numText.text = 'NO.'+ this.data.id;
         this.con.removeChildren();

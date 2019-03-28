@@ -2,41 +2,26 @@
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850">
 	<e:Group x="0" top="0" height="700">
 		<ns1:PKCardInfoUI id="item" skinName="PKCardInfoSkin" currentState="window" minHeight="560" left="0" right="0" top="0" bottom="0"/>
-		<e:Image id="con" source="type_tips_png" horizontalCenter="0" bottom="50"/>
-		<e:Image id="leftBtn" source="arrow1_png" left="40" bottom="60" scaleX="-1"/>
-		<e:Image id="rightBtn" source="arrow1_png" right="40" bottom="60"/>
-		<e:Group id="pageGroup" horizontalCenter="0" bottom="20">
-			<e:Image id="p0" source="point2_png" x="0" y="0" scaleX="0.3" scaleY="0.3"/>
-			<e:Image source="point2_png" x="10" y="10" scaleX="0.3" scaleY="0.3" id="p1"/>
-			<e:Image source="point2_png" x="20" y="20" scaleX="0.3" scaleY="0.3" id="p2"/>
-			<e:Image source="point2_png" x="30" y="30" scaleX="0.3" scaleY="0.3" id="p3"/>
-			<e:Image source="point2_png" x="40" y="40" scaleX="0.3" scaleY="0.3" id="p4"/>
-			<e:Image source="point2_png" x="50" y="50" scaleX="0.3" scaleY="0.3" id="p5"/>
-			<e:Image source="point2_png" x="60" y="60" scaleX="0.3" scaleY="0.3" id="p6"/>
-			<e:Image source="point2_png" x="70" y="70" scaleX="0.3" scaleY="0.3" id="p7"/>
-			<e:Image source="point2_png" x="80" y="80" scaleX="0.3" scaleY="0.3" id="p8"/>
-			<e:Image source="point2_png" x="90" y="90" scaleX="0.3" scaleY="0.3" id="p9"/>
-			<e:Image source="point2_png" x="100" y="100" scaleX="0.3" scaleY="0.3" id="p10"/>
-			<e:Image source="point2_png" x="110" y="110" scaleX="0.3" scaleY="0.3" id="p11"/>
-			<e:Image source="point2_png" x="120" y="120" scaleX="0.3" scaleY="0.3" id="p12"/>
-			<e:Image source="point2_png" x="130" y="130" scaleX="0.3" scaleY="0.3" id="p13"/>
-			<e:Image source="point2_png" x="140" y="140" scaleX="0.3" scaleY="0.3" id="p14"/>
-			<e:Image source="point2_png" x="150" y="150" scaleX="0.3" scaleY="0.3" id="p15"/>
-			<e:Image source="point2_png" x="160" y="160" scaleX="0.3" scaleY="0.3" id="p16"/>
-			<e:Image source="point2_png" x="170" y="170" scaleX="0.3" scaleY="0.3" id="p17"/>
-			<e:Image source="point2_png" x="180" y="180" scaleX="0.3" scaleY="0.3" id="p18"/>
-			<e:Image source="point2_png" x="190" y="190" scaleX="0.3" scaleY="0.3" id="p19"/>
+		<e:Image id="con" source="type_tips_png" bottom="50" x="100"/>
+		<e:Image id="leftBtn" source="arrow1_png" left="30" bottom="60" scaleX="-1"/>
+		<e:Image id="rightBtn" source="arrow1_png" right="30" bottom="60"/>
+		<e:Group right="100" bottom="50">
+			<e:RadioButton id="cb0" label="基础属性" x="0" y="0" skinName="MyCheckBoxSkin" selected="true"/>
+			<e:RadioButton label="工作属性" x="10" y="10" skinName="MyCheckBoxSkin" id="cb1"/>
+			<e:RadioButton label="进攻属性" x="20" y="20" skinName="MyCheckBoxSkin" id="cb2"/>
+			<e:RadioButton label="防守属性" x="30" y="30" skinName="MyCheckBoxSkin" id="cb3"/>
 			<e:layout>
-				<e:HorizontalLayout/>
+				<e:VerticalLayout gap="8"/>
 			</e:layout>
 		</e:Group>
+		<e:Label id="pageText" text="1 / 10" horizontalCenter="0" bottom="20" size="20" textColor="0xaf995b"/>
 	</e:Group>
 	<e:Group x="0" width="100%" height="150" bottom="0">
 		<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-		<e:Group horizontalCenter="-120" verticalCenter="0">
+		<e:Group id="coinGroup" horizontalCenter="-120" verticalCenter="0">
 			<e:Group x="0" y="7">
 				<e:Image source="border1_png" scale9Grid="28,20,26,2" x="0" y="0" width="200"/>
-				<e:Label id="coinText" text="1012345" x="48" size="24" y="9"/>
+				<e:Label id="coinText" text="1012345" size="24" y="9" right="20" textColor="0xfce4b5"/>
 				<e:Image x="0" y="-3.5" source="icon_coin_png" width="46" height="46"/>
 			</e:Group>
 			<e:Button id="upBtn" label="升级" x="240" skinName="Btn1Skin" width="150" y="0"/>
@@ -44,13 +29,13 @@
 				<e:VerticalLayout horizontalAlign="center"/>
 			</e:layout>
 		</e:Group>
-		<e:Group horizontalCenter="120" verticalCenter="0">
+		<e:Group id="diamonGroup" horizontalCenter="120" verticalCenter="0">
 			<e:Group x="0" y="7">
 			<e:Image source="border1_png" scale9Grid="28,20,26,2" y="0" width="185" x="15"/>
-			<e:Label id="diamondText" text="1012345" x="48" size="24" y="9"/>
+			<e:Label id="diamondText" text="1012345" size="24" y="9" anchorOffsetX="0" textAlign="center" right="20" textColor="0xfce4b5"/>
 			<e:Image x="0" y="-3.5" width="46" height="46" source="icon_diamond_png"/>
 			</e:Group>
-			<e:Button id="copyBtn" label="克隆" x="240" skinName="Btn1Skin" width="150" y="0"/>
+			<e:Button id="copyBtn" label="增加数量" x="240" skinName="Btn1Skin" width="150" y="0"/>
 			<e:layout>
 			<e:VerticalLayout horizontalAlign="center"/>
 			</e:layout>

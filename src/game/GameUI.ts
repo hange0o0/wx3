@@ -11,14 +11,15 @@ class GameUI extends game.BaseUI {
         this.skinName = "GameUISkin";
     }
 
+    private scroller: eui.Scroller;
+    private list: eui.List;
     private bottomGroup: eui.Group;
-    private rankBtn: eui.Group;
-    private buffBtn: eui.Group;
+    private workBtn: eui.Group;
     private tecBtn: eui.Group;
-    private monsterBtn: eui.Group;
     private settingBtn: eui.Group;
-    private chapterRedMC: eui.Image;
     private mailBtn: eui.Group;
+    private monsterBtn: eui.Group;
+    private buffBtn: eui.Group;
     private coinGroup: eui.Group;
     private shopRedMC: eui.Image;
     private coinText: eui.Label;
@@ -31,8 +32,7 @@ class GameUI extends game.BaseUI {
     private loadText: eui.Label;
     private barGroup: eui.Group;
     private barMC: eui.Rect;
-    private scroller: eui.Scroller;
-    private list: eui.List;
+
 
 
 
@@ -56,7 +56,7 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.settingBtn,this.onChapter)
         this.addBtnEvent(this.mailBtn,this.onMail)
         this.addBtnEvent(this.coinGroup,this.onShop)
-        this.addBtnEvent(this.rankBtn,this.onRank)
+        this.addBtnEvent(this.workBtn,this.onRank)
         this.addBtnEvent(this.monsterBtn,this.onMonster)
         this.addBtnEvent(this.tecBtn,this.onTec)
         this.addBtnEvent(this.buffBtn,this.onBuff)
@@ -130,7 +130,7 @@ class GameUI extends game.BaseUI {
         TecUI.getInstance().show();
     }
     private onRank(){
-        RankUI.getInstance().show();
+        WorkUI.getInstance().show();
     }
     private onBuff(){
         BuffUI.getInstance().show();

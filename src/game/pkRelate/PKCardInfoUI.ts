@@ -24,6 +24,8 @@ class PKCardInfoUI extends game.BaseContainer {
     private s7: eui.Image;
     private s8: eui.Image;
     private s9: eui.Image;
+    private levelText: eui.Label;
+
 
 
 
@@ -121,6 +123,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
         this.setHtml(this.nameText, vo.name +this.createHtml( '（'+vo.des2+'）',0xFFE6BA,22));
         this.type.source = vo.getTypeIcon()
+        this.levelText.text = 'LV.' + MonsterManager.getInstance().getMonsterLevel(vo.id)
 
         //星星数
         var num = MM.getMonsterNum(vo.id);
@@ -166,11 +169,11 @@ class PKCardInfoUI extends game.BaseContainer {
 
     }
 
-    private addMonsterList(vo,addForce?){
+    private addMonsterList(vo){
         var baseForceAdd = 1;
-        if(addForce == 'atk')
+        if(this.dataIn.type == 'atk')
             baseForceAdd =MonsterManager.getInstance().getAtkAdd(vo.id)
-        else if(addForce == 'def')
+        else if(this.dataIn.type == 'def')
             baseForceAdd =MonsterManager.getInstance().getDefAdd(vo.id)
 
         var atk = Math.floor(vo.atk * baseForceAdd);
@@ -178,7 +181,7 @@ class PKCardInfoUI extends game.BaseContainer {
         var def = vo.def;
 
         var workCD = WorkManager.getInstance().getWorkCD(vo.id)
-        var workCoin = addForce == 'coin'? WorkManager.getInstance().getWorkCoin(vo.id):WorkManager.getInstance().getBaseWorkCoin(vo.id)
+        var workCoin = this.dataIn.type == 'work'? WorkManager.getInstance().getWorkCoin(vo.id):WorkManager.getInstance().getBaseWorkCoin(vo.id)
         var workRate = Math.floor(workCoin*(3600*1000/workCD))
 
         var arr2:any = [

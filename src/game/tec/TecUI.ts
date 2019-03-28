@@ -58,6 +58,7 @@ class TecUI extends game.BaseUI {
 
     private onCoinChange(){
         this.coinText.text = UM.coinText
+        MyTool.renewList(this.list);
     }
 
 

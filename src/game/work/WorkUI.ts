@@ -7,11 +7,11 @@ class WorkUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
     private scroller: eui.Scroller;
     private list: eui.List;
-    private monsterBtn: eui.Group;
+    private topUI: TopUI;
+    private bottomUI: BottomUI;
+
 
 
 
@@ -31,14 +31,14 @@ class WorkUI extends game.BaseUI {
         this.scroller.viewport = this.list;
         this.list.useVirtualLayout = false;
 
-        this.addBtnEvent(this.monsterBtn,this.onMonster)
+        //this.addBtnEvent(this.monsterBtn,this.onMonster)
     }
 
-    private onMonster(){
-        SharedObjectManager.getInstance().setMyValue('showWork',false)
-        MonsterUI.getInstance().show();
-        this.hide();
-    }
+    //private onMonster(){
+    //    SharedObjectManager.getInstance().setMyValue('showWork',false)
+    //    MonsterUI.getInstance().show();
+    //    this.hide();
+    //}
 
 
     public show(){
@@ -96,8 +96,9 @@ class WorkUI extends game.BaseUI {
             red:red && list.length <maxNum ,
         })
 
-        maxNum = WM.getOpenWork();
-        for(var i=0;i<maxNum;i++)
+        var openNum = WM.getOpenWork();
+        maxNum = WM.getWorkNum();
+        for(var i=0;i<openNum;i++)
         {
             list = WM.getWorkList(i+1);
             for(var j=0;j<list.length;j++)
@@ -106,10 +107,11 @@ class WorkUI extends game.BaseUI {
             }
 
             var localMax = (1+i)*10;
-            if(localMax >= maxNum)
+            if(localMax <= maxNum)
                 localMax = 10;
             else
-                localMax = localMax%10;
+                localMax = maxNum%10;
+
 
             arr.push({
                 type:'work',

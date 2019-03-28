@@ -34,7 +34,8 @@ class UserManager {
     public energy: any;
     public chapterLevel: number = 0;  //已完成关卡，默认为0
     public chapterStar: any = {};
-    //public friendNew: any = {};
+    public chapterResetTime = 0;
+    public chapterCoin = 0;
 
     public shareUser: any = {};//buff玩家的数据   openid:{head,nick,time}
     public buffUser: any = {};//上阵Buff的数据 id:openid
@@ -56,7 +57,7 @@ class UserManager {
     public maxForce = 0
 
 
-    public lastForce
+    //public lastForce
     public fill(data:any):void{
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
         if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
@@ -70,11 +71,13 @@ class UserManager {
         this.dbid = data._id;
         this.loginTime = data.loginTime || TM.now();
         this.coin = data.coin || 0;
-        this.chapterLevel = data.tipsLevel || 0;
         this.diamond = data.diamond || 0;
         this.energy = data.energy;
         this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
+        this.chapterLevel = data.chapterLevel || 0;
+        this.chapterResetTime = data.chapterResetTime;
+        this.chapterCoin = data.chapterCoin;
         this.maxForce = data.maxForce;
         this.buffUser = data.buffUser;
         this.shareUser = data.shareUser;
@@ -88,8 +91,6 @@ class UserManager {
                 shareAward:0,   //分享金币次数
                 newAward:0,   //分享金币次数
             };
-        //this.friendNew = data.friendNew;
-        //this.writeKey = data.writeKey;
 
         if(!window['wx'])
         {
@@ -109,6 +110,7 @@ class UserManager {
         TecManager.getInstance().initTec(data.tec)
         MonsterManager.getInstance().initMonster(data.monster,data.def)
         FightManager.getInstance().initFight(data.fight)
+        ChapterManager.getInstance().setChapterEarn();
 
 
         //统一计算一下数据
@@ -116,7 +118,7 @@ class UserManager {
         WorkManager.getInstance().onTimer();
         this.testPassDay();
 
-        this.lastForce = this.getForce();
+        //this.lastForce = this.getForce();
 
 
     }
@@ -136,22 +138,22 @@ class UserManager {
     //    return TM.nowMS() - UM.loginTime*1000;
     //}
 
-    public getForce(){
-        var force = 0;
-        var mForce = 0;
-        var MM = MonsterManager.getInstance();
-        var TEM = TecManager.getInstance();
-        var monsterList = MM.getOpenMonster();
-        for(var i=0;i<monsterList.length;i++)
-        {
-             var vo = monsterList[i];
-            mForce += (Math.pow(vo.cost,0.5)*(1+MM.getMonsterLevel(vo.id)/10)*MM.getMonsterNum(vo.id));
-        }
-        force += mForce;
-        force += (TEM.getTecLevel(31) + TEM.getTecLevel(31))*0.05*mForce;
-        force += (TEM.getTecLevel(33)*0.02 + TEM.getTecLevel(34)*0.06)*mForce;
-        return Math.floor(force)
-    }
+    //public getForce(){
+    //    var force = 0;
+    //    var mForce = 0;
+    //    var MM = MonsterManager.getInstance();
+    //    var TEM = TecManager.getInstance();
+    //    var monsterList = MM.getOpenMonster();
+    //    for(var i=0;i<monsterList.length;i++)
+    //    {
+    //         var vo = monsterList[i];
+    //        mForce += (Math.pow(vo.cost,0.5)*(1+MM.getMonsterLevel(vo.id)/10)*MM.getMonsterNum(vo.id));
+    //    }
+    //    force += mForce;
+    //    force += (TEM.getTecLevel(31) + TEM.getTecLevel(31))*0.05*mForce;
+    //    force += (TEM.getTecLevel(33)*0.02 + TEM.getTecLevel(34)*0.06)*mForce;
+    //    return Math.floor(force)
+    //}
 
 
 
@@ -296,17 +298,16 @@ class UserManager {
     private orginUserData(){
          return {
              loginTime:TM.now(),   //$
-             coin:300,   //$
-             coinwin:0,   //$
-             win:0,   //$
-             total:0,   //$
+             coin:10000,   //$
+             diamond:10,   //$
              guideFinish:false,
              chapterLevel:0,
-             tipsLevel:0,
+             chapterStar:{},
+             chapterResetTime:0,
+             chapterCoin:0,
              fight:{},
              saveTime:0,
              energy:{v:0,t:0},
-             chapterStar:{},
              buffUser:{},
              shareUser:{},
              def:'1,48,2,3,4,5,6,7,9,10',
@@ -321,7 +322,6 @@ class UserManager {
                  shareAward:0,   //分享金币次数
                  newAward:0,   //拉新领奖次数
              },
-             friendNew:{}//拉新
          };
     }
 
@@ -354,6 +354,8 @@ class UserManager {
             tec:TecManager.getInstance().tecData,
             chapterLevel:UM.chapterLevel,
             chapterStar:UM.chapterStar,
+            chapterResetTime:UM.chapterResetTime,
+            chapterCoin:UM.chapterCoin,
             maxForce:UM.maxForce,
             coinObj:UM.coinObj,
             buffUser:UM.buffUser,
@@ -460,8 +462,14 @@ class UserManager {
         return  this.energy.t + v -  TM.now();
     }
 
-
-
+    public checkCoin(value){
+        if(UM.coin < value)
+        {
+            GetCoinUI.getInstance().show();
+            return false
+        }
+        return true
+    }
 
 
 

@@ -128,7 +128,7 @@ class WorkManager {
     }
 
     public getWorkCoin(id,t?){
-        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id))*(1+BuffManager.getInstance().getWorkAdd(t)));
+        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id)/100)*(1+BuffManager.getInstance().getWorkAdd(t)/100));
     }
 
     //基础挖矿效率

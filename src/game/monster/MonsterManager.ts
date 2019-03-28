@@ -86,6 +86,18 @@ class MonsterManager {
         return oo;
     }
 
+    public levelUpMonster(id){
+        if(!this.monsterData[id])
+            this.monsterData[id] = {}
+        this.monsterData[id].lv = this.getMonsterLevel(id) + 1;
+    }
+
+    public numUpMonster(id){
+        if(!this.monsterData[id])
+            this.monsterData[id] = {}
+        this.monsterData[id].num = this.getMonsterNum(id) + 1;
+    }
+
 
     public getMonsterLevel(id){
         if(!this.monsterData[id])
@@ -94,7 +106,7 @@ class MonsterManager {
     }
 
     public getMonsterNum(id){
-        return 3;
+        //return 3;
         if(!this.monsterData[id])
             return 1;
         return this.monsterData[id].num || 1;
@@ -116,14 +128,19 @@ class MonsterManager {
     public getWorkAdd(id)
     {
         var lv = this.getMonsterLevel(id);
-        return lv*0.05;
+        return lv*5;
     }
 
     //增加的战力加成
     public getForceAdd(id)
     {
         var lv = this.getMonsterLevel(id);
-        return lv*10;
+        var force = 0
+        for(var i=0;i<lv;i++)
+        {
+            force += (i+10)
+        }
+        return force;
     }
 
     public getAtkAdd(id){

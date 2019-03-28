@@ -101,34 +101,7 @@ class PKManager {
         return '1,2,3,4,5,6'
     }
 
-    //取章节星星数
-    public getChapterStar(id){
-        if(UM.chapterLevel<id)
-            return 0;
-        return UM.chapterStar[id] || 3
-    }
 
-    public setChapterStar(id,star){
-        var lastStar = this.getChapterStar(id);
-        var b = false;
-        if(UM.chapterLevel<id)
-        {
-            UM.chapterLevel = id
-            b = true;
-            UM.upWXChapter();
-        }
-
-        if(lastStar < star)  //升星
-        {
-            b = true;
-            if(star == 3)
-                delete UM.chapterStar[id];
-            else
-                UM.chapterStar[id] = star;
-        }
-        if(b)
-            UM.needUpUser = true;
-    }
 
     public getPKBG(seed){
         var mapNum = 7
@@ -160,6 +133,11 @@ class PKManager {
     //}
 
     public initData(){
+         this.loadChapter();
+         this.loadNick();
+    }
+
+    private loadChapter(){
         var url = 'resource/chapter.txt';
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
@@ -175,7 +153,9 @@ class PKManager {
             }
         },this);
         loader.load(new egret.URLRequest(url));
+    }
 
+    private loadNick(){
         var url = 'resource/game_assets2/nick.txt';
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
