@@ -186,9 +186,11 @@ class UserManager {
         var wx = window['wx'];
         if(!wx)
         {
-            this.fill(this.orginUserData());
-            this.guideFinish = true;   //本地不进新手了
-            fun && fun();
+            setTimeout(()=>{
+                this.fill(this.orginUserData());
+                this.guideFinish = true;   //本地不进新手了
+                fun && fun();
+            },1000)
             return;
         }
         //wx.login({

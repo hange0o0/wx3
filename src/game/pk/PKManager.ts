@@ -31,7 +31,7 @@ class PKManager {
     //public costChange = false
 
     public pkResult = {}//所有PK结果的集合
-    public levelData = []//关卡数据的集合
+    public levelData//关卡数据的集合
     public chapterData = []//关卡数据的集合
     public nickData = []//昵称
     //public roundTotalData = {}//关卡数据的集合
@@ -74,7 +74,10 @@ class PKManager {
     public roundData;
 
     public randomNick(){
-        return Base64.decode(ArrayUtil.randomOne(this.nickData));
+        var name = ArrayUtil.randomOne(this.nickData);
+        name = name.replace('\n','')
+        name = name.replace('\r','')
+        return Base64.decode(name);
     }
     public setHead(img,head){
         var wx = window['wx'];
@@ -98,7 +101,7 @@ class PKManager {
     }
 
     public getRobotList(lv){
-        return '1,2,3,4,5,6'
+        return ArrayUtil.randomOne(this.levelData[lv])
     }
 
 
@@ -161,6 +164,28 @@ class PKManager {
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{
             this.nickData = loader.data.split('\n')
+        },this);
+        loader.load(new egret.URLRequest(url));
+    }
+
+    public loadLevel(){
+        this.levelData = {};
+        for(var i=1;i<=20;i++)
+        {
+            this._loadLevel(i);
+        }
+    }
+    private _loadLevel(lv){
+        var url = 'resource/level/level'+lv+'.txt';
+        var loader: egret.URLLoader = new egret.URLLoader();
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        loader.once(egret.Event.COMPLETE,()=>{
+            var temp = loader.data.split('\n')
+            while(!temp[temp.length-1])//去掉后面的空数据
+            {
+                temp.pop();
+            }
+            this.levelData[lv] = temp
         },this);
         loader.load(new egret.URLRequest(url));
     }

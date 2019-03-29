@@ -16,7 +16,7 @@ class DefItem extends game.BaseItem{
     }
 
     public dataChanged():void {
-        this.mc.source = this.data.robot.head;
+        PKManager.getInstance().setHead(this.mc,this.data.robot.head);
         this.onE();
     }
 

@@ -8,7 +8,7 @@ class TecManager {
         return this._instance;
     }
     public tecBase = {
-        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:25,v1:-70000,v2:4,v3:5000},
+        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:20,v1:-70000,v2:4,v3:5000},
         21:{'name':'挖矿加成',des:'增加挖矿时的金币收益',type:'coin',v1:0,v2:3,v3:2000},
         22:{'name':'矿坑容量',des:'增加一个新的挖矿位置',type:'coin',v1:0,v2:3,v3:500},
         31:{'name':'防守加成',des:'增加防守时的战力加成',type:'coin',v1:0,v2:3,v3:2000},
@@ -66,7 +66,7 @@ class TecManager {
             case 22: return lv + 3;
             case 31: return this.getForceLevelValue(lv);
             case 32: return this.getForceLevelValue(lv);
-            case 33: return lv + 20;
+            case 33: return lv + 16;
             case 34: return lv + 4;
         }
     }

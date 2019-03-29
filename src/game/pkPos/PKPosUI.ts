@@ -277,16 +277,16 @@ class PKPosUI extends game.BaseUI {
         }
         if(this.dataIn.autoList)
             SharedObjectManager.getInstance().setMyValue('lastAtkList',list);
-        var baseForce = MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
-        UM.maxForce = Math.max(UM.maxForce,baseForce);
+        MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
+        UM.maxForce = Math.max(UM.maxForce,Math.ceil(MonsterManager.getInstance().tempForceAdd));
         this.dataIn.fun && this.dataIn.fun(list)
     }
     public onSave(){
         var list = this.getMyList();
         if(list && this.dataIn.isPK)
         {
-            var baseForce = MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
-            UM.maxForce = Math.max(UM.maxForce,baseForce);
+            MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
+            UM.maxForce = Math.max(UM.maxForce,Math.ceil(MonsterManager.getInstance().tempForceAdd));
         }
 
         this.dataIn.fun && this.dataIn.fun(list)

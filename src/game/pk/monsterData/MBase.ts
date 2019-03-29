@@ -11,7 +11,7 @@ class MBase {
     }
 
     public static getClass(id){
-        switch (id){
+        switch (Math.floor(id)){
             case 1:return M1;
             case 2:return M2;
             case 3:return M3;

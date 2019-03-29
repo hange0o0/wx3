@@ -13,6 +13,7 @@ class DebugManager {
 
 
     public constructor() {
+        this.addTime = SharedObjectManager.getInstance().getMyValue('addTime') || 0;
     }
 
 
@@ -23,28 +24,50 @@ class DebugManager {
     public outPut = []
 
     public callCost = 0
+    public callLevel = 0
+    public callNum = 0
+    public repeatNum = 0
+
+    public addTime = 0;
+    public addTimeCD(t){
+        this.addTime += t;
+        SharedObjectManager.getInstance().setMyValue('addTime',this.addTime)
+    }
 
     public randomList(cost){
+        var costIn = cost;
         var arr = []
         for(var s in MonsterVO.data)
         {
             var mvo = MonsterVO.data[s]
-            arr.push(mvo)
+            if(this.callLevel && mvo.level>this.callLevel)
+                continue;
+            for(var i=0;i<this.repeatNum;i++)
+                arr.push(mvo)
         }
+
+        var orginArr = arr.concat();
 
         var num = 0;
         var newList = [];
-        while(num < 100 && cost > 0)
+        while(num < 100 && cost > 0 && arr.length>0)
         {
-            var vo = ArrayUtil.randomOne(arr)
+            var vo = ArrayUtil.randomOne(arr,true);
             if(vo.cost <= cost)
             {
                 cost -= vo.cost;
                 newList.push(vo.id)
+                if(this.callNum && this.callNum < newList.length) //超过数量,重来
+                {
+                    cost = costIn;
+                    arr = orginArr.concat();
+                    newList.length = 0;
+                    num = 0;
+                    continue;
+                }
             }
             num ++;
         }
-
         ArrayUtil.random(newList);
         return newList.join(',')
     }
@@ -137,7 +160,7 @@ class DebugManager {
         {
             var id = arr[i].id;
             arr[i].rate =arr[i].num*Math.pow(CM.getCardVO(id).cost,0.8)
-            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name  + '\t\ttype:' +  CM.getCardVO(id).type)
+            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name  + '\t\ttype:' +  CM.getCardVO(id).type  + '\t\tlevel:' +  CM.getCardVO(id).level)
         }
 
         console.log("\n\n======================================================================\n\n")
@@ -145,7 +168,7 @@ class DebugManager {
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log((i + 1) + '\tid:' +id +  '\t\trate:' + arr[i].rate + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\ttype:' +  CM.getCardVO(id).type + '\t\tnum:' +  arr[i].num)
+            console.log((i + 1) + '\tid:' +id +  '\t\trate:' + arr[i].rate + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\ttype:' +  CM.getCardVO(id).type + '\t\tnum:' +  arr[i].num  + '\t\tlevel:' +  CM.getCardVO(id).level)
         }
 
     }
@@ -154,10 +177,9 @@ class DebugManager {
     private testRound(){
         this.testNum ++;
         var arr = []
-        var n = 1024;
+        var n = 2048;
 
         var cost = this.callCost || (30 + Math.floor(Math.random()*30))
-        console.log(cost)
         for(var i=0;i<n;i++)
         {
             arr.push(this.randomList(cost))
@@ -226,19 +248,19 @@ class DebugManager {
 
             if(this.stop == 2)
             {
-                for(var i=0;i<this.outPut.length;i++)
-                {
-                    this.outPut[i] = this.format(this.outPut[i])
-                }
-                egret.localStorage.setItem('mapData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.outPut.join('\n'));
+                //for(var i=0;i<this.outPut.length;i++)
+                //{
+                //    this.outPut[i] = this.format(this.outPut[i])
+                //}
+                egret.localStorage.setItem('chapterData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.chapterArr.join('\n'));
             }
             if(this.stop == 3)
             {
-                for(var i=0;i<this.levelArr.length;i++)
-                {
-                    this.levelArr[i] = JSON.stringify(this.levelArr[i])
-                }
-                egret.localStorage.setItem('levelData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.levelArr.join('\n'));
+                //for(var i=0;i<this.levelArr.length;i++)
+                //{
+                //    this.levelArr[i] = JSON.stringify(this.levelArr[i])
+                //}
+                egret.localStorage.setItem('levelData_' +this.callLevel + '_'+ DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.levelArr.join('\n'));
             }
             return;
         }
@@ -293,49 +315,61 @@ class DebugManager {
 
     //创建关卡数据，输入花费比例
     public levelArr = []
-    public createLevel(rate){
+    //等级，费用小-》大，数量小-》大
+    public createLevel(lv,c1,c2,n1,n2,repeatNum = 10){
         this.levelArr = [];
-       this.finishFun = (winArr)=>{
-           var list1 = winArr[0]
-           var myCost = 36;
-           //var cost = 0;
-           //var arr = list1.split(',');
-           //for(var i=0;i<arr.length;i++)
-           //{
-           //    cost += MonsterVO.getObject(arr[i]).cost;
-           //}
-           //cost = Math.floor(cost*rate);
-           var oo:any = {
-               list1:list1,
-               cost:myCost,
-               seed:Math.floor(Math.random() * 100000000000),
-           }
-           var num = 0;
-           do{
-               oo.list2 = this.randomList(myCost);
-               if(oo.list2.split(',').length>10)
-                   continue;
-               this.testOne(oo.list1,oo.list2,oo.seed);
-               if(PKData.getInstance().getPKResult() == 2)
-               {
-                   this.levelArr.push(oo);
-                   this.resetCost();
-                   break;
-               }
-               num ++
-               if(num >1000)
-               {
-                   this.testNum --;
-                   //console.log('fail')
-                   break;
-               }
-           }while(true);
-           return false;
-       }
-
-
-        this.resetCost();
+        this.callLevel = lv;
+        this.repeatNum = repeatNum;
+        this.callCost = c1 + Math.floor(Math.random()*(c2-c1+1))
+        this.callNum = n1 + Math.floor(Math.random()*(n2-n1+1))
+        this.finishFun = (winArr)=>{
+            var list1 = winArr[0]
+            if(this.levelArr.indexOf(list1) == -1)
+            {
+                this.levelArr.push(list1);
+                console.log(this.levelArr.length + ' -create')
+            }
+            this.callCost = c1 + Math.floor(Math.random()*(c2-c1+1))
+            this.callNum = n1 + Math.floor(Math.random()*(n2-n1+1))
+            return false;
+        }
         this.testRound();
+        console.log('DM.stop=3')
+    }
+
+    //创建章节
+    private getClevel(index){
+        var lv = 1;
+        while(true)
+        {
+            if(index <= Math.pow(lv,1.6)*10)
+                return lv;
+            lv++
+            if(lv >=20)
+                return lv;
+        }
+    }
+    public chapterArr = []
+    public createChapter(begin){
+        this.chapterArr = [];
+        this.repeatNum = 5;
+        this.callNum = 14;
+        this.callLevel = this.getClevel(begin)
+        this.callCost = 16 + Math.floor(begin/20)
+        this.finishFun = (winArr)=>{
+            var list1 = winArr[0]
+            if(this.chapterArr.indexOf(list1) == -1)
+            {
+                begin++;
+                this.callLevel = this.getClevel(begin)
+                this.callCost = 16 + Math.floor(begin/20)
+                this.chapterArr.push(list1);
+                console.log(begin + ' -create')
+            }
+            return false;
+        }
+        this.testRound();
+        console.log('DM.stop=2')
     }
 
     private resetCost(){

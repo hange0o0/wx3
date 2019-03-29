@@ -121,10 +121,7 @@ class GameUI extends game.BaseUI {
     }
 
     private onMonster(){
-        if(SharedObjectManager.getInstance().getMyValue('showWork'))
-            WorkUI.getInstance().show();
-        else
-            MonsterUI.getInstance().show();
+        MonsterUI.getInstance().show();
     }
     private onTec(){
         TecUI.getInstance().show();
@@ -199,6 +196,7 @@ class GameUI extends game.BaseUI {
 
 
     public onShow(){
+        PKManager.getInstance().loadLevel();//处理等级数据，玩家登录后有可能会用到
         var self = this;
         this.bottomGroup.visible = false;
         this.coinText.text = '???'
@@ -207,6 +205,7 @@ class GameUI extends game.BaseUI {
         ChangeUserUI.getAD();
         this.renewSound();
         this.loadingGroup.visible = true;
+        this.barMC.width = 300;
         self.loadText.text = '正在加载素材，请耐心等候..'
         this.renewInfo();
         UM.getUserInfo(()=>{
@@ -216,7 +215,6 @@ class GameUI extends game.BaseUI {
         var wx =  window["wx"];
         if(wx)
         {
-
             const loadTask = wx.loadSubpackage({
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
@@ -227,6 +225,7 @@ class GameUI extends game.BaseUI {
             })
 
             loadTask.onProgressUpdate(res => {
+                this.barMC.width = 300*res.progress/100;
                 self.loadText.text = '正在加载素材，请耐心等候..' + res.progress + '%'
             })
             return;
@@ -239,7 +238,7 @@ class GameUI extends game.BaseUI {
         if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
         {
             this.changeUser.dataChanged()
-            this.loadText.text = '点击屏幕受权进入游戏';
+            this.loadText.text = '点击屏幕授权进入游戏';
             this.needShowStartBtn = false;
             this.infoBtn.visible = true;
             this.barGroup.visible = false;

@@ -7,7 +7,7 @@ class PKPlayerData {
     public hp; //城堡的血量
     public type//类型
     private force;//怪的基础属性
-    public mforce;//怪的基础属性
+    public mforce={};//怪的基础属性
     public buff;//buff的加成
     public teamData:PKTeamData   //对应队伍
 
@@ -43,7 +43,7 @@ class PKPlayerData {
         for(var i=0;i<this.autoList.length;i++)
         {
             var vo = MonsterVO.getObject(this.autoList[i]);
-            var hp = Math.floor(vo.hp*(1+this.getMonsterForce()/100));
+            var hp = Math.floor(vo.hp*(1+this.getMonsterForce(vo.id)/100));
             this.monsterHpList.push(hp);
             this.maxTeamHp += hp;
         }
@@ -61,8 +61,9 @@ class PKPlayerData {
         return count;
     }
 
+    //buff对本身和战力都有增益
     public getMonsterForce(mid?){
-        return (this.force + (this.mforce[mid] || 0))*(1+(this.buff || 0)/100)
+        return (this.force + (this.mforce[mid] || 0))*(1+(this.buff || 0)/100) +  (this.buff || 0)
     }
 
     public addMonster(){

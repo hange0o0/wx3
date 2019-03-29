@@ -70,6 +70,7 @@ class FightManager {
         }
     }
 
+
     public initFight(data){
         this.nextBeHitTime = data.time || 0;
         this.fightingArr = data.list || [];
@@ -87,6 +88,7 @@ class FightManager {
         {
             oo.list.push(ObjectUtil.clone(this.fightingArr[i]));
         }
+        return oo;
     }
 
 
@@ -118,10 +120,13 @@ class FightManager {
     }
 
     public resetNextBeHit(){
-        this.nextBeHitTime += Math.floor(10*3600*Math.random())
+        if(!this.nextBeHitTime)
+            this.nextBeHitTime = TM.now()
+        this.nextBeHitTime += Math.floor(6*3600*Math.random())
         var date = DateUtil.timeToChineseDate(this.nextBeHitTime)
         if(date.getHours()<6 && Math.random()>0.8)
             this.nextBeHitTime += (6-date.getHours())*3600
+        UM.needUpUser = true;
     }
 
 
@@ -148,6 +153,7 @@ class FightManager {
     }
 
     public onTimer(){
+
         var b = false
         var t = TM.now();
         var coinArr = [];
@@ -273,6 +279,7 @@ class FightManager {
         {
             UM.needUpUser = true;
             RobotVO.change = true;
+            this.save();
             EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
         }
     }
@@ -295,18 +302,19 @@ class FightManager {
         var robot = oo.robot;
         var pkObj:any = {
             seed:oo.seed,
-            list1:robot.list,
             force1:robot.getFightForce(),
             mforce1:{}
         }
         if(oo.type == 'atk')//我是进攻方
         {
+            pkObj.list1 = robot.def;
             pkObj.list2 = oo.list;
             pkObj.buff2 = BuffManager.getInstance().getAtkAdd(),
             pkObj.force2 = TecManager.getInstance().getAtkForce();
         }
         else//我是防守方
         {
+            pkObj.list1 = robot.atk;
             pkObj.list2 = MonsterManager.getInstance().defList;
             pkObj.buff2 = BuffManager.getInstance().getDefAdd(),
             pkObj.force2 = TecManager.getInstance().getDefForce();
@@ -316,6 +324,8 @@ class FightManager {
     }
 
     public addAtkList(list,robot):any{
+        if(!this.nextBeHitTime)
+            this.resetNextBeHit();
         robot.lastAtk = TM.now();
         var oo = {
             time: robot.lastAtk,

@@ -1,4 +1,5 @@
 class TimeManager {
+
 	public constructor() {
 	}
 	
@@ -10,13 +11,17 @@ class TimeManager {
         return TimeManager._instance;
     }
     
-    public timeDiff: number = 0;
+    private _timeDiff: number = 0;
+    public get timeDiff():number {
+        return this._timeDiff - DM.addTime;
+    }
+
     public loginTime: number = 0;//等陆时的服务器时间
 
     private loginWXTime = 0;
     public init(time:number):void{
         //本地和服务器的时间差
-        this.timeDiff = Math.floor(Date.now() / 1000 - time);
+        this._timeDiff = Math.floor(Date.now() / 1000 - time);
     }
 
     public getTimer(){

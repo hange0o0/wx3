@@ -1,8 +1,8 @@
 class MonsterVO {
     public static dataKey = 'monster_base';
     public static key = 'id';
-    public static getObject(id): MonsterVO{
-        return CM.table[this.dataKey][id];
+    public static getObject(id): MonsterVO{ //id有可能带\n or \r
+        return CM.table[this.dataKey][Math.floor(id)];
     }
     public static get data(){
         return CM.table[this.dataKey]

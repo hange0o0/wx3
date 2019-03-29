@@ -8,7 +8,7 @@ class MonsterManager {
         return this._instance;
     }
 
-    private numCost = [1,3,6,10,15,21,28,36,45]
+    private numCost = [3,6,12,24,48,96,192,384,768];
     public monsterData;  //{lv,num};
     public defList = '';
 
@@ -49,6 +49,8 @@ class MonsterManager {
                     UM.needUpUser = true;
                     EM.dispatchEventWith(GameEvent.client.DEF_CHANGE)
                 }
+                if(!FightManager.getInstance().nextBeHitTime)
+                    FightManager.getInstance().resetNextBeHit();
             },
         })
     }
@@ -56,7 +58,9 @@ class MonsterManager {
 
 
     //取队伍战力
+    public tempForceAdd = 0;//用于计算玩家最强战力
     public getMyListForce(list,isAtk?,addBuff = true){
+        this.tempForceAdd = 0;
         if(!list)
             return 0;
         var count = 0;
@@ -68,10 +72,15 @@ class MonsterManager {
         for(var i=0;i<arr.length;i++)
         {
             var vo = MonsterVO.getObject(arr[i]);
-            count += vo.cost*(1+(force + this.getForceAdd(vo.id))/100)*(1+buffForce/100);
+            var forceAdd = (force + this.getForceAdd(vo.id));
+            count += vo.cost*(1+forceAdd/100)*(1+buffForce/100);
+            this.tempForceAdd += forceAdd;
         }
+        this.tempForceAdd/=arr.length;
         return Math.floor(count);
     }
+
+    public forceAdd
 
     //生成战斗用的怪物战力数据
     public getMonsterPKForce(list)
