@@ -21,6 +21,7 @@
 
     <e:Group bottom="28" right="20">
 		<e:Image source="bg3_png" scale9Grid="16,15,7,7" left="0" right="0" top="0" bottom="0"/>
-		<e:Label id="desText" text="所有增益都对最终值作二次加成" stroke="2" strokeColor="0x301200" size="24" left="15" right="15" top="10" bottom="10"/>
+		<e:Label id="desText" text="增益会加成科技及基础值" stroke="2" strokeColor="0x301200" size="24" left="15" right="15" top="10" bottom="10"/>
 	</e:Group>
+	<e:Button id="inviteBtn" label="邀请好友" horizontalCenter="0" skinName="Btn5Skin" y="600"/>
 </e:Skin>

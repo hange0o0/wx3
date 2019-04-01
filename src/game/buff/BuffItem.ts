@@ -81,11 +81,13 @@ class BuffItem extends game.BaseItem{
             this.barGroup.visible = true;
             this.onTimer();
             this.headMC.source = this.user.head || 'common_head_bg_jpg';
+            this.rateText.textColor = 0x00ff00
         }
         else
         {
             this.barGroup.visible = false;
             this.headMC.source = ''
+            this.rateText.textColor = 0xCCCCCC
         }
         this.onTimer();
     }

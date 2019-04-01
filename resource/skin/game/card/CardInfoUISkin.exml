@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850">
-	<e:Group x="0" top="0" height="700">
-		<ns1:PKCardInfoUI id="item" skinName="PKCardInfoSkin" currentState="window" minHeight="560" left="0" right="0" top="0" bottom="0"/>
-		<e:Image id="con" source="type_tips_png" bottom="50" x="100"/>
+<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850" states="s1,s2"  height.s2="670">
+	<e:Group x="0" top="0" height="700" height.s2="670">
+		<ns1:PKCardInfoUI id="item" skinName="PKCardInfoSkin" currentState="s1" minHeight="560" left="0" right="0" top="0" bottom="0" currentState.s2="s2"/>
+		<e:Image id="con" source="type_tips_png" bottom="50" x="100" horizontalCenter.s2="0"/>
 		<e:Image id="leftBtn" source="arrow1_png" left="30" bottom="60" scaleX="-1"/>
 		<e:Image id="rightBtn" source="arrow1_png" right="30" bottom="60"/>
-		<e:Group right="100" bottom="50">
+		<e:Group right="100" bottom="50" includeIn="s1">
 			<e:RadioButton id="cb0" label="基础属性" x="0" y="0" skinName="MyCheckBoxSkin" selected="true"/>
 			<e:RadioButton label="工作属性" x="10" y="10" skinName="MyCheckBoxSkin" id="cb1"/>
 			<e:RadioButton label="进攻属性" x="20" y="20" skinName="MyCheckBoxSkin" id="cb2"/>
@@ -16,7 +16,7 @@
 		</e:Group>
 		<e:Label id="pageText" text="1 / 10" horizontalCenter="0" bottom="20" size="20" textColor="0xaf995b"/>
 	</e:Group>
-	<e:Group x="0" width="100%" height="150" bottom="0">
+	<e:Group x="0" width="100%" height="150" bottom="0" includeIn="s1">
 		<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 		<e:Group id="coinGroup" horizontalCenter="-120" verticalCenter="0">
 			<e:Group x="0" y="7">
@@ -33,7 +33,7 @@
 			<e:Group x="0" y="7">
 			<e:Image source="border1_png" scale9Grid="28,20,26,2" y="0" width="185" x="15"/>
 			<e:Label id="diamondText" text="1012345" size="24" y="9" anchorOffsetX="0" textAlign="center" right="20" textColor="0xfce4b5"/>
-			<e:Image x="0" y="-3.5" width="46" height="46" source="icon_diamond_png"/>
+			<e:Image x="5" y="-2.5" width="46" height="46" source="icon_diamond_png"/>
 			</e:Group>
 			<e:Button id="copyBtn" label="增加数量" x="240" skinName="Btn1Skin" width="150" y="0"/>
 			<e:layout>

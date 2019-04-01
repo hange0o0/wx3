@@ -95,7 +95,7 @@ class MonsterVO {
         //        arr.push(MonsterVO.data[s])
         //}
         ////console.log(arr.join(','));
-        ////ArrayUtil.sortByField(arr,['level'],[0])
+        //ArrayUtil.sortByField(arr,['level'],[0])
         //for(var i=0;i<arr.length;i++)
         //{
         //    console.log(arr[i].level,arr[i].id,arr[i].name)

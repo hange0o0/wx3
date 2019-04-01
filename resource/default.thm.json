@@ -50,6 +50,7 @@
 		"resource/skin/game/common/HeadMCSkin.exml",
 		"resource/skin/game/DefItemSkin.exml",
 		"resource/skin/game/DefUISkin.exml",
+		"resource/skin/game/fight/EnemyAtkInfoSkin.exml",
 		"resource/skin/game/fight/FightingItemSkin.exml",
 		"resource/skin/game/fight/FightItemSkin.exml",
 		"resource/skin/game/fight/FightUISkin.exml",

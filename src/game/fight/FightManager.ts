@@ -8,7 +8,7 @@ class FightManager {
         return this._instance;
     }
 
-    public refreshSearchTime = 4*3600
+    public refreshSearchTime = 6*3600
 
     public notReadLog = [];
 
@@ -129,6 +129,17 @@ class FightManager {
         UM.needUpUser = true;
     }
 
+
+    //是否正在攻击此人
+    public isAtking(gameid){
+        for(var i=0;i<this.fightingArr.length;i++)
+        {
+            var oo:any = this.fightingArr[i];
+            if(oo.type == 'atk' && oo.robot.gameid == gameid)
+                return oo;
+        }
+        return null;
+    }
 
     public getAtkList(){
         var arr = [];

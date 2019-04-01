@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="EnemyAtkInfoSkin" width="500" height="260" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Group y="30" horizontalCenter="0">
+		<e:Image id="headMC" width="110" height="110" x="0" y="0"/>
+		<e:Group x="130" y="0" width="220">
+			<e:Label id="nameText" text="Label" textColor="0xFFD1A5" size="30" verticalAlign="middle" textAlign="left" x="0" y="0"/>
+			<e:Label id="lvText" text="Label" textColor="0xFFD1A5" size="24" verticalAlign="middle" textAlign="left" x="0" y="41"/>
+			<e:Group y="91.48" x="11.54">
+			<e:Image source="icon_clock_png" x="5" y="0"/>
+			<e:Label id="cdText" text="Label" textColor="0xFFD1A5" size="24" verticalAlign="middle" textAlign="center" x="0" y="36"/>
+			<e:layout>
+				<e:HorizontalLayout/>
+			</e:layout>
+			</e:Group>
+			<e:layout>
+			<e:VerticalLayout gap="15"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="30">
+		<e:Button id="cancelBtn" label="知道了" x="0" y="0" skinName="Btn2Skin" width="150"/>
+		<e:Button id="atkBtn" label="逆袭" x="10" y="10" skinName="Btn1Skin" width="150"/>
+		<e:layout>
+			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

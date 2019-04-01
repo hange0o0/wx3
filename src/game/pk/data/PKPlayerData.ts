@@ -71,7 +71,7 @@ class PKPlayerData {
         if(this.autoList.length == 0)
             return;
 
-        var mid = this.autoList.shift();
+        var mid = Math.floor(this.autoList.shift());
         this.monsterHpList.shift();
         if(this.autoList[0])
         {

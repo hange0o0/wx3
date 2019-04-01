@@ -4,9 +4,11 @@ class FightItem extends game.BaseItem{
     private nameText: eui.Label;
     private cdText: eui.Label;
     private lvText: eui.Label;
+    private successMC: eui.Image;
 
 
 
+    private pkMV;
 
     public constructor() {
         super();
@@ -24,11 +26,6 @@ class FightItem extends game.BaseItem{
         {
             return;
         }
-        //if(UM.getEnergy()<1)
-        //{
-        //    MyWindow.ShowTips('体力不足')
-        //    return;
-        //}
 
         PKPosUI.getInstance().show({
             title:'进攻布阵',
@@ -51,7 +48,50 @@ class FightItem extends game.BaseItem{
          this.nameText.text = this.data.nick
         this.lvText.text = 'LV.' + this.data.level
         this.cdText.text = '路程:' +  DateUtil.getStringBySecond(this.data.distanceTime).substr(-5);
+        this.stopShowPKing();
+        this.successMC.visible = false;
+        if(this.data.isAtked())
+        {
+            if(this.data.isAtking()){
+                this.showPKing()
+            }
+            else
+            {
+                this.successMC.visible = true;
+            }
+        }
+    }
 
+    public onTimer(){
+        if(this.pkMV && this.pkMV.visible && !this.data.isAtking())
+            this.stopShowPKing();
+    }
+
+    public showPKing(){
+        if(!this.pkMV)
+        {
+            var name = 'pk_mv'
+            var data:any = RES.getRes(name + "_json"); //qid
+            var texture:egret.Texture = RES.getRes(name + "_png");
+            var mcFactory = new egret.MovieClipDataFactory(data, texture);
+            this.pkMV = new egret.MovieClip();
+            this.pkMV.movieClipData = mcFactory.generateMovieClipData('mv');
+            this.addChild(this.pkMV);
+            this.pkMV.y = 5;
+            this.pkMV.x = 58;
+            this.pkMV.scaleX = this.pkMV.scaleY = 1.5
+            this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.stopShowPKing,this)
+        }
+        this.pkMV.visible = true;
+        this.pkMV.play(-1);
+    }
+
+    public stopShowPKing(){
+        if(this.pkMV)
+        {
+            this.pkMV.visible = false;
+            this.pkMV.stop();
+        }
     }
 
 

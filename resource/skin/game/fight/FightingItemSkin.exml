@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="FightingItemSkin" width="600" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
+<e:Skin class="FightingItemSkin" width="620" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
 	<e:Image id="headMC" width="100" height="100" x="10" verticalCenter="0"/>
-	<e:Label id="nameText" text="Label" x="125" y="11.96" bold="true"/>
+	<e:Label id="nameText" text="Label" x="125" y="11.96" bold="true" textColor="0xfff2ba"/>
 	<e:Label id="desText" text="Label" x="125" y="50" size="24" textColor="0x5a3909"/>
-	<e:Label id="cdText" text="00:00" y="15" size="24" textColor="0xf4e5cb" right="10" width="120" textAlign="center" verticalCenter.s2="0"/>
 	<e:Button id="btn" label="撤回" skinName="Btn1Skin" right="10" width="120" y="44" includeIn="s1"/>
 	<e:Group id="awardGroup" x="125" y="81.81">
 		<e:Label text="掠夺资源：" x="0" y="0" size="24" textColor="0x5A3909"/>
@@ -12,6 +11,13 @@
 		<e:Label id="coinText" text="x123" x="10" y="10" size="24" textColor="0x5A3909"/>
 		<e:layout>
 			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Group x="490" y="15" width="120">
+		<e:Image source="icon_clock_png" x="1" y="2"/>
+		<e:Label id="cdText" text="00:00" y="0" size="22" textAlign="center" verticalCenter.s2="0" x="0" textColor="0xe8e1d7"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center" gap="10"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

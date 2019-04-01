@@ -41,7 +41,7 @@ class FightUI extends game.BaseUI {
 
         this.addBtnEvent(this.logBtn,this.onLog)
         this.addBtnEvent(this.refreshBtn,this.onSearch)
-        this.refreshBtn.visible = !UM.isTest
+
     }
 
 
@@ -115,6 +115,8 @@ class FightUI extends game.BaseUI {
         }
         var cd = FM.refreshSearchTime - (TM.now() - FM.searchTime);
         this.cdText.text = '离下次刷新还有：' + DateUtil.getStringBySecond(cd);
+
+        this.refreshBtn.visible = !UM.isTest && TM.now() - FM.searchTime >= 3600;
     }
 
 }

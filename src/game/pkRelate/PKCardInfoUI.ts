@@ -20,10 +20,6 @@ class PKCardInfoUI extends game.BaseContainer {
     private s3: eui.Image;
     private s4: eui.Image;
     private s5: eui.Image;
-    private s6: eui.Image;
-    private s7: eui.Image;
-    private s8: eui.Image;
-    private s9: eui.Image;
     private levelText: eui.Label;
 
 
@@ -49,12 +45,12 @@ class PKCardInfoUI extends game.BaseContainer {
         this.list.itemRenderer = PKCardInfoItem
 
         this.heroItem = new PKMonsterMV()
-        this.heroItem.x = 150/2
-        this.heroItem.y = 160
+        this.heroItem.x = 180/2
+        this.heroItem.y = 200
         this.heroItem.scaleX = this.heroItem.scaleY = 1.2
         this.cardGroup.addChild(this.heroItem);
 
-        for(var i=0;i<10;i++)
+        for(var i=0;i<6;i++)
         {
             this.starArr.push(this['s' + i])
         }
@@ -151,8 +147,8 @@ class PKCardInfoUI extends game.BaseContainer {
 
 
         //var baseForceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force)
-        var forceAdd = CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
-        this.setHtml(this.desText,vo.getDes(forceAdd,true));
+        //var forceAdd = 0//CM.getCardVO(this.dataIn.mid).getAdd(this.dataIn.force,this.dataIn.type)
+
         //console.log(forceAdd)
         //var str = vo.isMonster? '传送':'施法'
 
@@ -167,11 +163,14 @@ class PKCardInfoUI extends game.BaseContainer {
 
 
 
+
     }
 
     private addMonsterList(vo){
         var baseForceAdd = 1;
-        if(this.dataIn.type == 'atk')
+        if(this.dataIn.type == 'other')
+            baseForceAdd = 1 + this.dataIn.force/100;
+        else if(this.dataIn.type == 'atk')
             baseForceAdd =MonsterManager.getInstance().getAtkAdd(vo.id)
         else if(this.dataIn.type == 'def')
             baseForceAdd =MonsterManager.getInstance().getDefAdd(vo.id)
@@ -183,6 +182,8 @@ class PKCardInfoUI extends game.BaseContainer {
         var workCD = WorkManager.getInstance().getWorkCD(vo.id)
         var workCoin = this.dataIn.type == 'work'? WorkManager.getInstance().getWorkCoin(vo.id):WorkManager.getInstance().getBaseWorkCoin(vo.id)
         var workRate = Math.floor(workCoin*(3600*1000/workCD))
+
+        this.setHtml(this.desText,vo.getDes(baseForceAdd,true));
 
         var arr2:any = [
             {index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},

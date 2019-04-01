@@ -148,10 +148,9 @@ class PKManager {
             this.chapterData = loader.data.split('\n')
             for(var i=0;i<this.chapterData.length;i++)
             {
-                var arr = this.chapterData[i].split('|');
                 this.chapterData[i] = {
                     id:i+1,
-                    list1:arr[0]
+                    list1:this.chapterData[i]
                 }
             }
         },this);

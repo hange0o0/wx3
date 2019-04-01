@@ -316,12 +316,17 @@ class DebugManager {
     //创建关卡数据，输入花费比例
     public levelArr = []
     //等级，费用小-》大，数量小-》大
-    public createLevel(lv,c1,c2,n1,n2,repeatNum = 10){
+    public createLevel(lv){
         this.levelArr = [];
         this.callLevel = lv;
-        this.repeatNum = repeatNum;
-        this.callCost = c1 + Math.floor(Math.random()*(c2-c1+1))
-        this.callNum = n1 + Math.floor(Math.random()*(n2-n1+1))
+
+        var maxCost = Math.floor(16 +lv*3.2)
+
+        this.repeatNum = 1+Math.max(1,Math.floor(lv*0.5));
+        this.callNum = 4 + Math.ceil(lv/2);
+
+
+        this.callCost = Math.round(maxCost*(0.9+Math.random()*0.2))
         this.finishFun = (winArr)=>{
             var list1 = winArr[0]
             if(this.levelArr.indexOf(list1) == -1)
@@ -329,8 +334,7 @@ class DebugManager {
                 this.levelArr.push(list1);
                 console.log(this.levelArr.length + ' -create')
             }
-            this.callCost = c1 + Math.floor(Math.random()*(c2-c1+1))
-            this.callNum = n1 + Math.floor(Math.random()*(n2-n1+1))
+            this.callCost = Math.round(maxCost*(0.9+Math.random()*0.2))
             return false;
         }
         this.testRound();
@@ -360,11 +364,12 @@ class DebugManager {
             var list1 = winArr[0]
             if(this.chapterArr.indexOf(list1) == -1)
             {
+                console.log(begin + ' -create')
                 begin++;
                 this.callLevel = this.getClevel(begin)
                 this.callCost = 16 + Math.floor(begin/20)
                 this.chapterArr.push(list1);
-                console.log(begin + ' -create')
+
             }
             return false;
         }

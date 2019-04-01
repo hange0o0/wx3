@@ -39,6 +39,7 @@ class CardInfoUI extends game.BaseWindow {
 
     public list
     public index
+    public sp
     public data;
     public coinCost;
     public diamondCost;
@@ -65,12 +66,14 @@ class CardInfoUI extends game.BaseWindow {
     public onCBChange(){
         this.item.renew({
             mid:this.data,
-            force:100,
+            force:this.sp.otherForce,
             type:this.getSelectType()
         });
     }
 
     private getSelectType(){
+        if('otherForce' in this.sp)
+            return 'other';
        if(this.cb0.selected)return ''
        if(this.cb1.selected)return 'work'
        if(this.cb2.selected)return 'atk'
@@ -107,10 +110,11 @@ class CardInfoUI extends game.BaseWindow {
 
 
 
-    public show(v?,list?,index=-1){
+    public show(v?,list?,index=-1,sp?){
         this.data = v;
         this.list = list
         this.index = index;
+        this.sp = sp || {};
         if(list && index==-1)
         {
             this.index = list.indexOf(this.data)
@@ -150,11 +154,14 @@ class CardInfoUI extends game.BaseWindow {
         this.diamondText.textColor = UM.diamond >= this.diamondCost?0xFCE4B5:0xFF0000
 
 
+        //var force = 100;
         this.item.renew({
             mid:this.data,
-            force:100,
+            force:this.sp.otherForce,
             type:this.getSelectType()
         });
+
+        this.currentState = this.getSelectType() == 'other'?'s2':'s1'
 
         if(this.list && this.list.length > 1)
         {
@@ -175,7 +182,7 @@ class CardInfoUI extends game.BaseWindow {
             this.pageText.text = ''
         }
 
-        if(MonsterManager.getInstance().getMonsterNum(this.data) == 10)
+        if(MonsterManager.getInstance().getMonsterNum(this.data) >= 6)
         {
             this.diamonGroup.visible = false;
             this.coinGroup.horizontalCenter = 0;

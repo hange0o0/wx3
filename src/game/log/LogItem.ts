@@ -87,7 +87,7 @@ class LogItem extends game.BaseItem {
                 this.currentState = 's2'
                 this.desText.text = '防守成功，喜大普奔！';
             }
-            this.pkBtn.visible = !this.data.atkBack
+            this.pkBtn.visible = this.data.result == 1 && !this.data.atkBack
         }
         this.cdText.text = DateUtil.getStringBySeconds(cd,false,2) + '前';
     }

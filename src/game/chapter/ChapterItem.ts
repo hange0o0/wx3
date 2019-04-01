@@ -10,7 +10,6 @@ class ChapterItem extends game.BaseItem{
 
 
 
-
     public constructor() {
         super();
         this.skinName = "ChapterItemSkin";
@@ -69,6 +68,12 @@ class ChapterItem extends game.BaseItem{
                         else
                             ChapterManager.getInstance().setChapterStar(this.data.id,1);
                         PKData.instanceIndex = 1;
+                        UM.addCoin(ChapterManager.getInstance().resultEarn.coin)
+                        UM.addDiamond(ChapterManager.getInstance().resultEarn.diamond)
+                    }
+                    else
+                    {
+                        ChapterManager.getInstance().resultEarn = null;
                     }
                     MainPKUI.getInstance().show(pkObj);
                     EM.dispatch(GameEvent.client.CHAPTER_CHANGE)

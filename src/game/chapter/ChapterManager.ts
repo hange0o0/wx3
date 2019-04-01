@@ -7,6 +7,7 @@ class ChapterManager {
     }
 
     public maxEarn = 0;
+    public resultEarn:any;
 
     //取章节星星数
     public getChapterStar(id){
@@ -24,12 +25,18 @@ class ChapterManager {
             b = true;
             UM.upWXChapter();
         }
+        this.resultEarn = {
+            coin:id*50*star
+        }
 
         if(lastStar < star)  //升星
         {
             b = true;
             if(star == 3)
+            {
                 delete UM.chapterStar[id];
+                this.resultEarn.diamond = Math.ceil(id/50)
+            }
             else
                 UM.chapterStar[id] = star;
         }

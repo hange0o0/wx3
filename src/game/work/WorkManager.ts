@@ -51,7 +51,7 @@ class WorkManager {
             maxCost:Number.MAX_VALUE,
             fun:(list)=>{
                 PKPosUI.getInstance().hide();
-                var newList = list.split(',');
+                var newList = list?list.split(','):[];
                 ArrayUtil.sortByField(workList,['resetTime'],[1])
                 var b = false;
                 for(var i=0;i<workList.length;i++) //重复

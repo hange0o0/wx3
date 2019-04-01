@@ -13,6 +13,8 @@ class BuffUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private desText: eui.Label;
+    private inviteBtn: eui.Button;
+
 
 
 
@@ -41,6 +43,8 @@ class BuffUI extends game.BaseUI {
         this.list.itemRenderer = BuffListItem
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
 
+        this.addBtnEvent(this.inviteBtn,this.share)
+
 
     }
 
@@ -51,7 +55,7 @@ class BuffUI extends game.BaseUI {
     public share(){
         ShareTool.share('我需要你们的帮助！！',Config.localResRoot + "share_img_1.jpg",{type:1,from:UM.gameid},()=>{
             MyWindow.ShowTips('等待好友加入')
-        })
+        },true)
     }
 
 
@@ -125,6 +129,7 @@ class BuffUI extends game.BaseUI {
 
         this.dataProvider.source = arr;
         this.dataProvider.refresh();
+        this.inviteBtn.visible = arr.length == 0;
     }
 
 }

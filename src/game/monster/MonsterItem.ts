@@ -20,7 +20,7 @@ class MonsterItem extends game.BaseItem{
         this.addBtnEvent(this,this.onClick)
 
         this.heroItem = new PKMonsterMV()
-        this.heroItem.x = 150/2
+        this.heroItem.x = 150/2-5
         this.heroItem.y = 170
         this.heroItem.scaleX = this.heroItem.scaleY = 1.2
         this.cardGroup.addChild(this.heroItem);
@@ -40,10 +40,11 @@ class MonsterItem extends game.BaseItem{
         var num = MonsterManager.getInstance().getMonsterNum(vo.id)
         this.bg2.source = vo.getBG()
         this.bg.source = PKManager.getInstance().getDefBG();
-        this.costText.text = vo.cost +'';
+        //this.costText.text = '费用：' + 12 +'';
+        this.costText.text = '费用：' + vo.cost +'';
         this.numBar.width =  num*8;
         this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(vo.id) + ''
-        this.text.text = vo.name;
+        this.text.text = vo.name //+ '('+vo.cost+')';
 
         if(this.heroItem)
         {

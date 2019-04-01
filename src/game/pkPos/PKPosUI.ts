@@ -100,7 +100,7 @@ class PKPosUI extends game.BaseUI {
                 {
                     list.push(this.monsterArr[j].id)
                 }
-                CardInfoUI.getInstance().show(mc.id,list,i);
+                CardInfoUI.getInstance().show(mc.id,list,i,{otherForce:this.dataIn.enemy.force || 0});
                 break;
             }
         }
@@ -355,7 +355,7 @@ class PKPosUI extends game.BaseUI {
             count += vo.cost*(1+force/100);
             console.log(count)
             this.con.addChild(item);
-            item.load(id)
+            item.load(vo.id)
             item.stand();
             item.scaleX = item.scaleY = 1.2;
             item.currentMV.scaleX = -Math.abs(item.currentMV.scaleX);
@@ -375,7 +375,7 @@ class PKPosUI extends game.BaseUI {
         else
             this.bg.source = PKManager.getInstance().getPKBG(this.dataIn.enemy.seed);
 
-        this.otherForceText.text = '' + Math.floor(count);
+        this.otherForceText.text = '对方总战力：' + Math.floor(count);
     }
     private renewTitle(){
         this.topUI.setTitle(this.dataIn.title || '布阵')

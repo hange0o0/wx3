@@ -187,8 +187,11 @@ class UserManager {
         if(!wx)
         {
             setTimeout(()=>{
+                this.gameid = _get['openid'];
                 this.fill(this.orginUserData());
                 this.guideFinish = true;   //本地不进新手了
+                if(!SharedObjectManager.getInstance().getMyValue('localSave'))
+                    this.needUpUser = true;
                 fun && fun();
             },1000)
             return;
@@ -295,6 +298,7 @@ class UserManager {
         })
 
         this.testAddInvite();
+        this.needUpUser = true;
     }
 
     private orginUserData(){
@@ -312,8 +316,8 @@ class UserManager {
              energy:{v:0,t:0},
              buffUser:{},
              shareUser:{},
-             def:'1,48,2,3,4,5,6,7,9,10',
-             work:'1#0#1,2#0#1,3#0#1,4#0#1,70#0#1,48#0#1', //初始1个在工作
+             def:'41',
+             work:'65#0#1', //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间
                  loginDays:1,   //登陆天数

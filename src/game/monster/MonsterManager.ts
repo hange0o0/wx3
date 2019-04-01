@@ -8,7 +8,7 @@ class MonsterManager {
         return this._instance;
     }
 
-    private numCost = [3,6,12,24,48,96,192,384,768];
+    private numCost = [10,20,40,80,160];
     public monsterData;  //{lv,num};
     public defList = '';
 
