@@ -16,6 +16,15 @@ class ChapterManager {
         return UM.chapterStar[id] || 3
     }
 
+    public getTotalStar(){
+        var count = 0;
+        for(var i=0;i<UM.chapterLevel;i++)
+        {
+            count += this.getChapterStar(i+1)
+        }
+        return count;
+    }
+
     public setChapterStar(id,star){
         var lastStar = this.getChapterStar(id);
         var b = false;
@@ -24,6 +33,7 @@ class ChapterManager {
             UM.chapterLevel = id
             b = true;
             UM.upWXChapter();
+
         }
         this.resultEarn = {
             coin:id*50*star
@@ -55,13 +65,19 @@ class ChapterManager {
             coin += i+1;
         }
         this.maxEarn =coin;
+        UM.resetHourEarn();
+    }
+
+    public getMaxChapterCoin(){
+        return this.maxEarn*(3600*24/this.collectCD)
     }
 
     //取当前已收集的金币(每5分钟结算一次)
+    public collectCD = 60*5;
     public getChapterCoin(){
-        var collectCD = 60*5;
+        var collectCD = this.collectCD;
         var coin = this.maxEarn;
-        var maxCoin = coin*(3600*24/collectCD)//只收集一天
+        var maxCoin = this.getMaxChapterCoin()//只收集一天
         var num = Math.floor((TM.now() - UM.chapterResetTime)/collectCD)
         if(num > 0)
         {

@@ -2,9 +2,8 @@
 <e:Skin class="FightItemSkin" width="180" height="240" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
 	<e:Image id="headMC" width="150" height="150" x="15" y="15"/>
-	<e:Image id="successMC" source="icon_edit_png" x="15" y="15"/>
 	<e:Image source="bg8_png" y="164" anchorOffsetX="0" anchorOffsetY="0" height="40" left="14" right="14" scale9Grid="9,9,9,9"/>
-	<e:Label id="nameText" text="Label" horizontalCenter="1" textColor="0xffd1a5" size="24" verticalCenter="98" verticalAlign="middle" textAlign="center" width="160" height="30"/>
+	<e:Label id="nameText" text="Label" horizontalCenter="1" textColor="0xffd1a5" size="24" verticalAlign="middle" textAlign="center" width="160" height="30" y="205"/>
 	<e:Group y="173" horizontalCenter="0">
 		<e:Image source="icon_clock_png" x="5" y="0"/>
 		<e:Label id="cdText" text="Label" textColor="0xFFD1A5" size="22" verticalAlign="middle" textAlign="center" x="0" y="36"/>
@@ -14,4 +13,8 @@
 	</e:Group>
 	<e:Image source="bg17_png" x="15" scaleY="-1" top="15" height="36"/>
 	<e:Label id="lvText" text="Label" x="20" y="22" size="24" textColor="0xffe6af"/>
+	<e:Group id="successMC" width="150" height="150" y="15" horizontalCenter="0">
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" left="0" right="0" top="0" bottom="0"/>
+		<e:Image source="icon_edit_png" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
 </e:Skin>

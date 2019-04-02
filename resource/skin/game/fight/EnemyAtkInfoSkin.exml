@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="EnemyAtkInfoSkin" width="500" height="260" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="EnemyAtkInfoSkin" width="500" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Group y="30" horizontalCenter="0">
 		<e:Image id="headMC" width="110" height="110" x="0" y="0"/>
@@ -23,6 +23,13 @@
 		<e:Button id="atkBtn" label="逆袭" x="10" y="10" skinName="Btn1Skin" width="150"/>
 		<e:layout>
 			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
+	<e:Group y="160" horizontalCenter="0">
+		<e:Image x="5" y="0" source="icon_clock2_png"/>
+		<e:Label id="arriveText" text="Label" size="22" verticalAlign="middle" textAlign="center" x="0" y="36" textColor="0xf26f6f"/>
+		<e:layout>
+		<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

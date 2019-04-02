@@ -13,6 +13,7 @@ class DefUI extends game.BaseItem{
 
 
 
+
     private dataProvider:eui.ArrayCollection
 
     public constructor() {
@@ -28,6 +29,7 @@ class DefUI extends game.BaseItem{
         this.addBtnEvent(this,this.onClick)
         this.defList.itemRenderer = DefItem;
         this.defList.dataProvider = this.dataProvider = new eui.ArrayCollection();
+
     }
 
     private onClick(){
@@ -84,6 +86,9 @@ class DefUI extends game.BaseItem{
 
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
+
+
+
     }
 
     public onE(){
@@ -103,13 +108,13 @@ class DefUI extends game.BaseItem{
             return;
         if(egret.getTimer() < this.lastTalk)
             return;
-        if(Math.random() > 0.5)
+        if(Math.random() > 0.2)
             return;
         var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
         if(item && !item.talkItm)
         {
             item.talk();
-            this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*2000);
+            this.lastTalk = egret.getTimer() + 5000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
         }
     }
 

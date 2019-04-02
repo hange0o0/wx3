@@ -13,6 +13,7 @@ class CacheManager{
 
     public constructor() {
         this.register(MonsterVO);
+        this.register(TaskVO);
 
     }
 
@@ -44,6 +45,8 @@ class CacheManager{
 
     //静态数据初始化后调用
     public initFinish(){
+        TaskVO.orderList = ObjectUtil.objToArray(TaskVO.data)
+        ArrayUtil.sortByField(TaskVO.orderList,['index'],[0])
     }
 
     public getCardVO(id):MonsterVO{

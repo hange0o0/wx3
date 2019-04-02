@@ -50,9 +50,19 @@ class ChapterUI extends game.BaseUI {
         this.addBtnEvent(this.leftBtn,this.onLeft)
         this.addBtnEvent(this.addBtn,this.onAddEnergy)
         this.addBtnEvent(this.getCoinBtn,()=>{
-            UM.addCoin(ChapterManager.getInstance().getChapterCoin());
+            var coin = ChapterManager.getInstance().getChapterCoin();
+            MyWindow.ShowTips('获得金币：' + MyTool.createHtml(NumberUtil.addNumSeparator(coin,2),0xFBB646),1500)
+            UM.addCoin(coin);
             UM.chapterCoin = 0;
         })
+
+        MyTool.addLongTouch(this.energyText,()=>{
+            if(egret.getTimer() - DebugUI.getInstance().debugTimer < 3000)
+            {
+                MyWindow.ShowTips('你作弊！')
+                DebugUI.getInstance().debugOpen = true
+            }
+        },this)
     }
 
     private onAddEnergy(){
@@ -115,6 +125,7 @@ class ChapterUI extends game.BaseUI {
 
     public hide() {
         super.hide();
+        TaskManager.getInstance().guideTaskVO = null;
     }
 
     public onShow(){

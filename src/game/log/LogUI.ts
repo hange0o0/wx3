@@ -49,7 +49,11 @@ class LogUI extends game.BaseUI {
         FightManager.getInstance().notReadLog.length = 0;
         super.hide();
         if(red)
+        {
             EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
+            RobotVO.change = true;
+            FightManager.getInstance().save();
+        }
     }
 
     public onShow(){

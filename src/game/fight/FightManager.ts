@@ -19,6 +19,7 @@ class FightManager {
 
     public fightingArr = [];//出战中的人(自己和敌人的)
     public nextBeHitTime = 0
+    public fightNum = 0//进攻的次数
 
 
 
@@ -70,13 +71,23 @@ class FightManager {
         }
     }
 
+    private getRobot(gameid){
+        for(var i=0;i<this.searchRobot.length;i++)
+        {
+            if(this.searchRobot[i].gameid == gameid)
+                return this.searchRobot[i];
+        }
+        return null;
+    }
 
     public initFight(data){
         this.nextBeHitTime = data.time || 0;
         this.fightingArr = data.list || [];
+        this.fightNum = data.fightNum || 0;
         for(var i=0;i<this.fightingArr.length;i++)
         {
-            this.fightingArr[i].robot = new RobotVO(this.fightingArr[i].robot);
+            //与搜索的玩家关联
+            this.fightingArr[i].robot = this.getRobot(this.fightingArr[i].robot.gameid) || new RobotVO(this.fightingArr[i].robot);
         }
     }
 
@@ -84,6 +95,7 @@ class FightManager {
         var oo:any = {}
         oo.list = [];
         oo.time = this.nextBeHitTime;
+        oo.fightNum = this.fightNum;
         for(var i=0;i<this.fightingArr.length;i++)
         {
             oo.list.push(ObjectUtil.clone(this.fightingArr[i]));
@@ -206,6 +218,8 @@ class FightManager {
                     oo.logTime = oo.time + robot.distanceTime;
                     this.notReadLog.push(oo.time)
                     RobotVO.change = true;
+                    if(oo.type == 'atk' && oo.result != 2)
+                        robot.lastAtk = 0;
 
                     if(cd - robot.distanceTime < 5)
                     {
@@ -248,7 +262,6 @@ class FightManager {
                 }
                 else
                 {
-                    robot.lastAtk = 0;
                     this.onAtkBackFail(oo);
                 }
                 this.fightingArr.splice(i,1);
@@ -346,6 +359,9 @@ class FightManager {
             robot:robot
         };
         this.fightingArr.push(oo)
+        this.fightNum ++;
+        RobotVO.change = true;
+        UM.needUpUser = true;
         return oo;
     }
 

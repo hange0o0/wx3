@@ -23,6 +23,7 @@ class FightUI extends game.BaseUI {
 
 
 
+    public dataProvider = new eui.ArrayCollection()
     public constructor() {
         super();
         this.skinName = "FightUISkin";
@@ -36,6 +37,7 @@ class FightUI extends game.BaseUI {
 
         this.list.itemRenderer = FightingItem
         this.list2.itemRenderer = FightItem
+        this.list2.dataProvider = this.dataProvider
 
 
 
@@ -65,6 +67,7 @@ class FightUI extends game.BaseUI {
     public hide() {
         //MainPKUI.instance.hide();
         super.hide();
+        TaskManager.getInstance().guideTaskVO = null;
         //GameUI.getInstance().onTimer();
     }
 
@@ -102,7 +105,10 @@ class FightUI extends game.BaseUI {
     }
 
     public renewSearch(){
-        this.list2.dataProvider = new eui.ArrayCollection(FightManager.getInstance().searchRobot);
+        var FM = FightManager.getInstance()
+        this.dataProvider.source = FM.searchRobot;
+        this.dataProvider.refresh();
+        this.refreshBtn.visible = !UM.isTest && TM.now() - FM.searchTime >= 3600;;
     }
 
     private onTimer(){

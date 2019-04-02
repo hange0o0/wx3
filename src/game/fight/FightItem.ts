@@ -32,7 +32,7 @@ class FightItem extends game.BaseItem{
             autoList:true,
             isPK:true,
             isAtk:true,
-            maxNum:10,//TecManager.getInstance().getTeamNum(),
+            maxNum:TecManager.getInstance().getTeamNum(),
             maxCost:TecManager.getInstance().getTeamCost(),
             fun:(list)=>{
                 PKPosUI.getInstance().hide();
@@ -77,8 +77,8 @@ class FightItem extends game.BaseItem{
             this.pkMV = new egret.MovieClip();
             this.pkMV.movieClipData = mcFactory.generateMovieClipData('mv');
             this.addChild(this.pkMV);
-            this.pkMV.y = 5;
-            this.pkMV.x = 58;
+            this.pkMV.y = 100;
+            this.pkMV.x = 180/2;
             this.pkMV.scaleX = this.pkMV.scaleY = 1.5
             this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.stopShowPKing,this)
         }

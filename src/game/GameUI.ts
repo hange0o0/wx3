@@ -14,12 +14,15 @@ class GameUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private bottomGroup: eui.Group;
-    private workBtn: eui.Group;
-    private tecBtn: eui.Group;
-    private settingBtn: eui.Group;
-    private mailBtn: eui.Group;
-    private monsterBtn: eui.Group;
     private buffBtn: eui.Group;
+    private buffRed: eui.Image;
+    private workBtn: eui.Group;
+    public tecBtn: eui.Group;
+    public monsterBtn: eui.Group;
+    public chapterBtn: eui.Group;
+    private chapterRed: eui.Image;
+    public fightBtn: eui.Group;
+    private fightRed: eui.Image;
     private coinGroup: eui.Group;
     private shopRedMC: eui.Image;
     private coinText: eui.Label;
@@ -41,6 +44,7 @@ class GameUI extends game.BaseUI {
 
 
 
+
     private infoBtn:UserInfoBtn
     private haveGetInfo = false;
     private haveLoadFinish = false;
@@ -53,8 +57,8 @@ class GameUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.soundBtn,this.onSetting)
-        this.addBtnEvent(this.settingBtn,this.onChapter)
-        this.addBtnEvent(this.mailBtn,this.onMail)
+        this.addBtnEvent(this.chapterBtn,this.onChapter)
+        this.addBtnEvent(this.fightBtn,this.onFight)
         this.addBtnEvent(this.coinGroup,this.onShop)
         this.addBtnEvent(this.workBtn,this.onRank)
         this.addBtnEvent(this.monsterBtn,this.onMonster)
@@ -75,6 +79,13 @@ class GameUI extends game.BaseUI {
         }, this, Config.localResRoot + "wx_btn_info.png");
         this.infoBtn.visible = false;
         this.startBtn.visible = false;
+
+        MyTool.addLongTouch(this.soundBtn,()=>{
+            if(DebugUI.getInstance().debugOpen && !SoundManager.getInstance().soundPlaying)
+            {
+                DebugUI.getInstance().show();
+            }
+        },this)
     }
 
     private renewInfo(res?){
@@ -148,7 +159,7 @@ class GameUI extends game.BaseUI {
         this.soundBtn.source = SoundManager.getInstance().bgPlaying?'sound_btn1_png':'sound_btn2_png'
     }
 
-    public onMail(){
+    public onFight(){
         FightUI.getInstance().show()
         //LogUI.getInstance().show();
         //this.mainPKUI.hide();
@@ -350,7 +361,9 @@ class GameUI extends game.BaseUI {
     public onTimer(){
         if(!this.visible)
             return;
-         this.renewCoinRed();
-
+        this.renewCoinRed();
+        this.fightRed.visible = TM.now() - FightManager.getInstance().searchTime >= FightManager.getInstance().refreshSearchTime
+        this.chapterRed.visible = ChapterManager.getInstance().getChapterCoin() > ChapterManager.getInstance().getMaxChapterCoin()*0.9
+        this.buffRed.visible = ObjectUtil.objLength(UM.shareUser) > ObjectUtil.objLength(UM.buffUser)
     }
 }

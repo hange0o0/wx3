@@ -185,12 +185,14 @@ class PKCardInfoUI extends game.BaseContainer {
 
         this.setHtml(this.desText,vo.getDes(baseForceAdd,true));
 
-        var arr2:any = [
-            {index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},
-            {index:1,icon:'icon_coin_png',iconScale:0.6,title:'挖矿',value:workRate + ' /时',valueAdd:0},
-            {index:1,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp}
+        var arr2:any = []
+        arr2.push({index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0})
+        if(this.dataIn.type != 'other')
+        {
+            arr2.push({index:1,icon:'icon_coin_png',iconScale:0.6,title:'挖矿',value:workRate + ' /时',valueAdd:0})
+        }
 
-        ]
+        arr2.push({index:1,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp})
         if(atk)
         {
             arr2.push({index:2,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk})

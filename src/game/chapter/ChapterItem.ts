@@ -7,6 +7,8 @@ class ChapterItem extends game.BaseItem{
     private s2: eui.Image;
     private lockMC: eui.Image;
     private img: eui.Image;
+    private diamondMC: eui.Image;
+
 
 
 
@@ -95,6 +97,7 @@ class ChapterItem extends game.BaseItem{
         this.con.removeChildren();
         var id = this.data.list1.split(',')[0]
         this.img.source = MonsterVO.getObject(id).getImage(star == 3);
+        this.diamondMC.visible = star != 3
         for(var i=0;i<star;i++)
         {
             if(i<star)

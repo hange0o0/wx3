@@ -33,7 +33,7 @@
 			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="justify"/>
 		</e:layout>
 	</e:Group>
-	<e:List id="defList" y="60" right="10">
+	<e:List id="defList" y="55" right="5">
 		<e:layout>
 			<e:HorizontalLayout/>
 		</e:layout>

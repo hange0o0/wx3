@@ -34,6 +34,7 @@ class UserManager {
     public energy: any;
     public chapterLevel: number = 0;  //已完成关卡，默认为0
     public chapterStar: any = {};
+    public task: any;
     public chapterResetTime = 0;
     public chapterCoin = 0;
 
@@ -57,6 +58,7 @@ class UserManager {
     public maxForce = 0
 
 
+    public hourEarn = 0;
     //public lastForce
     public fill(data:any):void{
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
@@ -81,6 +83,8 @@ class UserManager {
         this.maxForce = data.maxForce;
         this.buffUser = data.buffUser;
         this.shareUser = data.shareUser;
+        this.hourEarn = data.hourEarn;
+        this.task = data.task || 0;
         this.coinObj = data.coinObj || {
                 loginTime:TM.now(),   //登陆时间
                 loginDays:1,   //登陆天数
@@ -110,7 +114,7 @@ class UserManager {
         TecManager.getInstance().initTec(data.tec)
         MonsterManager.getInstance().initMonster(data.monster,data.def)
         FightManager.getInstance().initFight(data.fight)
-        ChapterManager.getInstance().setChapterEarn();
+
 
 
         //统一计算一下数据
@@ -120,7 +124,16 @@ class UserManager {
 
         //this.lastForce = this.getForce();
 
+        DM.addTime = SharedObjectManager.getInstance().getMyValue('addTime') || 0;
 
+
+        ChapterManager.getInstance().setChapterEarn();//里面有resetHourEarn
+        //this.resetHourEarn();
+    }
+
+    //重置时产
+    public resetHourEarn(){
+        this.hourEarn = Math.max(this.hourEarn,WorkManager.getInstance().getTotalHourEarn() + ChapterManager.getInstance().maxEarn*(3600/ChapterManager.getInstance().collectCD))
     }
 
     public renewInfo(userInfo){
@@ -305,12 +318,14 @@ class UserManager {
          return {
              loginTime:TM.now(),   //$
              coin:10000,   //$
-             diamond:10,   //$
+             diamond:50,   //$
              guideFinish:false,
              chapterLevel:0,
              chapterStar:{},
              chapterResetTime:0,
              chapterCoin:0,
+             hourEarn:0,
+             task:0,
              fight:{},
              saveTime:0,
              energy:{v:0,t:0},
@@ -364,8 +379,10 @@ class UserManager {
             chapterCoin:UM.chapterCoin,
             maxForce:UM.maxForce,
             coinObj:UM.coinObj,
+            task:UM.task,
             buffUser:UM.buffUser,
             guideFinish:UM.guideFinish,
+            hourEarn:UM.hourEarn,
             saveTime:TM.now(),
         };
     }

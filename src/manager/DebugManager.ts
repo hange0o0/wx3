@@ -13,7 +13,7 @@ class DebugManager {
 
 
     public constructor() {
-        this.addTime = SharedObjectManager.getInstance().getMyValue('addTime') || 0;
+
     }
 
 

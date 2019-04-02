@@ -6,7 +6,7 @@
 	<e:Group id="mainCon" x="0" top="55" bottom="100">
 		<e:Group id="con" x="0" width="640" height="300" y="0" scrollEnabled="true">
 			<e:Image id="bg" horizontalCenter="0" bottom="0"/>
-			<e:Image source="black_bg2_png" x="0" y="0" width="320" height="40"/>
+			<e:Image source="black_bg2_png" x="0" y="0" width="520" height="40"/>
 			<e:Group x="0" y="2" width="150">
 				<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
 				<e:Label id="otherForceText" text="123456" size="24" x="0" y="0" textColor="0xFFECA5" stroke="2"/>

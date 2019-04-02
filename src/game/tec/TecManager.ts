@@ -75,7 +75,7 @@ class TecManager {
         var force = 0
         for(var i=0;i<lv;i++)
         {
-            force += (i+10)
+            force += (i+10)*2
         }
         return force;
     }

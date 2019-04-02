@@ -39,7 +39,11 @@ class BuffManager {
             }
         }
         if(b)
+        {
+            UM.resetHourEarn();
+            UM.needUpUser = true;
             EM.dispatch(GameEvent.client.BUFF_CHANGE)
+        }
     }
 
     public getBuffUser(id,t?){
@@ -76,6 +80,7 @@ class BuffManager {
     public deleteBuff(id)
     {
         delete UM.buffUser[id];
+        UM.resetHourEarn();
         UM.needUpUser = true;
         EM.dispatch(GameEvent.client.BUFF_CHANGE)
     }
@@ -101,6 +106,7 @@ class BuffManager {
         }
         UM.buffUser[id] = openid
         UM.needUpUser = true;
+        UM.resetHourEarn();
         EM.dispatch(GameEvent.client.BUFF_CHANGE)
     }
 

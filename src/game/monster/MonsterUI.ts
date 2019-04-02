@@ -45,6 +45,7 @@ class MonsterUI extends game.BaseUI {
 
     public hide() {
         super.hide();
+        TaskManager.getInstance().guideTaskVO = null;
     }
 
     public onShow(){

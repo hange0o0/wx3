@@ -147,7 +147,7 @@ class MonsterManager {
         var force = 0
         for(var i=0;i<lv;i++)
         {
-            force += (i+10)
+            force += (i+10)*2;
         }
         return force;
     }
@@ -212,5 +212,31 @@ class MonsterManager {
             }
         }
         return returnArr;
+    }
+
+    public getNumOver(num){
+        var arr = this.getOpenMonster();
+        var count = 0;
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i].id;
+            var maxNum = this.getMonsterNum(id)
+            if(maxNum >= num)
+                count ++
+        }
+        return count;
+    }
+
+    public getLevelOver(num){
+        var arr = this.getOpenMonster();
+        var count = 0;
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i].id;
+            var maxNum = this.getMonsterLevel(id)
+            if(maxNum >= num)
+                count ++
+        }
+        return count;
     }
 }

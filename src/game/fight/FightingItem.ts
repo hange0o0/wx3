@@ -50,7 +50,7 @@ class FightingItem extends game.BaseItem{
     public dataChanged():void {
         var robot = this.data.robot;
         PKManager.getInstance().setHead(this.headMC,robot.head)
-        this.nameText.text = robot.nick;
+        this.nameText.text = robot.nick + ' (LV.'+robot.level+')';
         this.onTimer();
     }
 

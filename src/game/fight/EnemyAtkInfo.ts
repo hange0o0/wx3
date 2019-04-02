@@ -12,15 +12,17 @@ class EnemyAtkInfo extends game.BaseWindow {
     private nameText: eui.Label;
     private lvText: eui.Label;
     private cdText: eui.Label;
+    private btnGroup: eui.Group;
     private cancelBtn: eui.Button;
     private atkBtn: eui.Button;
-    private btnGroup: eui.Group;
+    private arriveText: eui.Label;
+
 
 
     private enemyData
     public constructor() {
         super();
-        this.skinName = "ChapterUISkin";
+        this.skinName = "EnemyAtkInfoSkin";
     }
 
     public childrenCreated() {
@@ -38,6 +40,7 @@ class EnemyAtkInfo extends game.BaseWindow {
             maxNum:TecManager.getInstance().getTeamNum(),
             maxCost:TecManager.getInstance().getTeamCost(),
             fun:(list)=>{
+                this.hide();
                 PKPosUI.getInstance().hide();
                 FightManager.getInstance().addAtkList(list,this.enemyData.robot);
                 EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
@@ -48,6 +51,17 @@ class EnemyAtkInfo extends game.BaseWindow {
     public show(v?){
         this.enemyData = v;
         super.show();
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+    }
+
+    private onTimer(){
+        var robot = this.enemyData.robot
+        var cd = robot.distanceTime - (TM.now() - this.enemyData.time);
+        this.arriveText.text = '敌人部队将在 ' + DateUtil.getStringBySecond(Math.max(0,cd)).substr(-5) + ' 后到达';
+        if(cd < 0)
+        {
+            this.hide();
+        }
     }
 
     public onShow(){
@@ -57,8 +71,7 @@ class EnemyAtkInfo extends game.BaseWindow {
         this.lvText.text = 'LV.' + robot.level
         this.cdText.text = '路程:' +  DateUtil.getStringBySecond(robot.distanceTime).substr(-5);
 
-        var cd = robot.distanceTime - (TM.now() - this.enemyData.time);
-        this.cdText.text += '\n敌人部队在' + DateUtil.getStringBySecond(Math.max(0,cd)).substr(-5) + '后到达';
+        this.onTimer();
         if(FightManager.getInstance().isAtking(this.enemyData.robot.gameid ))
         {
             MyTool.removeMC(this.atkBtn)

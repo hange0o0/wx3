@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850" states="s1,s2"  height.s2="670">
-	<e:Group x="0" top="0" height="700" height.s2="670">
+<e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850" states="s1,s2"  height.s2="700">
+	<e:Group x="0" top="0" height="700" height.s2="700">
 		<ns1:PKCardInfoUI id="item" skinName="PKCardInfoSkin" currentState="s1" minHeight="560" left="0" right="0" top="0" bottom="0" currentState.s2="s2"/>
 		<e:Image id="con" source="type_tips_png" bottom="50" x="100" horizontalCenter.s2="0"/>
 		<e:Image id="leftBtn" source="arrow1_png" left="30" bottom="60" scaleX="-1"/>

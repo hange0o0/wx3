@@ -45,6 +45,11 @@ class BuffUI extends game.BaseUI {
 
         this.addBtnEvent(this.inviteBtn,this.share)
 
+        MyTool.addLongTouch(this.desText,()=>{
+            DebugUI.getInstance().debugTimer = egret.getTimer();
+            MyWindow.ShowTips('Tips:这是整个游戏加成最厉害的功能！')
+        },this)
+
 
     }
 

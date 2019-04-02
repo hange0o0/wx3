@@ -86,6 +86,7 @@ class WorkManager {
 
                 if(b)
                 {
+                    UM.resetHourEarn();
                     UM.needUpUser = true;
                     EM.dispatchEventWith(GameEvent.client.MONSTER_WORK_CHANGE)
                 }
@@ -127,8 +128,11 @@ class WorkManager {
         return Math.floor(cd*2 + 2000);
     }
 
-    public getWorkCoin(id,t?){
-        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id)/100)*(1+BuffManager.getInstance().getWorkAdd(t)/100));
+    public getWorkCoin(id,t?,stopBuff?){
+        var buffAdd = (1+BuffManager.getInstance().getWorkAdd(t)/100);
+        if(stopBuff)
+            buffAdd = 1
+        return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id)/100)*buffAdd);
     }
 
     //基础挖矿效率
@@ -205,6 +209,18 @@ class WorkManager {
             var id = arr[i].id;
              var v1 = this.getWorkCD(id)
              var v2 = this.getWorkCoin(id)
+            count += v2*(3600*1000/v1)
+        }
+        return Math.floor(count);
+    }
+
+    public getTotalHourEarn(){
+        var count = 0
+        for(var i=0;i<this.workList.length;i++)
+        {
+            var id = this.workList[i].id;
+            var v1 = this.getWorkCD(id)
+            var v2 = this.getWorkCoin(id,null,true)
             count += v2*(3600*1000/v1)
         }
         return Math.floor(count);

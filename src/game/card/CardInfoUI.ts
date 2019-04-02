@@ -136,6 +136,15 @@ class CardInfoUI extends game.BaseWindow {
 
     public showFinish(){
          GuideManager.getInstance().testShowGuide()
+
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv')  && TSM.guideTaskVO.key == this.data)
+        {
+            if(TSM.guideTaskVO.type == 'mnum')
+                TaskManager.getInstance().showGuideMC(this.copyBtn);
+            else
+                TaskManager.getInstance().showGuideMC(this.upBtn);
+        }
     }
 
     public renewCoin(){

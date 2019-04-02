@@ -12,7 +12,12 @@ class DefItem extends game.BaseItem{
     public childrenCreated() {
         super.childrenCreated();
         this.mc.mask = this.maskMC
-        //this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick)
+    }
+
+    public onClick(e){
+        e.stopImmediatePropagation()
+        EnemyAtkInfo.getInstance().show(this.data);
     }
 
     public dataChanged():void {

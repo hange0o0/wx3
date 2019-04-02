@@ -165,6 +165,8 @@ class Main extends eui.UILayer {
      */
     protected startCreateScene(): void {
         CM.initData(RES.getRes("data_json"));
+        CM.initData(RES.getRes("task_json"));
+        CM.initFinish()
         GameManager.stage = this.stage;
         GameManager.container = this;
         if(App.isIOS){

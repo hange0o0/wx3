@@ -145,6 +145,7 @@ class PKManager {
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{
+            loader.data = loader.data.replace(/\r/g,'');
             this.chapterData = loader.data.split('\n')
             for(var i=0;i<this.chapterData.length;i++)
             {
@@ -162,6 +163,7 @@ class PKManager {
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{
+            loader.data = loader.data.replace(/\r/g,'');
             this.nickData = loader.data.split('\n')
         },this);
         loader.load(new egret.URLRequest(url));
@@ -179,6 +181,7 @@ class PKManager {
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{
+            loader.data = loader.data.replace(/\r/g,'');
             var temp = loader.data.split('\n')
             while(!temp[temp.length-1])//去掉后面的空数据
             {
