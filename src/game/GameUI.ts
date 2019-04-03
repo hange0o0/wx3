@@ -36,6 +36,10 @@ class GameUI extends game.BaseUI {
     private barGroup: eui.Group;
     private barMC: eui.Rect;
 
+    private taskGroup: eui.Group;
+    private taskText: eui.Label;
+    private taskText2: eui.Label;
+
 
 
 
@@ -86,6 +90,44 @@ class GameUI extends game.BaseUI {
                 DebugUI.getInstance().show();
             }
         },this)
+        this.addBtnEvent(this.taskGroup,this.onTask)
+
+    }
+
+    public showDefGuide(){
+        this.scroller.viewport.scrollV = 0;
+        this.scroller.validateNow()
+        MyTool.runListFun(this.list,'defGuide')
+
+    }
+
+    private onTask(e){
+        e.stopImmediatePropagation();
+        TaskManager.getInstance().onTaskGo();
+    }
+
+    public renewTask(){
+        var TSM = TaskManager.getInstance();
+        var vo = TSM.getCurrentTask();
+        if(vo)
+        {
+            var value = Math.min(TSM.getTaskValue(vo),vo.value);
+            this.setHtml(this.taskText,vo.getDes() + '  ' + this.createHtml(value + '/' + vo.value,0xFFECA5))
+            if(value<vo.value)
+            {
+                this.taskText2.text = '去完成>>'
+                this.taskText2.textColor = 0xFCB33C
+            }
+            else
+            {
+                this.taskText2.text = '【领取奖励】'
+                this.taskText2.textColor = 0x70F45F
+            }
+        }
+        else
+        {
+            this.taskGroup.visible = false;
+        }
     }
 
     private renewInfo(res?){
@@ -266,6 +308,7 @@ class GameUI extends game.BaseUI {
         this.onTimer();
         this.onCoinChange();
         this.onDimaondChange();
+        this.renewTask();
         MyTool.removeMC(this.changeUser);
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
@@ -277,6 +320,7 @@ class GameUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewTask)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
@@ -346,7 +390,7 @@ class GameUI extends game.BaseUI {
         //SoundManager.getInstance().playSound('pkbg');
         if(this.visible)
         {
-            this.onTimer();
+            this.renewList();
         }
         else
         {

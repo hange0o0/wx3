@@ -70,6 +70,8 @@ class TaskManager {
         {
             case 'fight':
                 return FightManager.getInstance().fightNum;
+            case 'def':
+                return MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false);
             case 'mlv'://指定ID
                 return MonsterManager.getInstance().getMonsterLevel(vo.key)
             case 'mnum': //指定ID
@@ -95,21 +97,36 @@ class TaskManager {
         if(!this.isTaskFinish(vo))
             return
         if(vo.coin)
+        {
             UM.addCoin(vo.coin)
+            MyWindow.ShowTips('获得金币：'+MyTool.createHtml(NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
+        }
         if(vo.diamond)
+        {
             UM.addDiamond(vo.diamond)
+            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(vo.diamond,0x6ffdfd),2000)
+        }
         UM.task = vo.id;
+        EM.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
     //未完成任务前往
     public guideTaskVO:TaskVO;
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
+        if(this.isTaskFinish(vo))
+        {
+            this.getTaskAward();
+            return
+        }
         var type = vo.type
         switch(type)
         {
             case 'fight':
                 this.showGuideMC(GameUI.getInstance().fightBtn)
+                break;
+            case 'def':
+                GameUI.getInstance().showDefGuide();
                 break;
             case 'mlv'://指定ID
                 this.showGuideMC(GameUI.getInstance().monsterBtn)

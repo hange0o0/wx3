@@ -51,10 +51,14 @@ class ChapterManager {
                 UM.chapterStar[id] = star;
         }
         if(b)
+        {
             UM.needUpUser = true;
+            this.setChapterEarn();
+            EM.dispatch(GameEvent.client.TASK_CHANGE)
+        }
         if(!UM.chapterResetTime)
             UM.chapterResetTime = TM.now()
-        this.setChapterEarn();
+
     }
 
     //取单次收益

@@ -99,12 +99,14 @@ class MonsterManager {
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].lv = this.getMonsterLevel(id) + 1;
+        EM.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
     public numUpMonster(id){
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].num = this.getMonsterNum(id) + 1;
+        EM.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
 

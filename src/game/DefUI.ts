@@ -5,9 +5,12 @@ class DefUI extends game.BaseItem{
     private bgFront: eui.Image;
     private redMC: eui.Image;
     private forceText: eui.Label;
-    private numText: eui.Label;
-    private costText: eui.Label;
+    //private numText: eui.Label;
+    //private costText: eui.Label;
     private defList: eui.List;
+
+
+
 
 
 
@@ -60,7 +63,7 @@ class DefUI extends game.BaseItem{
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1;
-            item.bottom = 20+vo.height*0.3 - 3 + 6*Math.random()// + Math.random()*80
+            item.bottom = 25+vo.height*0.4 - 5 + 10*Math.random()// + Math.random()*80
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);
@@ -77,18 +80,15 @@ class DefUI extends game.BaseItem{
         this.bgFront.source = PKManager.getInstance().getDefBGFront()
 
 
-        this.numText.text = '数量：' + arr.length + '/'+ teamNum;
-        this.costText.text =  '费用：' +cost + '/' + teamCost;
-        this.forceText.text = '战力：' + MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false)
+        //this.numText.text = '数量：' + arr.length + '/'+ teamNum;
+        //this.costText.text =  '费用：' +cost + '/' + teamCost;
+        this.forceText.text = '防守战力：' + MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false)
 
 
         this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
 
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
-
-
-
     }
 
     public onE(){
@@ -96,6 +96,10 @@ class DefUI extends game.BaseItem{
             return;
         this.randomTalk();
         MyTool.runListFun(this.defList,'onE');
+    }
+
+    public defGuide(){
+        TaskManager.getInstance().showGuideMC(this)
     }
 
 

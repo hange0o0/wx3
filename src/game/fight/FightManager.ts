@@ -119,16 +119,18 @@ class FightManager {
     }
 
     //打赢的人能得到的金币(根据进攻方战力)
-    public getFightCoin(list,force,mforce){
+    public getFightCoin(list,force,mforce,isAll?){
         var coin =  0;
         var arr = list.split(',');
         for(var i=0;i<arr.length;i++)
         {
             var vo = MonsterVO.getObject(arr[i]);
             var mf = force + (mforce[vo.id] || 0);
-            coin += vo.cost*(1+mf/100)*5
+            coin += vo.cost*(1+mf/100)*100
         }
-        return Math.floor(coin);
+        if(isAll || Math.random() > 0.5)
+            return Math.floor(coin);
+        return Math.floor(coin*(0.2 + 0.8*Math.random()));
     }
 
     public resetNextBeHit(){
@@ -275,7 +277,7 @@ class FightManager {
                 //扣钱
                 if(oo.result == 1)
                 {
-                    oo.addCoin = -this.getFightCoin(oo.pkObj.list1,oo.pkObj.force1,oo.pkObj.mforce1)
+                    oo.addCoin = -this.getFightCoin(oo.pkObj.list1,oo.pkObj.force1,oo.pkObj.mforce1,true)
                     coinArr.push({time:oo.time + robot.distanceTime,oo:oo})
                 }
                 this.fightingArr.splice(i,1);
@@ -360,6 +362,7 @@ class FightManager {
         };
         this.fightingArr.push(oo)
         this.fightNum ++;
+        EM.dispatch(GameEvent.client.TASK_CHANGE)
         RobotVO.change = true;
         UM.needUpUser = true;
         return oo;

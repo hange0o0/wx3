@@ -12,6 +12,7 @@ class GameEvent {
         TEC_CHANGE:'TEC_CHANGE',
         BUFF_CHANGE:'BUFF_CHANGE',
         DEF_CHANGE:'DEF_CHANGE',
+        TASK_CHANGE:'TASK_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

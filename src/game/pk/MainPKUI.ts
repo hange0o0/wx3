@@ -32,6 +32,7 @@ class MainPKUI extends game.BaseUI {
     private backBtn: eui.Button;
     private doubleBtn: eui.Button;
     private replayBtn: eui.Button;
+    private strongBtn: eui.Button;
     private bottomBar: eui.Group;
     private hpBar1: eui.Image;
     private hpBar2: eui.Image;
@@ -42,6 +43,7 @@ class MainPKUI extends game.BaseUI {
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
     private topUI: TopUI;
+
 
 
 
@@ -78,6 +80,7 @@ class MainPKUI extends game.BaseUI {
         this.addBtnEvent(this.backBtn,this.onBack)
         this.addBtnEvent(this.doubleBtn,this.onDouble)
         this.addBtnEvent(this.addSpeedBtn,this.onSpeed)
+        this.addBtnEvent(this.strongBtn,this.onStrong)
 
         var pkvideo = PKVideoCon.getInstance();
         this.con.addChild(pkvideo)
@@ -92,6 +95,10 @@ class MainPKUI extends game.BaseUI {
 
         // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
         // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
+    }
+
+    private onStrong(){
+
     }
 
     public onVideoEvent2(e){
@@ -380,6 +387,7 @@ class MainPKUI extends game.BaseUI {
             var result = PD.getPKResult();
             //if(this.dataIn.isPK)
             //{
+
                 if(result == 1)
                 {
                     this.delayShowResult(this.failGroup);
@@ -412,10 +420,12 @@ class MainPKUI extends game.BaseUI {
             if(this.shareStr)
             {
                 this.btnGroup.addChild(this.doubleBtn)
+                MyTool.removeMC(this.strongBtn)
             }
             else
             {
                 MyTool.removeMC(this.doubleBtn)
+                this.btnGroup.addChild(this.strongBtn)
             }
         }
         else

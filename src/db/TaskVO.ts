@@ -34,4 +34,30 @@ class TaskVO {
         this.coin = data.coin;
         this.diamond = data.diamond;
     }
+
+    public getDes(){
+        switch(this.type)
+        {
+            case 'fight':
+                return '进行'+this.value+'次掠夺'
+            case 'def':
+                return '防守战力达到'+this.value+''
+            case 'mlv'://指定ID
+                var mvo = MonsterVO.getObject(this.key)
+                return '【'+mvo.name+'】达到'+this.value+'级'
+            case 'mnum': //指定ID
+                var mvo = MonsterVO.getObject(this.key)
+                return '【'+mvo.name+'】达到'+this.value+'星'
+            case 'mlv2'://等级大于v1的数量
+                return '拥有'+this.value+'个'+this.key+'级及以上怪物'
+            case 'mnum2'://数量大于v1的数量
+                return '拥有'+this.value+'个'+this.key+'星及以上怪物'
+            case 'tlv':
+                return '【'+TecManager.getInstance().tecBase[this.key].name+'】科技达到'+this.value+'级'
+            case 'clv':
+                return '收复'+this.value+'个据点'
+            case 'cstar'://星星数量
+                return '据点总星星数达到'+this.value+'个'
+        }
+    }
 }
