@@ -24,8 +24,12 @@ class LogItem extends game.BaseItem {
 
 
     private onViewClick(){
-        this.data.pkObj.isReplay = true;
-        MainPKUI.getInstance().show(this.data.pkObj)
+        var pkObject = ObjectUtil.clone(this.data.pkObj);
+        pkObject.addCoin = this.data.addCoin
+        pkObject.isReplay = true;
+        pkObject.fight = this.data;
+        pkObject.title = '与【'+this.data.robot.nick+'】的战斗回放'
+        MainPKUI.getInstance().show(pkObject)
     }
 
     private onPKClick(){

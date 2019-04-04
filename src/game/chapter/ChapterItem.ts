@@ -48,6 +48,8 @@ class ChapterItem extends game.BaseItem{
                     PKPosUI.getInstance().hide();
                     UM.addEnergy(-1);
                     var pkObj:any = {
+                        chapterid:this.data.id,
+                        title:'收复据点 - NO.' + this.data.id,
                         seed:enemy.seed,
                         list1:this.data.list1,
                         force1:enemy.force,
@@ -63,15 +65,17 @@ class ChapterItem extends game.BaseItem{
                         PKData.instanceIndex = 2;
                         var hpObj = PKData.getInstance().getHpData();
                         var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
-                        if(hpRate2 >= 0.8)
+                        if(hpRate2 >= 0.6)
                             ChapterManager.getInstance().setChapterStar(this.data.id,3);
-                        else if(hpRate2 >= 0.5)
+                        else if(hpRate2 >= 0.3)
                             ChapterManager.getInstance().setChapterStar(this.data.id,2);
                         else
                             ChapterManager.getInstance().setChapterStar(this.data.id,1);
                         PKData.instanceIndex = 1;
                         UM.addCoin(ChapterManager.getInstance().resultEarn.coin)
                         UM.addDiamond(ChapterManager.getInstance().resultEarn.diamond)
+                        pkObj.coin = ChapterManager.getInstance().resultEarn.coin
+                        pkObj.diamond = ChapterManager.getInstance().resultEarn.diamond
                     }
                     else
                     {

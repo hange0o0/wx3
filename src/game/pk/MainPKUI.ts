@@ -24,7 +24,10 @@ class MainPKUI extends game.BaseUI {
     private winGroup: eui.Group;
     private winText: eui.Label;
     private desGroup: eui.Group;
+    private resourceGroup: eui.Group;
+    private coinGroup: eui.Group;
     private des1: eui.Label;
+    private diamondGroup: eui.Group;
     private des2: eui.Label;
     private failGroup: eui.Group;
     private failText: eui.Label;
@@ -43,6 +46,8 @@ class MainPKUI extends game.BaseUI {
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
     private topUI: TopUI;
+
+
 
 
 
@@ -219,9 +224,9 @@ class MainPKUI extends game.BaseUI {
     }
 
     public onReplay(){
-
         this.dataIn.passTime = 0;
-        this.bottomBar.visible = true;
+        this.dataIn.isReplay = true;
+        this.bottomBar.visible = true
         this.reset();
         this.renewSpeedBtn();
     }
@@ -243,6 +248,7 @@ class MainPKUI extends game.BaseUI {
         else
         {
             this.currentState = 's1'
+            this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
         }
 
         PKVideoCon.getInstance().x = -(PKConfig.floorWidth + PKConfig.appearPos*2 - 640)/2;
@@ -375,7 +381,7 @@ class MainPKUI extends game.BaseUI {
         {
             this.renewForce();
             this.renewHp();
-            this.bottomBar.visible = false;
+
             PD.playSpeed = 1;
             
 
@@ -391,28 +397,49 @@ class MainPKUI extends game.BaseUI {
                 if(result == 1)
                 {
                     this.delayShowResult(this.failGroup);
-                    this.failText.text = '失败'
-                    this.backBtn.label = '重试'
+                    this.failText.text = this.dataIn.chapterid?'挑战失败':'失败'
+                    this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
                 }
                 else if(result == 2)
                 {
+                    this.resourceGroup.removeChildren()
                     this.delayShowResult(this.winGroup);
-                    this.winText.text = '胜利'
-                    var addCoin = 1;
-                    if(addCoin)
+                    this.winText.text = this.dataIn.chapterid?'挑战成功':'胜利'
+                    if(this.dataIn.coin)
                     {
                         this.desGroup['callVisible'] = true
-                        this.des1.text = '恭喜获得'
-                        this.des2.text = 'x' + NumberUtil.addNumSeparator(addCoin)
+                        this.resourceGroup.addChild(this.coinGroup)
+                        this.des1.text = 'x' + NumberUtil.addNumSeparator(this.dataIn.coin,2)
                     }
-                    this.shareStr = '已成功通过第'+this.dataIn.level+'关，需要向我取经吗？'
-                    this.backBtn.label = '下一关'
+                    if(this.dataIn.diamond)
+                    {
+                        this.desGroup['callVisible'] = true
+                        this.resourceGroup.addChild(this.diamondGroup)
+                        this.des2.text = 'x' + this.dataIn.diamond;
+                    }
+                    if(this.dataIn.chapterid)
+                    {
+                        this.shareStr = '已成功通过第'+this.dataIn.chapterid+'关，需要向我取经吗？'
+                        this.backBtn.label = this.dataIn.chapterid == UM.chapterLevel?'下一关':'关闭'
+                    }
+                    else
+                    {
+                        if(this.dataIn.fight)
+                        {
+                            if(this.dataIn.fight.type == 'atk')
+                                this.shareStr = '我成功突破了【'+this.dataIn.fight.robot.nick+'】的防守，获得了'+NumberUtil.addNumSeparator(this.dataIn.coin,1)+'金币'
+                            else
+                                this.shareStr = '我成功防守住了【'+this.dataIn.fight.robot.nick+'】来势汹汹的进攻，牛得不要不要的~'
+                        }
+                        this.backBtn.label = '关闭'
+                    }
+
                 }
                 else
                 {
                     this.delayShowResult(this.failGroup);
-                    this.failText.text = '平手'
-                    this.backBtn.label = '重试'
+                    this.failText.text = '双方平手'
+                    this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
                 }
             //}
 
@@ -490,6 +517,7 @@ class MainPKUI extends game.BaseUI {
 
         var w1 = 300 * Math.min(1,hpRate1)
         var w2 = 300 * Math.min(1,hpRate2)
+        console.log(w1,w2)
         egret.Tween.removeTweens(this.hpBar1)
         egret.Tween.removeTweens(this.hpBar2)
         if(isInit)
@@ -524,6 +552,7 @@ class MainPKUI extends game.BaseUI {
 
             tw.call(()=>{
                 this.btnGroup.visible = true
+                this.bottomBar.visible = false;
             })
 
         },1000)

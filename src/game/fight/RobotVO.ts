@@ -9,7 +9,7 @@ class RobotVO{
             this.key = t
             this.index = 0;
         }
-        var lv = Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1))
+        var lv = Math.min(TecManager.getInstance().tecBase[11].max,Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)))
         var force = UM.maxForce*(0.7 + Math.random()*0.8);
         var robot = new RobotVO({
             force:force,
@@ -93,18 +93,6 @@ class RobotVO{
             this.lastTime = TM.now();
             RobotVO.change = true;
         }
-        //var num = Math.floor((TM.now() - this.setDataTime)/(this.growSpeed*this.level));
-        //if(num > 0)
-        //{
-        //    this.force += Math.ceil(num*2*this.level*Math.random());
-        //    this.setDataTime += num*this.growSpeed;
-        //
-        //    var t = TM.now() - this.lastTime;
-        //    while(t - Math.pow(this.level+this.levelAdd,2.8)*15*60 > 0)
-        //    {
-        //        this.levelAdd ++
-        //    }
-        //}
     }
 
     //public getLevel(){

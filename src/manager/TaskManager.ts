@@ -151,5 +151,8 @@ class TaskManager {
                 this.showGuideMC(GameUI.getInstance().chapterBtn)
                 break;
         }
+
+
+        //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
     }
 }

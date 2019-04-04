@@ -56,6 +56,15 @@ class DebugManager {
             //console.log(TecManager.getInstance().getTecCost(11,i))
             console.log(TecManager.getInstance().getSkillValue(32,i))
         }
+
+
+        var list = ObjectUtil.objToArray(MonsterVO.data)
+        ArrayUtil.sortByField(list,['level'],[0])
+        for(var i=0;i<list.length;i++)
+        {
+           console.log(list[i].level,list[i].id,list[i].name)
+        }
+
     }
 
     public randomList(cost){
