@@ -279,6 +279,7 @@ class GameUI extends game.BaseUI {
 
     public onShow(){
         PKManager.getInstance().loadLevel();//处理等级数据，玩家登录后有可能会用到
+        PKManager.getInstance().loadNick();//处理等级数据，玩家登录后有可能会用到
         var self = this;
         this.bottomGroup.visible = false;
         this.coinText.text = '???'

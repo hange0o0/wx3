@@ -145,7 +145,7 @@ class PKManager {
 
     public initData(){
          this.loadChapter();
-         this.loadNick();
+
     }
 
     private loadChapter(){
@@ -166,8 +166,8 @@ class PKManager {
         loader.load(new egret.URLRequest(url));
     }
 
-    private loadNick(){
-        var url = 'resource/game_assets2/nick.txt';
+    public loadNick(){
+        var url = 'resource/level/nick.txt';
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{

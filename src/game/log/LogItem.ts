@@ -64,7 +64,7 @@ class LogItem extends game.BaseItem {
                 this.currentState = 's1'
                 this.desText.text = '战斗胜利,成功掠夺资源!';
                 this.awardText.text = '收获：'
-                this.coinText.text = this.data.addCoin
+                this.coinText.text = NumberUtil.addNumSeparator(this.data.addCoin,2)
                 this.coinText.textColor = 0x66FF66
 
             }
@@ -82,7 +82,7 @@ class LogItem extends game.BaseItem {
             {
                 this.currentState = 's1'
                 this.desText.text = '防守失败，夺资源惨被掠!';
-                this.coinText.text = this.data.addCoin
+                this.coinText.text = '-' + NumberUtil.addNumSeparator(-this.data.addCoin,2)
                 this.coinText.textColor = 0xFF0000
                 this.awardText.text = '损失：'
             }
