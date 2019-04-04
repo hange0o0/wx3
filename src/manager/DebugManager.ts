@@ -32,6 +32,30 @@ class DebugManager {
     public addTimeCD(t){
         this.addTime += t;
         SharedObjectManager.getInstance().setMyValue('addTime',this.addTime)
+
+
+    }
+
+    private ccccccc(){
+        var list = ObjectUtil.objToArray(MonsterVO.data)
+        for(var i=0;i<list.length;i++)
+        {
+            var mid = list[i].id;
+            //list[i].temp = MonsterManager.getInstance().getLevelCost(mid,100)
+            list[i].temp = WorkManager.getInstance().getBaseWorkCoin(list[i].id)*(3600*1000/WorkManager.getInstance().getWorkCD(list[i].id))    //70/45
+        }
+        ArrayUtil.sortByField(list,['temp'],[0])
+        console.log(list.shift().id)
+        console.log(list.pop().id)
+
+        var id = 70;
+        for(var i=1;i<=100;i++)
+        {
+            //console.log(MonsterManager.getInstance().getLevelCost(id,i))
+            //console.log(Math.ceil(WorkManager.getInstance().getBaseWorkCoin(id)*(1+(i*5)/100)*(3600*1000/WorkManager.getInstance().getWorkCD(id))))
+            //console.log(TecManager.getInstance().getTecCost(11,i))
+            console.log(TecManager.getInstance().getSkillValue(32,i))
+        }
     }
 
     public randomList(cost){

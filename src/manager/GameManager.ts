@@ -61,7 +61,7 @@ class GameManager {
     public init(){
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this);
         GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this);
-        this.createAD();
+        //this.createAD();
     }
 
     private createAD(){
@@ -260,7 +260,7 @@ class App {
 function sendClientError(str){
     //var url =  'http://172.17.196.195:90/error_wx2/log_error.php'
     //if(window["wx"])
-    var url =  'https://120.77.153.203/error_wx2/log_error.php'
+    var url =  'https://www.hangegame.com/error_wx3/log_error.php'
     Net.getInstance().send(url,{str:str});
 }
 //window.onerror=handleErr;
@@ -273,6 +273,7 @@ if(window["wx"])
     window["PKCardInfoUI"] = PKCardInfoUI;
     window["BottomUI"] = BottomUI;
     window["TopUI"] = TopUI
+    window["ChangeUserUI"] = ChangeUserUI
 
 
     var wx =  window["wx"];

@@ -36,7 +36,7 @@ class PKTalkItem extends game.BaseContainer {
     }
 
 
-    public setData(data,gift?) {
+    public setData(data,gift?,scale=1) {
         this.active = true;
 
 
@@ -65,7 +65,7 @@ class PKTalkItem extends game.BaseContainer {
         this.scaleX = 0;
         this.scaleY = 0;
         var tw = egret.Tween.get(this);
-        tw.to({scaleX:1,scaleY:1},200).to({scaleX:0.8,scaleY:0.8},200).wait(2500).to({scaleX:1,scaleY:1},200).to({scaleX:0,scaleY:0},100).call(function(){
+        tw.to({scaleX:1/scale,scaleY:1/scale},200).to({scaleX:0.8/scale,scaleY:0.8/scale},200).wait(2500).to({scaleX:1/scale,scaleY:1/scale},200).to({scaleX:0,scaleY:0},100).call(function(){
              this.remove();
         },this);
     }

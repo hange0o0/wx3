@@ -72,12 +72,13 @@ class ChapterManager {
         UM.resetHourEarn();
     }
 
+    //只存12小时
     public getMaxChapterCoin(){
-        return this.maxEarn*(3600*24/this.collectCD)
+        return this.maxEarn*(3600*12/this.collectCD)
     }
 
-    //取当前已收集的金币(每5分钟结算一次)
-    public collectCD = 60*5;
+    //取当前已收集的金币(每2分钟结算一次)
+    public collectCD = 60*2;
     public getChapterCoin(){
         var collectCD = this.collectCD;
         var coin = this.maxEarn;

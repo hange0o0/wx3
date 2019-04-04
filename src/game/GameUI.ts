@@ -39,6 +39,9 @@ class GameUI extends game.BaseUI {
     private taskGroup: eui.Group;
     private taskText: eui.Label;
     private taskText2: eui.Label;
+    private taskBtn: eui.Group;
+    private taskBtn2: eui.Group;
+    private taskRed: eui.Image;
 
 
 
@@ -68,6 +71,8 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.monsterBtn,this.onMonster)
         this.addBtnEvent(this.tecBtn,this.onTec)
         this.addBtnEvent(this.buffBtn,this.onBuff)
+        this.addBtnEvent(this.taskBtn,this.onTaskBtn)
+        this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
         this.scroller.viewport = this.list
         this.list.itemRendererFunction = (data)=>{
@@ -92,6 +97,30 @@ class GameUI extends game.BaseUI {
         },this)
         this.addBtnEvent(this.taskGroup,this.onTask)
 
+    }
+
+    private onTaskBtn(){
+        this.taskBtn.visible = this.taskBtn2.visible = false;
+        egret.Tween.removeTweens(this.taskGroup)
+        if(this.taskGroup.x == 0)
+        {
+            egret.Tween.get(this.taskGroup).to({x:-600},300).call(this.renewTaskRed,this);
+        }
+        else
+        {
+            egret.Tween.get(this.taskGroup).to({x:20},200).to({x:0},100).call(this.renewTaskRed,this);
+        }
+    }
+
+    private renewTaskRed(){
+        this.taskRed.visible = this.taskGroup.x == -600 && TaskManager.getInstance().isTaskFinish()
+        this.taskBtn.visible = this.taskGroup.x == -600
+        this.taskBtn2.visible = !this.taskBtn.visible
+    }
+
+    public hideTask(){
+        this.taskGroup.x = -600;
+        this.renewTaskRed();
     }
 
     public showDefGuide(){
@@ -255,6 +284,8 @@ class GameUI extends game.BaseUI {
         this.coinText.text = '???'
         this.diamondText.text = '???'
 
+        this.hideTask();
+
         ChangeUserUI.getAD();
         this.renewSound();
         this.loadingGroup.visible = true;
@@ -279,7 +310,7 @@ class GameUI extends game.BaseUI {
 
             loadTask.onProgressUpdate(res => {
                 this.barMC.width = 300*res.progress/100;
-                self.loadText.text = '正在加载素材，请耐心等候..' + res.progress + '%'
+                self.loadText.text = '正在加载素材..' + res.progress + '%'
             })
             return;
         }
@@ -300,7 +331,7 @@ class GameUI extends game.BaseUI {
         }
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
-        GuideManager.getInstance().isGuiding = !UM.guideFinish;
+        GuideManager.getInstance().isGuiding = false//!UM.guideFinish;
         this.bottomGroup.visible = true;
         this.loadingGroup.visible = false;
         this.showIndex = -1;

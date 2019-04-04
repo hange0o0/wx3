@@ -4,6 +4,7 @@ class TecItem extends game.BaseItem{
     private nameText: eui.Label;
     private desText: eui.Label;
     private upGroup: eui.Group;
+    private barMC: eui.Rect;  //150
     private iconMC: eui.Image;
     private valueText: eui.Label;
     private upBtn: eui.Button;
@@ -12,7 +13,7 @@ class TecItem extends game.BaseItem{
 
     public cost;
     public isMax = false
-    private typeColor = [0x994400,0xFDD302,0x660000];
+    //private typeColor = [0x994400,0xFDD302,0x660000];
     public constructor() {
         super();
         this.skinName = "TecItemSkin";
@@ -61,9 +62,10 @@ class TecItem extends game.BaseItem{
         if(this.isMax)
             return;
          var b = (this.data.type == 'diamond' && UM.diamond>=this.cost) || (this.data.type == 'coin' && UM.coin>=this.cost)
-        this.valueText.textColor = b?0xfff6db:0xFF0000;
+        //this.valueText.textColor = b?0xfff6db:0xFF0000;
         //this.upBtn.touchEnabled = b;
         this.upBtn.skinName = b?'Btn1Skin':'Btn3Skin';
+        MyTool.renewBar(this.barMC,this.cost,UM.coin,150,2);
     }
 
 

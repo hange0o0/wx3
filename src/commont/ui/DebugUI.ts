@@ -75,6 +75,20 @@ class DebugUI extends game.BaseUI {
             UM.addDiamond(100)
             MyWindow.ShowTips('钻石 + ' + 100)
         })
+        this.addB('跳转小程序',()=>{
+            var wx = window['wx'];
+            if(!wx)
+            {
+                MyWindow.ShowTips('只在公网生效')
+                return;
+            }
+            wx.navigateToMiniProgram({
+                appId: 'wxf9c8e218c23e2eb7',
+                success(res) {
+                    // 打开成功
+                }
+            })
+        })
     }
 
     private addB(label,fun){

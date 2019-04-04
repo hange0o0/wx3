@@ -8,13 +8,13 @@ class TecManager {
         return this._instance;
     }
     public tecBase = {
-        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:20,v1:-70000,v2:4,v3:5000},
+        11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:20,v1:-94716,v2:4.52,v3:5000},
         21:{'name':'挖矿加成',des:'增加挖矿时的金币收益',type:'coin',v1:0,v2:3,v3:2000},
         22:{'name':'矿坑容量',des:'增加一个新的挖矿位置',type:'coin',v1:0,v2:3,v3:500},
-        31:{'name':'防守加成',des:'增加防守时的战力加成',type:'coin',v1:0,v2:3,v3:2000},
-        32:{'name':'进攻加成',des:'增加进攻时的战力加成',type:'coin',v1:0,v2:3,v3:2000},
-        33:{'name':'战队费用',des:'增加战斗队伍费用上限',type:'coin',v1:0,v2:4,v3:1000},
-        34:{'name':'战队容量',des:'增加战斗队伍队员上限',max:14-4,type:'coin',v1:0,v2:5,v3:1000},
+        31:{'name':'防守加成',des:'增加防守时的战力加成',type:'coin',v1:0,v2:3,v3:4000},
+        32:{'name':'进攻加成',des:'增加进攻时的战力加成',type:'coin',v1:0,v2:3,v3:4000},
+        33:{'name':'战队费用',des:'增加战斗队伍费用上限',type:'coin',v1:0,v2:3.64,v3:1000},
+        34:{'name':'战队容量',des:'增加战斗队伍队员上限',max:14-4,type:'coin',v1:0,v2:6,v3:3000},
         //8:{'name':'科技革命',des:'提升主科技等级可提高其它科技的等级上限',type:'diamond',v1:0,v2:0,v3:0},
     }
 
@@ -75,7 +75,7 @@ class TecManager {
         var force = 0
         for(var i=0;i<lv;i++)
         {
-            force += (i+10)*2
+            force += (i+10)*5
         }
         return force;
     }
@@ -87,7 +87,7 @@ class TecManager {
     public getTecCost(id,lv?){
          lv = lv || (this.getTecLevel(id)+1);
         var oo = this.tecBase[id]
-        return Math.floor(oo.v1 + Math.pow(lv,oo.v2)*oo.v3);
+        return MyTool.reInit(oo.v1 + Math.pow(lv,oo.v2)*oo.v3,3);
     }
 
     public getDefForce(){

@@ -3,11 +3,12 @@ class DefUI extends game.BaseItem{
     private con: eui.Group;
     private bg: eui.Image;
     private bgFront: eui.Image;
-    private redMC: eui.Image;
     private forceText: eui.Label;
-    //private numText: eui.Label;
-    //private costText: eui.Label;
+    private redMC: eui.Image;
+    private numText: eui.Label;
+    private costText: eui.Label;
     private defList: eui.List;
+
 
 
 
@@ -32,13 +33,43 @@ class DefUI extends game.BaseItem{
         this.addBtnEvent(this,this.onClick)
         this.defList.itemRenderer = DefItem;
         this.defList.dataProvider = this.dataProvider = new eui.ArrayCollection();
+        //this.addBtnEvent(this.taskGroup,this.onTask)
 
     }
+
+    //private onTask(e){
+    //    e.stopImmediatePropagation();
+    //    TaskManager.getInstance().onTaskGo();
+    //}
 
     private onClick(){
         MonsterManager.getInstance().editDef();
     }
 
+
+    //public renewTask(){
+    //    var TSM = TaskManager.getInstance();
+    //    var vo = TSM.getCurrentTask();
+    //    if(vo)
+    //    {
+    //        var value = Math.min(TSM.getTaskValue(vo),vo.value);
+    //        this.setHtml(this.taskText,vo.getDes() + '  ' + this.createHtml(value + '/' + vo.value,0xFFECA5))
+    //        if(value<vo.value)
+    //        {
+    //            this.taskText2.text = '去完成>>'
+    //            this.taskText2.textColor = 0xFCB33C
+    //        }
+    //        else
+    //        {
+    //            this.taskText2.text = '【领取奖励】'
+    //            this.taskText2.textColor = 0x70F45F
+    //        }
+    //    }
+    //    else
+    //    {
+    //        this.taskGroup.visible = false;
+    //    }
+    //}
 
     public dataChanged():void {
         while(this.monsterArr.length > 0)
@@ -62,8 +93,8 @@ class DefUI extends game.BaseItem{
             this.con.addChild(item);
             item.load(id)
             item.stand();
-            item.scaleX = item.scaleY = 1;
-            item.bottom = 25+vo.height*0.4 - 5 + 10*Math.random()// + Math.random()*80
+            item.scaleX = item.scaleY = 1.2;
+            item.bottom = 30+vo.height*0.6 - 5 + 10*Math.random()// + Math.random()*80
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);
@@ -89,6 +120,8 @@ class DefUI extends game.BaseItem{
 
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
+
+        //this.renewTask();
     }
 
     public onE(){

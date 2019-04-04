@@ -8,7 +8,7 @@ class MonsterManager {
         return this._instance;
     }
 
-    private numCost = [10,20,40,80,160];
+    private numCost = [10,20,40,80,160,999];
     public monsterData;  //{lv,num};
     public defList = '';
 
@@ -124,15 +124,16 @@ class MonsterManager {
     }
 
     public getLevelCost(id,lv?){
+
         lv = lv || this.getMonsterLevel(id)+1;
         var vo = MonsterVO.getObject(id);
-        return  Math.floor(Math.pow(lv + vo.level/10,2.5)*1000);
+        return  MyTool.reInit(Math.pow(lv + (1+lv/10)*vo.level/10,2.5)*1000,3);
     }
 
     //最多10只分身
     public getNumCost(id,num?){
         num = num || this.getMonsterNum(id)+1;
-        return this.numCost[num-1];
+        return this.numCost[num-2] + MonsterVO.getObject(id).level - 1;
     }
 
     //增加的工作收益
@@ -149,7 +150,7 @@ class MonsterManager {
         var force = 0
         for(var i=0;i<lv;i++)
         {
-            force += (i+10)*2;
+            force += (i+10)*5;
         }
         return force;
     }

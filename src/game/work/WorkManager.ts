@@ -139,7 +139,7 @@ class WorkManager {
     public getBaseWorkCoin(id){
         var vo = MonsterVO.getObject(id);
         if(!vo.coinAdd)
-            vo.coinAdd =  Math.ceil(this.getWorkCD(id)/2000 + vo.cost/2 + vo.level/2)
+            vo.coinAdd =  Math.ceil(this.getWorkCD(id)/2000 + vo.cost*0.6 + vo.level*0.8)
         return vo.coinAdd;
     }
 

@@ -7,6 +7,7 @@
 	<e:Group id="upGroup" y="8" right="10">
 		<e:Group y="0" x="0">
 			<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>
+			<e:Rect id="barMC" left="0" top="0" bottom="0" ellipseWidth="15" width="150" fillColor="0xff0000" fillAlpha="0.3"/>
 			<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
 			<e:Label id="valueText" text="Label" size="24" verticalCenter="0" right="10"/>
 		</e:Group>

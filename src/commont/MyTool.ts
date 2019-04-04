@@ -11,6 +11,31 @@ class MyTool {
         return name;
     }
 
+    //只有前面num位是非0数字
+    public static reInit(value:number,num){
+        var value = Math.floor(value);
+        var str = value + ''
+        if(str.length <= num)
+            return value;
+        return parseInt(str.substr(0,num))*Math.pow(10,str.length - num)
+    }
+
+    //显示bar
+    public static renewBar(rect,value,total,width,start){
+        if(value<total)
+        {
+            rect.fillColor = 0x00ff00
+        }
+        else
+        {
+            rect.fillColor = 0xff0000
+            var temp = total
+            total = value;
+            value = temp;
+        }
+        rect.scrollRect = new egret.Rectangle(start,0,(width - start)*value/total + start,100)
+    }
+
     //public static getPropCoin(){
     //    return Config.localResRoot + 'prop/prop_coin.png'
     //}

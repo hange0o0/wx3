@@ -7,30 +7,11 @@
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="132" y="337">
 			<e:layout>
-			<e:VerticalLayout gap="0" paddingBottom="50"/>
+			<e:VerticalLayout gap="0" paddingBottom="20" paddingTop="160"/>
 			</e:layout>
 		</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Group id="taskGroup" horizontalCenter="0" bottom="103">
-		<e:Group left="0" right="0" top="0" bottom="0">
-		<e:Image source="bg17_png" scale9Grid="12,0,57,41" y="0" x="0" scaleX="-1" width="50%" height="100%"/>
-		<e:Image source="bg17_png" scale9Grid="12,0,57,41" y="41" x="0" width="50%" height="100%"/>
-		<e:layout>
-			<e:HorizontalLayout gap="0"/>
-		</e:layout>
-		</e:Group>
-		<e:Group left="40" right="40" top="8" bottom="8">
-		<e:Group x="0" y="0">
-			<e:Label id="taskText" text="Label" x="0" y="0" size="24"/>
-			<e:Rect width="100%" height="2" x="0" y="26" fillColor="0xFFFFFF" strokeColor="0x000000"/>
-		</e:Group>
-		<e:Label id="taskText2" text="Label" x="10" y="10" size="24"/>
-		<e:layout>
-			<e:HorizontalLayout verticalAlign="top" gap="20"/>
-		</e:layout>
-		</e:Group>
-	</e:Group>
 	<e:Image source="title_bg4_png" x="-1.52" width="640" fillMode="repeat" bottom="-20"/>
     <e:Group id="bottomGroup" height="100" bottom="0" horizontalCenter="0">
 			<e:Group id="buffBtn" x="130" y="30" width="90" height="90">
@@ -84,15 +65,35 @@
 			<e:HorizontalLayout gap="10" verticalAlign="middle"/>
 		</e:layout>
 	</e:Group>
+	<e:Group id="taskGroup" x="0" bottom="110" height="68">
+		<e:Image source="bg17_png" left="-30" right="0" top="0" bottom="0" scale9Grid="12,5,53,31"/>
+		<e:Group verticalCenter="0" left="80" right="50">
+		<e:Group x="0" y="0">
+			<e:Label id="taskText" text="Label" x="0" y="0" size="22"/>
+			<e:Rect width="100%" height="2" x="0" y="26" fillColor="0xFFFFFF" strokeColor="0x000000"/>
+		</e:Group>
+		<e:Label id="taskText2" text="Label" x="74" y="0" size="25"/>
+		<e:layout>
+			<e:HorizontalLayout gap="20"/>
+		</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group id="taskBtn" x="10" bottom="115">
+		<e:Image source="note_icon_png" x="0" y="0"/>
+		<e:Image id="taskRed" source="red_mc_png" right="-15" top="0"/>
+	</e:Group>
+	<e:Group id="taskBtn2" x="10" bottom="115" width="49" height="54">
+		<e:Image source="arrow1_png" scaleX="-0.6" scaleY="0.6" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
 	<e:Group id="loadingGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Rect left="0" right="0" top="0" bottom="0"/>
 		<e:Label text="《健康游戏忠告》" size="24" textColor="0x999999" bottom="80" horizontalCenter="0"/>
 		<e:Label text="抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。\n适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。" size="20" lineSpacing="6" textAlign="center" horizontalCenter="0" bottom="20" textColor="0x999999"/>
 		<ns1:ChangeUserUI id="changeUser" skinName="ChangeUserUISkin" horizontalCenter="0" bottom="120"/>
 		<e:Image id="startBtn" source="wx_btn_info_png" width="640" height="800" bottom="420" x="0"/>
-		<e:Group verticalCenter="-100" horizontalCenter="0">
-			<e:Label id="loadText" text="加载中" size="24" textAlign="center" lineSpacing="20" textColor="0xffffff" y="0" horizontalCenter="0"/>
-			<e:Group id="barGroup" y="40" x="0">
+		<e:Group verticalCenter="-100" horizontalCenter="0" width="640">
+			<e:Label id="loadText" text="加载中" size="24" textAlign="center" lineSpacing="20" textColor="0xffffff" horizontalCenter="0" bottom="36"/>
+			<e:Group id="barGroup" y="40" horizontalCenter="0">
 				<e:Rect width="304" height="20" y="0" fillColor="0x000000" strokeColor="0xffffff" strokeWeight="1" ellipseWidth="20" x="0"/>
 				<e:Rect id="barMC" width="100" height="16" strokeColor="0xFFFFFF" ellipseWidth="16" x="2" fillColor="0xffffff" y="2"/>
 			</e:Group>

@@ -137,6 +137,8 @@ class UserManager {
     }
 
     public renewInfo(userInfo){
+        if(!userInfo)
+            return;
         this.nick = userInfo.nickName
         this.head = userInfo.avatarUrl
         this.gender = userInfo.gender || 1 //性别 0：未知、1：男、2：女
@@ -214,6 +216,13 @@ class UserManager {
                 wx.cloud.callFunction({      //取玩家openID,
                     name: 'getInfo',
                     complete: (res) => {
+                        if(!res.result)
+                        {
+                            MyWindow.Alert('请求用户数据失败，请重新启动',()=>{
+                                wx.exitMiniProgram({});
+                            })
+                            return;
+                        }
                         console.log(res)
                         this.gameid = res.result.openid
                         this.isTest = res.result.testVersion == this.testVersion;
@@ -319,7 +328,7 @@ class UserManager {
              loginTime:TM.now(),   //$
              coin:10000,   //$
              diamond:50,   //$
-             guideFinish:false,
+             guideFinish:true,
              chapterLevel:0,
              chapterStar:{},
              chapterResetTime:0,

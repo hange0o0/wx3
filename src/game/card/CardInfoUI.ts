@@ -17,12 +17,15 @@ class CardInfoUI extends game.BaseWindow {
     private cb3: eui.RadioButton;
     private pageText: eui.Label;
     private coinGroup: eui.Group;
+    private coinBarMC: eui.Rect;
     private coinText: eui.Label;
     private upBtn: eui.Button;
     private diamonGroup: eui.Group;
+    private diamondBarMC: eui.Rect;    //160
     private diamondText: eui.Label;
     private copyBtn: eui.Button;
     private closeBtn: eui.Image;
+
 
 
 
@@ -148,7 +151,9 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     public renewCoin(){
-        this.coinText.textColor = UM.coin >= this.coinCost?0xFCE4B5:0xFF0000
+        //this.coinText.textColor = UM.coin >= this.coinCost?0xFCE4B5:0xFF0000
+        MyTool.renewBar(this.coinBarMC,this.coinCost,UM.coin,160,15);
+        this.upBtn.skinName = UM.coin >= this.coinCost?'Btn1Skin':'Btn3Skin';
     }
 
 
@@ -160,7 +165,9 @@ class CardInfoUI extends game.BaseWindow {
         this.coinText.text = NumberUtil.addNumSeparator(this.coinCost)
         this.renewCoin();
         this.diamondText.text = this.diamondCost + ''
-        this.diamondText.textColor = UM.diamond >= this.diamondCost?0xFCE4B5:0xFF0000
+        //this.diamondText.textColor = UM.diamond >= this.diamondCost?0xFCE4B5:0xFF0000
+        MyTool.renewBar(this.diamondBarMC,this.diamondCost,UM.diamond,160,15);
+        this.copyBtn.skinName = UM.diamond >= this.diamondCost?'Btn1Skin':'Btn3Skin';
 
 
         //var force = 100;

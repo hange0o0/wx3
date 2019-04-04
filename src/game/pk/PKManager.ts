@@ -34,6 +34,7 @@ class PKManager {
     public levelData//关卡数据的集合
     public chapterData = []//关卡数据的集合
     public nickData = []//昵称
+    public headData = {}//昵称
     //public roundTotalData = {}//关卡数据的集合
 
     private beginTime = 1550073600;//2019-2-14 0:0:0
@@ -80,19 +81,26 @@ class PKManager {
         return Base64.decode(name);
     }
     public setHead(img,head){
+        if(this.headData[head])
+        {
+            img.source = this.headData[head];
+            return;
+        }
         var wx = window['wx'];
         if(!wx)
         {
             img.source = 'common_head_bg_jpg'
             return
         }
+        var self = this;
         img.source = 'common_head_bg_jpg'
         wx.cloud.downloadFile({
-            fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
-            //fileID: 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/level/level_'+tempIndex+'.txt',
+            //fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
+            fileID: 'cloud://server1-3f4fd3.7365-server1-3f4fd3/head/'+head+'.jpg',
             success: res => {
                 console.log(res);
                 img.source = res.tempFilePath;
+                self.headData[head] = res.tempFilePath;
             },
             fail: err => {
                 console.log(err)

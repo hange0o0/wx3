@@ -50,8 +50,9 @@ class TaskManager {
 
 
     //任务是否完成
-    public isTaskFinish(vo){
-        return this.getTaskValue(vo) >= vo.value
+    public isTaskFinish(){
+        var vo = this.getCurrentTask();
+        return vo && this.getTaskValue(vo) >= vo.value
     }
 
     //取正在进行的任务(未领奖)
@@ -94,7 +95,7 @@ class TaskManager {
         var vo = this.getCurrentTask();
         if(!vo)
             return;
-        if(!this.isTaskFinish(vo))
+        if(!this.isTaskFinish())
             return
         if(vo.coin)
         {
@@ -114,7 +115,7 @@ class TaskManager {
     public guideTaskVO:TaskVO;
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
-        if(this.isTaskFinish(vo))
+        if(this.isTaskFinish())
         {
             this.getTaskAward();
             return
