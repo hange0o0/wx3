@@ -5,6 +5,7 @@ class MonsterItem extends game.BaseItem{
     private text: eui.Label;
     private costText: eui.Label;
     private numBar: eui.Image;
+    private redMC: eui.Image;
     private levelText: eui.Label;
 
     public heroItem

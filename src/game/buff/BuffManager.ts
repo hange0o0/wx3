@@ -126,16 +126,16 @@ class BuffManager {
         return add;
     }
 
-    public getAtkAdd(t?){
-        return this.getAdd('atk',t)
+    public getForceAdd(){
+        return 0//this.getAdd('atk',t)
     }
 
-    public getWorkAdd(t?){
-        return this.getAdd('work',t)
+    public getCoinAdd(){
+        return 0//this.getAdd('work',t)
     }
 
-    public getDefAdd(t?){
-        return this.getAdd('def',t)
-    }
+    //public getDefAdd(t?){
+    //    return this.getAdd('def',t)
+    //}
 
 }

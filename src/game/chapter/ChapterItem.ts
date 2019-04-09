@@ -23,69 +23,7 @@ class ChapterItem extends game.BaseItem{
     }
 
     private onClick(){
-        if(this.data.id <= UM.chapterLevel + 1)
-        {
-            if(UM.getEnergy() < 1)
-            {
-                MyWindow.ShowTips('体力不足')
-                return;
-            }
-            var enemy = {
-                bgid:this.data.id%7 || 7,
-                list:this.data.list1,
-                seed:Math.ceil((Math.random() + 1)*10000000000),
-                force:Math.floor(Math.pow(this.data.id - 1,1.15))
-            }
-            PKPosUI.getInstance().show({
-                title:'收复据点 - NO.' + this.data.id,
-                autoList:true,
-                isPK:true,
-                isAtk:true,
-                enemy:enemy,
-                maxNum:TecManager.getInstance().getTeamNum(),
-                maxCost:TecManager.getInstance().getTeamCost(),
-                fun:(list)=>{
-                    PKPosUI.getInstance().hide();
-                    UM.addEnergy(-1);
-                    var pkObj:any = {
-                        chapterid:this.data.id,
-                        title:'收复据点 - NO.' + this.data.id,
-                        seed:enemy.seed,
-                        list1:this.data.list1,
-                        force1:enemy.force,
-                        mforce1:{},
-                        list2:list,
-                        buff2:BuffManager.getInstance().getAtkAdd(),
-                        force2:TecManager.getInstance().getAtkForce(),
-                        mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
-                    }
-                    var result = PKManager.getInstance().getPKResult(pkObj);
-                    if(result == 2)
-                    {
-                        PKData.instanceIndex = 2;
-                        var hpObj = PKData.getInstance().getHpData();
-                        var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
-                        if(hpRate2 >= 0.6)
-                            ChapterManager.getInstance().setChapterStar(this.data.id,3);
-                        else if(hpRate2 >= 0.3)
-                            ChapterManager.getInstance().setChapterStar(this.data.id,2);
-                        else
-                            ChapterManager.getInstance().setChapterStar(this.data.id,1);
-                        PKData.instanceIndex = 1;
-                        UM.addCoin(ChapterManager.getInstance().resultEarn.coin)
-                        UM.addDiamond(ChapterManager.getInstance().resultEarn.diamond)
-                        pkObj.coin = ChapterManager.getInstance().resultEarn.coin
-                        pkObj.diamond = ChapterManager.getInstance().resultEarn.diamond
-                    }
-                    else
-                    {
-                        ChapterManager.getInstance().resultEarn = null;
-                    }
-                    MainPKUI.getInstance().show(pkObj);
-                    EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
-                },
-            })
-        }
+        ChapterManager.getInstance().pkChapter(this.data.id)
     }
 
     public dataChanged():void {

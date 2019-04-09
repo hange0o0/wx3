@@ -69,7 +69,7 @@ class FightingItem extends game.BaseItem{
             {
                 this.desText.text = '战斗胜利，正在返回';
                 this.awardGroup.visible = true;
-                this.coinText.text = this.data.addCoin
+                this.coinText.text = NumberUtil.addNumSeparator(this.data.addCoin,2)
             }
             else
                 this.desText.text = '进攻失利，正在返回';

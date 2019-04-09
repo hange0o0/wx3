@@ -7,8 +7,8 @@ class PKPosUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
     private bottomUI: BottomUI;
+    private topUI: TopUI;
     private mainCon: eui.Group;
     private con: eui.Group;
     private bg: eui.Image;
@@ -22,10 +22,21 @@ class PKPosUI extends game.BaseUI {
     private chooseList: eui.List;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private emptyGroup: eui.Group;
+    private emptyText: eui.Label;
+    private tecBtn: eui.Button;
+    private monsterBtn: eui.Button;
+    private workBtn: eui.Button;
     private btnGroup: eui.Group;
+    private sortBtn: eui.Group;
+    private sortText: eui.Label;
     private resetBtn: eui.Group;
     private okBtn: eui.Group;
     private pkBtn: eui.Group;
+
+
+
+
 
 
 
@@ -50,6 +61,22 @@ class PKPosUI extends game.BaseUI {
     public maxNum = 0 //最大数量
     public currentCost = 0 //当前消耗
 
+    private sortIndexWork = 0
+    private sortIndexPK = 0
+    private sortBaseWork= [
+        {key:'default',name:'默认\n排序'},
+        {key:'work',name:'效率\n降序'},
+        {key:'level',name:'等级\n降序'},
+        {key:'type',name:'阵营\n排序'}
+    ]
+    private sortBasePK= [
+        {key:'default',name:'默认\n排序'},
+        {key:'pk',name:'战力\n降序'},
+        {key:'level',name:'等级\n降序'},
+        {key:'cost',name:'费用\n升序'},
+        {key:'type',name:'阵营\n排序'}
+    ]
+
     public dataIn;
     public constructor() {
         super();
@@ -72,6 +99,18 @@ class PKPosUI extends game.BaseUI {
         this.addBtnEvent(this.pkBtn,this.onPK);
         this.addBtnEvent(this.okBtn,this.onSave);
         this.addBtnEvent(this.resetBtn,this.reset);
+        this.addBtnEvent(this.tecBtn,()=>{
+            this.hide();
+            TecUI.getInstance().show()
+        });
+        this.addBtnEvent(this.monsterBtn,()=>{
+            this.hide();
+            MonsterUI.getInstance().show()
+        });
+        this.addBtnEvent(this.workBtn,()=>{
+            this.hide();
+            WorkUI.getInstance().show()
+        });
 
         this.chooseList.addEventListener('start_drag',this.onDragStart,this);
         this.chooseList.addEventListener('end_drag',this.onDragEnd,this);
@@ -84,6 +123,24 @@ class PKPosUI extends game.BaseUI {
         this.stage.addChild(this.dragTarget);
         this.dragTarget.initDragItem();
         MyTool.removeMC(this.dragTarget);
+        this.addBtnEvent(this.sortBtn,this.onSort)
+    }
+
+    private onSort(){
+        if(this.dataIn.isPK)
+        {
+            this.sortIndexPK ++;
+            if(this.sortIndexPK >= this.sortBasePK.length)
+                this.sortIndexPK = 0;
+        }
+        else
+        {
+            this.sortIndexWork ++;
+            if(this.sortIndexWork >= this.sortBaseWork.length)
+                this.sortIndexWork = 0;
+        }
+
+        this.renew();
     }
 
     private onMClick(e){
@@ -277,7 +334,7 @@ class PKPosUI extends game.BaseUI {
         }
         if(this.dataIn.autoList)
             SharedObjectManager.getInstance().setMyValue('lastAtkList',list);
-        MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
+        MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk)
         UM.maxForce = Math.max(UM.maxForce,Math.ceil(MonsterManager.getInstance().tempForceAdd));
         this.dataIn.fun && this.dataIn.fun(list)
     }
@@ -285,7 +342,7 @@ class PKPosUI extends game.BaseUI {
         var list = this.getMyList();
         if(list && this.dataIn.isPK)
         {
-            MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk,false)
+            MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk)
             UM.maxForce = Math.max(UM.maxForce,Math.ceil(MonsterManager.getInstance().tempForceAdd));
         }
 
@@ -403,15 +460,70 @@ class PKPosUI extends game.BaseUI {
                 }
             }
         }
+        if(this.dataIn.isPK)
+        {
+            var sortObj = this.sortBasePK[this.sortIndexPK];
+        }
+        else
+        {
+            var sortObj = this.sortBaseWork[this.sortIndexWork];
+        }
+        this.sortText.text = sortObj.name
+    //private sortBaseWork= [
+    //        {key:'default',name:'默认排序'},
+    //        {key:'work',name:'效率降序'},
+    //        {key:'level',name:'等级降序'},
+    //        {key:'type',name:'阵营排序'}
+    //    ]
+    //private sortBasePK= [
+    //        {key:'default',name:'默认排序'},
+    //        {key:'pk',name:'战力降序'},
+    //        {key:'level',name:'等级降序'},
+    //        {key:'cost',name:'费用升序'},
+    //        {key:'type',name:'阵营排序'}
+    //    ]
+        switch(sortObj.key)
+        {
+            case 'default':
+                ArrayUtil.sortByField(list,['level','cost','type'],[0,0,0]);
+                break;
+            case 'level':
+                for(var i=0;i<list.length;i++)
+                {
+                    list[i].temp = MonsterManager.getInstance().getMonsterLevel(list[i].id)
+                }
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                break;
+            case 'pk':
+                for(var i=0;i<list.length;i++)
+                {
+                    list[i].temp = MonsterManager.getInstance().getMyListForce(list[i].id + '',this.dataIn.isAtk)
+                }
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                break;
+            case 'work':
+                for(var i=0;i<list.length;i++)
+                {
+                    list[i].temp = WorkManager.getInstance().getListHourEarn(list[i].id)
+                }
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                break;
+            case 'cost':
+                ArrayUtil.sortByField(list,['cost','level','type'],[0,0,0]);
+                break;
+            case 'type':
+                ArrayUtil.sortByField(list,['type','cost','level'],[0,0,0]);
+                break;
+        }
 
-
-        ArrayUtil.sortByField(list,['cost','type'],[0,0])
         for(var i=0;i<list.length;i++)
         {
             list[i] = {id:list[i].id,list:list,index:i};
         }
         this.chooseDataProvider.source = list;
         this.chooseDataProvider.refresh();
+
+        this.emptyGroup.visible = list.length == 0
     }
 
     private renewTopList(){

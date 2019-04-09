@@ -43,12 +43,16 @@ class UserManager {
 
     public coinObj:{
         loginTime,
-        loginDays,
-        loginDayAward,
-        onLineAwardTime,
-        onLineAwardNum,
+        //loginDays,
+        //loginDayAward,
+        //onLineAwardTime,
+        //onLineAwardNum,
         shareNum,
-        newAward,
+        //newAward,
+        videoNum,
+        videoAwardNum,
+        gameNum,
+        gameDiamond,
         shareAward
     }
     public guideFinish: boolean = false;
@@ -64,11 +68,13 @@ class UserManager {
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
         if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
         {
+
             for(var s in localData)
             {
                 data[s] = localData[s];
             }
         }
+        var saveTime = data.saveTime;
 
         this.dbid = data._id;
         this.loginTime = data.loginTime || TM.now();
@@ -87,13 +93,12 @@ class UserManager {
         this.task = data.task || 0;
         this.coinObj = data.coinObj || {
                 loginTime:TM.now(),   //登陆时间
-                loginDays:1,   //登陆天数
-                loginDayAward:0,   //领取登陆礼包
-                onLineAwardTime:TM.now(),   //在线礼包领取时间
-                onLineAwardNum:0,   //在线礼包领取数量
                 shareNum:0,   //分享金币次数
                 shareAward:0,   //分享金币次数
-                newAward:0,   //分享金币次数
+                videoNum:0,
+                videoAwardNum:0,
+                gameNum:0,
+                gameDiamond:0,
             };
 
         if(!window['wx'])
@@ -128,6 +133,10 @@ class UserManager {
 
 
         ChapterManager.getInstance().setChapterEarn();//里面有resetHourEarn
+        var offlineTime = TM.now() - saveTime;
+        WorkOfflineUI.getInstance().show(offlineTime,WorkManager.getInstance().offlineEarn)
+
+        this.localSave();
         //this.resetHourEarn();
     }
 
@@ -344,13 +353,17 @@ class UserManager {
              work:'65#0#1', //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间
-                 loginDays:1,   //登陆天数
-                 loginDayAward:0,   //领取登陆礼包
-                 onLineAwardTime:TM.now(),   //在线礼包领取时间
-                 onLineAwardNum:0,   //在线礼包领取数量
+                 //loginDays:1,   //登陆天数
+                 //loginDayAward:0,   //领取登陆礼包
+                 //onLineAwardTime:TM.now(),   //在线礼包领取时间
+                 //onLineAwardNum:0,   //在线礼包领取数量
                  shareNum:0,   //分享金币次数
                  shareAward:0,   //分享金币次数
-                 newAward:0,   //拉新领奖次数
+                 //newAward:0,   //拉新领奖次数
+                 videoNum:0,
+                 videoAwardNum:0,
+                 gameNum:0,
+                 gameDiamond:0,
              },
          };
     }
@@ -362,12 +375,16 @@ class UserManager {
         if(DateUtil.isSameDay(this.coinObj.loginTime))
             return false;
         this.coinObj.loginTime = TM.now();
-        this.coinObj.loginDays ++;
-        this.coinObj.loginDayAward = 0;
-        this.coinObj.onLineAwardTime = this.coinObj.loginTime;
-        this.coinObj.onLineAwardNum = 0;
+        //this.coinObj.loginDays ++;
+        //this.coinObj.loginDayAward = 0;
+        //this.coinObj.onLineAwardTime = this.coinObj.loginTime;
+        //this.coinObj.onLineAwardNum = 0;
         this.coinObj.shareNum = 0;
         this.coinObj.shareAward = 0;
+        this.coinObj.videoNum = 0;
+        this.coinObj.videoAwardNum = 0;
+        this.coinObj.gameNum = 0;
+        this.coinObj.gameDiamond = 0;
         UM.needUpUser = true;
         return true;
     }

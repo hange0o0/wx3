@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BuffItemSkin" width="146" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Group id="con" width="146" height="200" anchorOffsetX="73" anchorOffsetY="100" x="73" y="100">
-		<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
-		<e:Image source="border_10_png" y="13" width="120" height="120" horizontalCenter="0" scale9Grid="17,19,29,24"/>
-		<e:Image id="chooseMC" source="border2_png" scale9Grid="12,12,3,3" left="-2" right="-2" top="-2" bottom="-2"/>
-		<e:Image source="icon_add1_png" y="55" horizontalCenter="0.5"/>
-		<e:Image id="headMC" width="120" height="120" y="13" x="13"/>
-		<e:Group y="145" horizontalCenter="0">
-			<e:Image id="icon" x="0" y="0" scaleX="0.9" scaleY="0.9" source="icon_def2_png"/>
-			<e:Label id="rateText" text="+10%" x="54" y="16" bold="true" size="28"/>
-			<e:layout>
-			<e:HorizontalLayout verticalAlign="middle"/>
-			</e:layout>
-		</e:Group>
-		<e:Group id="barGroup" y="121.32" scaleX="0.6" scaleY="0.6" horizontalCenter="0">
-			<e:Image source="bar_bg_png" x="0" y="0"/>
-			<e:Image id="barMC" source="bar1_png" x="2" y="2"/>
+<e:Skin class="BuffItemSkin" width="300" height="130" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="empty,normal" >
+	<e:Image source="bg13_png" scale9Grid="19,19,9,10" left="0" right="0" top="0" bottom="0"/>
+	<e:Group x="15" width="100" height="100" y="15">
+		<e:Image id="headMC" width="100" height="100" x="5" y="5" includeIn="normal"/>
+		<e:Image source="border_10_png" scale9Grid="17,19,29,24" left="0" right="0" top="0" bottom="0"/>
+		<e:Group left="0" right="0" top="0" bottom="0" includeIn="empty">
+			<e:Image source="icon_add1_png" horizontalCenter="0" verticalCenter="0"/>
 		</e:Group>
 	</e:Group>
-	<e:Image id="deleteMC" source="icon_error_png" right="-10" top="-10" scaleX="0.8" scaleY="0.8"/>
+	<e:Group x="120" y="15" includeIn="empty">
+		<e:Image source="icon_force2_png" x="5" y="0"/>
+		<e:Label text="战力+50%" x="50" size="24" verticalCenter="0" textColor="0xFFDC59"/>
+	</e:Group>
+	<e:Group x="120" height="45" y="70" includeIn="empty">
+		<e:Image x="5" source="icon_coin_png" scaleX="0.8" scaleY="0.8" verticalCenter="0"/>
+		<e:Label text="效率+10%" x="50" size="24" verticalCenter="0" textColor="0xFFDC59"/>
+	</e:Group>
+	<e:Image source="icon_right_png" bottom="10" right="10" includeIn="normal"/>
+	<e:Label id="nameText" text="Label" x="130" y="25" textColor="0xffedad" size="24" includeIn="normal"/>
 </e:Skin>

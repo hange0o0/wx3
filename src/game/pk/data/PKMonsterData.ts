@@ -83,8 +83,8 @@ class PKMonsterData {
         var maxAdd = obj.maxHpAdd || 1;
         this.force = obj.force;
 
-        this.hp = Math.floor(mvo.hp * add * maxAdd);
-        this.atk = Math.floor(mvo.atk * add);
+        this.hp = Math.floor(mvo.hp * add * maxAdd*(1+obj.hpBuff/100));
+        this.atk = Math.floor(mvo.atk * add*(1+obj.atkBuff/100));
         this.speed = mvo.speed;
         this.def = mvo.def;
 
@@ -537,14 +537,13 @@ class PKMonsterData {
 
     public getSkillValue(index,needForce=false){
         var PD = PKData.getInstance();
-
         return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).getMonsterForce(this.id):0)
     }
-
-    public getForce(){
-        var mvo = this.getVO();
-        if(mvo.atk)
-            return mvo.cost*(1+this.force/100)*(0.4*this.atk/mvo.atk+0.4*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.2)
-        return mvo.cost*(1+this.force/100)*(0.6*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.4)
-    }
+    //
+    //public getForce(){
+    //    var mvo = this.getVO();
+    //    if(mvo.atk)
+    //        return mvo.cost*(1+this.force/100)*(0.4*this.atk/mvo.atk+0.4*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.2)
+    //    return mvo.cost*(1+this.force/100)*(0.6*this.getHpRate()*(1+this.def/100) + this.speed/mvo.speed*0.4)
+    //}
 }

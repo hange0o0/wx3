@@ -10,7 +10,8 @@ class RobotVO{
             this.index = 0;
         }
         var lv = Math.min(TecManager.getInstance().tecBase[11].max,Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)))
-        var force = UM.maxForce*(0.7 + Math.random()*0.8);
+        var buffForce = BuffManager.getInstance().getForceAdd()
+        var force = (UM.maxForce-buffForce)*(0.8 + Math.random()*0.4) + buffForce*0.5;
         var robot = new RobotVO({
             force:force,
             level:lv,
@@ -19,8 +20,8 @@ class RobotVO{
             atk:PKManager.getInstance().getRobotList(lv),
             def:PKManager.getInstance().getRobotList(lv),
             nick:PKManager.getInstance().randomNick(),
-            head:Math.ceil(Math.random()*1189),
-        })
+            head:PKManager.getInstance().randomHead(),
+        });
         robot.gameid = 'robot' + TM.now() +'_'+ this.index;
         RobotVO.change = true;
         return robot;
@@ -69,16 +70,17 @@ class RobotVO{
          {
              this[s] = data[s];
          }
-        this.reset();
+        //this.reset();
     }
 
-    public reset(){
+    //更新敌人属性，一般出现在打回去时
+    public reset(t){
         if(!this.level)
             this.level = 1;
         var cd = Math.pow(this.level,1.5)*100*(1 + Math.random()*2);
-        if(TM.now() - this.lastTime > cd)
+        if(t - this.lastTime > cd)
         {
-            var num = Math.floor((TM.now() - this.lastTime)/cd);
+            var num = Math.floor((t - this.lastTime)/cd);
             if(num > 5)
             {
                 if(num/this.level>=10)
@@ -90,7 +92,7 @@ class RobotVO{
                 num--;
                 this.force += Math.ceil(2*this.level*Math.random());
             }
-            this.lastTime = TM.now();
+            this.lastTime = t;
             RobotVO.change = true;
         }
     }

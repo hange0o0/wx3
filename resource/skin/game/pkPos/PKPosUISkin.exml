@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKPosUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,pk" >
+<e:Skin class="PKPosUISkin" width="640" height="1136" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,pk" >
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
@@ -61,18 +61,36 @@
 					</e:layout>
 					</e:List>
 				</e:Group>
-				<e:Scroller id="scroller" width="640" x="0" bounces="false" top="0" y="200" height="100%">
-					<e:Group>
-					<e:List id="list" x="67" y="43">
+				<e:Group x="0" y="190" height="100%">
+					<e:Scroller id="scroller" width="640" x="0" bounces="false" y="0" height="100%">
+						<e:Group>
+						<e:List id="list" x="67" y="43">
+							<e:layout>
+							<e:TileLayout requestedColumnCount="6" paddingTop="10" paddingLeft="10" paddingBottom="10" horizontalGap="10" verticalGap="10"/>
+							</e:layout>
+						</e:List>
 						<e:layout>
-						<e:TileLayout requestedColumnCount="6" paddingTop="10" paddingLeft="10" paddingBottom="10" horizontalGap="10" verticalGap="10"/>
+							<e:HorizontalLayout horizontalAlign="center" gap="10" paddingTop="10" paddingBottom="10"/>
 						</e:layout>
-					</e:List>
-					<e:layout>
-						<e:HorizontalLayout horizontalAlign="center" gap="10" paddingTop="10" paddingBottom="10"/>
-					</e:layout>
+						</e:Group>
+					</e:Scroller>
+					<e:Group id="emptyGroup" width="540" verticalCenter="0" horizontalCenter="0" height="260">
+						<e:Image source="bg11_png" left="0" right="0" top="0" bottom="0" scale9Grid="15,14,7,10"/>
+						<e:Label id="emptyText" text="你已没有空闲的怪物了" y="20" scaleX="1" scaleY="1" size="26" textColor="0xfcda88" horizontalCenter="0.5" bold="true"/>
+						<e:Group y="60" horizontalCenter="0">
+						<e:Label text="提升【科技革命】等级，获得新怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
+						<e:Button id="tecBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+						</e:Group>
+						<e:Group y="120" horizontalCenter="0">
+						<e:Label text="提升怪物星级，增加怪物上限" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
+						<e:Button id="monsterBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+						</e:Group>
+						<e:Group y="180" horizontalCenter="0">
+							<e:Label text="调整怪物工作，腾出空闲怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
+							<e:Button id="workBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+						</e:Group>
 					</e:Group>
-				</e:Scroller>
+				</e:Group>
 				<e:layout>
 					<e:VerticalLayout gap="0" horizontalAlign="center" paddingTop="10"/>
 				</e:layout>
@@ -84,6 +102,10 @@
 		</e:layout>
 	</e:Group>
 	<e:Group id="btnGroup" right="20" bottom="10">
+	<e:Group id="sortBtn" width="100" height="80" bottom="10" right="10">
+		<e:Image source="border2_png" scale9Grid="12,12,3,3" top="0" bottom="0" width="80" horizontalCenter="0"/>
+		<e:Label id="sortText" text="等级\n升序" horizontalCenter="0" verticalCenter="0" size="26" lineSpacing="6" textColor="0xf1bb15" stroke="2" strokeColor="0x4d3624" bold="true"/>
+	</e:Group>
 		<e:Group id="resetBtn" x="246" y="0" width="100" height="80">
 			<e:Image source="icon_atk3_png" y="0" horizontalCenter="0" scaleX="0.9" scaleY="0.9"/>
 			<e:Label text="重置" bottom="0" horizontalCenter="0" size="24" stroke="2." textColor="0xffe0c4"/>

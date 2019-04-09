@@ -13,6 +13,8 @@ class WorkManager {
     public workLen = 800//500
     public workList = []
 
+    public offlineEarn = 0;
+
     public initWork(dataIn){
         this.workList.length = 0;
         if(!dataIn)
@@ -128,10 +130,8 @@ class WorkManager {
         return Math.floor(cd*2 + 2000);
     }
 
-    public getWorkCoin(id,t?,stopBuff?){
-        var buffAdd = (1+BuffManager.getInstance().getWorkAdd(t)/100);
-        if(stopBuff)
-            buffAdd = 1
+    public getWorkCoin(id,t?){
+        var buffAdd = (1+BuffManager.getInstance().getCoinAdd()/100);
         return Math.ceil(this.getBaseWorkCoin(id)*(1+TecManager.getInstance().getSkillValue(21)/100 + MonsterManager.getInstance().getWorkAdd(id)/100)*buffAdd);
     }
 
@@ -166,7 +166,9 @@ class WorkManager {
             if(num)
             {
                 oo.resetTime += num*workCD;
-                UM.addCoin(this.getWorkCoin(oo.id,tIn)*num,true);
+                var coin = this.getWorkCoin(oo.id,tIn)*num
+                this.offlineEarn += coin;
+                UM.addCoin(coin,true);
             }
             if(isOver24)
                 oo.resetTime = t;
@@ -190,7 +192,7 @@ class WorkManager {
         if(!str)
             return 0;
         var count = 0
-        var arr = str.split(',')
+        var arr = (str+'').split(',')
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i];
@@ -220,7 +222,7 @@ class WorkManager {
         {
             var id = this.workList[i].id;
             var v1 = this.getWorkCD(id)
-            var v2 = this.getWorkCoin(id,null,true)
+            var v2 = this.getWorkCoin(id,null)
             count += v2*(3600*1000/v1)
         }
         return Math.floor(count);

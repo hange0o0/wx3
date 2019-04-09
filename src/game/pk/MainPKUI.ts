@@ -10,6 +10,7 @@ class MainPKUI extends game.BaseUI {
         this.skinName = "MainPKUISkin";
     }
 
+    private topUI: TopUI;
     private con: eui.Group;
     private lineMC: eui.Rect;
     private scroller: eui.Scroller;
@@ -23,6 +24,10 @@ class MainPKUI extends game.BaseUI {
     private timeText: eui.Label;
     private winGroup: eui.Group;
     private winText: eui.Label;
+    private starGroup: eui.Group;
+    private s0: eui.Image;
+    private s1: eui.Image;
+    private s2: eui.Image;
     private desGroup: eui.Group;
     private resourceGroup: eui.Group;
     private coinGroup: eui.Group;
@@ -45,7 +50,7 @@ class MainPKUI extends game.BaseUI {
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
-    private topUI: TopUI;
+
 
 
 
@@ -134,11 +139,22 @@ class MainPKUI extends game.BaseUI {
     private onDouble(){
         ShareTool.share(this.shareStr,Config.localResRoot + "share_img_2.jpg",{},()=>{
 
-        })
+        },true)
     }
 
     private onBack(){
         this.hide();
+        if(this.dataIn.chapterid)
+        {
+            if(this.backBtn.label == '重试')
+            {
+                 ChapterManager.getInstance().pkChapter(this.dataIn.chapterid)
+            }
+            else if(this.backBtn.label == '下一关')
+            {
+                 ChapterManager.getInstance().pkChapter(this.dataIn.chapterid + 1)
+            }
+        }
         //if(!this.dataIn.isMain)
         //    LogUI.getInstance().show()
     }
@@ -270,8 +286,8 @@ class MainPKUI extends game.BaseUI {
         var data = {
             seed:this.dataIn.seed,
             players:[
-                {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1,buff:this.dataIn.buff1},
-                {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,buff:this.dataIn.buff2}
+                {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1,atkBuff:this.dataIn.atkBuff1,hpBuff:this.dataIn.hpBuff1},
+                {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,atkBuff:this.dataIn.atkBuff2,hpBuff:this.dataIn.hpBuff2}
             ]
         };
 
@@ -379,7 +395,6 @@ class MainPKUI extends game.BaseUI {
         this.testRenew();
         if(PD.isGameOver)
         {
-            this.renewForce();
             this.renewHp();
 
             PD.playSpeed = 1;
@@ -402,6 +417,7 @@ class MainPKUI extends game.BaseUI {
                 }
                 else if(result == 2)
                 {
+                    this.starGroup.removeChildren();
                     this.resourceGroup.removeChildren()
                     this.delayShowResult(this.winGroup);
                     this.winText.text = this.dataIn.chapterid?'挑战成功':'胜利'
@@ -421,6 +437,14 @@ class MainPKUI extends game.BaseUI {
                     {
                         this.shareStr = '已成功通过第'+this.dataIn.chapterid+'关，需要向我取经吗？'
                         this.backBtn.label = this.dataIn.chapterid == UM.chapterLevel?'下一关':'关闭'
+                        if(this.dataIn.star)
+                        {
+                            this.winText.text = ''
+                            for(var i=0;i<this.dataIn.star;i++)
+                            {
+                                this.starGroup.addChild(this['s' + i])
+                            }
+                        }
                     }
                     else
                     {
@@ -493,7 +517,6 @@ class MainPKUI extends game.BaseUI {
         if(PKData.getInstance().actionTime - this.lastRenewTime > 200)
         {
             this.lastRenewTime = PKData.getInstance().actionTime
-            this.renewForce();
             this.renewHp();
         }
     }

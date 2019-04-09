@@ -66,6 +66,7 @@ class FightManager {
             {
                 this.searchRobot.push(RobotVO.create());
             }
+            ArrayUtil.sortByField(this.searchRobot,['distanceTime'],[0])
             this.searchTime = TM.now();
             this.save();
         }
@@ -177,6 +178,22 @@ class FightManager {
         return arr;
     }
 
+    //报复性打回来的敌人
+    public getHitBackEnemy(){
+        if(Math.random() < 0.5)
+            return null;
+         for(var i=0;i<this.log.length;i++)
+         {
+             var oo = this.log[i];
+             if(oo.type == 'atk' && oo.result == 1 && !oo.hitBack)
+             {
+                 oo.hitBack = true;
+                 return oo.robot;
+             }
+         }
+        return null
+    }
+
     public onTimer(){
 
         var b = false
@@ -190,7 +207,7 @@ class FightManager {
                 time:this.nextBeHitTime,
                 type:'def',
                 seed:Math.floor(Math.random()*10000000000),
-                robot:RobotVO.create()
+                robot:this.getHitBackEnemy() || RobotVO.create()
             })
             this.resetNextBeHit();
             num++;
@@ -214,6 +231,7 @@ class FightManager {
             {
                 if(cd > robot.distanceTime)//要计算结果
                 {
+                    robot.reset(oo.time+robot.distanceTime);
                     oo.pkObj = this.getPKObj(oo);
                     oo.result = PKManager.getInstance().getPKResult(oo.pkObj);
                     this.log.unshift(oo);
@@ -335,15 +353,13 @@ class FightManager {
         {
             pkObj.list1 = robot.def;
             pkObj.list2 = oo.list;
-            pkObj.buff2 = BuffManager.getInstance().getAtkAdd(),
-            pkObj.force2 = TecManager.getInstance().getAtkForce();
+            pkObj.force2 = TecManager.getInstance().getAtkForce() + BuffManager.getInstance().getForceAdd();
         }
         else//我是防守方
         {
             pkObj.list1 = robot.atk;
             pkObj.list2 = MonsterManager.getInstance().defList;
-            pkObj.buff2 = BuffManager.getInstance().getDefAdd(),
-            pkObj.force2 = TecManager.getInstance().getDefForce();
+            pkObj.force2 = TecManager.getInstance().getDefForce() + BuffManager.getInstance().getForceAdd();
         }
         pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(pkObj.list2);
         return pkObj;

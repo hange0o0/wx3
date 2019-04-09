@@ -53,7 +53,7 @@ class LogItem extends game.BaseItem {
     public dataChanged(){
         var robot = this.data.robot;
         PKManager.getInstance().setHead(this.headMC,robot.head)
-        this.nameText.text = robot.nick;
+        this.nameText.text = robot.nick + '(LV.'+robot.level+')';
 
         var cd =  TM.now() - this.data.logTime;
         if(this.data.type == 'atk')

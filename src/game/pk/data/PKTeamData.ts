@@ -4,6 +4,7 @@ class PKTeamData {
     public atkRota = 0  //进攻方向  0左路出发，1右路出发
     public enemy:PKTeamData
 
+    public force = 0;//队伍战力
 
 
 

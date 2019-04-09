@@ -8,7 +8,8 @@ class PKPlayerData {
     public type//类型
     private force;//怪的基础属性
     public mforce={};//怪的基础属性
-    public buff;//buff的加成
+    public hpBuff;//buff的加成
+    public atkBuff;//buff的加成
     public teamData:PKTeamData   //对应队伍
 
     public autoList
@@ -34,6 +35,8 @@ class PKPlayerData {
         for (var key in obj) {
             this[key] = obj[key];
         }
+        this.hpBuff = this.hpBuff || 0
+        this.atkBuff = this.atkBuff || 0
 
         if(obj['autolist'])
             this.autoList = obj['autolist'].split(',');
@@ -43,7 +46,7 @@ class PKPlayerData {
         for(var i=0;i<this.autoList.length;i++)
         {
             var vo = MonsterVO.getObject(this.autoList[i]);
-            var hp = Math.floor(vo.hp*(1+this.getMonsterForce(vo.id)/100));
+            var hp = Math.floor(vo.hp*(1+this.getMonsterForce(vo.id)/100)*(1+this.hpBuff/100));
             this.monsterHpList.push(hp);
             this.maxTeamHp += hp;
         }
@@ -63,7 +66,19 @@ class PKPlayerData {
 
     //buff对本身和战力都有增益
     public getMonsterForce(mid?){
-        return (this.force + (this.mforce[mid] || 0))*(1+(this.buff || 0)/100) +  (this.buff || 0)
+        return (this.force + (this.mforce[mid] || 0))
+    }
+
+    public getTeamForce(){
+        var count = 0;
+        for(var i=0;i<this.autoList.length;i++)
+        {
+            var mid = this.autoList[i];
+             var force = MonsterVO.getObject(mid).cost*(1+this.getMonsterForce(mid)/100)
+            force *= 1 + (this.hpBuff + this.atkBuff)/2/100
+            count += force;
+        }
+        return Math.round(count);
     }
 
     public addMonster(){
@@ -80,17 +95,33 @@ class PKPlayerData {
         //var owner = this.id
         var atkRota = this.teamData.atkRota;
         var x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
-        PKData.getInstance().addMonster({
-            force:this.getMonsterForce(mid),
+
+        PKData.getInstance().addMonster(this.getMonsterCreateData({
             mid:mid,
-            owner:this.id,
-            atkRota:atkRota,
             fromPos:true,
             index:this.maxPlayer - this.autoList.length,
             x:x,
+        }))
+    }
+
+    public getMonsterCreateData(oo):any{
+        var mid = oo.mid;
+        var data =  {
+            force:this.getMonsterForce(mid),
+            hpBuff:this.hpBuff,
+            atkBuff:this.atkBuff,
+            mid:mid,
+            owner:this.id,
+            atkRota:this.teamData.atkRota,
             y:-25 + PKData.getInstance().random2()*50,
             actionTime:PKData.getInstance().actionTime
-        })
+        }
+        for(var s in oo)
+        {
+            data[s] = oo[s];
+        }
+        return data;
     }
+
 
 }

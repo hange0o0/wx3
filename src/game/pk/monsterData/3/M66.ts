@@ -12,17 +12,16 @@ class M66 extends MBase {
         target.stopReborn = true;
         for(var i=0;i<num;i++)
         {
-            var mData = {
-                force:owner.getMonsterForce(mid),
+            var mData = owner.getMonsterCreateData({
                 mid:mid,
-                owner:user.owner,
-                atkRota:atkRota,
+                //owner:user.owner,
+                //atkRota:atkRota,
                 x:target.x,
-                y:-30 + PD.random2()*60,
+                //y:-30 + PD.random2()*60,
                 lastSkill:Number.MAX_VALUE,
                 dieTime:PD.actionTime + user.getSkillValue(2)*1000,
-                actionTime:PD.actionTime
-            }
+                //actionTime:PD.actionTime
+            })
             PD.addMonster(mData);
         }
     }

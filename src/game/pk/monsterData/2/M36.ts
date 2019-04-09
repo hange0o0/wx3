@@ -42,18 +42,17 @@ class M36 extends MBase {
         var mid = 36;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
-        var mData = {
-            force:owner.getMonsterForce(mid),
+        var mData = owner.getMonsterCreateData({
             mid:mid,
-            owner:user.owner,
-            atkRota:atkRota,
+            //owner:user.owner,
+            //atkRota:atkRota,
             x:user.x,
-            y:user.y,
+            //y:user.y,
             index:user.index,
             isReborn:true,
             lastSkill:Number.MAX_VALUE,
-            actionTime:PD.actionTime
-        }
+            //actionTime:PD.actionTime
+        })
 
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;

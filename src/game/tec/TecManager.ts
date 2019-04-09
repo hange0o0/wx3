@@ -45,11 +45,11 @@ class TecManager {
              case 21:
              case 31:
              case 32:
-                 return str + '\n' + this.getSkillValue(id) + '% -> ' + this.getSkillValue(id,lv) + '%';
+                 return str + '\n' + MyTool.createHtml(this.getSkillValue(id) + '% -> ' + this.getSkillValue(id,lv) + '%',0x66ff66);
              case 22:
              case 33:
              case 34:
-                 return str + '\n' + this.getSkillValue(id) + ' -> ' + this.getSkillValue(id,lv) + '';
+                 return str + '\n' + MyTool.createHtml(this.getSkillValue(id) + ' -> ' + this.getSkillValue(id,lv) + '',0x66ff66);
          }
     }
 

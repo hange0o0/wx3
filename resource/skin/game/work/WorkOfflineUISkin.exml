@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="WorkOfflineUISkin" width="520" height="420" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="40">
+		<e:Button id="closeBtn" label="普通领取" x="0" y="0" width="160" skinName="Btn2Skin"/>
+		<e:Group id="shareBtn" x="200" y="0">
+			<e:Button label="三倍领取" x="0" y="0" skinName="Btn1Skin" width="160"/>
+			<e:Image id="videoIcon" source="video_icon_png" right="-12" top="-6" touchEnabled="false"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
+	<e:Image source="main_shop_png" scaleX="1.5" scaleY="1.5" horizontalCenter="0" bottom="160"/>
+	<e:Label id="desText" text="在你离开期间获得了以怔收益" y="50" size="24" horizontalCenter="0" textColor="0xffd88c"/>
+	<e:Label id="coinText" text="312K" y="125" size="40" horizontalCenter="0" bold="true" textColor="0xf9de40"/>
+</e:Skin>

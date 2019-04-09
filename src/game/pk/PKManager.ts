@@ -80,6 +80,20 @@ class PKManager {
         name = name.replace('\r','')
         return Base64.decode(name);
     }
+
+    public randomHead(){
+        var head = Math.ceil(Math.random()*1189);
+        var useHead = SharedObjectManager.getInstance().getValue('useHead') || [];
+        while(useHead.indexOf(head) != -1)
+        {
+            head = Math.ceil(Math.random()*1189);
+        }
+        useHead.unshift(head);
+        if(useHead.length > 300)
+            useHead.length = 300;
+        SharedObjectManager.getInstance().setValue('useHead',useHead);
+        return head
+    }
     public setHead(img,head){
         if(this.headData[head])
         {
@@ -470,19 +484,19 @@ class PKManager {
   //          MsgingUI.getInstance().show();
   //  }
 
-    public getChapterData(){
-        //var index = Math.ceil(UM.chapterLevel/100)
-        //var id = (UM.chapterLevel%100 || 100)-1
-        //var data = this.chapterData[index].split('\n')
-        //return JSON.parse(data[id])
-        var arr = this.chapterData[UM.chapterLevel-1].split('|')
-        return {
-            list1:arr[0],
-            list2:arr[1],
-            cost:36,
-            seed:parseInt(arr[2]),
-        }
-    }
+    //public getChapterData(){
+    //    //var index = Math.ceil(UM.chapterLevel/100)
+    //    //var id = (UM.chapterLevel%100 || 100)-1
+    //    //var data = this.chapterData[index].split('\n')
+    //    //return JSON.parse(data[id])
+    //    var arr = this.chapterData[UM.chapterLevel-1].split('|')
+    //    return {
+    //        list1:arr[0],
+    //        list2:arr[1],
+    //        cost:36,
+    //        seed:parseInt(arr[2]),
+    //    }
+    //}
 
 
     //结算投注信息
@@ -612,8 +626,8 @@ class PKManager {
         PD.init({
             seed:data.seed,
             players:[
-                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1,buff:data.buff1},
-                {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2,buff:data.buff2}
+                {id:1,gameid:'team1',team:1,force:data.force1,hp:1,autolist:data.list1,mforce:data.mforce1,atkBuff:data.atkBuff1,hpBuff:data.hpBuff1},
+                {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2,atkBuff:data.atkBuff2,hpBuff:data.hpBuff2}
             ]
         });
         PD.quick = true;

@@ -25,9 +25,9 @@
 		</e:Scroller>
 		<e:Group x="0" y="0">
 			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="-1" right="0"/>
-			<e:Group id="cost1Group" verticalCenter="0" right="50">
+			<e:Group id="cost1Group" verticalCenter="0" left="15">
+				<e:Image x="0" y="1.5" source="icon_force2_png"/>
 				<e:Label id="force1Text" text="Label" x="49" y="0" size="24" textColor="0xffe2a5"/>
-			<e:Image x="0" y="1.5" source="icon_force2_png"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
@@ -35,9 +35,9 @@
 		</e:Group>
 		<e:Group y="0" x="320">
 			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="1" right="0"/>
-			<e:Group id="cost2Group" verticalCenter="0" left="50">
+			<e:Group id="cost2Group" verticalCenter="0" right="15">
 				<e:Image x="0" y="1.5" source="icon_force2_png"/>
-			<e:Label id="force2Text" text="Label" x="49" y="0" size="24" textColor="0xFFE2A5"/>
+				<e:Label id="force2Text" text="Label" x="49" y="0" size="24" textColor="0xFFE2A5"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
@@ -56,6 +56,14 @@
 			</e:layout>
 			</e:Group>
 			<e:Label id="winText" text="挑战成功" y="118" textColor="0xFCE492" strokeColor="0xFFFFFF" horizontalCenter="0"/>
+			<e:Group id="starGroup" y="114" horizontalCenter="0">
+				<e:Image id="s0" source="start1_png" x="0" y="0" scaleX="1.4" scaleY="1.4"/>
+				<e:Image source="start1_png" x="10" y="10" scaleX="1.4" scaleY="1.4" id="s1"/>
+				<e:Image source="start1_png" x="20" y="20" scaleX="1.4" scaleY="1.4" id="s2"/>
+				<e:layout>
+					<e:HorizontalLayout/>
+				</e:layout>
+			</e:Group>
 			<e:Group id="desGroup" y="275" horizontalCenter="0">
 			<e:Image source="black_bg_png" left="0" right="0" top="0" bottom="0" scale9Grid="43,7,8,42"/>
 				<e:Group id="resourceGroup" y="5" left="50" right="50">
@@ -79,7 +87,7 @@
 				</e:Group>
 			</e:Group>
 		</e:Group>
-		<e:Group id="failGroup" y="200" height="265" anchorOffsetY="130" horizontalCenter="0">
+		<e:Group id="failGroup" y="200" height="265" anchorOffsetY="130" horizontalCenter="0" visible="false">
 			<e:Group x="0" y="0">
 			<e:Image source="pk_fail_png" x="0" y="0"/>
 			<e:Image source="pk_fail_png" x="0" y="0" scaleX="-1"/>

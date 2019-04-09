@@ -9,13 +9,19 @@ class GetCoinItem extends game.BaseItem {
     private titleText: eui.Label;
     private rateText: eui.Label;
     private desText: eui.Label;
+    private awardGroup: eui.Group;
     private addCoinText: eui.Label;
+    private diamondGroup: eui.Group;
+    private addDiamondText: eui.Label;
+    private diamondMC: eui.Image;
+
 
 
 
 
 
     public addCoin = 0;
+    public addDiamond = 0;
     public canAward = false
     public goWork = false
     public childrenCreated() {
@@ -39,6 +45,19 @@ class GetCoinItem extends game.BaseItem {
                     this.goBtn.visible = false;
                 })
             }
+            else if(this.data.type == 5)
+            {
+                ShareTool.openGDTV(()=>{
+                    UM.coinObj.videoNum ++;
+                    this.dataChanged();
+                })
+            }
+            else if(this.data.type == 6)
+            {
+                UM.coinObj.gameNum ++;
+                this.dataChanged();
+                ShootGameUI.getInstance().show();
+            }
             return;
         }
         if(!this.canAward)
@@ -52,18 +71,21 @@ class GetCoinItem extends game.BaseItem {
 
         switch(this.data.type)
         {
-            case 1:  //{type:1,title:'等陆第X天'},
-                UM.coinObj.loginDayAward =1;
-                break;
-            case 2:   //{type:2,title:'X小时后可领'},
-                UM.coinObj.onLineAwardNum ++;
-                UM.coinObj.onLineAwardTime = TM.now();
-                break;
+            //case 1:  //{type:1,title:'等陆第X天'},
+            //    UM.coinObj.loginDayAward =1;
+            //    break;
+            //case 2:   //{type:2,title:'X小时后可领'},
+            //    UM.coinObj.onLineAwardNum ++;
+            //    UM.coinObj.onLineAwardTime = TM.now();
+            //    break;
             case 3:   //{type:3,title:'告诉我的好友们'},
                 UM.coinObj.shareAward ++;
                 break;
-            case 4: // {type:4,title:'邀请X位新的好友'},
-                UM.coinObj.newAward ++;
+            //case 4: // {type:4,title:'邀请X位新的好友'},
+            //    UM.coinObj.newAward ++;
+            //    break;
+            case 5: //
+                UM.coinObj.videoAwardNum ++;
                 break;
         }
         this.dataChanged();
@@ -79,46 +101,49 @@ class GetCoinItem extends game.BaseItem {
         this.goBtn.visible = true;
         this.goBtn.skinName = 'Btn1Skin'
         this.bg.source = 'coin_bg'+this.data.type+'_jpg'
+        this.addDiamond = 0;
+
         switch(this.data.type)
         {
-            case 1:  //{type:1,title:'等陆第X天'},
-                min = coinObj.loginDays
-                max = coinObj.loginDays
-                if(coinObj.loginDayAward)
-                {
-                     //min = coinObj.loginDays
-                     //max = coinObj.loginDays + 1
-                    this.goBtn.skinName = 'Btn3Skin'
-                    this.goBtn.label = '今日已领'
-
-                }
-                else
-                {
-
-                    this.goBtn.label = '领取'
-                    this.canAward = true;
-                }
-                this.titleText.text = '每日登陆奖励'
-                this.addCoin = 1000;
-                break;
-            case 2:   //{type:2,title:'X小时后可领'},
-                if(coinObj.onLineAwardNum >= 5)
-                {
-                    this.goBtn.skinName = 'Btn3Skin'
-                    this.goBtn.label = '今日已领'
-                }
-                //else
-                //{
-                //   this.onTimer()
-                //}
-                this.titleText.text = '在线金币礼包'
-                this.addCoin = 100*Math.min(coinObj.onLineAwardNum + 1,5);
-                break;
+            //case 1:  //{type:1,title:'等陆第X天'},
+            //    min = coinObj.loginDays
+            //    max = coinObj.loginDays
+            //    if(coinObj.loginDayAward)
+            //    {
+            //         //min = coinObj.loginDays
+            //         //max = coinObj.loginDays + 1
+            //        this.goBtn.skinName = 'Btn3Skin'
+            //        this.goBtn.label = '今日已领'
+            //
+            //    }
+            //    else
+            //    {
+            //
+            //        this.goBtn.label = '领取'
+            //        this.canAward = true;
+            //    }
+            //    this.titleText.text = '每日登陆奖励'
+            //    this.addCoin = 1000;
+            //    break;
+            //case 2:   //{type:2,title:'X小时后可领'},
+            //    if(coinObj.onLineAwardNum >= 5)
+            //    {
+            //        this.goBtn.skinName = 'Btn3Skin'
+            //        this.goBtn.label = '今日已领'
+            //    }
+            //    //else
+            //    //{
+            //    //   this.onTimer()
+            //    //}
+            //    this.titleText.text = '在线金币礼包'
+            //    this.addCoin = 100*Math.min(coinObj.onLineAwardNum + 1,5);
+            //    break;
             case 3:   //{type:3,title:'告诉我的好友们'},
                 if(coinObj.shareAward)
                 {
                     this.goBtn.skinName = 'Btn3Skin'
                     this.goBtn.label = '今日已领'
+                    this.diamondMC.visible = false;
                 }
                 else
                 {
@@ -137,7 +162,9 @@ class GetCoinItem extends game.BaseItem {
                     }
                 }
                 this.titleText.text = '体验任意小程序30秒'
-                this.addCoin = 800;
+                this.diamondMC.visible = true;
+                this.addDiamond = 1;
+                this.addCoin = this.getCoin(2);
                 break;
             //case 4: // {type:4,title:'邀请X位新的好友'},
             //    min = ObjectUtil.objLength(UM.friendNew),
@@ -156,6 +183,47 @@ class GetCoinItem extends game.BaseItem {
             //    this.titleText.text = '邀请'+max+'位新的好友'
             //    this.addCoin = 500*max;
             //    break;
+            case 5: // 观看广告
+                if(coinObj.videoAwardNum >= 3)
+                {
+                    this.goBtn.skinName = 'Btn3Skin'
+                    this.goBtn.label = '今日已领'
+                    this.diamondMC.visible = false;
+                }
+                else
+                {
+                    if(coinObj.videoAwardNum < coinObj.videoNum)
+                    {
+                        this.goBtn.label = '领取'
+                        this.canAward = true;
+                    }
+                    else
+                    {
+                        this.goBtn.skinName = 'Btn2Skin'
+                        this.goBtn.label = '观看广告'
+                        this.goWork = true
+                    }
+                }
+                this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
+                this.diamondMC.visible = true;
+                this.addDiamond = coinObj.videoAwardNum==3?1:0;
+                this.addCoin = this.getCoin(1);
+                break;
+            case 6: // 射击游戏
+                if(coinObj.gameNum >= 3)
+                {
+                    this.goBtn.skinName = 'Btn3Skin'
+                    this.goBtn.label = '今日已领'
+                }
+                else
+                {
+                    this.goBtn.skinName = 'Btn2Skin'
+                    this.goBtn.label = '开始游戏'
+                    this.goWork = true
+                }
+                this.diamondMC.visible = !coinObj.gameDiamond;
+                this.titleText.text = '炮击怪物（'+coinObj.gameNum+'/3）'
+                break;
             case 99: // debug
                 this.titleText.text = '临时加钱'
                 this.addCoin = 1000;
@@ -166,46 +234,63 @@ class GetCoinItem extends game.BaseItem {
 
         }
 
+        if(this.addDiamond)
+        {
+             this.awardGroup.addChild(this.diamondGroup);
+        }
+        else
+        {
+            MyTool.removeMC(this.diamondGroup);
+        }
+
         if(min > max)
             min = max;
         this.addCoinText.text = 'x' + this.addCoin;
+        if(this.data.type == 6)
+        {
+            this.addCoinText.text = '无上限';
+        }
         //this.rateText.text = min+'/'+max;
         this.rateText.text = ''
         //if(this.data.type == 2 && coinObj.onLineAwardNum >= 5)
         //    this.rateText.text = '明天继续'
         //else if(this.data.type == 2 && coinObj.onLineAwardNum >= 5)
         //    this.rateText.text = '明天继续'
-        this.onTimer();
+        //this.onTimer();
     }
 
-    public onTimer(){
-        if(this.data.type == 2)
-        {
-            var coinObj = UM.coinObj
-            if(coinObj.onLineAwardNum >= 5)
-                return;
+    //public onTimer(){
+    //    if(this.data.type == 2)
+    //    {
+    //        var coinObj = UM.coinObj
+    //        if(coinObj.onLineAwardNum >= 5)
+    //            return;
+    //
+    //        var coinCD = UM.onLineAwardCD
+    //        var nextAwardTime = coinObj.onLineAwardTime + coinCD[coinObj.onLineAwardNum];
+    //        var min = TM.now() - coinObj.onLineAwardTime
+    //        var max = nextAwardTime - coinObj.onLineAwardTime
+    //        if(min >= max)
+    //        {
+    //            min = max;
+    //            this.goBtn.label = '领取'
+    //            this.goBtn.visible = true;
+    //            this.canAward = true;
+    //            this.rateText.text = ''
+    //        }
+    //        else
+    //        {
+    //            this.goBtn.visible = false;
+    //            this.canAward = false;
+    //            this.rateText.text = DateUtil.getStringBySecond(max - min);
+    //        }
+    //
+    //    }
+    //
+    //}
 
-            var coinCD = UM.onLineAwardCD
-            var nextAwardTime = coinObj.onLineAwardTime + coinCD[coinObj.onLineAwardNum];
-            var min = TM.now() - coinObj.onLineAwardTime
-            var max = nextAwardTime - coinObj.onLineAwardTime
-            if(min >= max)
-            {
-                min = max;
-                this.goBtn.label = '领取'
-                this.goBtn.visible = true;
-                this.canAward = true;
-                this.rateText.text = ''
-            }
-            else
-            {
-                this.goBtn.visible = false;
-                this.canAward = false;
-                this.rateText.text = DateUtil.getStringBySecond(max - min);
-            }
-
-        }
-
+    private getCoin(lv){
+        return UM.hourEarn*lv
     }
 
 

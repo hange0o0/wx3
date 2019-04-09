@@ -161,6 +161,7 @@ class PKData extends egret.EventDispatcher{
             player.teamData.autoDef = Math.max(data.players[i].def || 0,player.teamData.autoDef)
 
             player.teamData.hp += player.hp;
+            player.teamData.force += player.getTeamForce();
             this.playerObj[player.id] = player;
             if(player.gameid == UM.gameid)
             {
@@ -190,18 +191,21 @@ class PKData extends egret.EventDispatcher{
     }
 
     public getForceData(){
-        var forceObj = {};
-        for(var s in this.monsterList)
-        {
-            var monsterData:PKMonsterData = this.monsterList[s];
-            if(monsterData.die)
-                continue;
-            var temaID = monsterData.getOwner().teamData.id;
-            if(!forceObj[temaID])
-                forceObj[temaID] = 0;
-            forceObj[temaID] += monsterData.getForce()
-        }
-        return forceObj;
+        var forceObj = {
+            1:this.getTeamByID(1).force,
+            2:this.getTeamByID(2).force,
+        };
+        //for(var s in this.monsterList)
+        //{
+        //    var monsterData:PKMonsterData = this.monsterList[s];
+        //    if(monsterData.die)
+        //        continue;
+        //    var temaID = monsterData.getOwner().teamData.id;
+        //    if(!forceObj[temaID])
+        //        forceObj[temaID] = 0;
+        //    forceObj[temaID] += monsterData.getForce()
+        //}
+        //return forceObj;
     }
 
     public getHpData(){

@@ -40,7 +40,7 @@ class TecItem extends game.BaseItem{
         var lv = TecManager.getInstance().getTecLevel(data.id);
         this.headMC.source = Config.localResRoot2 + 'skill/skill'+data.id+'.jpg';
         this.nameText.text = data.name + '（LV.'+lv+'）';
-        this.desText.text = TecManager.getInstance().getDes(data.id);
+        this.setHtml(this.desText, TecManager.getInstance().getDes(data.id));
 
         this.iconMC.source = data.type=='diamond'?'icon_diamond_png':'icon_coin_png'
         this.cost = TecManager.getInstance().getTecCost(data.id)

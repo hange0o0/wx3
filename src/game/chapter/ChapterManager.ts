@@ -9,6 +9,77 @@ class ChapterManager {
     public maxEarn = 0;
     public resultEarn:any;
 
+    public pkChapter(id){
+        if(id <= UM.chapterLevel + 1)
+        {
+            if(UM.getEnergy() < 1)
+            {
+                MyWindow.ShowTips('体力不足')
+                return;
+            }
+            var chapterData = PKManager.getInstance().chapterData[id-1]
+            var enemy = {
+                bgid:id%7 || 7,
+                list:chapterData.list1,
+                seed:Math.ceil((Math.random() + 1)*10000000000),
+                force:Math.floor(Math.pow(id - 1,1.25)*10)
+            }
+            PKPosUI.getInstance().show({
+                title:'收复据点 - NO.' + id,
+                autoList:true,
+                isPK:true,
+                isAtk:true,
+                enemy:enemy,
+                maxNum:TecManager.getInstance().getTeamNum(),
+                maxCost:TecManager.getInstance().getTeamCost(),
+                fun:(list)=>{
+                    PKBuffUI.getInstance().show((atkBuff,hpBuff)=>{
+                        PKPosUI.getInstance().hide();
+                        UM.addEnergy(-1);
+                        var pkObj:any = {
+                            chapterid:id,
+                            title:'收复据点 - NO.' + id,
+                            seed:enemy.seed,
+                            list1:chapterData.list1,
+                            force1:enemy.force,
+                            mforce1:{},
+                            list2:list,
+                            atkBuff2:atkBuff,
+                            hpBuff2:hpBuff,
+                            force2:TecManager.getInstance().getAtkForce() + BuffManager.getInstance().getForceAdd(),
+                            mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
+                        }
+                        var result = PKManager.getInstance().getPKResult(pkObj);
+                        if(result == 2)
+                        {
+                            PKData.instanceIndex = 2;
+                            var hpObj = PKData.getInstance().getHpData();
+                            var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
+                            if(hpRate2 >= 0.6)
+                                this.setChapterStar(id,3);
+                            else if(hpRate2 >= 0.3)
+                                this.setChapterStar(id,2);
+                            else
+                                this.setChapterStar(id,1);
+                            PKData.instanceIndex = 1;
+                            UM.addCoin(this.resultEarn.coin)
+                            UM.addDiamond(this.resultEarn.diamond)
+                            pkObj.coin = this.resultEarn.coin
+                            pkObj.diamond = this.resultEarn.diamond
+                            pkObj.star = this.resultEarn.star
+                        }
+                        else
+                        {
+                            this.resultEarn = null;
+                        }
+                        MainPKUI.getInstance().show(pkObj);
+                        EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
+                    })
+                },
+            })
+        }
+    }
+
     //取章节星星数
     public getChapterStar(id){
         if(UM.chapterLevel<id)
@@ -36,6 +107,7 @@ class ChapterManager {
 
         }
         this.resultEarn = {
+            star:star,
             coin:id*50*star
         }
 

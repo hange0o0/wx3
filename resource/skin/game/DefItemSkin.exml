@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefItemSkin" width="70" height="70" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="DefItemSkin" width="85" height="85" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="border_4_png" scale9Grid="20,20,8,8" left="0" right="0" top="0" bottom="0"/>
-	<e:Image id="mc" width="60" height="60" verticalCenter="0" horizontalCenter="0"/>
-	<e:Rect id="maskMC" width="58" height="58" ellipseWidth="30" y="5.34" horizontalCenter="0"/>
+	<e:Image id="mc" width="75" height="75" verticalCenter="0" horizontalCenter="0"/>
+	<e:Rect id="maskMC" width="74" height="74" ellipseWidth="30" y="5" horizontalCenter="0"/>
 	<e:Label id="cdText" text="56:16" bottom="8" textColor="0xff0000" stroke="2" size="18" horizontalCenter="0"/>
 </e:Skin>

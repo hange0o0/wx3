@@ -67,8 +67,8 @@ class GetCoinUI extends game.BaseUI {
     public renew(){
         console.log(UM.isTest);
          var arr =[
-            {type:1,title:'等陆第X天'},
-            {type:2,title:'X小时后可领'},
+            //{type:1,title:'等陆第X天'},
+            //{type:2,title:'X小时后可领'},
         ]
         if(!UM.isTest && ChangeUserUI.adList.length)
         {
@@ -77,8 +77,8 @@ class GetCoinUI extends game.BaseUI {
         }
         //arr.push({type:4,title:'邀请X位新的好友'})
 
-        //arr.push({type:5,title:'观看广告'})
-        //arr.push({type:6,title:'射击游戏'})
+        arr.push({type:5,title:'观看广告'})
+        arr.push({type:6,title:'射击游戏'})
 
 
         //arr.push({type:99,title:'DEBUG'})

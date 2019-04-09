@@ -2,32 +2,32 @@
 <e:Skin class="MainWorkItemSkin" width="640" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,lock">
 	<w:Config id="1693728fc32"/>
 	<e:Group left="0" right="0" scrollEnabled="true" touchChildren="false" height="350" bottom="0">
-		<e:Image id="bg" horizontalCenter="0" bottom="-100" x="320" y="300" scaleX="1" scaleY="1"/>
+		<e:Image id="bg" horizontalCenter="0" bottom="-80" x="320" y="300" scaleX="1" scaleY="1"/>
 		<e:Group id="con" left="0" right="0" top="0" bottom="0">
 		</e:Group>
 	</e:Group>
-	<e:Group y="30" includeIn="normal" x="0" width="100%" height="50">
-		<e:Image left="0" right="0" top="0" source="black4_png" scaleY="-1" height="100"/>
+	<e:Image left="0" right="0" top="0" source="black4_png" scaleY="-1" height="100"/>
+	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0" locked="true" visible="false"/>
+	<e:Image x="0" source="dig_pass2_png" y="-10" height="70"/>
+	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="-20" horizontalCenter="0" scaleX="1.8" scaleY="1.8"/>
+	<e:Group y="5" includeIn="normal" x="0" width="100%" height="40">
 		<e:Group verticalCenter="0" left="10">
-			<e:Image source="icon_coin_png" x="0" y="1" scaleX="0.7" scaleY="0.7"/>
-			<e:Label id="coinText" text="Label" y="0" size="22" textColor="0xffe6a5" x="85"/>
-			<e:layout>
-				<e:HorizontalLayout verticalAlign="middle"/>
-			</e:layout>
+		<e:Image source="icon_coin_png" x="0" y="1" scaleX="0.7" scaleY="0.7"/>
+		<e:Label id="coinText" text="Label" y="0" size="22" x="85" textColor="0xe0cf91"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
 		</e:Group>
 		<e:Group verticalCenter="0" right="15">
-			<e:Image source="tec_slave_icon_png" x="166" y="106" scaleX="0.5" scaleY="0.5"/>
-			<e:Label id="numText" text="10/10" size="22" x="0" y="0" textColor="0xFFECA5" height="25"/>
-			<e:layout>
+		<e:Image source="tec_slave_icon_png" x="166" y="106" scaleX="0.5" scaleY="0.5"/>
+		<e:Label id="numText" text="10/10" size="22" x="0" y="0" height="25" textColor="0xe0cf91"/>
+		<e:layout>
 			<e:HorizontalLayout verticalAlign="bottom"/>
-			</e:layout>
+		</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0" locked="true"/>
-	<e:Image x="0" scale9Grid="80,96,480,15" source="dig_pass2_png" y="-10"/>
-	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="-20" horizontalCenter="0" scaleX="1.8" scaleY="1.8"/>
-	<e:Image x="0" scale9Grid="80,96,480,15" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
-	<e:Image source="red_mc_png" right="-5" id="redMC" includeIn="normal" y="32"/>
+	<e:Image x="0" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0" height="70"/>
+	<e:Image source="red_mc_png" right="-5" id="redMC" includeIn="normal" y="0"/>
 	<e:Image id="lastMC" x="0" scale9Grid="80,96,480,15" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
 	<e:Label id="desText" text="Label" includeIn="lock" textColor="0xeedbc6" horizontalCenter="0" verticalCenter="50" size="24"/>
 </e:Skin>

@@ -59,21 +59,19 @@ class MonsterManager {
 
     //取队伍战力
     public tempForceAdd = 0;//用于计算玩家最强战力
-    public getMyListForce(list,isAtk?,addBuff = true){
+    public getMyListForce(list,isAtk?){
         this.tempForceAdd = 0;
         if(!list)
             return 0;
         var count = 0;
         var force = isAtk?TecManager.getInstance().getAtkForce():TecManager.getInstance().getDefForce();
-        var buffForce = 0;
-        if(addBuff)
-            buffForce = isAtk?BuffManager.getInstance().getAtkAdd():BuffManager.getInstance().getDefAdd();
-        var arr = list.split(',');
+        force += BuffManager.getInstance().getForceAdd();
+        var arr = (list+'').split(',');
         for(var i=0;i<arr.length;i++)
         {
             var vo = MonsterVO.getObject(arr[i]);
             var forceAdd = (force + this.getForceAdd(vo.id));
-            count += vo.cost*(1+forceAdd/100)*(1+buffForce/100);
+            count += vo.cost*(1+forceAdd/100);
             this.tempForceAdd += forceAdd;
         }
         this.tempForceAdd/=arr.length;
@@ -157,14 +155,14 @@ class MonsterManager {
 
     public getAtkAdd(id){
         var tecForce =TecManager.getInstance().getAtkForce()
-        var buffForce = BuffManager.getInstance().getAtkAdd();
+        var buffForce = BuffManager.getInstance().getForceAdd();
         var monsterForce = this.getForceAdd(id);
         return (1+(tecForce + monsterForce)/100)*(1+buffForce/100)
     }
 
     public getDefAdd(id){
         var tecForce =TecManager.getInstance().getDefForce()
-        var buffForce = BuffManager.getInstance().getDefAdd();
+        var buffForce = BuffManager.getInstance().getForceAdd();
         var monsterForce = this.getForceAdd(id);
         return (1+(tecForce + monsterForce)/100)*(1+buffForce/100)
     }

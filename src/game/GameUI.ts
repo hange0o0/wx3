@@ -122,6 +122,10 @@ class GameUI extends game.BaseUI {
         this.taskGroup.x = -600;
         this.renewTaskRed();
     }
+    public showTask(){
+        this.taskGroup.x = -600;
+        this.onTaskBtn();
+    }
 
     public showDefGuide(){
         this.scroller.viewport.scrollV = 0;
@@ -285,7 +289,7 @@ class GameUI extends game.BaseUI {
         this.coinText.text = '???'
         this.diamondText.text = '???'
 
-        this.hideTask();
+
 
         ChangeUserUI.getAD();
         this.renewSound();
@@ -341,6 +345,7 @@ class GameUI extends game.BaseUI {
         this.onCoinChange();
         this.onDimaondChange();
         this.renewTask();
+        this.showTask();
         MyTool.removeMC(this.changeUser);
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
@@ -407,14 +412,14 @@ class GameUI extends game.BaseUI {
 
     private renewCoinRed(){
         var coinObj = UM.coinObj;
-        this.shopRedMC.visible = !coinObj.loginDayAward;
+        this.shopRedMC.visible = false//!coinObj.loginDayAward;
 
-        if(!this.shopRedMC.visible && coinObj.onLineAwardNum < 5)
-        {
-            var coinCD = UM.onLineAwardCD
-            var nextAwardTime = coinObj.onLineAwardTime + coinCD[coinObj.onLineAwardNum];
-            this.shopRedMC.visible = TM.now() >=  nextAwardTime
-        }
+        //if(!this.shopRedMC.visible && coinObj.onLineAwardNum < 5)
+        //{
+        //    var coinCD = UM.onLineAwardCD
+        //    var nextAwardTime = coinObj.onLineAwardTime + coinCD[coinObj.onLineAwardNum];
+        //    this.shopRedMC.visible = TM.now() >=  nextAwardTime
+        //}
     }
 
 

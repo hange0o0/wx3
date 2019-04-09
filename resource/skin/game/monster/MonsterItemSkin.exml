@@ -16,4 +16,5 @@
 	</e:Group>
 	<e:Image source="black4_png" scaleY="-1" top="40" right="10" width="30" height="160" alpha="0.8"/>
 	<e:Label id="costText" text="12" y="45" size="20" width="30" textAlign="center" stroke="2" bold="false" right="10" lineSpacing="3"/>
+	<e:Image id="redMC" source="red_mc_png" right="-5" top="0"/>
 </e:Skin>
