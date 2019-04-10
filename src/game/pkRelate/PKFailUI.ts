@@ -20,7 +20,7 @@ class PKFailUI extends game.BaseWindow {
 
 
 
-    private enemyData
+    private tecid
     public constructor() {
         super();
         this.skinName = "PKFailUISkin";
@@ -28,34 +28,44 @@ class PKFailUI extends game.BaseWindow {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this.closeBtn,this.hide)
-        this.addBtnEvent(this.closeBtn,this.onShare)
-    }
+        this.addBtnEvent(this.closeBtn,this.hide);
 
-    public onShare(){
-        PKPosUI.getInstance().show({
-            title:'进攻布阵',
-            autoList:true,
-            isPK:true,
-            isAtk:true,
-            maxNum:TecManager.getInstance().getTeamNum(),
-            maxCost:TecManager.getInstance().getTeamCost(),
-            fun:(list)=>{
-                this.hide();
-                PKPosUI.getInstance().hide();
-                FightManager.getInstance().addAtkList(list,this.enemyData.robot);
-                EM.dispatchEventWith(GameEvent.client.FIGHT_CHANGE)
-            },
+        this.addBtnEvent(this.monsterBtn,()=>{
+            MonsterUI.getInstance().show()
+        })
+
+        this.addBtnEvent(this.tecBtn,()=>{
+            TecUI.getInstance().show()
+        })
+
+        this.addBtnEvent(this.friendBtn,()=>{
+            BuffUI.getInstance().show()
+        })
+
+        this.addBtnEvent(this.goBtn,()=>{
+            var wx = window['wx'];
+            if(!wx)
+            {
+                MyWindow.ShowTips('只在公网生效')
+                return;
+            }
+            wx.navigateToMiniProgram({
+                appId: 'wxf9c8e218c23e2eb7',
+                success(res) {
+                    // 打开成功
+                }
+            })
         })
     }
 
+
     public show(v?){
-        this.enemyData = v;
+        this.tecid = v;
         super.show();
     }
 
     public onShow(){
-
+         this.tecText.text = '提升【'+TecManager.getInstance().tecBase[this.tecid].name+'】科技等级'
 
     }
 }

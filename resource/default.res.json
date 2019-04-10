@@ -1628,6 +1628,26 @@
 			"name":"invite_btn_png",
 			"type":"image",
 			"url":"game_assets/invite_btn.png"
+		},
+		{
+			"name":"floor_jpg",
+			"type":"image",
+			"url":"game_assets/floor.jpg"
+		},
+		{
+			"name":"coin_bg5_jpg",
+			"type":"image",
+			"url":"game_assets/coin_bg5.jpg"
+		},
+		{
+			"name":"coin_bg6_jpg",
+			"type":"image",
+			"url":"game_assets/coin_bg6.jpg"
+		},
+		{
+			"name":"cannon_png",
+			"type":"image",
+			"url":"game_assets/cannon.png"
 		}
 	]
 }

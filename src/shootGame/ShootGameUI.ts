@@ -7,8 +7,8 @@ class ShootGameUI extends game.BaseUI {
         return this._instance;
     }
 
-    private cannonGroup: eui.Group;
     private con: eui.Group;
+    private cannonGroup: eui.Group;
     private c0: eui.Image;
     private c1: eui.Image;
     private c2: eui.Image;
@@ -17,12 +17,17 @@ class ShootGameUI extends game.BaseUI {
     private numText: eui.Label;
     private coinGroup: eui.Group;
     private coinText: eui.Label;
+    private diamondGroup: eui.Group;
+    private diamondText: eui.Label;
     private cdGroup: eui.Group;
     private timeText: eui.Label;
     private resultGroup: eui.Group;
     private resultCoinText: eui.Label;
-    private tipText: eui.Label;
+    private resultDiamondGroup: eui.Group;
     private closeBtn: eui.Button;
+    private tipText: eui.Label;
+
+
 
 
 
@@ -40,6 +45,8 @@ class ShootGameUI extends game.BaseUI {
 
     private gameStep = 0
     private coin = 0
+    private kill = 0
+    private maxKill = 50
     public constructor() {
         super();
         this.skinName = "ShootGameUISkin";
@@ -100,9 +107,17 @@ class ShootGameUI extends game.BaseUI {
 
     public addCoin(addCoin){
         this.coin += addCoin;
+        this.kill ++;
         UM.addCoin(addCoin);
+        if(this.kill == this.maxKill && !UM.coinObj.gameDiamond)
+        {
+            UM.coinObj.gameDiamond = 1;
+            this.resultDiamondGroup.visible = true;
+            UM.addDiamond(1)
+        }
         AddCoinItem.showMV(addCoin,this)
         this.coinText.text = this.coin + ''
+        this.diamondText.text = '消灭：' + this.kill + '/' + this.maxKill
     }
 
     public show(){
@@ -126,11 +141,15 @@ class ShootGameUI extends game.BaseUI {
         this.cdGroup.visible = false
         this.cannonGroup.visible = false
         this.coinGroup.visible = false
+        this.diamondGroup.visible = false
         this.resultGroup.visible = false
+        this.resultDiamondGroup.visible = false;
         this.tipText.visible = false
         this.gameStep = 0;
         this.coin = 0;
+        this.kill = 0;
         this.coinText.text = this.coin + ''
+        this.diamondText.text = '消灭：' + this.kill + '/' + this.maxKill
         this.lastCreate = 0;
         this.gameStart = egret.getTimer();
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
@@ -152,6 +171,7 @@ class ShootGameUI extends game.BaseUI {
                 this.cannonGroup.visible = true
                 this.coinGroup.visible = true
                 this.tipText.visible = true
+                this.diamondGroup.visible = !UM.coinObj.gameDiamond
                 this.tipText.alpha = 1;
                 egret.Tween.get(this.tipText,{loop:true}).to({alpha:0},500).to({alpha:1},500)
                 SoundManager.getInstance().playSound('pkbg')

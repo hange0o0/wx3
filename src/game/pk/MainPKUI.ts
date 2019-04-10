@@ -108,7 +108,10 @@ class MainPKUI extends game.BaseUI {
     }
 
     private onStrong(){
-
+        var tecid = 32;
+        if(this.dataIn.fight && this.dataIn.fight.type == 'def')
+            tecid = 31
+        PKFailUI.getInstance().show(tecid)
     }
 
     public onVideoEvent2(e){
@@ -527,8 +530,8 @@ class MainPKUI extends game.BaseUI {
         var force2 =  Math.round(forceObj[2] || 0);
         var green = 0x66ff66
         var white = 0xFFEDC9
-        this.force1Text.text = force1 + ''
-        this.force2Text.text = force2 + ''
+        this.force1Text.text = "总战力：" + force1 + ''
+        this.force2Text.text = "总战力：" + force2 + ''
         this.force1Text.textColor = force1 > force2 ?green:white
         this.force2Text.textColor = force2 > force1 ?green:white
     }
@@ -540,7 +543,6 @@ class MainPKUI extends game.BaseUI {
 
         var w1 = 300 * Math.min(1,hpRate1)
         var w2 = 300 * Math.min(1,hpRate2)
-        console.log(w1,w2)
         egret.Tween.removeTweens(this.hpBar1)
         egret.Tween.removeTweens(this.hpBar2)
         if(isInit)

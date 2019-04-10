@@ -19,11 +19,11 @@
 		<e:Label id="desText" text="当前新邀请好友 30个:" y="10" size="24" x="10"/>
 		<e:Group x="10" verticalCenter="0">
 			<e:Image source="icon_force2_png" x="0" y="0"/>
-			<e:Label text="战力+0%" x="45" size="24" verticalCenter="0" textColor="0xffff00"/>
+			<e:Label id="atkText" text="战力+0%" x="45" size="24" verticalCenter="0" textColor="0xffff00"/>
 		</e:Group>
 		<e:Group x="250" verticalCenter="0">
 			<e:Image source="icon_coin_png" x="10" y="0" scaleX="0.8" scaleY="0.8"/>
-			<e:Label text="效率+0%" x="52" size="24" verticalCenter="0" textColor="0xffff00"/>
+			<e:Label id="workText" text="效率+0%" x="52" size="24" verticalCenter="0" textColor="0xffff00"/>
 		</e:Group>
 		<e:layout>
 			<e:HorizontalLayout verticalAlign="middle" gap="6"/>

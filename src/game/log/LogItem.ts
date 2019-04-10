@@ -34,7 +34,7 @@ class LogItem extends game.BaseItem {
 
     private onPKClick(){
         PKPosUI.getInstance().show({
-            title:'进攻布阵',
+            title:'掠夺【'+this.data.robot.nick+'】',
             autoList:true,
             isPK:true,
             isAtk:true,

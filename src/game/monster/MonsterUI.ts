@@ -98,14 +98,14 @@ class MonsterUI extends game.BaseUI {
                 {
                     list[i].temp = MM.getMonsterLevel(list[i].id)
                 }
-                ArrayUtil.sortByField(list,['temp','level','cost','type'],[0,0,0]);
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[0,0,0,0]);
                 break;
             case 'star':
                 for(var i=0;i<list.length;i++)
                 {
                     list[i].temp = MM.getMonsterNum(list[i].id)
                 }
-                ArrayUtil.sortByField(list,['temp','level','cost','type'],[0,0,0]);
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[0,0,0,0]);
                 break;
             case 'cost':
                 ArrayUtil.sortByField(list,['cost','level','type'],[0,0,0]);

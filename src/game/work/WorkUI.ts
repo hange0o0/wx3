@@ -25,7 +25,7 @@ class WorkUI extends game.BaseUI {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
-        this.topUI.setTitle('工作中的怪物')
+
 
         this.list.itemRenderer = WorkConItem
         this.scroller.viewport = this.list;
@@ -52,6 +52,7 @@ class WorkUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.topUI.setTitle('怪物管理 （'+MonsterManager.getInstance().getTotalMonsterNum()+'）')
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.resetList)

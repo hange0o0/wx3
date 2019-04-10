@@ -47,6 +47,9 @@ class MonsterItem extends game.BaseItem{
         this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(vo.id) + ''
         this.text.text = vo.name //+ '('+vo.cost+')';
 
+        this.redMC.visible = UM.diamond >=  MonsterManager.getInstance().getNumCost(vo.id) ||
+            UM.coin >= MonsterManager.getInstance().getLevelCost(vo.id);
+
         if(this.heroItem)
         {
             this.heroItem.load(vo.id)

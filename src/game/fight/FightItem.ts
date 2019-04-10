@@ -28,7 +28,7 @@ class FightItem extends game.BaseItem{
         }
 
         PKPosUI.getInstance().show({
-            title:'进攻布阵',
+            title:'掠夺【'+this.data.nick+'】',
             autoList:true,
             isPK:true,
             isAtk:true,

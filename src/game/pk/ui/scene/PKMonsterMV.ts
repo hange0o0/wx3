@@ -108,15 +108,26 @@ class PKMonsterMV extends eui.Group {
          this.currentMV.die();
      }
 
+
+    public isTalking = 0
     public talk(gift?){
         if(this.talkItm)
         {
             PKTalkItem.freeItem(this.talkItm)
             this.talkItm = null;
         }
+        this.isTalking = this.monsterMV.state
+        if([61,62,63,70,76].indexOf(this.id) == -1)
+            this.atk();
         this.talkItm = PKTalkItem.createItem();
         this.talkItm.setData(this,gift,this.scaleX);
         this.addChild(this.talkItm);
         SoundManager.getInstance().playEffect('talk');
+    }
+
+    public talkFinish(){
+        this.monsterMV.state = this.isTalking;
+        this.monsterMV.reset();
+        this.isTalking = 0;
     }
 }

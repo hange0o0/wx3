@@ -18,7 +18,7 @@ class ChangeUserUI extends game.BaseItem {
         if(!wx) {
             var oo = {
                 "appid": "wxec9471079f8b6c27",
-                "desc": '免费抽⼤大奖，免费领奖品，再奖⼀一个亿',
+                "desc": '免费抽大奖，免费领奖品，再奖⼀一个亿',
                 "img": "https://wllm.oss-cn-beijing.aliyuncs.com/trackposter/wxec9471079f8b6c27/75428.jpg",
                 "logo": "",
                 "name": "测试号1"

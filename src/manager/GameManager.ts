@@ -12,6 +12,7 @@ class GameManager {
     public lastTouchTime: number;
     public lastTouchMC;
     public changeUserTime = 0
+    public changeUserID = 0
 
     public onShowFun
     public shareFailTime = 0;
@@ -157,7 +158,6 @@ class GameManager {
 
         WorkManager.getInstance().onTimer();
         FightManager.getInstance().onTimer();
-        BuffManager.getInstance().onTimer();
         EM.dispatch(GameEvent.client.timer);
 
         //if(UM.friendtime == 0){  //拿过日志了
@@ -309,10 +309,16 @@ if(window["wx"])
 
         if(GameManager.getInstance().changeUserTime)
         {
-            if(TM.now() - GameManager.getInstance().changeUserTime > 30 && !UM.coinObj.shareNum) //停留超过30秒
+            if(TM.now() - GameManager.getInstance().changeUserTime > 30) //停留超过30秒
             {
                 UM.coinObj.shareNum ++;
-                UM.needUpUser = true;;
+                UM.needUpUser = true;
+                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUser')|| [];
+                arr.unshift(GameManager.getInstance().changeUserID)
+                if(arr.length > 10)
+                    arr.length = 10;
+                if(UM.coinObj.shareNum <= 3)
+                    MyWindow.ShowTips('体验完成，可领取奖励！')
             }
         }
         GameManager.getInstance().changeUserTime = 0;

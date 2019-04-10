@@ -47,7 +47,7 @@ class WorkManager {
         }
 
         PKPosUI.getInstance().show({
-            title:'矿坑'+workIndex+'怪物调整',
+            title:'矿坑'+workIndex+'-工作怪物调整',
             chooseList:strList.join(','),
             maxNum:localMax,
             maxCost:Number.MAX_VALUE,

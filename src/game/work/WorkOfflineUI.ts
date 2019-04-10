@@ -45,18 +45,16 @@ class WorkOfflineUI extends game.BaseWindow {
     private onAddCoin(){
         MyTool.removeMC(this.shareBtn);
         UM.addCoin(this.coin*2);
+        this.closeBtn.label = '关闭'
 
         var old = this.coin
         var pre = this.coin*2/50
-        var  coin = old;
+        var coin = old;
         for(var i = 0 ; i < 50 ; i++)
         {
             egret.setTimeout(()=>{
                 coin += pre
-                if(i==50-1)
-                    this.coin.text = NumberUtil.addNumSeparator(old*3,2);
-                else
-                    this.coin.text = NumberUtil.addNumSeparator(Math.floor(coin),2);
+                this.coinText.text = NumberUtil.addNumSeparator(Math.round(coin),2);
             },this,20*i)
         }
     }
@@ -74,6 +72,7 @@ class WorkOfflineUI extends game.BaseWindow {
         this.coinText.text = NumberUtil.addNumSeparator(this.coin,2);
         this.desText.text = '在你离开的 '+DateUtil.getStringBySeconds(this.cd,false,2)+' 内挖矿获得了'
         if(this.cd >= 3600 && !UM.isTest)
+        //if(true)
         {
             this.closeBtn.label = '普通领取'
             this.btnGroup.addChild(this.shareBtn)

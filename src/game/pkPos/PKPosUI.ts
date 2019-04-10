@@ -381,7 +381,7 @@ class PKPosUI extends game.BaseUI {
     public onShow(){
 
         this.renew();
-        //this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.renew)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.randomTalk)
     }
 
     public showEnemy() {
@@ -492,21 +492,21 @@ class PKPosUI extends game.BaseUI {
                 {
                     list[i].temp = MonsterManager.getInstance().getMonsterLevel(list[i].id)
                 }
-                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0,0]);
                 break;
             case 'pk':
                 for(var i=0;i<list.length;i++)
                 {
                     list[i].temp = MonsterManager.getInstance().getMyListForce(list[i].id + '',this.dataIn.isAtk)
                 }
-                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0,0]);
                 break;
             case 'work':
                 for(var i=0;i<list.length;i++)
                 {
                     list[i].temp = WorkManager.getInstance().getListHourEarn(list[i].id)
                 }
-                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0]);
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0,0]);
                 break;
             case 'cost':
                 ArrayUtil.sortByField(list,['cost','level','type'],[0,0,0]);
@@ -587,6 +587,7 @@ class PKPosUI extends game.BaseUI {
 
     private renew(){
         this.btnGroup.removeChildren();
+        this.btnGroup.addChild(this.sortBtn)
         this.btnGroup.addChild(this.resetBtn)
         if(this.dataIn.isPK)
         {
@@ -644,5 +645,21 @@ class PKPosUI extends game.BaseUI {
                 list.push(arr[i].id)
         }
         return list.join(',')
+    }
+
+    private lastTalk = 0;
+    public randomTalk(){
+        if(!this.dataIn.enemy)
+            return;
+        if(Math.random() > 0.3)
+            return;
+        var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
+        if(item && !item.talkItm)
+        {
+            if(egret.getTimer() < this.lastTalk)
+                return;
+            item.talk(2);
+            this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000);
+        }
     }
 }

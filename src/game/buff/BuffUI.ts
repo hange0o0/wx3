@@ -12,6 +12,8 @@ class BuffUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private desText: eui.Label;
+    private atkText: eui.Label;
+    private workText: eui.Label;
     private inviteBtn: eui.Group;
 
 
@@ -23,7 +25,6 @@ class BuffUI extends game.BaseUI {
 
 
     private dataProvider:eui.ArrayCollection
-    private topDataProvider:eui.ArrayCollection
     public currentChooseID = '';
 
     public constructor() {
@@ -40,16 +41,19 @@ class BuffUI extends game.BaseUI {
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = BuffItem
-        this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
+        var arr = [];
+        for(var i=0;i<100;i++)
+        {
+            arr.push(i)
+        }
+        this.list.dataProvider = this.dataProvider = new eui.ArrayCollection(arr);
 
         this.addBtnEvent(this.inviteBtn,this.share)
 
         MyTool.addLongTouch(this.desText,()=>{
             DebugUI.getInstance().debugTimer = egret.getTimer();
-            MyWindow.ShowTips('Tips:这是整个游戏加成最厉害的功能！')
+            MyWindow.ShowTips('Tips:要邀请未加入过的好友才有效哦~')
         },this)
-
-
     }
 
     public onClose(){
@@ -81,7 +85,11 @@ class BuffUI extends game.BaseUI {
 
 
     public renew(){
-
+        var BM = BuffManager.getInstance();
+        this.desText.text = '当前新邀请好友 '+BM.getUserNum()+'个:'
+        this.dataProvider.refresh();
+        this.atkText.text = '战力+'+BM.getForceAdd()+'%'
+        this.workText.text = '效率+'+BM.getCoinAdd()+'%'
     }
 
 }

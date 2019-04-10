@@ -24,10 +24,10 @@
 			</e:Group>
 		</e:Scroller>
 		<e:Group x="0" y="0">
-			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="-1" right="0"/>
-			<e:Group id="cost1Group" verticalCenter="0" left="15">
-				<e:Image x="0" y="1.5" source="icon_force2_png"/>
+			<e:Image source="black_bg2_png" y="0" height="50" width="320" right="0" scaleX="-1"/>
+			<e:Group id="cost1Group" verticalCenter="0" right="55">
 				<e:Label id="force1Text" text="Label" x="49" y="0" size="24" textColor="0xffe2a5"/>
+				<e:Image x="0" y="1.5" source="icon_force2_png"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
@@ -35,7 +35,7 @@
 		</e:Group>
 		<e:Group y="0" x="320">
 			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="1" right="0"/>
-			<e:Group id="cost2Group" verticalCenter="0" right="15">
+			<e:Group id="cost2Group" verticalCenter="0" x="55">
 				<e:Image x="0" y="1.5" source="icon_force2_png"/>
 				<e:Label id="force2Text" text="Label" x="49" y="0" size="24" textColor="0xFFE2A5"/>
 			<e:layout>

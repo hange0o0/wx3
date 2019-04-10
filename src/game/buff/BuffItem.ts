@@ -14,45 +14,25 @@ class BuffItem extends game.BaseItem{
 
     public childrenCreated() {
         super.childrenCreated();
-
-        this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,()=>{
+            if(this.currentState == 'empty')
+                BuffUI.getInstance().share()
+        })
     }
 
-    private onClick(e){
-        e.stopImmediatePropagation()
-        var ui = BuffUI.getInstance();
-        if(ui.currentChooseID)
-        {
-             if(this.user &&this.user.openid == ui.currentChooseID)
-                return;
-            //交换
-            BuffManager.getInstance().addBuff(this.data.id,ui.currentChooseID)
-            //ui.renew();
-        }
-        //else if(this.user)
-        //{
-        //    ui.onUserClick(this.user.openid)
-        //}
-        //else
-        //{
-        //     if(ui.getNoUseNum() > 0)
-        //     {
-        //         MyWindow.ShowTips('选择下方好友加成增益')
-        //     }
-        //    else
-        //     {
-        //         ui.share();
-        //     }
-        //}
-    }
-    private onDelete(e){
-        e.stopImmediatePropagation()
-        BuffManager.getInstance().deleteBuff(this.data.id)
-        //BuffUI.getInstance().renew();
-    }
 
     public dataChanged():void {
-
+        var user = UM.shareUser[this.data]
+        if(user)
+        {
+            this.currentState = 'normal'
+            this.headMC.source = user.h
+            this.nameText.text = user.n
+        }
+        else
+        {
+             this.currentState = 'empty'
+        }
     }
 
 

@@ -240,4 +240,15 @@ class MonsterManager {
         }
         return count;
     }
+
+    public getTotalMonsterNum(){
+        var arr = this.getOpenMonster();
+        var count = 0;
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i].id;
+            count += this.getMonsterNum(id)
+        }
+        return count;
+    }
 }

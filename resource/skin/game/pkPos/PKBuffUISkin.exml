@@ -5,7 +5,7 @@
 	<e:Label text="竖列加成生命，行列加成攻击" horizontalCenter="0" textColor="0xBCA98B" size="24" bottom="10"/>
 	<e:Group top="0" bottom="80" left="0" right="0">
 		<e:Group scaleX="1" scaleY="1" x="108" y="182">
-			<e:Label text="有效布阵组合" textColor="0xffe6bf" size="26" x="0" y="0"/>
+			<e:Label text="要求布阵组合" textColor="0xffe6bf" size="26" x="0" y="0"/>
 			<e:Group x="9" y="41">
 			<e:Image id="q0" source="icon_type3_png" x="0" y="0"/>
 			<e:Image id="q1" source="icon_type3_png" x="10" y="10"/>

@@ -74,7 +74,7 @@ class DefUI extends game.BaseItem{
     public dataChanged():void {
         while(this.monsterArr.length > 0)
         {
-            PKMonsterMV.freeItem(this.monsterArr.pop());
+            DefMonsterItem.freeItem(this.monsterArr.pop());
         }
         var teamCost = TecManager.getInstance().getTeamCost();
         var teamNum = TecManager.getInstance().getTeamNum();
@@ -82,28 +82,34 @@ class DefUI extends game.BaseItem{
         var arr = MonsterManager.getInstance().getDefArr();
         var cost = 0;
 
-        var des = Math.min(500/(arr.length-1),80)
-        var begin = (640-des*(arr.length-1))/2
+        var h = 120;
+        var des = Math.min(h/(arr.length-1),20)
+        var begin = (h-des*(arr.length-1))/2
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i];
             var vo = MonsterVO.getObject(id);
             cost += vo.cost;
-            var item = PKMonsterMV.createItem();
+            var item = DefMonsterItem.createItem();
             this.con.addChild(item);
             item.load(id)
             item.stand();
             item.scaleX = item.scaleY = 1.2;
-            item.bottom = 30+vo.height*0.6 - 5 + 10*Math.random()// + Math.random()*80
+            item.atkRota = Math.random()>0.5?1:-1;
+            item.renewScale();
+            item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
             item['w'] = vo.width
-            item.x = begin + i*des
+            item.x = 20 + Math.random()*600
+            //item.x = begin + i*des
             this.monsterArr.push(item);
         }
 
         var sortList = this.monsterArr.concat();
         ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
-        for(var i=0;i<sortList.length;i++)
+        var len = sortList.length;
+        for(var i=0;i<len;i++)
         {
+            sortList[i].bottom = 10 +begin + (len-i)*des
             this.con.addChild(sortList[i]);
         }
 
@@ -129,6 +135,8 @@ class DefUI extends game.BaseItem{
             return;
         this.randomTalk();
         MyTool.runListFun(this.defList,'onE');
+        for(var i=0;i<this.monsterArr.length;i++)
+            this.monsterArr[i].onE();
     }
 
     public defGuide(){
@@ -145,10 +153,10 @@ class DefUI extends game.BaseItem{
             return;
         if(egret.getTimer() < this.lastTalk)
             return;
-        if(Math.random() > 0.2)
-            return;
+        //if(Math.random() > 0.2)
+        //    return;
         var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
-        if(item && !item.talkItm)
+        if(item && !item.talkItm && item.x > 100 && item.x < 540)
         {
             item.talk();
             this.lastTalk = egret.getTimer() + 5000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;

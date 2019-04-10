@@ -29,7 +29,13 @@ class ChangeUserItem extends game.BaseItem{
         wx.previewImage({
             urls: [this.data.img],
             success: function () {
-                GameManager.getInstance().changeUserTime = TM.now();
+                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUser')|| [];
+                if(arr.indexOf(this.data.appid) == -1)
+                {
+                    GameManager.getInstance().changeUserTime = TM.now();
+                    GameManager.getInstance().changeUserID = this.data.appid;
+                }
+
             }
         })
     }

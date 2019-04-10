@@ -63,6 +63,7 @@ class GameUI extends game.BaseUI {
     public showData;
     public childrenCreated() {
         super.childrenCreated();
+        this.buffRed.visible = false;
         this.addBtnEvent(this.soundBtn,this.onSetting)
         this.addBtnEvent(this.chapterBtn,this.onChapter)
         this.addBtnEvent(this.fightBtn,this.onFight)
@@ -336,6 +337,7 @@ class GameUI extends game.BaseUI {
         }
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
+        UM.testAddInvite();
         GuideManager.getInstance().isGuiding = false//!UM.guideFinish;
         this.bottomGroup.visible = true;
         this.loadingGroup.visible = false;
@@ -445,6 +447,5 @@ class GameUI extends game.BaseUI {
         this.renewCoinRed();
         this.fightRed.visible = TM.now() - FightManager.getInstance().searchTime >= FightManager.getInstance().refreshSearchTime
         this.chapterRed.visible = ChapterManager.getInstance().getChapterCoin() > ChapterManager.getInstance().getMaxChapterCoin()*0.9
-        this.buffRed.visible = ObjectUtil.objLength(UM.shareUser) > ObjectUtil.objLength(UM.buffUser)
     }
 }

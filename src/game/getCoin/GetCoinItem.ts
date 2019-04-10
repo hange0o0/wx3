@@ -139,7 +139,7 @@ class GetCoinItem extends game.BaseItem {
             //    this.addCoin = 100*Math.min(coinObj.onLineAwardNum + 1,5);
             //    break;
             case 3:   //{type:3,title:'告诉我的好友们'},
-                if(coinObj.shareAward)
+                if(coinObj.shareAward >= 3)
                 {
                     this.goBtn.skinName = 'Btn3Skin'
                     this.goBtn.label = '今日已领'
@@ -147,9 +147,7 @@ class GetCoinItem extends game.BaseItem {
                 }
                 else
                 {
-                    min = coinObj.shareNum,
-                    max = 1
-                    if(min >= max)
+                    if(coinObj.shareNum < coinObj.shareAward)
                     {
                         this.goBtn.label = '领取'
                         this.canAward = true;
@@ -161,10 +159,10 @@ class GetCoinItem extends game.BaseItem {
                         this.goWork = true
                     }
                 }
-                this.titleText.text = '体验任意小程序30秒'
+                this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'
                 this.diamondMC.visible = true;
-                this.addDiamond = 1;
-                this.addCoin = this.getCoin(2);
+                this.addDiamond = coinObj.shareNum==3?1:0;
+                this.addCoin = this.getCoin(1);
                 break;
             //case 4: // {type:4,title:'邀请X位新的好友'},
             //    min = ObjectUtil.objLength(UM.friendNew),

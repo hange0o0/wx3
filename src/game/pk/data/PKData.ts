@@ -205,7 +205,7 @@ class PKData extends egret.EventDispatcher{
         //        forceObj[temaID] = 0;
         //    forceObj[temaID] += monsterData.getForce()
         //}
-        //return forceObj;
+        return forceObj;
     }
 
     public getHpData(){

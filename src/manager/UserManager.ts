@@ -39,7 +39,6 @@ class UserManager {
     public chapterCoin = 0;
 
     public shareUser: any = {};//buff玩家的数据   openid:{head,nick,time}
-    public buffUser: any = {};//上阵Buff的数据 id:openid
 
     public coinObj:{
         loginTime,
@@ -62,6 +61,7 @@ class UserManager {
     public maxForce = 0
 
 
+    public isFirst = false
     public hourEarn = 0;
     //public lastForce
     public fill(data:any):void{
@@ -87,7 +87,6 @@ class UserManager {
         this.chapterResetTime = data.chapterResetTime;
         this.chapterCoin = data.chapterCoin;
         this.maxForce = data.maxForce;
-        this.buffUser = data.buffUser;
         this.shareUser = data.shareUser;
         this.hourEarn = data.hourEarn;
         this.task = data.task || 0;
@@ -103,15 +102,15 @@ class UserManager {
 
         if(!window['wx'])
         {
-            this.shareUser = {
-                1:{head:'',nick:'1',time:TM.now()-1*3600},
-                2:{head:'',nick:'2',time:TM.now()-3*3600},
-                3:{head:'',nick:'3',time:TM.now()-5*3600},
-                4:{head:'',nick:'4',time:TM.now()-7*3600},
-                5:{head:'',nick:'5',time:TM.now()-9*3600},
-                6:{head:'',nick:'6',time:TM.now()-11*3600},
-                7:{head:'',nick:'7',time:TM.now()-13*3600},
-            }
+            this.shareUser = [
+                {h:'',n:'1'},
+                {h:'',n:'2'},
+                {h:'',n:'3'},
+                {h:'',n:'4'},
+                {h:'',n:'5'},
+                {h:'',n:'6'},
+                {h:'',n:'7'},
+            ]
         }
 
         this.initDataTime = TM.now();
@@ -264,7 +263,6 @@ class UserManager {
                     return;
                 }
                 this.fill(res.data[0]);
-                //this.testAddInvite();
                 fun && fun();
             }
         })
@@ -296,7 +294,9 @@ class UserManager {
         })
     }
 
-    private testAddInvite(){
+    public testAddInvite(){
+        if(!this.isFirst)
+            return;
         var wx = window['wx'];
         var query = wx.getLaunchOptionsSync().query;
         if(query.type == '1')
@@ -316,6 +316,7 @@ class UserManager {
 
     //新用户注册
     private onNewUser(fun?){
+        this.isFirst = true;
         var wx = window['wx'];
         const db = wx.cloud.database();
         var initData:any = this.orginUserData();
@@ -328,7 +329,6 @@ class UserManager {
             }
         })
 
-        this.testAddInvite();
         this.needUpUser = true;
     }
 
@@ -406,7 +406,6 @@ class UserManager {
             maxForce:UM.maxForce,
             coinObj:UM.coinObj,
             task:UM.task,
-            buffUser:UM.buffUser,
             guideFinish:UM.guideFinish,
             hourEarn:UM.hourEarn,
             saveTime:TM.now(),

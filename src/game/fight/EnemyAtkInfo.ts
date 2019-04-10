@@ -33,7 +33,7 @@ class EnemyAtkInfo extends game.BaseWindow {
 
     public atkBack(){
         PKPosUI.getInstance().show({
-            title:'进攻布阵',
+            title:'掠夺【'+this.enemyData.robot.nick+'】',
             autoList:true,
             isPK:true,
             isAtk:true,
