@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TaskItemSkin" width="520" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
+	<e:Label id="nameText" text="Label" x="130" y="10" size="26" bold="true" textColor="0xFFE8A5"/>
+	<e:Label id="desText" text="需要怪物：10" y="45" size="24" left="130" right="180" lineSpacing="6" textColor="0xDDB46A"/>
+	<e:Label id="timeText" text="工作时间：1小时" y="80" size="24" left="130" right="180" lineSpacing="6" textColor="0xDDB46A"/>
+	<e:Image id="taskIcon" width="100" height="100" x="10" verticalCenter="0"/>
+	<e:Group y="8" x="360">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>
+		<e:Image source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
+		<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10"/>
+	</e:Group>
+	<e:Button id="goBtn" label="前往" skinName="Btn1Skin" width="150" x="360" y="54" visible="false"/>
+	<e:Group id="cdGroup" x="360" y="60" height="50">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="50" x="0" y="0"/>
+		<e:Rect id="barMC" left="0" top="0" bottom="0" ellipseWidth="15" width="150" fillColor="0x8c3a00"/>
+		<e:Group y="13" horizontalCenter="0">
+			<e:Image x="0" source="icon_clock_png" verticalCenter="0" scaleX="1.2" scaleY="1.2"/>
+			<e:Label id="cdText" text="59:60" size="24" x="40" verticalCenter="0"/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

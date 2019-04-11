@@ -36,7 +36,7 @@ class GetCoinItem extends game.BaseItem {
             {
                 GetCoinUI.getInstance().hide();
                 GameUI.getInstance().scrollToBottom();
-                GameUI.getInstance().hideTask();
+                //GameUI.getInstance().hideTask();
             }
             else  if(this.data.type == 4)
             {

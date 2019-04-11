@@ -64,17 +64,17 @@ class PKPosUI extends game.BaseUI {
     private sortIndexWork = 0
     private sortIndexPK = 0
     private sortBaseWork= [
-        {key:'default',name:'默认\n排序'},
-        {key:'work',name:'效率\n降序'},
-        {key:'level',name:'等级\n降序'},
-        {key:'type',name:'阵营\n排序'}
+        {key:'default',name:'默认\n排序',color:0xFFFFFF},
+        {key:'work',name:'效率\n降序',color:0xFFFF00},
+        {key:'level',name:'等级\n降序',color:0xFFFF00},
+        //{key:'type',name:'阵营\n排序'}
     ]
     private sortBasePK= [
-        {key:'default',name:'默认\n排序'},
-        {key:'pk',name:'战力\n降序'},
-        {key:'level',name:'等级\n降序'},
-        {key:'cost',name:'费用\n升序'},
-        {key:'type',name:'阵营\n排序'}
+        {key:'default',name:'默认\n排序',color:0xFFFFFF},
+        {key:'pk',name:'战力\n降序',color:0xFF0000},
+        {key:'level',name:'等级\n降序',color:0xFFFF00},
+        {key:'cost',name:'费用\n升序',color:0x0000FF},
+        {key:'type',name:'阵营\n排序',color:0xFF00FF}
     ]
 
     public dataIn;
@@ -469,6 +469,7 @@ class PKPosUI extends game.BaseUI {
             var sortObj = this.sortBaseWork[this.sortIndexWork];
         }
         this.sortText.text = sortObj.name
+        this.sortText.textColor = sortObj.color
     //private sortBaseWork= [
     //        {key:'default',name:'默认排序'},
     //        {key:'work',name:'效率降序'},

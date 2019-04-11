@@ -481,6 +481,8 @@ class MainPKUI extends game.BaseUI {
                 MyTool.removeMC(this.doubleBtn)
                 this.btnGroup.addChild(this.strongBtn)
             }
+            if(this.backBtn.label == '关闭')
+                MyTool.removeMC(this.backBtn)
         }
         else
         {
@@ -578,6 +580,7 @@ class MainPKUI extends game.BaseUI {
             tw.call(()=>{
                 this.btnGroup.visible = true
                 this.bottomBar.visible = false;
+                this.currentState = 's2'
             })
 
         },1000)

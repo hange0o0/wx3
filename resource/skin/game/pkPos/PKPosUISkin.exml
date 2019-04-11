@@ -53,6 +53,7 @@
 			</e:Group>
 			<e:Group left="0" right="0" top="50" bottom="0">
 				<e:Group id="chooseGroup" x="0" y="0" width="620" height="180">
+					<e:Image source="bg7_png" scale9Grid="33,31,4,6" left="0" right="0" top="0" bottom="0"/>
 					<e:Image left="0" right="0" top="0" bottom="0" source="border2_png" scale9Grid="11,11,7,5"/>
 					<e:Label id="desText" text="点击加入/移除怪物，长按查看详情，拖动调整顺序" horizontalCenter="0" size="24" textColor="0xffefaa" verticalCenter="0"/>
 					<e:List id="chooseList" horizontalCenter="0" verticalCenter="0">
@@ -74,20 +75,20 @@
 						</e:layout>
 						</e:Group>
 					</e:Scroller>
-					<e:Group id="emptyGroup" width="540" verticalCenter="-5" horizontalCenter="0" height="250">
+					<e:Group id="emptyGroup" width="580" horizontalCenter="0" height="250" verticalCenter="0">
 						<e:Image source="bg11_png" left="0" right="0" top="0" bottom="0" scale9Grid="15,14,7,10"/>
 						<e:Label id="emptyText" text="你已没有空闲的怪物了" y="18" scaleX="1" scaleY="1" size="26" textColor="0xfcda88" horizontalCenter="0.5" bold="true"/>
 						<e:Group y="60" horizontalCenter="0">
 						<e:Label text="提升【科技革命】等级，获得新怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-						<e:Button id="tecBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+						<e:Button id="tecBtn" label="前往" skinName="Btn1Skin" x="420" verticalCenter="0"/>
 						</e:Group>
 						<e:Group y="120" horizontalCenter="0">
 						<e:Label text="提升怪物星级，增加怪物上限" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-						<e:Button id="monsterBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+						<e:Button id="monsterBtn" label="前往" skinName="Btn1Skin" x="420" verticalCenter="0"/>
 						</e:Group>
 						<e:Group y="180" horizontalCenter="0">
 							<e:Label text="调整怪物工作，腾出空闲怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-							<e:Button id="workBtn" label="前往" skinName="Btn1Skin" x="400" verticalCenter="0"/>
+							<e:Button id="workBtn" label="前往" skinName="Btn1Skin" x="420" verticalCenter="0"/>
 						</e:Group>
 					</e:Group>
 				</e:Group>

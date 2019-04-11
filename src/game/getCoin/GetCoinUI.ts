@@ -1,4 +1,4 @@
-class GetCoinUI extends game.BaseUI {
+class GetCoinUI extends game.BaseWindow {
 
     private static _instance: GetCoinUI;
     public static getInstance(): GetCoinUI {
@@ -7,10 +7,9 @@ class GetCoinUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
-    private scroller: eui.Scroller;
     private list: eui.List;
+    private closeBtn: eui.Image;
+
 
 
 
@@ -25,10 +24,8 @@ class GetCoinUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('每日金币')
+        this.addBtnEvent(this.closeBtn,this.hide)
 
-        this.scroller.viewport = this.list;
         this.list.itemRenderer = GetCoinItem
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
 
@@ -50,7 +47,6 @@ class GetCoinUI extends game.BaseUI {
 
     public hide() {
         super.hide();
-        GameUI.getInstance().onTimer();
     }
 
     public onShow(){

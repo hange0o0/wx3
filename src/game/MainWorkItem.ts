@@ -33,6 +33,7 @@ class MainWorkItem extends game.BaseItem {
 
     public dataChanged(){
         this.lastMC.visible = this.data.isLast;
+        this.bg.scaleX = this.data.id%2 == 1?1:-1
         if(WorkManager.getInstance().getOpenWork() >= this.data.id)
         {
             this.showList();

@@ -2,15 +2,15 @@
 <e:Skin class="MainWorkItemSkin" width="640" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,lock">
 	<w:Config id="1693728fc32"/>
 	<e:Group left="0" right="0" scrollEnabled="true" touchChildren="false" height="350" bottom="0">
-		<e:Image id="bg" horizontalCenter="0" bottom="-80" x="320" y="300" scaleX="1" scaleY="1"/>
+		<e:Image id="bg" bottom="-80" y="300" scaleX="-1" scaleY="1" left="0"/>
 		<e:Group id="con" left="0" right="0" top="0" bottom="0">
 		</e:Group>
 	</e:Group>
 	<e:Image left="0" right="0" top="0" source="black4_png" scaleY="-1" height="100"/>
-	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0" locked="true" visible="false"/>
-	<e:Image x="0" source="dig_pass2_png" y="-10" height="70"/>
+	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0" locked="true"/>
+	<e:Image x="0" source="dig_pass2_png" y="0" height="65"/>
 	<e:Image source="icon_lock_png" includeIn="lock" verticalCenter="-20" horizontalCenter="0" scaleX="1.8" scaleY="1.8"/>
-	<e:Group y="5" includeIn="normal" x="0" width="100%" height="40">
+	<e:Group y="2" includeIn="normal" x="0" width="100%" height="40">
 		<e:Group verticalCenter="0" left="10">
 		<e:Image source="icon_coin_png" x="0" y="1" scaleX="0.7" scaleY="0.7"/>
 		<e:Label id="coinText" text="Label" y="0" size="22" x="85" textColor="0xe0cf91"/>
@@ -26,8 +26,8 @@
 		</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Image x="0" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0" height="70"/>
 	<e:Image source="red_mc_png" right="-5" id="redMC" includeIn="normal" y="0"/>
-	<e:Image id="lastMC" x="0" scale9Grid="80,96,480,15" y="340" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
+	<e:Image id="lastMC" x="0" scale9Grid="80,96,480,15" y="350" source="dig_pass2_png" fillMode="clip" anchorOffsetY="0"/>
 	<e:Label id="desText" text="Label" includeIn="lock" textColor="0xeedbc6" horizontalCenter="0" verticalCenter="50" size="24"/>
+	<e:Image source="black4_png" x="0" bottom="0" width="640" height="15"/>
 </e:Skin>

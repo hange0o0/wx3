@@ -11,6 +11,7 @@ class WorkUI extends game.BaseUI {
     private list: eui.List;
     private topUI: TopUI;
     private bottomUI: BottomUI;
+    private desText: eui.Label;
 
 
 
@@ -52,7 +53,8 @@ class WorkUI extends game.BaseUI {
     }
 
     public onShow(){
-        this.topUI.setTitle('怪物管理 （'+MonsterManager.getInstance().getTotalMonsterNum()+'）')
+        this.topUI.setTitle('怪物管理')
+
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.resetList)
@@ -70,7 +72,12 @@ class WorkUI extends game.BaseUI {
         this.scroller.viewport.scrollV = v;
     }
 
+    private renewDes(){
+        this.desText.text = '当前累计拥有怪物总量：' +MonsterManager.getInstance().getTotalMonsterNum()
+    }
+
     public renew(){
+        this.renewDes();
         var arr = [];
         var MM = MonsterManager.getInstance();
         var WM = WorkManager.getInstance();

@@ -1648,6 +1648,11 @@
 			"name":"cannon_png",
 			"type":"image",
 			"url":"game_assets/cannon.png"
+		},
+		{
+			"name":"task_icon_png",
+			"type":"image",
+			"url":"game_assets/task_icon.png"
 		}
 	]
 }

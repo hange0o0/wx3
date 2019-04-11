@@ -79,6 +79,8 @@
 		"resource/skin/game/rank/RankItemSkin.exml",
 		"resource/skin/game/rank/RankUISkin.exml",
 		"resource/skin/game/shootGame/ShootGameUISkin.exml",
+		"resource/skin/game/task/TaskItemSkin.exml",
+		"resource/skin/game/task/TaskUISkin.exml",
 		"resource/skin/game/tec/TecItemSkin.exml",
 		"resource/skin/game/tec/TecUISkin.exml",
 		"resource/skin/game/work/WorkConItemSkin.exml",

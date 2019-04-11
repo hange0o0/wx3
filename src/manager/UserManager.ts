@@ -38,7 +38,7 @@ class UserManager {
     public chapterResetTime = 0;
     public chapterCoin = 0;
 
-    public shareUser: any = {};//buff玩家的数据   openid:{head,nick,time}
+    public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
 
     public coinObj:{
         loginTime,
@@ -348,7 +348,7 @@ class UserManager {
              saveTime:0,
              energy:{v:0,t:0},
              buffUser:{},
-             shareUser:{},
+             shareUser:[],
              def:'41',
              work:'65#0#1', //初始1个在工作
              coinObj:{

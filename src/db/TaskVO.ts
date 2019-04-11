@@ -60,4 +60,28 @@ class TaskVO {
                 return '据点总星星数达到'+this.value+'个'
         }
     }
+
+    public getTitle(){
+        switch(this.type)
+        {
+            case 'fight':
+                return '强取豪夺'
+            case 'def':
+                return '固若金汤'
+            case 'mlv'://指定ID
+                return '自强不息'
+            case 'mnum': //指定ID
+                return '分身有术'
+            case 'mlv2'://等级大于v1的数量
+                return '强强联合'
+            case 'mnum2'://数量大于v1的数量
+                return '千军万马'
+            case 'tlv':
+                return '科技强国'
+            case 'clv':
+                return '开疆辟土'
+            case 'cstar'://星星数量
+                return '声名远播'
+        }
+    }
 }

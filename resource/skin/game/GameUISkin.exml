@@ -65,26 +65,6 @@
 			<e:HorizontalLayout gap="10" verticalAlign="middle"/>
 		</e:layout>
 	</e:Group>
-	<e:Group id="taskGroup" x="0" bottom="110" height="68">
-		<e:Image source="bg17_png" left="-30" right="0" top="0" bottom="0" scale9Grid="12,5,53,31"/>
-		<e:Group verticalCenter="0" left="80" right="50">
-		<e:Group x="0" y="0">
-			<e:Label id="taskText" text="Label" x="0" y="0" size="22"/>
-			<e:Rect width="100%" height="2" x="0" y="26" fillColor="0xFFFFFF" strokeColor="0x000000"/>
-		</e:Group>
-		<e:Label id="taskText2" text="Label" x="74" y="0" size="25"/>
-		<e:layout>
-			<e:HorizontalLayout gap="20"/>
-		</e:layout>
-		</e:Group>
-	</e:Group>
-	<e:Group id="taskBtn" x="10" bottom="115">
-		<e:Image source="note_icon_png" x="0" y="0"/>
-		<e:Image id="taskRed" source="red_mc_png" right="-15" top="0"/>
-	</e:Group>
-	<e:Group id="taskBtn2" x="10" bottom="115" width="49" height="54">
-		<e:Image source="arrow1_png" scaleX="-0.6" scaleY="0.6" verticalCenter="0" horizontalCenter="0"/>
-	</e:Group>
 	<e:Group id="loadingGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Rect left="0" right="0" top="0" bottom="0"/>
 		<e:Label text="《健康游戏忠告》" size="24" textColor="0x999999" bottom="80" horizontalCenter="0"/>

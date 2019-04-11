@@ -24,7 +24,7 @@ class AddCoinItem extends game.BaseItem{
         mc.verticalCenter = 0
         mc.alpha = 1
         con.addChild(mc);
-        egret.Tween.get(mc).wait(200).to({verticalCenter:-160,alpha:0},800).call(()=>{
+        egret.Tween.get(mc).wait(200).to({verticalCenter:-120,alpha:0},1000).call(()=>{
             this.freeItem(mc);
         })
     }

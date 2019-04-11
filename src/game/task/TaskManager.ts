@@ -115,11 +115,6 @@ class TaskManager {
     public guideTaskVO:TaskVO;
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
-        if(this.isTaskFinish())
-        {
-            this.getTaskAward();
-            return
-        }
         var type = vo.type
         switch(type)
         {
@@ -152,7 +147,12 @@ class TaskManager {
                 break;
         }
 
-
+         return true;
         //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
+    }
+
+    //
+    public getFeederTaskList(){
+        return [];
     }
 }

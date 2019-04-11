@@ -24,6 +24,33 @@ class FightManager {
 
 
     public constructor(){
+
+    }
+
+    public renewSearch(force?){
+        if(TM.now() - this.searchTime >= this.refreshSearchTime || force)
+        {
+            this.searchRobot.length = 0;
+            for(var i=0;i<9;i++)
+            {
+                this.searchRobot.push(RobotVO.create());
+            }
+            ArrayUtil.sortByField(this.searchRobot,['distanceTime'],[0])
+            this.searchTime = TM.now();
+            this.save();
+        }
+    }
+
+    private getRobot(gameid){
+        for(var i=0;i<this.searchRobot.length;i++)
+        {
+            if(this.searchRobot[i].gameid == gameid)
+                return this.searchRobot[i];
+        }
+        return null;
+    }
+
+    public initFight(data){
         var oo = SharedObjectManager.getInstance().getMyValue('fight')
         if(oo)
         {
@@ -56,32 +83,7 @@ class FightManager {
                 }
             }
         }
-    }
 
-    public renewSearch(force?){
-        if(TM.now() - this.searchTime >= this.refreshSearchTime || force)
-        {
-            this.searchRobot.length = 0;
-            for(var i=0;i<9;i++)
-            {
-                this.searchRobot.push(RobotVO.create());
-            }
-            ArrayUtil.sortByField(this.searchRobot,['distanceTime'],[0])
-            this.searchTime = TM.now();
-            this.save();
-        }
-    }
-
-    private getRobot(gameid){
-        for(var i=0;i<this.searchRobot.length;i++)
-        {
-            if(this.searchRobot[i].gameid == gameid)
-                return this.searchRobot[i];
-        }
-        return null;
-    }
-
-    public initFight(data){
         this.nextBeHitTime = data.time || 0;
         this.fightingArr = data.list || [];
         this.fightNum = data.fightNum || 0;
@@ -357,6 +359,7 @@ class FightManager {
         }
         else//我是防守方
         {
+            pkObj.force1 = Math.floor(pkObj.force1*0.9);//降低防守难度
             pkObj.list1 = robot.atk;
             pkObj.list2 = MonsterManager.getInstance().defList;
             pkObj.force2 = TecManager.getInstance().getDefForce() + BuffManager.getInstance().getForceAdd();

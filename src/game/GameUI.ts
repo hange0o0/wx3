@@ -36,12 +36,12 @@ class GameUI extends game.BaseUI {
     private barGroup: eui.Group;
     private barMC: eui.Rect;
 
-    private taskGroup: eui.Group;
-    private taskText: eui.Label;
-    private taskText2: eui.Label;
-    private taskBtn: eui.Group;
-    private taskBtn2: eui.Group;
-    private taskRed: eui.Image;
+    //private taskGroup: eui.Group;
+    //private taskText: eui.Label;
+    //private taskText2: eui.Label;
+    //private taskBtn: eui.Group;
+    //private taskBtn2: eui.Group;
+    //private taskRed: eui.Image;
 
 
 
@@ -72,8 +72,8 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.monsterBtn,this.onMonster)
         this.addBtnEvent(this.tecBtn,this.onTec)
         this.addBtnEvent(this.buffBtn,this.onBuff)
-        this.addBtnEvent(this.taskBtn,this.onTaskBtn)
-        this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
+        //this.addBtnEvent(this.taskBtn,this.onTaskBtn)
+        //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
         this.scroller.viewport = this.list
         this.list.itemRendererFunction = (data)=>{
@@ -96,37 +96,37 @@ class GameUI extends game.BaseUI {
                 DebugUI.getInstance().show();
             }
         },this)
-        this.addBtnEvent(this.taskGroup,this.onTask)
+        //this.addBtnEvent(this.taskGroup,this.onTask)
 
     }
 
-    private onTaskBtn(){
-        this.taskBtn.visible = this.taskBtn2.visible = false;
-        egret.Tween.removeTweens(this.taskGroup)
-        if(this.taskGroup.x == 0)
-        {
-            egret.Tween.get(this.taskGroup).to({x:-600},300).call(this.renewTaskRed,this);
-        }
-        else
-        {
-            egret.Tween.get(this.taskGroup).to({x:20},200).to({x:0},100).call(this.renewTaskRed,this);
-        }
-    }
+    //private onTaskBtn(){
+    //    this.taskBtn.visible = this.taskBtn2.visible = false;
+    //    egret.Tween.removeTweens(this.taskGroup)
+    //    if(this.taskGroup.x == 0)
+    //    {
+    //        egret.Tween.get(this.taskGroup).to({x:-600},300).call(this.renewTaskRed,this);
+    //    }
+    //    else
+    //    {
+    //        egret.Tween.get(this.taskGroup).to({x:20},200).to({x:0},100).call(this.renewTaskRed,this);
+    //    }
+    //}
 
-    private renewTaskRed(){
-        this.taskRed.visible = this.taskGroup.x == -600 && TaskManager.getInstance().isTaskFinish()
-        this.taskBtn.visible = this.taskGroup.x == -600
-        this.taskBtn2.visible = !this.taskBtn.visible
-    }
+    //private renewTaskRed(){
+    //    this.taskRed.visible = this.taskGroup.x == -600 && TaskManager.getInstance().isTaskFinish()
+    //    this.taskBtn.visible = this.taskGroup.x == -600
+    //    this.taskBtn2.visible = !this.taskBtn.visible
+    //}
 
-    public hideTask(){
-        this.taskGroup.x = -600;
-        this.renewTaskRed();
-    }
-    public showTask(){
-        this.taskGroup.x = -600;
-        this.onTaskBtn();
-    }
+    //public hideTask(){
+    //    this.taskGroup.x = -600;
+    //    this.renewTaskRed();
+    //}
+    //public showTask(){
+    //    this.taskGroup.x = -600;
+    //    this.onTaskBtn();
+    //}
 
     public showDefGuide(){
         this.scroller.viewport.scrollV = 0;
@@ -135,34 +135,34 @@ class GameUI extends game.BaseUI {
 
     }
 
-    private onTask(e){
-        e.stopImmediatePropagation();
-        TaskManager.getInstance().onTaskGo();
-    }
-
-    public renewTask(){
-        var TSM = TaskManager.getInstance();
-        var vo = TSM.getCurrentTask();
-        if(vo)
-        {
-            var value = Math.min(TSM.getTaskValue(vo),vo.value);
-            this.setHtml(this.taskText,vo.getDes() + '  ' + this.createHtml(value + '/' + vo.value,0xFFECA5))
-            if(value<vo.value)
-            {
-                this.taskText2.text = '去完成>>'
-                this.taskText2.textColor = 0xFCB33C
-            }
-            else
-            {
-                this.taskText2.text = '【领取奖励】'
-                this.taskText2.textColor = 0x70F45F
-            }
-        }
-        else
-        {
-            this.taskGroup.visible = false;
-        }
-    }
+    //private onTask(e){
+    //    e.stopImmediatePropagation();
+    //    TaskManager.getInstance().onTaskGo();
+    //}
+    //
+    //public renewTask(){
+    //    var TSM = TaskManager.getInstance();
+    //    var vo = TSM.getCurrentTask();
+    //    if(vo)
+    //    {
+    //        var value = Math.min(TSM.getTaskValue(vo),vo.value);
+    //        this.setHtml(this.taskText,vo.getDes() + '  ' + this.createHtml(value + '/' + vo.value,0xFFECA5))
+    //        if(value<vo.value)
+    //        {
+    //            this.taskText2.text = '去完成>>'
+    //            this.taskText2.textColor = 0xFCB33C
+    //        }
+    //        else
+    //        {
+    //            this.taskText2.text = '【领取奖励】'
+    //            this.taskText2.textColor = 0x70F45F
+    //        }
+    //    }
+    //    else
+    //    {
+    //        this.taskGroup.visible = false;
+    //    }
+    //}
 
     private renewInfo(res?){
         var wx = window['wx'];
@@ -346,8 +346,8 @@ class GameUI extends game.BaseUI {
         this.onTimer();
         this.onCoinChange();
         this.onDimaondChange();
-        this.renewTask();
-        this.showTask();
+        //this.renewTask();
+        //this.showTask();
         MyTool.removeMC(this.changeUser);
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
@@ -359,7 +359,7 @@ class GameUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.renewList)
-        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewTask)
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.onTaskChange)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
@@ -381,6 +381,9 @@ class GameUI extends game.BaseUI {
     //}
 
 
+    private onTaskChange(){
+        MyTool.runListFun(this.list,'renewTask')
+    }
 
     public endGuide(){
 
