@@ -24,35 +24,52 @@ class DefMonsterItem extends PKMonsterMV {
     }
 
 
-    public onE(){
-        if(this.isTalking)
+    //public onE(){
+    //    if(this.isTalking)
+    //        return;
+    //    if(this.monsterMV.state != MonsterMV.STAT_RUN)
+    //        this.run()
+    //    var vo = MonsterVO.getObject(this.id)
+    //    this.x += this.atkRota * Math.round(vo.speed)/10*20/60;
+    //    if(this.atkRota == 1)
+    //    {
+    //        if(this.x > (this.changePos || 640))
+    //        {
+    //            this.atkRota = -1
+    //            this.changePos = Math.random()*150
+    //            this.renewScale();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if(this.x < (this.changePos || 0))
+    //        {
+    //            this.atkRota = 1
+    //            this.changePos = 640-Math.random()*150
+    //            this.renewScale();
+    //        }
+    //    }
+    //}
+
+    public renewRota(rota){
+        if(this.atkRota == rota)
             return;
-        if(this.monsterMV.state != MonsterMV.STAT_RUN)
-            this.run()
-        var vo = MonsterVO.getObject(this.id)
-        this.x += this.atkRota * Math.round(vo.speed)/10*20/60;
-        if(this.atkRota == 1)
+        this.atkRota = rota
+        if(rota == 1)
         {
-            if(this.x > (this.changePos || 640))
-            {
-                this.atkRota = -1
-                this.changePos = Math.random()*150
-                this.renewScale();
-            }
+            this.bottom = 40
+            this.parent && this.parent.addChild(this)
         }
         else
         {
-            if(this.x < (this.changePos || 0))
-            {
-                this.atkRota = 1
-                this.changePos = 640-Math.random()*150
-                this.renewScale();
-            }
+            this.bottom = 160
+            this.parent && this.parent.addChildAt(this,1)
         }
+        this.renewScale();
     }
 
     public renewScale(){
-        this.scaleX = -this.atkRota * Math.abs(this.scaleX);
+        this.scaleX = this.atkRota * Math.abs(this.scaleX);
     }
 
 

@@ -151,8 +151,31 @@ class TaskManager {
         //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
     }
 
-    //
-    public getFeederTaskList(){
-        return [];
+    public onTimer(){
+        var arr = UM.dayTask;
+        var needAddNum = Math.min(2,6 - arr.length);
+        if(needAddNum && (TM.now()%(15*60) == 0 || arr.length == 0))//加3个
+        {
+            var list = [1,2,3,4,5,6,7,8];
+            for(var i=0;i<arr.length;i++)
+            {
+                var oo = arr[i]
+                var index = list.indexOf(oo.id);
+                if(index != -1)
+                    list.splice(index,1);
+            }
+
+            while(needAddNum > 0) //加入新的
+            {
+                needAddNum --;
+                var cd = Math.ceil(Math.random()*4);
+                arr.push({
+                    id:ArrayUtil.randomOne(list,true),
+                    num:Math.ceil(TecManager.getInstance().getTecLevel(11)/2),
+                    cd:cd,
+                    award:Math.ceil(UM.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
+                })
+            }
+        }
     }
 }

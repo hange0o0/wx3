@@ -47,10 +47,12 @@ class WorkManager {
         }
 
         PKPosUI.getInstance().show({
+            type:'work',
             title:'矿坑'+workIndex+'-工作怪物调整',
             chooseList:strList.join(','),
             maxNum:localMax,
             maxCost:Number.MAX_VALUE,
+            workIndex:workIndex,
             fun:(list)=>{
                 PKPosUI.getInstance().hide();
                 var newList = list?list.split(','):[];
@@ -217,13 +219,14 @@ class WorkManager {
     }
 
     public getTotalHourEarn(){
+        var arr = MonsterManager.getInstance().getOpenMonster();
         var count = 0
-        for(var i=0;i<this.workList.length;i++)
+        for(var i=0;i<arr.length;i++)
         {
-            var id = this.workList[i].id;
+            var id = arr[i].id;
             var v1 = this.getWorkCD(id)
-            var v2 = this.getWorkCoin(id,null)
-            count += v2*(3600*1000/v1)
+            var v2 = this.getWorkCoin(id)
+            count += v2*(3600*1000/v1)*MonsterManager.getInstance().getMonsterNum(id)
         }
         return Math.floor(count);
     }

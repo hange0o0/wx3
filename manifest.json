@@ -175,6 +175,7 @@
 		"bin-debug/game/task/TaskItem.js",
 		"bin-debug/game/task/TaskManager.js",
 		"bin-debug/game/task/TaskUI.js",
+		"bin-debug/game/task/TaskUI2.js",
 		"bin-debug/game/tec/TecItem.js",
 		"bin-debug/game/tec/TecManager.js",
 		"bin-debug/game/tec/TecUI.js",

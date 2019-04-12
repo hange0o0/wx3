@@ -104,7 +104,7 @@ class MainWorkItem extends game.BaseItem {
     public onE(){
         if(this.currentState == 'lock')
             return
-        if(!this.visible || !GameUI.getInstance().visible)
+        if(!this.visible)
             return;
         var t = TM.nowMS();
         var WM = WorkManager.getInstance();

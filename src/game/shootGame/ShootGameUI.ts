@@ -46,7 +46,8 @@ class ShootGameUI extends game.BaseUI {
     private gameStep = 0
     private coin = 0
     private kill = 0
-    private maxKill = 50
+    private maxKill = 80
+    private maxCoin = 80
     public constructor() {
         super();
         this.skinName = "ShootGameUISkin";
@@ -105,7 +106,8 @@ class ShootGameUI extends game.BaseUI {
         egret.Tween.get(mc).to({y:0},100)
     }
 
-    public addCoin(addCoin){
+    public addCoin(cost){
+        var addCoin = Math.floor(cost*this.maxCoin/300);
         this.coin += addCoin;
         this.kill ++;
         UM.addCoin(addCoin);
@@ -116,11 +118,12 @@ class ShootGameUI extends game.BaseUI {
             UM.addDiamond(1)
         }
         AddCoinItem.showMV(addCoin,this)
-        this.coinText.text = this.coin + ''
+        this.coinText.text = NumberUtil.addNumSeparator(this.coin,2)
         this.diamondText.text = '消灭：' + this.kill + '/' + this.maxKill
     }
 
-    public show(){
+    public show(maxCoin?){
+        this.maxCoin = maxCoin
         super.show()
     }
 

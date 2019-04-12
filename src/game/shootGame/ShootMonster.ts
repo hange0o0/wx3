@@ -37,6 +37,7 @@ class ShootMonster extends game.BaseItem{
         this.addChildAt(this.mc,0)
         this.mc.x = 50;
         this.mc.y = 300;
+        this.mc.scaleX = this.mc.scaleY = 1;
         this.anchorOffsetX = 50;
         this.anchorOffsetY = 300;
         this.mc.addEventListener('mv_die',this.onDieFinish,this)

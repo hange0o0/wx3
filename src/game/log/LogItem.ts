@@ -36,8 +36,10 @@ class LogItem extends game.BaseItem {
         PKPosUI.getInstance().show({
             title:'掠夺【'+this.data.robot.nick+'】',
             autoList:true,
+            type:'fight',
             isPK:true,
             isAtk:true,
+            fightData:this.data.robot,
             maxNum:TecManager.getInstance().getTeamNum(),
             maxCost:TecManager.getInstance().getTeamCost(),
             fun:(list)=>{

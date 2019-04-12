@@ -7,22 +7,15 @@ class TaskUI extends game.BaseWindow {
         return this._instance;
     }
 
-    private iconMC: eui.Image;
-    private awardText: eui.Label;
     private taskTextTitle: eui.Label;
     private taskText: eui.Label;
     private taskRateText: eui.Label;
-    private taskBtn: eui.Button;
+    private iconMC: eui.Image;
+    private awardText: eui.Label;
     private closeBtn: eui.Image;
-    private scroller: eui.Scroller;
-    private list: eui.List;
+    private taskBtn: eui.Button;
 
 
-
-
-
-
-    private dataProvider:eui.ArrayCollection
 
     public constructor() {
         super();
@@ -45,10 +38,6 @@ class TaskUI extends game.BaseWindow {
 
         })
 
-        this.list.itemRenderer = TaskItem
-        this.scroller.viewport = this.list;
-        this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
-
     }
 
     public onClose(){
@@ -66,17 +55,13 @@ class TaskUI extends game.BaseWindow {
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
     }
 
-    private onTimer(){
-        MyTool.runListFun(this.list,'onTimer')
-    }
+
 
 
     public renew(){
         this.renewMainTask();
-        this.renewFeederTask();
     }
 
     private renewMainTask(){
@@ -85,7 +70,6 @@ class TaskUI extends game.BaseWindow {
         if(vo)
         {
             var value = Math.min(TSM.getTaskValue(vo),vo.value);
-            this.currentState = 's1';
 
             if(vo.coin)
             {
@@ -113,13 +97,7 @@ class TaskUI extends game.BaseWindow {
                 this.taskBtn.skinName = 'Btn1Skin'
             }
         }
-        else
-        {
-            this.currentState = 's2';
-        }
-    }
-
-    private renewFeederTask(){
 
     }
+
 }

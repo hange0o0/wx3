@@ -1,52 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefUISkin" width="640" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="DefUISkin" width="640" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="con" left="0" right="0" bottom="0" touchChildren="false" height="500" scrollEnabled="false">
 		<e:Image id="bg" bottom="0" y="300" scaleY="1" horizontalCenter="0"/>
 	</e:Group>
 	<e:Image id="bgFront" x="0" bottom="0" source=""/>
-	<e:Image source="black4_png" x="0" bottom="-3" width="640" height="25"/>
+	<e:Image source="black4_png" x="0" bottom="-3" width="640" height="25" visible="false"/>
 	<e:Image source="black3_png" y="0" height="50" left="0" right="0" visible="false"/>
 	<e:Image source="border1_png" height="70" y="-10" width="700" horizontalCenter="0" scale9Grid="28,20,26,2" visible="false"/>
-	<e:Group x="0" height="50" width="640" y="-160">
-		<e:Image top="0" bottom="0" source="black_bg2_png" width="320" right="0" scaleX="-1"/>
-		<e:Group x="0" bottom="10" width="640">
-			<e:Group x="0" y="0" width="120" visible="false">
+	<e:Group x="0" height="50" width="640" y="-190">
+		<e:Image top="0" source="black_bg2_png" width="320" right="0" scaleX="-1" height="127.21" anchorOffsetY="0" visible="false"/>
+		<e:Group y="8" right="20" visible="false">
+			<e:Group x="-13.000000000000057" y="76" scaleX="1" scaleY="1">
+				<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
+				<e:Group x="38" y="6">
+				<e:Label id="forceText" text="123456" size="22" x="0" y="0" textColor="0xffeca5" height="24"/>
+				</e:Group>
+				<e:layout>
+				<e:HorizontalLayout verticalAlign="bottom"/>
+				</e:layout>
+			</e:Group>
+			<e:Group x="0" y="0">
 			<e:Image source="tec_slave_icon_png" x="166" y="106" scaleX="0.5" scaleY="0.5"/>
 			<e:Label id="numText" text="10/10" size="24" x="0" y="0" textColor="0xffeca5" height="26"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="bottom"/>
 			</e:layout>
 			</e:Group>
-			<e:Group x="0" y="30" width="150" visible="false">
+			<e:Group x="0" y="30">
 			<e:Image source="icon_cost_png" x="62" y="66"/>
 			<e:Label id="costText" text="100/100" size="24" x="0" y="0" textColor="0xffeca5" height="26"/>
 			<e:layout>
 				<e:HorizontalLayout verticalAlign="bottom"/>
 			</e:layout>
 			</e:Group>
-			<e:Group x="0" y="0">
-				<e:Image x="166" y="106" scaleX="0.7" scaleY="0.7" source="icon_force2_png"/>
-				<e:Group x="38" y="6">
-				<e:Label id="forceText" text="123456" size="22" x="0" y="0" textColor="0xffeca5" height="24"/>
-				<e:Image id="redMC" source="red_mc_png" right="-20" top="-10"/>
-				</e:Group>
-				<e:layout>
-				<e:HorizontalLayout verticalAlign="bottom"/>
-				</e:layout>
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="right"/>
+			</e:layout>
+		</e:Group>
+		<e:Group id="btnGroup" x="10" y="10">
+			<e:Group id="taskBtn" x="0" y="0" width="90" height="90">
+				<e:Image y="-8" scaleX="0.7" scaleY="0.7" horizontalCenter="0" source="task_icon2_png"/>
+				<e:Label text="主线任务" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
+				<e:Image id="taskRed" source="red_mc_png" right="5" y="0"/>
+			</e:Group>
+			<e:Group id="taskBtn2" x="0" y="0" width="90" height="90">
+				<e:Image source="task_icon_png" y="-10" scaleX="0.75" scaleY="0.75" horizontalCenter="0"/>
+				<e:Label text="日常任务" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
+				<e:Image id="taskRed2" source="red_mc_png" right="5" y="0"/>
+			</e:Group>
+			<e:Group id="coinBtn" x="220" y="10" width="90" height="90">
+				<e:Image horizontalCenter="0" y="0" source="main_more_coin_png"/>
+				<e:Label text="每日金币" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
+				<e:Image id="coinRed" source="red_mc_png" right="5" y="0"/>
+			</e:Group>
+			<e:Group id="buffBtn" x="110" y="10" width="90" height="90">
+				<e:Image horizontalCenter="0" source="main_slave_png" y="-25" scaleX="1.1" scaleY="1.1"/>
+				<e:Label text="好友助力" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
+			</e:Group>
+			<e:Group id="rankBtn" x="230" y="20" width="90" height="90">
+				<e:Image horizontalCenter="0" y="0" source="main_rank_png" scaleX="0.7" scaleY="0.7"/>
+				<e:Label text="好友排行" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
 			</e:Group>
 			<e:layout>
-			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="right" paddingRight="20"/>
+				<e:HorizontalLayout gap="18" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
-		<e:Group id="taskBtn" x="0" y="0">
-			<e:Image source="task_icon_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
-			<e:Image id="taskRed" source="red_mc_png" right="5" top="10"/>
-		</e:Group>
-		<e:List id="defList" y="10" left="115">
+		<e:List id="defList" y="10" right="10" itemRendererSkinName="DefItemSkin">
 			<e:layout>
-			<e:HorizontalLayout/>
+				<e:VerticalLayout gap="10"/>
 			</e:layout>
+
 		</e:List>
+		<e:Image id="redMC" source="red_mc_png" right="0" top="0"/>
 	</e:Group>
 	<e:Button id="addDefBtn" label="配置防守阵容" skinName="Btn5Skin" y="61.33" horizontalCenter="1" width="250"/>
 </e:Skin>

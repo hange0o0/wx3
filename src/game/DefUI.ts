@@ -3,13 +3,20 @@ class DefUI extends game.BaseItem{
     private con: eui.Group;
     private bg: eui.Image;
     private bgFront: eui.Image;
+    private forceText: eui.Label;
     private numText: eui.Label;
     private costText: eui.Label;
-    private forceText: eui.Label;
-    private redMC: eui.Image;
+    private btnGroup: eui.Group;
     private taskBtn: eui.Group;
     private taskRed: eui.Image;
+    private taskBtn2: eui.Group;
+    private taskRed2: eui.Image;
+    private coinBtn: eui.Group;
+    private coinRed: eui.Image;
+    private buffBtn: eui.Group;
+    private rankBtn: eui.Group;
     private defList: eui.List;
+    private redMC: eui.Image;
     private addDefBtn: eui.Button;
 
 
@@ -17,15 +24,26 @@ class DefUI extends game.BaseItem{
 
 
 
+    public isPos = false
 
 
 
+
+
+
+    private walkStep = Math.round(50)/10*20/1000//每毫秒移动距离
+    private monsterStep = 110//每个怪的间距
+    private roundLength = 800*2//单次行动的长度
+    private roundTime = 0//移动一轮需要的时间ms
+    private monsterStepTime = 0//间距移动时间ms
 
 
     private dataProvider:eui.ArrayCollection
 
     public constructor() {
         super();
+        this.roundTime = Math.floor(this.roundLength/this.walkStep)
+        this.monsterStepTime = Math.floor(this.monsterStep/this.walkStep)
         this.skinName = "DefUISkin";
     }
 
@@ -38,12 +56,33 @@ class DefUI extends game.BaseItem{
         this.defList.itemRenderer = DefItem;
         this.defList.dataProvider = this.dataProvider = new eui.ArrayCollection();
         this.addBtnEvent(this.taskBtn,this.onTask)
+        this.addBtnEvent(this.taskBtn2,this.onTask2)
+        this.addBtnEvent(this.buffBtn,this.onBuff)
+        this.addBtnEvent(this.coinBtn,this.onCoin)
+        this.addBtnEvent(this.rankBtn,this.onRank)
 
+    }
+
+    private onCoin(e){
+        e.stopImmediatePropagation();
+        GetCoinUI.getInstance().show();
+    }
+    private onRank(e){
+        e.stopImmediatePropagation();
+        RankUI.getInstance().show();
+    }
+    private onBuff(e){
+        e.stopImmediatePropagation();
+        BuffUI.getInstance().show();
     }
 
     private onTask(e){
         e.stopImmediatePropagation();
         TaskUI.getInstance().show();
+    }
+    private onTask2(e){
+        e.stopImmediatePropagation();
+        TaskUI2.getInstance().show();
     }
 
     private onClick(){
@@ -98,25 +137,26 @@ class DefUI extends game.BaseItem{
             var item = DefMonsterItem.createItem();
             this.con.addChild(item);
             item.load(id)
-            item.stand();
+            item.run();
             item.scaleX = item.scaleY = 1.2;
-            item.atkRota = Math.random()>0.5?1:-1;
-            item.renewScale();
-            item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
-            item['w'] = vo.width
-            item.x = 20 + Math.random()*600
+            item.atkRota = 0//Math.random()>0.5?1:-1;
+            //item.renewScale();
+            //item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
+            //item['w'] = vo.width
+            //item.x = 20 + Math.random()*600
             //item.x = begin + i*des
             this.monsterArr.push(item);
         }
+        this.renewMonsterPos();
 
-        var sortList = this.monsterArr.concat();
-        ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
-        var len = sortList.length;
-        for(var i=0;i<len;i++)
-        {
-            sortList[i].bottom = 10 +begin + (len-i)*des
-            this.con.addChild(sortList[i]);
-        }
+        //var sortList = this.monsterArr.concat();
+        //ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
+        //var len = sortList.length;
+        //for(var i=0;i<len;i++)
+        //{
+        //    sortList[i].bottom = 10 +begin + (len-i)*des
+        //    this.con.addChild(sortList[i]);
+        //}
 
         this.bg.source = PKManager.getInstance().getDefBG()
         this.bgFront.source = PKManager.getInstance().getDefBGFront()
@@ -137,12 +177,46 @@ class DefUI extends game.BaseItem{
     }
 
     public onE(){
-        if(!this.visible || !GameUI.getInstance().visible)
+        if(!this.visible)
             return;
         this.randomTalk();
         MyTool.runListFun(this.defList,'onE');
+        this.renewMonsterPos();
+        //for(var i=0;i<this.monsterArr.length;i++)
+        //    this.monsterArr[i].onE();
+    }
+
+    //private walkStep = Math.round(50)/10*20/1000//每毫秒移动距离
+    //private monsterStep = 100//每个怪的间距
+    //private roundLength = 760*2//单次行动的长度
+    //private roundTime = 0//移动一轮需要的时间ms
+    //private monsterStepTime = 0//间距移动时间ms
+    private renewMonsterPos(){
+        //var round = TM.nowMS()/(this.roundTime*2)
+        var roundCD = TM.nowMS()%(this.roundTime)
+        var halfPos = this.roundLength/2;
+        var offset = (halfPos-640)/2
         for(var i=0;i<this.monsterArr.length;i++)
-            this.monsterArr[i].onE();
+        {
+            var mc = this.monsterArr[i];
+            roundCD -= this.monsterStepTime;
+            if(roundCD < 0)
+                roundCD += this.roundTime;
+            var pos = roundCD*this.walkStep
+
+            if(pos<halfPos)
+            {
+                mc.x = pos - offset
+                mc.renewRota(-1)
+            }
+            else
+            {
+                mc.x = this.roundLength -  pos - offset
+                mc.renewRota(1)
+            }
+            //if(i==0)
+            //console.log(mc.x,mc.bottom)
+        }
     }
 
     public defGuide(){
@@ -164,6 +238,13 @@ class DefUI extends game.BaseItem{
         var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
         if(item && !item.talkItm && item.x > 100 && item.x < 540)
         {
+
+            if(item.atkRota == -1 && this.isPos)
+                return;
+            if(item.atkRota == 1 && item.x < 320)
+                return;
+            if(item.atkRota == -1 && item.x > 320)
+                return;
             item.talk();
             this.lastTalk = egret.getTimer() + 5000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
         }

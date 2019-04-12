@@ -35,8 +35,10 @@ class EnemyAtkInfo extends game.BaseWindow {
         PKPosUI.getInstance().show({
             title:'掠夺【'+this.enemyData.robot.nick+'】',
             autoList:true,
+            type:'fight',
             isPK:true,
             isAtk:true,
+            fightData:this.enemyData.robot,
             maxNum:TecManager.getInstance().getTeamNum(),
             maxCost:TecManager.getInstance().getTeamCost(),
             fun:(list)=>{

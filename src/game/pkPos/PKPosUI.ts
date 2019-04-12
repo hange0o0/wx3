@@ -42,6 +42,9 @@ class PKPosUI extends game.BaseUI {
 
 
 
+    private defItem:DefUI
+    private workItem:MainWorkItem
+    private fightItem:FightItem
 
 
 
@@ -65,7 +68,7 @@ class PKPosUI extends game.BaseUI {
     private sortIndexPK = 0
     private sortBaseWork= [
         {key:'default',name:'默认\n排序',color:0xFFFFFF},
-        {key:'work',name:'效率\n降序',color:0xFFFF00},
+        {key:'work',name:'效率\n降序',color:0xFF8800},
         {key:'level',name:'等级\n降序',color:0xFFFF00},
         //{key:'type',name:'阵营\n排序'}
     ]
@@ -73,7 +76,7 @@ class PKPosUI extends game.BaseUI {
         {key:'default',name:'默认\n排序',color:0xFFFFFF},
         {key:'pk',name:'战力\n降序',color:0xFF0000},
         {key:'level',name:'等级\n降序',color:0xFFFF00},
-        {key:'cost',name:'费用\n升序',color:0x0000FF},
+        {key:'cost',name:'费用\n升序',color:0x00FF00},
         {key:'type',name:'阵营\n排序',color:0xFF00FF}
     ]
 
@@ -364,6 +367,8 @@ class PKPosUI extends game.BaseUI {
      fun
      autoList
      noEmpty
+     workIndex
+      fightData
       */
     public show(dataIn?){
         this.dataIn = dataIn;
@@ -381,21 +386,70 @@ class PKPosUI extends game.BaseUI {
     public onShow(){
 
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.timer,this.randomTalk)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
     }
 
-    public showEnemy() {
+    private onE(){
+        switch (this.dataIn.type)
+        {
+            case 'chapter':
+                this.randomTalk();
+                break;
+            case 'def':
+                this.defItem && this.defItem.onE();
+                break;
+            case 'work':
+                this.workItem && this.workItem.onE();
+                break;
+
+        }
+    }
+
+    private renewByType(){
         while(this.monsterArr.length > 0)
         {
             PKMonsterMV.freeItem(this.monsterArr.pop());
         }
-
-        if(!this.dataIn.enemy)
+        MyTool.removeMC(this.con)
+        this.defItem && MyTool.removeMC(this.defItem)
+        this.workItem && MyTool.removeMC(this.workItem)
+        this.fightItem && MyTool.removeMC(this.fightItem)
+        switch (this.dataIn.type)
         {
-            MyTool.removeMC(this.con);
-            return;
+            case 'chapter':
+                this.mainCon.addChildAt(this.con,0);
+                this.showEnemy();
+                break;
+            case 'def':
+                if(!this.defItem){
+                    this.defItem = new DefUI();
+                    this.defItem.isPos = true;
+                }
+                this.mainCon.addChildAt(this.defItem,0);
+                this.defItem.dataChanged();
+                break;
+            case 'work':
+                if(!this.workItem){
+                    this.workItem = new MainWorkItem();
+                }
+                this.mainCon.addChildAt(this.workItem,0);
+                this.workItem.data = {id:this.dataIn.workIndex};
+                break;
+            case 'fight':
+                if(!this.fightItem){
+                    this.fightItem = new FightItem();
+                    this.fightItem.horizontalCenter = 0
+                    this.fightItem.verticalCenter = 0
+                }
+                this.otherForceText.text = '对方总战力：???';
+                this.mainCon.addChildAt(this.con,0);
+                this.con.addChild(this.fightItem)
+                this.fightItem.data = this.dataIn.fightData;
+                break;
         }
-        this.mainCon.addChildAt(this.con,0);
+    }
+
+    public showEnemy() {
 
         var arr = this.dataIn.enemy.list.split(',')
         arr.reverse();
@@ -605,11 +659,13 @@ class PKPosUI extends game.BaseUI {
         }
 
         this.renewTitle();
-        this.showEnemy();
+        this.renewByType();
         this.renewDownList();
         this.renewTopList();
         //this.reset();
     }
+
+
 
     public reset(){
         var arr = this.dataProvider.source;

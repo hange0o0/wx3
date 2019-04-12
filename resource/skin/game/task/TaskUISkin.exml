@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TaskUISkin" width="560" height="800" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="TaskUISkin" width="440" height="380" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Label text="主线任务" y="25" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="22"/>
-	<e:Group y="200" left="8" right="8">
-		<e:Image source="bg8_png" scale9Grid="9,9,9,9" y="0" height="50" x="0" width="100%"/>
-		<e:Label text="支线任务" bold="true" textColor="0xFFEC99" stroke="3" strokeColor="0x351D03" size="22" verticalCenter="0" horizontalCenter="0"/>
-	</e:Group>
-	<e:Group y="60" left="20" right="20" height="130">
+	<e:Label text="主线任务" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
+	<e:Group y="75" left="20" right="20" height="185">
 		<e:Image source="bg2_png" scale9Grid="9,9,11,10" left="0" right="0" top="0" bottom="0"/>
-		<e:Group y="10" right="10">
-			<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>
-			<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
-			<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10"/>
-		</e:Group>
-		<e:Group x="15" y="15">
-			<e:Label id="taskTextTitle" text="Label" x="74" y="0" size="25" textColor="0xffe000" bold="true"/>
-			<e:Label id="taskText" text="Label" x="74" y="0" size="22"/>
-			<e:Label id="taskRateText" text="Label" x="0" y="31" size="22"/>
+		<e:Group x="15" y="10">
+			<e:Label id="taskTextTitle" text="Label" x="74" y="0" size="25" textColor="0xffe000" bold="true" height="40" textAlign="left" verticalAlign="middle"/>
+			<e:Label id="taskText" text="Label" x="74" y="0" size="22" textAlign="left" height="40" verticalAlign="middle"/>
+			<e:Label id="taskRateText" text="Label" x="0" y="31" size="22" textAlign="left" height="40" verticalAlign="middle"/>
+			<e:Group x="0" y="105">
+				<e:Label text="完成奖励：" x="0" size="22" y="0"/>
+				<e:Group x="0" y="34" scaleX="1" scaleY="1">
+					<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="180" height="40" x="0" y="0"/>
+					<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
+					<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10"/>
+				</e:Group>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="12"/>
+				<e:VerticalLayout gap="0"/>
 			</e:layout>
 		</e:Group>
-		<e:Button id="taskBtn" label="Button" skinName="Btn1Skin" width="150" right="10" bottom="10"/>
 	</e:Group>
 	<e:Image id="closeBtn" source="icon_error_png" right="-8" top="-16"/>
-	<e:Scroller id="scroller" width="540" horizontalCenter="0" top="250" bottom="10">
-		<e:Group>
-			<e:List id="list" width="540" anchorOffsetY="0" y="0" x="0" scaleX="1" scaleY="1">
-				<e:layout>
-				<e:VerticalLayout paddingLeft="10" paddingBottom="10" paddingTop="0" gap="10"/>
-				</e:layout>
-			</e:List>
-		</e:Group>
-	</e:Scroller>
+	<e:Button id="taskBtn" label="Button" skinName="Btn1Skin" width="150" bottom="30" horizontalCenter="0"/>
 
 </e:Skin>

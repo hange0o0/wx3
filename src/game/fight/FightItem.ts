@@ -29,9 +29,11 @@ class FightItem extends game.BaseItem{
 
         PKPosUI.getInstance().show({
             title:'掠夺【'+this.data.nick+'】',
+            type:'fight',
             autoList:true,
             isPK:true,
             isAtk:true,
+            fightData:this.data,
             maxNum:TecManager.getInstance().getTeamNum(),
             maxCost:TecManager.getInstance().getTeamCost(),
             fun:(list)=>{

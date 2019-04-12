@@ -1,4 +1,4 @@
-class RankUI extends game.BaseUI{
+class RankUI extends game.BaseWindow{
 
     private static _instance:RankUI;
     public static getInstance() {
@@ -6,12 +6,8 @@ class RankUI extends game.BaseUI{
         return this._instance;
     }
 
-    private scroller: eui.Scroller;
-    private list: eui.List;
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
-    private tab: eui.TabBar;
-    private desText: eui.Label;
+    private closeBtn: eui.Image;
+
 
 
 
@@ -23,9 +19,7 @@ class RankUI extends game.BaseUI{
     private isLoadFile:boolean;
 
 
-    private infoBtn:UserInfoBtn
 
-    private tips = ['世界榜中的数据存在一定的延时','收益排行以打赏赢取收入为依据']
 
     private rankData = {}
     public constructor() {
@@ -35,27 +29,14 @@ class RankUI extends game.BaseUI{
 
     public childrenCreated() {
         super.childrenCreated();
-        this.topUI.setTitle('排行榜')
-        this.bottomUI.setHide(this.hide,this)
-        //this.addBtnEvent(this.closeBtn,this.hide)
-        this.tab.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.onTab,this);
-        this.tab.selectedIndex = 0;
-        this.touchEnabled = false;
-
-        this.scroller.viewport  =this.list;
-        this.list.itemRenderer = RankItem;
-
+        this.addBtnEvent(this.closeBtn,this.hide)
     }
 
-    private onTab(){
-        this.renew();
-    }
+
 
 
     public onShow(){
-        var arr = [{label:'世界收益'},{label:'世界关卡'},{label:'好友收益'},{label:'好友关卡'}]
-        this.tab.width = 600;
-        this.tab.dataProvider = new eui.ArrayCollection(arr)
+
         this.renew();
     }
 
@@ -64,118 +45,22 @@ class RankUI extends game.BaseUI{
         if(!window['wx'])
             return;
         this.remove();
-        //if(this.tab.selectedIndex == 0)
-        //{
-        //    this.worldRank('coin',UM.coinwin);
-        //}
-        //else if(this.tab.selectedIndex == 1)
-        //{
-        //    this.worldRank('level',UM.chapterLevel);
-        //}
-        //else
-        //{
-            this.showBitmapList()
-        //}
-        this.desText.text = this.tips[Math.floor(Math.random()*this.tips.length)];
+        this.showBitmapList()
     }
 
-    //private worldRank(type,myValue){
-    //    var wx = window['wx'];
-    //    if(!wx)
-    //    {
-    //        return;
-    //    }
-    //    var oo = {
-    //        type:type,
-    //        openid:UM.gameid,
-    //        nick:UM.nick,
-    //        head:UM.head,
-    //        value:myValue,
-    //    }
-    //    if(this.rankData[oo.type])
-    //    {
-    //        this.showRank(type);
-    //        return;
-    //    }
-    //    wx.cloud.callFunction({      //取玩家openID,
-    //        name: 'getRank',
-    //        data: oo,
-    //        complete: (res) => {
-    //            if(res.result)
-    //            {
-    //                this.rankData[oo.type] = {
-    //                    list:res.result,
-    //                    time:TM.now()
-    //                }
-    //                this.showRank(type);
-    //            }
-    //        },
-    //        fail:()=>{
-    //
-    //        }
-    //    })
-    //    //    }
-    //    //})
-    //}
-    //
-    //public showRank(type){
-    //    if(!this.rankData[type])
-    //        return;
-    //    this.scroller.visible = true;
-    //    var arr = this.rankData[type].list;
-    //    var b = false;
-    //    var myScore = type=='coin'?UM.coinwin:UM.chapterLevel;
-    //    for(var i=0;i<arr.length;i++) //更新自己成绩
-    //    {
-    //        arr[i].type = type;
-    //        if(arr[i].openid == UM.gameid)
-    //        {
-    //            arr[i].value = myScore;
-    //            arr[i].nick = UM.nick;
-    //            arr[i].head = UM.head;
-    //            b = true;
-    //        }
-    //        if(arr[i].value <= 1)
-    //        {
-    //            arr.splice(i,1);
-    //            i--;
-    //        }
-    //    }
-    //    if(!b && UM.nick && arr.length<50 && myScore > 1)
-    //    {
-    //        arr.push({
-    //            nick:UM.nick,
-    //            value:myScore,
-    //            head:UM.head,
-    //        })
-    //    }
-    //    ArrayUtil.sortByField(arr,['value'],[1])
-    //    for(var i=0;i<arr.length;i++) //更新自己成绩
-    //    {
-    //        arr[i].index = i+1;
-    //    }
-    //    this.list.dataProvider = new eui.ArrayCollection(arr)
-    //}
+
 
     private poseData(){
-        if(this.tab.selectedIndex == 2)
-        {
-            var key = 'coinwin'
-            //var value = UM.coinwin;
-        }
-        else if(this.tab.selectedIndex == 3)
-        {
-            var key = 'level'
-            var value = UM.chapterLevel
-        }
 
+        var key = 'chapter'
+        var value = UM.chapterLevel
         let param:any = {
             me: UM.gameid,
             command: 'open',
             key:key,
-            rankHeight:GameManager.uiHeight-130-110,
-            x:this.bitmap.x,// + (GameManager.uiWidth - this.width)/2,
-            y:this.bitmap.y + (GameManager.uiHeight - this.height)/2 + (GameManager.isLiuHai()?50:0),
+            rankHeight:this.height-this.bitmap.y - 20,
+            x:this.bitmap.x + (GameManager.uiWidth - this.width)/2,
+            y:this.bitmap.y + (GameManager.uiHeight - this.height)/2,
             me_value: value + ',0', //第2位时间传0，永远排在最上面
             root: "openDataContext/",
         }
@@ -193,8 +78,8 @@ class RankUI extends game.BaseUI{
         if (!this.isdisplay) {
 
             this.bitmap = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
-            this.bitmap.x = 10;
-            this.bitmap.y = 130;
+            this.bitmap.x = 20;
+            this.bitmap.y = 75;
             this.addChild(this.bitmap);
             this.bitmap.touchEnabled = false
 
@@ -213,7 +98,6 @@ class RankUI extends game.BaseUI{
                 platform.openDataContext.postMessage({ command: 'close' });
             }
         }
-        this.scroller.visible = false;
     }
     public hide(){
         this.remove();

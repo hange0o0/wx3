@@ -62,13 +62,13 @@ class PKTalkItem extends game.BaseContainer {
         }
         this.y = -data.showHeight();
 
-
+    //.wait(500)
         egret.Tween.removeTweens(this);
         this.scaleX = 0;
         this.scaleY = 0;
         var scale2 = Math.abs(scale)
         var tw = egret.Tween.get(this);
-        tw.wait(500).to({scaleX:1/scale,scaleY:1/scale2},200).to({scaleX:0.8/scale,scaleY:0.8/scale2},200).wait(2500).to({scaleX:1/scale,scaleY:1/scale2},200).to({scaleX:0,scaleY:0},100).call(function(){
+        tw.to({scaleX:1/scale,scaleY:1/scale2},200).to({scaleX:0.8/scale,scaleY:0.8/scale2},200).wait(2500).to({scaleX:1/scale,scaleY:1/scale2},200).to({scaleX:0,scaleY:0},100).call(function(){
              this.remove();
 
         },this);

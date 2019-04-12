@@ -2,7 +2,7 @@
 <e:Skin class="PKPosUISkin" width="640" height="960" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="normal,pk" >
 	<e:Image source="bg3_png" scale9Grid="16,15,7,7" x="0" y="0" width="100%" height="100%"/>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
-	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+
 	<e:Group id="mainCon" x="0" top="55" bottom="100">
 		<e:Group id="con" x="0" width="640" height="300" y="0" scrollEnabled="true">
 			<e:Image id="bg" horizontalCenter="0" bottom="0"/>
@@ -102,10 +102,11 @@
 			<e:VerticalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Group id="btnGroup" right="20" bottom="10">
 	<e:Group id="sortBtn" width="100" height="80" bottom="10" right="10">
 		<e:Image source="border2_png" scale9Grid="12,12,3,3" top="0" bottom="0" width="80" horizontalCenter="0"/>
-		<e:Label id="sortText" text="等级\n升序" horizontalCenter="0" verticalCenter="0" size="26" lineSpacing="6" textColor="0xf1bb15" stroke="2" strokeColor="0x4d3624" bold="true"/>
+		<e:Label id="sortText" text="等级\n升序" horizontalCenter="0" verticalCenter="0" size="26" lineSpacing="6" textColor="0xf1bb15" stroke="3" strokeColor="0x4d3624" bold="true"/>
 	</e:Group>
 		<e:Group id="resetBtn" x="246" y="0" width="100" height="80">
 			<e:Image source="icon_atk3_png" y="0" horizontalCenter="0" scaleX="0.9" scaleY="0.9"/>

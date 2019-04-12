@@ -36,6 +36,7 @@ class MonsterManager {
 
     public editDef(){
         PKPosUI.getInstance().show({
+            type:'def',
             title:'防守阵容调整',
             chooseList:this.defList,
             isPK:true,

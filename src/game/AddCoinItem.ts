@@ -19,7 +19,7 @@ class AddCoinItem extends game.BaseItem{
     public static showMV(v,con)
     {
         var mc = this.createItem();
-        mc.data = '+' + v;
+        mc.data = '+' + NumberUtil.addNumSeparator(v);
         mc.horizontalCenter = 0
         mc.verticalCenter = 0
         mc.alpha = 1

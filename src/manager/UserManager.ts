@@ -35,6 +35,7 @@ class UserManager {
     public chapterLevel: number = 0;  //已完成关卡，默认为0
     public chapterStar: any = {};
     public task: any;
+    public dayTask: any;
     public chapterResetTime = 0;
     public chapterCoin = 0;
 
@@ -90,6 +91,7 @@ class UserManager {
         this.shareUser = data.shareUser;
         this.hourEarn = data.hourEarn;
         this.task = data.task || 0;
+        this.dayTask = data.dayTask || [];
         this.coinObj = data.coinObj || {
                 loginTime:TM.now(),   //登陆时间
                 shareNum:0,   //分享金币次数
@@ -136,7 +138,6 @@ class UserManager {
         WorkOfflineUI.getInstance().show(offlineTime,WorkManager.getInstance().offlineEarn)
 
         this.localSave();
-        //this.resetHourEarn();
     }
 
     //重置时产
@@ -344,6 +345,7 @@ class UserManager {
              chapterCoin:0,
              hourEarn:0,
              task:0,
+             dayTask:[],
              fight:{},
              saveTime:0,
              energy:{v:0,t:0},
@@ -406,6 +408,7 @@ class UserManager {
             maxForce:UM.maxForce,
             coinObj:UM.coinObj,
             task:UM.task,
+            dayTask:UM.dayTask,
             guideFinish:UM.guideFinish,
             hourEarn:UM.hourEarn,
             saveTime:TM.now(),
@@ -423,6 +426,7 @@ class UserManager {
         }
         this.needUpUser = false;
         FightManager.getInstance().save();
+        this.localSave();
         //this.upWXData();
     }
 

@@ -56,7 +56,7 @@ class MonsterItem extends game.BaseItem{
             this.heroItem.stand();
             this.heroItem.stop();
             var TSM = TaskManager.getInstance()
-            if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv'))
+            if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv') && TSM.guideTaskVO.key == vo.id)
                 TaskManager.getInstance().showGuideMC(this);
 
         }

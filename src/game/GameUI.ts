@@ -14,8 +14,8 @@ class GameUI extends game.BaseUI {
     private scroller: eui.Scroller;
     private list: eui.List;
     private bottomGroup: eui.Group;
-    private buffBtn: eui.Group;
-    private buffRed: eui.Image;
+    //private buffBtn: eui.Group;
+    //private buffRed: eui.Image;
     private workBtn: eui.Group;
     public tecBtn: eui.Group;
     public monsterBtn: eui.Group;
@@ -23,8 +23,8 @@ class GameUI extends game.BaseUI {
     private chapterRed: eui.Image;
     public fightBtn: eui.Group;
     private fightRed: eui.Image;
-    private coinGroup: eui.Group;
-    private shopRedMC: eui.Image;
+    //private coinGroup: eui.Group;
+    //private shopRedMC: eui.Image;
     private coinText: eui.Label;
     private diamondGroup: eui.Group;
     private diamondText: eui.Label;
@@ -63,15 +63,15 @@ class GameUI extends game.BaseUI {
     public showData;
     public childrenCreated() {
         super.childrenCreated();
-        this.buffRed.visible = false;
+        //this.buffRed.visible = false;
         this.addBtnEvent(this.soundBtn,this.onSetting)
         this.addBtnEvent(this.chapterBtn,this.onChapter)
         this.addBtnEvent(this.fightBtn,this.onFight)
-        this.addBtnEvent(this.coinGroup,this.onShop)
+        //this.addBtnEvent(this.coinGroup,this.onShop)
         this.addBtnEvent(this.workBtn,this.onRank)
         this.addBtnEvent(this.monsterBtn,this.onMonster)
         this.addBtnEvent(this.tecBtn,this.onTec)
-        this.addBtnEvent(this.buffBtn,this.onBuff)
+
         //this.addBtnEvent(this.taskBtn,this.onTaskBtn)
         //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
@@ -216,9 +216,7 @@ class GameUI extends game.BaseUI {
     private onRank(){
         WorkUI.getInstance().show();
     }
-    private onBuff(){
-        BuffUI.getInstance().show();
-    }
+
 
     private onSetting(){
         SoundManager.getInstance().soundPlaying = !SoundManager.getInstance().soundPlaying
@@ -417,7 +415,7 @@ class GameUI extends game.BaseUI {
 
     private renewCoinRed(){
         var coinObj = UM.coinObj;
-        this.shopRedMC.visible = false//!coinObj.loginDayAward;
+        //this.shopRedMC.visible = false//!coinObj.loginDayAward;
 
         //if(!this.shopRedMC.visible && coinObj.onLineAwardNum < 5)
         //{
@@ -441,13 +439,14 @@ class GameUI extends game.BaseUI {
     }
 
     private onE(){
-        MyTool.runListFun(this.list,'onE')
+        if(this.visible)
+            MyTool.runListFun(this.list,'onE')
     }
 
     public onTimer(){
         if(!this.visible)
             return;
-        this.renewCoinRed();
+        //this.renewCoinRed();
         this.fightRed.visible = TM.now() - FightManager.getInstance().searchTime >= FightManager.getInstance().refreshSearchTime
         this.chapterRed.visible = ChapterManager.getInstance().getChapterCoin() > ChapterManager.getInstance().getMaxChapterCoin()*0.9
     }

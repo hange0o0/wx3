@@ -24,7 +24,7 @@ class MonsterUI extends game.BaseUI {
         {key:'default',name:'默认\n排序',color:0xFFFFFF},
         {key:'level',name:'等级\n升序',color:0xFFFF00},
         {key:'star',name:'星级\n升序',color:0x00FFFF},
-        {key:'cost',name:'费用\n升序',color:0x0000FF},
+        {key:'cost',name:'费用\n升序',color:0x00FF00},
         {key:'type',name:'阵营\n排序',color:0xFF00FF}
     ]
     public constructor() {

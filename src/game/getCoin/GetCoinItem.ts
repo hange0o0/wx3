@@ -56,7 +56,7 @@ class GetCoinItem extends game.BaseItem {
             {
                 UM.coinObj.gameNum ++;
                 this.dataChanged();
-                ShootGameUI.getInstance().show();
+                ShootGameUI.getInstance().show(this.getCoin(1));
             }
             return;
         }
@@ -162,7 +162,7 @@ class GetCoinItem extends game.BaseItem {
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'
                 this.diamondMC.visible = true;
                 this.addDiamond = coinObj.shareNum==3?1:0;
-                this.addCoin = this.getCoin(1);
+                this.addCoin = this.getCoin(0.5);
                 break;
             //case 4: // {type:4,title:'邀请X位新的好友'},
             //    min = ObjectUtil.objLength(UM.friendNew),
@@ -205,7 +205,7 @@ class GetCoinItem extends game.BaseItem {
                 this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
                 this.diamondMC.visible = true;
                 this.addDiamond = coinObj.videoAwardNum==3?1:0;
-                this.addCoin = this.getCoin(1);
+                this.addCoin = this.getCoin(0.5);
                 break;
             case 6: // 射击游戏
                 if(coinObj.gameNum >= 3)
@@ -288,7 +288,7 @@ class GetCoinItem extends game.BaseItem {
     //}
 
     private getCoin(lv){
-        return UM.hourEarn*lv
+        return Math.floor(Math.max(20000,UM.hourEarn)*lv)
     }
 
 

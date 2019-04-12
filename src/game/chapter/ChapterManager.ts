@@ -29,6 +29,7 @@ class ChapterManager {
                 autoList:true,
                 isPK:true,
                 isAtk:true,
+                type:'chapter',
                 enemy:enemy,
                 maxNum:TecManager.getInstance().getTeamNum(),
                 maxCost:TecManager.getInstance().getTeamCost(),
