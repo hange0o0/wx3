@@ -31,6 +31,11 @@ class WorkOfflineUI extends game.BaseWindow {
         this.addBtnEvent(this.shareBtn,this.onShare)
     }
 
+    public hide(){
+        super.hide();
+        TaskUI.getInstance().show();
+    }
+
     public onShare(){
         if(this.videoIcon.visible)
         {
@@ -61,7 +66,10 @@ class WorkOfflineUI extends game.BaseWindow {
 
     public show(cd?,coin?){
         if(!coin || cd < 60)
+        {
+            TaskUI.getInstance().show();
             return;
+        }
         this.cd = cd;
         this.coin = coin;
         super.show();

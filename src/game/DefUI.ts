@@ -31,7 +31,7 @@ class DefUI extends game.BaseItem{
 
 
 
-    private walkStep = Math.round(50)/10*20/1000//每毫秒移动距离
+    private walkStep = 40/10*20/1000//每毫秒移动距离
     private monsterStep = 110//每个怪的间距
     private roundLength = 800*2//单次行动的长度
     private roundTime = 0//移动一轮需要的时间ms
@@ -92,8 +92,10 @@ class DefUI extends game.BaseItem{
 
     public renewTask(){
         var TSM = TaskManager.getInstance();
-        var vo = TSM.getCurrentTask();
-        this.taskRed.visible = true//vo && vo.value <= TSM.getTaskValue(vo)
+        this.taskRed.visible = TSM.isTaskFinish();
+        this.taskRed2.visible = TSM.dayTaskRed();
+        this.coinRed.visible = !TSM.openCoinUI;
+        //this.taskRed.visible = true//vo && vo.value <= TSM.getTaskValue(vo)
         //if(vo)
         //{
         //    var value = Math.min(TSM.getTaskValue(vo),vo.value);
@@ -129,6 +131,7 @@ class DefUI extends game.BaseItem{
         var h = 120;
         var des = Math.min(h/(arr.length-1),20)
         var begin = (h-des*(arr.length-1))/2
+        var renewFun = ()=>{this.renewY()};
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i];
@@ -142,7 +145,8 @@ class DefUI extends game.BaseItem{
             item.atkRota = 0//Math.random()>0.5?1:-1;
             //item.renewScale();
             //item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
-            //item['w'] = vo.width
+            item['w'] = vo.width
+            item['renewY'] = renewFun;
             //item.x = 20 + Math.random()*600
             //item.x = begin + i*des
             this.monsterArr.push(item);
@@ -176,14 +180,35 @@ class DefUI extends game.BaseItem{
         this.renewTask();
     }
 
+    public renewY(){
+        egret.callLater(this._renewY,this)
+    }
+
+    private _renewY(){
+        var sortList = this.monsterArr.concat();
+        ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
+        var len = sortList.length;
+        for(var i=0;i<len;i++)
+        {
+            this.con.addChild(sortList[i]);
+        }
+    }
+
     public onE(){
         if(!this.visible)
             return;
-        this.randomTalk();
         MyTool.runListFun(this.defList,'onE');
         this.renewMonsterPos();
         //for(var i=0;i<this.monsterArr.length;i++)
         //    this.monsterArr[i].onE();
+    }
+
+    public onTimer(){
+        if(!this.visible)
+            return;
+        this.randomTalk();
+
+
     }
 
     //private walkStep = Math.round(50)/10*20/1000//每毫秒移动距离
@@ -246,7 +271,7 @@ class DefUI extends game.BaseItem{
             if(item.atkRota == -1 && item.x > 320)
                 return;
             item.talk();
-            this.lastTalk = egret.getTimer() + 5000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
+            this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
         }
     }
 

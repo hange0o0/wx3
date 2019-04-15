@@ -71,6 +71,7 @@
 		"resource/skin/game/pk/ui/scene/PKTotemSkin.exml",
 		"resource/skin/game/pk/ui/scene/PKVideoConSkin.exml",
 		"resource/skin/game/pkPos/PKBuffUISkin.exml",
+		"resource/skin/game/pkPos/PKPosAddUISkin.exml",
 		"resource/skin/game/pkPos/PKPosChooseItemSkin.exml",
 		"resource/skin/game/pkPos/PKPosListItemSkin.exml",
 		"resource/skin/game/pkPos/PKPosUISkin.exml",

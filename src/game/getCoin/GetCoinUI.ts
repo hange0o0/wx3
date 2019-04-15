@@ -47,9 +47,15 @@ class GetCoinUI extends game.BaseWindow {
 
     public hide() {
         super.hide();
+
     }
 
     public onShow(){
+        if(!TaskManager.getInstance().openCoinUI)
+        {
+            TaskManager.getInstance().openCoinUI = true;
+            EM.dispatch(GameEvent.client.TASK_CHANGE)
+        }
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.pass_day,this.renew)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)

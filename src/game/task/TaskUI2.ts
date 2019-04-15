@@ -46,11 +46,15 @@ class TaskUI2 extends game.BaseWindow {
 
     public hide() {
         super.hide();
+        TaskManager.getInstance().taskFinish = TaskManager.getInstance().testTaskFinish();
+        TaskManager.getInstance().newRed = false;
+        EM.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
     public onShow(){
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewFeederTask)
     }
 
     private onTimer(){
@@ -60,6 +64,7 @@ class TaskUI2 extends game.BaseWindow {
 
     public renew(){
         this.renewFeederTask();
+        this.scroller.viewport.scrollV = 0;
     }
 
 

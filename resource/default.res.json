@@ -1668,6 +1668,46 @@
 			"name":"main_more_coin_png",
 			"type":"image",
 			"url":"game_assets/main_more_coin.png"
+		},
+		{
+			"name":"task1_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task1.jpg"
+		},
+		{
+			"name":"task2_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task2.jpg"
+		},
+		{
+			"name":"task3_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task3.jpg"
+		},
+		{
+			"name":"task4_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task4.jpg"
+		},
+		{
+			"name":"task5_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task5.jpg"
+		},
+		{
+			"name":"task6_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task6.jpg"
+		},
+		{
+			"name":"task7_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task7.jpg"
+		},
+		{
+			"name":"task8_jpg",
+			"type":"image",
+			"url":"game_assets2/task/task8.jpg"
 		}
 	]
 }

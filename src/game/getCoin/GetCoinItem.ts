@@ -5,15 +5,17 @@ class GetCoinItem extends game.BaseItem {
     }
 
     private bg: eui.Image;
-    private goBtn: eui.Button;
     private titleText: eui.Label;
-    private rateText: eui.Label;
-    private desText: eui.Label;
     private awardGroup: eui.Group;
     private addCoinText: eui.Label;
     private diamondGroup: eui.Group;
     private addDiamondText: eui.Label;
+    private goBtn: eui.Button;
+    private rateText: eui.Label;
+    private desText: eui.Label;
     private diamondMC: eui.Image;
+    private awardMC: eui.Image;
+
 
 
 
@@ -100,8 +102,9 @@ class GetCoinItem extends game.BaseItem {
         var max=1
         this.goBtn.visible = true;
         this.goBtn.skinName = 'Btn1Skin'
-        this.bg.source = 'coin_bg'+this.data.type+'_jpg'
+
         this.addDiamond = 0;
+        this.awardMC.visible = false;
 
         switch(this.data.type)
         {
@@ -141,8 +144,8 @@ class GetCoinItem extends game.BaseItem {
             case 3:   //{type:3,title:'告诉我的好友们'},
                 if(coinObj.shareAward >= 3)
                 {
-                    this.goBtn.skinName = 'Btn3Skin'
-                    this.goBtn.label = '今日已领'
+                    this.awardMC.visible = true;
+                    this.goBtn.visible = false
                     this.diamondMC.visible = false;
                 }
                 else
@@ -159,6 +162,7 @@ class GetCoinItem extends game.BaseItem {
                         this.goWork = true
                     }
                 }
+                this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'
                 this.diamondMC.visible = true;
                 this.addDiamond = coinObj.shareNum==3?1:0;
@@ -184,8 +188,8 @@ class GetCoinItem extends game.BaseItem {
             case 5: // 观看广告
                 if(coinObj.videoAwardNum >= 3)
                 {
-                    this.goBtn.skinName = 'Btn3Skin'
-                    this.goBtn.label = '今日已领'
+                    this.awardMC.visible = true;
+                    this.goBtn.visible = false
                     this.diamondMC.visible = false;
                 }
                 else
@@ -202,6 +206,7 @@ class GetCoinItem extends game.BaseItem {
                         this.goWork = true
                     }
                 }
+                this.bg.source = 'coin_bg2_jpg'
                 this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
                 this.diamondMC.visible = true;
                 this.addDiamond = coinObj.videoAwardNum==3?1:0;
@@ -210,8 +215,8 @@ class GetCoinItem extends game.BaseItem {
             case 6: // 射击游戏
                 if(coinObj.gameNum >= 3)
                 {
-                    this.goBtn.skinName = 'Btn3Skin'
-                    this.goBtn.label = '今日已领'
+                    this.awardMC.visible = true;
+                    this.goBtn.visible = false
                 }
                 else
                 {
@@ -219,6 +224,7 @@ class GetCoinItem extends game.BaseItem {
                     this.goBtn.label = '开始游戏'
                     this.goWork = true
                 }
+                this.bg.source = 'coin_bg3_jpg'
                 this.diamondMC.visible = !coinObj.gameDiamond;
                 this.titleText.text = '炮击怪物（'+coinObj.gameNum+'/3）'
                 break;
@@ -243,7 +249,7 @@ class GetCoinItem extends game.BaseItem {
 
         if(min > max)
             min = max;
-        this.addCoinText.text = 'x' + this.addCoin;
+        this.addCoinText.text = 'x' + NumberUtil.addNumSeparator(this.addCoin,2);
         if(this.data.type == 6)
         {
             this.addCoinText.text = '无上限';

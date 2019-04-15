@@ -368,6 +368,8 @@ class GameUI extends game.BaseUI {
         else
         {
             SoundManager.getInstance().playSound('bg');
+
+            WorkOfflineUI.getInstance().show(UM.offlineTime,WorkManager.getInstance().offlineEarn)
         }
     }
 
@@ -449,5 +451,6 @@ class GameUI extends game.BaseUI {
         //this.renewCoinRed();
         this.fightRed.visible = TM.now() - FightManager.getInstance().searchTime >= FightManager.getInstance().refreshSearchTime
         this.chapterRed.visible = ChapterManager.getInstance().getChapterCoin() > ChapterManager.getInstance().getMaxChapterCoin()*0.9
+        MyTool.runListFun(this.list,'onTimer')
     }
 }

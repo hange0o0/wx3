@@ -45,6 +45,7 @@ class PKPosUI extends game.BaseUI {
     private defItem:DefUI
     private workItem:MainWorkItem
     private fightItem:FightItem
+    private taskItem:TaskItem
 
 
 
@@ -66,6 +67,12 @@ class PKPosUI extends game.BaseUI {
 
     private sortIndexWork = 0
     private sortIndexPK = 0
+    private sortIndexTask = 0
+    private sortBaseTask= [
+        {key:'default',name:'默认\n排序',color:0xFFFFFF},
+        {key:'level2',name:'等级\n升序',color:0xFFFF00},
+        //{key:'type',name:'阵营\n排序'}
+    ]
     private sortBaseWork= [
         {key:'default',name:'默认\n排序',color:0xFFFFFF},
         {key:'work',name:'效率\n降序',color:0xFF8800},
@@ -130,7 +137,13 @@ class PKPosUI extends game.BaseUI {
     }
 
     private onSort(){
-        if(this.dataIn.isPK)
+        if(this.dataIn.type == 'task')
+        {
+            this.sortIndexTask ++;
+            if(this.sortIndexTask >= this.sortBaseTask.length)
+                this.sortIndexTask = 0;
+        }
+        else if(this.dataIn.isPK)
         {
             this.sortIndexPK ++;
             if(this.sortIndexPK >= this.sortBasePK.length)
@@ -343,6 +356,14 @@ class PKPosUI extends game.BaseUI {
     }
     public onSave(){
         var list = this.getMyList();
+        if(this.dataIn.type == 'task')
+        {
+            if(this.getChooseNum() != this.maxNum)
+            {
+                MyWindow.ShowTips('需要上阵'+this.maxNum+'个怪物才能开始任务')
+                return;
+            }
+        }
         if(list && this.dataIn.isPK)
         {
             MonsterManager.getInstance().getMyListForce(list,this.dataIn.isAtk)
@@ -369,6 +390,7 @@ class PKPosUI extends game.BaseUI {
      noEmpty
      workIndex
       fightData
+      taskData
       */
     public show(dataIn?){
         this.dataIn = dataIn;
@@ -414,6 +436,7 @@ class PKPosUI extends game.BaseUI {
         this.defItem && MyTool.removeMC(this.defItem)
         this.workItem && MyTool.removeMC(this.workItem)
         this.fightItem && MyTool.removeMC(this.fightItem)
+        this.taskItem && MyTool.removeMC(this.taskItem)
         switch (this.dataIn.type)
         {
             case 'chapter':
@@ -427,6 +450,7 @@ class PKPosUI extends game.BaseUI {
                 }
                 this.mainCon.addChildAt(this.defItem,0);
                 this.defItem.dataChanged();
+                this.defItem.touchChildren = this.defItem.touchEnabled = false
                 break;
             case 'work':
                 if(!this.workItem){
@@ -434,6 +458,7 @@ class PKPosUI extends game.BaseUI {
                 }
                 this.mainCon.addChildAt(this.workItem,0);
                 this.workItem.data = {id:this.dataIn.workIndex};
+                this.workItem.touchChildren = this.workItem.touchEnabled = false
                 break;
             case 'fight':
                 if(!this.fightItem){
@@ -441,10 +466,27 @@ class PKPosUI extends game.BaseUI {
                     this.fightItem.horizontalCenter = 0
                     this.fightItem.verticalCenter = 0
                 }
+                this.bg.source = PKManager.getInstance().getDefBG(this.dataIn.fightData.level);
                 this.otherForceText.text = '对方总战力：???';
                 this.mainCon.addChildAt(this.con,0);
                 this.con.addChild(this.fightItem)
                 this.fightItem.data = this.dataIn.fightData;
+                this.fightItem.touchChildren = this.fightItem.touchEnabled = false
+                break;
+            case 'task':
+                this.currentState = 'task'
+                if(!this.taskItem){
+                    this.taskItem = new TaskItem();
+                    this.taskItem.horizontalCenter = 0
+                    this.taskItem.verticalCenter = 0
+                    this.taskItem.currentState = 's2'
+                }
+                this.bg.source = PKManager.getInstance().getDefBG();
+                this.otherForceText.text = '';
+                this.mainCon.addChildAt(this.con,0);
+                this.con.addChild(this.taskItem)
+                this.taskItem.data = this.dataIn.taskData;
+                this.taskItem.touchChildren = this.taskItem.touchEnabled = false
                 break;
         }
     }
@@ -514,7 +556,11 @@ class PKPosUI extends game.BaseUI {
                 }
             }
         }
-        if(this.dataIn.isPK)
+        if(this.dataIn.type == 'task')
+        {
+            var sortObj = this.sortBaseTask[this.sortIndexTask];
+        }
+        else if(this.dataIn.isPK)
         {
             var sortObj = this.sortBasePK[this.sortIndexPK];
         }
@@ -549,6 +595,13 @@ class PKPosUI extends game.BaseUI {
                 }
                 ArrayUtil.sortByField(list,['temp','level','cost','type'],[1,0,0,0]);
                 break;
+            case 'level2':
+                for(var i=0;i<list.length;i++)
+                {
+                    list[i].temp = MonsterManager.getInstance().getMonsterLevel(list[i].id)
+                }
+                ArrayUtil.sortByField(list,['temp','level','cost','type'],[0,0,0,0]);
+                break;
             case 'pk':
                 for(var i=0;i<list.length;i++)
                 {
@@ -575,6 +628,8 @@ class PKPosUI extends game.BaseUI {
         {
             list[i] = {id:list[i].id,list:list,index:i};
         }
+        if(list.length > 0)
+            list.push({add:true})
         this.chooseDataProvider.source = list;
         this.chooseDataProvider.refresh();
 

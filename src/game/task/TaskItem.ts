@@ -11,16 +11,7 @@ class TaskItem extends game.BaseItem{
     private cdText: eui.Label;
 
 
-    private base = {
-        1:{name:'1',des:'1'},
-        2:{name:'2',des:'1'},
-        3:{name:'3',des:'1'},
-        4:{name:'41',des:'1'},
-        5:{name:'51',des:'1'},
-        6:{name:'16',des:'1'},
-        7:{name:'7',des:'1'},
-        8:{name:'8',des:'1'},
-    }
+
     public constructor() {
         super();
         this.skinName = "TaskItemSkin";
@@ -32,16 +23,43 @@ class TaskItem extends game.BaseItem{
     }
 
     private onClick(e){
-
+         if(this.goBtn.label == '接单')
+         {
+             PKPosUI.getInstance().show({
+                 title:'接受【'+TaskManager.getInstance().dayTaskBase[this.data.id].name+'】任务',
+                 type:'task',
+                 taskData:this.data,
+                 maxNum:this.data.num,
+                 maxCost:Number.MAX_VALUE,
+                 fun:(list)=>{
+                     PKPosUI.getInstance().hide();
+                     this.data.list = list;
+                     this.data.time = TM.now();
+                     this.dataChanged();
+                     UM.needUpUser = true;
+                 },
+             })
+         }
+        else
+         {
+             UM.addCoin(this.data.award);
+             var index = UM.dayTask.indexOf(this.data);
+             if(index != -1)
+             {
+                 UM.dayTask.split(index,1);
+                 EM.dispatch(GameEvent.client.TASK_CHANGE)
+             }
+             UM.needUpUser = true;
+         }
     }
 
     public dataChanged():void {
          var data = this.data;
-         this.nameText.text = this.base[data.id].name
+         this.nameText.text = TaskManager.getInstance().dayTaskBase[data.id].name
          this.awardText.text = NumberUtil.addNumSeparator(data.award)
-        this.taskIcon.source = ''
-        this.timeText.text = '需要时间：'+ data.cd + '小时'
-        this.desText.text = '需要怪物：'+ data.num + '个'
+        this.taskIcon.source = 'task'+data.id+'_jpg'
+        this.setHtml(this.timeText,'需要时间：'+ this.createHtml(data.cd + '小时',0xFFFFFF))
+        this.setHtml(this.desText, '需要怪物：'+ this.createHtml(data.num + '个',0xFFFFFF))
         if(data.time)
         {
             this.onTimer()

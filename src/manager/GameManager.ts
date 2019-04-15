@@ -141,6 +141,8 @@ class GameManager {
 
 
     private timerun(): void {
+        if(!UM.gameid)
+            return;
         var now = TM.now();
         if(!this.lastTime) {
             this.lastTime = now;

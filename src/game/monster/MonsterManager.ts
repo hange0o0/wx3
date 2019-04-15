@@ -200,12 +200,13 @@ class MonsterManager {
         var defNum = this.getDefNumObj();
         var fightNum = FightManager.getInstance().getFightNumObj();
         var workNum = WorkManager.getInstance().getNumObj();
+        var taskNum = TaskManager.getInstance().getNumObj();
         var returnArr = [];
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
             var maxNum = this.getMonsterNum(id)
-            var useNum = (defNum[id] || 0) + (workNum[id] || 0) + (fightNum[id] || 0);
+            var useNum = (defNum[id] || 0) + (workNum[id] || 0) + (fightNum[id] || 0) + (taskNum[id] || 0);
             if(maxNum > useNum)
             {
                 returnArr.push({vo:arr[i],num:maxNum-useNum});

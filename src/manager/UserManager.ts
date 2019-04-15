@@ -64,7 +64,7 @@ class UserManager {
 
     public isFirst = false
     public hourEarn = 0;
-    //public lastForce
+    public offlineTime
     public fill(data:any):void{
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
         if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
@@ -134,8 +134,8 @@ class UserManager {
 
 
         ChapterManager.getInstance().setChapterEarn();//里面有resetHourEarn
-        var offlineTime = TM.now() - saveTime;
-        WorkOfflineUI.getInstance().show(offlineTime,WorkManager.getInstance().offlineEarn)
+        this.offlineTime = TM.now() - saveTime;
+
 
         this.localSave();
     }

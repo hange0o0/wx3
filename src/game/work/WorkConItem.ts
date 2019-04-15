@@ -26,10 +26,14 @@ class WorkConItem extends game.BaseItem{
             case 'work':
                 WorkManager.getInstance().editWork(this.data.index)
                 break;
+            case 'task':
+                TaskUI2.getInstance().show()
+                break;
         }
     }
 
     public dataChanged():void {
+        this.redMC.visible = this.data.red;
         this.list.dataProvider = new eui.ArrayCollection(this.data.list);
         switch(this.data.type)
         {
@@ -45,8 +49,11 @@ class WorkConItem extends game.BaseItem{
             case 'free':
                 this.timeText.text = '空闲中（'+this.data.maxNum+'）';
                 break;
+            case 'task':
+                this.onTimer();
+                break;
         }
-        this.redMC.visible = this.data.red;
+
     }
 
     public onTimer(){
@@ -77,6 +84,23 @@ class WorkConItem extends game.BaseItem{
                 str = '正在前往攻打【'+robot.nick+'】'
             }
             this.timeText.text = str + ' （' + DateUtil.getStringBySecond(cd).substr(-5) + '）';
+        }
+        else if(this.data.type == 'task')
+        {
+            var data = this.data.data
+            var str =  '任务【'+TaskManager.getInstance().dayTaskBase[data.id].name+'】中';
+            var totalTime = data.cd*3600;
+            var cd = TM.now() - data.time
+            if(cd > totalTime) //完成
+            {
+                this.redMC.visible = true;
+                this.timeText.text = str + ' （已完成）';
+            }
+            else
+            {
+                this.redMC.visible = false;
+                this.timeText.text = str + ' （'+DateUtil.getStringBySecond(totalTime-cd)+'）';
+            }
         }
     }
 

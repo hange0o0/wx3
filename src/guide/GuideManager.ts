@@ -177,6 +177,7 @@ class GuideManager {
         GuideUI.getInstance().hide();
         UM.guideFinish = true;
         UM.needUpUser = true;
+        TaskUI.getInstance().show();
     }
 
     private addGuideObj(obj){

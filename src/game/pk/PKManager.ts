@@ -149,11 +149,11 @@ class PKManager {
         var arr = [1,2,3,4,5,7]
         return arr[lv % arr.length];
     }
-    public getDefBG(){
-        return 'map'+this.getDefBGID()+'_jpg'
+    public getDefBG(lv?){
+        return 'map'+this.getDefBGID(lv)+'_jpg'
     }
-    public getDefBGFront(){
-        return 'map'+this.getDefBGID()+'__png'
+    public getDefBGFront(lv?){
+        return 'map'+this.getDefBGID(lv)+'__png'
     }
 
     //public getLastAtkList(){

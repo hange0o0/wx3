@@ -39,12 +39,23 @@ class PKPosListItem extends game.BaseItem {
     }
 
     private onClick(){
+        if(this.data.add)
+        {
+            PKPosAddUI.getInstance().show();
+            return;
+        }
         if(this.stopClick)
             return;
           PKPosUI.getInstance().addChoose(this.data.id)
     }
 
     public dataChanged(){
+        if(this.data.add)
+        {
+            this.currentState = 'add'
+            return;
+        }
+        this.currentState = 'normal'
         //this.indexText.text = this.data.index;
         var ui = PKPosUI.getInstance();
         var vo = MonsterVO.getObject(this.data.id)

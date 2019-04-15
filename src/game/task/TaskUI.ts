@@ -55,6 +55,7 @@ class TaskUI extends game.BaseWindow {
 
     public onShow(){
         this.renew();
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewMainTask)
     }
 
 
@@ -84,17 +85,19 @@ class TaskUI extends game.BaseWindow {
 
             this.taskTextTitle.text = vo.getTitle();
             this.taskText.text = '要求：' + vo.getDes();
-            this.taskRateText.text = '完成度：' + value + '/' + vo.value;
+
 
             if(value<vo.value)
             {
                 this.taskBtn.label = '去完成'
                 this.taskBtn.skinName = 'Btn2Skin'
+                this.setHtml(this.taskRateText,'完成度：' + this.createHtml(value + '/' + vo.value,0xFF0000))
             }
             else
             {
                 this.taskBtn.label = '领取奖励'
                 this.taskBtn.skinName = 'Btn1Skin'
+                this.setHtml(this.taskRateText,'完成度：' + this.createHtml(value + '/' + vo.value,0x00ff00))
             }
         }
 

@@ -17,6 +17,7 @@ class DefMonsterItem extends PKMonsterMV {
             this.pool2.push(item);
     }
 
+    public renewY
     public atkRota
     public changePos
     public constructor() {
@@ -57,13 +58,13 @@ class DefMonsterItem extends PKMonsterMV {
         this.atkRota = rota
         if(rota == 1)
         {
-            this.bottom = 40
-            this.parent && this.parent.addChild(this)
+            this.bottom = 40 + this.showHeight()*0.1
+            this.renewY();
         }
         else
         {
-            this.bottom = 160
-            this.parent && this.parent.addChildAt(this,1)
+            this.bottom = 150 + this.showHeight()*0.1
+            this.renewY();
         }
         this.renewScale();
     }

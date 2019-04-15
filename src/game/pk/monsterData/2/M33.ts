@@ -13,7 +13,7 @@ class M33 extends MBase {
     }
 
     public atk(user:PKMonsterData,target:PKMonsterData){
-        var hp = Math.floor((1-target.getHpRate())*target.maxHp*0.3)
+        var hp = Math.floor((1-target.getHpRate())*target.maxHp*0.35)
         var b = super.atk(user,target)
         if(b && target.mid != 99 && hp > 0)
         {

@@ -1,4 +1,4 @@
-class BuffUI extends game.BaseUI {
+class BuffUI extends game.BaseWindow {
 
     private static _instance: BuffUI;
     public static getInstance(): BuffUI {
@@ -7,14 +7,15 @@ class BuffUI extends game.BaseUI {
         return this._instance;
     }
 
-    private topUI: TopUI;
-    private bottomUI: BottomUI;
+    private closeBtn: eui.Image;
     private scroller: eui.Scroller;
     private list: eui.List;
     private desText: eui.Label;
     private atkText: eui.Label;
     private workText: eui.Label;
-    private inviteBtn: eui.Group;
+    private inviteBtn: eui.Button;
+
+
 
 
 
@@ -35,8 +36,7 @@ class BuffUI extends game.BaseUI {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.bottomUI.setHide(this.onClose,this);
-        this.topUI.setTitle('好友助力')
+        this.addBtnEvent(this.closeBtn,this.hide);
 
 
         this.scroller.viewport = this.list;
@@ -86,7 +86,7 @@ class BuffUI extends game.BaseUI {
 
     public renew(){
         var BM = BuffManager.getInstance();
-        this.desText.text = '当前新邀请好友 '+BM.getUserNum()+'个:'
+        this.desText.text = '当前新邀请好友 '+BM.getUserNum()+'个：'
         this.dataProvider.refresh();
         this.atkText.text = '战力+'+BM.getForceAdd()+'%'
         this.workText.text = '效率+'+BM.getCoinAdd()+'%'

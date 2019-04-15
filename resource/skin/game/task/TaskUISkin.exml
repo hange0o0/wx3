@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TaskUISkin" width="440" height="380" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="TaskUISkin" width="480" height="380" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Label text="主线任务" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
 	<e:Group y="75" left="20" right="20" height="185">
 		<e:Image source="bg2_png" scale9Grid="9,9,11,10" left="0" right="0" top="0" bottom="0"/>
 		<e:Group x="15" y="10">
 			<e:Label id="taskTextTitle" text="Label" x="74" y="0" size="25" textColor="0xffe000" bold="true" height="40" textAlign="left" verticalAlign="middle"/>
-			<e:Label id="taskText" text="Label" x="74" y="0" size="22" textAlign="left" height="40" verticalAlign="middle"/>
-			<e:Label id="taskRateText" text="Label" x="0" y="31" size="22" textAlign="left" height="40" verticalAlign="middle"/>
+			<e:Label id="taskText" text="Label" x="74" y="0" size="22" textAlign="left" height="40" verticalAlign="middle" textColor="0xfceea9"/>
+			<e:Label id="taskRateText" text="Label" x="0" y="31" size="22" textAlign="left" height="40" verticalAlign="middle" textColor="0xfceea9"/>
 			<e:Group x="0" y="105">
-				<e:Label text="完成奖励：" x="0" size="22" y="0"/>
+				<e:Label text="完成奖励：" x="0" size="22" y="0" textColor="0xfceea9"/>
 				<e:Group x="0" y="34" scaleX="1" scaleY="1">
 					<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="180" height="40" x="0" y="0"/>
 					<e:Image id="iconMC" source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
-					<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10"/>
+					<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10" textColor="0xfceea9"/>
 				</e:Group>
 				<e:layout>
 					<e:HorizontalLayout verticalAlign="middle"/>

@@ -6,6 +6,20 @@ class TaskManager {
         return this._instance;
     }
 
+    public dayTaskBase = {
+        1:{name:'打猎',des:'1'},
+        2:{name:'烹调食材',des:'1'},
+        3:{name:'收集珍珠',des:'1'},
+        4:{name:'采集蘑菇',des:'1'},
+        5:{name:'收集鸟蛋',des:'1'},
+        6:{name:'采果子',des:'1'},
+        7:{name:'种植草药',des:'1'},
+        8:{name:'清理池塘',des:'1'},
+    }
+
+    public newRed= false;
+    public taskFinish= false;
+    public openCoinUI = false;
     public constructor() {
 
     }
@@ -151,10 +165,23 @@ class TaskManager {
         //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
     }
 
+
     public onTimer(){
         var arr = UM.dayTask;
-        var needAddNum = Math.min(2,6 - arr.length);
-        if(needAddNum && (TM.now()%(15*60) == 0 || arr.length == 0))//加3个
+        if(!arr)
+            return;
+        var b = false
+        if(!this.taskFinish)
+        {
+            b = true;
+            this.taskFinish = this.testTaskFinish();
+        }
+        var needAddNum = 1;
+        if(arr.length <= 2)
+            needAddNum = 2 - arr.length;
+        else if(arr.length >= 5)
+            needAddNum = 0;
+        if(needAddNum && (TM.now()%(5*60) == 0 || arr.length == 0))//加3个
         {
             var list = [1,2,3,4,5,6,7,8];
             for(var i=0;i<arr.length;i++)
@@ -165,6 +192,7 @@ class TaskManager {
                     list.splice(index,1);
             }
 
+            UM.needUpUser = true;
             while(needAddNum > 0) //加入新的
             {
                 needAddNum --;
@@ -175,7 +203,55 @@ class TaskManager {
                     cd:cd,
                     award:Math.ceil(UM.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
                 })
+                b = true
+                this.newRed = true;
             }
         }
+        b && EM.dispatch(GameEvent.client.TASK_CHANGE);
+    }
+
+    public testTaskFinish(){
+        var arr = this.getTaskingList();
+        var t = TM.now();
+        for(var i=0;i<arr.length;i++)   //可领奖
+        {
+            if(t - arr[i].time > arr[i].cd*3600)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public dayTaskRed(){
+        return this.newRed || this.taskFinish
+    }
+
+    //进行中的日常
+    public getTaskingList(){
+        var arr = UM.dayTask;
+        var list = [];
+        for(var i=0;i<arr.length;i++)
+        {
+             if(arr[i].time && arr[i].list)
+                 list.push(arr[i])
+        }
+        return list;
+    }
+
+    //任务中的怪物
+    public getNumObj(){
+        var numObj = {};
+        var arr = this.getTaskingList();
+        for(var i=0;i<arr.length;i++)
+        {
+            var temp = arr[i].list.split(',')
+            for(var j=0;j<temp.length;j++)
+            {
+                var id = temp[j];
+                numObj[id] = (numObj[id] || 0) + 1;
+            }
+        }
+        return numObj;
     }
 }

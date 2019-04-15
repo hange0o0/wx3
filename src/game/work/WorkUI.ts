@@ -95,6 +95,18 @@ class WorkUI extends game.BaseUI {
             })
         }
 
+        list = TaskManager.getInstance().getTaskingList();
+        for(var i=0;i<list.length;i++)
+        {
+            arr.push({
+                type:'task',
+                list:this.encodeList(list[i].list.split(',')),
+                data:list[i],
+                maxNum:maxNum,
+            })
+        }
+
+
         list = this.encodeList(MM.getDefArr());
         var maxNum:any = TecManager.getInstance().getTeamNum();
         arr.push({
