@@ -68,11 +68,12 @@ class UserManager {
     public fill(data:any):void{
         this.isFirst = true;     //debug
 
+        //console.log(data)
 
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
-        if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
+        if(localData && localData.saveTime && localData.saveTime - data.saveTime > 10) //本地的数据更新
         {
-
+            //console.log('overwrite')
             for(var s in localData)
             {
                 data[s] = localData[s];
@@ -92,7 +93,6 @@ class UserManager {
         this.chapterCoin = data.chapterCoin;
         this.maxForce = data.maxForce;
         this.shareUser = data.shareUser;
-        this.hourEarn = data.hourEarn;
         this.task = data.task || 0;
         this.dayTask = data.dayTask || [];
         this.coinObj = data.coinObj || {
@@ -235,7 +235,7 @@ class UserManager {
                             })
                             return;
                         }
-                        console.log(res)
+                        //console.log(res)
                         this.gameid = res.result.openid
                         this.isTest = res.result.testVersion == this.testVersion;
                         this.shareFail = res.result.shareFail;
@@ -261,7 +261,7 @@ class UserManager {
             _openid: this.gameid,
         }).get({
             success: (res)=>{
-                console.log(res,res.data.length == 0);
+                //console.log(res,res.data.length == 0);
                 if(res.data.length == 0)//新用户
                 {
                     this.onNewUser(fun)
@@ -300,12 +300,12 @@ class UserManager {
     }
 
     public testAddInvite(){
-        console.log('testAddInvite')
+        //console.log('testAddInvite')
         if(!this.isFirst)
             return;
         var wx = window['wx'];
         var query = wx.getLaunchOptionsSync().query;
-        console.log(query)
+        //console.log(query)
         if(query.type == '1')
         {
             wx.cloud.callFunction({      //取玩家openID,
@@ -324,7 +324,7 @@ class UserManager {
 
     //新用户注册
     private onNewUser(fun?){
-        console.log('newUser')
+        //console.log('newUser')
         this.isFirst = true;
         var wx = window['wx'];
         const db = wx.cloud.database();
@@ -351,13 +351,11 @@ class UserManager {
              chapterStar:{},
              chapterResetTime:0,
              chapterCoin:0,
-             hourEarn:0,
              task:0,
              dayTask:[],
              fight:{},
              saveTime:0,
              energy:{v:0,t:0},
-             buffUser:{},
              shareUser:[],
              def:'',
              work:'65#0#1', //初始1个在工作
@@ -419,7 +417,6 @@ class UserManager {
             task:UM.task,
             dayTask:UM.dayTask,
             guideFinish:UM.guideFinish,
-            hourEarn:UM.hourEarn,
             saveTime:TM.now(),
         };
     }
