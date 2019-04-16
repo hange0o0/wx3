@@ -310,16 +310,18 @@ if(window["wx"])
         //GameUI.getInstance().cleanTouch();
         console.log('show')
 
+
         if(GameManager.getInstance().changeUserTime)
         {
+            console.log(TM.now() - GameManager.getInstance().changeUserTime)
             if(TM.now() - GameManager.getInstance().changeUserTime > 30) //停留超过30秒
             {
                 UM.coinObj.shareNum ++;
                 UM.needUpUser = true;
-                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUser')|| [];
+                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
                 arr.unshift(GameManager.getInstance().changeUserID)
-                if(arr.length > 10)
-                    arr.length = 10;
+                if(arr.length > 5)
+                    arr.length = 5;
                 if(UM.coinObj.shareNum <= 3)
                     MyWindow.ShowTips('体验完成，可领取奖励！')
             }

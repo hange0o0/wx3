@@ -31,6 +31,10 @@ class TecManager {
         {
             this.tecBase[s].id = s;
         }
+        for(var i=0;i<this.tecList.length;i++)
+        {
+            this.tecList[i].index = i;
+        }
         if(!this.tecData[11])
             this.tecData[11] = 1;
     }
@@ -115,6 +119,7 @@ class TecManager {
         }
         this.tecData[id] = this.getTecLevel(id) + 1;
         EM.dispatch(GameEvent.client.TEC_CHANGE)
+        TaskManager.getInstance().testMainTask()
         fun && fun();
     }
 

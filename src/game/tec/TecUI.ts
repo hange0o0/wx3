@@ -55,6 +55,23 @@ class TecUI extends game.BaseUI {
     public onShow(){
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange)
+        this.testShowTask();
+
+    }
+
+    public testShowTask(){
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'tlv')
+        {
+            var index = TecManager.getInstance().tecBase[TSM.guideTaskVO.key].index;
+            if(index <= 3)
+                this.scroller.viewport.scrollV = 0;
+            else
+            {
+                this.validateNow()
+                this.scroller.viewport.scrollV = this.scroller.viewport.contentHeight - this.scroller.height;
+            }
+        }
     }
 
     private onCoinChange(){

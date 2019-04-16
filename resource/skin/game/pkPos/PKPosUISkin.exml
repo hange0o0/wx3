@@ -114,7 +114,7 @@
 		</e:Group>
 		<e:Group id="okBtn" x="256" y="10" width="100" height="80">
 			<e:Image y="0" horizontalCenter="0" source="icon_right_png"/>
-			<e:Label text="保存" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xFFE0C4"/>
+			<e:Label id="okText" text="保存" bottom="0" horizontalCenter="0" size="24" stroke="2" textColor="0xFFE0C4"/>
 		</e:Group>
 		<e:Group id="pkBtn" x="149" y="6" width="100" height="80">
 			<e:Image source="icon_atk2_png" y="0" horizontalCenter="0" scaleX="0.8" scaleY="0.8"/>

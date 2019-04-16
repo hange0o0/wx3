@@ -53,12 +53,29 @@ class TaskManager {
             rect.y += mc.anchorOffsetY
             var p1 = mc.localToGlobal(rect.x, rect.y);
             var p2 = mc.localToGlobal(rect.x + rect.width, rect.y + rect.height);
+            console.log(p1,p2)
 
             this.guideLight.x = p1.x + (p2.x - p1.x) / 2
             this.guideLight.y = p1.y + (p2.y - p1.y) / 2
             GameManager.container.addChild(this.guideLight);
             this.guideLight.gotoAndPlay(1, 1);
         },this,200);
+
+    }
+
+    public init(){
+        this.lastTaskFinish = this.isTaskFinish()
+    }
+
+    private lastTaskFinish = false;
+    public testMainTask(){
+        if(!this.lastTaskFinish && this.isTaskFinish())
+        {
+            this.lastTaskFinish = true;
+            TaskUI.getInstance().show();
+            //MyWindow.ShowTips(''+this.getCurrentTask().getDes()+' - 任务完成')
+            EM.dispatch(GameEvent.client.TASK_CHANGE)
+        }
 
     }
 
@@ -122,6 +139,7 @@ class TaskManager {
             MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(vo.diamond,0x6ffdfd),2000)
         }
         UM.task = vo.id;
+        this.lastTaskFinish = this.isTaskFinish();
         EM.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
@@ -142,6 +160,11 @@ class TaskManager {
                 this.showGuideMC(GameUI.getInstance().monsterBtn)
                 break;
             case 'mnum': //指定ID
+                if(CardInfoUI.getInstance().stage && CardInfoUI.getInstance().visible && CardInfoUI.getInstance().data == vo.key)
+                {
+                    CardInfoUI.getInstance().showFinish();
+                    return;
+                }
                 this.showGuideMC(GameUI.getInstance().monsterBtn)
                 break;
             case 'mlv2'://等级大于v1的数量
@@ -151,6 +174,11 @@ class TaskManager {
                 this.showGuideMC(GameUI.getInstance().monsterBtn)
                 break;
             case 'tlv':
+                if(TecUI.getInstance().stage && TecUI.getInstance().visible)
+                {
+                    TecUI.getInstance().testShowTask();
+                    return;
+                }
                 this.showGuideMC(GameUI.getInstance().tecBtn)
                 break;
             case 'clv':
@@ -161,6 +189,7 @@ class TaskManager {
                 break;
         }
 
+        PopUpManager.hideAll();
          return true;
         //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
     }
@@ -173,8 +202,7 @@ class TaskManager {
         var b = false
         if(!this.taskFinish)
         {
-            b = true;
-            this.taskFinish = this.testTaskFinish();
+            b = this.taskFinish = this.testTaskFinish();
         }
         var needAddNum = 1;
         if(arr.length <= 2)

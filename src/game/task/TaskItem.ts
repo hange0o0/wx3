@@ -46,7 +46,7 @@ class TaskItem extends game.BaseItem{
              var index = UM.dayTask.indexOf(this.data);
              if(index != -1)
              {
-                 UM.dayTask.split(index,1);
+                 UM.dayTask.splice(index,1);
                  EM.dispatch(GameEvent.client.TASK_CHANGE)
              }
              UM.needUpUser = true;

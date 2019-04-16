@@ -15,6 +15,6 @@
 	<e:Label id="lvText" text="Label" x="20" y="22" size="24" textColor="0xffe6af"/>
 	<e:Group id="successMC" width="150" height="150" y="15" horizontalCenter="0">
 		<e:Image source="bg8_png" scale9Grid="9,9,9,9" left="0" right="0" top="0" bottom="0"/>
-		<e:Image source="icon_edit_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image source="fight_finish_png" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 </e:Skin>

@@ -221,13 +221,18 @@ class DefUI extends game.BaseItem{
         var roundCD = TM.nowMS()%(this.roundTime)
         var halfPos = this.roundLength/2;
         var offset = (halfPos-640)/2
+
+        //roundCD -= this.monsterStepTime;
+        //if(roundCD < 0)
+        //    roundCD += this.roundTime;
+        var pos = roundCD*this.walkStep //第一个的位置
         for(var i=0;i<this.monsterArr.length;i++)
         {
             var mc = this.monsterArr[i];
-            roundCD -= this.monsterStepTime;
-            if(roundCD < 0)
-                roundCD += this.roundTime;
-            var pos = roundCD*this.walkStep
+
+            pos -= mc.showWidth()/2 + 10;
+            if(pos < 0)
+                pos += this.roundLength;
 
             if(pos<halfPos)
             {
@@ -239,6 +244,10 @@ class DefUI extends game.BaseItem{
                 mc.x = this.roundLength -  pos - offset
                 mc.renewRota(1)
             }
+
+            pos -= mc.showWidth()/2 + 10;
+            if(pos < 0)
+                pos += this.roundLength;
             //if(i==0)
             //console.log(mc.x,mc.bottom)
         }

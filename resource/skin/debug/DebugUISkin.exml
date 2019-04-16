@@ -7,4 +7,5 @@
 		</e:layout>
 	</e:Group>
 	<e:Button id="backBtn" label="返回" x="30" y="30" skinName="Btn2Skin"/>
+	<e:Label id="desText" text="Label" textColor="0x1c0101" left="20" right="20" bottom="10" size="24"/>
 </e:Skin>

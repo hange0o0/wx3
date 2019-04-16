@@ -7,8 +7,9 @@ class DebugUI extends game.BaseUI {
         return this._instance;
     }
 
-    private backBtn: eui.Button;
     private con: eui.Group;
+    private backBtn: eui.Button;
+    private desText: eui.Label;
 
 
     public debugTimer = 0;
@@ -75,6 +76,13 @@ class DebugUI extends game.BaseUI {
             UM.addDiamond(100)
             MyWindow.ShowTips('钻石 + ' + 100)
         })
+        this.addB('跳过PK',()=>{
+            DM.jumpPK = !DM.jumpPK;
+            if(DM.jumpPK)
+                MyWindow.ShowTips('自动跳过PK')
+            else
+                MyWindow.ShowTips('取消自动跳过PK')
+        })
         this.addB('跳转小程序',()=>{
             var wx = window['wx'];
             if(!wx)
@@ -98,6 +106,14 @@ class DebugUI extends game.BaseUI {
         btn.label = label;
         this.con.addChild(btn);
         this.addBtnEvent(btn,fun);
+    }
+
+    public onShow(){
+        var arr = [];
+        arr.push('已经过游戏时间：' + DateUtil.getStringBySeconds(TM.now() - UM.loginTime))
+        arr.push('当前时间：'+DateUtil.formatDate('yyyy-MM-dd hh:mm:ss',TM.chineseDate()))
+        arr.push('实际时间：' + DateUtil.formatDate('yyyy-MM-dd hh:mm:ss',new Date()))
+        this.desText.text = arr.join('\n')
     }
 
 }

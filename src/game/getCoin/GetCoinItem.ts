@@ -150,7 +150,7 @@ class GetCoinItem extends game.BaseItem {
                 }
                 else
                 {
-                    if(coinObj.shareNum < coinObj.shareAward)
+                    if(coinObj.shareNum > coinObj.shareAward)
                     {
                         this.goBtn.label = '领取'
                         this.canAward = true;

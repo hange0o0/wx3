@@ -7,6 +7,7 @@ class DebugManager {
         return this._instance;
     }
 
+    public jumpPK = false;
     public stop = 0;
     public winCardArr = [];
     public finishFun = function(winArr){return false}

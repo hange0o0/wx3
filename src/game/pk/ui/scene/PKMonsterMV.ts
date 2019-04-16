@@ -50,6 +50,9 @@ class PKMonsterMV extends eui.Group {
     public showHeight(){
         return MonsterVO.getObject(this.id).height
     }
+    public showWidth(){
+        return MonsterVO.getObject(this.id).width
+    }
 
      public load(id){
          this.id = id;

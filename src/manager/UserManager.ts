@@ -66,6 +66,9 @@ class UserManager {
     public hourEarn = 0;
     public offlineTime
     public fill(data:any):void{
+        this.isFirst = true;     //debug
+
+
         var localData = SharedObjectManager.getInstance().getMyValue('localSave')
         if(localData && localData.saveTime - data.saveTime > 10) //本地的数据更新
         {
@@ -258,6 +261,7 @@ class UserManager {
             _openid: this.gameid,
         }).get({
             success: (res)=>{
+                console.log(res,res.data.length == 0);
                 if(res.data.length == 0)//新用户
                 {
                     this.onNewUser(fun)
@@ -296,20 +300,23 @@ class UserManager {
     }
 
     public testAddInvite(){
+        console.log('testAddInvite')
         if(!this.isFirst)
             return;
         var wx = window['wx'];
         var query = wx.getLaunchOptionsSync().query;
+        console.log(query)
         if(query.type == '1')
         {
             wx.cloud.callFunction({      //取玩家openID,
                 name: 'onShareIn',
                 data:{
                     other:query.from,
-                    skinid:query.skinid,
+                    nick:UM.nick,
+                    head:UM.head,
                 },
                 complete: (res) => {
-                     //console.log(res)
+                     console.log(res)
                 }
             })
         }
@@ -317,6 +324,7 @@ class UserManager {
 
     //新用户注册
     private onNewUser(fun?){
+        console.log('newUser')
         this.isFirst = true;
         var wx = window['wx'];
         const db = wx.cloud.database();
@@ -329,8 +337,8 @@ class UserManager {
                 fun && fun();
             }
         })
-
-        this.needUpUser = true;
+        //
+        //this.needUpUser = true;
     }
 
     private orginUserData(){
@@ -351,7 +359,7 @@ class UserManager {
              energy:{v:0,t:0},
              buffUser:{},
              shareUser:[],
-             def:'41',
+             def:'',
              work:'65#0#1', //初始1个在工作
              coinObj:{
                  loginTime:TM.now(),   //登陆时间
@@ -393,6 +401,7 @@ class UserManager {
 
     private getUpdataData(){
         return {
+            loginTime:UM.loginTime,
             coin:UM.coin,
             diamond:UM.diamond,
             energy:UM.energy,

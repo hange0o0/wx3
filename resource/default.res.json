@@ -1708,6 +1708,11 @@
 			"name":"task8_jpg",
 			"type":"image",
 			"url":"game_assets2/task/task8.jpg"
+		},
+		{
+			"name":"fight_finish_png",
+			"type":"image",
+			"url":"game_assets/fight_finish.png"
 		}
 	]
 }

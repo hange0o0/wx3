@@ -68,6 +68,7 @@ class ChapterManager {
                             pkObj.coin = this.resultEarn.coin
                             pkObj.diamond = this.resultEarn.diamond
                             pkObj.star = this.resultEarn.star
+                            pkObj.showTaskChange = true
                         }
                         else
                         {
@@ -127,7 +128,6 @@ class ChapterManager {
         {
             UM.needUpUser = true;
             this.setChapterEarn();
-            EM.dispatch(GameEvent.client.TASK_CHANGE)
         }
         if(!UM.chapterResetTime)
             UM.chapterResetTime = TM.now()

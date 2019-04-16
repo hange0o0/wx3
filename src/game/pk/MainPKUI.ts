@@ -309,10 +309,10 @@ class MainPKUI extends game.BaseUI {
         PKBulletManager.getInstance().freeAll();
         var PD = PKData.getInstance();
         PD.init(data);
-        if(this.dataIn.passTime && this.dataIn.passTime > 0)
+        if(!this.dataIn.isReplay && DM.jumpPK)
         {
             PD.quick = true;
-            PD.quickTime = this.dataIn.passTime*1000;
+            PD.quickTime = Number.MAX_VALUE;
         }
 
         PKVideoCon.getInstance().init(this.dataIn);
@@ -581,6 +581,8 @@ class MainPKUI extends game.BaseUI {
                 this.btnGroup.visible = true
                 this.bottomBar.visible = false;
                 this.currentState = 's2'
+                if(this.dataIn.showTaskChange)
+                    TaskManager.getInstance().testMainTask();
             })
 
         },1000)

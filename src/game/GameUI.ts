@@ -91,6 +91,11 @@ class GameUI extends game.BaseUI {
         this.startBtn.visible = false;
 
         MyTool.addLongTouch(this.soundBtn,()=>{
+            if(DEBUG)
+            {
+                DebugUI.getInstance().show();
+                return;
+            }
             if(DebugUI.getInstance().debugOpen && !SoundManager.getInstance().soundPlaying)
             {
                 DebugUI.getInstance().show();
@@ -293,7 +298,8 @@ class GameUI extends game.BaseUI {
         ChangeUserUI.getAD();
         this.renewSound();
         this.loadingGroup.visible = true;
-        this.barMC.width = 300;
+        var w = 204;
+        this.barMC.width = w;
         self.loadText.text = '正在加载素材，请耐心等候..'
         this.renewInfo();
         UM.getUserInfo(()=>{
@@ -313,7 +319,7 @@ class GameUI extends game.BaseUI {
             })
 
             loadTask.onProgressUpdate(res => {
-                this.barMC.width = 300*res.progress/100;
+                this.barMC.width = w*res.progress/100;
                 self.loadText.text = '正在加载素材..' + res.progress + '%'
             })
             return;
@@ -355,12 +361,14 @@ class GameUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.TEC_CHANGE,this.reInitList)
         this.addPanelOpenEvent(GameEvent.client.DEF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.onTaskChange)
         //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
         this.firstShow = false;
 
+        TaskManager.getInstance().init();
         if(GuideManager.getInstance().isGuiding)
         {
             GuideManager.getInstance().showGuide();
@@ -368,7 +376,6 @@ class GameUI extends game.BaseUI {
         else
         {
             SoundManager.getInstance().playSound('bg');
-
             WorkOfflineUI.getInstance().show(UM.offlineTime,WorkManager.getInstance().offlineEarn)
         }
     }

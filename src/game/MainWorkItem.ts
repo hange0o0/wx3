@@ -7,7 +7,7 @@ class MainWorkItem extends game.BaseItem {
     private bg: eui.Image;
     private con: eui.Group;
     private coinText: eui.Label;
-    private numText: eui.Label;
+    //private numText: eui.Label;
     private redMC: eui.Image;
     private lastMC: eui.Image;
     private desText: eui.Label;
@@ -49,7 +49,7 @@ class MainWorkItem extends game.BaseItem {
 
     private showList() {
 
-        this.coinText.text = '时产：' + (NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2)) + ' /小时';
+        this.coinText.text =this.data.id +  '号坑产出：' + (NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2)) + ' /小时';
 
         this.currentState = 'normal'
 
@@ -97,7 +97,7 @@ class MainWorkItem extends game.BaseItem {
         else
             localMax = max%10;
 
-        this.numText.text = '数量：' + arr.length + '/' +  localMax;
+        //this.numText.text = '数量：' + arr.length + '/' +  localMax;
         this.redMC.visible = arr.length < localMax && MonsterManager.getInstance().getFreeMonster(true).length > 0
     }
 

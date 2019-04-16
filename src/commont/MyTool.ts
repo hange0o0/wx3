@@ -22,7 +22,7 @@ class MyTool {
 
     //显示bar
     public static renewBar(rect,value,total,width,start){
-        if(value<total)
+        if(value<=total)
         {
             rect.fillColor = 0x00ff00
         }
@@ -33,7 +33,7 @@ class MyTool {
             total = value;
             value = temp;
         }
-        rect.scrollRect = new egret.Rectangle(start,0,(width - start)*value/total + start,100)
+        rect.scrollRect = new egret.Rectangle(0,0,(width - start)*value/total + start,100)
     }
 
     //public static getPropCoin(){

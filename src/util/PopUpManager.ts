@@ -198,12 +198,16 @@ class PopUpManager {
                 var ui = GameManager.container.getChildAt(i);
                 if(ui instanceof game.BaseUI)
                 {
-                    isHide = true;
+                    if(ui == GameUI.getInstance())
+                    {
+                        isHide = true;
+                        break;
+                    }
                     ui.hide();
                     break;
                 }
             }
-            if(!isHide)
+            if(isHide)
                 return;
         }
     }

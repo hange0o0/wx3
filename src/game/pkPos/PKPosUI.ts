@@ -30,6 +30,7 @@ class PKPosUI extends game.BaseUI {
     private btnGroup: eui.Group;
     private sortBtn: eui.Group;
     private sortText: eui.Label;
+    private okText: eui.Label;
     private resetBtn: eui.Group;
     private okBtn: eui.Group;
     private pkBtn: eui.Group;
@@ -407,8 +408,10 @@ class PKPosUI extends game.BaseUI {
 
     public onShow(){
 
+        this.okText.text = '保存'
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
+        this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewDownList) //怪物升级/升星
     }
 
     private onE(){
@@ -481,6 +484,7 @@ class PKPosUI extends game.BaseUI {
                     this.taskItem.verticalCenter = 0
                     this.taskItem.currentState = 's2'
                 }
+                this.okText.text = '接单'
                 this.bg.source = PKManager.getInstance().getDefBG();
                 this.otherForceText.text = '';
                 this.mainCon.addChildAt(this.con,0);

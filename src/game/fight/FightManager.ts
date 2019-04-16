@@ -122,14 +122,14 @@ class FightManager {
     }
 
     //打赢的人能得到的金币(根据进攻方战力)
-    public getFightCoin(list,force,mforce,buff,isAll?){
+    public getFightCoin(list,force,mforce,isAll?){
         var coin =  0;
         var arr = list.split(',');
         for(var i=0;i<arr.length;i++)
         {
             var vo = MonsterVO.getObject(arr[i]);
             var mf = force + (mforce[vo.id] || 0);
-            coin += vo.cost*(1+mf/100)*(1+(buff || 0)/100)*500
+            coin += vo.cost*(1+mf/100)*500
         }
         if(isAll || Math.random() > 0.5)
             return Math.floor(coin);
@@ -243,6 +243,9 @@ class FightManager {
                     if(oo.type == 'atk' && oo.result != 2)
                         robot.lastAtk = 0;
 
+                    if(oo.type == 'atk' && oo.result == 2)//得到的钱先放入记录
+                        oo.addCoin = this.getFightCoin(oo.pkObj.list2,oo.pkObj.force2,oo.pkObj.mforce2)
+
                     if(cd - robot.distanceTime < 5)
                     {
                         if(oo.type == 'atk')
@@ -279,7 +282,6 @@ class FightManager {
                 //加钱
                 if(oo.result == 2)
                 {
-                    oo.addCoin = this.getFightCoin(oo.pkObj.list2,oo.pkObj.force2,oo.pkObj.mforce2,oo.pkObj.buff2)
                     coinArr.push({time:oo.time + robot.distanceTime*2,oo:oo})
                 }
                 else
@@ -297,7 +299,7 @@ class FightManager {
                 //扣钱
                 if(oo.result == 1)
                 {
-                    oo.addCoin = -this.getFightCoin(oo.pkObj.list1,oo.pkObj.force1,oo.pkObj.mforce1,0,true)
+                    oo.addCoin = -this.getFightCoin(oo.pkObj.list1,oo.pkObj.force1,oo.pkObj.mforce1,true)
                     coinArr.push({time:oo.time + robot.distanceTime,oo:oo})
                 }
                 this.fightingArr.splice(i,1);
@@ -381,7 +383,7 @@ class FightManager {
         };
         this.fightingArr.push(oo)
         this.fightNum ++;
-        EM.dispatch(GameEvent.client.TASK_CHANGE)
+        TaskManager.getInstance().testMainTask()
         RobotVO.change = true;
         UM.needUpUser = true;
         return oo;

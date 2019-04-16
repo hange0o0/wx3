@@ -56,6 +56,13 @@ class TecItem extends game.BaseItem{
             this.upGroup.visible = true;
         }
         this.renewCost();
+
+        var TSM = TaskManager.getInstance()
+        console.log(TSM.guideTaskVO)
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'tlv' && TSM.guideTaskVO.key == data.id)
+        {
+            TaskManager.getInstance().showGuideMC(this.upBtn);
+        }
     }
 
     public renewCost(){

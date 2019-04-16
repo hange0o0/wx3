@@ -1,6 +1,7 @@
 class MonsterItem extends game.BaseItem{
     private bg2: eui.Image;
     private cardGroup: eui.Group;
+    private posGroup: eui.Group;
     private bg: eui.Image;
     private text: eui.Label;
     private costText: eui.Label;
@@ -47,8 +48,8 @@ class MonsterItem extends game.BaseItem{
         this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(vo.id) + ''
         this.text.text = vo.name //+ '('+vo.cost+')';
 
-        this.redMC.visible = UM.diamond >=  MonsterManager.getInstance().getNumCost(vo.id) ||
-            UM.coin >= MonsterManager.getInstance().getLevelCost(vo.id);
+        this.renewRed();
+
 
         if(this.heroItem)
         {
@@ -57,9 +58,18 @@ class MonsterItem extends game.BaseItem{
             this.heroItem.stop();
             var TSM = TaskManager.getInstance()
             if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv') && TSM.guideTaskVO.key == vo.id)
-                TaskManager.getInstance().showGuideMC(this);
+            {
+                if(!CardInfoUI.getInstance().stage)
+                    TaskManager.getInstance().showGuideMC(this.posGroup);
+            }
 
         }
+    }
+
+    public renewRed(){
+        var vo = this.data.vo
+        this.redMC.visible = UM.diamond >=  MonsterManager.getInstance().getNumCost(vo.id) ||
+            UM.coin >= MonsterManager.getInstance().getLevelCost(vo.id);
     }
 
 
