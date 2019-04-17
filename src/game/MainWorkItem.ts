@@ -10,6 +10,7 @@ class MainWorkItem extends game.BaseItem {
     //private numText: eui.Label;
     private redMC: eui.Image;
     private lastMC: eui.Image;
+    private mineLightMC: eui.Image;
     private desText: eui.Label;
 
 
@@ -18,9 +19,11 @@ class MainWorkItem extends game.BaseItem {
     public teamID
     private maxCost = 10000;
 
+
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
+        egret.Tween.get(this.mineLightMC,{loop:true}).to({alpha:0.2},2000).to({alpha:1},2000)
     }
 
     private onClick(){

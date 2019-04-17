@@ -1713,6 +1713,11 @@
 			"name":"fight_finish_png",
 			"type":"image",
 			"url":"game_assets/fight_finish.png"
+		},
+		{
+			"name":"mine_light_png",
+			"type":"image",
+			"url":"game_assets/png32/mine_light.png"
 		}
 	]
 }

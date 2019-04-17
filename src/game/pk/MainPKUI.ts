@@ -128,9 +128,15 @@ class MainPKUI extends game.BaseUI {
     }
 
     private onSpeed(){
+        if(BuffManager.getInstance().getUserNum()<1)
+        {
+            MyWindow.ShowTips('在【好友助力】中解锁PK加速功能')
+            return;
+        }
         PKData.getInstance().playSpeed ++;
         if(PKData.getInstance().playSpeed > 3)
             PKData.getInstance().playSpeed = 1;
+        SharedObjectManager.getInstance().setMyValue('pkSpeed',PKData.getInstance().playSpeed)
         this.renewSpeedBtn();
     }
 
@@ -218,8 +224,7 @@ class MainPKUI extends game.BaseUI {
 
     public onShow(){
 
-        PKData.getInstance().playSpeed = 1;
-        this.renewSpeedBtn();
+
         this.bottomBar.visible = true
         if(this.dataIn.isMain)
         {
@@ -232,6 +237,7 @@ class MainPKUI extends game.BaseUI {
         }
         this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         this.reset();
+
     }
 
     public hide(){
@@ -247,7 +253,6 @@ class MainPKUI extends game.BaseUI {
         this.dataIn.isReplay = true;
         this.bottomBar.visible = true
         this.reset();
-        this.renewSpeedBtn();
     }
 
     private resetList(list){
@@ -362,6 +367,9 @@ class MainPKUI extends game.BaseUI {
         }
         else
             SoundManager.getInstance().playSound('pkbg')
+
+        PKData.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
+        this.renewSpeedBtn();
     }
 
     public showHurt(rota){

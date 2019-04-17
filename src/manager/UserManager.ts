@@ -38,6 +38,7 @@ class UserManager {
     public dayTask: any;
     public chapterResetTime = 0;
     public chapterCoin = 0;
+    public buffDiamond = 0;
 
     public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
 
@@ -66,7 +67,7 @@ class UserManager {
     public hourEarn = 0;
     public offlineTime
     public fill(data:any):void{
-        this.isFirst = true;     //debug
+        //this.isFirst = true;     //debug
 
         //console.log(data)
 
@@ -93,6 +94,7 @@ class UserManager {
         this.chapterCoin = data.chapterCoin;
         this.maxForce = data.maxForce;
         this.shareUser = data.shareUser;
+        this.buffDiamond = data.buffDiamond;
         this.task = data.task || 0;
         this.dayTask = data.dayTask || [];
         this.coinObj = data.coinObj || {
@@ -105,18 +107,18 @@ class UserManager {
                 gameDiamond:0,
             };
 
-        if(!window['wx'])
-        {
-            this.shareUser = [
-                {h:'',n:'1'},
-                {h:'',n:'2'},
-                {h:'',n:'3'},
-                {h:'',n:'4'},
-                {h:'',n:'5'},
-                {h:'',n:'6'},
-                {h:'',n:'7'},
-            ]
-        }
+        //if(!window['wx'])
+        //{
+        //    this.shareUser = [
+        //        {h:'',n:'1'},
+        //        {h:'',n:'2'},
+        //        {h:'',n:'3'},
+        //        {h:'',n:'4'},
+        //        {h:'',n:'5'},
+        //        {h:'',n:'6'},
+        //        {h:'',n:'7'},
+        //    ]
+        //}
 
         this.initDataTime = TM.now();
         WorkManager.getInstance().initWork(data.work)
@@ -275,7 +277,7 @@ class UserManager {
 
     public renewFriendNew(fun)
     {
-        if(TM.now() - this.initDataTime < 10*60)
+        if(TM.now() - this.initDataTime < 5*60)
         {
             fun && fun();
             return;
@@ -304,6 +306,8 @@ class UserManager {
         if(!this.isFirst)
             return;
         var wx = window['wx'];
+        if(!wx)
+            return;
         var query = wx.getLaunchOptionsSync().query;
         //console.log(query)
         if(query.type == '1')
@@ -355,6 +359,7 @@ class UserManager {
              dayTask:[],
              fight:{},
              saveTime:0,
+             buffDiamond:0,
              energy:{v:0,t:0},
              shareUser:[],
              def:'',
@@ -402,6 +407,7 @@ class UserManager {
             loginTime:UM.loginTime,
             coin:UM.coin,
             diamond:UM.diamond,
+            buffDiamond:UM.buffDiamond,
             energy:UM.energy,
             work:WorkManager.getInstance().getWorkSave(),
             def:MonsterManager.getInstance().defList,

@@ -101,11 +101,11 @@ class PKPosUI extends game.BaseUI {
 
 
         this.chooseList.itemRenderer = PKPosChooseItem
-        this.chooseList.dataProvider = this.dataProvider = new eui.ArrayCollection();
+        this.chooseList.dataProvider = this.chooseDataProvider = new eui.ArrayCollection();
 
         this.scroller.viewport = this.list;
         this.list.itemRenderer = PKPosListItem
-        this.list.dataProvider =  this.chooseDataProvider = new eui.ArrayCollection()
+        this.list.dataProvider =  this.dataProvider = new eui.ArrayCollection()
 
         this.addBtnEvent(this.pkBtn,this.onPK);
         this.addBtnEvent(this.okBtn,this.onSave);
@@ -157,7 +157,7 @@ class PKPosUI extends game.BaseUI {
                 this.sortIndexWork = 0;
         }
 
-        this.renew();
+        this.renewDownList();
     }
 
     private onMClick(e){
@@ -250,26 +250,26 @@ class PKPosUI extends game.BaseUI {
                 {
                     if(mc.data == this.dragTarget.data)
                         break
-                    var currentIndex =  this.dataProvider.source.indexOf(mc.data)// this.chooseList会有不存在数组中数据的显示对象
-                    var index = this.dataProvider.source.indexOf(this.dragTarget.data)
+                    var currentIndex =  this.chooseDataProvider.source.indexOf(mc.data)// this.chooseList会有不存在数组中数据的显示对象
+                    var index = this.chooseDataProvider.source.indexOf(this.dragTarget.data)
                     var p = mc.globalToLocal(x,y);
                     if(p.x < mc.width/4 || p.x > mc.width/4*3)//insert
                     {
                         var targetIndex = p.x < mc.width/4?currentIndex:currentIndex+1;
                         if(targetIndex == index)
                             break;
-                        this.dataProvider.removeItemAt(index)
+                        this.chooseDataProvider.removeItemAt(index)
                         if(targetIndex > index)
                             targetIndex --;
-                        this.dataProvider.addItemAt(this.dragTarget.data,targetIndex)
+                        this.chooseDataProvider.addItemAt(this.dragTarget.data,targetIndex)
                     }
                     else//swap
                     {
-                        this.dataProvider.source[index] = mc.data
-                        this.dataProvider.source[currentIndex] = this.dragTarget.data
+                        this.chooseDataProvider.source[index] = mc.data
+                        this.chooseDataProvider.source[currentIndex] = this.dragTarget.data
                     }
 
-                    this.dataProvider.refresh();
+                    this.chooseDataProvider.refresh();
                     this.chooseList.validateNow();
                     break
                 }
@@ -284,17 +284,17 @@ class PKPosUI extends game.BaseUI {
 
     public addChoose(id){
         var index = this.getChooseNum();
-        this.dataProvider.removeItemAt(this.dataProvider.length - 1);
-        this.dataProvider.addItemAt({id:id,list:this.dataProvider.source},index)
+        this.chooseDataProvider.removeItemAt(this.chooseDataProvider.length - 1);
+        this.chooseDataProvider.addItemAt({id:id,list:this.chooseDataProvider.source},index)
         this.addFreeMonsterNum(id,-1)
         this.onItemChange();
     }
 
     public deleteItem(data){
-        var index = this.dataProvider.getItemIndex(data)
+        var index = this.chooseDataProvider.getItemIndex(data)
         this.addFreeMonsterNum(data.id,1)
-        this.dataProvider.removeItemAt(index);
-        this.dataProvider.addItem(null);
+        this.chooseDataProvider.removeItemAt(index);
+        this.chooseDataProvider.addItem(null);
         this.chooseList.validateNow();
         this.onItemChange()
     }
@@ -323,7 +323,7 @@ class PKPosUI extends game.BaseUI {
 
     public getChooseNum(){
         var count = 0;
-        var arr = this.dataProvider.source;
+        var arr = this.chooseDataProvider.source;
         for(var i = 0;i<arr.length;i++)
         {
             if(arr[i])
@@ -538,19 +538,26 @@ class PKPosUI extends game.BaseUI {
         this.topUI.setTitle(this.dataIn.title || '布阵')
     }
 
+
+
+
+
     private renewDownList() {
-        var list = MonsterManager.getInstance().getFreeMonster();
+        var list = [];
         var obj = {};
-        this.emptyNum = {};
-        for(var i=0;i<list.length;i++)
+        for(var s in this.emptyNum)
         {
-            obj[list[i].vo.id] = true;
-            this.emptyNum[list[i].vo.id] = list[i].num;
-            list[i] = list[i].vo;
+            if(this.emptyNum[s])
+            {
+                obj[s] = true;
+                list.push(MonsterVO.getObject(s))
+            }
         }
-        if(this.dataIn.chooseList)
+
+        var myList = this.getMyList();
+        if(myList)
         {
-            var temp = this.dataIn.chooseList.split(',');
+            var temp = myList.split(',');
             for(var i=0;i<temp.length;i++)
             {
                 if(!obj[temp[i]])
@@ -560,6 +567,8 @@ class PKPosUI extends game.BaseUI {
                 }
             }
         }
+
+
         if(this.dataIn.type == 'task')
         {
             var sortObj = this.sortBaseTask[this.sortIndexTask];
@@ -634,8 +643,8 @@ class PKPosUI extends game.BaseUI {
         }
         if(list.length > 0)
             list.push({add:true})
-        this.chooseDataProvider.source = list;
-        this.chooseDataProvider.refresh();
+        this.dataProvider.source = list;
+        this.dataProvider.refresh();
 
         this.emptyGroup.visible = list.length == 0
     }
@@ -694,8 +703,8 @@ class PKPosUI extends game.BaseUI {
         }
         while(list.length < this.maxNum)
             list.push(null)
-        this.dataProvider.source = list;
-        this.dataProvider.refresh();
+        this.chooseDataProvider.source = list;
+        this.chooseDataProvider.refresh();
         this.onItemChange();
     }
 
@@ -719,15 +728,23 @@ class PKPosUI extends game.BaseUI {
 
         this.renewTitle();
         this.renewByType();
-        this.renewDownList();
+
+        var freeList = MonsterManager.getInstance().getFreeMonster();
+        this.emptyNum = {};
+        for(var i=0;i<freeList.length;i++)
+        {
+            this.emptyNum[freeList[i].vo.id] = freeList[i].num;
+        }
         this.renewTopList();
+        this.renewDownList();
+
         //this.reset();
     }
 
 
 
     public reset(){
-        var arr = this.dataProvider.source;
+        var arr = this.chooseDataProvider.source;
         for(var i=0;i<arr.length;i++)
         {
             if(arr[i])
@@ -736,13 +753,13 @@ class PKPosUI extends game.BaseUI {
         arr = [];
         while(arr.length<this.maxNum)
             arr.push(null)
-        this.dataProvider.source = arr;
-        this.dataProvider.refresh();
+        this.chooseDataProvider.source = arr;
+        this.chooseDataProvider.refresh();
         this.onItemChange();
     }
 
     private getMyCost(){
-        var arr = this.dataProvider.source;
+        var arr = this.chooseDataProvider.source;
         var cost = 0;
         for(var i=0;i<arr.length;i++)
         {
@@ -753,7 +770,7 @@ class PKPosUI extends game.BaseUI {
     }
 
     private getMyList(){
-        var arr = this.dataProvider.source;
+        var arr = this.chooseDataProvider.source;
         var list = [];
         for(var i=0;i<arr.length;i++)
         {

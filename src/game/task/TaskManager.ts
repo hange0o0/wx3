@@ -63,6 +63,16 @@ class TaskManager {
 
     }
 
+    public hideGuideLight(){
+        if(this.guideLight)
+        {
+            egret.clearTimeout(this.guideTimer);
+            this.guideLight.stop();
+            MyTool.removeMC(this.guideLight);
+        }
+
+    }
+
     public init(){
         this.lastTaskFinish = this.isTaskFinish()
     }
@@ -190,27 +200,31 @@ class TaskManager {
         }
 
         PopUpManager.hideAll();
+        this.guideTaskVO = vo;
          return true;
         //clv,mlv*2,mnum*2,clv,clv*2,mlv,clv*2
     }
 
 
+    public addTaskTime = 0;
     public onTimer(){
         var arr = UM.dayTask;
         if(!arr)
             return;
+        if(!this.addTaskTime)
+        {
+            this.addTaskTime = SharedObjectManager.getInstance().getMyValue('addTaskTime') || 1
+        }
         var b = false
         if(!this.taskFinish)
         {
             b = this.taskFinish = this.testTaskFinish();
         }
-        var needAddNum = 1;
-        if(arr.length <= 2)
-            needAddNum = 2 - arr.length;
-        else if(arr.length >= 5)
-            needAddNum = 0;
-        if(needAddNum && (TM.now()%(5*60) == 0 || arr.length == 0))//加3个
+        var needAddNum = Math.min(Math.floor((TM.now() - this.addTaskTime)/30/60), 5-arr.length,2);
+        if(needAddNum > 0)//
         {
+            this.addTaskTime = TM.now()
+            SharedObjectManager.getInstance().setMyValue('addTaskTime',this.addTaskTime)
             var list = [1,2,3,4,5,6,7,8];
             for(var i=0;i<arr.length;i++)
             {

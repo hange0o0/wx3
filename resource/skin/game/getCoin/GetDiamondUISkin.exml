@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GetDiamondUISkin" width="540" height="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Button id="closeBtn" label="关闭" width="160" skinName="Btn1Skin" horizontalCenter="0" bottom="30"/>
+	<e:Group y="80" horizontalCenter="0">
+		<e:Group x="10" y="10">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
+			<e:Label text="完成【每日金币】后获得" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="coinBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group x="20" y="20">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
+			<e:Label text="完成主线任务有机会获得" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="taskBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group x="30" y="30">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
+			<e:Label text="首次3星通关据点必掉" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="chapterBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group x="30" y="30">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
+			<e:Label text="邀请新玩家加入后获得" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="friendBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:layout>
+			<e:VerticalLayout gap="10"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="获取钻石" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0" stroke="3" strokeColor="0x351D03"/>
+</e:Skin>

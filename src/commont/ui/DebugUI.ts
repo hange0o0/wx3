@@ -32,6 +32,7 @@ class DebugUI extends game.BaseUI {
                      SharedObjectManager.getInstance().removeMyValue('fight')
                      SharedObjectManager.getInstance().removeMyValue('addTime')
                      SharedObjectManager.getInstance().removeMyValue('lastAtkList')
+                     SharedObjectManager.getInstance().removeMyValue('pkSpeed')
                 }
             });
         })
@@ -82,6 +83,10 @@ class DebugUI extends game.BaseUI {
                 MyWindow.ShowTips('自动跳过PK')
             else
                 MyWindow.ShowTips('取消自动跳过PK')
+        })
+        this.addB('加好友',()=>{
+            UM.shareUser.push({h:'',n:Math.random() + ''})
+            MyWindow.ShowTips('当前好友数量:' + UM.shareUser.length)
         })
         this.addB('跳转小程序',()=>{
             var wx = window['wx'];

@@ -8,15 +8,19 @@
 			<e:Image source="icon_add1_png" horizontalCenter="0" verticalCenter="0"/>
 		</e:Group>
 	</e:Group>
-	<e:Group x="130" y="20" bottom.normal="20" bottom.empty="65">
-		<e:Image source="icon_force2_png" x="5" y="0"/>
-		<e:Label text="所有怪物战力+50%" x="50" size="24" verticalCenter="0" textColor="0xFFDC59" text.normal="战力+50%"/>
+	<e:Group x="125" y="20" height="45" bottom.normal="20">
+		<e:Image source="icon_force2_png" x="0" y="0"/>
+		<e:Label text="战力+50%" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
 	</e:Group>
-	<e:Group x="130" height="45"  bottom="20" x.normal="300">
+	<e:Group x="125" height="45" includeIn="empty" bottom="20">
+		<e:Image x="0" source="icon_diamond_png" scaleX="0.7" scaleY="0.7" verticalCenter="0"/>
+		<e:Label text="钻石+10" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
+	</e:Group>
+	<e:Group height="45" x="285" y="20" bottom.normal="20">
 		<e:Image x="5" source="icon_coin_png" scaleX="0.8" scaleY="0.8" verticalCenter="0"/>
-		<e:Label text="所有怪物效率+10%" x="50" size="24" verticalCenter="0" textColor="0xFFDC59" text.normal="效率+10%"/>
+		<e:Label text="效率+10%" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
 	</e:Group>
-	<e:Image source="icon_right_png" right="20" includeIn="normal" verticalCenter="0"/>
+	<e:Image source="icon_right_png" right="30" includeIn="normal" verticalCenter="0"/>
 	<e:Label id="nameText" text="Label" x="140" y="25" textColor="0xffedad" size="24" includeIn="normal"/>
 	<e:Button label="邀请\n好友" skinName="Btn1Skin" height="100" verticalCenter="0" right="15" visible.normal="false"/>
 </e:Skin>

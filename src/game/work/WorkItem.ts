@@ -31,6 +31,7 @@ class WorkItem extends game.BaseItem{
         this.bg.source = vo.getBG()
         this.mc.source = vo.getImage()
         this.numText.text = this.data.num>1?'x'+this.data.num:''
+        console.log(this.data.id,this.data.num)
     }
 
 

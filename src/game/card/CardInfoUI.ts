@@ -93,7 +93,10 @@ class CardInfoUI extends game.BaseWindow {
 
     public onCopy(){
          if(UM.diamond < this.diamondCost)
-            return;
+         {
+             GetDiamondUI.getInstance().show();
+             return;
+         }
         MonsterManager.getInstance().numUpMonster(this.data)
         UM.addDiamond(-this.diamondCost)
         this.renew();
@@ -124,6 +127,7 @@ class CardInfoUI extends game.BaseWindow {
         }
         super.show()
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
+        this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.renewDiamond)
     }
 
     public hide() {
@@ -156,6 +160,11 @@ class CardInfoUI extends game.BaseWindow {
         this.upBtn.skinName = UM.coin >= this.coinCost?'Btn1Skin':'Btn3Skin';
     }
 
+    public renewDiamond(){
+        MyTool.renewBar(this.diamondBarMC,this.diamondCost,UM.diamond,160,15);
+        this.copyBtn.skinName = UM.diamond >= this.diamondCost?'Btn1Skin':'Btn3Skin';
+    }
+
 
 
 
@@ -165,9 +174,8 @@ class CardInfoUI extends game.BaseWindow {
         this.coinText.text = NumberUtil.addNumSeparator(this.coinCost)
         this.renewCoin();
         this.diamondText.text = this.diamondCost + ''
-        //this.diamondText.textColor = UM.diamond >= this.diamondCost?0xFCE4B5:0xFF0000
-        MyTool.renewBar(this.diamondBarMC,this.diamondCost,UM.diamond,160,15);
-        this.copyBtn.skinName = UM.diamond >= this.diamondCost?'Btn1Skin':'Btn3Skin';
+        this.renewDiamond();
+
 
 
         //var force = 100;

@@ -59,6 +59,7 @@ class GameUI extends game.BaseUI {
     private needShowStartBtn = false;
 
     private firstShow = true;
+    private dataProvider:eui.ArrayCollection;
     public showIndex = -1;
     public showData;
     public childrenCreated() {
@@ -76,6 +77,7 @@ class GameUI extends game.BaseUI {
         //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
         this.scroller.viewport = this.list
+        this.dataProvider = this.list.dataProvider = new eui.ArrayCollection([])
         this.list.itemRendererFunction = (data)=>{
             if(data.def)
                 return DefUI;
@@ -312,6 +314,7 @@ class GameUI extends game.BaseUI {
             const loadTask = wx.loadSubpackage({
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
+                    self.changeUser.dataChanged()
                     self.callShow();
                 },
                 fail(res) {
@@ -319,7 +322,7 @@ class GameUI extends game.BaseUI {
             })
 
             loadTask.onProgressUpdate(res => {
-                this.barMC.width = w*res.progress/100;
+                self.barMC.width = w*res.progress/100;
                 self.loadText.text = '正在加载素材..' + res.progress + '%'
             })
             return;
@@ -331,7 +334,6 @@ class GameUI extends game.BaseUI {
     private initData(){
         if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
         {
-            this.changeUser.dataChanged()
             this.loadText.text = '点击屏幕授权进入游戏';
             this.needShowStartBtn = false;
             this.infoBtn.visible = true;
@@ -412,7 +414,8 @@ class GameUI extends game.BaseUI {
         return arr
     }
     public reInitList(){
-        this.list.dataProvider = new eui.ArrayCollection(this.getListArr())
+        this.dataProvider.source = (this.getListArr())
+        this.dataProvider.refresh();
     }
 
     private onCoinChange(){

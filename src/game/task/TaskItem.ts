@@ -42,6 +42,8 @@ class TaskItem extends game.BaseItem{
          }
         else
          {
+             TaskManager.getInstance().addTaskTime = TM.now()
+             SharedObjectManager.getInstance().setMyValue('addTaskTime',TaskManager.getInstance().addTaskTime)
              UM.addCoin(this.data.award);
              var index = UM.dayTask.indexOf(this.data);
              if(index != -1)

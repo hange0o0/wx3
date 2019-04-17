@@ -176,7 +176,7 @@ class DefUI extends game.BaseItem{
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
 
-        this.addDefBtn.visible = this.monsterArr.length == 0
+        this.addDefBtn.visible = !this.isPos && this.monsterArr.length == 0
         this.renewTask();
     }
 

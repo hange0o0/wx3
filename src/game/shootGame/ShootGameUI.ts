@@ -129,6 +129,7 @@ class ShootGameUI extends game.BaseUI {
 
     public hide() {
         super.hide();
+        GetCoinUI.getInstance().renew();
     }
 
     public onShow(){
@@ -189,7 +190,7 @@ class ShootGameUI extends game.BaseUI {
             this.showResult();
             return;
         }
-        this.timeText.text = timeCD + ''
+        this.timeText.text = (99 - timeCD) + ''
 
         var cd = egret.getTimer() - this.lastCreate;
         var createCD = 1*1000;
@@ -225,7 +226,7 @@ class ShootGameUI extends game.BaseUI {
     }
 
     private showResult(){
-        this.resultCoinText.text = 'x'+this.coin + ''
+        this.resultCoinText.text = 'x'+NumberUtil.addNumSeparator(this.coin,2) + ''
         this.resultGroup.visible = true;
         SoundManager.getInstance().playSound('bg');
     }

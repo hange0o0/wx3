@@ -20,4 +20,5 @@
 	</e:Group>
 	<e:Image source="black4_png" x="0" bottom="0" width="640" height="15" visible="false"/>
 	<e:Label id="coinText" text="Label" includeIn="normal" y="15" size="18" textColor="0x6b6b6b" right="15"/>
+	<e:Image id="mineLightMC" source="mine_light_png" includeIn="normal" y="0" right="0" x="560" scaleX="1" scaleY="1"/>
 </e:Skin>

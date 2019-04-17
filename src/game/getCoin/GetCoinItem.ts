@@ -67,7 +67,13 @@ class GetCoinItem extends game.BaseItem {
             return;
         }
         UM.addCoin(this.addCoin);
+
         MyWindow.ShowTips('获得金币：'+MyTool.createHtml(NumberUtil.addNumSeparator(this.addCoin,2),0xFFFF00),2000)
+        if(this.addDiamond)
+        {
+            UM.addDiamond(this.addDiamond);
+            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(this.addDiamond,0x6ffdfd),2000)
+        }
         UM.needUpUser = true;
         SoundManager.getInstance().playEffect('coin');
 
@@ -164,8 +170,8 @@ class GetCoinItem extends game.BaseItem {
                 }
                 this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'
-                this.diamondMC.visible = true;
-                this.addDiamond = coinObj.shareNum==3?1:0;
+                this.diamondMC.visible = coinObj.shareAward < 3;
+                this.addDiamond = coinObj.shareAward==2?1:0;
                 this.addCoin = this.getCoin(0.5);
                 break;
             //case 4: // {type:4,title:'邀请X位新的好友'},
@@ -208,8 +214,8 @@ class GetCoinItem extends game.BaseItem {
                 }
                 this.bg.source = 'coin_bg2_jpg'
                 this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
-                this.diamondMC.visible = true;
-                this.addDiamond = coinObj.videoAwardNum==3?1:0;
+                this.diamondMC.visible = coinObj.videoAwardNum < 3;
+                this.addDiamond = coinObj.videoAwardNum==2?1:0;
                 this.addCoin = this.getCoin(0.5);
                 break;
             case 6: // 射击游戏

@@ -21,7 +21,7 @@ class ShootMonster extends game.BaseItem{
     private teamMC: eui.Image;
     private list: eui.List;
 
-    public mc = PKMonsterMV.createItem();
+    public mc = new PKMonsterMV();
 
     public isDie = 0
     public hp = 0

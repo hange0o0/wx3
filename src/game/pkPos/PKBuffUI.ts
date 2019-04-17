@@ -10,13 +10,16 @@ class PKBuffUI extends game.BaseWindow {
     private atkBar: eui.Image;
     private atkText: eui.Label;
     private atkArrow: eui.Image;
+    private lock1: eui.Image;
     private hpBar: eui.Image;
     private hpText: eui.Label;
     private hpArrow: eui.Image;
+    private lock2: eui.Image;
     private btnGroup: eui.Group;
     private refreshBtn: eui.Button;
     private pkBtn: eui.Button;
     private desText: eui.Label;
+
 
 
 
@@ -32,6 +35,9 @@ class PKBuffUI extends game.BaseWindow {
     private atkAdd = 0
     private hpAdd = 0
 
+
+    private isLock1 = false
+    private isLock2 = false
     public constructor() {
         super();
         this.skinName = "PKBuffUISkin";
@@ -44,10 +50,36 @@ class PKBuffUI extends game.BaseWindow {
 
         this.addBtnEvent(this.pkBtn,this.onAtk)
         this.addBtnEvent(this.refreshBtn,this.onRefresh)
-
-
-
+        this.addBtnEvent(this.lock1,()=>{this.onLock(1)})
+        this.addBtnEvent(this.lock2,()=>{this.onLock(2)})
     }
+
+    public onLock(index){
+        if(BuffManager.getInstance().getUserNum()<5)
+        {
+            MyWindow.ShowTips('在【好友助力】中开启加成锁定功能')
+            return;
+        }
+        if(index == 1)
+        {
+            this.isLock1 = !this.isLock1;
+            if(this.isLock1)
+                this.isLock2 = false;
+        }
+        else if(index == 2)
+        {
+            this.isLock2 = !this.isLock2;
+            if(this.isLock2)
+                this.isLock1 = false;
+        }
+        this.renewLock();
+    }
+
+    private renewLock(){
+        this.lock1.alpha = this.isLock1?1:0.3
+        this.lock2.alpha = this.isLock2?1:0.3
+    }
+
 
     public onRefresh(){
         if(this.currentStep <= 0)
@@ -58,8 +90,8 @@ class PKBuffUI extends game.BaseWindow {
         this.currentStep --;
 
 
-        var hp = Math.round(Math.random()*30)
-        var atk = Math.round(Math.random()*30)
+        var hp = this.isLock2?this.hpAdd:Math.round(Math.random()*30)
+        var atk = this.isLock1?this.atkAdd:Math.round(Math.random()*30)
 
         this.atkArrow.visible = atk != this.atkAdd;
         this.atkArrow.source = atk > this.atkAdd?'arrow5_png':'arrow4_png'
@@ -93,6 +125,8 @@ class PKBuffUI extends game.BaseWindow {
     }
 
     public show(fun?){
+        this.isLock2 = false
+        this.isLock2 = false
         this.fun = fun
         super.show()
     }
@@ -102,6 +136,7 @@ class PKBuffUI extends game.BaseWindow {
     }
 
     public onShow(){
+        this.renewLock();
         this.renew();
     }
 

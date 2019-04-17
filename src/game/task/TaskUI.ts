@@ -46,6 +46,7 @@ class TaskUI extends game.BaseWindow {
 
 
     public show(){
+        TaskManager.getInstance().hideGuideLight()
         super.show()
     }
 

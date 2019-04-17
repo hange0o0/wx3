@@ -3,7 +3,7 @@
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Label text="好友助力" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
 	<e:Image id="closeBtn" source="icon_error_png" right="-8" top="-16"/>
-	<e:Scroller id="scroller" top="130" bottom="120" bounces="false" anchorOffsetY="0" width="560" horizontalCenter="0">
+	<e:Scroller id="scroller" top="195" bottom="120" bounces="false" anchorOffsetY="0" width="560" horizontalCenter="0">
 		<e:Group anchorOffsetY="0" height="512.58" x="0" y="-157.58">
 			<e:List id="list" width="200" height="200" x="96" y="96">
 				<e:layout>
@@ -13,7 +13,7 @@
 		</e:Group>
 	</e:Scroller>
 
-	<e:Group left="8" right="8" height="60" y="70">
+	<e:Group left="8" right="8" height="130" y="70">
 		<e:Image source="black_bg_alpha_png" anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" scale9Grid="35,7,15,42"/>
 		<e:Group x="15" y="8">
 		<e:Label id="desText" text="当前新邀请好友 30个:" y="10" size="22" x="10"/>
@@ -29,6 +29,18 @@
 			<e:HorizontalLayout verticalAlign="middle" gap="10"/>
 		</e:layout>
 		</e:Group>
+		<e:Label text="累计邀请好友达到 1 个，解锁PK加速功能" y="55" size="22" x="15"/>
+		<e:Label id="lock1" text="未解锁" y="55" size="22" right="20" textColor="0xaaaaaa"/>
+		<e:Label id="lock2" text="未解锁" y="93" size="22" right="20" textColor="0xAAAAAA"/>
+		<e:Label text="累计邀请好友达到 5 个，解锁PK加成锁定功能" y="93" size="22" x="15"/>
+		<e:Image id="ok1" source="icon_right_png" y="50" scaleX="0.6" scaleY="0.6" right="20"/>
+		<e:Image id="ok2" source="icon_right_png" y="85" scaleX="0.6" scaleY="0.6" right="20"/>
 	</e:Group>
-	<e:Button id="inviteBtn" label="邀请好友" skinName="Btn1Skin" width="160" horizontalCenter="0" bottom="30"/>
+	<e:Group id="btnGroup" y="770" horizontalCenter="0">
+		<e:Button id="diamondBtn" label="领取 100 钻石" width="200" x="0" y="0" skinName="Btn2Skin"/>
+		<e:Button id="inviteBtn" label="邀请好友" skinName="Btn1Skin" width="200" x="0" y="0"/>
+		<e:layout>
+			<e:HorizontalLayout gap="50"/>
+		</e:layout>
+	</e:Group>
 </e:Skin>

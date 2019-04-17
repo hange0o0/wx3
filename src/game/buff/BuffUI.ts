@@ -13,7 +13,15 @@ class BuffUI extends game.BaseWindow {
     private desText: eui.Label;
     private atkText: eui.Label;
     private workText: eui.Label;
+    private lock1: eui.Label;
+    private lock2: eui.Label;
+    private ok1: eui.Image;
+    private ok2: eui.Image;
+    private btnGroup: eui.Group;
+    private diamondBtn: eui.Button;
     private inviteBtn: eui.Button;
+
+
 
 
 
@@ -49,6 +57,14 @@ class BuffUI extends game.BaseWindow {
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection(arr);
 
         this.addBtnEvent(this.inviteBtn,this.share)
+        this.addBtnEvent(this.diamondBtn,()=>{
+            var num = BuffManager.getInstance().getUserNum()
+            var diamond = (num - UM.buffDiamond)*10;
+            UM.addDiamond(diamond)
+            UM.buffDiamond = num;
+            MyTool.removeMC(this.diamondBtn)
+            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(diamond,0x6ffdfd),2000)
+        })
 
         MyTool.addLongTouch(this.desText,()=>{
             DebugUI.getInstance().debugTimer = egret.getTimer();
@@ -86,10 +102,26 @@ class BuffUI extends game.BaseWindow {
 
     public renew(){
         var BM = BuffManager.getInstance();
-        this.desText.text = '当前新邀请好友 '+BM.getUserNum()+'个：'
+        var num = BM.getUserNum()
+        this.desText.text = '当前新邀请好友 '+num +'个：'
         this.dataProvider.refresh();
         this.atkText.text = '战力+'+BM.getForceAdd()+'%'
         this.workText.text = '效率+'+BM.getCoinAdd()+'%'
+
+        this.ok1.visible = num >= 1
+        this.ok2.visible = num >= 5
+        this.lock1.visible = !this.ok1.visible
+        this.lock2.visible = !this.ok2.visible
+
+        if(num <= UM.buffDiamond)
+        {
+            MyTool.removeMC(this.diamondBtn)
+        }
+        else
+        {
+            this.btnGroup.addChildAt(this.diamondBtn,0);
+            this.diamondBtn.label = '领取 '+(num - UM.buffDiamond)*10+' 钻石'
+        }
     }
 
 }
