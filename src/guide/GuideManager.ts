@@ -22,7 +22,7 @@ class GuideManager {
 
     private guideArr = [];
     public constructor() {
-        this.init();
+
     }
 
     public static getInstance(): GuideManager {
@@ -47,7 +47,7 @@ class GuideManager {
             return;
         //this.guideKey = ''
         MyTool.stopClick(300);
-        egret.callLater(this.guideFun,this);
+        egret.setTimeout(this.guideFun,this,200);
     }
 
     //public reInit(){
@@ -56,17 +56,188 @@ class GuideManager {
     //    this.guideArr[0].text = '(代号)['+UM.nick+']您好，欢迎来到[【冲破防线】]！我是你的引路人[铁牛]。'
     //}
 
-    private init(){
+    public init(){
         var self = this;
         //            hideHand:false,
         this.addGuideObj({
             fun:function(){
                 self.showGuide();
-                self.guideKey = 'count';
-                self.temp = TM.now();
             },
-            text:'这是一个考验玩家眼光的游戏，选出你认为能取胜队伍进行打赏激励，你的打赏队伍会对你的付出进行回报',
+            text:UM.nick+'你好，欢迎来到怪物争霸的世界。',
         })
+
+        this.addGuideObj({
+            mc:function(){return GameUI.getInstance().list.getChildAt(0)['addDefBtn']},
+            text:'我们要先守好自己的家园再图发展，马上去配置你的防守阵容吧。',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
+            text:'上阵一个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
+            text:'上阵第二个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(2)},
+            text:'上阵第三个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().chooseList.getChildAt(2)['hitMC']},
+            text:'[拖动]第三位的怪物[到第一位]，把肉盾顶到前面',
+            showFun:()=>{
+                GuideUI.getInstance().handMovePos(PKPosUI.getInstance().chooseList.getChildAt(2)['hitMC'],PKPosUI.getInstance().chooseList.getChildAt(0)['hitMC']);
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().okBtn},
+            text:'保存防守阵容，这下家园就暂时安全了吧',
+        })
+
+        this.addGuideObj({
+            mc:function(){return GameUI.getInstance().list.getChildAt(1)['frontBG']},
+            text:'然后我们要赶快回复生产，让更多的怪物开始[挖矿]吧。',
+            beforeFun:function(){
+                GameUI.getInstance().scrollToWork()
+            }
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
+            text:'上阵第二个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().okBtn},
+            text:'暂时就这样吧，我们还要留着空闲的怪物去开疆辟土呢',
+        })
+
+        this.addGuideObj({
+            mc:function(){return GameUI.getInstance().monsterBtn},
+            text:'一个怪物不够用，我们多招点怪物吧',
+        })
+
+        this.addGuideObj({
+            mc:function(){return MonsterUI.getInstance().list.getChildAt(0)['posGroup']},
+            text:'选择其中一个怪物开始强化',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().con},
+            text:'这里显示的是怪物间属性相克关系',
+            hideHand:true,
+            fun:function(){
+                self.showGuide();
+            },
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().upBtn},
+            text:'升级怪物可强化该怪物的[战斗属性]及[挖矿效率]',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().copyBtn},
+            text:'每升一星可使怪物[多一个分身]供你调遣',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().rightBtn},
+            text:'继续下一个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().copyBtn},
+            text:'怪物多多益善啊',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().rightBtn},
+            text:'每个工作[都要]怪物完成，能多就多吧',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().copyBtn},
+            text:'多分一个，应该就够用了',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().closeBtn},
+            text:'暂时就这样吧，要开始去攻打据点了',
+        })
+
+        this.addGuideObj({
+            mc:function(){return GameUI.getInstance().chapterBtn},
+            text:'开始收复第一个据点吧',
+        })
+
+        this.addGuideObj({
+            mc:function(){return ChapterUI.getInstance().list.getChildAt(0)},
+            text:'每个收复的据点会为[你源源不断地产出金币]，首次达[3星]还可获得[钻石]奖励，',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
+            text:'上阵一个怪物,会直接去到队伍第一位',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
+            text:'上阵二个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
+            text:'上阵第三个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(2)},
+            text:'上阵第四个怪物',
+        })
+
+        this.addGuideObj({
+            mc:function(){return PKPosUI.getInstance().pkBtn},
+            text:'开始战斗',
+        })
+
+        this.addGuideObj({
+            fun:function(){
+                self.showGuide();
+            },
+            text:'战斗开始后，怪物就会按你刚才[布阵的顺序依次出战]。',
+        })
+
+        this.addGuideObj({
+            fun:function(){
+                self.showGuide();
+            },
+            text:'只要[消灭对方所有怪物]或[冲破对方出生点]都会获得胜利。',
+        })
+
+        this.addGuideObj({
+            fun:function(){
+                GuideUI.getInstance().hide();
+                MainPKUI.getInstance().startGame()
+            },
+            text:'要赢取胜利，只要记住两点：[战力]和[阵容克制]！',
+        })
+
+        this.addGuideObj({
+            fun:function(){
+                self.endGuide();
+            },
+            text:'恭喜你取得了来到怪物世界的第一场胜利。下面就请开始你的表演吧',
+        })
+
+
+
+
 
         //this.addGuideObj({
         //    mc:function(){return GameUI.getInstance().loadingGroup},
@@ -174,9 +345,9 @@ class GuideManager {
 
     private endGuide(){
         this.isGuiding = false;
-        GuideUI.getInstance().hide();
-        UM.guideFinish = true;
-        UM.needUpUser = true;
+        GuideUI.getInstance().hide()
+        PopUpManager.hideAll();
+        GameUI.getInstance().endGuide();
         TaskUI.getInstance().show();
     }
 
@@ -197,19 +368,16 @@ class GuideManager {
         guideData.text = data.text;
         guideData.toBottom = data.toBottom;
         guideData.nearMC = data.nearMC;
-        guideData.hideHand = true//data.hideHand || false;
+        guideData.hideHand = data.hideHand || false;
         guideData.showFun = data.showFun//data.hideHand || false;
 
         if(data.guideKey)
             this.guideKey = data.guideKey
 
-        var testUI = data.ui
-        if(testUI && typeof testUI == 'string')
-            testUI = eval(testUI);
-
-        if(testUI && ui != testUI)
-            return;
         this.guideStep ++;
+
+        data.beforeFun &&  data.beforeFun();
+
         GuideUI.getInstance().show(guideData)
     }
 

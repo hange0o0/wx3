@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BuffItemSkin" width="560" height="130" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="empty,normal" >
+<e:Skin class="BuffItemSkin" width="574" height="130" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="empty,normal" >
 	<e:Image source="bg13_png" scale9Grid="19,19,9,10" left="0" right="0" top="0" bottom="0"/>
 	<e:Group x="15" width="100" height="100" verticalCenter="0">
 		<e:Image id="headMC" width="90" height="90" includeIn="normal" horizontalCenter="0" verticalCenter="0"/>
@@ -16,8 +16,8 @@
 		<e:Image x="0" source="icon_diamond_png" scaleX="0.7" scaleY="0.7" verticalCenter="0"/>
 		<e:Label text="钻石+10" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
 	</e:Group>
-	<e:Group height="45" x="285" y="20" bottom.normal="20">
-		<e:Image x="5" source="icon_coin_png" scaleX="0.8" scaleY="0.8" verticalCenter="0"/>
+	<e:Group height="45" x="290" y="20" bottom.normal="20">
+		<e:Image x="5" source="icon_coin_png" scaleX="0.75" scaleY="0.75" verticalCenter="0"/>
 		<e:Label text="效率+10%" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
 	</e:Group>
 	<e:Image source="icon_right_png" right="30" includeIn="normal" verticalCenter="0"/>

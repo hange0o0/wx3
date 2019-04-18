@@ -30,6 +30,8 @@ class PKPosListItem extends game.BaseItem {
 
 
     private onInfo(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         var arr = [];
         for(var i=0;i<this.data.list.length;i++)
         {

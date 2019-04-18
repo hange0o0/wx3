@@ -71,7 +71,8 @@
 			</e:layout>
 
 		</e:List>
-		<e:Image id="redMC" source="red_mc_png" right="0" top="0"/>
+		<e:Image id="redMC" source="red_mc_png" right="0" top="10"/>
 	</e:Group>
 	<e:Button id="addDefBtn" label="配置防守阵容" skinName="Btn5Skin" y="61.33" horizontalCenter="1" width="250"/>
+	<e:Image source="line2_png" x="0" bottom="0" width="640" fillMode="repeat"/>
 </e:Skin>

@@ -56,7 +56,7 @@ class UserManager {
         gameDiamond,
         shareAward
     }
-    public guideFinish: boolean = false;
+    //public guideFinish: boolean = false;
 
     public initDataTime;
     public loginTime = 0
@@ -87,7 +87,7 @@ class UserManager {
         this.coin = data.coin || 0;
         this.diamond = data.diamond || 0;
         this.energy = data.energy;
-        this.guideFinish = data.guideFinish;
+        //this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
         this.chapterLevel = data.chapterLevel || 0;
         this.chapterResetTime = data.chapterResetTime;
@@ -217,10 +217,8 @@ class UserManager {
         {
             setTimeout(()=>{
                 this.gameid = _get['openid'];
+                this.isFirst = !SharedObjectManager.getInstance().getMyValue('localSave')
                 this.fill(this.orginUserData());
-                this.guideFinish = true;   //本地不进新手了
-                if(!SharedObjectManager.getInstance().getMyValue('localSave'))
-                    this.needUpUser = true;
                 fun && fun();
             },1000)
             return;
@@ -422,7 +420,7 @@ class UserManager {
             coinObj:UM.coinObj,
             task:UM.task,
             dayTask:UM.dayTask,
-            guideFinish:UM.guideFinish,
+            //guideFinish:UM.guideFinish,
             saveTime:TM.now(),
         };
     }

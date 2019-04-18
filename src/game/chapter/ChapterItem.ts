@@ -24,6 +24,8 @@ class ChapterItem extends game.BaseItem{
 
     private onClick(){
         ChapterManager.getInstance().pkChapter(this.data.id)
+        TaskManager.getInstance().guideTaskVO = null;
+        //GuideManager.getInstance().testShowGuide()
     }
 
     public dataChanged():void {
@@ -46,6 +48,12 @@ class ChapterItem extends game.BaseItem{
             {
                 this.con.addChild(this['s' + i]);
             }
+        }
+
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'clv' && UM.chapterLevel+1 == this.data.id)
+        {
+            TaskManager.getInstance().showGuideMC(this);
         }
     }
 

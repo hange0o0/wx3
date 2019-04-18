@@ -66,6 +66,8 @@ class PKPosChooseItem extends game.BaseItem {
 
 
     private onInfo(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         if(!this.data)
             return;
         PKPosUI.getInstance().stopDrag();
@@ -80,6 +82,8 @@ class PKPosChooseItem extends game.BaseItem {
     }
 
     private onClick(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         if(this.data)
             PKPosUI.getInstance().deleteItem(this.data)
     }

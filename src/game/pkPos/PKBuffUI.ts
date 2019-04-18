@@ -109,8 +109,8 @@ class PKBuffUI extends game.BaseWindow {
         this.desText.text =  '剩余刷新次数：'+this.currentStep+'次'
         this.atkText.text = '攻击 +'+this.atkAdd + '%'
         this.hpText.text = '血量 +'+this.hpAdd + '%'
-        this.atkBar.width = 204 * this.atkAdd/30
-        this.hpBar.width = 204 * this.hpAdd/30
+        this.atkBar.scrollRect = new egret.Rectangle(0,0,204 * this.atkAdd/30,50)
+        this.hpBar.scrollRect = new egret.Rectangle(0,0,204 * this.hpAdd/30,50)
         if(this.currentStep <= 0)
             MyTool.removeMC(this.refreshBtn)
         else
@@ -125,6 +125,11 @@ class PKBuffUI extends game.BaseWindow {
     }
 
     public show(fun?){
+        if(GuideManager.getInstance().isGuiding)
+        {
+            fun(0,0);
+            return;
+        }
         this.isLock2 = false
         this.isLock2 = false
         this.fun = fun

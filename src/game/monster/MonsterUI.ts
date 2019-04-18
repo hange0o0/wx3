@@ -8,7 +8,7 @@ class MonsterUI extends game.BaseUI {
     }
 
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private sortBtn: eui.Group;
@@ -72,6 +72,7 @@ class MonsterUI extends game.BaseUI {
         this.renew();
         this.renewDes();
         this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewList)
+        GuideManager.getInstance().testShowGuide()
     }
 
     private renewList(){

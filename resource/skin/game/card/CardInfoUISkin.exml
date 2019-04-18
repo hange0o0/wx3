@@ -37,7 +37,7 @@
 			<e:Label id="diamondText" text="1012345" size="24" y="9" anchorOffsetX="0" textAlign="center" right="20" textColor="0xfce4b5"/>
 			<e:Image x="5" y="-2.5" width="46" height="46" source="icon_diamond_png"/>
 			</e:Group>
-			<e:Button id="copyBtn" label="增加数量" x="240" skinName="Btn1Skin" width="150" y="0"/>
+			<e:Button id="copyBtn" label="升星" x="240" skinName="Btn1Skin" width="150" y="0"/>
 			<e:layout>
 			<e:VerticalLayout horizontalAlign="center"/>
 			</e:layout>

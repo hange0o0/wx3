@@ -12,7 +12,7 @@ class GameUI extends game.BaseUI {
     }
 
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private bottomGroup: eui.Group;
     //private buffBtn: eui.Group;
     //private buffRed: eui.Image;
@@ -73,6 +73,8 @@ class GameUI extends game.BaseUI {
         this.addBtnEvent(this.monsterBtn,this.onMonster)
         this.addBtnEvent(this.tecBtn,this.onTec)
 
+
+        this.changeUser.stopRed = true;
         //this.addBtnEvent(this.taskBtn,this.onTaskBtn)
         //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
@@ -105,6 +107,10 @@ class GameUI extends game.BaseUI {
         },this)
         //this.addBtnEvent(this.taskGroup,this.onTask)
 
+    }
+
+    public scrollToWork(){
+        this.scroller.viewport.scrollV = Math.max(0,(500+320+100) -this.scroller.height)
     }
 
     //private onTaskBtn(){
@@ -314,8 +320,10 @@ class GameUI extends game.BaseUI {
             const loadTask = wx.loadSubpackage({
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
-                    self.changeUser.dataChanged()
                     self.callShow();
+                    setTimeout(()=>{
+                        self.changeUser.dataChanged()
+                    },5000)
                 },
                 fail(res) {
                 }
@@ -334,6 +342,7 @@ class GameUI extends game.BaseUI {
     private initData(){
         if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
         {
+            this.changeUser.dataChanged()
             this.loadText.text = '点击屏幕授权进入游戏';
             this.needShowStartBtn = false;
             this.infoBtn.visible = true;
@@ -344,7 +353,7 @@ class GameUI extends game.BaseUI {
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
         UM.testAddInvite();
-        GuideManager.getInstance().isGuiding = false//!UM.guideFinish;
+        GuideManager.getInstance().isGuiding = UM.isFirst;
         this.bottomGroup.visible = true;
         this.loadingGroup.visible = false;
         this.showIndex = -1;
@@ -373,7 +382,9 @@ class GameUI extends game.BaseUI {
         TaskManager.getInstance().init();
         if(GuideManager.getInstance().isGuiding)
         {
+            GuideManager.getInstance().init();
             GuideManager.getInstance().showGuide();
+            GuideManager.getInstance().enableScrollV(this.scroller);
         }
         else
         {
@@ -395,7 +406,8 @@ class GameUI extends game.BaseUI {
     }
 
     public endGuide(){
-
+        this.scroller.viewport.scrollV = 0;
+        GuideManager.getInstance().enableScrollV(this.scroller);
     }
 
     public renewList(){

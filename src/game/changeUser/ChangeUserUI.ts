@@ -4,6 +4,7 @@ class ChangeUserUI extends game.BaseItem {
 
     private list: eui.List;
     private dataProvider:eui.ArrayCollection
+    public stopRed = false;
 
     public constructor() {
         super();
@@ -59,6 +60,11 @@ class ChangeUserUI extends game.BaseItem {
         {
             MyTool.removeMC(this);
             return;
+        }
+
+        for(var i=0;i<ChangeUserUI.adList.length;i++)
+        {
+            ChangeUserUI.adList[i].stopRed = this.stopRed
         }
         this.dataProvider.source = ChangeUserUI.adList;
         this.dataProvider.refresh();

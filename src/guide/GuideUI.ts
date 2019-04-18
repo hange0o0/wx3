@@ -78,6 +78,31 @@ class GuideUI extends game.BaseContainer{
         }
     }
 
+    public handMovePos(formMC,toMC){
+         this.handStop();
+        var rect = formMC.getBounds();
+        var p1 = formMC.localToGlobal(rect.x, rect.y);
+        var p2 = formMC.localToGlobal(rect.x + rect.width, rect.y + rect.height);
+        var fromP = {
+            x: p1.x + (p2.x - p1.x) / 2,
+            y: p1.y + (p2.y - p1.y) / 2,
+        }
+
+        var rect = toMC.getBounds();
+        var p1 = toMC.localToGlobal(rect.x, rect.y);
+        var p2 = toMC.localToGlobal(rect.x + rect.width, rect.y + rect.height);
+        var toP = {
+            x: p1.x + (p2.x - p1.x) / 2,
+            y: p1.y + (p2.y - p1.y) / 2,
+        }
+
+
+        var tw:egret.Tween = egret.Tween.get(this.handMC,{loop:true});
+        this.handMC.x = fromP.x
+        this.handMC.y = fromP.y
+        tw.to(toP,1000).wait(300);
+    }
+
     private handMove(){
         this.handMC.anchorOffsetX = 70
         this.handMC.anchorOffsetY = 30
@@ -223,6 +248,7 @@ class GuideUI extends game.BaseContainer{
                 }
                 if(this.handMC.visible)
                 {
+                    //this.showHand(mc);
                     if(this.handMC.x == 0 && this.handMC.y == 0)
                     {
                         this.handMC.x = toX;

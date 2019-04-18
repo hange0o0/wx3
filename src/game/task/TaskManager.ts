@@ -79,6 +79,8 @@ class TaskManager {
 
     private lastTaskFinish = false;
     public testMainTask(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         if(!this.lastTaskFinish && this.isTaskFinish())
         {
             this.lastTaskFinish = true;
@@ -158,6 +160,54 @@ class TaskManager {
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
         var type = vo.type
+        if(vo.index > 200)
+        {
+            var needHideAll = true;
+            switch(type)
+            {
+                case 'mlv'://指定ID
+                case 'mnum': //指定ID
+                    if(CardInfoUI.getInstance().stage && CardInfoUI.getInstance().visible)
+                        needHideAll = false
+                    break;
+            }
+            if(needHideAll)
+                PopUpManager.hideAll();
+            this.guideTaskVO = vo;
+            switch(type)
+            {
+                case 'fight':
+                    FightUI.getInstance().show();
+                    break;
+                case 'def':
+                    MonsterManager.getInstance().editDef()
+                    break;
+                case 'mlv'://指定ID
+                    CardInfoUI.getInstance().show(vo.key)
+                    break;
+                case 'mnum': //指定ID
+                    CardInfoUI.getInstance().show(vo.key)
+                    break;
+                case 'mlv2'://等级大于v1的数量
+                   MonsterUI.getInstance().show();
+                    break;
+                case 'mnum2'://数量大于v1的数量
+                    MonsterUI.getInstance().show();
+                    break;
+                case 'tlv':
+                    TecUI.getInstance().show()
+                    break;
+                case 'clv':
+                    ChapterUI.getInstance().show()
+                    break;
+                case 'cstar'://星星数量
+                    ChapterUI.getInstance().show()
+                    break;
+            }
+
+
+            return true
+        }
         switch(type)
         {
             case 'fight':

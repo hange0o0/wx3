@@ -8,9 +8,7 @@
 	</e:Group>
 	<e:Image left="0" right="0" top="0" source="black4_png" scaleY="-1" height="100"/>
 	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0"/>
-	<e:Image x="0" y="0" source="line2_png" width="640" fillMode="repeat"/>
 	<e:Image source="red_mc_png" right="-5" id="redMC" includeIn="normal" y="0"/>
-	<e:Image id="lastMC" x="0" scale9Grid="80,96,480,15" y="320" fillMode="repeat" anchorOffsetY="0" source="line2_png" width="640"/>
 	<e:Group y="160" horizontalCenter="0" includeIn="lock">
 		<e:Image source="icon_lock_png" includeIn="lock" x="17" y="0"/>
 		<e:Label id="desText" text="Label" includeIn="lock" textColor="0xeedbc6" size="24" x="0" y="73"/>
@@ -19,6 +17,7 @@
 		</e:layout>
 	</e:Group>
 	<e:Image source="black4_png" x="0" bottom="0" width="640" height="15" visible="false"/>
-	<e:Label id="coinText" text="Label" includeIn="normal" y="15" size="18" textColor="0x6b6b6b" right="15"/>
 	<e:Image id="mineLightMC" source="mine_light_png" includeIn="normal" y="0" right="0" x="560" scaleX="1" scaleY="1"/>
+	<e:Image id="frontBG" source="dig_pass2_png" y="0" horizontalCenter="0"/>
+	<e:Label id="coinText" text="Label" includeIn="normal" size="18" horizontalCenter="0" top="-13" textColor="0x474134"/>
 </e:Skin>

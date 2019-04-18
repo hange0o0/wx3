@@ -65,7 +65,7 @@ class PKFailUI extends game.BaseWindow {
     }
 
     public onShow(){
-         this.tecText.text = '提升【'+TecManager.getInstance().tecBase[this.tecid].name+'】科技等级'
+         this.tecText.text = '提升与战斗相关的科技等级'
 
     }
 }

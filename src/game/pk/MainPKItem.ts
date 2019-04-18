@@ -23,6 +23,8 @@ class MainPKItem extends game.BaseItem {
 
 
     private onClick(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         CardInfoUI.getInstance().show(this.data.id,this.data.list,this.data.index-1)
     }
 

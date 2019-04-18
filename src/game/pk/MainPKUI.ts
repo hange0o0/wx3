@@ -70,6 +70,7 @@ class MainPKUI extends game.BaseUI {
 
     public dataIn;
     public finish = false
+    public gameStart = false
     public lastRota = 0
     public list1Data
     public list2Data
@@ -128,6 +129,8 @@ class MainPKUI extends game.BaseUI {
     }
 
     private onSpeed(){
+        if(GuideManager.getInstance().isGuiding)
+            return;
         if(BuffManager.getInstance().getUserNum()<1)
         {
             MyWindow.ShowTips('在【好友助力】中解锁PK加速功能')
@@ -264,6 +267,7 @@ class MainPKUI extends game.BaseUI {
     }
 
     public reset(){
+        this.gameStart = false;
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
@@ -319,21 +323,36 @@ class MainPKUI extends game.BaseUI {
             PD.quick = true;
             PD.quickTime = Number.MAX_VALUE;
         }
+        PKData.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
+        this.renewSpeedBtn();
 
         PKVideoCon.getInstance().init(this.dataIn);
-
-
-        PD.start();
         this.lastRenewTime = 0;
         this.renewForce();
         this.renewHp(true);
+
+
+        if(!GuideManager.getInstance().isGuiding)
+            this.startGame();
+        else
+        {
+            GuideManager.getInstance().testShowGuide();
+        }
+
+
+    }
+
+    public startGame(){
+        this.gameStart = true;
+        var PD = PKData.getInstance();
+        PD.start();
         this.onStep()
         this.isQuick = false;
         if(PD.isGameOver)
         {
             PKVideoCon.getInstance().resetView();
-            
-        
+
+
 
             var videoCon = PKVideoCon.getInstance();
             var result = PD.getPKResult();
@@ -367,9 +386,6 @@ class MainPKUI extends game.BaseUI {
         }
         else
             SoundManager.getInstance().playSound('pkbg')
-
-        PKData.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
-        this.renewSpeedBtn();
     }
 
     public showHurt(rota){
@@ -389,6 +405,8 @@ class MainPKUI extends game.BaseUI {
     }
 
     public onStep(){
+        if(!this.gameStart)
+            return;
         if(this.finish)
         {
             PKVideoCon.getInstance().action();
@@ -591,6 +609,8 @@ class MainPKUI extends game.BaseUI {
                 this.currentState = 's2'
                 if(this.dataIn.showTaskChange)
                     TaskManager.getInstance().testMainTask();
+
+                GuideManager.getInstance().testShowGuide();
             })
 
         },1000)

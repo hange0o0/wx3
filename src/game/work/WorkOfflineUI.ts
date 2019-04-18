@@ -65,7 +65,7 @@ class WorkOfflineUI extends game.BaseWindow {
     }
 
     public show(cd?,coin?){
-        if(!coin || cd < 60)
+        if(!coin || cd < 5*60)
         {
             TaskUI.getInstance().show();
             return;

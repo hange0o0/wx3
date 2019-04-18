@@ -8,9 +8,9 @@ class CardInfoUI extends game.BaseWindow {
     }
 
     private item: PKCardInfoUI;
-    private con: eui.Image;
+    public con: eui.Image;
     private leftBtn: eui.Image;
-    private rightBtn: eui.Image;
+    public rightBtn: eui.Image;
     private cb0: eui.RadioButton;
     private cb1: eui.RadioButton;
     private cb2: eui.RadioButton;
@@ -19,12 +19,12 @@ class CardInfoUI extends game.BaseWindow {
     private coinGroup: eui.Group;
     private coinBarMC: eui.Rect;
     private coinText: eui.Label;
-    private upBtn: eui.Button;
+    public upBtn: eui.Button;
     private diamonGroup: eui.Group;
     private diamondBarMC: eui.Rect;    //160
     private diamondText: eui.Label;
-    private copyBtn: eui.Button;
-    private closeBtn: eui.Image;
+    public copyBtn: eui.Button;
+    public closeBtn: eui.Image;
 
 
 
@@ -89,6 +89,7 @@ class CardInfoUI extends game.BaseWindow {
         MonsterManager.getInstance().levelUpMonster(this.data)
         UM.addCoin(-this.coinCost)
         this.renew();
+        GuideManager.getInstance().testShowGuide()
     }
 
     public onCopy(){
@@ -100,6 +101,7 @@ class CardInfoUI extends game.BaseWindow {
         MonsterManager.getInstance().numUpMonster(this.data)
         UM.addDiamond(-this.diamondCost)
         this.renew();
+        GuideManager.getInstance().testShowGuide()
     }
 
     private onLeft(){
@@ -112,6 +114,7 @@ class CardInfoUI extends game.BaseWindow {
         this.index++;
         this.data = this.list[this.index];
         this.renew();
+        GuideManager.getInstance().testShowGuide()
     }
 
 
@@ -126,24 +129,30 @@ class CardInfoUI extends game.BaseWindow {
             this.index = list.indexOf(this.data)
         }
         super.show()
-        this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
-        this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.renewDiamond)
+
+
     }
 
     public hide() {
         super.hide();
+        if(GuideManager.getInstance().isGuiding)
+        {
+            MonsterUI.getInstance().hide();
+            GuideManager.getInstance().testShowGuide()
+        }
+
     }
 
     public onShow(){
 
         this.renew();
-
+        this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
+        this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.renewDiamond)
 
     }
 
     public showFinish(){
          GuideManager.getInstance().testShowGuide()
-
         var TSM = TaskManager.getInstance()
         if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv')  && TSM.guideTaskVO.key == this.data)
         {

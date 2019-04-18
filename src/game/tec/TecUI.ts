@@ -10,7 +10,7 @@ class TecUI extends game.BaseUI {
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private coinGroup: eui.Group;
     private coinText: eui.Label;
     private addCoinBtn: eui.Image;
@@ -69,14 +69,14 @@ class TecUI extends game.BaseUI {
             else
             {
                 this.validateNow()
-                this.scroller.viewport.scrollV = this.scroller.viewport.contentHeight - this.scroller.height;
+                this.scroller.viewport.scrollV = Math.max(0,this.scroller.viewport.contentHeight - this.scroller.height);
             }
         }
     }
 
     private onCoinChange(){
         this.coinText.text = UM.coinText
-        MyTool.renewList(this.list);
+        MyTool.runListFun(this.list,'renewCost');
     }
 
 

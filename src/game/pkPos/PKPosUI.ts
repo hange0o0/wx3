@@ -19,9 +19,9 @@ class PKPosUI extends game.BaseUI {
     private numText: eui.Label;
     private chooseGroup: eui.Group;
     private desText: eui.Label;
-    private chooseList: eui.List;
+    public chooseList: eui.List;
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private emptyGroup: eui.Group;
     private emptyText: eui.Label;
     private tecBtn: eui.Button;
@@ -32,8 +32,8 @@ class PKPosUI extends game.BaseUI {
     private sortText: eui.Label;
     private okText: eui.Label;
     private resetBtn: eui.Group;
-    private okBtn: eui.Group;
-    private pkBtn: eui.Group;
+    public okBtn: eui.Group;
+    public pkBtn: eui.Group;
 
 
 
@@ -136,6 +136,7 @@ class PKPosUI extends game.BaseUI {
         MyTool.removeMC(this.dragTarget);
         this.addBtnEvent(this.sortBtn,this.onSort)
     }
+
 
     private onSort(){
         if(this.dataIn.type == 'task')
@@ -251,6 +252,8 @@ class PKPosUI extends game.BaseUI {
                     if(mc.data == this.dragTarget.data)
                         break
                     var currentIndex =  this.chooseDataProvider.source.indexOf(mc.data)// this.chooseList会有不存在数组中数据的显示对象
+                    if(GuideManager.getInstance().isGuiding && currentIndex != 0)
+                        return;
                     var index = this.chooseDataProvider.source.indexOf(this.dragTarget.data)
                     var p = mc.globalToLocal(x,y);
                     if(p.x < mc.width/4 || p.x > mc.width/4*3)//insert
@@ -268,6 +271,8 @@ class PKPosUI extends game.BaseUI {
                         this.chooseDataProvider.source[index] = mc.data
                         this.chooseDataProvider.source[currentIndex] = this.dragTarget.data
                     }
+
+                    GuideManager.getInstance().testShowGuide()
 
                     this.chooseDataProvider.refresh();
                     this.chooseList.validateNow();
@@ -288,6 +293,7 @@ class PKPosUI extends game.BaseUI {
         this.chooseDataProvider.addItemAt({id:id,list:this.chooseDataProvider.source},index)
         this.addFreeMonsterNum(id,-1)
         this.onItemChange();
+        GuideManager.getInstance().testShowGuide()
     }
 
     public deleteItem(data){
@@ -372,6 +378,7 @@ class PKPosUI extends game.BaseUI {
         }
 
         this.dataIn.fun && this.dataIn.fun(list)
+        GuideManager.getInstance().testShowGuide()
     }
 
     public onClose(){
@@ -394,6 +401,7 @@ class PKPosUI extends game.BaseUI {
       taskData
       */
     public show(dataIn?){
+
         this.dataIn = dataIn;
         this.maxCost = this.dataIn.maxCost || 9999;
         this.maxNum = this.dataIn.maxNum || 0;
@@ -412,6 +420,8 @@ class PKPosUI extends game.BaseUI {
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewDownList) //怪物升级/升星
+
+        GuideManager.getInstance().testShowGuide()
     }
 
     private onE(){

@@ -9,7 +9,7 @@ class ChapterUI extends game.BaseUI {
 
     private bottomUI: BottomUI;
     private scroller: eui.Scroller;
-    private list: eui.List;
+    public list: eui.List;
     private coinText: eui.Label;
     private energyText: eui.Label;
     private addBtn: eui.Image;
@@ -27,7 +27,7 @@ class ChapterUI extends game.BaseUI {
     private dataProvider:eui.ArrayCollection
     private page = 1;
     private maxPage = 1;
-    private pageSize = 50;
+    private pageSize = 30;
 
 
 
@@ -129,11 +129,16 @@ class ChapterUI extends game.BaseUI {
     }
 
     public onShow(){
+        this.renewPage();
+        this.page = this.maxPage;
+        var index = UM.chapterLevel%this.pageSize;
+        this.scroller.viewport.scrollV = Math.max(0,Math.floor(index/5)*140);
         this.renew();
         this.renewEnergy()
         this.renewCoin()
         this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.onChapterChange)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        GuideManager.getInstance().testShowGuide()
     }
 
     private onTimer(){

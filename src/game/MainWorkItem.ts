@@ -9,8 +9,9 @@ class MainWorkItem extends game.BaseItem {
     private coinText: eui.Label;
     //private numText: eui.Label;
     private redMC: eui.Image;
-    private lastMC: eui.Image;
+    //private lastMC: eui.Image;
     private mineLightMC: eui.Image;
+    private frontBG: eui.Image;
     private desText: eui.Label;
 
 
@@ -35,8 +36,9 @@ class MainWorkItem extends game.BaseItem {
 
 
     public dataChanged(){
-        this.lastMC.visible = this.data.isLast;
+        //this.lastMC.visible = this.data.isLast;
         this.bg.scaleX = this.data.id%2 == 1?1:-1
+        this.frontBG.scaleX = this.data.id%2 == 1?1:-1
         if(WorkManager.getInstance().getOpenWork() >= this.data.id)
         {
             this.showList();
@@ -50,7 +52,7 @@ class MainWorkItem extends game.BaseItem {
         //this.visible = false
     }
 
-    private showList() {
+    private showList(){
 
         this.coinText.text =this.data.id +  '号坑产出：' + (NumberUtil.addNumSeparator(WorkManager.getInstance().getHourEarn(this.data.id),2)) + ' /小时';
 

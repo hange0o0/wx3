@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="GameUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image left="0" right="0" top="0" bottom="0" source="blace_bg_jpg"/>
+	<e:Image left="0" right="0" top="0" bottom="0" source="main_bg_png"/>
 	<e:Scroller id="scroller" width="640" x="0" top="75" bottom="100" bounces="false">
 		<e:Group>
 		<e:List id="list" width="200" height="200" x="132" y="337">
 			<e:layout>
-			<e:VerticalLayout gap="0" paddingBottom="20" paddingTop="190"/>
+			<e:VerticalLayout gap="30" paddingBottom="20" paddingTop="190"/>
 			</e:layout>
 		</e:List>
 		</e:Group>
@@ -64,12 +64,13 @@
 		<e:Label text="抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。\n适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。" size="20" lineSpacing="6" textAlign="center" horizontalCenter="0" bottom="20" textColor="0xc9a346"/>
 		<ns1:ChangeUserUI id="changeUser" skinName="ChangeUserUISkin" horizontalCenter="0" bottom="120"/>
 		<e:Image id="startBtn" source="wx_btn_info_png" width="640" height="800" bottom="420" x="0"/>
-		<e:Group verticalCenter="-100" horizontalCenter="0" width="640">
+		<e:Group horizontalCenter="0" width="640" verticalCenter="-100">
 			<e:Label id="loadText" text="加载中" size="24" textAlign="center" lineSpacing="20" horizontalCenter="0" textColor="0xfff0ba" y="0"/>
 			<e:Group id="barGroup" y="40" horizontalCenter="0" scaleX="1.6">
 				<e:Image source="bar_bg_png" x="0" y="0"/>
 				<e:Image id="barMC" source="bar2_png" x="2" y="2"/>
 			</e:Group>
+			<e:Image source="loading_logo_png" top="-200" horizontalCenter="0"/>
 		</e:Group>
 			</e:Group>
 			</e:Skin>

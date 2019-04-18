@@ -50,9 +50,13 @@ class ChangeUserItem extends game.BaseItem{
         this.nameText.text = StringUtil.getStringByLength(this.data.name,5);
         this.redMC.visible = false;
 
-        var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
-        if(UM.gameid && arr.indexOf(this.data.appid) == -1)
-            this.redMC.visible = true
+        if(!this.data.stopRed)
+        {
+            var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
+            if(UM.gameid && arr.indexOf(this.data.appid) == -1)
+                this.redMC.visible = true
+        }
+
 
         //this.desText.text = this.data.desc;
     }

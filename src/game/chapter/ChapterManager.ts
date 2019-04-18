@@ -119,7 +119,7 @@ class ChapterManager {
             if(star == 3)
             {
                 delete UM.chapterStar[id];
-                this.resultEarn.diamond = Math.ceil(id/50)
+                this.resultEarn.diamond = Math.ceil(id/30)
             }
             else
                 UM.chapterStar[id] = star;
