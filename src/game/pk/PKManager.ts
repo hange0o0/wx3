@@ -160,13 +160,13 @@ class PKManager {
     //    return '';
     //}
 
-    public initData(){
-         this.loadChapter();
+    //public initData(){
+    //     this.loadChapter();
+    //
+    //}
 
-    }
-
-    private loadChapter(){
-        var url = 'resource/chapter.txt';
+    public loadChapter(){
+        var url = 'resource/game_assets2/chapter.txt';
         var loader: egret.URLLoader = new egret.URLLoader();
         loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
         loader.once(egret.Event.COMPLETE,()=>{

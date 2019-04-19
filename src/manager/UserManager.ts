@@ -94,7 +94,7 @@ class UserManager {
         this.chapterCoin = data.chapterCoin;
         this.maxForce = data.maxForce;
         this.shareUser = data.shareUser;
-        this.buffDiamond = data.buffDiamond;
+        this.buffDiamond = data.buffDiamond || 0;
         this.task = data.task || 0;
         this.dayTask = data.dayTask || [];
         this.coinObj = data.coinObj || {

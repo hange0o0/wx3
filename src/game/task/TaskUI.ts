@@ -6,14 +6,14 @@ class TaskUI extends game.BaseWindow {
             this._instance = new TaskUI();
         return this._instance;
     }
-
     private taskTextTitle: eui.Label;
     private taskText: eui.Label;
     private taskRateText: eui.Label;
-    private iconMC: eui.Image;
     private awardText: eui.Label;
+    private diamondText: eui.Label;
     private closeBtn: eui.Image;
     private taskBtn: eui.Button;
+
 
 
 
@@ -73,19 +73,11 @@ class TaskUI extends game.BaseWindow {
         {
             var value = Math.min(TSM.getTaskValue(vo),vo.value);
 
-            if(vo.coin)
-            {
-                this.awardText.text = NumberUtil.addNumSeparator(vo.coin,2)
-                this.iconMC.source = 'icon_coin_png'
-            }
-            else
-            {
-                this.awardText.text = vo.diamond + ''
-                this.iconMC.source = 'icon_diamond_png'
-            }
+            this.awardText.text =  'x' + NumberUtil.addNumSeparator(vo.coin,2)
+            this.diamondText.text = 'x' + vo.diamond + ''
 
             this.taskTextTitle.text = vo.getTitle();
-            this.taskText.text = '要求：' + vo.getDes();
+            this.setHtml(this.taskText, '要求：' + this.createHtml(vo.getDes(),0xFFFFFF));
 
 
             if(value<vo.value)

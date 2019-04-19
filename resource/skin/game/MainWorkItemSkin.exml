@@ -18,6 +18,6 @@
 	</e:Group>
 	<e:Image source="black4_png" x="0" bottom="0" width="640" height="15" visible="false"/>
 	<e:Image id="mineLightMC" source="mine_light_png" includeIn="normal" y="0" right="0" x="560" scaleX="1" scaleY="1"/>
-	<e:Image id="frontBG" source="dig_pass2_png" y="0" horizontalCenter="0"/>
-	<e:Label id="coinText" text="Label" includeIn="normal" size="18" horizontalCenter="0" top="-13" textColor="0x474134"/>
+	<e:Image id="frontBG" source="dig_pass2_png" y="0" horizontalCenter="0" locked="true"/>
+	<e:Label id="coinText" text="Label" includeIn="normal" size="18" horizontalCenter="0" top="-13" textColor="0x665d4a"/>
 </e:Skin>

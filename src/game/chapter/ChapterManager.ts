@@ -110,12 +110,13 @@ class ChapterManager {
         }
         this.resultEarn = {
             star:star,
-            coin:id*50*star
+            coin:id*10*star
         }
 
         if(lastStar < star)  //升星
         {
             b = true;
+            this.resultEarn.coin = (star - lastStar)*id*200;
             if(star == 3)
             {
                 delete UM.chapterStar[id];

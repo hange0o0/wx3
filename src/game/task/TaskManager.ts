@@ -28,6 +28,8 @@ class TaskManager {
     private guideLight;
     private guideTimer;
     public showGuideMC(mc) {
+        if(TaskUI.getInstance().stage)
+            return;
         if (!this.guideLight) {
             var data:any = RES.getRes('guide_mv' + "_json"); //qid
             var texture:egret.Texture = RES.getRes('guide_mv' + "_png");
@@ -64,9 +66,9 @@ class TaskManager {
     }
 
     public hideGuideLight(){
+        egret.clearTimeout(this.guideTimer);
         if(this.guideLight)
         {
-            egret.clearTimeout(this.guideTimer);
             this.guideLight.stop();
             MyTool.removeMC(this.guideLight);
         }
@@ -143,12 +145,12 @@ class TaskManager {
         if(vo.coin)
         {
             UM.addCoin(vo.coin)
-            MyWindow.ShowTips('获得金币：'+MyTool.createHtml(NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
+            MyWindow.ShowTips('获得金币：+'+MyTool.createHtml(NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
         }
         if(vo.diamond)
         {
             UM.addDiamond(vo.diamond)
-            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(vo.diamond,0x6ffdfd),2000)
+            MyWindow.ShowTips('获得钻石：+'+MyTool.createHtml(vo.diamond,0x6ffdfd),2000)
         }
         UM.task = vo.id;
         this.lastTaskFinish = this.isTaskFinish();
@@ -160,7 +162,7 @@ class TaskManager {
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
         var type = vo.type
-        if(vo.index > 200)
+        if(vo.index > 20)
         {
             var needHideAll = true;
             switch(type)
@@ -204,8 +206,6 @@ class TaskManager {
                     ChapterUI.getInstance().show()
                     break;
             }
-
-
             return true
         }
         switch(type)
@@ -236,7 +236,7 @@ class TaskManager {
             case 'tlv':
                 if(TecUI.getInstance().stage && TecUI.getInstance().visible)
                 {
-                    TecUI.getInstance().testShowTask();
+                    TecUI.getInstance().show();
                     return;
                 }
                 this.showGuideMC(GameUI.getInstance().tecBtn)

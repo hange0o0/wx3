@@ -17,14 +17,12 @@ class MainWorkItem extends game.BaseItem {
 
 
     private monsterArr = []
-    public teamID
-    private maxCost = 10000;
 
 
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
-        egret.Tween.get(this.mineLightMC,{loop:true}).to({alpha:0.2},2000).to({alpha:1},2000)
+        egret.Tween.get(this.mineLightMC,{loop:true}).to({alpha:0.2},1500).to({alpha:1},1500)
     }
 
     private onClick(){

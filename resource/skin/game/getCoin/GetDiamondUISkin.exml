@@ -10,7 +10,7 @@
 		</e:Group>
 		<e:Group x="20" y="20">
 			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
-			<e:Label text="完成主线任务有机会获得" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Label text="完成主线任务获得" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
 			<e:Button id="taskBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
 		</e:Group>
 		<e:Group x="30" y="30">

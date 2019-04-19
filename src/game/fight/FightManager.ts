@@ -361,7 +361,7 @@ class FightManager {
         }
         else//我是防守方
         {
-            pkObj.force1 = Math.floor(pkObj.force1*0.9);//降低防守难度
+            pkObj.force1 = Math.floor(pkObj.force1*0.8);//降低防守难度
             pkObj.list1 = robot.atk;
             pkObj.list2 = MonsterManager.getInstance().defList;
             pkObj.force2 = TecManager.getInstance().getDefForce() + BuffManager.getInstance().getForceAdd();

@@ -33,6 +33,7 @@ class DebugUI extends game.BaseUI {
                      SharedObjectManager.getInstance().removeMyValue('addTime')
                      SharedObjectManager.getInstance().removeMyValue('lastAtkList')
                      SharedObjectManager.getInstance().removeMyValue('pkSpeed')
+                     SharedObjectManager.getInstance().removeMyValue('addTaskTime')
                 }
             });
         })

@@ -11,7 +11,7 @@ class RobotVO{
         }
         var lv = Math.min(TecManager.getInstance().tecBase[11].max,Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)))
         var buffForce = BuffManager.getInstance().getForceAdd()
-        var force = (UM.maxForce-buffForce)*(0.8 + Math.random()*0.3) + buffForce*0.6;
+        var force = (UM.maxForce-buffForce)*(0.7 + Math.random()*0.4) + buffForce*0.6;
         var robot = new RobotVO({
             force:force,
             level:lv,

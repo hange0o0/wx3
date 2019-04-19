@@ -129,6 +129,7 @@ class ChapterUI extends game.BaseUI {
     }
 
     public onShow(){
+        GuideManager.getInstance().enableScrollV(this.scroller);
         this.renewPage();
         this.page = this.maxPage;
         var index = UM.chapterLevel%this.pageSize;

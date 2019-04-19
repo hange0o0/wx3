@@ -287,7 +287,7 @@ class GameUI extends game.BaseUI {
                 this.initData();
             },1000)
         //})
-        PKManager.getInstance().initData();
+
     }
 
 
@@ -352,6 +352,7 @@ class GameUI extends game.BaseUI {
         }
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
+        PKManager.getInstance().loadChapter();
         UM.testAddInvite();
         GuideManager.getInstance().isGuiding = UM.isFirst;
         this.bottomGroup.visible = true;

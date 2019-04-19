@@ -63,7 +63,7 @@ class GuideManager {
             fun:function(){
                 self.showGuide();
             },
-            text:UM.nick+'你好，欢迎来到怪物争霸的世界。',
+            text:'[' + UM.nick+']你好，欢迎来到怪物争霸的世界。',
         })
 
         this.addGuideObj({
@@ -152,18 +152,28 @@ class GuideManager {
         })
 
         this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().upBtn},
+            text:'你要拿这个怪物去[战斗]？升级怪物就能增加其[战力]了',
+        })
+
+        this.addGuideObj({
             mc:function(){return CardInfoUI.getInstance().copyBtn},
             text:'怪物多多益善啊',
         })
 
         this.addGuideObj({
             mc:function(){return CardInfoUI.getInstance().rightBtn},
-            text:'每个工作[都要]怪物完成，能多就多吧',
+            text:'无论什么工作，[都要]怪物来完成的，所以能升就升吧',
+        })
+
+        this.addGuideObj({
+            mc:function(){return CardInfoUI.getInstance().upBtn},
+            text:'你要拿这个怪物去[挖矿]？升级怪物就能提升[挖矿效率]了',
         })
 
         this.addGuideObj({
             mc:function(){return CardInfoUI.getInstance().copyBtn},
-            text:'多分一个，应该就够用了',
+            text:'多分一个，应该暂时够用了',
         })
 
         this.addGuideObj({
@@ -182,14 +192,16 @@ class GuideManager {
         })
 
         this.addGuideObj({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
-            text:'上阵一个怪物,会直接去到队伍第一位',
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
+            text:'上阵个怪物',
         })
 
         this.addGuideObj({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
-            text:'上阵二个怪物',
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
+            text:'上阵下一个怪物,会直接去到队伍第一个空位',
         })
+
+
 
         this.addGuideObj({
             mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
@@ -217,7 +229,7 @@ class GuideManager {
             fun:function(){
                 self.showGuide();
             },
-            text:'只要[消灭对方所有怪物]或[冲破对方出生点]都会获得胜利。',
+            text:'[消灭对方所有怪物]或[冲破对方出生点]都会获得胜利。',
         })
 
         this.addGuideObj({
@@ -225,14 +237,14 @@ class GuideManager {
                 GuideUI.getInstance().hide();
                 MainPKUI.getInstance().startGame()
             },
-            text:'要赢取胜利，只要记住两点：[战力]和[阵容克制]！',
+            text:'[重点]\n要赢取胜利，关键有两点：[战力够高]和[阵容克制]！',
         })
 
         this.addGuideObj({
             fun:function(){
                 self.endGuide();
             },
-            text:'恭喜你取得了来到怪物世界的第一场胜利。下面就请开始你的表演吧',
+            text:'恭喜你取得了来到怪物世界的首利。下面就请跟着[主线任务]继续前进吧！',
         })
 
 
