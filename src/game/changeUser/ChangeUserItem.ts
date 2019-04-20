@@ -52,9 +52,14 @@ class ChangeUserItem extends game.BaseItem{
 
         if(!this.data.stopRed)
         {
+            this.currentState = 's1'
             var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
             if(UM.gameid && arr.indexOf(this.data.appid) == -1)
                 this.redMC.visible = true
+        }
+        else
+        {
+            this.currentState = 's2'
         }
 
 
