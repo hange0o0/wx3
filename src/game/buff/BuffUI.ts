@@ -63,7 +63,7 @@ class BuffUI extends game.BaseWindow {
             UM.addDiamond(diamond)
             UM.buffDiamond = num;
             MyTool.removeMC(this.diamondBtn)
-            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml(diamond,0x6ffdfd),2000)
+            MyWindow.ShowTips('获得钻石：+'+MyTool.createHtml(diamond,0x6ffdfd),2000)
         })
 
         MyTool.addLongTouch(this.desText,()=>{

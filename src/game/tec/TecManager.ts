@@ -119,7 +119,7 @@ class TecManager {
         }
         this.tecData[id] = this.getTecLevel(id) + 1;
         EM.dispatch(GameEvent.client.TEC_CHANGE)
-        TaskManager.getInstance().testMainTask()
+        TaskManager.getInstance().testMainTask('tec')
         fun && fun();
     }
 

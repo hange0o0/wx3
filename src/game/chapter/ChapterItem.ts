@@ -24,7 +24,7 @@ class ChapterItem extends game.BaseItem{
 
     private onClick(){
         ChapterManager.getInstance().pkChapter(this.data.id)
-        TaskManager.getInstance().guideTaskVO = null;
+        //TaskManager.getInstance().guideTaskVO = null;
         //GuideManager.getInstance().testShowGuide()
     }
 

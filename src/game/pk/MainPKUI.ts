@@ -129,13 +129,17 @@ class MainPKUI extends game.BaseUI {
     }
 
     private onSpeed(){
-        if(GuideManager.getInstance().isGuiding)
-            return;
-        if(BuffManager.getInstance().getUserNum()<1)
+        if(!DEBUG)
         {
-            MyWindow.ShowTips('在【好友助力】中解锁PK加速功能')
-            return;
+            if(GuideManager.getInstance().isGuiding)
+                return;
+            if(BuffManager.getInstance().getUserNum()<1)
+            {
+                MyWindow.ShowTips('在【好友助力】中解锁PK加速功能')
+                return;
+            }
         }
+
         PKData.getInstance().playSpeed ++;
         if(PKData.getInstance().playSpeed > 3)
             PKData.getInstance().playSpeed = 1;
@@ -608,7 +612,7 @@ class MainPKUI extends game.BaseUI {
                 this.bottomBar.visible = false;
                 this.currentState = 's2'
                 if(this.dataIn.showTaskChange)
-                    TaskManager.getInstance().testMainTask();
+                    TaskManager.getInstance().testMainTask('chapter');
 
                 GuideManager.getInstance().testShowGuide();
             })

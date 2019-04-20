@@ -20,6 +20,8 @@ class TaskManager {
     public newRed= false;
     public taskFinish= false;
     public openCoinUI = false;
+
+    public autoTask:TaskVO; //自动增长的任务
     public constructor() {
 
     }
@@ -80,7 +82,7 @@ class TaskManager {
     }
 
     private lastTaskFinish = false;
-    public testMainTask(){
+    public testMainTask(type){
         if(GuideManager.getInstance().isGuiding)
             return;
         if(!this.lastTaskFinish && this.isTaskFinish())
@@ -89,6 +91,45 @@ class TaskManager {
             TaskUI.getInstance().show();
             //MyWindow.ShowTips(''+this.getCurrentTask().getDes()+' - 任务完成')
             EM.dispatch(GameEvent.client.TASK_CHANGE)
+        }
+        else if(!this.lastTaskFinish)
+        {
+            var vo = this.getCurrentTask();
+            var value = this.getTaskValue(vo);
+            switch(type)
+            {
+                case 'fight':
+                    if(vo.type != 'fight')
+                    {
+                       return
+                    }
+                    break;
+                case 'chapter':
+                    if(vo.type != 'clv' && vo.type != 'cstar')
+                    {
+                        return
+                    }
+                    break;
+                case 'monster':
+                    if(vo.type != 'mlv' && vo.type != 'mnum' && vo.type != 'mlv2' && vo.type != 'mnum2')
+                    {
+                        return
+                    }
+                    break;
+                case 'tec':
+                    if(vo.type != 'tlv')
+                    {
+                        return
+                    }
+                    break;
+                case 'def':
+                    if(vo.type != 'def')
+                    {
+                        return
+                    }
+                    break;
+            }
+            MyWindow.ShowTips(vo.getDes() + '  ' +MyTool.createHtml( value + '/' + vo.value,0xFF0000),3000)
         }
 
     }
@@ -105,8 +146,26 @@ class TaskManager {
         if(!UM.task)
             return TaskVO.orderList[0];
         var index = TaskVO.orderList.indexOf(TaskVO.getObject(UM.task))
-        if(index == -1)
-            return null;
+        if(index == -1) //自动生成任务
+        {
+
+            var id = UM.task + 1
+            var add = UM.task - TaskVO.orderList.length;
+            if(!this.autoTask || this.autoTask.id != id)
+            {
+                var lastCoin = TaskVO.orderList[TaskVO.orderList.length-1].coin;
+                this.autoTask = new TaskVO({
+                    id:id,
+                    index:id,
+                    type:'clv',
+                    key:'',
+                    value:1000+add*10,
+                    coin:lastCoin + Math.floor(200000*Math.pow(1.06,add)),
+                    diamond:5
+                });
+            }
+            return this.autoTask;
+        }
         return TaskVO.orderList[index+1];
     }
 
@@ -162,7 +221,7 @@ class TaskManager {
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
         var type = vo.type
-        if(vo.index > 20)
+        if(vo.index >= 20)
         {
             var needHideAll = true;
             switch(type)

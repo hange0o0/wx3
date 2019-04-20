@@ -48,7 +48,7 @@ class TecUI extends game.BaseUI {
     public hide() {
         //MainPKUI.instance.hide();
         super.hide();
-        TaskManager.getInstance().guideTaskVO = null;
+        //TaskManager.getInstance().guideTaskVO = null;
         //GameUI.getInstance().onTimer();
     }
 

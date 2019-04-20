@@ -419,9 +419,14 @@ class PKPosUI extends game.BaseUI {
         this.okText.text = '保存'
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
-        this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewDownList) //怪物升级/升星
+        this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.onMonsterChange) //怪物升级/升星
 
         GuideManager.getInstance().testShowGuide()
+    }
+
+    private onMonsterChange(){
+        this.renewDownList()
+        this.onItemChange();
     }
 
     private onE(){

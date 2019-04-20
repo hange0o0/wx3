@@ -325,7 +325,8 @@ module game {
 //            eui.PopUpManager.removePopUp(this);
 //            this.validateSkinState();
             PopUpManager.removePopUp(this);
-            
+
+            TaskManager.getInstance().guideTaskVO = null
             return this;
         }
         

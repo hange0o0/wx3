@@ -8,7 +8,7 @@ class MonsterManager {
         return this._instance;
     }
 
-    private numCost = [10,20,50,120,300,999];
+    private numCost = [10,20,50,120,300,99999];
     public monsterData;  //{lv,num};
     public defList = '';
 
@@ -52,6 +52,7 @@ class MonsterManager {
                 }
                 if(!FightManager.getInstance().nextBeHitTime)
                     FightManager.getInstance().resetNextBeHit();
+                TaskManager.getInstance().testMainTask('def') ;
             },
         })
     }
@@ -79,7 +80,7 @@ class MonsterManager {
         return Math.floor(count);
     }
 
-    public forceAdd
+    //public forceAdd
 
     //生成战斗用的怪物战力数据
     public getMonsterPKForce(list)
@@ -98,7 +99,7 @@ class MonsterManager {
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].lv = this.getMonsterLevel(id) + 1;
-        TaskManager.getInstance().testMainTask()
+        TaskManager.getInstance().testMainTask('monster')
         EM.dispatch(GameEvent.client.MONSTER_CHANGE)
     }
 
@@ -106,7 +107,7 @@ class MonsterManager {
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].num = this.getMonsterNum(id) + 1;
-        TaskManager.getInstance().testMainTask()
+        TaskManager.getInstance().testMainTask('monster')
         EM.dispatch(GameEvent.client.MONSTER_CHANGE)
     }
 

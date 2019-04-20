@@ -30,10 +30,12 @@ class FightManager {
     public renewSearch(force?){
         if(TM.now() - this.searchTime >= this.refreshSearchTime || force)
         {
+            var isNew = this.searchRobot.length == 0;
             this.searchRobot.length = 0;
             for(var i=0;i<9;i++)
             {
-                this.searchRobot.push(RobotVO.create());
+                var robotVO = RobotVO.create(isNew);
+                this.searchRobot.push(robotVO);
             }
             ArrayUtil.sortByField(this.searchRobot,['distanceTime'],[0])
             this.searchTime = TM.now();
@@ -383,7 +385,7 @@ class FightManager {
         };
         this.fightingArr.push(oo)
         this.fightNum ++;
-        TaskManager.getInstance().testMainTask()
+        TaskManager.getInstance().testMainTask('fight')
         RobotVO.change = true;
         UM.needUpUser = true;
         return oo;

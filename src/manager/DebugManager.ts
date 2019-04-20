@@ -426,6 +426,21 @@ class DebugManager {
         this.callCost = cost + 30
     }
 
+    public getChapterForce(id){
+        var chapterData = PKManager.getInstance().chapterData[id-1]
+        var arr = chapterData.list1.split(',')
+        var count = 0;
+        var force = Math.floor(Math.pow(id - 1,1.2)*10)
+        for(var i=0;i<arr.length;i++)
+        {
+            var id = arr[i]
+            var vo = MonsterVO.getObject(id);
+            count += vo.cost*(1+force/100);
+        }
+        return Math.floor(count);
+    }
+    //DM.getChapterForce(9)
+
     //private loadArr = []
     //private resultArr = []
     //public m(){

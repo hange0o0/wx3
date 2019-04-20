@@ -2,7 +2,7 @@ class RobotVO{
     public static change = false
     private static index = 0;
     private static key = 0;
-    public static create(){
+    public static create(isNew?){
         var t = TM.now();
         if(this.key != t)
         {
@@ -12,6 +12,11 @@ class RobotVO{
         var lv = Math.min(TecManager.getInstance().tecBase[11].max,Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)))
         var buffForce = BuffManager.getInstance().getForceAdd()
         var force = (UM.maxForce-buffForce)*(0.7 + Math.random()*0.4) + buffForce*0.6;
+        if(isNew)
+        {
+            lv = 1;
+            force = Math.abs(force * 0.8);
+        }
         var robot = new RobotVO({
             force:force,
             level:lv,
@@ -26,7 +31,6 @@ class RobotVO{
         RobotVO.change = true;
         return robot;
     }
-
     public gameid
     public force//战力
     public level//显示等级

@@ -22,7 +22,7 @@ class ChapterManager {
                 bgid:id%7 || 7,
                 list:chapterData.list1,
                 seed:Math.ceil((Math.random() + 1)*10000000000),
-                force:Math.floor(Math.pow(id - 1,1.25)*10)
+                force:Math.floor(Math.pow(id - 1,1.2)*10)
             }
             PKPosUI.getInstance().show({
                 title:'收复据点 - NO.' + id,

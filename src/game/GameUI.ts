@@ -362,9 +362,11 @@ class GameUI extends game.BaseUI {
         this.onTimer();
         this.onCoinChange();
         this.onDimaondChange();
+
         //this.renewTask();
         //this.showTask();
         MyTool.removeMC(this.changeUser);
+
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
@@ -393,6 +395,7 @@ class GameUI extends game.BaseUI {
             WorkOfflineUI.getInstance().show(UM.offlineTime,WorkManager.getInstance().offlineEarn)
         }
     }
+
 
     //private onPassDay(){
     //    var index = PKManager.getInstance().getTodayIndex();

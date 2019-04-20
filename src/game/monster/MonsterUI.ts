@@ -65,13 +65,13 @@ class MonsterUI extends game.BaseUI {
 
     public hide() {
         super.hide();
-        TaskManager.getInstance().guideTaskVO = null;
+        //TaskManager.getInstance().guideTaskVO = null;
     }
 
     public onShow(){
         this.renew();
         this.renewDes();
-        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewList)
+        this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewList)
         GuideManager.getInstance().testShowGuide()
     }
 

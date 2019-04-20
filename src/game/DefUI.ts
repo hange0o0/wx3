@@ -95,6 +95,12 @@ class DefUI extends game.BaseItem{
         this.taskRed.visible = TSM.isTaskFinish();
         this.taskRed2.visible = TSM.dayTaskRed();
         this.coinRed.visible = !TSM.openCoinUI;
+
+        var monsterNum = MonsterManager.getInstance().getTotalMonsterNum();
+        if(monsterNum < 20)
+            MyTool.removeMC(this.taskBtn2)
+        else
+            this.btnGroup.addChildAt(this.taskBtn2,1)
         //this.taskRed.visible = true//vo && vo.value <= TSM.getTaskValue(vo)
         //if(vo)
         //{

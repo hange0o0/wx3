@@ -8,7 +8,6 @@
 	</e:Group>
 	<e:Image left="0" right="0" top="0" source="black4_png" scaleY="-1" height="100"/>
 	<e:Image source="bg8_png" scale9Grid="9,9,9,9" includeIn="lock" left="0" right="0" top="0" bottom="0"/>
-	<e:Image source="red_mc_png" right="-5" id="redMC" includeIn="normal" y="0"/>
 	<e:Group y="160" horizontalCenter="0" includeIn="lock">
 		<e:Image source="icon_lock_png" includeIn="lock" x="17" y="0"/>
 		<e:Label id="desText" text="Label" includeIn="lock" textColor="0xeedbc6" size="24" x="0" y="73"/>
@@ -20,4 +19,5 @@
 	<e:Image id="mineLightMC" source="mine_light_png" includeIn="normal" y="0" right="0" x="560" scaleX="1" scaleY="1"/>
 	<e:Image id="frontBG" source="dig_pass2_png" y="0" horizontalCenter="0" locked="true"/>
 	<e:Label id="coinText" text="Label" includeIn="normal" size="18" horizontalCenter="0" top="-13" textColor="0x665d4a"/>
+	<e:Image source="red_mc_png" right="30" id="redMC" includeIn="normal" y="12.14"/>
 </e:Skin>

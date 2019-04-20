@@ -67,7 +67,7 @@ class FightUI extends game.BaseUI {
     public hide() {
         //MainPKUI.instance.hide();
         super.hide();
-        TaskManager.getInstance().guideTaskVO = null;
+        //TaskManager.getInstance().guideTaskVO = null;
         //GameUI.getInstance().onTimer();
     }
 
@@ -81,6 +81,23 @@ class FightUI extends game.BaseUI {
         this.onTimer();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.onFightChange)
+
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'fight')
+        {
+            this.list2.validateNow();
+            var list = []
+            for(var i=0;i<this.list2.numChildren;i++)
+            {
+                var mc = this.list2.getChildAt(i)
+                var data = mc['data']
+                if(!data.isAtked())
+                {
+                    TaskManager.getInstance().showGuideMC(mc);
+                    break;
+                }
+            }
+        }
     }
 
     private renewRed(){
