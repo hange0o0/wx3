@@ -53,7 +53,6 @@ class UserManager {
         videoNum,
         videoAwardNum,
         gameNum,
-        gameDiamond,
         shareAward
     }
     //public guideFinish: boolean = false;
@@ -104,7 +103,6 @@ class UserManager {
                 videoNum:0,
                 videoAwardNum:0,
                 gameNum:0,
-                gameDiamond:0,
             };
 
         //if(!window['wx'])
@@ -374,7 +372,6 @@ class UserManager {
                  videoNum:0,
                  videoAwardNum:0,
                  gameNum:0,
-                 gameDiamond:0,
              },
          };
     }
@@ -395,7 +392,6 @@ class UserManager {
         this.coinObj.videoNum = 0;
         this.coinObj.videoAwardNum = 0;
         this.coinObj.gameNum = 0;
-        this.coinObj.gameDiamond = 0;
         UM.needUpUser = true;
         return true;
     }

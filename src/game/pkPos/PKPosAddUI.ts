@@ -24,19 +24,19 @@ class PKPosAddUI extends game.BaseWindow {
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.tecBtn,()=>{
             this.hide();
-            PKPosUI.getInstance().hide()
+            //PKPosUI.getInstance().hide()
             TecUI.getInstance().show()
         });
 
         this.addBtnEvent(this.monsterBtn,()=>{
             this.hide();
-            PKPosUI.getInstance().hide()
+            //PKPosUI.getInstance().hide()
             MonsterUI.getInstance().show()
         });
 
         this.addBtnEvent(this.workBtn,()=>{
             this.hide();
-            PKPosUI.getInstance().hide()
+            //PKPosUI.getInstance().hide()
             WorkUI.getInstance().show()
         });
 

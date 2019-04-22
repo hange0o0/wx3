@@ -45,7 +45,7 @@ class TaskItem extends game.BaseItem{
              TaskManager.getInstance().addTaskTime = TM.now()
              SharedObjectManager.getInstance().setMyValue('addTaskTime',TaskManager.getInstance().addTaskTime)
              UM.addCoin(this.data.award);
-             MyWindow.ShowTips('获得金币：+'+MyTool.createHtml(NumberUtil.addNumSeparator(this.data.award,2),0xFFFF00),2000)
+             MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(this.data.award,2),0xFFFF00),2000)
              var index = UM.dayTask.indexOf(this.data);
              if(index != -1)
              {

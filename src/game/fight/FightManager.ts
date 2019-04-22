@@ -140,8 +140,13 @@ class FightManager {
 
     public resetNextBeHit(){
         if(!this.nextBeHitTime)
-            this.nextBeHitTime = TM.now()
-        this.nextBeHitTime += Math.floor(6*3600*Math.random())
+        {
+            this.nextBeHitTime = TM.now() + 3*60 + Math.random()*600
+        }
+        else
+        {
+            this.nextBeHitTime += Math.floor(4*3600*Math.random())
+        }
         var date = DateUtil.timeToChineseDate(this.nextBeHitTime)
         if(date.getHours()<6 && Math.random()>0.8)
             this.nextBeHitTime += (6-date.getHours())*3600
@@ -216,10 +221,10 @@ class FightManager {
             this.resetNextBeHit();
             num++;
             b=true;
-            if(num >= 3)
+            if(num >= 5)
                 break;
         }
-        if(num >= 3 && this.nextBeHitTime < t)
+        if(num >= 5 && this.nextBeHitTime < t)
         {
             this.nextBeHitTime = t;
             this.resetNextBeHit();
@@ -368,6 +373,31 @@ class FightManager {
             pkObj.list2 = MonsterManager.getInstance().defList;
             pkObj.force2 = TecManager.getInstance().getDefForce() + BuffManager.getInstance().getForceAdd();
         }
+
+        //动态调整对方出战人数
+        var temp = pkObj.list1.split(',');
+        var cost = 0;
+        var voList = [];
+        for(var i=0;i<temp.length;i++)
+        {
+            var vo = MonsterVO.getObject(temp[i]);
+            voList.push(vo);
+            cost += vo.cost;
+        }
+        var myCost = TecManager.getInstance().getTeamCost();
+        if(myCost / cost < 0.8)//对方费用比我高太多,去掉一些小单位
+        {
+            ArrayUtil.sortByField(voList,['cost'],[0])
+            while(myCost / cost < 0.8)
+            {
+                var removeVO = voList.shift()
+                var index = temp.lastIndexOf(removeVO.id +'')
+                temp.splice(index,1)
+                cost -= removeVO.cost;
+            }
+        }
+
+
         pkObj.mforce2 = MonsterManager.getInstance().getMonsterPKForce(pkObj.list2);
         return pkObj;
     }

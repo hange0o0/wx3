@@ -65,7 +65,7 @@
 				<e:HorizontalLayout gap="18" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
-		<e:List id="defList" y="10" right="10" itemRendererSkinName="DefItemSkin">
+		<e:List id="defList" y="15" right="10" itemRendererSkinName="DefItemSkin">
 			<e:layout>
 				<e:VerticalLayout gap="10"/>
 			</e:layout>

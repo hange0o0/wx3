@@ -166,32 +166,45 @@ class PKManager {
     //}
 
     public loadChapter(){
-        var url = 'resource/game_assets2/chapter.txt';
-        var loader: egret.URLLoader = new egret.URLLoader();
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        loader.once(egret.Event.COMPLETE,()=>{
-            loader.data = loader.data.replace(/\r/g,'');
-            this.chapterData = loader.data.split('\n')
-            for(var i=0;i<this.chapterData.length;i++)
-            {
-                this.chapterData[i] = {
-                    id:i+1,
-                    list1:this.chapterData[i]
-                }
+        //var url = 'resource/game_data/chapter.txt';
+        //var loader: egret.URLLoader = new egret.URLLoader();
+        //loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        //loader.once(egret.Event.COMPLETE,()=>{
+        //    loader.data = loader.data.replace(/\r/g,'');
+        //    this.chapterData = loader.data.split('\n')
+        //    for(var i=0;i<this.chapterData.length;i++)
+        //    {
+        //        this.chapterData[i] = {
+        //            id:i+1,
+        //            list1:this.chapterData[i]
+        //        }
+        //    }
+        //},this);
+        //loader.load(new egret.URLRequest(url));
+
+        var data = RES.getRes('chapter_txt').replace(/\r/g,'');
+        this.chapterData = data.split('\n')
+        for(var i=0;i<this.chapterData.length;i++)
+        {
+            this.chapterData[i] = {
+                id:i+1,
+                list1:this.chapterData[i]
             }
-        },this);
-        loader.load(new egret.URLRequest(url));
+        }
     }
 
     public loadNick(){
-        var url = 'resource/level/nick.txt';
-        var loader: egret.URLLoader = new egret.URLLoader();
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        loader.once(egret.Event.COMPLETE,()=>{
-            loader.data = loader.data.replace(/\r/g,'');
-            this.nickData = loader.data.split('\n')
-        },this);
-        loader.load(new egret.URLRequest(url));
+        //var url = 'resource/game_data/nick.txt';
+        //var loader: egret.URLLoader = new egret.URLLoader();
+        //loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        //loader.once(egret.Event.COMPLETE,()=>{
+        //    loader.data = loader.data.replace(/\r/g,'');
+        //    this.nickData = loader.data.split('\n')
+        //},this);
+        //loader.load(new egret.URLRequest(url));
+
+        var data = RES.getRes('nick_txt').replace(/\r/g,'');
+        this.nickData = data.split('\n')
     }
 
     public loadLevel(){
@@ -202,19 +215,27 @@ class PKManager {
         }
     }
     private _loadLevel(lv){
-        var url = 'resource/level/level'+lv+'.txt';
-        var loader: egret.URLLoader = new egret.URLLoader();
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        loader.once(egret.Event.COMPLETE,()=>{
-            loader.data = loader.data.replace(/\r/g,'');
-            var temp = loader.data.split('\n')
-            while(!temp[temp.length-1])//去掉后面的空数据
-            {
-                temp.pop();
-            }
-            this.levelData[lv] = temp
-        },this);
-        loader.load(new egret.URLRequest(url));
+        //var url = 'resource/game_data/level'+lv+'.txt';
+        //var loader: egret.URLLoader = new egret.URLLoader();
+        //loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        //loader.once(egret.Event.COMPLETE,()=>{
+        //    loader.data = loader.data.replace(/\r/g,'');
+        //    var temp = loader.data.split('\n')
+        //    while(!temp[temp.length-1])//去掉后面的空数据
+        //    {
+        //        temp.pop();
+        //    }
+        //    this.levelData[lv] = temp
+        //},this);
+        //loader.load(new egret.URLRequest(url));
+
+        var data = RES.getRes('level'+lv+'_txt').replace(/\r/g,'');
+        var temp = data.split('\n')
+        while(!temp[temp.length-1])//去掉后面的空数据
+        {
+            temp.pop();
+        }
+        this.levelData[lv] = temp
     }
 
     //public getTodayIndex(){

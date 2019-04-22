@@ -9,12 +9,24 @@ class ChapterManager {
     public maxEarn = 0;
     public resultEarn:any;
 
+    public addEnergyFull(){
+        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+            UM.addEnergy(UM.maxEnergy);
+        })
+    }
+
     public pkChapter(id){
         if(id <= UM.chapterLevel + 1)
         {
             if(UM.getEnergy() < 1)
             {
-                MyWindow.ShowTips('体力不足')
+
+                MyWindow.Confirm('体力不足,是否需要免费补满？',(b)=>{
+                    if(b==1)
+                    {
+                        this.addEnergyFull();
+                    }
+                },['取消', '补满']);
                 return;
             }
             var chapterData = PKManager.getInstance().chapterData[id-1]

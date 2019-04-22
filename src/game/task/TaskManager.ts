@@ -7,7 +7,7 @@ class TaskManager {
     }
 
     public dayTaskBase = {
-        1:{name:'打猎',des:'1'},
+        1:{name:'捕鱼',des:'1'},
         2:{name:'烹调食材',des:'1'},
         3:{name:'收集珍珠',des:'1'},
         4:{name:'采集蘑菇',des:'1'},
@@ -79,6 +79,54 @@ class TaskManager {
 
     public init(){
         this.lastTaskFinish = this.isTaskFinish()
+
+        //自动生成任务
+        var arr = ['def','cstar','fight'];
+        var clv = 0;
+        var id = TaskVO.orderList[TaskVO.orderList.length-1].id;
+        for(var i=TaskVO.orderList.length-1;i>=0;i--)
+        {
+             if(TaskVO.orderList[i].type == 'clv')
+             {
+                 clv = TaskVO.orderList[i].value;
+                 break;
+             }
+        }
+        for(var i=0;i<705;i++)//clv只支持去到708
+        {
+            var type = arr[i%3];
+            id++;
+            clv += 3;
+            this.createTask(id,'clv',clv);
+            id++;
+            switch(type)
+            {
+                case 'def':
+                    this.createTask(id,type,Math.floor(DM.getChapterForce(clv)*0.8));
+                    break;
+                case 'cstar':
+                    this.createTask(id,type,Math.floor(clv*3*0.8));
+                    break;
+                case 'fight':
+                    this.createTask(id,type,id - 50);
+                    break;
+            }
+        }
+    }
+
+    private createTask(id,type,value){
+        var coin = Math.floor(Math.pow(id,1.3)*1000);
+        var vo = new TaskVO({
+            id:id,
+            index:id,
+            type:type,
+            key:'',
+            value:value,
+            coin:coin,
+            diamond:3
+        })
+        TaskVO.orderList.push(vo)
+        TaskVO.data[id] = vo;
     }
 
     private lastTaskFinish = false;
@@ -204,12 +252,12 @@ class TaskManager {
         if(vo.coin)
         {
             UM.addCoin(vo.coin)
-            MyWindow.ShowTips('获得金币：+'+MyTool.createHtml(NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
+            MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
         }
         if(vo.diamond)
         {
             UM.addDiamond(vo.diamond)
-            MyWindow.ShowTips('获得钻石：+'+MyTool.createHtml(vo.diamond,0x6ffdfd),2000)
+            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml('+' + vo.diamond,0x6ffdfd),2000)
         }
         UM.task = vo.id;
         this.lastTaskFinish = this.isTaskFinish();
@@ -320,16 +368,26 @@ class TaskManager {
         var arr = UM.dayTask;
         if(!arr)
             return;
-        if(!this.addTaskTime)
+        var needAddNum = Math.min(Math.floor((TM.now() - this.addTaskTime)/30/60), 5-arr.length,2);
+        if(!this.addTaskTime)//首次进入onTimer
         {
             this.addTaskTime = SharedObjectManager.getInstance().getMyValue('addTaskTime') || 1
+            for(var i=0;i<arr.length;i++)
+            {
+                 if(!arr[i].time && TM.now() - (arr[i].create || 0) > 24*3600)//超过1天未做的要去掉
+                {
+                    arr.splice(i,1);
+                    i--;
+                    needAddNum++;
+                }
+            }
         }
         var b = false
         if(!this.taskFinish)
         {
             b = this.taskFinish = this.testTaskFinish();
         }
-        var needAddNum = Math.min(Math.floor((TM.now() - this.addTaskTime)/30/60), 5-arr.length,2);
+
         if(needAddNum > 0)//
         {
             this.addTaskTime = TM.now()
@@ -352,6 +410,7 @@ class TaskManager {
                     id:ArrayUtil.randomOne(list,true),
                     num:Math.ceil(TecManager.getInstance().getTecLevel(11)/2),
                     cd:cd,
+                    create:TM.now(),
                     award:Math.ceil(UM.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
                 })
                 b = true

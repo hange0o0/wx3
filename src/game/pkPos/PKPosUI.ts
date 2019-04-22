@@ -168,7 +168,7 @@ class PKPosUI extends game.BaseUI {
         for(var i=this.monsterArr.length-1;i>=0;i--)
         {
             var mc = this.monsterArr[i];
-            if(mc.clickMC.hitTestPoint(x,y,true))
+            if(mc.clickMC.hitTestPoint(x,y))
             {
                 var list = [];
                 for(var j=0;j<this.monsterArr.length;j++)

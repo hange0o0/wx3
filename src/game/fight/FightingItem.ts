@@ -19,9 +19,22 @@ class FightingItem extends game.BaseItem{
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.btn,this.onClick)
+        this.addBtnEvent(this,this.onVideo)
     }
 
-    private onClick(){
+    private onVideo(){
+        if(!this.data.pkObj)
+            return;
+        var pkObject = ObjectUtil.clone(this.data.pkObj);
+        pkObject.addCoin = this.data.addCoin
+        pkObject.isReplay = true;
+        pkObject.fight = this.data;
+        pkObject.title = '与【'+this.data.robot.nick+'】的战斗回放'
+        MainPKUI.getInstance().show(pkObject)
+    }
+
+    private onClick(e){
+        e.stopImmediatePropagation();
         if(this.btn.label == '撤回')
         {
             MyWindow.Confirm('确定撒回已出发的队伍吗？',(b)=>{
@@ -42,12 +55,10 @@ class FightingItem extends game.BaseItem{
         }
         else
         {
-            var pkObject = ObjectUtil.clone(this.data.pkObj);
-            pkObject.addCoin = this.data.addCoin
-            pkObject.isReplay = true;
-            pkObject.fight = this.data;
-            pkObject.title = '与【'+this.data.robot.nick+'】的战斗回放'
-             MainPKUI.getInstance().show(pkObject)
+            ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+                this.data.time = 1;
+                this.data.backTime = 1;
+            })
         }
     }
 
@@ -73,14 +84,15 @@ class FightingItem extends game.BaseItem{
             }
             else
                 this.desText.text = '进攻失利，正在返回';
-            this.btn.label = '查看'
+            this.btn.label = '传送回城'
             this.currentState = 's1'
         }
         else if(this.data.backTime)
         {
             cd = this.data.backTime - TM.now();
             this.desText.text = '正在撤回中'
-            this.currentState = 's2'
+            this.btn.label = '传送回城'
+            this.currentState = 's1'
         }
         else
         {

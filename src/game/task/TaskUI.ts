@@ -20,6 +20,7 @@ class TaskUI extends game.BaseWindow {
     public constructor() {
         super();
         this.skinName = "TaskUISkin";
+        this.canBGClose = false
     }
 
     public childrenCreated() {

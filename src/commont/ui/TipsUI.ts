@@ -37,6 +37,8 @@ class TipsUI extends game.BaseContainer{
 		MyTool.setColorText(this.text,v);
 		if(this.text.numLines > 1)
 			this.text.textAlign = 'left'
+		else
+			this.text.textAlign = 'center'
 		this.visible = false
 		this.timer = egret.setTimeout(this.onTimer,this,cd + (TipsUI.showTips.length-1)*100);
 		egret.setTimeout(function(){

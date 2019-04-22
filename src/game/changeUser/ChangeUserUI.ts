@@ -29,7 +29,8 @@ class ChangeUserUI extends game.BaseItem {
             //MyTool.removeMC(this);
             return;
         }
-        if(TM.now() - this.lastGetADTime < 10*60)
+        if(this.lastGetADTime)
+        //if(TM.now() - this.lastGetADTime < 10*60)
         {
             fun && fun();
             return;
@@ -49,13 +50,17 @@ class ChangeUserUI extends game.BaseItem {
         this.list.dataProvider = this.dataProvider = new eui.ArrayCollection();
     }
 
+    private isSet = false;
     public dataChanged(){
+        if(this.isSet)
+            return;
         ChangeUserUI.getAD(10,()=>{
             this.renew();
         });
     }
 
     public renew(){
+        this.isSet = true;
         if(ChangeUserUI.adList.length == 0)
         {
             MyTool.removeMC(this);

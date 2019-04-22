@@ -51,7 +51,7 @@ class ChapterUI extends game.BaseUI {
         this.addBtnEvent(this.addBtn,this.onAddEnergy)
         this.addBtnEvent(this.getCoinBtn,()=>{
             var coin = ChapterManager.getInstance().getChapterCoin();
-            MyWindow.ShowTips('获得金币：' + MyTool.createHtml(NumberUtil.addNumSeparator(coin,2),0xFBB646),1500)
+            MyWindow.ShowTips('获得金币：' + MyTool.createHtml('+' + NumberUtil.addNumSeparator(coin,2),0xFBB646),1500)
             UM.addCoin(coin);
             UM.chapterCoin = 0;
         })
@@ -66,9 +66,7 @@ class ChapterUI extends game.BaseUI {
     }
 
     private onAddEnergy(){
-        ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
-            UM.addEnergy(10);
-        })
+        ChapterManager.getInstance().addEnergyFull();
         //MyWindow.Confirm('确定花费 1 钻石补满所有体力吗？',(b)=>{
         //    if(b==1)
         //    {

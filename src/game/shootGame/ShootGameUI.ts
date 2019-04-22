@@ -111,9 +111,8 @@ class ShootGameUI extends game.BaseUI {
         this.coin += addCoin;
         this.kill ++;
         UM.addCoin(addCoin);
-        if(this.kill == this.maxKill && !UM.coinObj.gameDiamond)
+        if(this.kill == this.maxKill)
         {
-            UM.coinObj.gameDiamond = 1;
             this.resultDiamondGroup.visible = true;
             UM.addDiamond(1)
         }
@@ -175,7 +174,6 @@ class ShootGameUI extends game.BaseUI {
                 this.cannonGroup.visible = true
                 this.coinGroup.visible = true
                 this.tipText.visible = true
-                this.diamondGroup.visible = !UM.coinObj.gameDiamond
                 this.tipText.alpha = 1;
                 egret.Tween.get(this.tipText,{loop:true}).to({alpha:0},500).to({alpha:1},500)
                 SoundManager.getInstance().playSound('pkbg')

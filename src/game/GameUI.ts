@@ -296,6 +296,7 @@ class GameUI extends game.BaseUI {
     public onShow(){
         PKManager.getInstance().loadLevel();//处理等级数据，玩家登录后有可能会用到
         PKManager.getInstance().loadNick();//处理等级数据，玩家登录后有可能会用到
+        PKManager.getInstance().loadChapter(); //任务生成会用到
         var self = this;
         this.bottomGroup.visible = false;
         this.coinText.text = '???'
@@ -352,7 +353,7 @@ class GameUI extends game.BaseUI {
         }
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
-        PKManager.getInstance().loadChapter();
+
         UM.testAddInvite();
         GuideManager.getInstance().isGuiding = UM.isFirst;
         this.bottomGroup.visible = true;

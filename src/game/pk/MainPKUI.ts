@@ -262,11 +262,11 @@ class MainPKUI extends game.BaseUI {
         this.reset();
     }
 
-    private resetList(list){
+    private resetList(list,otherForce=-1){
         var orginList = list.concat();
         for(var i=0;i<list.length;i++)
         {
-            list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList}
+            list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:otherForce}
         }
     }
 
@@ -311,7 +311,7 @@ class MainPKUI extends game.BaseUI {
         var list1 = this.list1Data = this.dataIn.list1?this.dataIn.list1.split(','):[];
         var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
-        this.resetList(list1)
+        this.resetList(list1,this.dataIn.force1)
         this.resetList(list2)
 
         this.list1.dataProvider = new eui.ArrayCollection(list1)
@@ -573,8 +573,10 @@ class MainPKUI extends game.BaseUI {
         var hpRate1 =  (forceObj[1] || 0)/(forceObj['1_max'] || 1)
         var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
 
-        var w1 = 300 * Math.min(1,hpRate1)
-        var w2 = 300 * Math.min(1,hpRate2)
+
+
+        var w1 = Math.max(5,300 * Math.min(1,hpRate1))
+        var w2 = Math.max(5,300 * Math.min(1,hpRate2))
         egret.Tween.removeTweens(this.hpBar1)
         egret.Tween.removeTweens(this.hpBar2)
         if(isInit)

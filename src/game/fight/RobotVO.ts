@@ -20,7 +20,7 @@ class RobotVO{
         var robot = new RobotVO({
             force:force,
             level:lv,
-            lastTime:t,
+            //lastTime:t,
             distanceTime:180 + Math.floor((1800-180)*Math.random()),
             atk:PKManager.getInstance().getRobotList(lv),
             def:PKManager.getInstance().getRobotList(lv),
@@ -28,13 +28,14 @@ class RobotVO{
             head:PKManager.getInstance().randomHead(),
         });
         robot.gameid = 'robot' + TM.now() +'_'+ this.index;
+        this.index ++;
         RobotVO.change = true;
         return robot;
     }
     public gameid
     public force//战力
     public level//显示等级
-    public lastTime//最后一次更新
+    //public lastTime//最后一次更新
     public distanceTime//出战需要时间
     public atk//出战队列
     public def//出战队列
@@ -81,25 +82,46 @@ class RobotVO{
     public reset(t){
         if(!this.level)
             this.level = 1;
-        var cd = Math.pow(this.level,1.5)*100*(1 + Math.random()*2);
-        if(t - this.lastTime > cd)
+        var buffForce = BuffManager.getInstance().getForceAdd()
+        var minForce = (UM.maxForce-buffForce)*(0.7) + buffForce*0.6;
+        if(Math.abs(TecManager.getInstance().getTecLevel(11) - this.level) > 1 || this.force/minForce<0.9)
         {
-            var num = Math.floor((t - this.lastTime)/cd);
-            if(num > 5)
+            var lv = Math.min(TecManager.getInstance().tecBase[11].max,Math.max(1,TecManager.getInstance().getTecLevel(11) + Math.floor(Math.random()*3-1)))
+
+            var force = (UM.maxForce-buffForce)*(0.7 + Math.random()*0.4) + buffForce*0.6;
+            this.force = Math.max(this.force,force);
+            var lastLevel = this.level;
+            this.level = Math.max(this.level,lv);
+            if(lastLevel != this.level || Math.random()< 0.2)
             {
-                if(num/this.level>=10)
-                    this.level ++;
-                this.def = PKManager.getInstance().getRobotList(this.level)
+                this.atk = PKManager.getInstance().getRobotList(lv)
+                this.def = PKManager.getInstance().getRobotList(lv)
             }
-            while(num>0)
-            {
-                num--;
-                this.force += Math.ceil(2*this.level*Math.random());
-            }
-            this.lastTime = t;
             RobotVO.change = true;
         }
     }
+    //public reset(t){
+    //    if(!this.level)
+    //        this.level = 1;
+    //    var cd = Math.pow(this.level,1.5)*100*(1 + Math.random()*2);
+    //    if(t - this.lastTime > cd)
+    //    {
+    //        var num = Math.floor((t - this.lastTime)/cd);
+    //        if(num > 5)
+    //        {
+    //            if(num/this.level>=10)
+    //                this.level ++;
+    //            this.def = PKManager.getInstance().getRobotList(this.level)
+    //        }
+    //        while(num>0)
+    //        {
+    //            num--;
+    //            this.force += Math.ceil(2*this.level*Math.random());
+    //        }
+    //        this.lastTime = t;
+    //        RobotVO.change = true;
+    //    }
+    //}
 
     //public getLevel(){
     //    return this.level + this.levelAdd

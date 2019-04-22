@@ -14,7 +14,7 @@
 		</e:Group>
 		<e:Group y="200" horizontalCenter="0">
 		<e:Label text="调整怪物工作，腾出空闲怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-		<e:Button id="workBtn" label="前往" skinName="Btn1Skin" x="410" verticalCenter="0"/>
+		<e:Button id="workBtn" label="前往" x="410" verticalCenter="0" skinName="Btn9Skin"/>
 		</e:Group>
 		<e:layout>
 			<e:VerticalLayout gap="15"/>
