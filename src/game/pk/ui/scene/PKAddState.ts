@@ -1,10 +1,10 @@
-class PKAddState extends game.BaseItem {
+class PKAddState_wx3 extends game.BaseItem {
     private static pool = [];
-    public static createItem():PKAddState{
-        var item:PKAddState = this.pool.pop();
+    public static createItem():PKAddState_wx3{
+        var item:PKAddState_wx3 = this.pool.pop();
         if(!item)
         {
-            item = new PKAddState();
+            item = new PKAddState_wx3();
         }
         return item;
     }
@@ -69,6 +69,8 @@ class PKAddState extends game.BaseItem {
         this.skinName = "PKAddStateSkin";
     }
 
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
     public childrenCreated() {
         super.childrenCreated();
         this.anchorOffsetX = 16
@@ -82,9 +84,9 @@ class PKAddState extends game.BaseItem {
         MyTool.removeMC(this);
     }
 
-    public show(type,parent:PKMonsterItem,delay){
+    public show(type,parent:PKMonsterItem_wx3,delay){
         this.alpha = 0;
-        PKAddState.fillStateMC(this.stateMC,type);
+        PKAddState_wx3.fillStateMC(this.stateMC,type);
         egret.Tween.get(this).wait(delay).to({y:this.y - 40},800)
         egret.Tween.get(this).wait(delay).to({alpha:1}).wait(500).to({alpha:0},300).call(()=>{
             parent.removeAddState(this);

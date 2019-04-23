@@ -46,7 +46,7 @@ class MainWorkItem extends game.BaseItem {
             this.currentState = 'lock'
             this.desText.text = '【' + TecManager.getInstance().tecBase[22].name +  '】达到'+TecManager.getInstance().getUnlockValue(this.data.id)+'级后解锁'
         }
-        this.bg.source = PKManager.getInstance().getWorkBG(this.data.id)
+        this.bg.source = PKManager_wx3.getInstance().getWorkBG(this.data.id)
         //this.visible = false
     }
 

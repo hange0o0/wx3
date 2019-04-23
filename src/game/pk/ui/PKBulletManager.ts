@@ -1,7 +1,7 @@
-class PKBulletManager {
-    private static instance:PKBulletManager;
+class PKBulletManager_wx3 {
+    private static instance:PKBulletManager_wx3;
     public static getInstance() {
-        if (!this.instance) this.instance = new PKBulletManager();
+        if (!this.instance) this.instance = new PKBulletManager_wx3();
         return this.instance;
     }
 
@@ -12,12 +12,14 @@ class PKBulletManager {
     private bulletLinePool = [];
     private useItem = [];
 
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
     //有抛物线
-    public createArrow(fromMC,toMC,beginTime,endTime,id?):ArrowMC{
-        var item:ArrowMC = this.arrowPool.pop();
+    public createArrow(fromMC,toMC,beginTime,endTime,id?):ArrowMC_wx3{
+        var item:ArrowMC_wx3 = this.arrowPool.pop();
         if(!item)
         {
-            item = new ArrowMC();
+            item = new ArrowMC_wx3();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
         var con = fromMC.parent;
@@ -28,11 +30,11 @@ class PKBulletManager {
 
 
     //直线
-    public createBullet(fromMC,toMC,beginTime,endTime,id?):ArrowMC{
-        var item:BulletMC = this.bulletPool.pop();
+    public createBullet(fromMC,toMC,beginTime,endTime,id?):BulletMC_wx3{
+        var item:BulletMC_wx3 = this.bulletPool.pop();
         if(!item)
         {
-            item = new BulletMC();
+            item = new BulletMC_wx3();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
         if(!fromMC)
@@ -44,11 +46,11 @@ class PKBulletManager {
     }
 
     //直线2
-    public createBulletAni(fromMC,toMC,beginTime,endTime,id?):ArrowMC{
-        var item:BulletAniMC = this.bulletAniPool.pop();
+    public createBulletAni(fromMC,toMC,beginTime,endTime,id?):BulletAniMC_wx3{
+        var item:BulletAniMC_wx3 = this.bulletAniPool.pop();
         if(!item)
         {
-            item = new BulletAniMC();
+            item = new BulletAniMC_wx3();
         }
         item.init(fromMC,toMC,beginTime,endTime,id);
         var con = fromMC.parent;
@@ -58,11 +60,11 @@ class PKBulletManager {
     }
 
     //直线3   fun:每次移动触发的方法
-    public createBulletLine(fromMC,toMC,beginTime,endTime,id?,fun?):ArrowMC{
-        var item:BulletMCLine = this.bulletLinePool.pop();
+    public createBulletLine(fromMC,toMC,beginTime,endTime,id?,fun?):BulletMCLine_wx3{
+        var item:BulletMCLine_wx3 = this.bulletLinePool.pop();
         if(!item)
         {
-            item = new BulletMCLine();
+            item = new BulletMCLine_wx3();
         }
         item.init(fromMC,toMC,beginTime,endTime,id,fun);
         var con = fromMC.parent;
@@ -72,11 +74,11 @@ class PKBulletManager {
     }
 
     //直线4
-    public createBulletAni2(fromMC,toMC,beginTime,endTime):ArrowMC{
-        var item:BulletAniMC2 = this.bulletAniPool2.pop();
+    public createBulletAni2(fromMC,toMC,beginTime,endTime):BulletAniMC2_wx3{
+        var item:BulletAniMC2_wx3 = this.bulletAniPool2.pop();
         if(!item)
         {
-            item = new BulletAniMC2();
+            item = new BulletAniMC2_wx3();
         }
         item.init(fromMC,toMC,beginTime,endTime);
         var con = toMC.parent;
@@ -103,7 +105,7 @@ class PKBulletManager {
     }
 
     public actionAll(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         var removeArr = [];
         for(var i=0;i<this.useItem.length;i++)
         {
@@ -127,12 +129,12 @@ class PKBulletManager {
     }
 }
 
-class ArrowMC extends egret.DisplayObjectContainer{
+class ArrowMC_wx3 extends egret.DisplayObjectContainer{
     public type = 'arrow'
 
     public mc = new eui.Image()
-    public fromMC:PKMonsterItem
-    public toMC:PKMonsterItem
+    public fromMC:PKMonsterItem_wx3
+    public toMC:PKMonsterItem_wx3
     public beginTime
     public endTime
     constructor() {
@@ -142,6 +144,8 @@ class ArrowMC extends egret.DisplayObjectContainer{
         this.mc.anchorOffsetY = 25
         this.addChild(this.mc)
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public init(fromMC,toMC,beginTime,endTime,id){
         this.fromMC = fromMC;
@@ -188,12 +192,12 @@ class ArrowMC extends egret.DisplayObjectContainer{
     }
 }
 //图片字弹直线有角度
-class BulletMC extends egret.DisplayObjectContainer{
+class BulletMC_wx3 extends egret.DisplayObjectContainer{
     public type = 'bullet'
 
     public mc = new eui.Image()
-    public fromMC:PKMonsterItem
-    public toMC:PKMonsterItem
+    public fromMC:PKMonsterItem_wx3
+    public toMC:PKMonsterItem_wx3
     public beginTime
     public endTime
     public id
@@ -218,6 +222,8 @@ class BulletMC extends egret.DisplayObjectContainer{
         this.mc.anchorOffsetY = 25
         this.addChild(this.mc)
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public init(fromMC,toMC,beginTime,endTime,id){
         this.id = id;
@@ -296,11 +302,11 @@ class BulletMC extends egret.DisplayObjectContainer{
 }
 
 //图片字弹直线有回调，无角度
-class BulletMCLine extends egret.DisplayObjectContainer{
+class BulletMCLine_wx3 extends egret.DisplayObjectContainer{
     public type = 'bullet_line'
 
     public mc = new eui.Image()
-    public fromMC:PKMonsterItem
+    public fromMC:PKMonsterItem_wx3
     public toMC:any
     public beginTime
     public endTime
@@ -313,6 +319,8 @@ class BulletMCLine extends egret.DisplayObjectContainer{
         this.mc.anchorOffsetY = 25
         this.addChild(this.mc)
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public init(fromMC,toMC,beginTime,endTime,id,fun?){
         this.id = id;
@@ -356,12 +364,12 @@ class BulletMCLine extends egret.DisplayObjectContainer{
 }
 
 //旧素材子弹动画
-class BulletAniMC extends egret.DisplayObjectContainer{
+class BulletAniMC_wx3 extends egret.DisplayObjectContainer{
     public type = 'bullet_ani'
 
     public mc;
-    public fromMC:PKMonsterItem
-    public toMC:PKMonsterItem
+    public fromMC:PKMonsterItem_wx3
+    public toMC:PKMonsterItem_wx3
     public beginTime
     public endTime
 
@@ -371,6 +379,8 @@ class BulletAniMC extends egret.DisplayObjectContainer{
     constructor() {
         super();
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public init(fromMC,toMC,beginTime,endTime,id){
         this.fromMC = fromMC;
@@ -378,7 +388,7 @@ class BulletAniMC extends egret.DisplayObjectContainer{
         this.beginTime = beginTime;
         this.endTime = endTime;
 
-        var AM = AniManager.getInstance();
+        var AM = AniManager_wx3.getInstance();
         if(this.mc)
             AM.removeMV(this.mc);
         this.mc = AM.getAni(id);
@@ -416,22 +426,25 @@ class BulletAniMC extends egret.DisplayObjectContainer{
 
     public remove(){
         MyTool.removeMC(this);
-        AniManager.getInstance().removeMV(this.mc);
+        AniManager_wx3.getInstance().removeMV(this.mc);
         this.mc = null;
     }
 }
 
 //用新素材直线
-class BulletAniMC2 extends egret.DisplayObjectContainer{
+class BulletAniMC2_wx3 extends egret.DisplayObjectContainer{
     public type = 'bullet_ani2'
 
     public mc:any = new MonsterAtkMV()
-    public fromMC:PKMonsterItem
-    public toMC:PKMonsterItem
+    public fromMC:PKMonsterItem_wx3
+    public toMC:PKMonsterItem_wx3
     public beginTime
     public endTime
 
     public targetOffsetY = 0
+
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     constructor() {
         super();

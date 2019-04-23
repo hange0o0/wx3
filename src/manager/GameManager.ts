@@ -272,11 +272,12 @@ function sendClientError(str){
 if(window["wx"])
 {
     //window["TeamUI"] = TeamUI;
-    window["MainPKUI"] = MainPKUI;
-    window["PKCardInfoUI"] = PKCardInfoUI;
+    window["MainPKUI"] = MainPKUI_wx3;
+    window["PKCardInfoUI_wx3"] = PKCardInfoUI_wx3;
     window["BottomUI"] = BottomUI;
     window["TopUI"] = TopUI
     window["ChangeUserUI"] = ChangeUserUI
+    window["wxRandomFunction"] = function(b){}
 
 
     var wx =  window["wx"];
@@ -300,7 +301,7 @@ if(window["wx"])
     wx.onShow(function(res){
         if(!GameManager.stage)
             return;
-        if(PKManager.getInstance().isPKing && !MainPKUI.getInstance().finish)
+        if(PKManager_wx3.getInstance().isPKing && !MainPKUI_wx3.getInstance().finish)
             SoundManager.getInstance().playSound('pkbg');
         else
             SoundManager.getInstance().playSound('bg');

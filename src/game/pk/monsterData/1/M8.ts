@@ -1,29 +1,29 @@
-class M8 extends MBase {
+class M8_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
     public mvID1 = 119;
     //初始化怪物隐藏属性
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.doubleValue = user.getSkillValue(1)/100;
     }
 
-    public atkAction(user:PKMonsterData,target:PKMonsterData,actionTime){
+    public atkAction_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3,actionTime){
         if(target.dieTime)
         {
             user.doubleRate = 1;
         }
-        super.atkAction(user,target,actionTime);
+        super.atkAction_wx3(user,target,actionTime);
         user.doubleRate = 0
     }
 
 
 
-    public skill(user:PKMonsterData,target:PKMonsterData){
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         target.owner = user.owner
         target.atkRota = user.atkRota;
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_CHANGE_TEAM,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_CHANGE_TEAM,
             user:target
         })
         //var hp = Math.ceil(this.getAtkHp(user,target)*0.5);
@@ -31,8 +31,8 @@ class M8 extends MBase {
         //user.atkAction({hp:hp})
     }
     //转化
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkrage = 300;
         for(var i=0;i<arr.length;i++)

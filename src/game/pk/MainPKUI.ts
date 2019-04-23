@@ -1,7 +1,7 @@
-class MainPKUI extends game.BaseUI {
-    private static _instance:MainPKUI;
+class MainPKUI_wx3 extends game.BaseUI {
+    private static _instance:MainPKUI_wx3;
     public static getInstance() {
-        if (!this._instance) this._instance = new MainPKUI();
+        if (!this._instance) this._instance = new MainPKUI_wx3();
         return this._instance;
     }
 
@@ -93,20 +93,22 @@ class MainPKUI extends game.BaseUI {
         this.addBtnEvent(this.addSpeedBtn,this.onSpeed)
         this.addBtnEvent(this.strongBtn,this.onStrong)
 
-        var pkvideo = PKVideoCon.getInstance();
+        var pkvideo = PKVideoCon_wx3.getInstance();
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
-        pkvideo.x = -(PKConfig.floorWidth + PKConfig.appearPos*2 - 640)/2;
+        pkvideo.x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
 
-        PKData.getInstance().addEventListener('video_word',this.onVideoEvent,this);
-        PKData.getInstance().addEventListener('video',this.onVideoEvent2,this);
+        PKData_wx3.getInstance().addEventListener('video_word',this.onVideoEvent,this);
+        PKData_wx3.getInstance().addEventListener('video',this.onVideoEvent2,this);
 
-        this.list1.itemRenderer = MainPKItem
-        this.list2.itemRenderer = MainPKItem
+        this.list1.itemRenderer = MainPKItem_wx3
+        this.list2.itemRenderer = MainPKItem_wx3
 
         // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
         // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     private onStrong(){
         var tecid = 32;
@@ -121,8 +123,8 @@ class MainPKUI extends game.BaseUI {
         var videoData = e.data;
         switch(videoData.type)//动画类型
         {
-            case PKConfig.VIDEO_MONSTER_WIN:
-                var rota = videoData.user.getOwner().teamData.atkRota == PKConfig.ROTA_LEFT?PKConfig.ROTA_RIGHT:PKConfig.ROTA_LEFT
+            case PKConfig_wx3.VIDEO_MONSTER_WIN:
+                var rota = videoData.user.getOwner().teamData.atkRota == PKConfig_wx3.ROTA_LEFT?PKConfig_wx3.ROTA_RIGHT:PKConfig_wx3.ROTA_LEFT
                 this.showHurt(rota);
                 break;
         }
@@ -140,16 +142,16 @@ class MainPKUI extends game.BaseUI {
             }
         }
 
-        PKData.getInstance().playSpeed ++;
-        if(PKData.getInstance().playSpeed > 3)
-            PKData.getInstance().playSpeed = 1;
-        SharedObjectManager.getInstance().setMyValue('pkSpeed',PKData.getInstance().playSpeed)
+        PKData_wx3.getInstance().playSpeed ++;
+        if(PKData_wx3.getInstance().playSpeed > 3)
+            PKData_wx3.getInstance().playSpeed = 1;
+        SharedObjectManager.getInstance().setMyValue('pkSpeed',PKData_wx3.getInstance().playSpeed)
         this.renewSpeedBtn();
     }
 
     private renewSpeedBtn(){
-        this.speedMC.visible = PKData.getInstance().playSpeed > 1
-        this.speedMC2.visible = PKData.getInstance().playSpeed > 2
+        this.speedMC.visible = PKData_wx3.getInstance().playSpeed > 1
+        this.speedMC2.visible = PKData_wx3.getInstance().playSpeed > 2
     }
 
     private onDouble(){
@@ -178,9 +180,9 @@ class MainPKUI extends game.BaseUI {
 
     public onVideoEvent(e){
         var videoData = e.data;
-        if(videoData.type != PKConfig.VIDEO_MONSTER_ADD && videoData.type != PKConfig.VIDEO_MONSTER_DIE)
+        if(videoData.type != PKConfig_wx3.VIDEO_MONSTER_ADD && videoData.type != PKConfig_wx3.VIDEO_MONSTER_DIE)
             return;
-        var data:PKMonsterData = videoData.user;
+        var data:PKMonsterData_wx3 = videoData.user;
         if(!data.index)
             return;
 
@@ -188,7 +190,7 @@ class MainPKUI extends game.BaseUI {
         var teamID = data.getOwner().teamData.id;
         switch(videoData.type)//动画类型
         {
-            case PKConfig.VIDEO_MONSTER_ADD:
+            case PKConfig_wx3.VIDEO_MONSTER_ADD:
                 if(teamID == 1)
                 {
                     this.runItemFun(this.list1,index,'showBorn')
@@ -201,7 +203,7 @@ class MainPKUI extends game.BaseUI {
                 }
                 break;
 
-            case PKConfig.VIDEO_MONSTER_DIE:
+            case PKConfig_wx3.VIDEO_MONSTER_DIE:
                 if(teamID == 1)
                 {
                     this.runItemFun(this.list1,index,'showDie')
@@ -224,7 +226,7 @@ class MainPKUI extends game.BaseUI {
     }
 
     public show(data?){
-        PKManager.getInstance().isPKing = true
+        PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data,
         super.show();
     }
@@ -248,10 +250,10 @@ class MainPKUI extends game.BaseUI {
     }
 
     public hide(){
-        PKManager.getInstance().isPKing = false
+        PKManager_wx3.getInstance().isPKing = false
         SoundManager.getInstance().playSound('bg');
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
-        PKVideoCon.getInstance().remove();
+        PKVideoCon_wx3.getInstance().remove();
        super.hide();
     }
 
@@ -283,7 +285,7 @@ class MainPKUI extends game.BaseUI {
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
         }
 
-        PKVideoCon.getInstance().x = -(PKConfig.floorWidth + PKConfig.appearPos*2 - 640)/2;
+        PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
         //this.stopScrollTimer = 0;
         this.winGroup.visible = false;
         this.failGroup.visible = false;
@@ -319,18 +321,18 @@ class MainPKUI extends game.BaseUI {
 
         this.lineMC.height =  Math.ceil(Math.max(list1.length,list2.length)/3)*(95+6)
 
-        PKBulletManager.getInstance().freeAll();
-        var PD = PKData.getInstance();
+        PKBulletManager_wx3.getInstance().freeAll();
+        var PD = PKData_wx3.getInstance();
         PD.init(data);
         if(!this.dataIn.isReplay && DM.jumpPK)
         {
             PD.quick = true;
             PD.quickTime = Number.MAX_VALUE;
         }
-        PKData.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
+        PKData_wx3.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
         this.renewSpeedBtn();
 
-        PKVideoCon.getInstance().init(this.dataIn);
+        PKVideoCon_wx3.getInstance().init(this.dataIn);
         this.lastRenewTime = 0;
         this.renewForce();
         this.renewHp(true);
@@ -348,32 +350,32 @@ class MainPKUI extends game.BaseUI {
 
     public startGame(){
         this.gameStart = true;
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         PD.start();
         this.onStep()
         this.isQuick = false;
         if(PD.isGameOver)
         {
-            PKVideoCon.getInstance().resetView();
+            PKVideoCon_wx3.getInstance().resetView();
 
 
 
-            var videoCon = PKVideoCon.getInstance();
+            var videoCon = PKVideoCon_wx3.getInstance();
             var result = PD.getPKResult();
             if(result == 1)
             {
-                var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.id);
-                var item2 = PKData.getInstance().getBackItem(PKData.getInstance().myPlayer.teamData.id);
+                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+                var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.id);
             }
             else if(result == 2)
             {
-                var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.enemy.id);
-                var item2 = PKData.getInstance().getBackItem(PKData.getInstance().myPlayer.teamData.enemy.id);
+                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
+                var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
             }
             else
             {
-                var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.id);
-                var item2 = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.enemy.id);
+                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+                var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
             }
 
             if(item && item2)
@@ -394,7 +396,7 @@ class MainPKUI extends game.BaseUI {
 
     public showHurt(rota){
         var mc;
-        if(rota == PKConfig.ROTA_LEFT)
+        if(rota == PKConfig_wx3.ROTA_LEFT)
             mc = this.hurt1
         else
             mc = this.hurt2
@@ -413,14 +415,14 @@ class MainPKUI extends game.BaseUI {
             return;
         if(this.finish)
         {
-            PKVideoCon.getInstance().action();
+            PKVideoCon_wx3.getInstance().action();
             return;
         }
-        var PD = PKData.getInstance();
-        var PC = PKCode.getInstance();
+        var PD = PKData_wx3.getInstance();
+        var PC = PKCode_wx3.getInstance();
 
         PC.onStep();
-        PKVideoCon.getInstance().action();
+        PKVideoCon_wx3.getInstance().action();
 
 
 
@@ -437,7 +439,7 @@ class MainPKUI extends game.BaseUI {
             this.finish = true;
             this.desGroup.visible = false;
             this.desGroup['callVisible'] = false
-            PKBulletManager.getInstance().freeAll();
+            PKBulletManager_wx3.getInstance().freeAll();
             var result = PD.getPKResult();
             //if(this.dataIn.isPK)
             //{
@@ -516,11 +518,11 @@ class MainPKUI extends game.BaseUI {
         }
         else
         {
-            var item = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.id);
-            var item2 = PKData.getInstance().getFirstItem(PKData.getInstance().myPlayer.teamData.enemy.id);
+            var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+            var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
             if(item && item2)
             {
-                var videoCon = PKVideoCon.getInstance();
+                var videoCon = PKVideoCon_wx3.getInstance();
                 var w = 640
                 var scrollH = -((item.x + item2.x)/2 - w/2);
                 if(scrollH > 0)
@@ -549,15 +551,15 @@ class MainPKUI extends game.BaseUI {
     }
 
     private testRenew(){
-        if(PKData.getInstance().actionTime - this.lastRenewTime > 200)
+        if(PKData_wx3.getInstance().actionTime - this.lastRenewTime > 200)
         {
-            this.lastRenewTime = PKData.getInstance().actionTime
+            this.lastRenewTime = PKData_wx3.getInstance().actionTime
             this.renewHp();
         }
     }
 
     private renewForce(){
-        var forceObj = PKData.getInstance().getForceData();
+        var forceObj = PKData_wx3.getInstance().getForceData();
         var force1 =  Math.round(forceObj[1] || 0);
         var force2 =  Math.round(forceObj[2] || 0);
         var green = 0x66ff66
@@ -569,7 +571,7 @@ class MainPKUI extends game.BaseUI {
     }
 
     private renewHp(isInit?){
-        var forceObj = PKData.getInstance().getHpData();
+        var forceObj = PKData_wx3.getInstance().getHpData();
         var hpRate1 =  (forceObj[1] || 0)/(forceObj['1_max'] || 1)
         var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
 
@@ -596,7 +598,7 @@ class MainPKUI extends game.BaseUI {
         clearTimeout(this.resultTimer);
 
         this.resultTimer = setTimeout(()=>{
-            PKVideoCon.getInstance().resetAllMVSpeed();
+            PKVideoCon_wx3.getInstance().resetAllMVSpeed();
             if(mc == this.winGroup)
                 SoundManager.getInstance().playEffect('win');
             else

@@ -168,8 +168,8 @@ class DefUI extends game.BaseItem{
         //    this.con.addChild(sortList[i]);
         //}
 
-        this.bg.source = PKManager.getInstance().getDefBG()
-        this.bgFront.source = PKManager.getInstance().getDefBGFront()
+        this.bg.source = PKManager_wx3.getInstance().getDefBG()
+        this.bgFront.source = PKManager_wx3.getInstance().getDefBGFront()
 
 
         //this.numText.text = '数量：' + arr.length + '/'+ teamNum;
@@ -267,7 +267,7 @@ class DefUI extends game.BaseItem{
     private lastTalk = 0
     public randomTalk(){
 
-        if(PKManager.getInstance().isPKing)
+        if(PKManager_wx3.getInstance().isPKing)
             return;
         if(GuideManager.getInstance().isGuiding)
             return;

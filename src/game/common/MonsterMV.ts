@@ -172,7 +172,7 @@ class MonsterMV extends eui.Group {
                 break;
             case MonsterMV.STAT_DIE:
                 this.stop();
-                PKData.getInstance().actionRecord.push('die_mid|' + this.vo.id)
+                PKData_wx3.getInstance().actionRecord.push('die_mid|' + this.vo.id)
 
                 this.dispatchEventWith('mv_die')
                 break;

@@ -1,4 +1,4 @@
-class PKState extends game.BaseItem {
+class PKState_wx3 extends game.BaseItem {
 
     private stateMC:eui.Image;
     private atkMV:MonsterAtkMV
@@ -11,16 +11,18 @@ class PKState extends game.BaseItem {
     public childrenCreated() {
         super.childrenCreated();
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public dataChanged() {
         //if(!this.atkMV)
         //    this.atkMV = new MonsterAtkMV();
-        if(this.data == PKConfig.STATE_YUN)
+        if(this.data == PKConfig_wx3.STATE_YUN)
         {
             this.initAtkMV();
             this.atkMV.load('effect2_png',0,154,39,2)
         }
-        else if(this.data == PKConfig.STATE_DIE)
+        else if(this.data == PKConfig_wx3.STATE_DIE)
         {
             this.initImg();
             this.stateMC.source = 'effect5_png'
@@ -32,12 +34,12 @@ class PKState extends game.BaseItem {
         //    this.stateMC.source = 'icon_def2_png'
         //    this.stateMC.anchorOffsetX = 52/2
         //}
-        else if(this.data == PKConfig.STATE_MODUN)
+        else if(this.data == PKConfig_wx3.STATE_MODUN)
         {
              this.initAtkMV();
             this.atkMV.load('effect1_png',0,440,128,4)
         }
-        else if(this.data == PKConfig.STATE_MIANSHANG)
+        else if(this.data == PKConfig_wx3.STATE_MIANSHANG)
         {
              this.initImg();
             this.stateMC.source = 'effect3_png'
@@ -74,26 +76,26 @@ class PKState extends game.BaseItem {
     }
 
     public show(item){
-        var mD:PKMonsterData = item.data
+        var mD:PKMonsterData_wx3 = item.data
         clearTimeout(this.timer);
         switch (parseInt(this.data)){
-            case PKConfig.STATE_YUN:
+            case PKConfig_wx3.STATE_YUN:
                 this.atkMV.play()
                 this.x = 50 -  154/4
                 this.y = 300 - mD.getVO().height - 35
                 break;
-            case PKConfig.STATE_DIE:
+            case PKConfig_wx3.STATE_DIE:
                 this.x = 50
                 this.y = 300 - mD.getVO().height -50
                 break;
-            case PKConfig.STATE_MODUN:
+            case PKConfig_wx3.STATE_MODUN:
                 this.atkMV.play()
                 var scale = (mD.getVO().height + 20)/128
                 this.x = 50 -  110/2*scale
                 this.y = 300 - mD.getVO().height-20
                 this.atkMV.scaleX = this.atkMV.scaleY = scale
                 break;
-            case PKConfig.STATE_MIANSHANG:
+            case PKConfig_wx3.STATE_MIANSHANG:
                 this.scaleX = item.monsterMV.scaleX
                 if(item.monsterMV.scaleX == 1)
                     this.x = 50 -  mD.getVO().width/2 +10

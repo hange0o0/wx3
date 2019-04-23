@@ -70,7 +70,7 @@
 				<e:Image source="bar_bg_png" x="0" y="0"/>
 				<e:Image id="barMC" source="bar2_png" x="2" y="2"/>
 			</e:Group>
-			<e:Image source="loading_logo_png" top="-250" horizontalCenter="0"/>
+			<e:Image source="loading_logo_png" top="-160" horizontalCenter="0" scaleX="0.6" scaleY="0.6"/>
 		</e:Group>
 			</e:Group>
 			</e:Skin>

@@ -235,7 +235,7 @@ class GuideManager {
         this.addGuideObj({
             fun:function(){
                 GuideUI.getInstance().hide();
-                MainPKUI.getInstance().startGame()
+                MainPKUI_wx3.getInstance().startGame()
             },
             text:'[重点]\n要赢取胜利，关键有两点：[战力够高]和[阵容克制]！',
         })

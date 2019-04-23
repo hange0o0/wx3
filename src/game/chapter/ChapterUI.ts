@@ -158,7 +158,7 @@ class ChapterUI extends game.BaseUI {
 
     public renew(){
 
-        var arr = PKManager.getInstance().chapterData.slice((this.page-1)*this.pageSize,this.page*this.pageSize);
+        var arr = PKManager_wx3.getInstance().chapterData.slice((this.page-1)*this.pageSize,this.page*this.pageSize);
         this.topUI.setTitle('收复据点 （' + '第 ' + NumberUtil.cNum(this.page) + ' 区）')
         this.dataProvider.source = arr
         this.dataProvider.refresh();

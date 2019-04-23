@@ -1,15 +1,16 @@
-class PKCode {
-    private static instance:PKCode;
+class PKCode_wx3 {
+    private static instance:PKCode_wx3;
 
     public static getInstance() {
-        if (!this.instance) this.instance = new PKCode();
+        if (!this.instance) this.instance = new PKCode_wx3();
         return this.instance;
     }
 
-
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
     //每一步执行
     public onStep(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         if(PD.stopTime)
             return;
         if(!PD.startTime)
@@ -27,11 +28,11 @@ class PKCode {
         }
         //console.log(cd)
         var runStart = TM.nowMS();
-        while(PD.quick || cd > PKConfig.stepCD)
+        while(PD.quick || cd > PKConfig_wx3.stepCD)
         {
-            PD.actionTime += PKConfig.stepCD;
+            PD.actionTime += PKConfig_wx3.stepCD;
             PD.disableKey = {};
-            cd -= PKConfig.stepCD;
+            cd -= PKConfig_wx3.stepCD;
 
             if(PD.actionTime%2000 == 0)
                 this.autoAction();
@@ -40,7 +41,7 @@ class PKCode {
             //this.actionSkill();
             this.monsterAction();
             this.monsterMove();
-            PKMonsterAction.getInstance().actionAtk(PD.actionTime);//攻击落实
+            PKMonsterAction_wx3.getInstance().actionAtk(PD.actionTime);//攻击落实
             //this.heroAdd();
 
             this.actionFinish();
@@ -48,7 +49,7 @@ class PKCode {
             if(PD.isReplay && PD.actionTime >= PD.replayEndTime)
                 PD.isGameOver = true;
 
-            if(PD.actionTime > PKConfig.drawTime)//5分
+            if(PD.actionTime > PKConfig_wx3.drawTime)//5分
                 PD.isGameOver = true;
 
             if(PD.isGameOver)
@@ -62,7 +63,7 @@ class PKCode {
                 PD.startTime = TM.nowMS() - PD.actionTime + PD.speedAddTime;
                 PD.startTime -= TM.nowMS() - runStart;//扣去运行时间
 
-                PKVideoCon.getInstance().resetView();
+                PKVideoCon_wx3.getInstance().resetView();
             }
         }
         return false;
@@ -105,7 +106,7 @@ class PKCode {
 
     //自动出战上怪
     public autoAction(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
         {
             var player = PD.playerObj[i];
@@ -139,23 +140,23 @@ class PKCode {
 
     //怪出手
     public monsterAction(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         for(var i=0;i<PD.monsterList.length;i++)
         {
             PD.resetMonsterData();//重置技能数据，方便技能统计
-            var mvo:PKMonsterData = PD.monsterList[i];
+            var mvo:PKMonsterData_wx3 = PD.monsterList[i];
             var skillTargets = mvo.canSkill(PD.actionTime);
 
             if(skillTargets && skillTargets.length > 0)   //用技能
             {
-                PKMonsterAction.getInstance().skill(mvo,PD.actionTime)
+                PKMonsterAction_wx3.getInstance().skill(mvo,PD.actionTime)
             }
             else
             {
                 var target = mvo.getAtkTarget()
                 if(target)//普攻
                 {
-                    PKMonsterAction.getInstance().atk(mvo,PD.actionTime);
+                    PKMonsterAction_wx3.getInstance().atk(mvo,PD.actionTime);
                 }
             }
         }
@@ -163,10 +164,10 @@ class PKCode {
 
     //怪移动
     public monsterMove(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         for(var i=0;i<PD.monsterList.length;i++)
         {
-            var mvo:PKMonsterData = PD.monsterList[i];
+            var mvo:PKMonsterData_wx3 = PD.monsterList[i];
             if(mvo.canMove(PD.actionTime))
             {
                 mvo.move();
@@ -178,25 +179,25 @@ class PKCode {
 
     //一轮操作结束,移队死，过线的，结算,清除BUFF
     public actionFinish(){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         var teamNum1 = 0
         var teamNum2 = 0
         for(var i=0;i<PD.monsterList.length;i++)
         {
-            var mvo:PKMonsterData = PD.monsterList[i];
+            var mvo:PKMonsterData_wx3 = PD.monsterList[i];
             if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime)) //死的
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
                 PD.addVideo({
-                    type:PKConfig.VIDEO_MONSTER_DIE,
+                    type:PKConfig_wx3.VIDEO_MONSTER_DIE,
                     user:mvo,
                 })
                 i--;
                 mvo.onDie();
                 PD.monsterChange = true;
             }
-            else if(mvo.x < PKConfig.appearPos || mvo.x > PKConfig.floorWidth + PKConfig.appearPos) //冲过终点
+            else if(mvo.x < PKConfig_wx3.appearPos || mvo.x > PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos) //冲过终点
             {
                 mvo.die = true;
                 PD.monsterList.splice(i,1);
@@ -207,7 +208,7 @@ class PKCode {
                 if(mvo.dieTime) //召唤物不算分
                 {
                     PD.addVideo({
-                        type:PKConfig.VIDEO_MONSTER_DIE,
+                        type:PKConfig_wx3.VIDEO_MONSTER_DIE,
                         user:mvo,
                     })
                     continue;
@@ -220,7 +221,7 @@ class PKCode {
                 }
 
                 PD.addVideo({
-                    type:PKConfig.VIDEO_MONSTER_WIN,
+                    type:PKConfig_wx3.VIDEO_MONSTER_WIN,
                     user:mvo,
                 })
             }
@@ -235,7 +236,7 @@ class PKCode {
                 {
                     mvo.stateChange = false;
                     PD.addVideo({
-                        type:PKConfig.VIDEO_MONSTER_STATE_CHANGE,
+                        type:PKConfig_wx3.VIDEO_MONSTER_STATE_CHANGE,
                         user:mvo,
                     })
                 }

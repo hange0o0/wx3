@@ -1,9 +1,9 @@
-class ShootGameUI extends game.BaseUI {
+class ShootGameUI_wx3 extends game.BaseUI {
 
-    private static _instance: ShootGameUI;
-    public static getInstance(): ShootGameUI {
+    private static _instance: ShootGameUI_wx3;
+    public static getInstance(): ShootGameUI_wx3 {
         if(!this._instance)
-            this._instance = new ShootGameUI();
+            this._instance = new ShootGameUI_wx3();
         return this._instance;
     }
 
@@ -66,23 +66,23 @@ class ShootGameUI extends game.BaseUI {
     }
 
     private onShoot0(){
-        this.shoot(0);
+        this.shoot_wx3(0);
     }
     private onShoot1(){
-        this.shoot(1);
+        this.shoot_wx3(1);
     }
     private onShoot2(){
-        this.shoot(2);
+        this.shoot_wx3(2);
     }
     private onShoot3(){
-        this.shoot(3);
+        this.shoot_wx3(3);
     }
     private onShoot4(){
-        this.shoot(4);
+        this.shoot_wx3(4);
     }
 
 
-    private shoot(index){
+    private shoot_wx3(index){
         if(this.gameStep == 2)
             return;
          if(this.lastShootTime[index] && egret.getTimer() - this.lastShootTime[index] < 150)
@@ -97,7 +97,7 @@ class ShootGameUI extends game.BaseUI {
         var mc = this['c'+index];
         var p = mc.localToGlobal(mc.width/2,0)
         p = this.globalToLocal(p.x,p.y,p)
-        var bullet = ShootBulletItem.createItem()
+        var bullet = ShootBulletItem_wx3.createItem()
         bullet.y = p.y;
         bullet.x = p.x;
         this.con.addChild(bullet);
@@ -134,11 +134,11 @@ class ShootGameUI extends game.BaseUI {
     public onShow(){
         while(this.monsterArr.length)
         {
-             ShootMonster.freeItem(this.monsterArr.pop())
+             ShootMonster_wx3.freeItem(this.monsterArr.pop())
         }
         while(this.bulletArr.length)
         {
-             ShootBulletItem.freeItem(this.bulletArr.pop())
+             ShootBulletItem_wx3.freeItem(this.bulletArr.pop())
         }
         
         this.cdGroup.visible = false
@@ -185,7 +185,7 @@ class ShootGameUI extends game.BaseUI {
         if(timeCD >= 100)
         {
             this.gameStep = 2;
-            this.showResult();
+            this.showResult_wx3();
             return;
         }
         this.timeText.text = (99 - timeCD) + ''
@@ -196,7 +196,7 @@ class ShootGameUI extends game.BaseUI {
         if(cd > createCD && maxNum > this.monsterArr.length)
         {
             this.lastCreate = egret.getTimer();
-            this.createMonster();
+            this.createMonster_wx3();
         }
 
         for(var i=0;i<this.monsterArr.length;i++)
@@ -204,7 +204,7 @@ class ShootGameUI extends game.BaseUI {
             this.monsterArr[i].move()
             if(this.monsterArr[i].isDie == 2)
             {
-                ShootMonster.freeItem(this.monsterArr[i]);
+                ShootMonster_wx3.freeItem(this.monsterArr[i]);
                 this.monsterArr.splice(i,1);
                 i--;
             }
@@ -216,14 +216,14 @@ class ShootGameUI extends game.BaseUI {
              bullet.y -= this.bulletSpeed;
              if(bullet.y < -50 || this.testBullet(bullet))
              {
-                 ShootBulletItem.freeItem(bullet);
+                 ShootBulletItem_wx3.freeItem(bullet);
                  this.bulletArr.splice(i,1);
                  i--;
              }
          }
     }
 
-    private showResult(){
+    private showResult_wx3(){
         this.resultCoinText.text = 'x'+NumberUtil.addNumSeparator(this.coin,2) + ''
         this.resultGroup.visible = true;
         SoundManager.getInstance().playSound('bg');
@@ -251,10 +251,10 @@ class ShootGameUI extends game.BaseUI {
         return false;
     }
 
-    private createMonster(){
+    private createMonster_wx3(){
         //console.log('create');
         var mvo = ArrayUtil.randomOne(this.monsterDataList);
-        var monster = ShootMonster.createItem();
+        var monster = ShootMonster_wx3.createItem();
         this.con.addChild(monster);
         var atkRota = Math.random() > 0.5?1:-1;
         monster.data = {

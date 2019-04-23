@@ -1,8 +1,8 @@
 //队伍数据
-class PKTeamData {
+class PKTeamData_wx3 {
     public id  //1 or 2  or sys
     public atkRota = 0  //进攻方向  0左路出发，1右路出发
-    public enemy:PKTeamData
+    public enemy:PKTeamData_wx3
 
     public force = 0;//队伍战力
 
@@ -28,6 +28,9 @@ class PKTeamData {
         //this.autoDef = PKConfig.autoDef;
     }
 
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
+
     public fill(obj)
     {
         for (var key in obj) {
@@ -44,25 +47,25 @@ class PKTeamData {
     }
 
     //监听状态
-    public addStateLister(listener:PKStateListener){
+    public addStateLister(listener:PKStateListener_wx3){
         if(!this.stateObj[listener.type])
             this.stateObj[listener.type] = [];
         this.stateObj[listener.type].push(listener)
         //console.log('add')
     }
     //
-    public testState(state,target:PKMonsterData){
+    public testState(state,target:PKMonsterData_wx3){
         if(!this.stateObj[state] || this.stateObj[state].length == 0)
             return
         for(var i=0;i<this.stateObj[state].length;i++)
         {
-            var listener:PKStateListener = this.stateObj[state][i];
+            var listener:PKStateListener_wx3 = this.stateObj[state][i];
             listener.actionFun(target)
         }
     }
 
     //
-    public removeStateListener(listener:PKStateListener){
+    public removeStateListener(listener:PKStateListener_wx3){
         var state = listener.type
         if(!state || !this.stateObj[state] || this.stateObj[state].length == 0)
             return
@@ -75,7 +78,7 @@ class PKTeamData {
         {
             for(var i=0;i<this.stateObj[state].length;i++)
             {
-                var listener:PKStateListener = this.stateObj[state][i];
+                var listener:PKStateListener_wx3 = this.stateObj[state][i];
                 if(!listener.stopDieRemove && listener.owner == owner)
                 {
                     this.stateObj[state].splice(i,1);
@@ -91,19 +94,21 @@ class PKTeamData {
         {
             for(var i=0;i<this.stateObj[state].length;i++)
             {
-                var listener:PKStateListener = this.stateObj[state][i];
-                if(listener.endTime && listener.endTime <= PKData.getInstance().actionTime)
+                var listener:PKStateListener_wx3 = this.stateObj[state][i];
+                if(listener.endTime && listener.endTime <= PKData_wx3.getInstance().actionTime)
                 {
                     this.stateObj[state].splice(i,1);
                     i--;
                     listener.onRemove()
                 }
-                else if(parseInt(state) == PKConfig.LISTENER_TIMER)
+                else if(parseInt(state) == PKConfig_wx3.LISTENER_TIMER)
                 {
                     this.stateObj[state][i].actionFun()
                 }
             }
         }
     }
+
+
 
 }

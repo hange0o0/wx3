@@ -1,16 +1,16 @@
-class M9 extends MBase {
+class M9_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public onCreate(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public onCreate_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var rate = user.getSkillValue(1)/100;
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            var buff = new PKBuffData()
+            var buff = new PKBuffData_wx3()
             buff.id = 9;
             buff.user = user;
             buff.addValue('atk',Math.max(1,Math.floor(target.baseAtk*rate)));
@@ -21,8 +21,8 @@ class M9 extends MBase {
             if(buff.ing)
             {
 
-                PKData.getInstance().addVideo({
-                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                PKData_wx3.getInstance().addVideo({
+                    type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                     user:target,
                     keys:['atk+']
                 })
@@ -35,28 +35,28 @@ class M9 extends MBase {
         user.getOwner().teamData.addStateLister(listener)
     }
 
-    public onRemove(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public onRemove_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         for(var i=0;i<arr.length;i++)
         {
-            var target:PKMonsterData = arr[i];
+            var target:PKMonsterData_wx3 = arr[i];
             target.cleanBuff(0,user);
         }
         user.getOwner().teamData.removeStateListerByOwner(user)
     }
 }
 
-class M9StateListener extends PKStateListener {
-    public type = PKConfig.LISTENER_CREATE
+class M9StateListener extends PKStateListener_wx3 {
+    public type = PKConfig_wx3.LISTENER_CREATE
     constructor() {
         super();
     }
 
     // 起作用时会调用的方法
-    public actionFun(target?:PKMonsterData){
+    public actionFun(target?:PKMonsterData_wx3){
         var rate = this.owner.getSkillValue(1)/100;
-        var buff = new PKBuffData()
+        var buff = new PKBuffData_wx3()
         buff.id = 9;
         buff.user = this.owner;
         buff.addValue('atk',Math.max(1,Math.floor(target.baseAtk*rate)));
@@ -64,8 +64,8 @@ class M9StateListener extends PKStateListener {
 
         if(buff.ing)
         {
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                 user:target,
                 keys:['atk+']
             })

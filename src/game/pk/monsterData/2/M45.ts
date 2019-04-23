@@ -1,17 +1,17 @@
-class M45 extends MBase {
+class M45_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     public mvID2 = 8;
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkX = 20
         user.atkY = 40
     }
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 200;
     }
 
@@ -21,20 +21,20 @@ class M45 extends MBase {
 
 
 
-    public skill(user:PKMonsterData,target:PKMonsterData){
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var skillValue = user.getSkillValue(1);
-        var buff = new PKBuffData()
+        var buff = new PKBuffData_wx3()
         buff.id = 45;
         buff.value = skillValue;
         buff.addValue('addSpeed',skillValue);
         buff.user = user;
-        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+        buff.endTime = PKData_wx3.getInstance().actionTime + 1000*user.getSkillValue(2);
         target.addBuff(buff)
 
         if(buff.ing)
         {
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                 user:target,
                 keys:['speed+']
             })
@@ -42,8 +42,8 @@ class M45 extends MBase {
     }
 
     //
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getVO().getAtkDis() + 100;
         for(var i=0;i<arr.length;i++)

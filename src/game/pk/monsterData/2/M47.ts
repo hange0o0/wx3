@@ -1,14 +1,14 @@
-class M47 extends MBase {
+class M47_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     public mvID1 = 104;
-    public skill(user:PKMonsterData,target:PKMonsterData){
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var skillValue = user.getSkillValue(1,true);
         target.manaHp += skillValue
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MANAHP_CHANGE,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MANAHP_CHANGE,
             user:target,
         })
         //PKData.getInstance().addVideo({
@@ -20,8 +20,8 @@ class M47 extends MBase {
     }
 
     //
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getVO().getAtkDis() + 100;
         for(var i=0;i<arr.length;i++)

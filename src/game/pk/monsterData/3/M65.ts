@@ -1,14 +1,14 @@
-class M65 extends MBase {
+class M65_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public getSkillTarget(user:PKMonsterData){
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
         return [null];
     }
 
-    public skill(user:PKMonsterData,targets){
-        var PD = PKData.getInstance();
+    public skill_wx3(user:PKMonsterData_wx3,targets){
+        var PD = PKData_wx3.getInstance();
         var mid = 65;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;

@@ -244,7 +244,7 @@ class DebugManager {
         var xxx = {list1:arr[0],list2:arr[1]};
         arr = this.testOne(arr.shift(),arr.shift())
 
-        if(PKData.getInstance().isDraw())////平手局数不超过1/30
+        if(PKData_wx3.getInstance().isDraw())////平手局数不超过1/30
         {
             if(this.drawNum/this.outPut.length < 1/30)
             {
@@ -309,7 +309,7 @@ class DebugManager {
     }
 
     private testOne(list1,list2,seed?){
-        var PD = PKData.getInstance()
+        var PD = PKData_wx3.getInstance()
         var data = {
             seed:seed ||TM.now() + Math.floor(100000000*Math.random()),
             players:[
@@ -320,7 +320,7 @@ class DebugManager {
         PD.init(data);
         PD.quick = true;
         PD.start();
-        PKCode.getInstance().onStep()
+        PKCode_wx3.getInstance().onStep()
 
         if(PD.isWin())
         {
@@ -427,7 +427,7 @@ class DebugManager {
     }
 
     public getChapterForce(id){
-        var chapterData = PKManager.getInstance().chapterData[id-1]
+        var chapterData = PKManager_wx3.getInstance().chapterData[id-1]
         var arr = chapterData.list1.split(',')
         var count = 0;
         var force = Math.floor(Math.pow(id - 1,1.2)*10)

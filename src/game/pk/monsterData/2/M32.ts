@@ -1,25 +1,25 @@
-class M32 extends MBase {
+class M32_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = -30
     }
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x) + 100;
     }
 
 
 
-    public onCreate(user:PKMonsterData){
+    public onCreate_wx3(user:PKMonsterData_wx3){
         var listener = new M32StateListener();
         listener.owner = user;
         user.getOwner().teamData.addStateLister(listener)
     }
 
-    public onRemove(user:PKMonsterData){
+    public onRemove_wx3(user:PKMonsterData_wx3){
         //var PD = PKData.getInstance();
         //var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         //for(var i=0;i<arr.length;i++)
@@ -31,28 +31,28 @@ class M32 extends MBase {
     }
 }
 
-class M32StateListener extends PKStateListener {
-    public type = PKConfig.LISTENER_TIMER
+class M32StateListener extends PKStateListener_wx3 {
+    public type = PKConfig_wx3.LISTENER_TIMER
     public actionTime
     //public x
     constructor() {
         super();
-        this.actionTime = PKData.getInstance().actionTime;
+        this.actionTime = PKData_wx3.getInstance().actionTime;
     }
 
     // 起作用时会调用的方法
-    public actionFun(target?:PKMonsterData){
+    public actionFun(target?:PKMonsterData_wx3){
 
-        if(PKData.getInstance().actionTime - this.actionTime < 1000)
+        if(PKData_wx3.getInstance().actionTime - this.actionTime < 1000)
             return;
 
 
 
-        this.actionTime = PKData.getInstance().actionTime;
+        this.actionTime = PKData_wx3.getInstance().actionTime;
 
 
-        var user:PKMonsterData = <PKMonsterData>this.owner;
-        var PD = PKData.getInstance();
+        var user:PKMonsterData_wx3 = <PKMonsterData_wx3>this.owner;
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
         var list = [];

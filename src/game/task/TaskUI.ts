@@ -78,20 +78,20 @@ class TaskUI extends game.BaseWindow {
             this.diamondText.text = 'x' + vo.diamond + ''
 
             this.taskTextTitle.text = vo.getTitle();
-            this.setHtml(this.taskText, '要求：' + this.createHtml(vo.getDes(),0xFFFFFF));
+            this.setHtml(this.taskText, '任务要求：' + this.createHtml(vo.getDes(),0xFCF4D6));
 
 
             if(value<vo.value)
             {
                 this.taskBtn.label = '去完成'
                 this.taskBtn.skinName = 'Btn2Skin'
-                this.setHtml(this.taskRateText,'完成度：' + this.createHtml(value + '/' + vo.value,0xFF0000))
+                this.setHtml(this.taskRateText,'完 成 度：' + this.createHtml(value + '/' + vo.value,0xFCACA4))
             }
             else
             {
                 this.taskBtn.label = '领取奖励'
                 this.taskBtn.skinName = 'Btn1Skin'
-                this.setHtml(this.taskRateText,'完成度：' + this.createHtml(value + '/' + vo.value,0x00ff00))
+                this.setHtml(this.taskRateText,'完成度：' + this.createHtml(value + '/' + vo.value,0xBDF9A4))
             }
         }
 

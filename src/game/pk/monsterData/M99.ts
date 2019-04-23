@@ -1,28 +1,28 @@
-class M99 extends MBase{
+class M99_wx3 extends MBase_wx3{
     constructor() {
         super();
     }
 
-    public onCreate(user:PKMonsterData){
+    public onCreate_wx3(user:PKMonsterData_wx3){
         user.momian = true
     }
 
-    public beAtkAction(user,data){
+    public beAtkAction_wx3(user,data){
         data.atker.getOwner().teamData.def ++;
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_TEAM_DEF,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_TEAM_DEF,
             user:data.atker
         })
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_ATK,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_ATK,
             user:user
         })
 
         if(user.die)
         {
-            PKData.getInstance().currentState = 'pk'
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_TEAM_DEF2,
+            PKData_wx3.getInstance().currentState = 'pk'
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_TEAM_DEF2,
                 user:data.atker
             })
         }

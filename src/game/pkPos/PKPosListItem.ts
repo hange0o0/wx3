@@ -1,4 +1,4 @@
-class PKPosListItem extends game.BaseItem {
+class PKPosListItem_wx3 extends game.BaseItem {
     public constructor() {
         super();
         this.skinName = "PKPosListItemSkin";

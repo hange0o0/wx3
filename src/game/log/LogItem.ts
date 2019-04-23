@@ -29,7 +29,7 @@ class LogItem extends game.BaseItem {
         pkObject.isReplay = true;
         pkObject.fight = this.data;
         pkObject.title = '与【'+this.data.robot.nick+'】的战斗回放'
-        MainPKUI.getInstance().show(pkObject)
+        MainPKUI_wx3.getInstance().show(pkObject)
     }
 
     private onPKClick(){
@@ -54,7 +54,7 @@ class LogItem extends game.BaseItem {
 
     public dataChanged(){
         var robot = this.data.robot;
-        PKManager.getInstance().setHead(this.headMC,robot.head)
+        PKManager_wx3.getInstance().setHead(this.headMC,robot.head)
         this.nameText.text = robot.nick + '(LV.'+robot.level+')';
 
         var cd =  TM.now() - this.data.logTime;

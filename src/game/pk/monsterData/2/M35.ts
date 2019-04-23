@@ -1,20 +1,20 @@
-class M35 extends MBase {
+class M35_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
     public mvID1 = 103;
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = -30
     }
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x) + 100;
     }
 
 
-    public skill(user:PKMonsterData,target:PKMonsterData){
-        var PD = PKData.getInstance();
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var mid = 35;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
@@ -36,7 +36,7 @@ class M35 extends MBase {
         }
     }
 
-    public getSkillTarget(user:PKMonsterData){
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
         user.getAtkTarget();
         if(user.target)
             return [null];

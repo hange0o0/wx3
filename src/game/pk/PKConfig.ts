@@ -1,4 +1,4 @@
-class PKConfig {
+class PKConfig_wx3 {
     public static ROTA_LEFT = 1
     public static ROTA_RIGHT = -1
 

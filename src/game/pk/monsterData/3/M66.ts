@@ -1,12 +1,12 @@
-class M66 extends MBase {
+class M66_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public onKill(user:PKMonsterData,target:PKMonsterData){
+    public onKill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         if(target.dieTime)
             return;
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         var mid = 65;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;

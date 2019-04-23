@@ -1,11 +1,11 @@
-class M15 extends MBase {
+class M15_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     //a对B攻击到达时的逻辑（攻击正式生效）
-    public atk(user:PKMonsterData,target:PKMonsterData){
-        var b = super.atk(user,target)
+    public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
+        var b = super.atk_wx3(user,target)
         if(b)
         {
             user.atk += Math.ceil(user.baseAtk*user.getSkillValue(1)/100)

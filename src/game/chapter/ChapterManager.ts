@@ -29,7 +29,7 @@ class ChapterManager {
                 },['取消', '补满']);
                 return;
             }
-            var chapterData = PKManager.getInstance().chapterData[id-1]
+            var chapterData = PKManager_wx3.getInstance().chapterData[id-1]
             var enemy = {
                 bgid:id%7 || 7,
                 list:chapterData.list1,
@@ -62,11 +62,11 @@ class ChapterManager {
                             force2:TecManager.getInstance().getAtkForce() + BuffManager.getInstance().getForceAdd(),
                             mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
                         }
-                        var result = PKManager.getInstance().getPKResult(pkObj);
+                        var result = PKManager_wx3.getInstance().getPKResult(pkObj);
                         if(result == 2)
                         {
-                            PKData.instanceIndex = 2;
-                            var hpObj = PKData.getInstance().getHpData();
+                            PKData_wx3.instanceIndex = 2;
+                            var hpObj = PKData_wx3.getInstance().getHpData();
                             var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
                             if(hpRate2 >= 0.6)
                                 this.setChapterStar(id,3);
@@ -74,7 +74,7 @@ class ChapterManager {
                                 this.setChapterStar(id,2);
                             else
                                 this.setChapterStar(id,1);
-                            PKData.instanceIndex = 1;
+                            PKData_wx3.instanceIndex = 1;
                             UM.addCoin(this.resultEarn.coin)
                             UM.addDiamond(this.resultEarn.diamond)
                             pkObj.coin = this.resultEarn.coin
@@ -86,7 +86,7 @@ class ChapterManager {
                         {
                             this.resultEarn = null;
                         }
-                        MainPKUI.getInstance().show(pkObj);
+                        MainPKUI_wx3.getInstance().show(pkObj);
                         EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
                     })
                 },

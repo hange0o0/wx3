@@ -64,7 +64,7 @@ class GetCoinItem extends game.BaseItem {
             {
                 UM.coinObj.gameNum ++;
                 this.dataChanged();
-                ShootGameUI.getInstance().show(this.getCoin(0.25));
+                ShootGameUI_wx3.getInstance().show(this.getCoin(0.25));
             }
             return;
         }

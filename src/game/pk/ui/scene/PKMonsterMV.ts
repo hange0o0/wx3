@@ -1,10 +1,10 @@
-class PKMonsterMV extends eui.Group {
+class PKMonsterMV_wx3 extends eui.Group {
     private static pool = [];
-    public static createItem():PKMonsterMV{
-        var item:PKMonsterMV = this.pool.pop();
+    public static createItem():PKMonsterMV_wx3{
+        var item:PKMonsterMV_wx3 = this.pool.pop();
         if(!item)
         {
-            item = new PKMonsterMV();
+            item = new PKMonsterMV_wx3();
             item.touchChildren = item.touchEnabled =false;
         }
         return item;
@@ -20,7 +20,7 @@ class PKMonsterMV extends eui.Group {
     public monsterMV:MonsterMV
     //public heroMV:HeroMVItem
     public currentMV;
-    public talkItm:PKTalkItem;
+    public talkItm:PKTalkItem_wx3;
     public clickMC = new eui.Rect()
 
     public id;
@@ -42,7 +42,7 @@ class PKMonsterMV extends eui.Group {
 
         if(this.talkItm)
         {
-            PKTalkItem.freeItem(this.talkItm)
+            PKTalkItem_wx3.freeItem(this.talkItm)
             this.talkItm = null;
         }
     }
@@ -53,6 +53,8 @@ class PKMonsterMV extends eui.Group {
     public showWidth(){
         return MonsterVO.getObject(this.id).width
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
      public load(id){
          this.id = id;
@@ -116,13 +118,13 @@ class PKMonsterMV extends eui.Group {
     public talk(gift?){
         if(this.talkItm)
         {
-            PKTalkItem.freeItem(this.talkItm)
+            PKTalkItem_wx3.freeItem(this.talkItm)
             this.talkItm = null;
         }
         //this.isTalking = this.monsterMV.state
         //if([61,62,63,70,76].indexOf(this.id) == -1)
         //    this.atk();
-        this.talkItm = PKTalkItem.createItem();
+        this.talkItm = PKTalkItem_wx3.createItem();
         this.talkItm.setData(this,gift,this.scaleX);
         this.addChild(this.talkItm);
         SoundManager.getInstance().playEffect('talk');

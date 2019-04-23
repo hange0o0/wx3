@@ -1,15 +1,15 @@
-class M6 extends MBase {
+class M6_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public atk(user:PKMonsterData,target:PKMonsterData){
-        var b = super.atk(user,target);
+    public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
+        var b = super.atk_wx3(user,target);
         if(!b)
             return false;
         //溅射
         var isToRight = user.x<target.x
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkRage = user.getVO().getAtkDis() + user.getSkillValue(2);
         var hitRate = user.getSkillValue(1)/100;
@@ -31,7 +31,7 @@ class M6 extends MBase {
             if(tDes > atkRage + newTarget.getVO().width/2)
                 continue;
 
-            var hp = Math.ceil(this.getAtkHp(user,newTarget)*hitRate);
+            var hp = Math.ceil(this.getAtkHp_wx3(user,newTarget)*hitRate);
             newTarget.beAtkAction({hp:hp})
             user.addAtkHurt(hp)
         }

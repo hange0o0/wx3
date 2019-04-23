@@ -1,9 +1,9 @@
-class PKCardInfoUI extends game.BaseContainer {
+class PKCardInfoUI_wx3 extends game.BaseContainer {
 
-    private static _instance: PKCardInfoUI;
-    public static getInstance(): PKCardInfoUI {
+    private static _instance: PKCardInfoUI_wx3;
+    public static getInstance(): PKCardInfoUI_wx3 {
         if(!this._instance)
-            this._instance = new PKCardInfoUI();
+            this._instance = new PKCardInfoUI_wx3();
         return this._instance;
     }
 
@@ -42,9 +42,9 @@ class PKCardInfoUI extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.list.itemRenderer = PKCardInfoItem
+        this.list.itemRenderer = PKCardInfoItem_wx3
 
-        this.heroItem = new PKMonsterMV()
+        this.heroItem = new PKMonsterMV_wx3()
         this.heroItem.x = 180/2
         this.heroItem.y = 200
         this.heroItem.scaleX = this.heroItem.scaleY = 1.2
@@ -113,7 +113,7 @@ class PKCardInfoUI extends game.BaseContainer {
         this.dataIn = v;
         var vo:any = CM.getCardVO(this.dataIn.mid)
 
-        this.bg.source = PKManager.getInstance().getPKBG(1)
+        this.bg.source = PKManager_wx3.getInstance().getPKBG(1)
         this.heroItem.load(this.dataIn.mid)
         this.heroItem.stand();
 
@@ -137,7 +137,7 @@ class PKCardInfoUI extends game.BaseContainer {
 
         if(this.dataIn.rota)
         {
-            this.teamIcon.source = this.dataIn.rota == PKConfig.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png'
+            this.teamIcon.source = this.dataIn.rota == PKConfig_wx3.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png'
             this.teamIcon.visible = true
         }
         else

@@ -1,17 +1,17 @@
-class M36 extends MBase {
+class M36_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     public mvID1 = 119;
-    public onDie(user:PKMonsterData){
+    public onDie_wx3(user:PKMonsterData_wx3){
         if(user.skillTemp[36])
             return;
         if(user.reborning)
             return;
         user.reborning = true;
-        var PD = PKData.getInstance();
-        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+        var PD = PKData_wx3.getInstance();
+        PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill_before',
             model:this,
             user:user,
@@ -22,8 +22,8 @@ class M36 extends MBase {
         })
     }
 
-    protected sendSkillAction(user,target,actionTime,endTime){
-        PKMonsterAction.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
+    protected sendSkillAction_wx3(user,target,actionTime,endTime){
+        PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill',
             user:user,
             target:target,
@@ -37,8 +37,8 @@ class M36 extends MBase {
 
 
 
-    public skill(user:PKMonsterData,targets){
-        var PD = PKData.getInstance();
+    public skill_wx3(user:PKMonsterData_wx3,targets){
+        var PD = PKData_wx3.getInstance();
         var mid = 36;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
@@ -57,7 +57,7 @@ class M36 extends MBase {
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;
 
-        var mc = AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
+        var mc = AtkMVCtrl_wx3.getInstance().playAniOn(monster.id,this.mvID1)
         if(mc)
         {
             mc.y -= 30

@@ -1,30 +1,30 @@
-class M74 extends MBase {
+class M74_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkX = 20
         user.atkY = 65
     }
 
-    public preload(){
-        AtkMVCtrl.getInstance().preLoadPNG('monster/enemy72_attack.png')
+    public preload_wx3(){
+        AtkMVCtrl_wx3.getInstance().preLoadPNG('monster/enemy72_attack.png')
     }
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*1.5 + 200;
     }
 
 
 
-    public getSkillTarget(user:PKMonsterData){
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
         return [null];
     }
 
-    public skill(user:PKMonsterData,targets){
-        var PD = PKData.getInstance();
+    public skill_wx3(user:PKMonsterData_wx3,targets){
+        var PD = PKData_wx3.getInstance();
         var mid = 64;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;

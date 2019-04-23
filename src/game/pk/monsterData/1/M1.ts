@@ -1,4 +1,4 @@
-class M1 extends MBase{
+class M1_wx3 extends MBase_wx3{
     constructor() {
         super();
     }
@@ -16,7 +16,7 @@ class M1 extends MBase{
 
 
 
-    public skill(user:PKMonsterData,target){
+    public skill_wx3(user:PKMonsterData_wx3,target){
         var hp = Math.ceil(user.getSkillValue(2,true));
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
@@ -33,8 +33,8 @@ class M1 extends MBase{
         }
     }
     //对最多3个单位进行一次攻击
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var atkrage = user.getVO().getAtkDis() + 50;
         var list = PD.getMonsterByTeam(user.getOwner().teamData.enemy,this.testTarget,[user,atkrage]);
 

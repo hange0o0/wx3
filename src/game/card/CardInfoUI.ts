@@ -7,7 +7,7 @@ class CardInfoUI extends game.BaseWindow {
         return this._instance;
     }
 
-    private item: PKCardInfoUI;
+    private item: PKCardInfoUI_wx3;
     public con: eui.Image;
     private leftBtn: eui.Image;
     public rightBtn: eui.Image;

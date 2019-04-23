@@ -163,13 +163,13 @@ class MonsterVO {
         if(this.haveLoad)
             return;
         //MyRES.loadGroup(['enemy'+this.id+'_png'])
-         MBase.getData(this.id).preload();
+         MBase_wx3.getData(this.id).preload_wx3();
         this.haveLoad = true;
     }
 
     public getAdd(force,type?){
         if(type)
-            var typeAdd = this.type == type?PKConfig.typeAdd:0
+            var typeAdd = this.type == type?PKConfig_wx3.typeAdd:0
         else
             var typeAdd = 0;
         var add = (1+force/100)*(1+typeAdd/100);
@@ -217,7 +217,7 @@ class MonsterVO {
     }
 
     public isNearAtk(){
-        return this.atkrage <= PKConfig.nearRage
+        return this.atkrage <= PKConfig_wx3.nearRage
     }
 
     public isHero(){

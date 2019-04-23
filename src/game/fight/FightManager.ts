@@ -242,7 +242,7 @@ class FightManager {
                 {
                     robot.reset(oo.time+robot.distanceTime);
                     oo.pkObj = this.getPKObj(oo);
-                    oo.result = PKManager.getInstance().getPKResult(oo.pkObj);
+                    oo.result = PKManager_wx3.getInstance().getPKResult(oo.pkObj);
                     this.log.unshift(oo);
                     oo.logTime = oo.time + robot.distanceTime;
                     this.notReadLog.push(oo.time)

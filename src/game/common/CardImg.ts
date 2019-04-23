@@ -28,7 +28,7 @@ class CardImg extends game.BaseItem{
         {
             this.img.source = source
             this.lastSource = source;
-            this.typeMC.visible = this.data > PKConfig.skillBeginID && !this.hideType;
+            this.typeMC.visible = this.data > PKConfig_wx3.skillBeginID && !this.hideType;
             this.typeMC.source = vo.getTypeIcon();
         }
     }

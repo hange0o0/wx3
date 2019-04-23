@@ -103,7 +103,7 @@ class BuffUI extends game.BaseWindow {
     public renew(){
         var BM = BuffManager.getInstance();
         var num = BM.getUserNum()
-        this.desText.text = '当前新邀请好友 '+num +'个：'
+        this.desText.text = '当前邀请好友 '+num +'个：'
         this.dataProvider.refresh();
         this.atkText.text = '战力+'+BM.getForceAdd()+'%'
         this.workText.text = '效率+'+BM.getCoinAdd()+'%'

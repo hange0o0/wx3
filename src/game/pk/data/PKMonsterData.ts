@@ -1,5 +1,5 @@
 //场上的怪
-class PKMonsterData {
+class PKMonsterData_wx3 {
     public die = false;
     public passEnd = false;//冲过了终点
 
@@ -46,7 +46,7 @@ class PKMonsterData {
     public actionTime//上次行动的时间
     public atkRota//进攻方向
 
-    public target:PKMonsterData//攻击目标
+    public target:PKMonsterData_wx3//攻击目标
     public skillTargets//技能目标
 
     public id;//唯一ID
@@ -72,6 +72,8 @@ class PKMonsterData {
         if(obj)
             this.fill(obj);
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public fill(obj)
     {
@@ -102,19 +104,19 @@ class PKMonsterData {
 
 
 
-        MBase.getData(this.mid).initMonster(this);
+        MBase_wx3.getData(this.mid).initMonster_wx3(this);
         //this.def += this.getVO().def;
     }
 
 
 
     //根据属性相克，取攻击比例
-    public getAtkRate(defender:PKMonsterData){
+    public getAtkRate(defender:PKMonsterData_wx3){
         if(_get['debug'])
             return 1//先不考滤相克
         var atkType = this.getVO().type
         var defType = defender.getVO().type
-        return PKTool.getAtkRate(atkType,defType)
+        return PKTool_wx3.getAtkRate(atkType,defType)
     }
 
     //public changeValue(key,value){
@@ -139,11 +141,11 @@ class PKMonsterData {
     }
 
     public beSkillAble(){
-        return this.momian == false && !this.isInState(PKConfig.STATE_MOMIAN);
+        return this.momian == false && !this.isInState(PKConfig_wx3.STATE_MOMIAN);
     }
 
     //{endTime,  add:{属性名称:增加值}，   state:{状态名：true},   id:唯一ID,   no:这BUFF没生效,   value:技能等级数值}
-    public addBuff(data:PKBuffData){
+    public addBuff(data:PKBuffData_wx3){
         data.owner = this;
         this.buff.push(data);
         if(data.id)
@@ -159,7 +161,7 @@ class PKMonsterData {
     public haveBuff(id){
         for(var i=0;i<this.buff.length;i++)
         {
-            var oo:PKBuffData =  this.buff[i];
+            var oo:PKBuffData_wx3 =  this.buff[i];
             if(oo.id == id)
             {
                 return true
@@ -174,7 +176,7 @@ class PKMonsterData {
         var needTestId = null
         for(var i=0;i<this.buff.length;i++)
         {
-            var oo:PKBuffData =  this.buff[i];
+            var oo:PKBuffData_wx3 =  this.buff[i];
             var needClean = oo.endTime && t && oo.endTime <= t
             if(user && user == oo.user)
                 needClean = true;
@@ -215,7 +217,7 @@ class PKMonsterData {
 
     //判断是否在某个状态中
     public isInState(stateName){
-        if(stateName == PKConfig.STATE_MOMIAN && this.momian)
+        if(stateName == PKConfig_wx3.STATE_MOMIAN && this.momian)
             return true;
         return this.currentState[stateName];
     }
@@ -226,7 +228,7 @@ class PKMonsterData {
         this.currentState = {};
         for(var i=0;i<this.buff.length;i++)
         {
-            var oo:PKBuffData =  this.buff[i];
+            var oo:PKBuffData_wx3 =  this.buff[i];
             if(oo.ing && oo.haveState)
             {
                 for(var s in oo.state)
@@ -254,10 +256,10 @@ class PKMonsterData {
     //对ID唯一的技能进行重置
     public resetBuffID(id){
         var ids = []//所有相同ID的BUFF
-        var current:PKBuffData;
+        var current:PKBuffData_wx3;
         for(var i=0;i<this.buff.length;i++)
         {
-            var oo:PKBuffData =  this.buff[i];
+            var oo:PKBuffData_wx3 =  this.buff[i];
             if(oo.id == id)
             {
                 ids.push(oo);
@@ -269,10 +271,10 @@ class PKMonsterData {
             return
         if(ids.length == 1 && current) //只有唯一技能
             return
-        var newOne:PKBuffData;
+        var newOne:PKBuffData_wx3;
         for(var i=0;i<ids.length;i++)
         {
-            var oo:PKBuffData = ids[i];
+            var oo:PKBuffData_wx3 = ids[i];
             if(!newOne || Math.abs(oo.value) > Math.abs(newOne.value))
                 newOne = oo;
         }
@@ -293,7 +295,7 @@ class PKMonsterData {
         return MonsterVO.getObject(this.mid);
     }
     public getOwner(){
-        return PKData.getInstance().getPlayer(this.owner);
+        return PKData_wx3.getInstance().getPlayer(this.owner);
     }
 
     public canMove(t){
@@ -303,10 +305,10 @@ class PKMonsterData {
             return false;
         if(!this.canAction())
             return false
-        if(!this.atkAble && PKData.getInstance().currentState == 'def'){
-             if(this.atkRota == PKConfig.ROTA_LEFT && this.x > PKConfig.floorWidth/2 + PKConfig.appearPos - 100)
+        if(!this.atkAble && PKData_wx3.getInstance().currentState == 'def'){
+             if(this.atkRota == PKConfig_wx3.ROTA_LEFT && this.x > PKConfig_wx3.floorWidth/2 + PKConfig_wx3.appearPos - 100)
                  return false
-             if(this.atkRota == PKConfig.ROTA_RIGHT && this.x < PKConfig.floorWidth/2 + PKConfig.appearPos + 100)
+             if(this.atkRota == PKConfig_wx3.ROTA_RIGHT && this.x < PKConfig_wx3.floorWidth/2 + PKConfig_wx3.appearPos + 100)
                  return false
         }
         return this.stopTime < t;
@@ -314,17 +316,17 @@ class PKMonsterData {
 
     //可以有行为 如移动，攻击等
     public canAction(){
-        return !this.die && !this.isInState(PKConfig.STATE_YUN)
+        return !this.die && !this.isInState(PKConfig_wx3.STATE_YUN)
     }
 
     public canAtk(){
-        var PD =  PKData.getInstance();
+        var PD =  PKData_wx3.getInstance();
         return  this.atkAble && this.canAction() &&  this.stopTime < PD.actionTime
     }
 
     public canBeAtk(user){
         return !this.die &&
-            user.getOwner().teamData != this.getOwner().teamData && !this.isInState(PKConfig.STATE_NOBEATK)
+            user.getOwner().teamData != this.getOwner().teamData && !this.isInState(PKConfig_wx3.STATE_NOBEATK)
     }
 
 //可以用技能
@@ -338,7 +340,7 @@ class PKMonsterData {
             return null;
         if(!this.canAction())
             return null;
-        this.skillTargets = MBase.getData(this.mid).getSkillTarget(this);
+        this.skillTargets = MBase_wx3.getData(this.mid).getSkillTarget_wx3(this);
         return this.skillTargets
     }
 
@@ -348,13 +350,13 @@ class PKMonsterData {
 
     public setSkillUse(actionTime){
 
-        if(this.getVO().isHero())
-        {
-            if(this.callHeroSkill)
-                this.useingHeroSkill = this.callHeroSkill;
-            this.callHeroSkill = 0;
-            MBase.getData(this.mid).setHeroSkillUse(this,this.useingHeroSkill)
-        }
+        //if(this.getVO().isHero())
+        //{
+        //    if(this.callHeroSkill)
+        //        this.useingHeroSkill = this.callHeroSkill;
+        //    this.callHeroSkill = 0;
+        //    MBase_wx3.getData(this.mid).setHeroSkillUse(this,this.useingHeroSkill)
+        //}
 
         if(this.getVO().skillcd < 0)
         {
@@ -377,14 +379,14 @@ class PKMonsterData {
             var rate = (1+this.addSpeed/(100 - this.addSpeed));
 
         this.x += this.atkRota * Math.round(this.speed*rate)/10;
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_MOVE,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_MOVE,
             user:this
         })
     }
     public stand(){
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_STAND,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_STAND,
             user:this
         })
     }
@@ -392,7 +394,7 @@ class PKMonsterData {
     public getAtkTarget(){
         if(this.owner == 'sys')
             return null;
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         if(!this.canAtk())
             return null;
         var atkRage = this.getVO().getAtkDis();
@@ -412,7 +414,7 @@ class PKMonsterData {
         var myPlayer = PD.getPlayer(this.owner);
         for(var i=0;i<list.length;i++)
         {
-            var target:PKMonsterData = list[i];
+            var target:PKMonsterData_wx3 = list[i];
             var ePlayer = PD.getPlayer(target.owner);
             if(myPlayer.teamData.id == ePlayer.teamData.id)//同一队
                 continue;
@@ -440,18 +442,18 @@ class PKMonsterData {
         if(data.hp)
             this.addAtkHurt(data.hp)
 
-        this.getOwner().teamData.testState(PKConfig.LISTENER_ATK,this);
+        this.getOwner().teamData.testState(PKConfig_wx3.LISTENER_ATK,this);
     }
 
     public beAtkAction(data){
 
         this.addHp(-data.hp)
-        MBase.getData(this.mid).beAtkAction(this,data);
+        MBase_wx3.getData(this.mid).beAtkAction_wx3(this,data);
         this.listenerData = data;
-        this.getOwner().teamData.testState(PKConfig.LISTENER_BEATK,this);
+        this.getOwner().teamData.testState(PKConfig_wx3.LISTENER_BEATK,this);
         if(this.die && data.atker)
         {
-            MBase.getData(data.atker.mid).onKill(data.atker,this);
+            MBase_wx3.getData(data.atker.mid).onKill_wx3(data.atker,this);
         }
 
     }
@@ -468,8 +470,8 @@ class PKMonsterData {
             if(this.nohitTimes)
             {
                 this.nohitTimes -- ;
-                PKData.getInstance().addVideo({
-                    type:PKConfig.VIDEO_MONSTER_NOHIT,
+                PKData_wx3.getInstance().addVideo({
+                    type:PKConfig_wx3.VIDEO_MONSTER_NOHIT,
                     user:this,
                 })
                 return;
@@ -489,8 +491,8 @@ class PKMonsterData {
                 //魔盾消失
                 if(this.manaHp == 0)
                 {
-                    PKData.getInstance().addVideo({
-                        type:PKConfig.VIDEO_MANAHP_CHANGE,
+                    PKData_wx3.getInstance().addVideo({
+                        type:PKConfig_wx3.VIDEO_MANAHP_CHANGE,
                         user:this,
                     })
                 }
@@ -505,11 +507,11 @@ class PKMonsterData {
             this.die = true;
         else if(this.hp > this.maxHp)
             this.hp = this.maxHp
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_HPCHANGE,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_HPCHANGE,
             user:this,
         })
-        MBase.getData(this.mid).onHpChange(this);
+        MBase_wx3.getData(this.mid).onHpChange_wx3(this);
     }
 
     public getHpRate(){
@@ -521,22 +523,22 @@ class PKMonsterData {
         {
             for(var i=0;i<this.buff.length;i++)
             {
-                var oo:PKBuffData =  this.buff[i];
-                if(oo.ing && oo.haveState && (oo.state[PKConfig.STATE_DIE]))
+                var oo:PKBuffData_wx3 =  this.buff[i];
+                if(oo.ing && oo.haveState && (oo.state[PKConfig_wx3.STATE_DIE]))
                 {
                     var id = parseInt((oo.id + '').split('_').shift())
-                    MBase.getData(id).onBuff(oo);
+                    MBase_wx3.getData(id).onBuff_wx3(oo);
                 }
             }
-            MBase.getData(this.mid).onDie(this);
+            MBase_wx3.getData(this.mid).onDie_wx3(this);
         }
-        this.getOwner().teamData.testState(PKConfig.LISTENER_DIE,this);
-        MBase.getData(this.mid).onRemove(this);
-        PKData.getInstance().actionRecord.push('die|' + PKData.getInstance().actionTime + '|' + this.id + '|' + this.passEnd)
+        this.getOwner().teamData.testState(PKConfig_wx3.LISTENER_DIE,this);
+        MBase_wx3.getData(this.mid).onRemove_wx3(this);
+        PKData_wx3.getInstance().actionRecord.push('die|' + PKData_wx3.getInstance().actionTime + '|' + this.id + '|' + this.passEnd)
     }
 
     public getSkillValue(index,needForce=false){
-        var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
         return CM.getCardVO(this.mid).getSkillValue(index,needForce?PD.getPlayer(this.owner).getMonsterForce(this.id):0)
     }
     //

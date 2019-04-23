@@ -1,4 +1,4 @@
-class PKCardInfoItem extends game.BaseItem {
+class PKCardInfoItem_wx3 extends game.BaseItem {
     public constructor() {
         super();
         this.skinName = "PKCardInfoItemSkin";

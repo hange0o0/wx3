@@ -1,19 +1,19 @@
-class M13 extends MBase {
+class M13_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkAble =  false;
     }
 
-    public onCreate(user:PKMonsterData){
+    public onCreate_wx3(user:PKMonsterData_wx3){
         var listener = new M13StateListener();
         listener.owner = user;
         user.getOwner().teamData.addStateLister(listener)
     }
 
-    public onRemove(user:PKMonsterData){
+    public onRemove_wx3(user:PKMonsterData_wx3){
         //var PD = PKData.getInstance();
         //var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         //for(var i=0;i<arr.length;i++)
@@ -25,25 +25,25 @@ class M13 extends MBase {
     }
 }
 
-class M13StateListener extends PKStateListener {
-    public type = PKConfig.LISTENER_TIMER
+class M13StateListener extends PKStateListener_wx3 {
+    public type = PKConfig_wx3.LISTENER_TIMER
     public actionTime
     //public x
     constructor() {
         super();
-        this.actionTime = PKData.getInstance().actionTime;
+        this.actionTime = PKData_wx3.getInstance().actionTime;
     }
 
     // 起作用时会调用的方法
-    public actionFun(target?:PKMonsterData){
+    public actionFun(target?:PKMonsterData_wx3){
 
-        if(PKData.getInstance().actionTime - this.actionTime < 500)
+        if(PKData_wx3.getInstance().actionTime - this.actionTime < 500)
             return;
 
-        this.actionTime = PKData.getInstance().actionTime;
+        this.actionTime = PKData_wx3.getInstance().actionTime;
 
-        var user:PKMonsterData = <PKMonsterData>this.owner;
-        var PD = PKData.getInstance();
+        var user:PKMonsterData_wx3 = <PKMonsterData_wx3>this.owner;
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkrage = user.getSkillValue(1);
         var list = [];

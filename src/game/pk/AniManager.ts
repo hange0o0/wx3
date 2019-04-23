@@ -1,9 +1,9 @@
-class AniManager {
+class AniManager_wx3 {
 
-    private static _instance:AniManager;
-    public static getInstance():AniManager {
+    private static _instance:AniManager_wx3;
+    public static getInstance():AniManager_wx3 {
         if (!this._instance)
-            this._instance = new AniManager();
+            this._instance = new AniManager_wx3();
         return this._instance;
     }
 
@@ -119,6 +119,9 @@ class AniManager {
         //    this.aniList.push('skill' + i);
         //}
     }
+
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public getImg(source){
         var mc = this.imgPool.pop() || new eui.Image()

@@ -1,26 +1,26 @@
-class M44 extends MBase {
+class M44_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
     public mvID1 = 112;
     public mvID2 = 8;
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkX = 20
         user.atkY = 40
     }
 
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 200;
     }
 
 
 
 
-    public onKill(user:PKMonsterData,target:PKMonsterData){
-        var PD = PKData.getInstance();
+    public onKill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkRage = user.getSkillValue(1);
         var hurt = user.getSkillValue(2,true);
@@ -38,7 +38,7 @@ class M44 extends MBase {
             newTarget.beAtkAction({hp:hurt})
             user.addAtkHurt(hurt)
         }
-        var mv = AtkMVCtrl.getInstance().playAniOn(target.id,this.mvID1)
+        var mv = AtkMVCtrl_wx3.getInstance().playAniOn(target.id,this.mvID1)
         if(mv)
         {
             mv.scaleX = mv.scaleY = 1;

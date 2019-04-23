@@ -1,4 +1,4 @@
-class PKBuffData {
+class PKBuffData_wx3 {
     public user; //发起者,对象
     public owner;        //拥有者
     public isDebuff = false;
@@ -29,6 +29,8 @@ class PKBuffData {
         //else
         //    this.nick = '守卫者' + this.id;
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     //def,atk,addSpeed,hpChange
     public addValue(key,value){

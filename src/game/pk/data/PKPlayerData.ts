@@ -1,5 +1,5 @@
 //玩家数据
-class PKPlayerData {
+class PKPlayerData_wx3 {
     public id;//唯一ID
     public gameid;
     public nick;
@@ -10,7 +10,7 @@ class PKPlayerData {
     public mforce={};//怪的基础属性
     public hpBuff;//buff的加成
     public atkBuff;//buff的加成
-    public teamData:PKTeamData   //对应队伍
+    public teamData:PKTeamData_wx3   //对应队伍
 
     public autoList
     public maxPlayer
@@ -27,6 +27,8 @@ class PKPlayerData {
         else
             this.nick = '守卫者' + this.id;
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public fill(obj)
     {
@@ -94,9 +96,9 @@ class PKPlayerData {
         }
         //var owner = this.id
         var atkRota = this.teamData.atkRota;
-        var x = atkRota == PKConfig.ROTA_LEFT ? PKConfig.appearPos:PKConfig.floorWidth + PKConfig.appearPos;
+        var x = atkRota == PKConfig_wx3.ROTA_LEFT ? PKConfig_wx3.appearPos:PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos;
 
-        PKData.getInstance().addMonster(this.getMonsterCreateData({
+        PKData_wx3.getInstance().addMonster(this.getMonsterCreateData({
             mid:mid,
             fromPos:true,
             index:this.maxPlayer - this.autoList.length,
@@ -113,8 +115,8 @@ class PKPlayerData {
             mid:mid,
             owner:this.id,
             atkRota:this.teamData.atkRota,
-            y:-25 + PKData.getInstance().random2()*50,
-            actionTime:PKData.getInstance().actionTime
+            y:-25 + PKData_wx3.getInstance().random2()*50,
+            actionTime:PKData_wx3.getInstance().actionTime
         }
         for(var s in oo)
         {

@@ -1,24 +1,24 @@
-class M77 extends MBase {
+class M77_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     //预加载
-    public preload(){
-        AtkMVCtrl.getInstance().preLoadPNGLocal('enemy78_png')
+    public preload_wx3(){
+        AtkMVCtrl_wx3.getInstance().preLoadPNGLocal('enemy78_png')
     }
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkAble =  false;
     }
 
-    public onHpChange(user:PKMonsterData){
+    public onHpChange_wx3(user:PKMonsterData_wx3){
         if(!user.skillTemp[77] && user.getHpRate() < 0.5)
         {
             user.skillTemp[77] = true;
             user.addSpeed += 100;
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_MONSTER_CHANGE_SKIN,
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_CHANGE_SKIN,
                 user:user,
                 skin:78,
             })

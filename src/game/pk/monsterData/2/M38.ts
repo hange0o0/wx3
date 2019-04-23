@@ -1,44 +1,44 @@
-class M38 extends MBase {
+class M38_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = 10
         user.atkX = 30
     }
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 100;
     }
 
 
 
-    protected getSkillArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getSkillArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 100;
     }
 
-    public skill(user:PKMonsterData,target){
-        var hp = Math.ceil(this.getAtkHp(user,target));
+    public skill_wx3(user:PKMonsterData_wx3,target){
+        var hp = Math.ceil(this.getAtkHp_wx3(user,target));
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
 
         var skillValue = user.getSkillValue(1);
-        var buff = new PKBuffData()
+        var buff = new PKBuffData_wx3()
         buff.isDebuff = true;
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
         buff.addValue('addSpeed',-skillValue);
         buff.addValue('atk',-Math.floor(skillValue/100*target.baseAtk));
         buff.user = user;
-        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(2);
+        buff.endTime = PKData_wx3.getInstance().actionTime + 1000*user.getSkillValue(2);
         target.addBuff(buff)
 
         if(buff.ing)
         {
-            PKData.getInstance().addVideo({
-                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                 user:target,
                 keys:['def-','speed-','atk-']
             })
@@ -48,7 +48,7 @@ class M38 extends MBase {
 
 
     //对最多3个单位进行一次攻击
-    public getSkillTarget(user:PKMonsterData){
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
         user.getAtkTarget();
         var target = user.target
         if(target && target.beSkillAble())

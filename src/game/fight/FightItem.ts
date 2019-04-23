@@ -46,7 +46,7 @@ class FightItem extends game.BaseItem{
     }
 
     public dataChanged():void {
-        PKManager.getInstance().setHead(this.headMC,this.data.head)
+        PKManager_wx3.getInstance().setHead(this.headMC,this.data.head)
          this.nameText.text = this.data.nick
         this.lvText.text = 'LV.' + this.data.level
         this.cdText.text = '路程:' +  DateUtil.getStringBySecond(this.data.distanceTime).substr(-5);

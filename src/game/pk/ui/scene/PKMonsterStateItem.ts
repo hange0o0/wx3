@@ -1,4 +1,4 @@
-class PKMonsterStateItem extends game.BaseItem {
+class PKMonsterStateItem_wx3 extends game.BaseItem {
 
     private mc: eui.Image;
 
@@ -11,6 +11,8 @@ class PKMonsterStateItem extends game.BaseItem {
 
         this.skinName = "PKMonsterStateItemSkin";
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public childrenCreated() {
         super.childrenCreated();
@@ -18,7 +20,7 @@ class PKMonsterStateItem extends game.BaseItem {
 
 
     public dataChanged(){
-        PKAddState.fillStateMC(this.mc,this.data);
+        PKAddState_wx3.fillStateMC(this.mc,this.data);
     }
 
 }

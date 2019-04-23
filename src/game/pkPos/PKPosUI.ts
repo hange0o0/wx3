@@ -51,7 +51,7 @@ class PKPosUI extends game.BaseUI {
 
 
 
-    private dragTarget = new PKPosChooseItem()
+    private dragTarget = new PKPosChooseItem_wx3()
 
 
     private monsterArr = []
@@ -100,11 +100,11 @@ class PKPosUI extends game.BaseUI {
         this.bottomUI.setHide(this.onClose,this);
 
 
-        this.chooseList.itemRenderer = PKPosChooseItem
+        this.chooseList.itemRenderer = PKPosChooseItem_wx3
         this.chooseList.dataProvider = this.chooseDataProvider = new eui.ArrayCollection();
 
         this.scroller.viewport = this.list;
-        this.list.itemRenderer = PKPosListItem
+        this.list.itemRenderer = PKPosListItem_wx3
         this.list.dataProvider =  this.dataProvider = new eui.ArrayCollection()
 
         this.addBtnEvent(this.pkBtn,this.onPK);
@@ -448,7 +448,7 @@ class PKPosUI extends game.BaseUI {
     private renewByType(){
         while(this.monsterArr.length > 0)
         {
-            PKMonsterMV.freeItem(this.monsterArr.pop());
+            PKMonsterMV_wx3.freeItem(this.monsterArr.pop());
         }
         MyTool.removeMC(this.con)
         this.defItem && MyTool.removeMC(this.defItem)
@@ -484,7 +484,7 @@ class PKPosUI extends game.BaseUI {
                     this.fightItem.horizontalCenter = 0
                     this.fightItem.verticalCenter = 0
                 }
-                this.bg.source = PKManager.getInstance().getDefBG(this.dataIn.fightData.level);
+                this.bg.source = PKManager_wx3.getInstance().getDefBG(this.dataIn.fightData.level);
                 this.otherForceText.text = '对方总战力：???';
                 this.mainCon.addChildAt(this.con,0);
                 this.con.addChild(this.fightItem)
@@ -500,7 +500,7 @@ class PKPosUI extends game.BaseUI {
                     this.taskItem.currentState = 's2'
                 }
                 this.okText.text = '接单'
-                this.bg.source = PKManager.getInstance().getDefBG();
+                this.bg.source = PKManager_wx3.getInstance().getDefBG();
                 this.otherForceText.text = '';
                 this.mainCon.addChildAt(this.con,0);
                 this.con.addChild(this.taskItem)
@@ -523,9 +523,8 @@ class PKPosUI extends game.BaseUI {
         {
             var id = arr[i]
             var vo = MonsterVO.getObject(id);
-            var item = PKMonsterMV.createItem();
+            var item = PKMonsterMV_wx3.createItem();
             count += vo.cost*(1+force/100);
-            console.log(count)
             this.con.addChild(item);
             item.load(vo.id)
             item.stand();
@@ -545,7 +544,7 @@ class PKPosUI extends game.BaseUI {
         if(this.dataIn.enemy.bgid)
             this.bg.source = 'map'+this.dataIn.enemy.bgid+'_jpg';
         else
-            this.bg.source = PKManager.getInstance().getPKBG(this.dataIn.enemy.seed);
+            this.bg.source = PKManager_wx3.getInstance().getPKBG(this.dataIn.enemy.seed);
 
         this.otherForceText.text = '对方总战力：' + Math.floor(count);
     }

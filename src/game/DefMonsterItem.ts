@@ -1,4 +1,4 @@
-class DefMonsterItem extends PKMonsterMV {
+class DefMonsterItem extends PKMonsterMV_wx3 {
     private static pool2 = [];
     public static createItem():DefMonsterItem {
         var item:DefMonsterItem = this.pool2.pop();

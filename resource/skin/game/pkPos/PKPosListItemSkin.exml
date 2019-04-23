@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKPosListItemSkin" width="95" height="115" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="normal,add" >
 	<e:Image includeIn="add" left="0" right="0" top="0" bottom="0" source="border_14_png"/>
-	<e:Image source="icon_add1_png" includeIn="add" horizontalCenter="0" verticalCenter="0"/>
+	<e:Image source="icon_add1_png" includeIn="add" horizontalCenter="0" verticalCenter="-9"/>
+	<e:Label text="增加怪物" includeIn="add" size="18" bottom="15" horizontalCenter="0.5" bold="true" textColor="0xfcdc8a"/>
 	<e:Image id="bg" source="border_6_png" left="0" right="0" top="0" bottom="0" includeIn="normal"/>
 	<e:Image id="mc" width="80" height="80" horizontalCenter="0" y="8" includeIn="normal"/>
 	<e:Image source="black3_png" left="0" right="0" bottom="0" height="28" alpha="0.5" includeIn="normal"/>

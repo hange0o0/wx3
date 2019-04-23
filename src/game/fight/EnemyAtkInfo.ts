@@ -68,7 +68,7 @@ class EnemyAtkInfo extends game.BaseWindow {
 
     public onShow(){
         var robot = this.enemyData.robot
-        PKManager.getInstance().setHead(this.headMC,robot.head)
+        PKManager_wx3.getInstance().setHead(this.headMC,robot.head)
         this.nameText.text = robot.nick
         this.lvText.text = 'LV.' + robot.level
         this.cdText.text = '路程:' +  DateUtil.getStringBySecond(robot.distanceTime).substr(-5);

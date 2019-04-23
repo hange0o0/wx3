@@ -30,7 +30,7 @@ class FightingItem extends game.BaseItem{
         pkObject.isReplay = true;
         pkObject.fight = this.data;
         pkObject.title = '与【'+this.data.robot.nick+'】的战斗回放'
-        MainPKUI.getInstance().show(pkObject)
+        MainPKUI_wx3.getInstance().show(pkObject)
     }
 
     private onClick(e){
@@ -64,7 +64,7 @@ class FightingItem extends game.BaseItem{
 
     public dataChanged():void {
         var robot = this.data.robot;
-        PKManager.getInstance().setHead(this.headMC,robot.head)
+        PKManager_wx3.getInstance().setHead(this.headMC,robot.head)
         this.nameText.text = robot.nick + ' (LV.'+robot.level+')';
         this.onTimer();
     }
@@ -84,15 +84,30 @@ class FightingItem extends game.BaseItem{
             }
             else
                 this.desText.text = '进攻失利，正在返回';
-            this.btn.label = '传送回城'
-            this.currentState = 's1'
+            if(UM.isTest)
+            {
+                this.currentState = 's2'
+            }
+            else
+            {
+                this.btn.label = '传送'
+                this.currentState = 's1'
+            }
         }
         else if(this.data.backTime)
         {
             cd = this.data.backTime - TM.now();
             this.desText.text = '正在撤回中'
-            this.btn.label = '传送回城'
-            this.currentState = 's1'
+            if(UM.isTest)
+            {
+                this.currentState = 's2'
+            }
+            else
+            {
+                this.btn.label = '传送'
+                this.currentState = 's1'
+            }
+
         }
         else
         {

@@ -1,10 +1,10 @@
-class ShootBulletItem extends game.BaseItem{
+class ShootBulletItem_wx3 extends game.BaseItem{
 
     private static pool = [];
-    public static createItem():ShootBulletItem {
-        var item:ShootBulletItem = this.pool.pop();
+    public static createItem():ShootBulletItem_wx3 {
+        var item:ShootBulletItem_wx3 = this.pool.pop();
         if (!item) {
-            item = new ShootBulletItem();
+            item = new ShootBulletItem_wx3();
         }
         return item;
     }

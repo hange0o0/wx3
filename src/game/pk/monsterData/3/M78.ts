@@ -1,4 +1,4 @@
-class M78 extends MBase {
+class M78_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }

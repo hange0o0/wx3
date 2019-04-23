@@ -32,6 +32,7 @@ class BuffItem extends game.BaseItem{
         else
         {
              this.currentState = 'empty'
+            this.nameText.text = '邀请新好友进入可得：'
         }
     }
 

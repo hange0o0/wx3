@@ -1,10 +1,10 @@
-class PKMonsterItem extends game.BaseItem {
+class PKMonsterItem_wx3 extends game.BaseItem {
     private static pool = [];
-     public static createItem():PKMonsterItem{
-         var item:PKMonsterItem = this.pool.pop();
+     public static createItem():PKMonsterItem_wx3{
+         var item:PKMonsterItem_wx3 = this.pool.pop();
          if(!item)
          {
-             item = new PKMonsterItem();
+             item = new PKMonsterItem_wx3();
          }
          item.needRemove = false;
          return item;
@@ -30,7 +30,7 @@ class PKMonsterItem extends game.BaseItem {
 
 
     public addStateList = [];
-    public monsterMV:PKMonsterMV = new PKMonsterMV();
+    public monsterMV:PKMonsterMV_wx3 = new PKMonsterMV_wx3();
     public needRemove = false
     public stateMV = {};
     public stateDataArr:eui.ArrayCollection;
@@ -40,6 +40,8 @@ class PKMonsterItem extends game.BaseItem {
         this.monsterMV.addEventListener('mv_die',this.onDieFinish,this)
     }
 
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
     public childrenCreated() {
         super.childrenCreated();
 
@@ -50,7 +52,7 @@ class PKMonsterItem extends game.BaseItem {
         this.anchorOffsetY = 300;
 
         this.stateDataArr = this.list.dataProvider = new eui.ArrayCollection([])
-        this.list.itemRenderer = PKMonsterStateItem;
+        this.list.itemRenderer = PKMonsterStateItem_wx3;
 
 
 
@@ -58,8 +60,8 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     private onDieFinish(){
-        PKData.getInstance().actionRecord.push(PKData.getInstance().actionTime)
-        PKData.getInstance().actionRecord.push('die_mv_remove|' + (this.data && this.data.id))
+        PKData_wx3.getInstance().actionRecord.push(PKData_wx3.getInstance().actionTime)
+        PKData_wx3.getInstance().actionRecord.push('die_mv_remove|' + (this.data && this.data.id))
         this.needRemove = true;
 
     }
@@ -72,19 +74,19 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public renewState(){
-        var mD:PKMonsterData = this.data
+        var mD:PKMonsterData_wx3 = this.data
         if(mD.mid == 99)
             return;
         for(var s in this.stateMV)
         {
             if(!this.stateMV[s].parent)
                 continue;
-            if(parseInt(s) == PKConfig.STATE_MIANSHANG)
+            if(parseInt(s) == PKConfig_wx3.STATE_MIANSHANG)
                 continue;
-            if(parseInt(s) == PKConfig.STATE_MODUN)
+            if(parseInt(s) == PKConfig_wx3.STATE_MODUN)
             {
                 if(mD.manaHp <= 0)
-                    this.stateMV[PKConfig.STATE_MODUN].remove()
+                    this.stateMV[PKConfig_wx3.STATE_MODUN].remove()
                 continue;
             }
             if(!mD.currentState[s])
@@ -96,15 +98,15 @@ class PKMonsterItem extends game.BaseItem {
         for(var s in mD.currentState)
         {
             var id = parseInt(s)
-            if(id == PKConfig.STATE_MIANSHANG)
+            if(id == PKConfig_wx3.STATE_MIANSHANG)
                 continue;
-            if(id == PKConfig.STATE_MOMIAN)
+            if(id == PKConfig_wx3.STATE_MOMIAN)
                 continue;
-            if(id == PKConfig.STATE_NOBEATK)
+            if(id == PKConfig_wx3.STATE_NOBEATK)
                 continue;
-            if(id == PKConfig.STATE_DIE)
+            if(id == PKConfig_wx3.STATE_DIE)
                 continue;
-            if(id == PKConfig.STATE_SOUL)
+            if(id == PKConfig_wx3.STATE_SOUL)
                 continue;
             if(id > 100)
             {
@@ -116,14 +118,14 @@ class PKMonsterItem extends game.BaseItem {
 
         this.renewBuff(showBuffs);
         if(mD.manaHp > 0)
-            this.initStateMV(PKConfig.STATE_MODUN)
-        this.alpha = mD.currentState[PKConfig.STATE_SOUL]?0.5:1
+            this.initStateMV(PKConfig_wx3.STATE_MODUN)
+        this.alpha = mD.currentState[PKConfig_wx3.STATE_SOUL]?0.5:1
     }
 
     private renewBuff(showBuffs){
         var base = {}
-        base[PKConfig.STATE_ILL]  = 'ill'
-        base[PKConfig.STATE_REBORN]  = 'reborn'
+        base[PKConfig_wx3.STATE_ILL]  = 'ill'
+        base[PKConfig_wx3.STATE_REBORN]  = 'reborn'
 
         for(var i=0;i<showBuffs.length;i++)
         {
@@ -140,12 +142,12 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     private initStateMV(s){
-        var mD:PKMonsterData = this.data
+        var mD:PKMonsterData_wx3 = this.data
         var id = parseInt(s)
 
         if(!this.stateMV[id])
         {
-            var img = new PKState();
+            var img = new PKState_wx3();
             this.stateMV[id] = img;
             img.data = id;
         }
@@ -157,14 +159,14 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public showMianShang(){
-         this.initStateMV(PKConfig.STATE_MIANSHANG)
+         this.initStateMV(PKConfig_wx3.STATE_MIANSHANG)
     }
 
     //增加状态时的动画
     public showAddStateMV(keys){
         for(var i=0;i<keys.length;i++)
         {
-            var addStateMV = PKAddState.createItem();
+            var addStateMV = PKAddState_wx3.createItem();
             this.addStateList.push(addStateMV);
             this.addChild(addStateMV)
             addStateMV.y = this.barGroup.y// - 30
@@ -179,7 +181,7 @@ class PKMonsterItem extends game.BaseItem {
         {
             this.addStateList.splice(index,1);
         }
-        PKAddState.freeItem(item)
+        PKAddState_wx3.freeItem(item)
     }
 
     public changeSkin(skinid){
@@ -189,7 +191,7 @@ class PKMonsterItem extends game.BaseItem {
 
 
     public dataChanged(){
-        var mD:PKMonsterData = this.data
+        var mD:PKMonsterData_wx3 = this.data
         this.needRemove = false;
         this.monsterMV.load(mD.mid)
         this.monsterMV.stand();
@@ -221,7 +223,7 @@ class PKMonsterItem extends game.BaseItem {
             return;
         this.monsterMV.scaleX = rota
         this.list.x = rota == 1?50 + this.data.getVO().width/2:50 - this.data.getVO().width/2-30
-        var mD:PKMonsterData = this.data
+        var mD:PKMonsterData_wx3 = this.data
         this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
     }
     public setRota2(targetX){
@@ -231,8 +233,8 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public run(speed){
-        speed = speed + (PKData.getInstance().playSpeed-1)*100
-        var mD:PKMonsterData = this.data
+        speed = speed + (PKData_wx3.getInstance().playSpeed-1)*100
+        var mD:PKMonsterData_wx3 = this.data
         if(this.monsterMV.speed != speed)
             this.monsterMV.speed = speed;
         if(this.monsterMV.state != MonsterMV.STAT_RUN )
@@ -245,7 +247,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public resetSpeed(){
-        this.monsterMV.speed = (PKData.getInstance().playSpeed-1)*100
+        this.monsterMV.speed = (PKData_wx3.getInstance().playSpeed-1)*100
     }
 
 
@@ -255,7 +257,7 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public die(){
-        this.monsterMV.speed = (PKData.getInstance().playSpeed-1)*100
+        this.monsterMV.speed = (PKData_wx3.getInstance().playSpeed-1)*100
         this.monsterMV.die();
         this.bar.width = 0;
         this.barGroup.visible = true;
@@ -265,20 +267,20 @@ class PKMonsterItem extends game.BaseItem {
     }
 
     public atk(speed){
-        this.monsterMV.speed = speed + (PKData.getInstance().playSpeed-1)*100
+        this.monsterMV.speed = speed + (PKData_wx3.getInstance().playSpeed-1)*100
         this.monsterMV.atk();
     }
 
     public setTeam(){
-        var mD:PKMonsterData = this.data
-        this.bar.fillColor = mD.atkRota == PKConfig.ROTA_LEFT ? 0x0000FF : 0xFF0000;
+        var mD:PKMonsterData_wx3 = this.data
+        this.bar.fillColor = mD.atkRota == PKConfig_wx3.ROTA_LEFT ? 0x0000FF : 0xFF0000;
         var dec = mD.getVO().width / 2
         //this.teamMC.x = mD.atkRota == PKConfig.ROTA_LEFT ? 50-dec : 35+dec;
-        this.teamMC.source = mD.atkRota == PKConfig.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png';
+        this.teamMC.source = mD.atkRota == PKConfig_wx3.ROTA_LEFT ? 'card_battle2_png' : 'card_battle_png';
     }
 
     public renewHp(){
-        var mD:PKMonsterData = this.data
+        var mD:PKMonsterData_wx3 = this.data
         if(mD.mid == 99)
             return;
         if(mD.hp < mD.maxHp)
@@ -294,13 +296,13 @@ class PKMonsterItem extends game.BaseItem {
         var tw = egret.Tween.get(this);
         tw.to({alpha:0},500).call(function(){
             this.needRemove = true;
-            PKData.getInstance().actionRecord.push('win_mv_remove|' + (this.data && this.data.id))
+            PKData_wx3.getInstance().actionRecord.push('win_mv_remove|' + (this.data && this.data.id))
         },this)
     }
 
     public remove(){
         this.needRemove = true;
-        PKData.getInstance().actionRecord.push('just_mv_remove|' + (this.data && this.data.id))
+        PKData_wx3.getInstance().actionRecord.push('just_mv_remove|' + (this.data && this.data.id))
         egret.Tween.removeTweens(this);
         egret.Tween.removeTweens(this.barGroup);
         MyTool.removeMC(this);
@@ -308,7 +310,7 @@ class PKMonsterItem extends game.BaseItem {
 
         while(this.addStateList.length > 0)
         {
-            PKAddState.freeItem(this.addStateList.pop())
+            PKAddState_wx3.freeItem(this.addStateList.pop())
         }
 
         if(this.stateDataArr)

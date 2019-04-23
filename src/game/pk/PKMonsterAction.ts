@@ -1,8 +1,8 @@
-class PKMonsterAction {
-    private static instance:PKMonsterAction;
+class PKMonsterAction_wx3 {
+    private static instance:PKMonsterAction_wx3;
 
     public static getInstance() {
-        if (!this.instance) this.instance = new PKMonsterAction();
+        if (!this.instance) this.instance = new PKMonsterAction_wx3();
         return this.instance;
     }
 
@@ -16,6 +16,8 @@ class PKMonsterAction {
         this.atkList.length = 0;
     }
 
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public actionAtk(t){
         for(var i=0;i<this.atkList.length;i++)
@@ -27,8 +29,8 @@ class PKMonsterAction {
                 this.atkList.splice(i,1);
                 i--;
 
-                var user:PKMonsterData = data.user;
-                var target:PKMonsterData = data.target;
+                var user:PKMonsterData_wx3 = data.user;
+                var target:PKMonsterData_wx3 = data.target;
 
                 //if(user.mid == 36 && data.type == 'skill_before')
                 //    console.log(99999)
@@ -46,53 +48,53 @@ class PKMonsterAction {
                 {
                     if(!user.canAction())
                         continue;
-                    data.model.atkAction(user,target,t)
+                    data.model.atkAction_wx3(user,target,t)
                 }
                 else if(data.type == 'atk')  //攻击生效
                 {
-                    if(target.isInState(PKConfig.STATE_NOBEATK))
+                    if(target.isInState(PKConfig_wx3.STATE_NOBEATK))
                         return;
-                    MBase.getData(user.mid).atk(user,target)
+                    MBase_wx3.getData(user.mid).atk_wx3(user,target)
                 }
                 else if(data.type == 'skill_before')   //技能产生
                 {
                     if(!user.canAction() && !data.stopTestDie)
                         continue;
                     user.setSkillUse(data.actionTime);
-                    data.model.skillAction(user,data.target,t)
+                    data.model.skillAction_wx3(user,data.target,t)
                 }
                 else if(data.type == 'skill')  //技能生效
                 {
-                    MBase.getData(user.mid).skill(user,data.target)
+                    MBase_wx3.getData(user.mid).skill_wx3(user,data.target)
 
                 }
             }
         }
     }
 
-    public atk(user:PKMonsterData,actionTime){
+    public atk(user:PKMonsterData_wx3,actionTime){
         var time = actionTime + user.getAtkCD();
         user.stopTime = Math.max(user.stopTime,time)
 
-        PKData.getInstance().addVideo({   //攻击动画开始
-            type:PKConfig.VIDEO_MONSTER_ATK,
+        PKData_wx3.getInstance().addVideo({   //攻击动画开始
+            type:PKConfig_wx3.VIDEO_MONSTER_ATK,
             user:user,
             target:user.target
         })
 
-        MBase.getData(user.mid).atkBefore(user,actionTime)
+        MBase_wx3.getData(user.mid).atkBefore_wx3(user,actionTime)
     }
 
-    public skill(user:PKMonsterData,actionTime){
+    public skill(user:PKMonsterData_wx3,actionTime){
         var time = actionTime + user.getAtkCD();
         user.stopTime = Math.max(user.stopTime,time)
 
-        PKData.getInstance().addVideo({   //攻击动画开始
-            type:PKConfig.VIDEO_MONSTER_ATK,
+        PKData_wx3.getInstance().addVideo({   //攻击动画开始
+            type:PKConfig_wx3.VIDEO_MONSTER_ATK,
             user:user,
             target:user.skillTargets[0]
         })
 
-        MBase.getData(user.mid).skillBefore(user,actionTime)
+        MBase_wx3.getData(user.mid).skillBefore_wx3(user,actionTime)
     }
 }

@@ -1,4 +1,4 @@
-class M43 extends MBase {
+class M43_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
@@ -6,14 +6,14 @@ class M43 extends MBase {
     //private mvID = 103;
     public mvID2 = 8;
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkX = 20
         user.atkY = 40
     }
 
 
     //伤害飞行时间
-    protected getAtkArriveCD(user:PKMonsterData,target:PKMonsterData){
+    protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 200;
     }
 
@@ -21,33 +21,33 @@ class M43 extends MBase {
 
 
 
-    public skill(user:PKMonsterData,target:PKMonsterData){
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         //var buff = new PKBuffData()
         //buff.user = user;
         //buff.addState(PKConfig.STATE_MOMIAN);
         //buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
         //target.addBuff(buff)
 
-        var buff = new PKBuffData()
+        var buff = new PKBuffData_wx3()
         var skillValue = user.getSkillValue(2,true);
         buff.id = 43;
         buff.value = skillValue;
         buff.user = user;
         buff.addValue('hpChange',skillValue);
-        buff.addState(PKConfig.STATE_MOMIAN);
-        buff.endTime = PKData.getInstance().actionTime + 1000*user.getSkillValue(1);
+        buff.addState(PKConfig_wx3.STATE_MOMIAN);
+        buff.endTime = PKData_wx3.getInstance().actionTime + 1000*user.getSkillValue(1);
         target.addBuff(buff)
 
-        PKData.getInstance().addVideo({
-            type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+        PKData_wx3.getInstance().addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
             user:target,
             keys:['hp+','momian']
         })
     }
 
     //
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getVO().getAtkDis() + 100;
         for(var i=0;i<arr.length;i++)

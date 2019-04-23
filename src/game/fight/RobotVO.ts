@@ -22,10 +22,10 @@ class RobotVO{
             level:lv,
             //lastTime:t,
             distanceTime:180 + Math.floor((1800-180)*Math.random()),
-            atk:PKManager.getInstance().getRobotList(lv),
-            def:PKManager.getInstance().getRobotList(lv),
-            nick:PKManager.getInstance().randomNick(),
-            head:PKManager.getInstance().randomHead(),
+            atk:PKManager_wx3.getInstance().getRobotList(lv),
+            def:PKManager_wx3.getInstance().getRobotList(lv),
+            nick:PKManager_wx3.getInstance().randomNick(),
+            head:PKManager_wx3.getInstance().randomHead(),
         });
         robot.gameid = 'robot' + TM.now() +'_'+ this.index;
         this.index ++;
@@ -94,8 +94,8 @@ class RobotVO{
             this.level = Math.max(this.level,lv);
             if(lastLevel != this.level || Math.random()< 0.2)
             {
-                this.atk = PKManager.getInstance().getRobotList(lv)
-                this.def = PKManager.getInstance().getRobotList(lv)
+                this.atk = PKManager_wx3.getInstance().getRobotList(lv)
+                this.def = PKManager_wx3.getInstance().getRobotList(lv)
             }
             RobotVO.change = true;
         }

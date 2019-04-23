@@ -1,10 +1,10 @@
-class ShootMonster extends game.BaseItem{
+class ShootMonster_wx3 extends game.BaseItem{
 
     private static pool = [];
-    public static createItem():ShootMonster {
-        var item:ShootMonster = this.pool.pop();
+    public static createItem():ShootMonster_wx3 {
+        var item:ShootMonster_wx3 = this.pool.pop();
         if (!item) {
-            item = new ShootMonster();
+            item = new ShootMonster_wx3();
         }
         return item;
     }
@@ -21,7 +21,7 @@ class ShootMonster extends game.BaseItem{
     private teamMC: eui.Image;
     private list: eui.List;
 
-    public mc = new PKMonsterMV();
+    public mc = new PKMonsterMV_wx3();
 
     public isDie = 0
     public hp = 0
@@ -80,7 +80,7 @@ class ShootMonster extends game.BaseItem{
             this.barGroup.visible = false
 
             var addCoin = Math.floor(this.data.vo.cost)
-           ShootGameUI.getInstance().addCoin(addCoin)
+           ShootGameUI_wx3.getInstance().addCoin(addCoin)
         }
         else
         {

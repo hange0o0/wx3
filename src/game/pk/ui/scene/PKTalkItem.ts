@@ -1,10 +1,10 @@
-class PKTalkItem extends game.BaseContainer {
+class PKTalkItem_wx3 extends game.BaseContainer {
     private static pool = [];
-    public static createItem():PKTalkItem{
-        var item:PKTalkItem = this.pool.pop();
+    public static createItem():PKTalkItem_wx3{
+        var item:PKTalkItem_wx3 = this.pool.pop();
         if(!item)
         {
-            item = new PKTalkItem();
+            item = new PKTalkItem_wx3();
         }
         return item;
     }
@@ -26,7 +26,7 @@ class PKTalkItem extends game.BaseContainer {
     public active = false
     private h = 110;
     private w = 161;
-    private relateItem:PKMonsterMV;
+    private relateItem:PKMonsterMV_wx3;
     public childrenCreated() {
         super.childrenCreated();
 
@@ -34,18 +34,21 @@ class PKTalkItem extends game.BaseContainer {
         this.anchorOffsetY = 110
         this.cacheAsBitmap = true;
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
 
     public setData(data,type?,scale=1) {
         this.active = true;
 
 
-        if(type == 1)
-            this.text.text = PKManager.getInstance().costWord[Math.floor(Math.random()*PKManager.getInstance().costWord.length)];
-        else if(type == 2)
-            this.text.text = PKManager.getInstance().chapterWord[Math.floor(Math.random()*PKManager.getInstance().chapterWord.length)];
+        //if(type == 1)
+        //    this.text.text = PKManager_wx3.getInstance().costWord[Math.floor(Math.random()*PKManager_wx3.getInstance().costWord.length)];
+        //else
+        if(type == 2)
+            this.text.text = PKManager_wx3.getInstance().chapterWord[Math.floor(Math.random()*PKManager_wx3.getInstance().chapterWord.length)];
         else
-            this.text.text = PKManager.getInstance().pkWord[Math.floor(Math.random()*PKManager.getInstance().pkWord.length)];
+            this.text.text = PKManager_wx3.getInstance().pkWord[Math.floor(Math.random()*PKManager_wx3.getInstance().pkWord.length)];
         this.relateItem = data;
 
 

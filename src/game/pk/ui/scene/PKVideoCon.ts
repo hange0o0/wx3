@@ -1,8 +1,8 @@
-class PKVideoCon extends game.BaseContainer {
-    private static _instance:PKVideoCon;
+class PKVideoCon_wx3 extends game.BaseContainer {
+    private static _instance:PKVideoCon_wx3;
     public static getInstance() {
         if(!this._instance)
-            this._instance = new PKVideoCon();
+            this._instance = new PKVideoCon_wx3();
         return this._instance;
     }
 
@@ -28,19 +28,21 @@ class PKVideoCon extends game.BaseContainer {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.width = PKConfig.floorWidth +  PKConfig.appearPos*2
+        this.width = PKConfig_wx3.floorWidth +  PKConfig_wx3.appearPos*2
 
-        PKData.getInstance().addEventListener('video',this.onVideoEvent,this);
+        PKData_wx3.getInstance().addEventListener('video',this.onVideoEvent,this);
 
 
 
     }
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public init(dataIn){
         this.bg.visible = !this.isHang;
 
         if(this.bg.visible)
-            this.bg.source = PKManager.getInstance().getPKBG(dataIn.seed);
+            this.bg.source = PKManager_wx3.getInstance().getPKBG(dataIn.seed);
 
         this.remove();
 
@@ -50,27 +52,27 @@ class PKVideoCon extends game.BaseContainer {
         while(this.itemArr.length)
         {
             var item = this.itemArr.pop();
-            PKData.getInstance().actionRecord.push('mv_remove2|' + (item.data && item.data.id))
-            PKMonsterItem.freeItem(item);
+            PKData_wx3.getInstance().actionRecord.push('mv_remove2|' + (item.data && item.data.id))
+            PKMonsterItem_wx3.freeItem(item);
         }
         while(this.txtArr.length)
         {
             var item = this.txtArr.pop();
             this.freeTxt(item);
         }
-        while(this.totemArr.length)
-        {
-            var item = this.totemArr.pop();
-            PKTotem.freeItem(item);
-        }
+        //while(this.totemArr.length)
+        //{
+        //    var item = this.totemArr.pop();
+        //    PKTotem_wx3.freeItem(item);
+        //}
     }
 
     public resetView(){
         this.remove();
-        var PD = PKData.getInstance()
+        var PD = PKData_wx3.getInstance()
         for(var i=0;i<PD.monsterList.length;i++)
         {
-            var item = PKMonsterItem.createItem();
+            var item = PKMonsterItem_wx3.createItem();
             item.y =  this.monsterY + PD.monsterList[i].y;
 
             this.con.addChildAt(item,this.getIndexByY(item.y));
@@ -106,7 +108,7 @@ class PKVideoCon extends game.BaseContainer {
         this.txtPool.push(item);
     }
 
-    public getItemByID(id):PKMonsterItem{
+    public getItemByID(id):PKMonsterItem_wx3{
         for(var i=0;i<this.itemArr.length;i++)
         {
             var item = this.itemArr[i];
@@ -114,13 +116,13 @@ class PKVideoCon extends game.BaseContainer {
                 return item;
         }
         var str = ''
-        var mvo = PKData.getInstance().getMonsterByID(id);
+        var mvo = PKData_wx3.getInstance().getMonsterByID(id);
         if(!mvo)
-            str = ('can not find monster:' + id + '|' + PKData.getInstance().monsterID)
+            str = ('can not find monster:' + id + '|' + PKData_wx3.getInstance().monsterID)
         else if(mvo.die)
-            str = ('monster die and not find:' + id + '|' + PKData.getInstance().monsterID)
+            str = ('monster die and not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
         else
-            str = ('not die but not find:' + id + '|' + PKData.getInstance().monsterID)
+            str = ('not die but not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
         alert(str);
         //sendClientError(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+PKData.getInstance().actionTime+'#'+JSON.stringify(PKData.getInstance().actionRecord));
         return null;
@@ -150,13 +152,13 @@ class PKVideoCon extends game.BaseContainer {
     }
 
     public onVideoEvent(e){
-        var item:PKMonsterItem;
+        var item:PKMonsterItem_wx3;
         var videoData = e.data;
-        var data:PKMonsterData = videoData.user;
+        var data:PKMonsterData_wx3 = videoData.user;
         switch(videoData.type)//动画类型
         {
-            case PKConfig.VIDEO_MONSTER_ADD:
-                item = PKMonsterItem.createItem();
+            case PKConfig_wx3.VIDEO_MONSTER_ADD:
+                item = PKMonsterItem_wx3.createItem();
                 //if(data.owner == 'sys')
                 //    item.y = this.monsterY;
                 //else
@@ -165,7 +167,7 @@ class PKVideoCon extends game.BaseContainer {
                 this.con.addChildAt(item,this.getIndexByY(item.y));
                 item.data =data;
                 this.itemArr.push(item);
-                PKData.getInstance().actionRecord.push('mv_add|' + data.id)
+                PKData_wx3.getInstance().actionRecord.push('mv_add|' + data.id)
                 item.stand();
                 if(data.mid == 99)
                 {
@@ -174,87 +176,87 @@ class PKVideoCon extends game.BaseContainer {
                 }
 
                 break;
-            case PKConfig.VIDEO_MONSTER_MOVE:
+            case PKConfig_wx3.VIDEO_MONSTER_MOVE:
                 item = this.getItemByID(data.id);
                 if(item)
                     item.run(data.addSpeed);
                 break;
-            case PKConfig.VIDEO_MONSTER_ATK:
+            case PKConfig_wx3.VIDEO_MONSTER_ATK:
                 item = this.getItemByID(data.id);
                 if(videoData.target)
                     item.setRota2(videoData.target.x)
                 item.atk(data.addSpeed);
                 break;
-            case PKConfig.VIDEO_MONSTER_DOUBLE:
+            case PKConfig_wx3.VIDEO_MONSTER_DOUBLE:
                 if(data.die)  //死了就不显示
                     break;
                 item = this.getItemByID(data.id);
                 this.playDoubleHit(item,videoData.value);
                 break;
-            case PKConfig.VIDEO_MONSTER_MISS:
+            case PKConfig_wx3.VIDEO_MONSTER_MISS:
                 item = this.getItemByID(data.id);
                 this.playMiss(item);
                 break;
 
-            case PKConfig.VIDEO_MONSTER_HPCHANGE:
+            case PKConfig_wx3.VIDEO_MONSTER_HPCHANGE:
                 item = this.getItemByID(data.id);
                 item.renewHp();
                 break;
-            case PKConfig.VIDEO_MONSTER_WIN:
+            case PKConfig_wx3.VIDEO_MONSTER_WIN:
                 item = this.getItemByID(data.id);
                 item.winRemove();
                 break;
-            case PKConfig.VIDEO_MONSTER_ADD_STATE:
+            case PKConfig_wx3.VIDEO_MONSTER_ADD_STATE:
                 item = this.getItemByID(data.id);
                 item.showAddStateMV(videoData.keys);
                 break;
-            case PKConfig.VIDEO_MONSTER_DIE:
+            case PKConfig_wx3.VIDEO_MONSTER_DIE:
                 item = this.getItemByID(data.id);
                 item.die();
                 break;
-            case PKConfig.VIDEO_MONSTER_STAND:
+            case PKConfig_wx3.VIDEO_MONSTER_STAND:
                 item = this.getItemByID(data.id);
                 item.stand();
                 break;
-            case PKConfig.VIDEO_MONSTER_STATE_CHANGE:
+            case PKConfig_wx3.VIDEO_MONSTER_STATE_CHANGE:
                 item = this.getItemByID(data.id);
                 item.renewState();
                 break;
-            case PKConfig.VIDEO_MONSTER_NOHIT:
+            case PKConfig_wx3.VIDEO_MONSTER_NOHIT:
                 item = this.getItemByID(data.id);
                 item.showMianShang();
                 break;
-            case PKConfig.VIDEO_MANAHP_CHANGE:
+            case PKConfig_wx3.VIDEO_MANAHP_CHANGE:
                 item = this.getItemByID(data.id);
                 item.renewState();
                 break;
-            case PKConfig.VIDEO_MONSTER_CHANGE_TEAM:
+            case PKConfig_wx3.VIDEO_MONSTER_CHANGE_TEAM:
                 item = this.getItemByID(data.id);
                 item.setTeam();
                 break;
-            case PKConfig.VIDEO_TOTEM_ADD:
-                var totemItem = PKTotem.createItem();
-                totemItem.y =  this.monsterY + videoData.y;
-                totemItem.x =  videoData.x;
-                this.con.addChildAt(totemItem,this.getIndexByY(totemItem.y));
-                totemItem.data = videoData.totemType;
-                totemItem.owner = videoData.user;
-                this.totemArr.push(totemItem);
-                break;
-            case PKConfig.VIDEO_TOTEM_REMOVE:
-                for(var i=0;i<this.totemArr.length;i++)
-                {
-                    var totem =  this.totemArr[i];
-                    if(totem.owner == videoData.user)
-                    {
-                        PKTotem.freeItem(totem)
-                        this.totemArr.splice(i,1);
-                        i--;
-                        break
-                    }
-                }
-                break;
-            case PKConfig.VIDEO_MONSTER_CHANGE_SKIN:
+            //case PKConfig_wx3.VIDEO_TOTEM_ADD:
+            //    var totemItem = PKTotem_wx3.createItem();
+            //    totemItem.y =  this.monsterY + videoData.y;
+            //    totemItem.x =  videoData.x;
+            //    this.con.addChildAt(totemItem,this.getIndexByY(totemItem.y));
+            //    totemItem.data = videoData.totemType;
+            //    totemItem.owner = videoData.user;
+            //    this.totemArr.push(totemItem);
+            //    break;
+            //case PKConfig_wx3.VIDEO_TOTEM_REMOVE:
+            //    for(var i=0;i<this.totemArr.length;i++)
+            //    {
+            //        var totem =  this.totemArr[i];
+            //        if(totem.owner == videoData.user)
+            //        {
+            //            PKTotem_wx3.freeItem(totem)
+            //            this.totemArr.splice(i,1);
+            //            i--;
+            //            break
+            //        }
+            //    }
+            //    break;
+            case PKConfig_wx3.VIDEO_MONSTER_CHANGE_SKIN:
                 item = this.getItemByID(data.id);
                 item.changeSkin(videoData.skin);
                 break;
@@ -263,19 +265,19 @@ class PKVideoCon extends game.BaseContainer {
 
 
     public action(){
-        var item:PKMonsterItem;
+        var item:PKMonsterItem_wx3;
         for(var i=0;i<this.itemArr.length;i++)
         {
             item = this.itemArr[i];
             if(item.needRemove)//移除过期ID
             {
-                PKMonsterItem.freeItem(item);
+                PKMonsterItem_wx3.freeItem(item);
                 this.itemArr.splice(i,1);
-                PKData.getInstance().actionRecord.push('mv_remove|' + (item.data && item.data.id))
+                PKData_wx3.getInstance().actionRecord.push('mv_remove|' + (item.data && item.data.id))
                 i--;
             }
         }
-        PKBulletManager.getInstance().actionAll()
+        PKBulletManager_wx3.getInstance().actionAll()
     }
 
     //在AB之间播放动画
@@ -287,7 +289,7 @@ class PKVideoCon extends game.BaseContainer {
             throw new Error('XXX')
             return;
         }
-        var AM = AniManager.getInstance();
+        var AM = AniManager_wx3.getInstance();
         if(AM.preLoadMV(mvID))
         {
             var xy = MyTool.getMiddleXY(atker,defender)
@@ -311,7 +313,7 @@ class PKVideoCon extends game.BaseContainer {
 
     //在A上播放动画
     public playAniOn(a,mvID){
-        if(PKData.getInstance().quick)
+        if(PKData_wx3.getInstance().quick)
             return null;
         var atker = this.getItemByID(a)
         if(!atker)
@@ -320,7 +322,7 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var scale = Math.max(1,(atker.data.getVO().height)/70);
-        var AM = AniManager.getInstance();
+        var AM = AniManager_wx3.getInstance();
         var mv = AM.playOnItem(mvID,atker);
         if(mv)
             mv.scaleX = mv.scaleY = scale
@@ -328,7 +330,7 @@ class PKVideoCon extends game.BaseContainer {
     }
     //在A里播放动画
     public playAniIn(a,mvID){
-        if(PKData.getInstance().quick)
+        if(PKData_wx3.getInstance().quick)
             return null;
         var atker = this.getItemByID(a)
         if(!atker)
@@ -337,7 +339,7 @@ class PKVideoCon extends game.BaseContainer {
             return;
         }
         var scale = Math.max(1,(atker.data.getVO().height)/70);
-        var AM = AniManager.getInstance();
+        var AM = AniManager_wx3.getInstance();
         var mv = AM.playInItem(mvID,atker);
         if(mv)
             mv.scaleX = mv.scaleY = scale
@@ -346,7 +348,7 @@ class PKVideoCon extends game.BaseContainer {
 
     //掉在头上
     public dropOn(a,mvID){
-        if(PKData.getInstance().quick)
+        if(PKData_wx3.getInstance().quick)
             return null;
         var atker = this.getItemByID(a)
         if(!atker)
@@ -354,12 +356,12 @@ class PKVideoCon extends game.BaseContainer {
             throw new Error('XXX')
             return;
         }
-        var AM = AniManager.getInstance();
+        var AM = AniManager_wx3.getInstance();
         return AM.drop(mvID,atker);
     }
 
     //暴击动画
-    public playDoubleHit(item:PKMonsterItem,value){
+    public playDoubleHit(item:PKMonsterItem_wx3,value){
          var txt = this.createTxt();
         txt.textColor = 0xFF0000;
         txt.text = '!' + Math.ceil(value);

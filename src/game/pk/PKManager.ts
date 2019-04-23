@@ -1,43 +1,43 @@
-class PKManager {
+class PKManager_wx3 {
     //录像里也要调
-    public static TYPE_HANG = 1;
-    public static TYPE_SLAVE = 2;
-    public static TYPE_PVP_OFFLINE = 3;
-    public static TYPE_PVP_ONLINE = 4;
-
-
-    public static TYPE_FIGHT = 51;
-    public static TYPE_ANSWER = 52;
-    public static TYPE_RANDOM = 53;
-    public static TYPE_CHOOSECARD= 54;
-    public static TYPE_ENDLESS = 55;
-
-
-
-
+    //public static TYPE_HANG = 1;
+    //public static TYPE_SLAVE = 2;
+    //public static TYPE_PVP_OFFLINE = 3;
+    //public static TYPE_PVP_ONLINE = 4;
+    //
+    //
+    //public static TYPE_FIGHT = 51;
+    //public static TYPE_ANSWER = 52;
+    //public static TYPE_RANDOM = 53;
+    //public static TYPE_CHOOSECARD= 54;
+    //public static TYPE_ENDLESS = 55;
+    //
+    //
+    //
+    //
     public static TYPE_TEST = 101;
-    public static TYPE_MAIN_HANG = 102; //挂机动画用
+    //public static TYPE_MAIN_HANG = 102; //挂机动画用
 
-    private static instance:PKManager;
+    private static instance:PKManager_wx3;
     public static getInstance() {
-        if (!this.instance) this.instance = new PKManager();
+        if (!this.instance) this.instance = new PKManager_wx3();
         return this.instance;
     }
 
 
-    public baseForce = 10000;
+    //public baseForce = 10000;
     //public cost1 = 0
     //public cost2 = 0;
     //public costChange = false
 
-    public pkResult = {}//所有PK结果的集合
+    //public pkResult = {}//所有PK结果的集合
     public levelData//关卡数据的集合
     public chapterData = []//关卡数据的集合
     public nickData = []//昵称
     public headData = {}//昵称
     //public roundTotalData = {}//关卡数据的集合
 
-    private beginTime = 1550073600;//2019-2-14 0:0:0
+    //private beginTime = 1550073600;//2019-2-14 0:0:0
 
     public isPKing = false;
 
@@ -67,15 +67,17 @@ class PKManager {
         '我来给他点颜色瞧瞧','好疼啊','活着就要战斗','要打架了','所有人，都过来','死亡没什么好怕的','我，会让你安息','我可没时间陪你玩','死亡之神在召唤','待宰羔羊！','医生，我流血了','啊！医生！','我闻到血的味道','是吗？那就去死吧！',
         '祝你好运！','赐予我力量！','你们这是自寻死路！','我快没有时间了！','哈，那家伙死定了！','你想玩个游戏吗','灵魂，躁动不安','恐惧，如影随形','不可饶恕','都是你的错','恐惧吧，哀嚎吧','放纵你内心的恐惧吧','死期将至','戳死你！','残酷的命运',
         '$%&*&$@','@#$%&','( T___T ) ','( 3__3 ) ','zzz ZZZ','╭∩╮','...']
-    public costWord = ['老铁666','感谢老铁的支持','非常感谢','老铁真土豪','谢谢！','我们不会让你失望的','明智的选择','圈粉了','谢谢同志们','欢呼','高兴','万分感谢','太高兴了','无法用言语表达的感谢',
-        '果然是真爱','感谢大哥','要理性消费哦','关注走一波啊','关注可抽奖','输了会发红包的','实锤土壕','感谢感谢','鞠躬感谢','谢谢老铁','谢谢大哥','这波不亏','疯狂打call','你们都是老板','老板大气',
-        '谢谢老板','666','礼物走一走','谢谢你的礼物','老板长命百岁','老板万寿无疆','老板千秋万代','祝老板发财','出门遇贵人了','老板我爱你','老板我要和你生小孩','老板公司还缺人吗','￥￥￥￥￥','$$$$$',
-    '老板一统江湖','老板好眼光','比心','老板真土豪','老板真豪气','双击关注666']
+    //public costWord = ['老铁666','感谢老铁的支持','非常感谢','老铁真土豪','谢谢！','我们不会让你失望的','明智的选择','圈粉了','谢谢同志们','欢呼','高兴','万分感谢','太高兴了','无法用言语表达的感谢',
+    //    '果然是真爱','感谢大哥','要理性消费哦','关注走一波啊','关注可抽奖','输了会发红包的','实锤土壕','感谢感谢','鞠躬感谢','谢谢老铁','谢谢大哥','这波不亏','疯狂打call','你们都是老板','老板大气',
+    //    '谢谢老板','666','礼物走一走','谢谢你的礼物','老板长命百岁','老板万寿无疆','老板千秋万代','祝老板发财','出门遇贵人了','老板我爱你','老板我要和你生小孩','老板公司还缺人吗','￥￥￥￥￥','$$$$$',
+    //'老板一统江湖','老板好眼光','比心','老板真土豪','老板真豪气','双击关注666']
 
     public chapterWord = ['点击可以上下怪','已上阵怪物可拖动换位','要注意怪物间属性相克','长按头像可查看详情','要善用怪物技能','低费怪物也有春天','加入低费怪物调整节奏','战力是影响胜负的关键',
         '费用越大，强度越大','冲破出生点也能获胜','属性相克影响极大','熟悉怪物才能更易取胜']
 
-    public roundData;
+    //public roundData;
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     public randomNick(){
         var name = ArrayUtil.randomOne(this.nickData);
@@ -146,7 +148,7 @@ class PKManager {
     private getDefBGID(lv?){
         if(!lv)
             lv = TecManager.getInstance().getTecLevel(11)
-        var arr = [1,2,3,4,5,7]
+        var arr = [3,4,5,2,1,7]
         return arr[lv % arr.length];
     }
     public getDefBG(lv?){
@@ -238,90 +240,7 @@ class PKManager {
         this.levelData[lv] = temp
     }
 
-    //public getTodayIndex(){
-    //    var t = this.beginTime;
-    //    var index = Math.ceil((TM.now() - t)/24/3600)
-    //    return index;
-    //}
 
-    //告诉服务器我的玩费
-    //private sendTimer
-    //public callSendCost(b?){
-    //    clearTimeout(this.sendTimer);
-    //    if(b)
-    //    {
-    //        this.sendCost();
-    //    }
-    //    else
-    //    {
-    //        this.sendTimer = setTimeout(()=>{
-    //            this.sendTimer = 0;
-    //            this.sendCost();
-    //        },500)
-    //    }
-    //}
-
-    //
-    ////初始化今天的数据
-    //public initData(index,str){
-    //    var arr = str.split('\n')
-    //    this.roundData = arr;
-    //
-    //    SharedObjectManager.getInstance().setMyValue('today_data_1',{
-    //        key:index,
-    //        value:str
-    //    })
-    //}
-    //
-    //public getCurrentKey(){
-    //    return this.getTodayIndex()*1000 + this.getCurrentIndex();
-    //}
-    //
-    //public getCurrentIndex(){
-    //    //return -1;
-    //    var t0 = DateUtil.getNextDateTimeByHours(0)  - 24*3600
-    //    var t1 = TM.now()
-    //    var dec = (t1 - t0) - 3600*6;
-    //    if(dec < 0)
-    //        return -1;
-    //    return Math.floor(dec/10/60)
-    //}
-    //
-    //public getCurrentData(){
-    //    if(GuideManager.getInstance().isGuiding)
-    //    {
-    //        return JSON.parse('{"list1":"73,32,71,46,64,1","list2":"32,39,2,43,70,62,14,63","seed":15561043749}')
-    //    }
-    //    return this.getLevelData(this.getCurrentKey());
-    //    //var index =  this.getCurrentIndex();
-    //    //if(this.roundData[index])
-    //    //    return JSON.parse(this.roundData[index])
-    //    //return 0;
-    //}
-    //
-    //public getEndTime(){
-    //    if(GuideManager.getInstance().isGuiding)
-    //    {
-    //        if(GuideManager.getInstance().guideKey == 'count')
-    //        {
-    //            var endTime = GuideManager.getInstance().temp + 10*60
-    //            if(endTime <= TM.now() - (10*60 - PKConfig.addCoinTime))
-    //                endTime = TM.now() - (10*60 - PKConfig.addCoinTime)+1
-    //            return endTime;
-    //        }
-    //        else if(GuideManager.getInstance().guideKey == 'pk')
-    //        {
-    //            var endTime = GuideManager.getInstance().temp + (10*60 - PKConfig.addCoinTime)
-    //            if(TM.now() >= endTime)
-    //                endTime = TM.now()+1
-    //            return endTime;
-    //        }
-    //        return TM.now() + 10*60;
-    //    }
-    //    var t0 = DateUtil.getNextDateTimeByHours(0)  - 24*3600
-    //    var index =  this.getCurrentIndex();
-    //    return t0 + 3600*6 + (index + 1)*10*60;
-    //}
 
     public randomSeed;
     public random(seedIn?){
@@ -332,321 +251,12 @@ class PKManager {
             this.randomSeed = rd * 100000000;
         return rd;
     }
-  //  //取某一时间的花费情况
-  //  public getCost(seed,passTime){
-  //      this.randomSeed = seed*2;
-  //      var len = Math.min(passTime,PKConfig.addCoinTime);
-  //      var baseCost1 = 15 + 20*this.random()
-  //      var baseCost2 = 50 - baseCost1
-  //      var oo = {
-  //          cost1:0,
-  //          cost2:0
-  //      }
-  //      for(var i=0;i<len;i++)
-  //      {
-  //          oo.cost1 += (this.random()*baseCost1)
-  //          oo.cost2 += (this.random()*baseCost2)
-  //      }
-  //
-  //      var index =  this.getCurrentIndex();
-  //      var rate = this.getIndexRate(index);
-  //      oo.cost1 *= rate;
-  //      oo.cost2 *= rate;
-  //      return oo;
-  //  }
-  //
-  //  //模拟这一刻的玩家数量
-  //  public getIndexRate(index){
-  //      var rate = 1;
-  //      var start = 6
-  //      var step = 6;
-  //      var num = Math.abs((8-start)*step - index)
-  //      if(num < 10)
-  //      {
-  //          rate += (10-num)/10
-  //      }
-  //
-  //      num = Math.abs((12.5-start)*step - index)
-  //      if(num < 8)
-  //      {
-  //          rate += (8-num)/8*2
-  //      }
-  //
-  //      num = Math.abs((20.5-start)*step - index)
-  //      if(num < 20)
-  //      {
-  //          rate += (20-num)/15*3
-  //      }
-  //
-  //      rate += index/150
-  //
-  //      return rate;
-  //  }
-  //
-  //  public getForceAdd(cost){
-  //      return Math.floor(Math.pow(cost,0.57)*3);
-  //  }
-  //
-  //  public getMoneyRate(my,other){
-  //      if(other == my)
-  //          var rate = 1;
-  //      else if(other > my)
-  //          var rate = Math.pow(other/my,1.75)
-  //      else
-  //          var rate = Math.pow(other/my,1.5)
-  //      return Math.min(500,Math.max(105,Math.floor(100 + rate*30)));
-  //  }
-  //
-  //  //加载关卡数据
-  //  public loadLevelData(fun,showMsging?){
-  //      //if(this.levelData[index])
-  //      //{
-  //      //    fun && fun(this.levelData[index])
-  //      //    return;
-  //      //}
-  //      //var wx = window['wx'];
-  //      //if(wx) //微信加载
-  //      //{
-  //      //    var self = this;
-  //      //    var totalNum = 300;
-  //      //    var tempIndex = index%totalNum || totalNum
-  //      //    wx.cloud.downloadFile({
-  //      //        fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+tempIndex+'.txt',
-  //      //        //fileID: 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/level/level_'+tempIndex+'.txt',
-  //      //        success: res => {
-  //      //            console.log(res);
-  //      //            self.loadUrl(index,res.tempFilePath,fun,showMsging)
-  //      //        },
-  //      //        fail: err => {
-  //      //            console.log(err)
-  //      //        }
-  //      //    })
-  //      //    //wx.cloud.getTempFileURL({
-  //      //    //    fileList: ['cloud://hange0o0-1-797611.6861-hange0o0-1-797611/level/level_'+tempIndex+'.txt'],
-  //      //    //    success: res => {
-  //      //    //        self.loadUrl(index,res.fileList[0].tempFileURL,fun,showMsging)
-  //      //    //    },
-  //      //    //    fail: err => {
-  //      //    //        console.log(err)
-  //      //    //    }
-  //      //    //})
-  //      //    return;
-  //      //}
-  //
-  //      //本地加载
-  //      this.loadUrl('resource/level.txt',fun,showMsging)
-  //  }
-  //
-  //  public loadChapterData(fun,showMsging?){
-  //      if(this.chapterData.length)
-  //      {
-  //          fun && fun()
-  //          return;
-  //      }
-  //      //var wx = window['wx'];
-  //      //if(wx) //微信加载
-  //      //{
-  //      //    var self = this;
-  //      //    var tempIndex = index
-  //      //    wx.cloud.downloadFile({
-  //      //        fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/chapter/chapter_'+tempIndex+'.txt',
-  //      //        //fileID: 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/chapter/chapter_'+tempIndex+'.txt',
-  //      //        success: res => {
-  //      //            self.loadUrl(index,res.tempFilePath,fun,showMsging,true)
-  //      //        },
-  //      //        fail: err => {
-  //      //            console.log(err)
-  //      //        }
-  //      //    })
-  //      //    return;
-  //      //}
-  //
-  //      //本地加载
-  //      this.loadUrl('resource/chapter.txt',fun,showMsging,true)
-  //  }
-  //
-  //private loadUrl(url,fun,showMsging,isChapter?){
-  //      var loader: egret.URLLoader = new egret.URLLoader();
-  //      loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-  //      loader.once(egret.Event.COMPLETE,()=>{
-  //          if(isChapter)
-  //          {
-  //              this.chapterData = loader.data.split('\n');
-  //          }
-  //          else
-  //              this.levelData = loader.data.split('\n');
-  //          if(showMsging)
-  //              MsgingUI.getInstance().hide();
-  //          fun && fun();
-  //      },this);
-  //      loader.load(new egret.URLRequest(url));
-  //      if(showMsging)
-  //          MsgingUI.getInstance().show();
-  //  }
-  //private loadUrl(index,url,fun,showMsging,isChapter?){
-  //      console.log(url);
-  //      var loader: egret.URLLoader = new egret.URLLoader();
-  //      loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-  //      loader.once(egret.Event.COMPLETE,()=>{
-  //          if(isChapter)
-  //          {
-  //              this.chapterData[index] = loader.data
-  //              SharedObjectManager.getInstance().setMyValue('chapter_data_1',{
-  //                  key:index,
-  //                  value:loader.data
-  //              })
-  //          }
-  //          else
-  //              this.levelData[index] = loader.data
-  //          if(showMsging)
-  //              MsgingUI.getInstance().hide();
-  //          //PKManager.getInstance().initData(loader.data);
-  //          fun && fun(loader.data);
-  //      },this);
-  //      loader.load(new egret.URLRequest(url));
-  //      if(showMsging)
-  //          MsgingUI.getInstance().show();
-  //  }
 
-    //public getChapterData(){
-    //    //var index = Math.ceil(UM.chapterLevel/100)
-    //    //var id = (UM.chapterLevel%100 || 100)-1
-    //    //var data = this.chapterData[index].split('\n')
-    //    //return JSON.parse(data[id])
-    //    var arr = this.chapterData[UM.chapterLevel-1].split('|')
-    //    return {
-    //        list1:arr[0],
-    //        list2:arr[1],
-    //        cost:36,
-    //        seed:parseInt(arr[2]),
-    //    }
-    //}
-
-
-    //结算投注信息
-    //public testSendResult(alertWindow?){
-    //    if(this.getCurrentKey() != UM.lastGuess.key)
-    //    {
-    //        if(UM.lastGuess.key && UM.lastGuess.isDeal == 0 && (UM.lastGuess.cost1 || UM.lastGuess.cost2))//需要结算
-    //        {
-    //            var showData = UM.lastGuess
-    //            showData.isDeal = 1;
-    //            this.getPKResult(showData,(result)=>{
-    //                showData.isDeal = 2;
-    //                var addCoin = this.getAddCoin(showData,result);
-    //                if(addCoin)
-    //                {
-    //                    SoundManager.getInstance().playEffect('coin');
-    //                    if(alertWindow)
-    //                        MyWindow.Alert('你在上一轮竞猜中，赢得了'+MyTool.createHtml(NumberUtil.addNumSeparator(addCoin),0x00ff00)+'金币')
-    //                    else
-    //                        MyWindow.ShowTips('你在上一轮竞猜中，赢得了'+MyTool.createHtml(NumberUtil.addNumSeparator(addCoin),0x00ff00)+'金币',3000)
-    //                }
-    //                UM.addCoin(addCoin)
-    //
-    //                var coinWin = addCoin - showData.cost1 - showData.cost2;
-    //                if(coinWin > 0)
-    //                {
-    //                    UM.coinwin += coinWin
-    //                    UM.win ++;
-    //                }
-    //                else if(!addCoin)
-    //                {
-    //                    if(alertWindow)
-    //                        MyWindow.Alert('你在上一轮竞猜中输了\n'+MyTool.createHtml('血本无归',0xFF0000)).text.textAlign='center'
-    //                    else
-    //                        MyWindow.ShowTips('你在上一轮竞猜中输了，'+MyTool.createHtml('血本无归',0xFF0000),3000)
-    //                }
-    //                UM.total ++;
-    //
-    //                var roundData = this.getLevelData(showData.key);
-    //                showData.result = result;
-    //                showData.roundData = roundData;
-    //                UM.history.unshift(showData)
-    //                UM.saveHistory();
-    //                this.upWXData();
-    //                this.needUpUser = true;
-    //            })
-    //            return false;
-    //        }
-    //        else if(UM.lastGuess.isDeal == 1)
-    //        {
-    //            return false;
-    //        }
-    //        else
-    //        {
-    //        }
-    //    }
-    //    return true;
-    //
-    //    //PKManager.getInstance().getPKResult({
-    //    //    isDeal:0,
-    //    //    key:1000,
-    //    //    cost1:10,
-    //    //    cost2:10,
-    //    //    teamCost1:10,
-    //    //    teamCost2:10,
-    //    //},b=>{console.log(b)})
-    //}
-
-    //public getFinishTimeByKey(key){
-    //    var day = Math.floor(key/1000)
-    //    var index = key%1000;
-    //
-    //    var time = this.beginTime + (day-1)*3600*24 + 3600*6 + (index + 1)*60*10
-    //    return time;
-    //}
-    //
-    //public getDayStrByKey(key){
-    //
-    //     var time = this.getFinishTimeByKey(key);
-    //     return DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(time))
-    //}
-    //
-    //public getAddCoin(showData,result,roundData?){
-    //    var addCoin = 0;
-    //    //var lossCoin = 0;
-    //    if(!roundData)
-    //        roundData = this.getLevelData(showData.key);
-    //    var costData = this.getCost(roundData.seed,999999)
-    //    var teamCost1 = costData.cost1 + showData.teamCost1;
-    //    var teamCost2 = costData.cost2 + showData.teamCost2;
-    //    if(result == 1)
-    //    {
-    //        var rate = this.getMoneyRate(teamCost1,teamCost2)
-    //        addCoin += Math.ceil(showData.cost1*rate/100)
-    //        //lossCoin += showData.cost2;
-    //    }
-    //    else if(result == 2)
-    //    {
-    //        var rate = this.getMoneyRate(teamCost2,teamCost1)
-    //        addCoin += Math.ceil(showData.cost2*rate/100)
-    //        //lossCoin += showData.cost1;
-    //    }
-    //    //else
-    //    //{
-    //    //    lossCoin += showData.cost1 + showData.cost2;
-    //    //}
-    //
-    //    return addCoin
-    //}
-    //
-    //public getLevelData(key){
-    //    var day = Math.floor(key/1000)-1
-    //    var index = Math.floor(key%1000)-1
-    //    var num = (day*108+index)%this.levelData.length;
-    //    var arr = this.levelData[num].split('|')
-    //    return {
-    //        list1:arr[0],
-    //        list2:arr[1],
-    //        seed:parseInt(arr[2]),
-    //    }
-    //}
 
     //取PK结果
     public getPKResult(data){
-        PKData.instanceIndex = 2;
-        var PD = PKData.getInstance();
+        PKData_wx3.instanceIndex = 2;
+        var PD = PKData_wx3.getInstance();
         PD.init({
             seed:data.seed,
             players:[
@@ -656,44 +266,11 @@ class PKManager {
         });
         PD.quick = true;
         PD.start();
-        PKCode.getInstance().onStep()
-        this.pkResult[data.key] = PD.getPKResult();
+        PKCode_wx3.getInstance().onStep()
+        //this.pkResult[data.key] = PD.getPKResult();
         var result = PD.getPKResult();
-        PKData.instanceIndex = 1;
+        PKData_wx3.instanceIndex = 1;
         return result;
     }
-
-    ////保证已加载了
-    //public getRoundDataByKey(key){
-    //    if(this.roundTotalData[key])
-    //          return this.roundTotalData[key]
-    //    var day = Math.floor(key/1000)
-    //    var index = Math.floor(key%1000)
-    //    var arr = this.levelData[day].split('\n')
-    //    return JSON.parse(arr[index])
-    //}
-
-    ////发送投注信息
-    //public sendCost(){
-    //    if(this.costChange)
-    //    {
-    //
-    //    }
-    //}
-
-
-
-
-
-    //public onChapterWin(level){
-    //    if(UM.chapterLevel != level)
-    //        return 0;
-    //    var cost = Math.min(2000,Math.ceil(level/20)*100)/2
-    //    UM.addCoin(cost);
-    //    UM.chapterLevel ++;
-    //    EM.dispatch(GameEvent.client.CHAPTER_CHANGE)
-    //    this.upWXChapter();
-    //    return cost
-    //}
 
 }

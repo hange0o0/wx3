@@ -1,4 +1,4 @@
-class MainPKItem extends game.BaseItem {
+class MainPKItem_wx3 extends game.BaseItem {
     public constructor() {
         super();
         this.skinName = "MainPKItemSkin";
@@ -20,7 +20,8 @@ class MainPKItem extends game.BaseItem {
         super.childrenCreated();
         this.addBtnEvent(this,this.onClick)
     }
-
+    private wx3_fun_asdfasdfasdf(){}
+    private wx3_fun_ast34(){}
 
     private onClick(){
         if(GuideManager.getInstance().isGuiding)

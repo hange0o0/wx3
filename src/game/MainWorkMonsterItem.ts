@@ -1,4 +1,4 @@
-class MainWorkMonsterItem extends PKMonsterMV {
+class MainWorkMonsterItem extends PKMonsterMV_wx3 {
     private static pool2 = [];
     public static createItem():MainWorkMonsterItem {
         var item:MainWorkMonsterItem = this.pool2.pop();

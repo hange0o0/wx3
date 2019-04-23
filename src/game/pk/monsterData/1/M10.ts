@@ -1,23 +1,23 @@
-class M10 extends MBase {
+class M10_wx3 extends MBase_wx3 {
     constructor() {
         super();
     }
 
     public mvID1 = 128;
 
-    public initMonster(user:PKMonsterData){
+    public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkAble =  false;
     }
 
 
 
-    public skill(user:PKMonsterData,target:PKMonsterData){
+    public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         target.addHp(user.getSkillValue(1,true))
     }
 
     //治疗1个单位
-    public getSkillTarget(user:PKMonsterData){
-        var PD = PKData.getInstance();
+    public getSkillTarget_wx3(user:PKMonsterData_wx3){
+        var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getVO().getAtkDis() + 100;
         var selectTarget
