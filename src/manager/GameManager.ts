@@ -223,50 +223,12 @@ class App {
         return /ip(ad|hone|od)/.test(ua);
     }
 }
-
-//var _get = {};
-//var url = location.hash || location.search;
-//var splitStr = location.hash ? '#' : '?';
-//if (url.indexOf(splitStr) != -1) {
-//    var str = url.substr(1);
-//    var strs = str.split("&");
-//    for (var i = 0; i < strs.length; i++) {
-//        var a = strs[i].split("=");
-//        var k = a[0];
-//        var v = a[1];
-//        _get[k] = v;
-//    }
-//}
-
-
-//function handleErr(msg,url, line, col, errorObj)
-//{
-//    //if(!Net.getInstance().serverHost)
-//    //    return;
-//    var txt = (url|| '').substr(-30,27)+ ':' + msg + '|' + line + "--" + col+ "--" + (errorObj && errorObj.stack);
-//    var str = MyTool.getBtnPath(GameManager.getInstance().lastTouchMC);
-//    if(str)
-//        txt += str;
-//    sendClientError(txt);
-//    //Net.send(GameEvent.sys.client_error,{msg:txt});
-//    //if(LoginManager.getInstance().isAuto)
-//    //{
-//    //    LoginManager.getInstance().showLoginUI();
-//    //}
-//    //else if(GuideManager.getInstance().isGuiding)
-//    //{
-//    //    Alert('发生未知错误',MyTool.refresh);
-//    //}
-//    return false
-//}
-
+//#stop_wx_change#//
+function wx3_function(v){}
 function sendClientError(str){
-    //var url =  'http://172.17.196.195:90/error_wx2/log_error.php'
-    //if(window["wx"])
     var url =  'https://www.hangegame.com/error_wx3/log_error.php'
     Net.getInstance().send(url,{str:str});
 }
-//window.onerror=handleErr;
 
 
 if(window["wx"])

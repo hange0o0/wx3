@@ -230,6 +230,18 @@ class PKCode_wx3 {
                 {
                     mvo.addHp(Math.floor(mvo.hpChange/2))
                     mvo.lastHpChange = PD.actionTime;
+                    if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime)) //死的
+                    {
+                        mvo.die = true;
+                        PD.monsterList.splice(i,1);
+                        PD.addVideo({
+                            type:PKConfig_wx3.VIDEO_MONSTER_DIE,
+                            user:mvo,
+                        })
+                        i--;
+                        mvo.onDie();
+                        PD.monsterChange = true;
+                    }
                 }
                 mvo.cleanBuff(PD.actionTime) //清除BUFF
                 if(mvo.stateChange)
@@ -241,10 +253,14 @@ class PKCode_wx3 {
                     })
                 }
             }
-            if(mvo.getOwner().teamData.id == 1)
-                teamNum1 ++;
-            else if(mvo.getOwner().teamData.id == 2)
-                teamNum2 ++;
+            if(!mvo.die)
+            {
+                if(mvo.getOwner().teamData.id == 1)
+                    teamNum1 ++;
+                else if(mvo.getOwner().teamData.id == 2)
+                    teamNum2 ++;
+            }
+
         }
         PD.team1.onStateTimer();
         PD.team2.onStateTimer();
