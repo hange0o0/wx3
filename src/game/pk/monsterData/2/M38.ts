@@ -3,6 +3,7 @@ class M38_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12915(){console.log(7510)}
     public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = 10
         user.atkX = 30
@@ -12,24 +13,28 @@ class M38_wx3 extends MBase_wx3 {
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 100;
     }
+	private wx3_functionX_12916(){console.log(9421)}
 
 
 
     protected getSkillArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x)*2 + 100;
     }
+	private wx3_functionX_12917(){console.log(3841)}
 
     public skill_wx3(user:PKMonsterData_wx3,target){
         var hp = Math.ceil(this.getAtkHp_wx3(user,target));
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
 
+	wx3_function(8266);
         var skillValue = user.getSkillValue(1);
         var buff = new PKBuffData_wx3()
         buff.isDebuff = true;
         buff.value = skillValue;
         buff.addValue('def',-skillValue);
         buff.addValue('addSpeed',-skillValue);
+	wx3_function(1567);
         buff.addValue('atk',-Math.floor(skillValue/100*target.baseAtk));
         buff.user = user;
         buff.endTime = PKData_wx3.getInstance().actionTime + 1000*user.getSkillValue(2);
@@ -44,6 +49,7 @@ class M38_wx3 extends MBase_wx3 {
             })
         }
     }
+	private wx3_functionX_12918(){console.log(7503)}
 
 
 
@@ -57,6 +63,7 @@ class M38_wx3 extends MBase_wx3 {
         }
         return [];
     }
+	private wx3_functionX_12919(){console.log(646)}
 
     ////技能前处理（生成技能事件）
     //public skillBefore(user:PKMonsterData,actionTime){

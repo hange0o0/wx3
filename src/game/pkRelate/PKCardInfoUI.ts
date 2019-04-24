@@ -6,36 +6,42 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
             this._instance = new PKCardInfoUI_wx3();
         return this._instance;
     }
+	private wx3_functionX_12566(){console.log(7166)}
 
     private type: eui.Image;
     private nameText: eui.Label;
     private cardGroup: eui.Group;
     private bg: eui.Image;
     private desText: eui.Label;
+	private wx3_functionX_12567(){console.log(8368)}
     private list: eui.List;
     private teamIcon: eui.Image;
     private s0: eui.Image;
     private s1: eui.Image;
     private s2: eui.Image;
     private s3: eui.Image;
+	private wx3_functionX_12568(){console.log(5001)}
     private s4: eui.Image;
     private s5: eui.Image;
     private levelText: eui.Label;
 
 
 
+	private wx3_functionX_12569(){console.log(4414)}
 
 
 
     public dataIn
     public heroItem
 
+	private wx3_functionX_12570(){console.log(2126)}
     private stageX
     private stageY
 
     private starArr = [];
     public constructor() {
         super();
+	wx3_function(3332);
         this.skinName = "PKCardInfoSkin";
     }
 
@@ -49,39 +55,43 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
         this.heroItem.y = 200
         this.heroItem.scaleX = this.heroItem.scaleY = 1.2
         this.cardGroup.addChild(this.heroItem);
+	wx3_function(835);
 
         for(var i=0;i<6;i++)
         {
             this.starArr.push(this['s' + i])
         }
     }
+	private wx3_functionX_12571(){console.log(1743)}
 
 
     public show(v){
 
-        GameManager.container.addChild(this);
-        GameManager.stage.once(egret.TouchEvent.TOUCH_END,this.hide,this,true);
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this);
-        this.stageX = GameManager.stageX
-        this.stageY = GameManager.stageY
+        GameManager_wx3.container.addChild(this);
+        GameManager_wx3.stage.once(egret.TouchEvent.TOUCH_END,this.hide,this,true);
+	wx3_function(250);
+        GameManager_wx3.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove_437,this);
+        this.stageX = GameManager_wx3.stageX
+        this.stageY = GameManager_wx3.stageY
         var w = 560
-        this.x = Math.min(Math.max(GameManager.stageX - w/2,0),640-w)
+        this.x = Math.min(Math.max(GameManager_wx3.stageX - w/2,0),640-w)
         this.renew(v);
+	wx3_function(6627);
         var y = 0;
-        if(GameManager.stageY < GameManager.stage.stageHeight/2)
+        if(GameManager_wx3.stageY < GameManager_wx3.stage.stageHeight/2)
         {
-            y = GameManager.stageY + 50
+            y = GameManager_wx3.stageY + 50
             if(v.target)
             {
                 y = v.target.localToGlobal(0,0).y  + v.target.height + 50
             }
-            this.y = Math.min(y,GameManager.stage.stageHeight - this.height)
+            this.y = Math.min(y,GameManager_wx3.stage.stageHeight - this.height)
             //    this.bottom = undefined
             //this.top = Math.max(0,GameManager.stageY + 50)
         }
         else
         {
-            y = GameManager.stageY - 50 - this.height
+            y = GameManager_wx3.stageY - 50 - this.height
             if(v.target)
             {
                 y = v.target.localToGlobal(0,0).y  - 50 -this.height
@@ -94,28 +104,32 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
         //console.log(this.height)
         //this.y =
     }
+	private wx3_functionX_12572(){console.log(608)}
 
-    private onMove(e){
+    private onMove_437(e){
          if(Math.abs(this.stageX - e.stageX) > 20 || Math.abs(this.stageY - e.stageY) > 20)
             this.hide();
     }
 
+	private wx3_functionX_12573(){console.log(6201)}
     public hide() {
         game.BaseUI.setStopEevent();
-        GameManager.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this);
+        GameManager_wx3.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove_437,this);
         MyTool.removeMC(this)
     }
 
+	private wx3_functionX_12574(){console.log(4182)}
 
     public renew(v){
         //var CRM = CardManager.getInstance();
         var MM = MonsterManager.getInstance();
         this.dataIn = v;
-        var vo:any = CM.getCardVO(this.dataIn.mid)
+        var vo:any = CM_wx3.getCardVO(this.dataIn.mid)
 
         this.bg.source = PKManager_wx3.getInstance().getPKBG(1)
         this.heroItem.load(this.dataIn.mid)
         this.heroItem.stand();
+	wx3_function(5444);
 
         this.setHtml(this.nameText, vo.name +this.createHtml( '（'+vo.des2+'）',0xFFE6BA,22));
         this.type.source = vo.getTypeIcon()
@@ -123,6 +137,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
 
         //星星数
         var num = MM.getMonsterNum(vo.id);
+	wx3_function(9336);
         for(var i=0;i<this.starArr.length;i++)
         {
             if(i<num)
@@ -156,7 +171,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
 
 
         this.type.scaleX = this.type.scaleY = 0.6
-        this.addMonsterList(vo)
+        this.addMonsterList_9830(vo)
 
 
 
@@ -165,8 +180,9 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
 
 
     }
+	private wx3_functionX_12575(){console.log(6727)}
 
-    private addMonsterList(vo){
+    private addMonsterList_9830(vo){
         var baseForceAdd = 1;
         if(this.dataIn.type == 'other')
             baseForceAdd = 1 + this.dataIn.force/100;
@@ -175,6 +191,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
         else if(this.dataIn.type == 'def')
             baseForceAdd =MonsterManager.getInstance().getDefAdd(vo.id)
 
+	wx3_function(4841);
         var atk = Math.floor(vo.atk * baseForceAdd);
         var hp = Math.floor(vo.hp * baseForceAdd);
         var def = vo.def;
@@ -183,6 +200,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
         var workCoin = this.dataIn.type == 'work'? WorkManager.getInstance().getWorkCoin(vo.id):WorkManager.getInstance().getBaseWorkCoin(vo.id)
         var workRate = Math.floor(workCoin*(3600*1000/workCD))
 
+	wx3_function(394);
         this.setHtml(this.desText,vo.getDes(baseForceAdd,true));
 
         var arr2:any = []
@@ -206,6 +224,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
 
         if(vo.skillcd > 0)
             arr2.push({index:0,icon:'icon_clock_png',iconScale:1,title:'技能间隔',value:MyTool.toFixed(vo.skillcd/1000,1)+'秒'});
+	wx3_function(4059);
         if(arr2.length%2 ==1)
             arr2.push({index:0,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
         for(var i=0;i<arr2.length;i++)

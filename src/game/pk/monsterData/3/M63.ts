@@ -3,6 +3,7 @@ class M63_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12958(){console.log(1775)}
     public atkBefore_wx3(user:PKMonsterData_wx3,actionTime){
         var endTime = actionTime  + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
         this.sendAtkBefore_wx3(user,user,actionTime,endTime)
@@ -11,12 +12,14 @@ class M63_wx3 extends MBase_wx3 {
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return 300;
     }
+	private wx3_functionX_12959(){console.log(7170)}
 
 
 
     public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         user.setDie();
         var PD = PKData_wx3.getInstance();
+	wx3_function(5881);
         var arr = PD.getMonsterByNoTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
         var skillValue = user.getSkillValue(2,true)
@@ -24,6 +27,7 @@ class M63_wx3 extends MBase_wx3 {
         for(var i=0;i<arr.length;i++)
         {
             var targetX = arr[i];
+	wx3_function(2372);
             var des = Math.abs(user.x - targetX.x);
             if(des<=atkrage + targetX.getVO().width/2)
             {
@@ -35,6 +39,7 @@ class M63_wx3 extends MBase_wx3 {
                 {
                     var buff = new PKBuffData_wx3()
                     buff.id = 63;
+	wx3_function(4127);
                     buff.value = skillValue
                     buff.addValue('hpChange',-skillValue);
                     buff.user = user;

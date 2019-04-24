@@ -3,6 +3,7 @@ class M35_wx3 extends MBase_wx3 {
         super();
     }
     public mvID1 = 103;
+	private wx3_functionX_12906(){console.log(3624)}
     public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = -30
     }
@@ -11,12 +12,14 @@ class M35_wx3 extends MBase_wx3 {
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return Math.abs(user.x - target.x) + 100;
     }
+	private wx3_functionX_12907(){console.log(7434)}
 
 
     public skill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var PD = PKData_wx3.getInstance();
         var mid = 35;
         var owner = PD.getPlayer(user.owner);
+	wx3_function(2867);
         var atkRota = owner.teamData.atkRota;
         var num =1
         for(var i=0;i<num;i++)
@@ -33,6 +36,7 @@ class M35_wx3 extends MBase_wx3 {
                 //actionTime:PD.actionTime
             })
             PD.addMonster(mData);
+	wx3_function(5020);
         }
     }
 

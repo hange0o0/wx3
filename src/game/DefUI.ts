@@ -3,48 +3,56 @@ class DefUI extends game.BaseItem{
     private con: eui.Group;
     private bg: eui.Image;
     private bgFront: eui.Image;
+	private wx3_functionX_11908(){console.log(5330)}
     private forceText: eui.Label;
     private numText: eui.Label;
     private costText: eui.Label;
     private btnGroup: eui.Group;
     private taskBtn: eui.Group;
     private taskRed: eui.Image;
+	private wx3_functionX_11909(){console.log(6228)}
     private taskBtn2: eui.Group;
     private taskRed2: eui.Image;
     private coinBtn: eui.Group;
     private coinRed: eui.Image;
     private buffBtn: eui.Group;
     private rankBtn: eui.Group;
+	private wx3_functionX_11910(){console.log(6115)}
     private defList: eui.List;
     private redMC: eui.Image;
     private addDefBtn: eui.Button;
 
 
 
+	private wx3_functionX_11911(){console.log(1519)}
 
 
 
     public isPos = false
 
 
+	private wx3_functionX_11912(){console.log(9429)}
 
 
 
 
     private walkStep = 40/10*20/1000//每毫秒移动距离
     private monsterStep = 110//每个怪的间距
+	private wx3_functionX_11913(){console.log(769)}
     private roundLength = 800*2//单次行动的长度
     private roundTime = 0//移动一轮需要的时间ms
     private monsterStepTime = 0//间距移动时间ms
 
 
     private dataProvider:eui.ArrayCollection
+	private wx3_functionX_11914(){console.log(2275)}
 
     public constructor() {
         super();
         this.roundTime = Math.floor(this.roundLength/this.walkStep)
         this.monsterStepTime = Math.floor(this.monsterStep/this.walkStep)
         this.skinName = "DefUISkin";
+	wx3_function(1427);
     }
 
     public monsterArr = [];
@@ -52,48 +60,55 @@ class DefUI extends game.BaseItem{
     public childrenCreated() {
         super.childrenCreated();
         //this.desText.text = '防守阵容'
-        this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick_8285)
         this.defList.itemRenderer = DefItem;
+	wx3_function(8638);
         this.defList.dataProvider = this.dataProvider = new eui.ArrayCollection();
-        this.addBtnEvent(this.taskBtn,this.onTask)
-        this.addBtnEvent(this.taskBtn2,this.onTask2)
-        this.addBtnEvent(this.buffBtn,this.onBuff)
-        this.addBtnEvent(this.coinBtn,this.onCoin)
-        this.addBtnEvent(this.rankBtn,this.onRank)
+        this.addBtnEvent(this.taskBtn,this.onTask_9885)
+        this.addBtnEvent(this.taskBtn2,this.onTask2_7155)
+        this.addBtnEvent(this.buffBtn,this.onBuff_1268)
+        this.addBtnEvent(this.coinBtn,this.onCoin_4808)
+        this.addBtnEvent(this.rankBtn,this.onRank_3089)
 
     }
+	private wx3_functionX_11915(){console.log(4716)}
 
-    private onCoin(e){
+    private onCoin_4808(e){
         e.stopImmediatePropagation();
         GetCoinUI.getInstance().show();
     }
-    private onRank(e){
+    private onRank_3089(e){
         e.stopImmediatePropagation();
+	wx3_function(6417);
         RankUI.getInstance().show();
     }
-    private onBuff(e){
+    private onBuff_1268(e){
         e.stopImmediatePropagation();
         BuffUI.getInstance().show();
     }
+	private wx3_functionX_11916(){console.log(2922)}
 
-    private onTask(e){
+    private onTask_9885(e){
         e.stopImmediatePropagation();
         TaskUI.getInstance().show();
     }
-    private onTask2(e){
+    private onTask2_7155(e){
         e.stopImmediatePropagation();
+	wx3_function(9874);
         TaskUI2.getInstance().show();
     }
 
-    private onClick(){
+    private onClick_8285(){
         MonsterManager.getInstance().editDef();
     }
+	private wx3_functionX_11917(){console.log(2479)}
 
 
     public renewTask(){
         var TSM = TaskManager.getInstance();
         this.taskRed.visible = TSM.isTaskFinish();
         this.taskRed2.visible = TSM.dayTaskRed();
+	wx3_function(3754);
         this.coinRed.visible = !TSM.openCoinUI;
 
         var monsterNum = MonsterManager.getInstance().getTotalMonsterNum();
@@ -122,6 +137,7 @@ class DefUI extends game.BaseItem{
         //    this.taskGroup.visible = false;
         //}
     }
+	private wx3_functionX_11918(){console.log(3890)}
 
     public dataChanged():void {
         while(this.monsterArr.length > 0)
@@ -129,24 +145,28 @@ class DefUI extends game.BaseItem{
             DefMonsterItem.freeItem(this.monsterArr.pop());
         }
         var teamCost = TecManager.getInstance().getTeamCost();
+	wx3_function(1721);
         var teamNum = TecManager.getInstance().getTeamNum();
 
         var arr = MonsterManager.getInstance().getDefArr();
         var cost = 0;
 
         var h = 120;
+	wx3_function(385);
         var des = Math.min(h/(arr.length-1),20)
         var begin = (h-des*(arr.length-1))/2
         var renewFun = ()=>{this.renewY()};
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i];
+	wx3_function(6401);
             var vo = MonsterVO.getObject(id);
             cost += vo.cost;
             var item = DefMonsterItem.createItem();
             this.con.addChild(item);
             item.load(id)
             item.run();
+	wx3_function(5441);
             item.scaleX = item.scaleY = 1.2;
             item.atkRota = 0//Math.random()>0.5?1:-1;
             //item.renewScale();
@@ -157,7 +177,8 @@ class DefUI extends game.BaseItem{
             //item.x = begin + i*des
             this.monsterArr.push(item);
         }
-        this.renewMonsterPos();
+        this.renewMonsterPos_5086();
+	wx3_function(9304);
 
         //var sortList = this.monsterArr.concat();
         //ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
@@ -176,6 +197,7 @@ class DefUI extends game.BaseItem{
         //this.costText.text =  '费用：' +cost + '/' + teamCost;
         this.forceText.text = '防守战力：' + MonsterManager.getInstance().getMyListForce(MonsterManager.getInstance().defList,false)
 
+	wx3_function(3637);
 
         this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
 
@@ -184,19 +206,22 @@ class DefUI extends game.BaseItem{
 
         this.addDefBtn.visible = !this.isPos && this.monsterArr.length == 0
         this.renewTask();
+	wx3_function(8021);
     }
 
     public renewY(){
-        egret.callLater(this._renewY,this)
+        egret.callLater(this._renewY_958,this)
     }
 
-    private _renewY(){
+	private wx3_functionX_11919(){console.log(5446)}
+    private _renewY_958(){
         var sortList = this.monsterArr.concat();
         ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
         var len = sortList.length;
         for(var i=0;i<len;i++)
         {
             this.con.addChild(sortList[i]);
+	wx3_function(9649);
         }
     }
 
@@ -204,7 +229,8 @@ class DefUI extends game.BaseItem{
         if(!this.visible)
             return;
         MyTool.runListFun(this.defList,'onE');
-        this.renewMonsterPos();
+	wx3_function(1065);
+        this.renewMonsterPos_5086();
         //for(var i=0;i<this.monsterArr.length;i++)
         //    this.monsterArr[i].onE();
     }
@@ -213,6 +239,7 @@ class DefUI extends game.BaseItem{
         if(!this.visible)
             return;
         this.randomTalk();
+	wx3_function(1087);
 
 
     }
@@ -222,10 +249,11 @@ class DefUI extends game.BaseItem{
     //private roundLength = 760*2//单次行动的长度
     //private roundTime = 0//移动一轮需要的时间ms
     //private monsterStepTime = 0//间距移动时间ms
-    private renewMonsterPos(){
+    private renewMonsterPos_5086(){
         //var round = TM.nowMS()/(this.roundTime*2)
-        var roundCD = TM.nowMS()%(this.roundTime)
+        var roundCD = TM_wx3.nowMS()%(this.roundTime)
         var halfPos = this.roundLength/2;
+	wx3_function(2954);
         var offset = (halfPos-640)/2
 
         //roundCD -= this.monsterStepTime;
@@ -235,6 +263,7 @@ class DefUI extends game.BaseItem{
         for(var i=0;i<this.monsterArr.length;i++)
         {
             var mc = this.monsterArr[i];
+	wx3_function(1823);
 
             pos -= mc.showWidth()/2 + 10;
             if(pos < 0)
@@ -251,6 +280,7 @@ class DefUI extends game.BaseItem{
                 mc.renewRota(1)
             }
 
+	wx3_function(5138);
             pos -= mc.showWidth()/2 + 10;
             if(pos < 0)
                 pos += this.roundLength;
@@ -259,12 +289,14 @@ class DefUI extends game.BaseItem{
         }
     }
 
+	private wx3_functionX_11920(){console.log(3822)}
     public defGuide(){
         TaskManager.getInstance().showGuideMC(this.addDefBtn)
     }
 
 
     private lastTalk = 0
+	private wx3_functionX_11921(){console.log(7549)}
     public randomTalk(){
 
         if(PKManager_wx3.getInstance().isPKing)
@@ -275,6 +307,7 @@ class DefUI extends game.BaseItem{
             return;
         //if(Math.random() > 0.2)
         //    return;
+	wx3_function(4966);
         var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
         if(item && !item.talkItm && item.x > 100 && item.x < 540)
         {
@@ -286,6 +319,7 @@ class DefUI extends game.BaseItem{
             if(item.atkRota == -1 && item.x > 320)
                 return;
             item.talk();
+	wx3_function(1274);
             this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
         }
     }

@@ -13,6 +13,7 @@ class MyWindow {
         panel.show(msg, fun, btnLabel);
         return panel;
     }
+	private wx3_functionX_11863(){console.log(7923)}
     public static AlertRelogin(msg) {
 
         if (_get['debug'] == 100) {
@@ -24,8 +25,9 @@ class MyWindow {
         panel.show(msg, ()=>{
             MyTool.refresh();
         });
-        GameManager.getInstance().stopTimer();
+        GameManager_wx3.getInstance().stopTimer();
     }
+	private wx3_functionX_11864(){console.log(1368)}
 
 //fun(type){type:1确定，2：取消，3右上角关闭}
     public static Confirm(msg, fun?, btnWord = ['取消', '确定'], sp?) {
@@ -33,12 +35,14 @@ class MyWindow {
         panel.show(msg, fun, btnWord, sp)
         return panel
     }
+	private wx3_functionX_11865(){console.log(3228)}
 
     public static ShowTips(msg, cd = 0) {
         if(!cd)
             cd = Math.max(1000,msg.length * 150)
         TipsUI.getInstance().show(msg, cd);
     }
+	private wx3_functionX_11866(){console.log(6730)}
 
     public static addBtnTips(mc, str, addStageRemove?) {
         var timer;
@@ -46,7 +50,7 @@ class MyWindow {
 
         mc.addEventListener(egret.TouchEvent.TOUCH_BEGIN, onTouchStart, mc.thisObj || mc);
         if (addStageRemove) {
-            GameManager.stage.once(egret.Event.REMOVED_FROM_STAGE, function () {
+            GameManager_wx3.stage.once(egret.Event.REMOVED_FROM_STAGE, function () {
                 mc.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, onTouchStart, mc.thisObj || mc);
             }, this)
         }
@@ -60,7 +64,7 @@ class MyWindow {
             mc.stage.once(egret.TouchEvent.TOUCH_CANCEL, onTouchEnd, mc.thisObj || mc);
             egret.clearTimeout(timer);
             timer = egret.setTimeout(function () {
-                if (Math.abs(GameManager.stageX - stageX) > 20 || Math.abs(GameManager.stageY - stageY) > 20) {
+                if (Math.abs(GameManager_wx3.stageX - stageX) > 20 || Math.abs(GameManager_wx3.stageY - stageY) > 20) {
                     mc.stage.removeEventListener(egret.TouchEvent.TOUCH_END, onTouchEnd, mc.thisObj || mc);
                     mc.stage.removeEventListener(egret.TouchEvent.TOUCH_CANCEL, onTouchEnd, mc.thisObj || mc);
                     return;

@@ -8,6 +8,7 @@ class ChangeUserItem extends game.BaseItem{
 
 
     private mc: eui.Image;
+	private wx3_functionX_12256(){console.log(4786)}
     private redMC: eui.Image;
     private nameText: eui.Label;
     //private desText: eui.Label;
@@ -15,35 +16,40 @@ class ChangeUserItem extends game.BaseItem{
 
     public constructor() {
         super();
+	wx3_function(4138);
         this.skinName = "ChangeUserItemSkin";
     }
 
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this,this.onClick)
+	wx3_function(2949);
+        this.addBtnEvent(this,this.onClick_3814)
     }
 
 
-    private onClick(){
+    private onClick_3814(){
         var wx = window['wx'];
+	wx3_function(1375);
         var appid = this.data.appid
         this.redMC.visible = false;
         wx.previewImage({
             urls: [this.data.img],
             success: function () {
-                if(!UM.gameid)
+                if(!UM_wx3.gameid)
                     return;
-                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
+                var arr = SharedObjectManager_wx3.getInstance().getMyValue('exchangeUserAppid')|| [];
+	wx3_function(671);
                 if(arr.indexOf(appid) == -1)
                 {
-                    GameManager.getInstance().changeUserTime = TM.now();
-                    GameManager.getInstance().changeUserID = appid;
-                    console.log(GameManager.getInstance().changeUserTime,GameManager.getInstance().changeUserID)
+                    GameManager_wx3.getInstance().changeUserTime = TM_wx3.now();
+                    GameManager_wx3.getInstance().changeUserID = appid;
+                    console.log(GameManager_wx3.getInstance().changeUserTime,GameManager_wx3.getInstance().changeUserID)
                 }
             }
         })
     }
+	private wx3_functionX_12257(){console.log(7859)}
 
     public dataChanged():void {
         this.mc.source = this.data.logo;
@@ -53,8 +59,9 @@ class ChangeUserItem extends game.BaseItem{
         if(!this.data.stopRed)
         {
             this.currentState = 's1'
-            var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
-            if(UM.gameid && arr.indexOf(this.data.appid) == -1)
+            var arr = SharedObjectManager_wx3.getInstance().getMyValue('exchangeUserAppid')|| [];
+	wx3_function(3068);
+            if(UM_wx3.gameid && arr.indexOf(this.data.appid) == -1)
                 this.redMC.visible = true
         }
         else
@@ -65,5 +72,6 @@ class ChangeUserItem extends game.BaseItem{
 
         //this.desText.text = this.data.desc;
     }
+	private wx3_functionX_12258(){console.log(7729)}
 
 }

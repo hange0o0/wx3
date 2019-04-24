@@ -3,26 +3,30 @@ class PKCardInfoItem_wx3 extends game.BaseItem {
         super();
         this.skinName = "PKCardInfoItemSkin";
     }
+	private wx3_functionX_12529(){console.log(7)}
 
     private rect: eui.Rect;
     private barMC: eui.Rect;
     private icon: eui.Image;
     private text: eui.Label;
 
+	private wx3_functionX_12530(){console.log(3869)}
 
 
 
 
 
 
+	private wx3_functionX_12531(){console.log(1397)}
     public childrenCreated() {
         super.childrenCreated();
-        //this.addBtnEvent(this,this.onClick)
+        //this.addBtnEvent(this,this.onClick_1899)
     }
 
-    private onClick(){
+    private onClick_1899(){
 
     }
+	private wx3_functionX_12532(){console.log(7283)}
 
     public dataChanged(){
         this.barMC.visible = false
@@ -49,6 +53,7 @@ class PKCardInfoItem_wx3 extends game.BaseItem {
         if(this.data.rate)
         {
             this.barMC.visible = true;
+	wx3_function(1565);
             this.barMC.width = this.data.rate * 205;
         }
 

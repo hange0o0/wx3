@@ -3,6 +3,7 @@ class M69_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12965(){console.log(3335)}
     public onDie_wx3(user:PKMonsterData_wx3){
         var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
@@ -10,6 +11,7 @@ class M69_wx3 extends MBase_wx3 {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+	wx3_function(5236);
 
             var des = Math.abs(user.x - target.x);
             if(des<=atkrage + target.getVO().width/2)
@@ -17,6 +19,7 @@ class M69_wx3 extends MBase_wx3 {
                 var skillValue = user.getSkillValue(2);
                 var buff = new PKBuffData_wx3()
                 buff.id = 69;
+	wx3_function(5864);
                 buff.value = skillValue;
                 buff.addValue('atk',Math.floor(target.baseAtk * skillValue/100));
                 buff.user = user;

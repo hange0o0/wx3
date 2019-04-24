@@ -4,6 +4,7 @@
  *
  */
 class DateUtil {
+	private wx3_functionX_12086(){console.log(5974)}
     private static offsetTime: number = 0// -21600//6*3600 6小时修正（当日6点至次日6点为一天、本月1号6点至次月1号6点为一个月）
     
     public constructor() {
@@ -12,9 +13,10 @@ class DateUtil {
     //是不是同一周
     public static isSameWeek(time1: number,time2?: number): boolean {
         if(Boolean(time2) == false)
-            time2 = TimeManager.getInstance().now();
+            time2 = TimeManager_wx3.getInstance().now();
         return DateUtil.getWeekDec(time1,time2) == 0;
     }
+	private wx3_functionX_12087(){console.log(4408)}
 	
     //转化为北京时间的Date
     public static timeToChineseDate(time: number): Date {
@@ -22,6 +24,7 @@ class DateUtil {
         date.setMinutes(date.getMinutes() + 480 + date.getTimezoneOffset());
         return date;
     }
+	private wx3_functionX_12088(){console.log(9343)}
 	
     //是否同一天
     public static isSameDay(time1: number,time2?: number,offset = -1): boolean {
@@ -30,7 +33,7 @@ class DateUtil {
             oft = offset;
 
         if(Boolean(time2) == false)
-            time2 = TimeManager.getInstance().now();
+            time2 = TimeManager_wx3.getInstance().now();
         time1 -= oft;
         time2 -= oft;
 
@@ -41,6 +44,7 @@ class DateUtil {
             return true;
         return false;
     }
+	private wx3_functionX_12089(){console.log(1892)}
 	
     //与今天的天数差异，以6点为界
     public static getDayDes(time: number, isZero?: boolean): number {
@@ -48,7 +52,7 @@ class DateUtil {
         if(isZero)
             ttt = 0;
         var t1 = time + ttt;
-        var t2 = TimeManager.getInstance().now() + ttt;
+        var t2 = TimeManager_wx3.getInstance().now() + ttt;
         var date1 = DateUtil.timeToChineseDate(t1);
         var date2 = DateUtil.timeToChineseDate(t2);
         if(t1 >= t2) {
@@ -58,20 +62,23 @@ class DateUtil {
             return -DateUtil.datediff(date2,date1)
         }
     }
+	private wx3_functionX_12090(){console.log(124)}
 
     public static isThisDate(time: number): boolean {
         time += DateUtil.offsetTime;
         var date1 = DateUtil.timeToChineseDate(time);
-        var date2 = DateUtil.timeToChineseDate(TimeManager.getInstance().now());
+        var date2 = DateUtil.timeToChineseDate(TimeManager_wx3.getInstance().now());
         return date1.getDate() == date2.getDate();
     }
+	private wx3_functionX_12091(){console.log(5285)}
 	
     //判断时间戳是否是当前月
     public static isThisMonth(time: number): boolean {
         var date1 = DateUtil.timeToChineseDate(time);
-        var date2 = DateUtil.timeToChineseDate(TimeManager.getInstance().now());
+        var date2 = DateUtil.timeToChineseDate(TimeManager_wx3.getInstance().now());
         return date1.getMonth() == date2.getMonth()
     }
+	private wx3_functionX_12092(){console.log(9158)}
     
     //转成 XX：XX：XX 格式
     public static getStringBySecond(value: number): string {
@@ -95,6 +102,7 @@ class DateUtil {
 
         return msg;
     }
+	private wx3_functionX_12093(){console.log(9196)}
     
     //比较天数差异   (前大后小)
     public static datediff(startTime: Date,endTime: Date): number {
@@ -113,6 +121,7 @@ class DateUtil {
 
         return (startTime.getTime() - endTime.getTime()) / (24 * 3600000);
     }
+	private wx3_functionX_12094(){console.log(6452)}
     
     //判断两个时间错相差的周数 (注意这个 周1到周7为同一周)  0点
     public static getWeekDec(time1: number,time2: number): number {
@@ -138,14 +147,16 @@ class DateUtil {
 
         return (d2.getTime() - d1.getTime()) / 24 / 3600 / 1000 / 7;
     }
+	private wx3_functionX_12095(){console.log(924)}
     
     /**
     * 获取北京时间xx点的时间戳
     * @param h
     * @returns {number}
     */
+	private wx3_functionX_12096(){console.log(1757)}
     public static getNextDateTimeByHours(h: number): number {
-        var now = TimeManager.getInstance().now();
+        var now = TimeManager_wx3.getInstance().now();
         var date = new Date(now * 1000);
         var diffMinus = -480 - date.getTimezoneOffset();//和本地时区的 分钟间隔
         var localMinutes = (h - date.getHours()) * 60 + diffMinus//转换为本地时间
@@ -156,14 +167,16 @@ class DateUtil {
         date.setSeconds(0);
         return Math.floor(date.getTime() / 1000);
     }
+	private wx3_functionX_12097(){console.log(3747)}
     
     /**
     * 获取某个时间的时间对象
     * @param h
     * @returns {number}
     */
+	private wx3_functionX_12098(){console.log(4855)}
     public static getNextChineseDateByHours(h: number,date: Date): Date {
-        date = date || TimeManager.getInstance().chineseDate();
+        date = date || TimeManager_wx3.getInstance().chineseDate();
         if(date.getHours() >= h)
             date.setDate(date.getDate() + 1);
         date.setHours(0);
@@ -171,6 +184,7 @@ class DateUtil {
         date.setSeconds(0);
         return date;
     }
+	private wx3_functionX_12099(){console.log(6062)}
 
     public static getStringBySeconds(m: number,isSimple?: boolean,type?: number,addNumber?: number): string {
         if(m < 0)
@@ -233,6 +247,7 @@ class DateUtil {
         }
         return t;
     }
+	private wx3_functionX_12100(){console.log(3542)}
 
     public static getMonthWeek(a: number): number {
         /*
@@ -247,6 +262,7 @@ class DateUtil {
             (d + 6 - w) / 7
             );
     }
+	private wx3_functionX_12101(){console.log(1179)}
 
     public static getStringByDate(date: Date,type: number): string {
         if(type == 1) {
@@ -261,6 +277,7 @@ class DateUtil {
         var s: string = "0" + date.getSeconds();
         return h.substr(h.length - 2,2) + ":" + m.substr(m.length - 2,2) + ":" + s.substr(s.length - 2,2);
     }
+	private wx3_functionX_12102(){console.log(4886)}
 
     public static StringToDate(s: string): Date {
         if(s == null || s == "") return new Date();
@@ -277,6 +294,7 @@ class DateUtil {
         var da = new Date(<number> Darr[0],Darr[1] - 1,Darr[2],Tarr[0],Tarr[1],Tarr[2]);
         return da;
     }
+	private wx3_functionX_12103(){console.log(5099)}
     
     //str: "2015-07-15 0:0:0"
     public static getTimestampByChineseDate(str: string): number {
@@ -285,6 +303,7 @@ class DateUtil {
         date.setMinutes(date.getMinutes() - diffMinus);
         return Math.floor(date.getTime() / 1000);
     }
+	private wx3_functionX_12104(){console.log(115)}
     
     //格式化日期 例: DateUtils.formatDate('yyyy-MM-dd hh:mm', new Date());
     public static formatDate(format,date): string {

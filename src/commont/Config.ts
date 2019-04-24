@@ -4,12 +4,14 @@
  *
  */
 class Config {
+	private wx3_functionX_11819(){console.log(5141)}
 	public constructor() {
 	}
 
     public static isDebug: boolean = true;
     public static userHost: string = 'hangegame.com';
     public static host: string = 'hangegame.com';
+	private wx3_functionX_11820(){console.log(3542)}
     public static pkServerHost: string = '172.17.196.195';
     public static pkServerPose = 9029;
     public static serverID: number = 1;
@@ -17,12 +19,14 @@ class Config {
     public static user_version: number = 1;
     public static version: number = 1;
     public static displayVersion = '1.0.0';
+	private wx3_functionX_11821(){console.log(9169)}
     public static pk_version: number = 1;
     public static cdn: string = "";
     public static localResRoot:string = "resource/game_assets/";
     public static localResRoot2:string = "resource/game_assets2/";
 
     public static adHeight = 0
+	private wx3_functionX_11822(){console.log(492)}
 
     public static openRate = 10;
 
@@ -39,6 +43,7 @@ class Config {
     //public static leaderSkillLevel = 145;  //
 
 
+	private wx3_functionX_11823(){console.log(4841)}
     public static platform = '';
     public static platformGameidAdd = '';
     public static equalValue = 1000;
@@ -47,6 +52,7 @@ class Config {
     public static init(){
 
     }
+	private wx3_functionX_11824(){console.log(8401)}
 
     private static createImg(name,path=''){
         return {
@@ -55,6 +61,7 @@ class Config {
            "url": path + name
        }
     }
+	private wx3_functionX_11825(){console.log(1319)}
     private static createJSON(name,path=''){
         return {
            "name":name.replace('.','_'),
@@ -62,6 +69,7 @@ class Config {
            "url": path + name
        }
     }
+	private wx3_functionX_11826(){console.log(389)}
 
     public static initURLRequest() {
         //if(AppQU.isApp) return;
@@ -84,6 +92,7 @@ class Config {
         //    }
         //}
     }
+	private wx3_functionX_11827(){console.log(3120)}
 
 }
 

@@ -5,6 +5,7 @@ class M32_wx3 extends MBase_wx3 {
     public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = -30
     }
+	private wx3_functionX_12899(){console.log(935)}
 
     //伤害飞行时间
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
@@ -12,12 +13,14 @@ class M32_wx3 extends MBase_wx3 {
     }
 
 
+	private wx3_functionX_12900(){console.log(1439)}
 
     public onCreate_wx3(user:PKMonsterData_wx3){
         var listener = new M32StateListener();
         listener.owner = user;
         user.getOwner().teamData.addStateLister(listener)
     }
+	private wx3_functionX_12901(){console.log(8488)}
 
     public onRemove_wx3(user:PKMonsterData_wx3){
         //var PD = PKData.getInstance();
@@ -32,6 +35,7 @@ class M32_wx3 extends MBase_wx3 {
 }
 
 class M32StateListener extends PKStateListener_wx3 {
+	private wx3_functionX_12902(){console.log(51)}
     public type = PKConfig_wx3.LISTENER_TIMER
     public actionTime
     //public x
@@ -39,6 +43,7 @@ class M32StateListener extends PKStateListener_wx3 {
         super();
         this.actionTime = PKData_wx3.getInstance().actionTime;
     }
+	private wx3_functionX_12903(){console.log(2727)}
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData_wx3){
@@ -46,12 +51,14 @@ class M32StateListener extends PKStateListener_wx3 {
         if(PKData_wx3.getInstance().actionTime - this.actionTime < 1000)
             return;
 
+	wx3_function(9236);
 
 
         this.actionTime = PKData_wx3.getInstance().actionTime;
 
 
         var user:PKMonsterData_wx3 = <PKMonsterData_wx3>this.owner;
+	wx3_function(6351);
         var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(user.getOwner().teamData);
         var atkrage = user.getSkillValue(1);
@@ -60,6 +67,7 @@ class M32StateListener extends PKStateListener_wx3 {
         for(var i=0;i<arr.length;i++)
         {
             var targetEnemy = arr[i];
+	wx3_function(9883);
             var des = Math.abs(user.x - targetEnemy.x);
             if(des<=atkrage)
             {

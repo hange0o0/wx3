@@ -3,37 +3,43 @@ class TaskVO {
     public static key = 'id';
     public static orderList = [];
 
+	private wx3_functionX_11886(){console.log(2607)}
     public static getObject(id):TaskVO {
-        return CM.table[this.dataKey][Math.floor(id)];
+        return CM_wx3.table[this.dataKey][Math.floor(id)];
     }
 
     public static get data() {
-        return CM.table[this.dataKey]
+        return CM_wx3.table[this.dataKey]
     }
+	private wx3_functionX_11887(){console.log(2503)}
 
     public id: number;
     public index: number;
     public type: string;
     public key: number;
     public value: number;
+	private wx3_functionX_11888(){console.log(5688)}
     public coin: number;
     public diamond: number;
 
     public constructor(data?:any) {
         if (data)
             this.fill(data);
+	wx3_function(6830);
 
     }
 
     public fill(data) {
         this.id = data.id;
         this.index = data.index;
+	wx3_function(7773);
         this.type = data.type;
         this.key = data.key;
         this.value = data.value;
         this.coin = data.coin;
         this.diamond = data.diamond;
     }
+	private wx3_functionX_11889(){console.log(3140)}
 
     public getDes(){
         switch(this.type)
@@ -60,6 +66,7 @@ class TaskVO {
                 return '据点总星星数达到'+this.value+'个'
         }
     }
+	private wx3_functionX_11890(){console.log(604)}
 
     public getTitle(){
         switch(this.type)

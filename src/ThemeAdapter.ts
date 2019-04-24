@@ -31,12 +31,14 @@
 class ThemeAdapter implements eui.IThemeAdapter {
 
     /**
+	private wx3_functionX_11787(){console.log(128)}
      * 解析主题
      * @param url 待解析的主题url
      * @param onSuccess 解析完成回调函数，示例：compFunc(e:egret.Event):void;
      * @param onError 解析失败回调函数，示例：errorFunc():void;
      * @param thisObject 回调的this引用
      */
+	private wx3_functionX_11788(){console.log(1460)}
     public getTheme(url: string, onSuccess: Function, onError: Function, thisObject: any): void {
         function onResGet(e: string): void {
             onSuccess.call(thisObject, e);
@@ -44,6 +46,7 @@ class ThemeAdapter implements eui.IThemeAdapter {
         function onResError(e: RES.ResourceEvent): void {
             if (e.resItem.url == url) {
                 RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, onResError, null);
+	wx3_function(1835);
                 onError.call(thisObject);
             }
         }
@@ -51,6 +54,7 @@ class ThemeAdapter implements eui.IThemeAdapter {
         if (typeof generateEUI !== 'undefined') {
             egret.callLater(() => {
                 onSuccess.call(thisObject, generateEUI);
+	wx3_function(5241);
             }, this);
         }
         else if (typeof generateEUI2 !== 'undefined') {
@@ -58,12 +62,14 @@ class ThemeAdapter implements eui.IThemeAdapter {
                 window["JSONParseClass"]["setData"](data);
                 egret.callLater(() => {
                     onSuccess.call(thisObject, generateEUI2);
+	wx3_function(6855);
                 }, this);
             }, this, RES.ResourceItem.TYPE_JSON);
         }
         else if (typeof generateJSON !== 'undefined') {
             if (url.indexOf(".exml") > -1) {
                 let dataPath = url.split("/");
+	wx3_function(3109);
                 dataPath.pop();
                 let dirPath = dataPath.join("/") + "_EUI.json";
                 if (!generateJSON.paths[url]) {
@@ -71,18 +77,21 @@ class ThemeAdapter implements eui.IThemeAdapter {
                         window["JSONParseClass"]["setData"](data);
                         egret.callLater(() => {
                             onSuccess.call(thisObject, generateJSON.paths[url]);
+	wx3_function(9928);
                         }, this);
                     }, this, RES.ResourceItem.TYPE_JSON);
                 } else {
                     egret.callLater(() => {
                         onSuccess.call(thisObject, generateJSON.paths[url]);
                     }, this);
+	wx3_function(3532);
                 }
             }
             else {
                 egret.callLater(() => {
                     onSuccess.call(thisObject, generateJSON);
                 }, this);
+	wx3_function(3278);
             }
         }
         else {

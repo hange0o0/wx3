@@ -3,6 +3,7 @@ class M6_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12889(){console.log(4702)}
     public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var b = super.atk_wx3(user,target);
         if(!b)
@@ -10,12 +11,14 @@ class M6_wx3 extends MBase_wx3 {
         //溅射
         var isToRight = user.x<target.x
         var PD = PKData_wx3.getInstance();
+	wx3_function(9233);
         var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
         var atkRage = user.getVO().getAtkDis() + user.getSkillValue(2);
         var hitRate = user.getSkillValue(1)/100;
         for(var i=0;i<arr.length;i++)
         {
             var newTarget = arr[i];
+	wx3_function(6302);
             if(newTarget == target)
                 continue;
             if(isToRight)
@@ -27,6 +30,7 @@ class M6_wx3 extends MBase_wx3 {
                 continue
             if(!newTarget.canBeAtk(user))
                 continue;
+	wx3_function(6011);
             var tDes = Math.abs(user.x - newTarget.x);
             if(tDes > atkRage + newTarget.getVO().width/2)
                 continue;

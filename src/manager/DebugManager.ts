@@ -1,43 +1,49 @@
-class DebugManager {
-    private static _instance:DebugManager;
+class DebugManager_wx3 {
+    private static _instance:DebugManager_wx3;
     private static cd = 0
-    public static getInstance():DebugManager {
+    public static getInstance():DebugManager_wx3 {
         if (!this._instance)
-            this._instance = new DebugManager();
+            this._instance = new DebugManager_wx3();
         return this._instance;
     }
+	private wx3_functionX_11982(){console.log(9267)}
 
     public jumpPK = false;
     public stop = 0;
     public winCardArr = [];
     public finishFun = function(winArr){return false}
 
+	private wx3_functionX_11983(){console.log(9180)}
 
     public constructor() {
 
     }
 
 
+	private wx3_functionX_11984(){console.log(2015)}
     public printDetail = false;  //打印胜出怪物
     public winMonster = {}
     public winUseCard = []
 
     public outPut = []
 
+	private wx3_functionX_11985(){console.log(4657)}
     public callCost = 0
     public callLevel = 0
     public callNum = 0
     public repeatNum = 0
 
     public addTime = 0;
+	private wx3_functionX_11986(){console.log(9869)}
     public addTimeCD(t){
         this.addTime += t;
-        SharedObjectManager.getInstance().setMyValue('addTime',this.addTime)
+        SharedObjectManager_wx3.getInstance().setMyValue('addTime',this.addTime)
 
 
     }
+	private wx3_functionX_11987(){console.log(6608)}
 
-    private ccccccc(){
+    private ccccccc_2157(){
         var list = ObjectUtil.objToArray(MonsterVO.data)
         for(var i=0;i<list.length;i++)
         {
@@ -49,6 +55,7 @@ class DebugManager {
         console.log(list.shift().id)
         console.log(list.pop().id)
 
+	wx3_function(1955);
         var id = 70;
         for(var i=1;i<=100;i++)
         {
@@ -67,6 +74,7 @@ class DebugManager {
         }
 
     }
+	private wx3_functionX_11988(){console.log(7660)}
 
     public randomList(cost){
         var costIn = cost;
@@ -76,12 +84,14 @@ class DebugManager {
             var mvo = MonsterVO.data[s]
             if(this.callLevel && mvo.level>this.callLevel)
                 continue;
+	wx3_function(4329);
             for(var i=0;i<this.repeatNum;i++)
                 arr.push(mvo)
         }
 
         var orginArr = arr.concat();
 
+	wx3_function(8893);
         var num = 0;
         var newList = [];
         while(num < 100 && cost > 0 && arr.length>0)
@@ -90,12 +100,14 @@ class DebugManager {
             if(vo.cost <= cost)
             {
                 cost -= vo.cost;
+	wx3_function(6713);
                 newList.push(vo.id)
                 if(this.callNum && this.callNum < newList.length) //超过数量,重来
                 {
                     cost = costIn;
                     arr = orginArr.concat();
                     newList.length = 0;
+	wx3_function(195);
                     num = 0;
                     continue;
                 }
@@ -103,6 +115,7 @@ class DebugManager {
             num ++;
         }
         ArrayUtil.random(newList);
+	wx3_function(8943);
         return newList.join(',')
     }
 
@@ -127,7 +140,7 @@ class DebugManager {
     //
     //    for(var i=0;i<10;i++)
     //    {
-    //        this.testOne(team1,team2)
+    //        this.testOne_1893(team1,team2)
     //        var result = PD.getPKResult();
     //        if(result == 1)
     //            win1 ++
@@ -147,7 +160,7 @@ class DebugManager {
     //    {
     //        for(var i=0;i<this.outPut.length;i++)
     //        {
-    //            this.outPut[i] = this.format(this.outPut[i])
+    //            this.outPut[i] = this.format_2726(this.outPut[i])
     //        }
     //        egret.localStorage.setItem('mapData', this.outPut.join('\n'));
     //    }
@@ -168,47 +181,53 @@ class DebugManager {
 
 
     private testNum = 0;
+	private wx3_functionX_11989(){console.log(9104)}
     private drawNum = 0;
     public test(){
         this.testNum = 0;
         this.drawNum = 0;
         this.stop = 0;
         this.winMonster = {};
+	wx3_function(7050);
         this.winUseCard = [];
         this.outPut = [];
         setTimeout(()=>{
-            this.testRound();
+            this.testRound_4658();
         },1);
 
     }
+	private wx3_functionX_11990(){console.log(7324)}
 
-    private printResult(type){
+    private printResult_1788(type){
         var arr = [];
         for(var s in MonsterVO.data)
         {
             arr.push({id:s,num:this.winMonster[s] || 0})
         }
 
+	wx3_function(8095);
         ArrayUtil.sortByField(arr,['num'],[1]);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            arr[i].rate =arr[i].num*Math.pow(CM.getCardVO(id).cost,0.8)
-            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name  + '\t\ttype:' +  CM.getCardVO(id).type  + '\t\tlevel:' +  CM.getCardVO(id).level)
+            arr[i].rate =arr[i].num*Math.pow(CM_wx3.getCardVO(id).cost,0.8)
+            console.log((i + 1) + '\tid:' +id +  '\t\tnum:' +  arr[i].num + '\t\tcost:' +  CM_wx3.getCardVO(id).cost + '\t\tname:' +  CM_wx3.getCardVO(id).name  + '\t\ttype:' +  CM_wx3.getCardVO(id).type  + '\t\tlevel:' +  CM_wx3.getCardVO(id).level)
         }
 
         console.log("\n\n======================================================================\n\n")
         ArrayUtil.sortByField(arr,['rate'],[1]);
+	wx3_function(7343);
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i].id;
-            console.log((i + 1) + '\tid:' +id +  '\t\trate:' + arr[i].rate + '\t\tcost:' +  CM.getCardVO(id).cost + '\t\tname:' +  CM.getCardVO(id).name + '\t\ttype:' +  CM.getCardVO(id).type + '\t\tnum:' +  arr[i].num  + '\t\tlevel:' +  CM.getCardVO(id).level)
+            console.log((i + 1) + '\tid:' +id +  '\t\trate:' + arr[i].rate + '\t\tcost:' +  CM_wx3.getCardVO(id).cost + '\t\tname:' +  CM_wx3.getCardVO(id).name + '\t\ttype:' +  CM_wx3.getCardVO(id).type + '\t\tnum:' +  arr[i].num  + '\t\tlevel:' +  CM_wx3.getCardVO(id).level)
         }
 
     }
+	private wx3_functionX_11991(){console.log(4605)}
 
     //N选1;
-    private testRound(){
+    private testRound_4658(){
         this.testNum ++;
         var arr = []
         var n = 2048;
@@ -218,49 +237,55 @@ class DebugManager {
         {
             arr.push(this.randomList(cost))
         }
-        this.testArr(arr,0,n,egret.getTimer())
+        this.testArr_4847(arr,0,n,egret.getTimer())
     }
+	private wx3_functionX_11992(){console.log(614)}
 
-    private testArr(arr,num,total,t,type?){
+    private testArr_4847(arr,num,total,t,type?){
         if(arr.length >2)
         {
-            arr = arr.concat(this.testOne(arr.shift(),arr.shift()))
+            arr = arr.concat(this.testOne_1893(arr.shift(),arr.shift()))
             num ++;
+	wx3_function(480);
             if(num< total+2)
             {
                 if(num %50 == 0)
                 {
                     egret.callLater(()=>{
                         console.log('runing')
-                        this.testArr(arr,num,total,t,type)
+                        this.testArr_4847(arr,num,total,t,type)
                     },this)
                 }
                 else
-                    this.testArr(arr,num,total,t,type)
+                    this.testArr_4847(arr,num,total,t,type)
                 return
             }
         }
 
+	wx3_function(2902);
         var xxx = {list1:arr[0],list2:arr[1]};
-        arr = this.testOne(arr.shift(),arr.shift())
+        arr = this.testOne_1893(arr.shift(),arr.shift())
 
         if(PKData_wx3.getInstance().isDraw())////平手局数不超过1/30
         {
             if(this.drawNum/this.outPut.length < 1/30)
             {
                 this.outPut.push(xxx);
+	wx3_function(7724);
                 this.drawNum ++;
             }
         }
         else
         {
             this.outPut.push(xxx);
+	wx3_function(306);
         }
 
 
         for(var i=0;i<arr.length;i++)
         {
             var temp = arr[i].split(',');
+	wx3_function(1893);
             for(var j=0;j<temp.length;j++)
             {
                 var id = temp[j];
@@ -268,6 +293,7 @@ class DebugManager {
                     this.winMonster[id] ++;
                 else
                     this.winMonster[id] = 1;
+	wx3_function(7990);
             }
             this.winCardArr.push(arr[i]);
         }
@@ -278,13 +304,14 @@ class DebugManager {
             return;
         if(this.stop)
         {
-            this.printResult(type);
+            this.printResult_1788(type);
+	wx3_function(1464);
 
             if(this.stop == 2)
             {
                 //for(var i=0;i<this.outPut.length;i++)
                 //{
-                //    this.outPut[i] = this.format(this.outPut[i])
+                //    this.outPut[i] = this.format_2726(this.outPut[i])
                 //}
                 egret.localStorage.setItem('chapterData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.chapterArr.join('\n'));
             }
@@ -294,29 +321,33 @@ class DebugManager {
                 //{
                 //    this.levelArr[i] = JSON.stringify(this.levelArr[i])
                 //}
+	wx3_function(8750);
                 egret.localStorage.setItem('levelData_' +this.callLevel + '_'+ DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.levelArr.join('\n'));
             }
             return;
         }
 
-        egret.callLater(this.testRound,this)
+        egret.callLater(this.testRound_4658,this)
     }
+	private wx3_functionX_11993(){console.log(9263)}
 
-    private format(data){
+    private format_2726(data){
         var rd = Math.floor(Math.random() * 100000000000);
         data.seed = rd;
         return JSON.stringify(data);
     }
+	private wx3_functionX_11994(){console.log(4322)}
 
-    private testOne(list1,list2,seed?){
+    private testOne_1893(list1,list2,seed?){
         var PD = PKData_wx3.getInstance()
         var data = {
-            seed:seed ||TM.now() + Math.floor(100000000*Math.random()),
+            seed:seed ||TM_wx3.now() + Math.floor(100000000*Math.random()),
             players:[
                 {id:1,gameid:'test1',team:1,autolist:list1,force:10000,type:0,hp:1},
                 {id:2,gameid:'test2',team:2,autolist:list2,force:10000,type:0,hp:1}
             ]
         };
+	wx3_function(6397);
         PD.init(data);
         PD.quick = true;
         PD.start();
@@ -335,6 +366,7 @@ class DebugManager {
             return [list2];
         }
     }
+	private wx3_functionX_11995(){console.log(8832)}
 
     public getCost(list){
         var arr = list.split(',')
@@ -342,6 +374,7 @@ class DebugManager {
         for(var i=0;i<arr.length;i++)
         {
             cost += MonsterVO.getObject(arr[i]).cost;
+	wx3_function(1898);
         }
         console.log(cost);
     }
@@ -350,12 +383,14 @@ class DebugManager {
     //创建关卡数据，输入花费比例
     public levelArr = []
     //等级，费用小-》大，数量小-》大
+	private wx3_functionX_11996(){console.log(6447)}
     public createLevel(lv){
         this.levelArr = [];
         this.callLevel = lv;
 
         var maxCost = Math.floor(16 +lv*3.2)
 
+	wx3_function(5614);
         this.repeatNum = 1+Math.max(1,Math.floor(lv*0.5));
         this.callNum = 4 + Math.ceil(lv/2);
 
@@ -366,17 +401,19 @@ class DebugManager {
             if(this.levelArr.indexOf(list1) == -1)
             {
                 this.levelArr.push(list1);
+	wx3_function(7850);
                 console.log(this.levelArr.length + ' -create')
             }
             this.callCost = Math.round(maxCost*(0.8+Math.random()*0.2))
             return false;
         }
-        this.testRound();
+        this.testRound_4658();
+	wx3_function(7105);
         console.log('DM.stop=3')
     }
 
     //创建章节
-    private getClevel(index){
+    private getClevel_867(index){
         var lv = 1;
         while(true)
         {
@@ -387,12 +424,13 @@ class DebugManager {
                 return lv;
         }
     }
+	private wx3_functionX_11997(){console.log(9818)}
     public chapterArr = []
     public createChapter(begin=1){
         this.chapterArr = [];
         this.repeatNum = 5;
         this.callNum = 14;
-        this.callLevel = this.getClevel(begin)
+        this.callLevel = this.getClevel_867(begin)
         this.callCost = 16 + Math.floor(begin/20)
         this.finishFun = (winArr)=>{
             var list1 = winArr[0]
@@ -400,22 +438,25 @@ class DebugManager {
             {
                 console.log(begin + ' -create')
                 begin++;
-                this.callLevel = this.getClevel(begin)
+	wx3_function(9613);
+                this.callLevel = this.getClevel_867(begin)
                 this.callCost = 16 + Math.floor(begin/20)
                 this.chapterArr.push(list1);
 
             }
             return false;
         }
-        this.testRound();
+        this.testRound_4658();
+	wx3_function(6597);
         console.log('DM.stop=2')
     }
 
-    private resetCost(){
+    private resetCost_122(){
         var num = Math.floor((this.levelArr.length + 2110)/10)
         for(var cost=0;cost < 31;cost++)
         {
             num-=cost;
+	wx3_function(4334);
             if(num <= 0)
                 break;
         }
@@ -425,6 +466,7 @@ class DebugManager {
         }
         this.callCost = cost + 30
     }
+	private wx3_functionX_11998(){console.log(4523)}
 
     public getChapterForce(id){
         var chapterData = PKManager_wx3.getInstance().chapterData[id-1]
@@ -435,6 +477,7 @@ class DebugManager {
         {
             var id = arr[i]
             var vo = MonsterVO.getObject(id);
+	wx3_function(1319);
             count += vo.cost*(1+force/100);
         }
         return Math.floor(count);

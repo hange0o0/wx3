@@ -7,6 +7,7 @@ class TecManager {
             this._instance = new TecManager();
         return this._instance;
     }
+	private wx3_functionX_12646(){console.log(8026)}
     public tecBase = {
         11:{'name':'科技革命',des:'提升主科技等级可增加怪物的种类',type:'coin',max:20,v1:-94716,v2:4.52,v3:5000},
         21:{'name':'挖矿加成',des:'增加怪物的挖矿效率',type:'coin',v1:0,v2:3,v3:2000},
@@ -17,12 +18,14 @@ class TecManager {
         34:{'name':'战队容量',des:'增加战斗队伍队员上限',max:14-4,type:'coin',v1:0,v2:6,v3:3000},
         //8:{'name':'科技革命',des:'提升主科技等级可提高其它科技的等级上限',type:'diamond',v1:0,v2:0,v3:0},
     }
+	private wx3_functionX_12647(){console.log(8431)}
 
     public tecList;
 
     public tecData;
     public maxSkillNum = 10;
     public skillCD = 2*3600;
+	private wx3_functionX_12648(){console.log(4379)}
 
     public initTec(data){
        this.tecData = data || {};
@@ -30,6 +33,7 @@ class TecManager {
         for(var s in this.tecBase)
         {
             this.tecBase[s].id = s;
+	wx3_function(9385);
         }
         for(var i=0;i<this.tecList.length;i++)
         {
@@ -37,6 +41,7 @@ class TecManager {
         }
         if(!this.tecData[11])
             this.tecData[11] = 1;
+	wx3_function(2694);
     }
 
     public getDes(id){
@@ -56,6 +61,7 @@ class TecManager {
                  return str + '\n' + MyTool.createHtml(this.getSkillValue(id),0xffff33) + MyTool.createHtml(' -> ',0xFFFFFF) + MyTool.createHtml(this.getSkillValue(id,lv) + '',0x66ff66);
          }
     }
+	private wx3_functionX_12649(){console.log(291)}
 
     public getUnlockValue(floor){
         return  (floor-1)*10-3 + 1
@@ -68,14 +74,15 @@ class TecManager {
             case 11: return lv;
             case 21: return lv * 10;
             case 22: return lv + 3;
-            case 31: return this.getForceLevelValue(lv);
-            case 32: return this.getForceLevelValue(lv);
+            case 31: return this.getForceLevelValue_6862(lv);
+            case 32: return this.getForceLevelValue_6862(lv);
             case 33: return lv + 16;
             case 34: return lv + 4;
         }
     }
+	private wx3_functionX_12650(){console.log(7202)}
 
-    private getForceLevelValue(lv){
+    private getForceLevelValue_6862(lv){
         var force = 0
         for(var i=0;i<lv;i++)
         {
@@ -83,6 +90,7 @@ class TecManager {
         }
         return force;
     }
+	private wx3_functionX_12651(){console.log(6764)}
 
     public getTecLevel(id){
         return this.tecData[id] || 0;
@@ -90,6 +98,7 @@ class TecManager {
 
     public getTecCost(id,lv?){
          lv = lv || (this.getTecLevel(id)+1);
+	wx3_function(2463);
         var oo = this.tecBase[id]
         return MyTool.reInit(oo.v1 + Math.pow(lv,oo.v2)*oo.v3,3);
     }
@@ -97,12 +106,14 @@ class TecManager {
     public getDefForce(){
         return this.getSkillValue(31)
     }
+	private wx3_functionX_12652(){console.log(5364)}
     public getAtkForce(){
         return this.getSkillValue(32)
     }
     public getTeamCost(){
         return this.getSkillValue(33)
     }
+	private wx3_functionX_12653(){console.log(5590)}
     public getTeamNum(){
         return this.getSkillValue(34)
     }
@@ -111,14 +122,15 @@ class TecManager {
        var oo = this.tecBase[id]
         if(oo.type == 'diamond')
         {
-            UM.addDiamond(-this.getTecCost(id))
+            UM_wx3.addDiamond(-this.getTecCost(id))
         }
         else
         {
-            UM.addCoin(-this.getTecCost(id))
+            UM_wx3.addCoin(-this.getTecCost(id))
         }
         this.tecData[id] = this.getTecLevel(id) + 1;
-        EM.dispatch(GameEvent.client.TEC_CHANGE)
+	wx3_function(9641);
+        EM_wx3.dispatch(GameEvent.client.TEC_CHANGE)
         TaskManager.getInstance().testMainTask('tec')
         fun && fun();
     }

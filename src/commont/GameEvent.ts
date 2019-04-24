@@ -21,18 +21,21 @@ class GameEvent {
         timer:'timer',
         timerE:'timerE'
     };
+	private wx3_functionX_11828(){console.log(1322)}
 
     public static sys = {
         login:'login',
 
         client_error:'sys.client_error'
     }
+	private wx3_functionX_11829(){console.log(4673)}
 
     public static game = {
         buy_skin:'game.buy_skin',
         create_rank:'rank.create_rank',
         get_rank2:'rank.get_rank2'
     }
+	private wx3_functionX_11830(){console.log(1813)}
 
 
     public static rank = {
@@ -40,6 +43,7 @@ class GameEvent {
         create_rank:'rank.create_rank',
         get_rank2:'rank.get_rank2'
     }
+	private wx3_functionX_11831(){console.log(3400)}
 
 
 }

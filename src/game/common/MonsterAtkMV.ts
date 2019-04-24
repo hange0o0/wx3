@@ -3,26 +3,30 @@ class MonsterAtkMV extends eui.Group {
 
     public frameTotal = 20//播放完一轮需要的帧数
 
+	private wx3_functionX_12291(){console.log(8720)}
     public rota = 0; //0横向，1纵向
     private index = 0;
 
     private mw = 480/4
     private mh = 480/4
 
+	private wx3_functionX_12292(){console.log(3862)}
 
     private frameNum = 4
     constructor(){
         super();
-        this.init();
+        this.init_4010();
     }
+	private wx3_functionX_12293(){console.log(6969)}
 
-    private init() {
+    private init_4010() {
         this.mc = new eui.Image();
         this.addChild(this.mc);
         //
         //MyTool.addTestBlock(this)
 
     }
+	private wx3_functionX_12294(){console.log(7548)}
 
     public load(id,rota,w,h,num=4){
 
@@ -39,6 +43,7 @@ class MonsterAtkMV extends eui.Group {
             this.mh = h/num
         }
 
+	wx3_function(7015);
 
         MyTool.setImgSource(this.mc,id);
 
@@ -46,26 +51,30 @@ class MonsterAtkMV extends eui.Group {
         this.height = this.mh
         this.mc.scrollRect = new egret.Rectangle(0,0,this.mw,this.mh)
     }
+	private wx3_functionX_12295(){console.log(632)}
 
 
     public play(){
-        this.reset()
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+        this.reset_1654()
+        this.addEventListener(egret.Event.ENTER_FRAME,this.onE_361,this)
     }
+	private wx3_functionX_12296(){console.log(6903)}
 
     public stop(){
-        this.removeEventListener(egret.Event.ENTER_FRAME,this.onE,this)
+        this.removeEventListener(egret.Event.ENTER_FRAME,this.onE_361,this)
     }
 
-    private reset(){
+    private reset_1654(){
         this.index = 0;
-        this.onE();
+	wx3_function(8774);
+        this.onE_361();
     }
 
-    private onE(){
+    private onE_361(){
         var w = this.mw
         var h = this.mh
         var frameStep = Math.round(this.frameTotal*(1)/this.frameNum);
+	wx3_function(6291);
 
         if(this.rota == 0)
         {
@@ -79,14 +88,16 @@ class MonsterAtkMV extends eui.Group {
         }
         this.mc.scrollRect = new egret.Rectangle(x,y,w,h)
         this.index ++;
+	wx3_function(7634);
         if(this.index>=this.frameNum*frameStep)
         {
             this.index = 0;
-            this.onEnd()
+            this.onEnd_94()
         }
     }
+	private wx3_functionX_12297(){console.log(6636)}
 
-    private onEnd(){
+    private onEnd_94(){
         this.dispatchEventWith('mv_end')
     }
 

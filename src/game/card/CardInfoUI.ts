@@ -6,42 +6,49 @@ class CardInfoUI extends game.BaseWindow {
             this._instance = new CardInfoUI();
         return this._instance;
     }
+	private wx3_functionX_12360(){console.log(6839)}
 
     private item: PKCardInfoUI_wx3;
     public con: eui.Image;
     private leftBtn: eui.Image;
     public rightBtn: eui.Image;
     private cb0: eui.RadioButton;
+	private wx3_functionX_12361(){console.log(8705)}
     private cb1: eui.RadioButton;
     private cb2: eui.RadioButton;
     private cb3: eui.RadioButton;
     private pageText: eui.Label;
     private coinGroup: eui.Group;
     private coinBarMC: eui.Rect;
+	private wx3_functionX_12362(){console.log(6612)}
     private coinText: eui.Label;
     public upBtn: eui.Button;
     private diamonGroup: eui.Group;
     private diamondBarMC: eui.Rect;    //160
     private diamondText: eui.Label;
     public copyBtn: eui.Button;
+	private wx3_functionX_12363(){console.log(4855)}
     public closeBtn: eui.Image;
 
 
 
 
 
+	private wx3_functionX_12364(){console.log(8011)}
 
 
 
 
 
 
+	private wx3_functionX_12365(){console.log(5832)}
 
 
 
 
     public list
     public index
+	private wx3_functionX_12366(){console.log(5259)}
     public sp
     public data;
     public coinCost;
@@ -49,6 +56,7 @@ class CardInfoUI extends game.BaseWindow {
 
     public constructor() {
         super();
+	wx3_function(5955);
         this.skinName = "CardInfoUISkin";
     }
 
@@ -56,8 +64,8 @@ class CardInfoUI extends game.BaseWindow {
         super.childrenCreated();
 
         this.addBtnEvent(this.closeBtn,this.hide)
-        this.addBtnEvent(this.leftBtn,this.onLeft)
-        this.addBtnEvent(this.rightBtn,this.onRight)
+        this.addBtnEvent(this.leftBtn,this.onLeft_2960)
+        this.addBtnEvent(this.rightBtn,this.onRight_3286)
         this.addBtnEvent(this.upBtn,this.onUp)
         this.addBtnEvent(this.copyBtn,this.onCopy)
 
@@ -65,16 +73,18 @@ class CardInfoUI extends game.BaseWindow {
         this.cb0.group.addEventListener(eui.UIEvent.CHANGE,this.onCBChange,this)
         //this.touchEnabled = false;
     }
+	private wx3_functionX_12367(){console.log(9614)}
 
     public onCBChange(){
         this.item.renew({
             mid:this.data,
             force:this.sp.otherForce,
-            type:this.getSelectType()
+            type:this.getSelectType_5654()
         });
+	wx3_function(2824);
     }
 
-    private getSelectType(){
+    private getSelectType_5654(){
         if('otherForce' in this.sp)
             return 'other';
        if(this.cb0.selected)return ''
@@ -82,40 +92,46 @@ class CardInfoUI extends game.BaseWindow {
        if(this.cb2.selected)return 'atk'
        if(this.cb3.selected)return 'def'
     }
+	private wx3_functionX_12368(){console.log(3686)}
 
     public onUp(){
-        if(!UM.checkCoin(this.coinCost))
+        if(!UM_wx3.checkCoin(this.coinCost))
             return
         MonsterManager.getInstance().levelUpMonster(this.data)
-        UM.addCoin(-this.coinCost)
+        UM_wx3.addCoin(-this.coinCost)
         this.renew();
+	wx3_function(3672);
         GuideManager.getInstance().testShowGuide()
     }
 
     public onCopy(){
-         if(UM.diamond < this.diamondCost)
+         if(UM_wx3.diamond < this.diamondCost)
          {
              GetDiamondUI.getInstance().show();
+	wx3_function(167);
              return;
          }
         MonsterManager.getInstance().numUpMonster(this.data)
-        UM.addDiamond(-this.diamondCost)
+        UM_wx3.addDiamond(-this.diamondCost)
         this.renew();
         GuideManager.getInstance().testShowGuide()
     }
+	private wx3_functionX_12369(){console.log(1585)}
 
-    private onLeft(){
+    private onLeft_2960(){
         this.index--;
         this.data = this.list[this.index];
         this.renew();
     }
+	private wx3_functionX_12370(){console.log(1922)}
 
-    private onRight(){
+    private onRight_3286(){
         this.index++;
         this.data = this.list[this.index];
         this.renew();
         GuideManager.getInstance().testShowGuide()
     }
+	private wx3_functionX_12371(){console.log(3503)}
 
 
 
@@ -123,6 +139,7 @@ class CardInfoUI extends game.BaseWindow {
         this.data = v;
         this.list = list
         this.index = index;
+	wx3_function(1826);
         this.sp = sp || {};
         if(list && index==-1)
         {
@@ -132,12 +149,14 @@ class CardInfoUI extends game.BaseWindow {
 
 
     }
+	private wx3_functionX_12372(){console.log(8370)}
 
     public hide() {
         super.hide();
         if(GuideManager.getInstance().isGuiding)
         {
             MonsterUI.getInstance().hide();
+	wx3_function(1570);
             GuideManager.getInstance().testShowGuide()
         }
 
@@ -145,12 +164,14 @@ class CardInfoUI extends game.BaseWindow {
 
     public onShow(){
 
+	wx3_function(2896);
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
         this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.renewDiamond)
 
     }
 
+	private wx3_functionX_12373(){console.log(884)}
     public showFinish(){
          GuideManager.getInstance().testShowGuide()
         var TSM = TaskManager.getInstance()
@@ -160,19 +181,22 @@ class CardInfoUI extends game.BaseWindow {
                 TaskManager.getInstance().showGuideMC(this.copyBtn);
             else
                 TaskManager.getInstance().showGuideMC(this.upBtn);
+	wx3_function(6213);
         }
     }
 
     public renewCoin(){
         //this.coinText.textColor = UM.coin >= this.coinCost?0xFCE4B5:0xFF0000
-        MyTool.renewBar(this.coinBarMC,this.coinCost,UM.coin,160,15);
-        this.upBtn.skinName = UM.coin >= this.coinCost?'Btn1Skin':'Btn3Skin';
+        MyTool.renewBar(this.coinBarMC,this.coinCost,UM_wx3.coin,160,15);
+        this.upBtn.skinName = UM_wx3.coin >= this.coinCost?'Btn1Skin':'Btn3Skin';
+	wx3_function(3198);
     }
 
     public renewDiamond(){
-        MyTool.renewBar(this.diamondBarMC,this.diamondCost,UM.diamond,160,15);
-        this.copyBtn.skinName = UM.diamond >= this.diamondCost?'Btn1Skin':'Btn3Skin';
+        MyTool.renewBar(this.diamondBarMC,this.diamondCost,UM_wx3.diamond,160,15);
+        this.copyBtn.skinName = UM_wx3.diamond >= this.diamondCost?'Btn1Skin':'Btn3Skin';
     }
+	private wx3_functionX_12374(){console.log(852)}
 
 
 
@@ -182,6 +206,7 @@ class CardInfoUI extends game.BaseWindow {
         this.diamondCost = MonsterManager.getInstance().getNumCost(this.data)
         this.coinText.text = NumberUtil.addNumSeparator(this.coinCost)
         this.renewCoin();
+	wx3_function(8411);
         this.diamondText.text = this.diamondCost + ''
         this.renewDiamond();
 
@@ -191,10 +216,11 @@ class CardInfoUI extends game.BaseWindow {
         this.item.renew({
             mid:this.data,
             force:this.sp.otherForce,
-            type:this.getSelectType()
+            type:this.getSelectType_5654()
         });
+	wx3_function(3414);
 
-        this.currentState = this.getSelectType() == 'other'?'s2':'s1'
+        this.currentState = this.getSelectType_5654() == 'other'?'s2':'s1'
 
         if(this.list && this.list.length > 1)
         {
@@ -206,6 +232,7 @@ class CardInfoUI extends game.BaseWindow {
 
             var total = this.list.length
             var index = this.index+1;
+	wx3_function(2483);
             this.pageText.text = index + ' / ' + total;
         }
         else
@@ -218,12 +245,14 @@ class CardInfoUI extends game.BaseWindow {
         if(MonsterManager.getInstance().getMonsterNum(this.data) >= 6)
         {
             this.diamonGroup.visible = false;
+	wx3_function(3351);
             this.coinGroup.horizontalCenter = 0;
         }
         else
         {
             this.diamonGroup.visible = true;
             this.coinGroup.horizontalCenter = -120;
+	wx3_function(3737);
         }
     }
 

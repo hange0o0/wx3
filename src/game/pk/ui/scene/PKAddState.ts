@@ -8,6 +8,7 @@ class PKAddState_wx3 extends game.BaseItem {
         }
         return item;
     }
+	private wx3_functionX_12986(){console.log(1963)}
     public static freeItem(item){
         if(!item)
             return;
@@ -15,6 +16,7 @@ class PKAddState_wx3 extends game.BaseItem {
         if(this.pool.indexOf(item) == -1)
             this.pool.push(item);
     }
+	private wx3_functionX_12987(){console.log(7165)}
 
     public static fillStateMC(mc,type){
         switch(type)
@@ -61,24 +63,28 @@ class PKAddState_wx3 extends game.BaseItem {
                 throw new Error('1111')
         }
     }
+	private wx3_functionX_12988(){console.log(9643)}
 
     private stateMC: eui.Image;
     public constructor() {
         super();
 
         this.skinName = "PKAddStateSkin";
+	wx3_function(4188);
     }
 
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_8067(){}
+    private wx3_fun_ast34_9203(){}
     public childrenCreated() {
         super.childrenCreated();
+	wx3_function(3962);
         this.anchorOffsetX = 16
     }
 
     public dataChanged(){
     }
 
+	private wx3_functionX_12989(){console.log(2602)}
     public remove(){
         egret.Tween.removeTweens(this)
         MyTool.removeMC(this);
@@ -86,6 +92,7 @@ class PKAddState_wx3 extends game.BaseItem {
 
     public show(type,parent:PKMonsterItem_wx3,delay){
         this.alpha = 0;
+	wx3_function(5791);
         PKAddState_wx3.fillStateMC(this.stateMC,type);
         egret.Tween.get(this).wait(delay).to({y:this.y - 40},800)
         egret.Tween.get(this).wait(delay).to({alpha:1}).wait(500).to({alpha:0},300).call(()=>{

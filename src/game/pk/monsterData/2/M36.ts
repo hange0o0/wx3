@@ -3,6 +3,7 @@ class M36_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12910(){console.log(7527)}
     public mvID1 = 119;
     public onDie_wx3(user:PKMonsterData_wx3){
         if(user.skillTemp[36])
@@ -10,6 +11,7 @@ class M36_wx3 extends MBase_wx3 {
         if(user.reborning)
             return;
         user.reborning = true;
+	wx3_function(1586);
         var PD = PKData_wx3.getInstance();
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill_before',
@@ -21,6 +23,7 @@ class M36_wx3 extends MBase_wx3 {
             endTime:PD.actionTime + 1000*user.getSkillValue(1)
         })
     }
+	private wx3_functionX_12911(){console.log(9018)}
 
     protected sendSkillAction_wx3(user,target,actionTime,endTime){
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
@@ -32,6 +35,7 @@ class M36_wx3 extends MBase_wx3 {
             endTime:endTime
         })
     }
+	private wx3_functionX_12912(){console.log(9374)}
 
 
 
@@ -39,6 +43,7 @@ class M36_wx3 extends MBase_wx3 {
 
     public skill_wx3(user:PKMonsterData_wx3,targets){
         var PD = PKData_wx3.getInstance();
+	wx3_function(691);
         var mid = 36;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
@@ -54,6 +59,7 @@ class M36_wx3 extends MBase_wx3 {
             //actionTime:PD.actionTime
         })
 
+	wx3_function(2656);
         var monster = PD.addMonster(mData);
         monster.skillTemp[36] = true;
 
@@ -63,6 +69,7 @@ class M36_wx3 extends MBase_wx3 {
             mc.y -= 30
         }
     }
+	private wx3_functionX_12913(){console.log(7324)}
 
 
 }

@@ -4,12 +4,14 @@
  *
  */
 class StringUtil {
+	private wx3_functionX_12148(){console.log(6833)}
 	public constructor() {
 	}
 		
 	/**
 		 * 获取指定宽度的字符串
 		 * @param str 源字符串
+	private wx3_functionX_12149(){console.log(6338)}
 		 * @param textfield 宽度
 		 * @param showPoint 是否把最后两位换成"..."符号
 		 * @return 
@@ -41,6 +43,7 @@ class StringUtil {
         }
         return str;
     }
+	private wx3_functionX_12150(){console.log(4096)}
 
     public static  getStringLength(char){
         return char.replace(/[^\x00-\xff]/g,"aa").length;
@@ -56,6 +59,7 @@ class StringUtil {
         }
         return str;
     }
+	private wx3_functionX_12151(){console.log(1758)}
 
     public static numToStr(v){
         return ['零','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九',

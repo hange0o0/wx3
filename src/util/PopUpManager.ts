@@ -4,6 +4,7 @@
  *
  */
 class PopUpManager {
+	private wx3_functionX_12152(){console.log(5321)}
     public static shape:eui.Rect;
 	public constructor() {
 	}
@@ -24,6 +25,7 @@ class PopUpManager {
         var tw:egret.Tween = egret.Tween.get(newWindow);
         tw.to({x:0},300)
     }
+	private wx3_functionX_12153(){console.log(6615)}
 
     public static removeShape(){
         MyTool.removeMC(this.shape);
@@ -31,8 +33,8 @@ class PopUpManager {
 	
     public static addPopUp(display: egret.DisplayObject,isWindow:boolean,noMV? ){
         var haveShow = display.stage && display.visible;
-        var ww = GameManager.container.width;
-        var hh = GameManager.container.height;
+        var ww = GameManager_wx3.container.width;
+        var hh = GameManager_wx3.container.height;
         if(!this.shape)
         {
             this.shape = new eui.Rect();
@@ -46,8 +48,8 @@ class PopUpManager {
             this.shape.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTap,this)
         }
         var shape = this.shape;
-        GameManager.container.addChild(shape);
-        GameManager.container.addChild(display);
+        GameManager_wx3.container.addChild(shape);
+        GameManager_wx3.container.addChild(display);
         this.testVisible();
         if(isWindow) {
 //            console.log(display.width,display.height);
@@ -101,15 +103,17 @@ class PopUpManager {
 
         }
     }
+	private wx3_functionX_12154(){console.log(3210)}
 
     public static setMiddle(display){
-        var ww = GameManager.container.width;
-        var hh = GameManager.container.height;
+        var ww = GameManager_wx3.container.width;
+        var hh = GameManager_wx3.container.height;
         var x = (ww - display.width) / 2;
         var y = (hh - display.height) / 2;
         display.x = x
         display.y = y
     }
+	private wx3_functionX_12155(){console.log(3046)}
 
     private static onTap(){
          var ui:game.BaseUI = <game.BaseUI>this.shape.parent.getChildAt(this.shape.parent.numChildren-1);
@@ -118,6 +122,7 @@ class PopUpManager {
             ui.hide();
         }
     }
+	private wx3_functionX_12156(){console.log(210)}
 
     public static removePopUp(display: egret.DisplayObject) {
         if(display.parent) {
@@ -128,30 +133,32 @@ class PopUpManager {
             this.testVisible();
         }
     }
+	private wx3_functionX_12157(){console.log(8234)}
 
     public static testShape(strong?){
         if(this.shape.parent || strong)
         {
             MyTool.removeMC(this.shape)
             //找到最上一个BaseUI,放到其下方
-            for(var i=GameManager.container.numChildren-1 ;i>=0;i--)
+            for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
-                var ui = GameManager.container.getChildAt(i);
+                var ui = GameManager_wx3.container.getChildAt(i);
                 if(ui instanceof game.BaseWindow)
                 {
-                    GameManager.container.addChildAt(this.shape,i)
+                    GameManager_wx3.container.addChildAt(this.shape,i)
                     return
                 }
             }
 
         }
     }
+	private wx3_functionX_12158(){console.log(649)}
 
     public static testVisible(){
         var setVisible = false;
-        for(var i=GameManager.container.numChildren-1 ;i>=0;i--)
+        for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
         {
-            var ui = GameManager.container.getChildAt(i);
+            var ui = GameManager_wx3.container.getChildAt(i);
             if(ui instanceof game.BaseUI)
             {
                 var lastVisible = ui.visible;
@@ -168,13 +175,14 @@ class PopUpManager {
             }
         }
     }
+	private wx3_functionX_12159(){console.log(2972)}
 
     public static showToMain(){
         while(true)
         {
-            for(var i=GameManager.container.numChildren-1 ;i>=0;i--)
+            for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
-                var ui = GameManager.container.getChildAt(i);
+                var ui = GameManager_wx3.container.getChildAt(i);
                 if(ui instanceof game.BaseUI)
                 {
                     //if(ui == MainPageUI.getInstance())
@@ -187,15 +195,16 @@ class PopUpManager {
             }
         }
     }
+	private wx3_functionX_12160(){console.log(1095)}
 
 
     public static hideAll(){
         while(true)
         {
             var isHide = false
-            for(var i=GameManager.container.numChildren-1 ;i>=0;i--)
+            for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
-                var ui = GameManager.container.getChildAt(i);
+                var ui = GameManager_wx3.container.getChildAt(i);
                 if(ui instanceof game.BaseUI)
                 {
                     if(ui == GameUI.getInstance())

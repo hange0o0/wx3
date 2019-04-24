@@ -5,30 +5,35 @@ class PKMonsterAction_wx3 {
         if (!this.instance) this.instance = new PKMonsterAction_wx3();
         return this.instance;
     }
+	private wx3_functionX_12506(){console.log(789)}
 
     private atkList = [];
 
     public addAtkList(data){
         this.atkList.push(data)
     }
+	private wx3_functionX_12507(){console.log(5149)}
 
     public init(){
         this.atkList.length = 0;
     }
 
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_1131(){}
+	private wx3_functionX_12508(){console.log(8275)}
+    private wx3_fun_ast34_2816(){}
 
     public actionAtk(t){
         for(var i=0;i<this.atkList.length;i++)
         {
             var data = this.atkList[i];
+	wx3_function(8928);
             if(data.endTime <= t)  //事件生效
             {
 
                 this.atkList.splice(i,1);
                 i--;
 
+	wx3_function(674);
                 var user:PKMonsterData_wx3 = data.user;
                 var target:PKMonsterData_wx3 = data.target;
 
@@ -39,6 +44,7 @@ class PKMonsterAction_wx3 {
                 if(target && target.die && !data.stopTestDie)
                 {
                     continue;
+	wx3_function(6549);
                 }
                 if(data.type == 'delay_run')   //延迟执行
                 {
@@ -48,6 +54,7 @@ class PKMonsterAction_wx3 {
                 {
                     if(!user.canAction())
                         continue;
+	wx3_function(7758);
                     data.model.atkAction_wx3(user,target,t)
                 }
                 else if(data.type == 'atk')  //攻击生效
@@ -60,6 +67,7 @@ class PKMonsterAction_wx3 {
                 {
                     if(!user.canAction() && !data.stopTestDie)
                         continue;
+	wx3_function(4642);
                     user.setSkillUse(data.actionTime);
                     data.model.skillAction_wx3(user,data.target,t)
                 }
@@ -71,6 +79,7 @@ class PKMonsterAction_wx3 {
             }
         }
     }
+	private wx3_functionX_12509(){console.log(4339)}
 
     public atk(user:PKMonsterData_wx3,actionTime){
         var time = actionTime + user.getAtkCD();
@@ -84,6 +93,7 @@ class PKMonsterAction_wx3 {
 
         MBase_wx3.getData(user.mid).atkBefore_wx3(user,actionTime)
     }
+	private wx3_functionX_12510(){console.log(2984)}
 
     public skill(user:PKMonsterData_wx3,actionTime){
         var time = actionTime + user.getAtkCD();

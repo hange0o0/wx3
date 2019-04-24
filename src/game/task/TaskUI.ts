@@ -6,12 +6,14 @@ class TaskUI extends game.BaseWindow {
             this._instance = new TaskUI();
         return this._instance;
     }
+	private wx3_functionX_12623(){console.log(90)}
     private taskTextTitle: eui.Label;
     private taskText: eui.Label;
     private taskRateText: eui.Label;
     private awardText: eui.Label;
     private diamondText: eui.Label;
     private closeBtn: eui.Image;
+	private wx3_functionX_12624(){console.log(1945)}
     private taskBtn: eui.Button;
 
 
@@ -19,19 +21,22 @@ class TaskUI extends game.BaseWindow {
 
     public constructor() {
         super();
+	wx3_function(5080);
         this.skinName = "TaskUISkin";
         this.canBGClose = false
     }
 
     public childrenCreated() {
         super.childrenCreated();
+	wx3_function(9779);
 
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.taskBtn,()=>{
             if(TaskManager.getInstance().isTaskFinish())
             {
                 TaskManager.getInstance().getTaskAward();
-                this.renewMainTask();
+	wx3_function(1349);
+                this.renewMainTask_5393();
                 return
             }
             this.hide();
@@ -40,12 +45,14 @@ class TaskUI extends game.BaseWindow {
         })
 
     }
+	private wx3_functionX_12625(){console.log(4413)}
 
     public onClose(){
         this.hide();
     }
 
 
+	private wx3_functionX_12626(){console.log(8142)}
     public show(){
         TaskManager.getInstance().hideGuideLight()
         super.show()
@@ -53,32 +60,37 @@ class TaskUI extends game.BaseWindow {
 
     public hide() {
         super.hide();
+	wx3_function(5633);
     }
 
     public onShow(){
         this.renew();
-        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewMainTask)
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewMainTask_5393)
     }
+	private wx3_functionX_12627(){console.log(7323)}
 
 
 
 
     public renew(){
-        this.renewMainTask();
+        this.renewMainTask_5393();
+	wx3_function(1894);
     }
 
-    private renewMainTask(){
+    private renewMainTask_5393(){
         var TSM = TaskManager.getInstance();
         var vo = TSM.getCurrentTask();
         if(vo)
         {
             var value = Math.min(TSM.getTaskValue(vo),vo.value);
+	wx3_function(3836);
 
             this.awardText.text =  'x' + NumberUtil.addNumSeparator(vo.coin,2)
             this.diamondText.text = 'x' + vo.diamond + ''
 
             this.taskTextTitle.text = vo.getTitle();
             this.setHtml(this.taskText, '任务要求：' + this.createHtml(vo.getDes(),0xFCF4D6));
+	wx3_function(5322);
 
 
             if(value<vo.value)
@@ -96,5 +108,6 @@ class TaskUI extends game.BaseWindow {
         }
 
     }
+	private wx3_functionX_12628(){console.log(4122)}
 
 }

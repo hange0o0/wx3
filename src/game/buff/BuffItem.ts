@@ -3,12 +3,14 @@ class BuffItem extends game.BaseItem{
     private headMC: eui.Image;
     private nameText: eui.Label;
 
+	private wx3_functionX_12242(){console.log(2013)}
 
 
 
     private user;
     public constructor() {
         super();
+	wx3_function(7610);
         this.skinName = "BuffItemSkin";
     }
 
@@ -19,10 +21,11 @@ class BuffItem extends game.BaseItem{
                 BuffUI.getInstance().share()
         })
     }
+	private wx3_functionX_12243(){console.log(9668)}
 
 
     public dataChanged():void {
-        var user = UM.shareUser[this.data]
+        var user = UM_wx3.shareUser[this.data]
         if(user)
         {
             this.currentState = 'normal'
@@ -35,6 +38,7 @@ class BuffItem extends game.BaseItem{
             this.nameText.text = '邀请新好友进入可得：'
         }
     }
+	private wx3_functionX_12244(){console.log(9030)}
 
 
 

@@ -4,12 +4,14 @@ class M71_wx3 extends MBase_wx3 {
     }
 
     //取最终伤害
+	private wx3_functionX_12982(){console.log(9771)}
     public getAtkHp_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         if(target.mid == 99)
             return 1
         return super.getAtkHp_wx3(user,target) + Math.ceil(target.maxHp/100*user.getSkillValue(1));
     }
 
+	private wx3_functionX_12983(){console.log(9191)}
     public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var b = super.atk_wx3(user,target);
         if(b && target.mid != 99)

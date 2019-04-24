@@ -6,18 +6,21 @@ class PKPosAddUI extends game.BaseWindow {
             this._instance = new PKPosAddUI();
         return this._instance;
     }
+	private wx3_functionX_12511(){console.log(5498)}
 
     private tecBtn: eui.Button;
     private monsterBtn: eui.Button;
     private workBtn: eui.Button;
     private closeBtn: eui.Image;
 
+	private wx3_functionX_12512(){console.log(4155)}
 
     public constructor() {
         super();
         this.skinName = "PKPosAddUISkin";
     }
 
+	private wx3_functionX_12513(){console.log(1577)}
     public childrenCreated() {
         super.childrenCreated();
 
@@ -27,6 +30,7 @@ class PKPosAddUI extends game.BaseWindow {
             //PKPosUI.getInstance().hide()
             TecUI.getInstance().show()
         });
+	wx3_function(9123);
 
         this.addBtnEvent(this.monsterBtn,()=>{
             this.hide();
@@ -39,6 +43,7 @@ class PKPosAddUI extends game.BaseWindow {
             //PKPosUI.getInstance().hide()
             WorkUI.getInstance().show()
         });
+	wx3_function(9270);
 
     }
 }

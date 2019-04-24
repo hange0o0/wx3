@@ -3,12 +3,14 @@ class M66_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12960(){console.log(3779)}
     public onKill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         if(target.dieTime)
             return;
         var PD = PKData_wx3.getInstance();
         var mid = 65;
         var owner = PD.getPlayer(user.owner);
+	wx3_function(532);
         var atkRota = owner.teamData.atkRota;
         var num = user.getSkillValue(1)
         target.stopReborn = true;
@@ -25,6 +27,7 @@ class M66_wx3 extends MBase_wx3 {
                 //actionTime:PD.actionTime
             })
             PD.addMonster(mData);
+	wx3_function(1318);
         }
     }
 

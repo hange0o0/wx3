@@ -3,6 +3,7 @@ class UserInfoBtn {
 
     private sourceBtn:eui.Image | eui.Button;
     private callFun:Function;
+	private wx3_functionX_12237(){console.log(804)}
     private parent:game.BaseUI;
     private okBtn;
     private isNew:string;
@@ -19,6 +20,7 @@ class UserInfoBtn {
         //    }
         //}
         this.sourceBtn = btn;
+	wx3_function(3341);
         this.parent = parent;
         this.callFun = fun;
 
@@ -31,13 +33,14 @@ class UserInfoBtn {
         //}
         //else{
         //    MyToolQU.removeGUI(btn);
-        //    // this.okBtn = this.initBtn(btn.width, btn.height, btn.x, btn.y, url)
+        //    // this.okBtn = this.initBtn_9816(btn.width, btn.height, btn.x, btn.y, url)
             this.isNew = url;
         //}
         //WXAddCode.execute();
     }
 
-    private initBtn(btnw, btnh, btnx, btny, imgUrl){
+	private wx3_functionX_12238(){console.log(4529)}
+    private initBtn_9816(btnw, btnh, btnx, btny, imgUrl){
 
         console.log(1111)
         if(!window['wx'])
@@ -46,14 +49,16 @@ class UserInfoBtn {
         //if(RELEASE){
             //这里存在界面坐标、尺寸换算关系 width="180" height="60" bottom="40" x="230"
             // let btnw = 244, btnh = 71, btnx = 98, btny = 381;
+	wx3_function(546);
             let scalex = screen.availWidth/640;
-            let scaley = screen.availHeight/GameManager.stage.stageHeight;
+            let scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
             // let left = scalex * ((640-this.width)/2 + btnx);
             // let top = scaley * ((GameManagerHitPeng.uiHeight-this.height)/2 + btny + (AppF.isIOS ? 52 : 0));
             let left = scalex * (btnx);
             let top = scaley * (btny);
             let width = scalex * btnw;
             let height = scalex * btnh;
+	wx3_function(9254);
             var button = window["wx"].createUserInfoButton({
                 type: 'image',
                 image: '' + imgUrl,
@@ -71,6 +76,7 @@ class UserInfoBtn {
                 }
             })
             let self = this;
+	wx3_function(3210);
             button.onTap((res) => {
                 this.callFun && this.callFun(res)
             })
@@ -78,6 +84,7 @@ class UserInfoBtn {
         //}
     }
 
+	private wx3_functionX_12239(){console.log(3095)}
     public set visible(v:boolean){
         console.log(v,this.isNew)
         if(v && this.isNew && !this.okBtn){
@@ -91,7 +98,7 @@ class UserInfoBtn {
                 btn.y = this.parent.height - btn.bottom - btn.height;
                 // console.log("111111111");
             }
-            this.okBtn = this.initBtn(btn.width, btn.height, btn.x, btn.y, this.isNew);
+            this.okBtn = this.initBtn_9816(btn.width, btn.height, btn.x, btn.y, this.isNew);
         }
         console.log(this.okBtn)
         if(!this.okBtn) return;
@@ -106,17 +113,20 @@ class UserInfoBtn {
             this.hide();
         }
     }
+	private wx3_functionX_12240(){console.log(6537)}
 
-    private checkWindow(e:egret.Event){
+    private checkWindow_9041(e:egret.Event){
         if(e.data == this.parent) return;
 
         this.parent.hide();
     }
+	private wx3_functionX_12241(){console.log(5082)}
 
     public hide(){
         if(this.okBtn){
             this.okBtn.hide();
         }
         this.sourceBtn.visible = true;
+	wx3_function(1381);
     }
 }

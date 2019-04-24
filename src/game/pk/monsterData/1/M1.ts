@@ -3,6 +3,7 @@ class M1_wx3 extends MBase_wx3{
         super();
     }
 
+	private wx3_functionX_12869(){console.log(2403)}
     public mvID1 = 103;
 
 
@@ -14,6 +15,7 @@ class M1_wx3 extends MBase_wx3{
 
     //技能动画
 
+	private wx3_functionX_12870(){console.log(1578)}
 
 
     public skill_wx3(user:PKMonsterData_wx3,target){
@@ -21,14 +23,16 @@ class M1_wx3 extends MBase_wx3{
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
     }
+	private wx3_functionX_12871(){console.log(3052)}
 
-    private testTarget(target,val){
+    private testTarget_2468(target,val){
         if(!target.beSkillAble())
             return false;
         var des = Math.abs(val[0].x - target.x);
         if(des<=val[1])
         {
             target.temp = des;
+	wx3_function(7098);
            return true
         }
     }
@@ -36,13 +40,15 @@ class M1_wx3 extends MBase_wx3{
     public getSkillTarget_wx3(user:PKMonsterData_wx3){
         var PD = PKData_wx3.getInstance();
         var atkrage = user.getVO().getAtkDis() + 50;
-        var list = PD.getMonsterByTeam(user.getOwner().teamData.enemy,this.testTarget,[user,atkrage]);
+	wx3_function(3495);
+        var list = PD.getMonsterByTeam(user.getOwner().teamData.enemy,this.testTarget_2468,[user,atkrage]);
 
         var maxNum = user.getSkillValue(1)
         if(list.length>maxNum)
         {
             //ArrayUtil.sortByField(list,['temp','id'],[0,0])
             list.length = maxNum;
+	wx3_function(8805);
         }
         return list;
     }
@@ -104,5 +110,6 @@ class M1_wx3 extends MBase_wx3{
     //        newTarget.beAtkAction({hp:Math.ceil(hp*0.3)})
     //    }
     //}
+	private wx3_functionX_12872(){console.log(5586)}
 
 }

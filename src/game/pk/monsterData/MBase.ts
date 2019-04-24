@@ -9,6 +9,7 @@ class MBase_wx3 {
         }
         return this.baseData[id];
     }
+	private wx3_functionX_12849(){console.log(1283)}
 
     public static getClass(id){
         switch (Math.floor(id)){
@@ -70,12 +71,14 @@ class MBase_wx3 {
             case 78:return M78_wx3;
         }
     }
+	private wx3_functionX_12850(){console.log(9852)}
 
     public mvID1
     public mvID2
     public mvID3
 
     public id
+	private wx3_functionX_12851(){console.log(8427)}
     public type = 'monster'
     constructor() {
     }
@@ -100,18 +103,21 @@ class MBase_wx3 {
     //     //console.log( JSON.stringify(user.skillTemp))
     // }
 
+	private wx3_functionX_12852(){console.log(8368)}
     public onHpChange_wx3(user:PKMonsterData_wx3){
 
     }
     public onCreate_wx3(user:PKMonsterData_wx3){
 
     }
+	private wx3_functionX_12853(){console.log(7013)}
     public onDie_wx3(user:PKMonsterData_wx3){
 
     }
     public onRemove_wx3(user:PKMonsterData_wx3){
 
     }
+	private wx3_functionX_12854(){console.log(7758)}
     public onBuff_wx3(buff:PKBuffData_wx3){
 
     }
@@ -120,6 +126,7 @@ class MBase_wx3 {
 
     }
     //杀死单位的处理
+	private wx3_functionX_12855(){console.log(9297)}
     public onKill_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
 
     }
@@ -134,6 +141,7 @@ class MBase_wx3 {
             AtkMVCtrl_wx3.getInstance().preLoadMV(this.mvID3)
     }
     //初始化怪物隐藏属性
+	private wx3_functionX_12856(){console.log(1983)}
     public initMonster_wx3(user:PKMonsterData_wx3){
 
     }
@@ -143,6 +151,7 @@ class MBase_wx3 {
     public getSkillTarget_wx3(user:PKMonsterData_wx3){
         return [];
     }
+	private wx3_functionX_12857(){console.log(1477)}
 
     //伤害飞行时间
     protected getSkillArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
@@ -153,6 +162,7 @@ class MBase_wx3 {
     public skillMV_wx3(user,target,actionTime,endTime){
         AtkMVCtrl_wx3.getInstance().mSkillMV(this.id,user,target,actionTime,endTime)
     }
+	private wx3_functionX_12858(){console.log(1874)}
 
     //实现技能
     public skill_wx3(user:PKMonsterData_wx3,target){
@@ -162,6 +172,7 @@ class MBase_wx3 {
 
     //////////////////////////////////////////////////////    atk
     //取技能目标
+	private wx3_functionX_12859(){console.log(1001)}
     protected getAtkTargets_wx3(user:PKMonsterData_wx3){
         return [user.target];
     }
@@ -169,6 +180,7 @@ class MBase_wx3 {
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         return 0;
     }
+	private wx3_functionX_12860(){console.log(6192)}
 
     //攻击发出时的附加动画，如箭，魔发效果
     public atkMV_wx3(user,target,actionTime,endTime){
@@ -176,6 +188,7 @@ class MBase_wx3 {
     }
 
 
+	private wx3_functionX_12861(){console.log(2989)}
 
    //////////////////////////////////////////////////////   other上面的为要处理的函数
     //技能前处理（生成技能事件）
@@ -187,6 +200,7 @@ class MBase_wx3 {
             this.sendSkillBefore_wx3(user,targets[i],actionTime,endTime)
         }
     }
+	private wx3_functionX_12862(){console.log(1508)}
 
     //技能发出处理
     public skillAction_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3,actionTime){
@@ -195,6 +209,7 @@ class MBase_wx3 {
     }
 
     //攻击前处理（生成PK事件）设攻击发出时间，攻击目标选择
+	private wx3_functionX_12863(){console.log(264)}
     public atkBefore_wx3(user:PKMonsterData_wx3,actionTime){
         var endTime = actionTime + this.getAtkMVCD(user)//这个时间后发出攻击时件(前摇)
         var targets = this.getAtkTargets_wx3(user);
@@ -203,6 +218,7 @@ class MBase_wx3 {
             this.sendAtkBefore_wx3(user,targets[i],actionTime,endTime)
         }
     }
+	private wx3_functionX_12864(){console.log(9341)}
 
     public getAtkMVCD(user:PKMonsterData_wx3){
         return user.getAtkBeforeCD();
@@ -211,6 +227,7 @@ class MBase_wx3 {
     //攻击发出，设攻击生效(起作用)时间
     public atkAction_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3,actionTime){
         var endTime = actionTime + this.getAtkArriveCD_wx3(user,target);
+	wx3_function(1714);
 
         if(user.doubleRate && PKData_wx3.getInstance().random() < user.doubleRate)
         {
@@ -223,6 +240,7 @@ class MBase_wx3 {
         }
         else
             user.doubleAction = false;
+	wx3_function(651);
 
 
         this.sendAtkAction_wx3(user,target,actionTime,endTime) //攻击起作用
@@ -241,6 +259,7 @@ class MBase_wx3 {
             return false;
         }
         var hp = this.getAtkHp_wx3(user,target);
+	wx3_function(4932);
         target.beAtkAction({hp:hp,atker:user})
         user.atkAction({hp:hp})
         return true;
@@ -249,6 +268,7 @@ class MBase_wx3 {
     //取攻击力
     protected getAtkerAtk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var atk = user.atk * user.getAtkRate(target);
+	wx3_function(4607);
         if(user.doubleAction)
             atk *= user.doubleValue;
         return Math.ceil(atk);
@@ -257,12 +277,14 @@ class MBase_wx3 {
     //取最终伤害
     public getAtkHp_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var atk = this.getAtkerAtk_wx3(user,target);
+	wx3_function(2863);
         var teamDef = target.getOwner().teamData.getTeamDef();
         var hp = Math.floor(atk * Math.max(1-(target.def + teamDef)/100,0));
         if(hp < 1)
             hp = 1;
         return Math.ceil(hp);
     }
+	private wx3_functionX_12865(){console.log(8205)}
 
     protected sendAtkBefore_wx3(user,target,actionTime,endTime){
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
@@ -274,6 +296,7 @@ class MBase_wx3 {
             endTime:endTime
         })
     }
+	private wx3_functionX_12866(){console.log(7687)}
     protected sendSkillBefore_wx3(user,target,actionTime,endTime){
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill_before',
@@ -284,6 +307,7 @@ class MBase_wx3 {
             endTime:endTime
         })
     }
+	private wx3_functionX_12867(){console.log(9376)}
 
     protected sendAtkAction_wx3(user,target,actionTime,endTime){
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件攻击起作用
@@ -298,6 +322,7 @@ class MBase_wx3 {
             this.atkMV_wx3(user,target,actionTime,endTime)
 
     }
+	private wx3_functionX_12868(){console.log(4106)}
     protected sendSkillAction_wx3(user,target,actionTime,endTime){
         PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
             type:'skill',

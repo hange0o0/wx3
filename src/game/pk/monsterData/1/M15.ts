@@ -4,6 +4,7 @@ class M15_wx3 extends MBase_wx3 {
     }
 
     //a对B攻击到达时的逻辑（攻击正式生效）
+	private wx3_functionX_12882(){console.log(9683)}
     public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var b = super.atk_wx3(user,target)
         if(b)

@@ -8,6 +8,7 @@ class AddCoinItem extends game.BaseItem{
         }
         return item;
     }
+	private wx3_functionX_11898(){console.log(9743)}
 
     public static freeItem(item) {
         if (!item)
@@ -15,6 +16,7 @@ class AddCoinItem extends game.BaseItem{
         item.remove();
         this.pool.push(item);
     }
+	private wx3_functionX_11899(){console.log(434)}
 
     public static showMV(v,con)
     {
@@ -28,6 +30,7 @@ class AddCoinItem extends game.BaseItem{
             this.freeItem(mc);
         })
     }
+	private wx3_functionX_11900(){console.log(683)}
 
 
 
@@ -35,18 +38,21 @@ class AddCoinItem extends game.BaseItem{
 
     public constructor() {
         super();
+	wx3_function(6042);
         this.touchChildren = this.touchEnabled = false;
         this.skinName = "AddCoinItemSkin";
     }
 
     public childrenCreated() {
         super.childrenCreated();
+	wx3_function(9911);
     }
 
     public dataChanged():void {
         this.addText.text = this.data;
     }
 
+	private wx3_functionX_11901(){console.log(6839)}
     public remove(){
         MyTool.removeMC(this);
         egret.Tween.removeTweens(this);

@@ -8,6 +8,7 @@ class DefMonsterItem extends PKMonsterMV_wx3 {
         }
         return item;
     }
+	private wx3_functionX_11905(){console.log(5206)}
 
     public static freeItem(item) {
         if (!item)
@@ -16,12 +17,14 @@ class DefMonsterItem extends PKMonsterMV_wx3 {
         if (this.pool2.indexOf(item) == -1)
             this.pool2.push(item);
     }
+	private wx3_functionX_11906(){console.log(8503)}
 
     public renewY
     public atkRota
     public changePos
     public constructor() {
         super();
+	wx3_function(3948);
     }
 
 
@@ -60,6 +63,7 @@ class DefMonsterItem extends PKMonsterMV_wx3 {
         {
             this.bottom = 40 + this.showHeight()*0.1
             this.renewY();
+	wx3_function(8493);
         }
         else
         {
@@ -67,12 +71,14 @@ class DefMonsterItem extends PKMonsterMV_wx3 {
             this.renewY();
         }
         this.renewScale();
+	wx3_function(9147);
     }
 
     public renewScale(){
         this.scaleX = this.atkRota * Math.abs(this.scaleX);
     }
 
+	private wx3_functionX_11907(){console.log(5558)}
 
 
 }

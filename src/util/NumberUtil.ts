@@ -3,6 +3,7 @@ class NumberUtil {
 	}
 
 
+	private wx3_functionX_12116(){console.log(2728)}
 	
     public static addNumSeparator(num,len = 0){
         var s = String(num);
@@ -38,6 +39,7 @@ class NumberUtil {
         
         return ss;
     }
+	private wx3_functionX_12117(){console.log(8834)}
     
     //将数字格式化为带有逗号千位分隔符
     //from: http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript/2901298#2901298
@@ -47,6 +49,7 @@ class NumberUtil {
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
    }
+	private wx3_functionX_12118(){console.log(8658)}
 
     /**
      * 格式化 数字显示，10万以下显示数字，10以上显示字母
@@ -66,6 +69,7 @@ class NumberUtil {
         }
         return "999.9T+";
     }
+	private wx3_functionX_12119(){console.log(4310)}
 
     public static cNum(id){
         return ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十',

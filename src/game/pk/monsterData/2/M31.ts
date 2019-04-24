@@ -5,6 +5,7 @@ class M31_wx3 extends MBase_wx3 {
     public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkY = -30
     }
+	private wx3_functionX_12898(){console.log(1143)}
 
     //伤害飞行时间
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
@@ -17,6 +18,7 @@ class M31_wx3 extends MBase_wx3 {
         {
             var buff = new PKBuffData_wx3()
             buff.user = user;
+	wx3_function(7890);
             buff.isDebuff = true;
             buff.addState(PKConfig_wx3.STATE_YUN);
             buff.endTime = PKData_wx3.getInstance().actionTime + 1000*user.getSkillValue(2);

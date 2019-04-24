@@ -3,6 +3,7 @@ class M74_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12972(){console.log(4065)}
     public initMonster_wx3(user:PKMonsterData_wx3){
         user.atkX = 20
         user.atkY = 65
@@ -11,6 +12,7 @@ class M74_wx3 extends MBase_wx3 {
     public preload_wx3(){
         AtkMVCtrl_wx3.getInstance().preLoadPNG('monster/enemy72_attack.png')
     }
+	private wx3_functionX_12973(){console.log(9828)}
 
     //伤害飞行时间
     protected getAtkArriveCD_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
@@ -18,6 +20,7 @@ class M74_wx3 extends MBase_wx3 {
     }
 
 
+	private wx3_functionX_12974(){console.log(5218)}
 
     public getSkillTarget_wx3(user:PKMonsterData_wx3){
         return [null];
@@ -25,6 +28,7 @@ class M74_wx3 extends MBase_wx3 {
 
     public skill_wx3(user:PKMonsterData_wx3,targets){
         var PD = PKData_wx3.getInstance();
+	wx3_function(3967);
         var mid = 64;
         var owner = PD.getPlayer(user.owner);
         var atkRota = owner.teamData.atkRota;
@@ -42,6 +46,7 @@ class M74_wx3 extends MBase_wx3 {
                 //actionTime:PD.actionTime
             })
             PD.addMonster(mData);
+	wx3_function(7771);
         }
 
     }

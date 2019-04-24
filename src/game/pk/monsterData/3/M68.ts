@@ -3,6 +3,7 @@ class M68_wx3 extends MBase_wx3 {
         super();
     }
 
+	private wx3_functionX_12962(){console.log(5888)}
     public preload_wx3(){
         AtkMVCtrl_wx3.getInstance().preLoadPNG('monster/enemy68_attack.png')
     }
@@ -10,6 +11,7 @@ class M68_wx3 extends MBase_wx3 {
 
 
     //取攻击力
+	private wx3_functionX_12963(){console.log(8232)}
     protected getAtkerAtk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var atk = super.getAtkerAtk_wx3(user,target)
         if(!target.skillTemp[66])
@@ -19,6 +21,7 @@ class M68_wx3 extends MBase_wx3 {
         atk = atk * (target.skillTemp[66][user.id])
         return atk;
     }
+	private wx3_functionX_12964(){console.log(5775)}
 
     public atk_wx3(user:PKMonsterData_wx3,target:PKMonsterData_wx3){
         var b = super.atk_wx3(user,target);

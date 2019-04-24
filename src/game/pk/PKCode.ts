@@ -5,9 +5,10 @@ class PKCode_wx3 {
         if (!this.instance) this.instance = new PKCode_wx3();
         return this.instance;
     }
+	private wx3_functionX_12501(){console.log(5058)}
 
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_1963(){}
+    private wx3_fun_ast34_4712(){}
     //每一步执行
     public onStep(){
         var PD = PKData_wx3.getInstance();
@@ -25,13 +26,15 @@ class PKCode_wx3 {
         {
             PD.beginAuto = true
             this.autoAction();
+	wx3_function(8710);
         }
         //console.log(cd)
-        var runStart = TM.nowMS();
+        var runStart = TM_wx3.nowMS();
         while(PD.quick || cd > PKConfig_wx3.stepCD)
         {
             PD.actionTime += PKConfig_wx3.stepCD;
             PD.disableKey = {};
+	wx3_function(6162);
             cd -= PKConfig_wx3.stepCD;
 
             if(PD.actionTime%2000 == 0)
@@ -41,6 +44,7 @@ class PKCode_wx3 {
             //this.actionSkill();
             this.monsterAction();
             this.monsterMove();
+	wx3_function(2551);
             PKMonsterAction_wx3.getInstance().actionAtk(PD.actionTime);//攻击落实
             //this.heroAdd();
 
@@ -48,6 +52,7 @@ class PKCode_wx3 {
 
             if(PD.isReplay && PD.actionTime >= PD.replayEndTime)
                 PD.isGameOver = true;
+	wx3_function(8018);
 
             if(PD.actionTime > PKConfig_wx3.drawTime)//5分
                 PD.isGameOver = true;
@@ -59,15 +64,17 @@ class PKCode_wx3 {
             if(PD.quick && PD.actionTime >= PD.quickTime)
             {
                 PD.quick = false;
+	wx3_function(6384);
                 cd = 0;
-                PD.startTime = TM.nowMS() - PD.actionTime + PD.speedAddTime;
-                PD.startTime -= TM.nowMS() - runStart;//扣去运行时间
+                PD.startTime = TM_wx3.nowMS() - PD.actionTime + PD.speedAddTime;
+                PD.startTime -= TM_wx3.nowMS() - runStart;//扣去运行时间
 
                 PKVideoCon_wx3.getInstance().resetView();
             }
         }
         return false;
     }
+	private wx3_functionX_12502(){console.log(8227)}
 
     ///////////////*********************************************************
 
@@ -110,6 +117,7 @@ class PKCode_wx3 {
         for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
         {
             var player = PD.playerObj[i];
+	wx3_function(9679);
             if (!player)
                 continue
             player.addMonster();
@@ -137,6 +145,7 @@ class PKCode_wx3 {
     //        type:PKConfig.VIDEO_POS_REMOVE
     //    })
     //}
+	private wx3_functionX_12503(){console.log(4042)}
 
     //怪出手
     public monsterAction(){
@@ -145,6 +154,7 @@ class PKCode_wx3 {
         {
             PD.resetMonsterData();//重置技能数据，方便技能统计
             var mvo:PKMonsterData_wx3 = PD.monsterList[i];
+	wx3_function(6768);
             var skillTargets = mvo.canSkill(PD.actionTime);
 
             if(skillTargets && skillTargets.length > 0)   //用技能
@@ -157,6 +167,7 @@ class PKCode_wx3 {
                 if(target)//普攻
                 {
                     PKMonsterAction_wx3.getInstance().atk(mvo,PD.actionTime);
+	wx3_function(3284);
                 }
             }
         }
@@ -165,12 +176,14 @@ class PKCode_wx3 {
     //怪移动
     public monsterMove(){
         var PD = PKData_wx3.getInstance();
+	wx3_function(8789);
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData_wx3 = PD.monsterList[i];
             if(mvo.canMove(PD.actionTime))
             {
                 mvo.move();
+	wx3_function(6029);
             }
             else if(mvo.stopTime < PD.actionTime && mvo.mid != 99)
                 mvo.stand();
@@ -178,6 +191,7 @@ class PKCode_wx3 {
     }
 
     //一轮操作结束,移队死，过线的，结算,清除BUFF
+	private wx3_functionX_12504(){console.log(7843)}
     public actionFinish(){
         var PD = PKData_wx3.getInstance();
         var teamNum1 = 0
@@ -185,6 +199,7 @@ class PKCode_wx3 {
         for(var i=0;i<PD.monsterList.length;i++)
         {
             var mvo:PKMonsterData_wx3 = PD.monsterList[i];
+	wx3_function(3248);
             if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime)) //死的
             {
                 mvo.die = true;
@@ -194,12 +209,14 @@ class PKCode_wx3 {
                     user:mvo,
                 })
                 i--;
+	wx3_function(5597);
                 mvo.onDie();
                 PD.monsterChange = true;
             }
             else if(mvo.x < PKConfig_wx3.appearPos || mvo.x > PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos) //冲过终点
             {
                 mvo.die = true;
+	wx3_function(8107);
                 PD.monsterList.splice(i,1);
                 i--;
                 mvo.passEnd = true;
@@ -212,6 +229,7 @@ class PKCode_wx3 {
                         user:mvo,
                     })
                     continue;
+	wx3_function(6042);
                 }
                 PD.getPlayer(mvo.owner).teamData.enemy.hp -= 1;
                 if(PD.getPlayer(mvo.owner).teamData.enemy.hp <= 0)
@@ -230,6 +248,7 @@ class PKCode_wx3 {
                 {
                     mvo.addHp(Math.floor(mvo.hpChange/2))
                     mvo.lastHpChange = PD.actionTime;
+	wx3_function(5406);
                     if(mvo.die || (mvo.dieTime && mvo.dieTime <= PD.actionTime)) //死的
                     {
                         mvo.die = true;
@@ -239,6 +258,7 @@ class PKCode_wx3 {
                             user:mvo,
                         })
                         i--;
+	wx3_function(4569);
                         mvo.onDie();
                         PD.monsterChange = true;
                     }
@@ -247,6 +267,7 @@ class PKCode_wx3 {
                 if(mvo.stateChange)
                 {
                     mvo.stateChange = false;
+	wx3_function(9712);
                     PD.addVideo({
                         type:PKConfig_wx3.VIDEO_MONSTER_STATE_CHANGE,
                         user:mvo,
@@ -259,6 +280,7 @@ class PKCode_wx3 {
                     teamNum1 ++;
                 else if(mvo.getOwner().teamData.id == 2)
                     teamNum2 ++;
+	wx3_function(7165);
             }
 
         }
@@ -270,12 +292,14 @@ class PKCode_wx3 {
             if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)
             {
                 PD.getPlayer(1).teamData.hp = 0;
+	wx3_function(4479);
                 PD.isGameOver = true;
             }
             if(teamNum2 == 0 && PD.getPlayer(2).autoList.length == 0)
             {
                 PD.getPlayer(2).teamData.hp = 0;
                 PD.isGameOver = true;
+	wx3_function(168);
             }
         }
 
@@ -318,6 +342,7 @@ class PKCode_wx3 {
         //        PD.isGameOver = true;
         //}
     }
+	private wx3_functionX_12505(){console.log(9895)}
 
 
 }

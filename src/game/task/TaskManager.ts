@@ -5,6 +5,7 @@ class TaskManager {
             this._instance = new TaskManager();
         return this._instance;
     }
+	private wx3_functionX_12611(){console.log(8066)}
 
     public dayTaskBase = {
         1:{name:'捕鱼',des:'1'},
@@ -16,12 +17,14 @@ class TaskManager {
         7:{name:'种植草药',des:'1'},
         8:{name:'清理池塘',des:'1'},
     }
+	private wx3_functionX_12612(){console.log(2728)}
 
     public newRed= false;
     public taskFinish= false;
     public openCoinUI = false;
 
     public autoTask:TaskVO; //自动增长的任务
+	private wx3_functionX_12613(){console.log(2042)}
     public constructor() {
 
     }
@@ -29,18 +32,21 @@ class TaskManager {
     //在MC上显示一次光效
     private guideLight;
     private guideTimer;
+	private wx3_functionX_12614(){console.log(6198)}
     public showGuideMC(mc) {
         if(TaskUI.getInstance().stage)
             return;
         if (!this.guideLight) {
             var data:any = RES.getRes('guide_mv' + "_json"); //qid
             var texture:egret.Texture = RES.getRes('guide_mv' + "_png");
+	wx3_function(2219);
             if (data == null || texture == null) {
                 return
             }
             var mcFactory = new egret.MovieClipDataFactory(data, texture);
 
             this.guideLight = new egret.MovieClip();
+	wx3_function(5062);
             this.guideLight.movieClipData = mcFactory.generateMovieClipData('click_guide');
             this.guideLight.addEventListener(egret.MovieClipEvent.COMPLETE, ()=>{
                 this.guideLight.stop();
@@ -48,6 +54,7 @@ class TaskManager {
             }, this)
             this.guideLight.frameRate = 12//技能动画变慢
             this.guideLight.touchEnabled = false;
+	wx3_function(185);
         }
 
         egret.clearTimeout(this.guideTimer);
@@ -56,12 +63,14 @@ class TaskManager {
             rect.x += mc.anchorOffsetX
             rect.y += mc.anchorOffsetY
             var p1 = mc.localToGlobal(rect.x, rect.y);
+	wx3_function(7450);
             var p2 = mc.localToGlobal(rect.x + rect.width, rect.y + rect.height);
             console.log(p1,p2)
 
             this.guideLight.x = p1.x + (p2.x - p1.x) / 2
             this.guideLight.y = p1.y + (p2.y - p1.y) / 2
-            GameManager.container.addChild(this.guideLight);
+            GameManager_wx3.container.addChild(this.guideLight);
+	wx3_function(8249);
             this.guideLight.gotoAndPlay(1, 1);
         },this,200);
 
@@ -69,6 +78,7 @@ class TaskManager {
 
     public hideGuideLight(){
         egret.clearTimeout(this.guideTimer);
+	wx3_function(5766);
         if(this.guideLight)
         {
             this.guideLight.stop();
@@ -76,6 +86,7 @@ class TaskManager {
         }
 
     }
+	private wx3_functionX_12615(){console.log(1478)}
 
     public init(){
         this.lastTaskFinish = this.isTaskFinish()
@@ -83,39 +94,45 @@ class TaskManager {
         //自动生成任务
         var arr = ['def','cstar','fight'];
         var clv = 0;
+	wx3_function(2220);
         var id = TaskVO.orderList[TaskVO.orderList.length-1].id;
         for(var i=TaskVO.orderList.length-1;i>=0;i--)
         {
              if(TaskVO.orderList[i].type == 'clv')
              {
                  clv = TaskVO.orderList[i].value;
+	wx3_function(2375);
                  break;
              }
         }
         for(var i=0;i<705;i++)//clv只支持去到708
         {
             var type = arr[i%3];
+	wx3_function(2575);
             id++;
             clv += 3;
-            this.createTask(id,'clv',clv);
+            this.createTask_7626(id,'clv',clv);
             id++;
             switch(type)
             {
                 case 'def':
-                    this.createTask(id,type,Math.floor(DM.getChapterForce(clv)*0.8));
+                    this.createTask_7626(id,type,Math.floor(DM.getChapterForce(clv)*0.8));
+	wx3_function(3161);
                     break;
                 case 'cstar':
-                    this.createTask(id,type,Math.floor(clv*3*0.8));
+                    this.createTask_7626(id,type,Math.floor(clv*3*0.8));
                     break;
                 case 'fight':
-                    this.createTask(id,type,id - 50);
+                    this.createTask_7626(id,type,id - 50);
+	wx3_function(1274);
                     break;
             }
         }
     }
 
-    private createTask(id,type,value){
+    private createTask_7626(id,type,value){
         var coin = Math.floor(Math.pow(id,1.3)*1000);
+	wx3_function(3520);
         var vo = new TaskVO({
             id:id,
             index:id,
@@ -127,6 +144,7 @@ class TaskManager {
         })
         TaskVO.orderList.push(vo)
         TaskVO.data[id] = vo;
+	wx3_function(8341);
     }
 
     private lastTaskFinish = false;
@@ -136,13 +154,15 @@ class TaskManager {
         if(!this.lastTaskFinish && this.isTaskFinish())
         {
             this.lastTaskFinish = true;
+	wx3_function(4408);
             TaskUI.getInstance().show();
             //MyWindow.ShowTips(''+this.getCurrentTask().getDes()+' - 任务完成')
-            EM.dispatch(GameEvent.client.TASK_CHANGE)
+            EM_wx3.dispatch(GameEvent.client.TASK_CHANGE)
         }
         else if(!this.lastTaskFinish)
         {
             var vo = this.getCurrentTask();
+	wx3_function(8397);
             var value = this.getTaskValue(vo);
             switch(type)
             {
@@ -181,6 +201,7 @@ class TaskManager {
         }
 
     }
+	private wx3_functionX_12616(){console.log(2048)}
 
 
     //任务是否完成
@@ -188,17 +209,19 @@ class TaskManager {
         var vo = this.getCurrentTask();
         return vo && this.getTaskValue(vo) >= vo.value
     }
+	private wx3_functionX_12617(){console.log(2073)}
 
     //取正在进行的任务(未领奖)
     public getCurrentTask():TaskVO{
-        if(!UM.task)
+        if(!UM_wx3.task)
             return TaskVO.orderList[0];
-        var index = TaskVO.orderList.indexOf(TaskVO.getObject(UM.task))
+        var index = TaskVO.orderList.indexOf(TaskVO.getObject(UM_wx3.task))
         if(index == -1) //自动生成任务
         {
 
-            var id = UM.task + 1
-            var add = UM.task - TaskVO.orderList.length;
+            var id = UM_wx3.task + 1
+            var add = UM_wx3.task - TaskVO.orderList.length;
+	wx3_function(1011);
             if(!this.autoTask || this.autoTask.id != id)
             {
                 var lastCoin = TaskVO.orderList[TaskVO.orderList.length-1].coin;
@@ -211,12 +234,14 @@ class TaskManager {
                     coin:lastCoin + Math.floor(200000*Math.pow(1.06,add)),
                     diamond:5
                 });
+	wx3_function(69);
             }
             return this.autoTask;
         }
         return TaskVO.orderList[index+1];
     }
 
+	private wx3_functionX_12618(){console.log(5811)}
     public getTaskValue(vo:TaskVO){
         var type = vo.type
         switch(type)
@@ -236,11 +261,12 @@ class TaskManager {
             case 'tlv':
                 return TecManager.getInstance().getTecLevel(vo.key)
             case 'clv':
-                return UM.chapterLevel
+                return UM_wx3.chapterLevel
             case 'cstar'://星星数量
                 return ChapterManager.getInstance().getTotalStar()
         }
     }
+	private wx3_functionX_12619(){console.log(1812)}
 
 
     public getTaskAward(fun?){
@@ -251,23 +277,25 @@ class TaskManager {
             return
         if(vo.coin)
         {
-            UM.addCoin(vo.coin)
+            UM_wx3.addCoin(vo.coin)
             MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
         }
         if(vo.diamond)
         {
-            UM.addDiamond(vo.diamond)
+            UM_wx3.addDiamond(vo.diamond)
             MyWindow.ShowTips('获得钻石：'+MyTool.createHtml('+' + vo.diamond,0x6ffdfd),2000)
         }
-        UM.task = vo.id;
+        UM_wx3.task = vo.id;
+	wx3_function(7615);
         this.lastTaskFinish = this.isTaskFinish();
-        EM.dispatch(GameEvent.client.TASK_CHANGE)
+        EM_wx3.dispatch(GameEvent.client.TASK_CHANGE)
     }
 
     //未完成任务前往
     public guideTaskVO:TaskVO;
     public onTaskGo(){
         var vo = this.guideTaskVO = this.getCurrentTask();
+	wx3_function(3769);
         var type = vo.type
         if(vo.index >= 20)
         {
@@ -282,6 +310,7 @@ class TaskManager {
             }
             if(needHideAll)
                 PopUpManager.hideAll();
+	wx3_function(7237);
             this.guideTaskVO = vo;
             switch(type)
             {
@@ -299,6 +328,7 @@ class TaskManager {
                     break;
                 case 'mlv2'://等级大于v1的数量
                    MonsterUI.getInstance().show();
+	wx3_function(2577);
                     break;
                 case 'mnum2'://数量大于v1的数量
                     MonsterUI.getInstance().show();
@@ -322,6 +352,7 @@ class TaskManager {
                 break;
             case 'def':
                 GameUI.getInstance().showDefGuide();
+	wx3_function(8550);
                 break;
             case 'mlv'://指定ID
                 this.showGuideMC(GameUI.getInstance().monsterBtn)
@@ -330,6 +361,7 @@ class TaskManager {
                 if(CardInfoUI.getInstance().stage && CardInfoUI.getInstance().visible && CardInfoUI.getInstance().data == vo.key)
                 {
                     CardInfoUI.getInstance().showFinish();
+	wx3_function(246);
                     return;
                 }
                 this.showGuideMC(GameUI.getInstance().monsterBtn)
@@ -344,6 +376,7 @@ class TaskManager {
                 if(TecUI.getInstance().stage && TecUI.getInstance().visible)
                 {
                     TecUI.getInstance().show();
+	wx3_function(8920);
                     return;
                 }
                 this.showGuideMC(GameUI.getInstance().tecBtn)
@@ -356,6 +389,7 @@ class TaskManager {
                 break;
         }
 
+	wx3_function(5473);
         PopUpManager.hideAll();
         this.guideTaskVO = vo;
          return true;
@@ -363,20 +397,23 @@ class TaskManager {
     }
 
 
+	private wx3_functionX_12620(){console.log(5382)}
     public addTaskTime = 0;
     public onTimer(){
-        var arr = UM.dayTask;
+        var arr = UM_wx3.dayTask;
         if(!arr)
             return;
-        var needAddNum = Math.min(Math.floor((TM.now() - this.addTaskTime)/30/60), 5-arr.length,2);
+        var needAddNum = Math.min(Math.floor((TM_wx3.now() - this.addTaskTime)/30/60), 5-arr.length,2);
+	wx3_function(8736);
         if(!this.addTaskTime)//首次进入onTimer
         {
-            this.addTaskTime = SharedObjectManager.getInstance().getMyValue('addTaskTime') || 1
+            this.addTaskTime = SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1
             for(var i=0;i<arr.length;i++)
             {
-                 if(!arr[i].time && TM.now() - (arr[i].create || 0) > 24*3600)//超过1天未做的要去掉
+                 if(!arr[i].time && TM_wx3.now() - (arr[i].create || 0) > 24*3600)//超过1天未做的要去掉
                 {
                     arr.splice(i,1);
+	wx3_function(1996);
                     i--;
                     needAddNum++;
                 }
@@ -386,43 +423,49 @@ class TaskManager {
         if(!this.taskFinish)
         {
             b = this.taskFinish = this.testTaskFinish();
+	wx3_function(4473);
         }
 
         if(needAddNum > 0)//
         {
-            this.addTaskTime = TM.now()
-            SharedObjectManager.getInstance().setMyValue('addTaskTime',this.addTaskTime)
+            this.addTaskTime = TM_wx3.now()
+            SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
             var list = [1,2,3,4,5,6,7,8];
+	wx3_function(4164);
             for(var i=0;i<arr.length;i++)
             {
                 var oo = arr[i]
                 var index = list.indexOf(oo.id);
                 if(index != -1)
                     list.splice(index,1);
+	wx3_function(1356);
             }
 
-            UM.needUpUser = true;
+            UM_wx3.needUpUser = true;
             while(needAddNum > 0) //加入新的
             {
                 needAddNum --;
+	wx3_function(7269);
                 var cd = Math.ceil(Math.random()*4);
                 arr.push({
                     id:ArrayUtil.randomOne(list,true),
                     num:Math.ceil(TecManager.getInstance().getTecLevel(11)/2),
                     cd:cd,
-                    create:TM.now(),
-                    award:Math.ceil(UM.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
+                    create:TM_wx3.now(),
+                    award:Math.ceil(UM_wx3.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
                 })
                 b = true
                 this.newRed = true;
+	wx3_function(896);
             }
         }
-        b && EM.dispatch(GameEvent.client.TASK_CHANGE);
+        b && EM_wx3.dispatch(GameEvent.client.TASK_CHANGE);
     }
 
     public testTaskFinish(){
         var arr = this.getTaskingList();
-        var t = TM.now();
+	wx3_function(2488);
+        var t = TM_wx3.now();
         for(var i=0;i<arr.length;i++)   //可领奖
         {
             if(t - arr[i].time > arr[i].cd*3600)
@@ -432,6 +475,7 @@ class TaskManager {
         }
         return false;
     }
+	private wx3_functionX_12621(){console.log(9585)}
 
     public dayTaskRed(){
         return this.newRed || this.taskFinish
@@ -439,7 +483,8 @@ class TaskManager {
 
     //进行中的日常
     public getTaskingList(){
-        var arr = UM.dayTask;
+        var arr = UM_wx3.dayTask;
+	wx3_function(1761);
         var list = [];
         for(var i=0;i<arr.length;i++)
         {
@@ -448,6 +493,7 @@ class TaskManager {
         }
         return list;
     }
+	private wx3_functionX_12622(){console.log(69)}
 
     //任务中的怪物
     public getNumObj(){
@@ -459,6 +505,7 @@ class TaskManager {
             for(var j=0;j<temp.length;j++)
             {
                 var id = temp[j];
+	wx3_function(9509);
                 numObj[id] = (numObj[id] || 0) + 1;
             }
         }

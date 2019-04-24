@@ -14,24 +14,28 @@ class PKData_wx3 extends egret.EventDispatcher{
             return this.instance2;
         }
     }
+	private wx3_functionX_12709(){console.log(5736)}
 
 
 
     public currentState = 'def'
 
     public quick = false//快速算出结果
+	private wx3_functionX_12710(){console.log(7079)}
     public quickTime = Number.MAX_VALUE//快速算出到这个时间
     public baseData//原始PK数据
     public isReplay;
     public replayEndTime;
     public isAuto;
     public round; //当前的回合
+	private wx3_functionX_12711(){console.log(6535)}
 
     public jumpMV = false;
     public isGameOver = false //游戏结束
     public showTopNum = 0 //头顶显示敌人出怪的数量
     public startTime = 0 //游戏开始时间
     public stopTime = 0 //游戏暂停时间
+	private wx3_functionX_12712(){console.log(5489)}
     public actionTime = 0 //游戏数据上处理过的时间
     public beginAuto = false //正式开始前的上怪处理
 
@@ -39,12 +43,14 @@ class PKData_wx3 extends egret.EventDispatcher{
     public team1:PKTeamData_wx3;  //进攻方
     public team2:PKTeamData_wx3;
     //public sysTeam:PKTeamData;
+	private wx3_functionX_12713(){console.log(9948)}
     public playerNum = 2;
     public endless = 0;//无尽时的倒计时
     public needcd = 0;//限时的倒计时
 
     public monsterChange = false//怪有变化
     public randomSeed = 0//随机的种子
+	private wx3_functionX_12714(){console.log(4726)}
     public randomSeed2 = 0//随机的种子2
     public randomTimes = 0//随机的次数
     public monsterList = [];//场上的怪的数据
@@ -52,12 +58,14 @@ class PKData_wx3 extends egret.EventDispatcher{
     public myPlayer:PKPlayerData_wx3;
     //public sysPlayer:PKPlayerData;
     public diamondData;
+	private wx3_functionX_12715(){console.log(4762)}
     public heroStep;
     public preLoadHeroStep;
 
     public history = {};
     public disableKey = {}; //同一时间不能起效的KEY
 
+	private wx3_functionX_12716(){console.log(8586)}
     public actionRecord = []
 
     public playSpeed = 1;//播放速度
@@ -67,15 +75,17 @@ class PKData_wx3 extends egret.EventDispatcher{
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
     //private topKey = ['monster_win','monster_add'];
+	private wx3_functionX_12717(){console.log(7657)}
     constructor(){
         super();
     }
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_8460(){}
+    private wx3_fun_ast34_7099(){}
 
     //public isView(){
     //    return this.isAuto || this.isReplay
     //}
+	private wx3_functionX_12718(){console.log(8118)}
     public canSpeed(){
         return false//this.isView() || (!PKManager.getInstance().isOnline && !GuideManager.getInstance().isGuiding)
     }
@@ -86,14 +96,16 @@ class PKData_wx3 extends egret.EventDispatcher{
 
     //取经过的时间
     public getPassTime(){
-        var t = TM.nowMS();
+        var t = TM_wx3.nowMS();
+	wx3_function(6510);
         var cd = t - (this.lastDealSpeedTime || this.startTime);
         if(cd)
         {
             this.speedAddTime += (this.playSpeed - 1)*cd;
         }
         this.lastDealSpeedTime = t;
-        return TM.nowMS() - this.startTime + this.speedAddTime;
+	wx3_function(4254);
+        return TM_wx3.nowMS() - this.startTime + this.speedAddTime;
     }
 
     //暂停
@@ -101,16 +113,18 @@ class PKData_wx3 extends egret.EventDispatcher{
         //if(isLast)//在最后一次行动后暂停(马上停)
         //    this.stopTime = this.actionTime + 1;
         //else
-            this.stopTime = TM.nowMS();
+            this.stopTime = TM_wx3.nowMS();
     }
+	private wx3_functionX_12719(){console.log(4483)}
 
     //继续
     public play(){
         if(this.stopTime)
         {
-            var add = (TM.nowMS() - this.stopTime)*this.playSpeed;
+            var add = (TM_wx3.nowMS() - this.stopTime)*this.playSpeed;
             this.startTime += add
             //this.actionTime += add;
+	wx3_function(7141);
             this.stopTime = 0;
         }
     }
@@ -118,36 +132,42 @@ class PKData_wx3 extends egret.EventDispatcher{
     //初始化游戏
     public init(data){
 
+	wx3_function(1945);
         this.startTime = 0;
         this.round = 1;
         this.heroStep = 0;
         this.preLoadHeroStep = 0;
         this.isReplay = false;
         this.isAuto = false;
+	wx3_function(151);
         this.baseData = data;
         this.actionRecord = [];
         this.quick = false
         this.quickTime = Number.MAX_VALUE
         this.history = {};
         this.monsterList.length = 0;
+	wx3_function(5543);
         this.playerObj = {};
         this.myPlayer = null;
         this.actionTime = 0;
         this.playSpeed = 1;
         this.lastDealSpeedTime = 0;
         this.speedAddTime = 0;
+	wx3_function(6450);
         this.stopTime = 0;
         this.monsterID = 1;
         this.isGameOver = false;
         this.monsterChange = false;
         this.beginAuto = false;
         this.currentState = 'pk';
+	wx3_function(5888);
         PKMonsterAction_wx3.getInstance().init()
 
 
 
         this.randomTimes = 0;
         this.randomSeed = data.seed;
+	wx3_function(7008);
         this.randomSeed2 = data.seed;
         this.showTopNum = data.showTopNum || 0
         this.endless = data.endless || 0;
@@ -162,12 +182,14 @@ class PKData_wx3 extends egret.EventDispatcher{
             player.teamData = this.getTeamByID(data.players[i].team)
             player.teamData.autoDef = Math.max(data.players[i].def || 0,player.teamData.autoDef)
 
+	wx3_function(42);
             player.teamData.hp += player.hp;
             player.teamData.force += player.getTeamForce();
             this.playerObj[player.id] = player;
-            if(player.gameid == UM.gameid)
+            if(player.gameid == UM_wx3.gameid)
             {
                 this.myPlayer = player;
+	wx3_function(6540);
                 player.teamData.atkRota = PKConfig_wx3.ROTA_LEFT
                 player.teamData.enemy.atkRota = PKConfig_wx3.ROTA_RIGHT
                 player.teamData.members.unshift(player);
@@ -175,6 +197,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             }
             else
                 player.teamData.members.push(player);
+	wx3_function(8876);
         }
 
         //this.sysTeam = new PKTeamData({id:'sys'})
@@ -189,6 +212,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             this.myPlayer = this.getPlayer(1)
         }
         this.team1.reInit();
+	wx3_function(8955);
         this.team2.reInit();
     }
 
@@ -209,12 +233,14 @@ class PKData_wx3 extends egret.EventDispatcher{
         //}
         return forceObj;
     }
+	private wx3_functionX_12720(){console.log(9501)}
 
     public getHpData(){
         var forceObj = {};
         for(var s in this.monsterList)
         {
             var monsterData:PKMonsterData_wx3 = this.monsterList[s];
+	wx3_function(3459);
             if(monsterData.die)
                 continue;
             var temaID = monsterData.getOwner().teamData.id;
@@ -225,6 +251,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         for(var s in this.playerObj)
         {
             var temaID = this.playerObj[s].teamData.id;
+	wx3_function(8923);
             if(!forceObj[temaID])
                 forceObj[temaID] = 0;
             forceObj[temaID+'_max'] = this.playerObj[s].maxTeamHp
@@ -232,18 +259,21 @@ class PKData_wx3 extends egret.EventDispatcher{
         }
         return forceObj;
     }
+	private wx3_functionX_12721(){console.log(8342)}
 
     public random(){
         this.randomTimes ++;
         var seed = this.randomSeed;
         seed = ( seed * 9301 + 49297 ) % 233280;
         var rd = seed / ( 233280.0 );
+	wx3_function(7045);
         this.randomSeed = rd * 100000000;
         return rd;
     }
 
     public random2(){
         var seed = this.randomSeed2;
+	wx3_function(7321);
         seed = ( seed * 9301 + 49297 ) % 233280;
         var rd = seed / ( 233280.0 );
         this.randomSeed2 = rd * 100000000;
@@ -262,12 +292,14 @@ class PKData_wx3 extends egret.EventDispatcher{
     //        return self.random()>0.5?-1:1;
     //    }
     //}
+	private wx3_functionX_12722(){console.log(8025)}
 
     public randomOne(arr:Array<any>,splice = false):any{
         var index = Math.floor(arr.length * this.random())
         var data = arr[index];
         if(splice)
             arr.splice(index,1);
+	wx3_function(9526);
         return data;
     }
 
@@ -279,8 +311,9 @@ class PKData_wx3 extends egret.EventDispatcher{
 
     //开始游戏
     public start(){
-        this.startTime = TM.nowMS()
+        this.startTime = TM_wx3.nowMS()
         this.stopTime = 0;
+	wx3_function(550);
     }
 
     //public addDiamondMonster(){
@@ -308,6 +341,7 @@ class PKData_wx3 extends egret.EventDispatcher{
 
 
     //要保证只是通知改变显示，不能有逻辑
+	private wx3_functionX_12723(){console.log(4066)}
     public addVideo(data){
         this.dispatchEventWith('video_word',false,data)
         if(this.quick)
@@ -317,6 +351,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         //if(this.topKey.indexOf(data.type) != -1)
         //    this.topVideoList.push(data);
     }
+	private wx3_functionX_12724(){console.log(2813)}
 
     public getTeamByID(teamID){
         //if(teamID == 'sys')
@@ -330,6 +365,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     public getPlayer(id):PKPlayerData_wx3{
         return this.playerObj[id]
     }
+	private wx3_functionX_12725(){console.log(1647)}
 
     public get otherPlayer(){
         return this.getPlayer(this.myPlayer.id==1?2:1)
@@ -346,6 +382,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         return team1.hp > 0 &&  team2.hp <= 0;
     }
     //平
+	private wx3_functionX_12726(){console.log(9476)}
     public isDraw(){
         var team1 =  this.myPlayer.teamData
         var team2 =  this.myPlayer.teamData.enemy
@@ -354,6 +391,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         return (team1.hp > 0 &&  team2.hp > 0) || (team1.hp <= 0 &&  team2.hp <= 0);
     }
     //赢输平
+	private wx3_functionX_12727(){console.log(4410)}
     public getPKResult(){
         if(this.isWin())
             return 1;
@@ -361,6 +399,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             return 3;
         return 2;
     }
+	private wx3_functionX_12728(){console.log(4548)}
 
     ////找玩家对应的怪
     //public getMonsterByPlayer(playerid,type=0){
@@ -397,6 +436,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         for(var i=0;i<this.monsterList.length;i++)
         {
             var oo = this.monsterList[i];
+	wx3_function(3586);
              if(oo.id == id)
              {
                  return oo;
@@ -405,6 +445,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         return null;
     }
     //找玩家对应的怪
+	private wx3_functionX_12729(){console.log(2540)}
     public getMonsterByTeam(team,fun?,value?){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
@@ -414,6 +455,7 @@ class PKData_wx3 extends egret.EventDispatcher{
              {
                  if(fun && !fun(oo,value))
                     continue;
+	wx3_function(925);
                  arr.push(oo)
              }
         }
@@ -421,6 +463,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
 
     //找玩家对应的怪
+	private wx3_functionX_12730(){console.log(4216)}
     public getMonsterByNoTeam(team,fun?,value?){
         var arr = [];
         for(var i=0;i<this.monsterList.length;i++)
@@ -430,6 +473,7 @@ class PKData_wx3 extends egret.EventDispatcher{
              {
                  if(fun && !fun(oo,value))
                      continue;
+	wx3_function(4880);
                  arr.push(oo)
              }
         }
@@ -437,12 +481,14 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
 
     //取队伍的最前的怪
+	private wx3_functionX_12731(){console.log(6999)}
     public getFirstItem(taamID){
         var atkRota = PKData_wx3.getInstance().getTeamByID(taamID).atkRota;
         var chooseItem
         for(var i=0;i<this.monsterList.length;i++)
         {
             var item:PKMonsterData_wx3 = this.monsterList[i];
+	wx3_function(3085);
             if(item.atkRota != atkRota)
                 continue
             if(item.owner == 'sys')
@@ -453,6 +499,7 @@ class PKData_wx3 extends egret.EventDispatcher{
                 chooseItem = item;
             else if(atkRota == PKConfig_wx3.ROTA_RIGHT && chooseItem.x>item.x)
                 chooseItem = item;
+	wx3_function(5421);
         }
         return chooseItem
     }
@@ -460,6 +507,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     //取队伍的后排的怪
     public getBackItem(taamID){
         var atkRota = PKData_wx3.getInstance().getTeamByID(taamID).atkRota;
+	wx3_function(9630);
         var chooseItem
         for(var i=0;i<this.monsterList.length;i++)
         {
@@ -472,6 +520,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             {
                 if(!item.getVO().isNearAtk())
                     chooseItem = item;
+	wx3_function(6920);
             }
             else if(atkRota == PKConfig_wx3.ROTA_LEFT && chooseItem.x<item.x)
             {
@@ -482,6 +531,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             {
                 if(!item.getVO().isNearAtk())
                     chooseItem = item;
+	wx3_function(4523);
             }
         }
         return chooseItem
@@ -495,6 +545,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     //}
 
     //加入怪到场上
+	private wx3_functionX_12732(){console.log(2837)}
     public addMonster(data){
         var player = this.getPlayer(data.owner)
         var toFront = player.teamData.toFront
@@ -503,6 +554,7 @@ class PKData_wx3 extends egret.EventDispatcher{
             if(frontItem)
             {
                 data.x = frontItem.x;
+	wx3_function(6563);
                 if(!MonsterVO.getObject(data.mid).isNearAtk())
                 {
                     data.x += player.teamData.atkRota == PKConfig_wx3.ROTA_LEFT?-60:60
@@ -512,6 +564,7 @@ class PKData_wx3 extends egret.EventDispatcher{
 
         var monster = new PKMonsterData_wx3(data)
         monster.id = this.monsterID;
+	wx3_function(3351);
         this.monsterID ++;
         this.monsterList.push(monster);
 
@@ -520,12 +573,14 @@ class PKData_wx3 extends egret.EventDispatcher{
             user:monster
         })
 
+	wx3_function(5534);
         MBase_wx3.getData(monster.mid).onCreate_wx3(monster);
 
         monster.getOwner().teamData.testState(PKConfig_wx3.LISTENER_CREATE,monster);
         if(data.fromPos)
             monster.getOwner().teamData.testState(PKConfig_wx3.LISTENER_CREATE_POS,monster);
         this.monsterChange = true;
+	wx3_function(3780);
 
         this.history[monster.id] = ({
             id:monster.id,
@@ -537,6 +592,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         this.actionRecord.push('create|' + this.actionTime + '|' + monster.id + '|' + monster.mid+ '|' + monster.owner)
         return monster;
     }
+	private wx3_functionX_12733(){console.log(102)}
 
     //重置战场上的怪的数据
     public resetMonsterData(){
@@ -548,6 +604,7 @@ class PKData_wx3 extends egret.EventDispatcher{
 
         }
     }
+	private wx3_functionX_12734(){console.log(4995)}
 
     //public changeMyPlayer(id){
     //    var player = this.getPlayer(id);

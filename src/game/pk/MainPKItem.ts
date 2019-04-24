@@ -3,6 +3,7 @@ class MainPKItem_wx3 extends game.BaseItem {
         super();
         this.skinName = "MainPKItemSkin";
     }
+	private wx3_functionX_12414(){console.log(8790)}
 
     private bg: eui.Image;
     private mc: eui.Image;
@@ -10,20 +11,23 @@ class MainPKItem_wx3 extends game.BaseItem {
 
 
 
+	private wx3_functionX_12415(){console.log(9168)}
 
 
 
 
 
 
+	private wx3_functionX_12416(){console.log(9793)}
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this,this.onClick)
+        this.addBtnEvent(this,this.onClick_3492)
     }
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_5220(){}
+    private wx3_fun_ast34_9884(){}
+	private wx3_functionX_12417(){console.log(5679)}
 
-    private onClick(){
+    private onClick_3492(){
         if(GuideManager.getInstance().isGuiding)
             return;
         if(this.data.otherForce == -1)
@@ -31,6 +35,7 @@ class MainPKItem_wx3 extends game.BaseItem {
         else
             CardInfoUI.getInstance().show(this.data.id,this.data.list,this.data.index-1,{otherForce:this.data.otherForce || 0})
     }
+	private wx3_functionX_12418(){console.log(9072)}
 
     public dataChanged(){
         //this.indexText.text = this.data.index;
@@ -41,6 +46,7 @@ class MainPKItem_wx3 extends game.BaseItem {
             this.bg.source = vo.getBG()
         this.mc.source = vo.getImage(this.data.isDie)
     }
+	private wx3_functionX_12419(){console.log(2442)}
 
     public showDie(){
         egret.Tween.removeTweens(this.mc);
@@ -53,6 +59,7 @@ class MainPKItem_wx3 extends game.BaseItem {
             this.bg.source = 'border_16_png'
         },this)
     }
+	private wx3_functionX_12420(){console.log(6829)}
 
     public showBorn(){
         egret.Tween.removeTweens(this.mc);
@@ -62,5 +69,6 @@ class MainPKItem_wx3 extends game.BaseItem {
         egret.Tween.get(this.mc).to({rotation:5},50).to({rotation:-5},50).to({rotation:5},50).to({rotation:-5},50).to({rotation:0},50)
         egret.Tween.get(this.mc).to({scaleX:1.2,scaleY:1.2},200).to({scaleX:1,scaleY:1},200)
     }
+	private wx3_functionX_12421(){console.log(3197)}
 
 }

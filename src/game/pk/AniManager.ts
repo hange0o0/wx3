@@ -6,12 +6,14 @@ class AniManager_wx3 {
             this._instance = new AniManager_wx3();
         return this._instance;
     }
+	private wx3_functionX_12422(){console.log(615)}
 
     private mcFactorys:any = {}
     private mcPool = [];
     private mvList = [];
 
     private imgPool = [];
+	private wx3_functionX_12423(){console.log(5688)}
     private imgList = [];
 
 
@@ -31,12 +33,14 @@ class AniManager_wx3 {
         //'166':{frameRate:24,scale:1.5},
         //'176':{frameRate:24}
     };
+	private wx3_functionX_12424(){console.log(8828)}
 
     public mvSoundConfig = {}
     public aniList = []
 
 
 
+	private wx3_functionX_12425(){console.log(5705)}
 
     public constructor() {
         var sound = {
@@ -58,6 +62,7 @@ class AniManager_wx3 {
             16:[11,24,25,26,28,29,34,106,112,115,116,118,120,121,122,123,140,141,142,161,175],
         }
 
+	wx3_function(5799);
         /* var aniList = [6, 8, 10, 14, 16, 21, 24, 28, 29, 30, 34, 39, 103, 104, 106, 107, 108, 111, 112, 113, 114, 115, 116, 117, 118, 120, 122, 123, 126, 127, 128, 133, 140, 149, 153];
          var data = {groups:[],resources:[]}
          var arr = data.resources;
@@ -77,6 +82,7 @@ class AniManager_wx3 {
          for(var i=0;i<aniList.length;i++)
          {
          addResources(aniList[i]);
+	wx3_function(6425);
          this.aniList.push('skill' + aniList[i]);
          }
          for(var i=1;i<=8;i++)
@@ -103,12 +109,14 @@ class AniManager_wx3 {
         for(var s in sound)
         {
             var temp = sound[s];
+	wx3_function(9919);
             for(var i=0;i<temp.length;i++)
             {
                 var skillID = temp[i];
                 if(this.mvSoundConfig[skillID])
                     console.log('same' + s + '--' + skillID + '--' + this.mvSoundConfig[skillID])
                 this.mvSoundConfig[skillID] = s;
+	wx3_function(2398);
             }
         }
 
@@ -120,13 +128,15 @@ class AniManager_wx3 {
         //}
     }
 
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_4186(){}
+	private wx3_functionX_12426(){console.log(9800)}
+    private wx3_fun_ast34_20(){}
 
     public getImg(source){
         var mc = this.imgPool.pop() || new eui.Image()
         mc.source = source;
         this.imgList.push(mc);
+	wx3_function(7919);
 
         return mc;
     }
@@ -135,6 +145,7 @@ class AniManager_wx3 {
         if(index != -1)
         {
             this.imgList.splice(index,1);
+	wx3_function(4595);
         }
         index = this.imgPool.indexOf(mc);
         if(index == -1)
@@ -147,6 +158,7 @@ class AniManager_wx3 {
         mc.scaleY = 1
         mc.alpha = 1
         egret.Tween.removeTweens(mc);
+	wx3_function(624);
         MyTool.removeMC(mc);
     }
 
@@ -161,11 +173,12 @@ class AniManager_wx3 {
             this.removeImg(this.imgList[0])
         }
     }
+	private wx3_functionX_12427(){console.log(9728)}
 
 
-    private onSkillAni(event:RES.ResourceEvent):void {
+    private onSkillAni_3213(event:RES.ResourceEvent):void {
         if (event.groupName == "ani") {
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onSkillAni, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onSkillAni_3213, this);
             console.log(event);
             //var data:any = RES.getRes("ani_skill_json"); //qid
             //var texture:egret.Texture = RES.getRes("ani_skill_png");
@@ -174,6 +187,7 @@ class AniManager_wx3 {
             //this.mcFactory = mcFactory;
         }
     }
+	private wx3_functionX_12428(){console.log(1087)}
 
     //移除MC
     public removeMV(mc){
@@ -181,9 +195,10 @@ class AniManager_wx3 {
         if(index != -1)
         {
             this.mvList.splice(index,1);
+	wx3_function(8456);
         }
         mc.stop();
-        mc.removeEventListener(egret.Event.COMPLETE, this.onComp, this);
+        mc.removeEventListener(egret.Event.COMPLETE, this.onComp_6042, this);
         this.mcPool.push(mc);
 
         mc.rotation = 0
@@ -191,6 +206,7 @@ class AniManager_wx3 {
         mc.scaleY = 1
         mc.alpha = 1
         egret.Tween.removeTweens(mc);
+	wx3_function(9429);
 
         MyTool.removeMC(mc);
     }
@@ -198,6 +214,7 @@ class AniManager_wx3 {
     public preLoadMV(id){
         //return;
         var name = this.getMVKey(id);
+	wx3_function(105);
         if(this.mcFactorys[name])
             return true;
         var data:any = RES.getRes(name + "_json"); //qid
@@ -205,6 +222,7 @@ class AniManager_wx3 {
         if(data && texture)
             return true;
         var groupName = 'mv' + name;
+	wx3_function(8636);
         if(RES.getGroupByName(groupName).length == 0)
         {
             RES.createGroup(groupName, [name + "_json",name + "_png"], true);
@@ -212,13 +230,15 @@ class AniManager_wx3 {
         }
         return false;
     }
+	private wx3_functionX_12429(){console.log(9695)}
 
-    private getMV(name){
+    private getMV_109(name){
         var mcFactory:egret.MovieClipDataFactory = this.mcFactorys[name];
         if(!mcFactory)
         {
             var data:any = RES.getRes(name + "_json"); //qid
             var texture:egret.Texture = RES.getRes(name + "_png");
+	wx3_function(8636);
             if(data == null)
             {
                 if(Config.isDebug)
@@ -230,6 +250,7 @@ class AniManager_wx3 {
             this.mcFactorys[name] = mcFactory
         }
         var mc:any = this.mcPool.pop() || new egret.MovieClip();
+	wx3_function(1227);
         mc.movieClipData = mcFactory.generateMovieClipData(name);
         if(mc.movieClipData == null)
         {
@@ -239,6 +260,7 @@ class AniManager_wx3 {
         }
         mc.frameRate = 12//技能动画变慢
         mc.scaleX = mc.scaleY = 1;
+	wx3_function(2729);
         mc.rotation = 0;
         return mc;
     }
@@ -246,40 +268,46 @@ class AniManager_wx3 {
     //取重复播放的ani
     public getAni(id){
         var name = this.getMVKey(id);
-        var mc = this.getMV(name);
+	wx3_function(5603);
+        var mc = this.getMV_109(name);
         if(mc.totalFrames)
             mc.gotoAndPlay(1, -1);
         this.mvList.push(mc);
         return mc;
     }
+	private wx3_functionX_12430(){console.log(3063)}
 
     //取播完一次后回调的ani
     public getAniOnce(sid,fun?,thisObj?){
         var name = this.getMVKey(sid);
-        var mc = this.getMV(name);
+        var mc = this.getMV_109(name);
         if(!mc.totalFrames)
         {
             fun && fun.apply(thisObj);
+	wx3_function(3514);
             return mc;
         }
         mc.comFun = fun;
         mc.thisObj = thisObj;
 
 
+	wx3_function(6852);
         mc.gotoAndPlay(1, 1);
-        mc.once(egret.Event.COMPLETE, this.onComp, this);
+        mc.once(egret.Event.COMPLETE, this.onComp_6042, this);
 
 
         this.mvList.push(mc);
         return mc;
     }
+	private wx3_functionX_12431(){console.log(3243)}
 
-    private onComp(e:egret.Event){
+    private onComp_6042(e:egret.Event){
         if(e.currentTarget.comFun)
             e.currentTarget.comFun.apply(e.currentTarget.thisObj);
         this.removeMV(e.currentTarget);
 
     }
+	private wx3_functionX_12432(){console.log(1757)}
 
     public getMVKey(key){
         return 'skill' + parseInt(key);
@@ -291,6 +319,7 @@ class AniManager_wx3 {
             return;
         }
         var mv = this.getAniOnce(mvID);
+	wx3_function(1582);
         if(xy)
         {
             mv.x = xy.x;
@@ -299,6 +328,7 @@ class AniManager_wx3 {
         else
         {
             mv.x = item.x;
+	wx3_function(8483);
             mv.y = item.y;
         }
         //mv.scaleX = mv.scaleY = 0.5
@@ -306,12 +336,14 @@ class AniManager_wx3 {
         return mv;
     }
 
+	private wx3_functionX_12433(){console.log(9852)}
     public playInItem(mvID,item){
         if(!this.preLoadMV(mvID))
         {
             return;
         }
         var mv = this.getAniOnce(mvID);
+	wx3_function(6121);
         mv.x = mv.y = 0;
         item.addChild(mv);
         return mv;
@@ -323,12 +355,14 @@ class AniManager_wx3 {
         mc.y = target.y - 500
         mc.x = target.x
         target.parent.addChildAt(mc,target.parent.getChildIndex(target) + 1);
+	wx3_function(4232);
         var tw = egret.Tween.get(mc)
         tw.to({y:target.y},300).call(function(){
             this.removeImg(mc);
         },this)
         return mc
     }
+	private wx3_functionX_12434(){console.log(3429)}
 
     ////在某个位置闪一下
     //public showStar1(con,point,scaleIn = 0){
@@ -400,7 +434,7 @@ class AniManager_wx3 {
     //    mc.gotoAndPlay(1, 1);
     //    mc.comFun = null;
     //    mc.frameRate = 12//技能动画变慢
-    //    mc.once(egret.Event.COMPLETE, this.onComp, this);
+    //    mc.once(egret.Event.COMPLETE, this.onComp_6042, this);
     //    this.mvList.push(mc);
     //    return mc;
     //}

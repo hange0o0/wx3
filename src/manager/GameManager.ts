@@ -1,16 +1,18 @@
-class GameManager {
-    private static _instance:GameManager;
-    public static getInstance():GameManager {
+class GameManager_wx3 {
+    private static _instance:GameManager_wx3;
+    public static getInstance():GameManager_wx3 {
         if (!this._instance)
-            this._instance = new GameManager();
+            this._instance = new GameManager_wx3();
         return this._instance;
     }
+	private wx3_functionX_12027(){console.log(1909)}
 
     private timeID: egret.Timer;
     private timeE = new MyTimer(1000/60);
     private lastTime: number;
     public lastTouchTime: number;
     public lastTouchMC;
+	private wx3_functionX_12028(){console.log(5312)}
     public changeUserTime = 0
     public changeUserID = 0
 
@@ -18,26 +20,30 @@ class GameManager {
     public shareFailTime = 0;
 	public constructor() {
         this.timeID = new egret.Timer(1000);
-        this.timeID.addEventListener(egret.TimerEvent.TIMER,this.timerun,this);
+	wx3_function(9713);
+        this.timeID.addEventListener(egret.TimerEvent.TIMER,this.timerun_4261,this);
         this.timeID.start();
 
-        this.timeE.addEventListener(egret.TimerEvent.TIMER,this.onTimeE,this);
+        this.timeE.addEventListener(egret.TimerEvent.TIMER,this.onTimeE_3339,this);
         this.timeE.start();
 	}
+	private wx3_functionX_12029(){console.log(499)}
 	
     public static stage:egret.Stage;
     public static stageX;
     public static stageY;
     public static container:egret.DisplayObjectContainer;
     public static loadStep
+	private wx3_functionX_12030(){console.log(2729)}
 
 
     public static isLiuHai(){
         return this.stage.stageHeight > 1250;
     }
     public static paddingTop(){
-        return GameManager.isLiuHai()?50:0
+        return GameManager_wx3.isLiuHai()?50:0
     }
+	private wx3_functionX_12031(){console.log(9326)}
 
     public static get uiHeight(){
         var h = this.stage.stageHeight - Config.adHeight;
@@ -51,6 +57,7 @@ class GameManager {
         return h//Math.min(1136,this.stage.stageHeight);
         //return this.stage.stageHeight;
     }
+	private wx3_functionX_12032(){console.log(5948)}
     public static get uiWidth(){
         return this.stage.stageWidth;
     }
@@ -58,35 +65,40 @@ class GameManager {
     public isWebGL(){
         return egret.Capabilities.renderMode == 'webgl';
     }
+	private wx3_functionX_12033(){console.log(640)}
 
     public init(){
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove,this);
-        GameManager.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin,this);
-        //this.createAD();
+        GameManager_wx3.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove_8881,this);
+        GameManager_wx3.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin_2672,this);
+        //this.createAD_3105();
     }
 
-    private createAD(){
+	private wx3_functionX_12034(){console.log(1664)}
+    private createAD_3105(){
         //Config.adHeight = 200;
         if(!window['wx'])
             return;
-        if(GameManager.stage.stageHeight < 1080)
+        if(GameManager_wx3.stage.stageHeight < 1080)
             return;
 
 
-        var btnw = Math.min(Math.pow(GameManager.stage.stageHeight/1330,1.6)*640,640)
+        var btnw = Math.min(Math.pow(GameManager_wx3.stage.stageHeight/1330,1.6)*640,640)
 
+	wx3_function(3816);
         let scalex = screen.availWidth/640;
-        let scaley = screen.availHeight/GameManager.stage.stageHeight;
+        let scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
         if(btnw * scalex < 300){ //微信限制广告宽度不能小于300
             btnw = 300 / scalex;
         }
         Config.adHeight =  btnw/640 * 224;
-        var  btny = GameManager.uiHeight;//给广告留的高度
-        var  paddingTop = GameManager.paddingTop();
+	wx3_function(776);
+        var  btny = GameManager_wx3.uiHeight;//给广告留的高度
+        var  paddingTop = GameManager_wx3.paddingTop();
         var btnx =  (640-btnw)/2;
 
         let left = scalex * (btnx);
         let top = scaley * (btny + paddingTop);
+	wx3_function(7899);
         let width = scalex * btnw;
 
         let bannerAd = wx.createBannerAd({
@@ -99,53 +111,61 @@ class GameManager {
         })
         bannerAd.onError(()=>{
             Config.adHeight = 0
-            GameManager.stage.dispatchEventWith(egret.Event.RESIZE);
+            GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
+	wx3_function(7938);
         })
         bannerAd.onLoad(()=>{
 
         })
         bannerAd.onResize((res)=>{
             var hh = res.height/scalex*(640/btnw);
+	wx3_function(612);
             if(Math.abs(hh - 224)/224 > 0.02)
             {
                 Config.adHeight =  btnw/640 * hh;
-                GameManager.stage.dispatchEventWith(egret.Event.RESIZE);
-                bannerAd.style.top = scaley * (GameManager.uiHeight + paddingTop);
+                GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
+                bannerAd.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop);
             }
             //console.log(res,scalex,scaley,GameManager.stage.stageHeight)
         })
         bannerAd.show()
     }
+	private wx3_functionX_12035(){console.log(8759)}
 
     public stopTimer(){
         this.timeID.stop();
         this.timeE.stop();
     }
 
+	private wx3_functionX_12036(){console.log(7149)}
 
-    private onTimeE(){
-        EM.dispatch(GameEvent.client.timerE);
+    private onTimeE_3339(){
+        EM_wx3.dispatch(GameEvent.client.timerE);
     }
 
 
-    private onTouchMove(e){
-        GameManager.stageX = e.stageX;
-        GameManager.stageY = e.stageY;
+	private wx3_functionX_12037(){console.log(8931)}
+    private onTouchMove_8881(e){
+        GameManager_wx3.stageX = e.stageX;
+        GameManager_wx3.stageY = e.stageY;
     }
-    private onTouchBegin(e){
+    private onTouchBegin_2672(e){
         this.lastTouchMC = e.target;
-        GameManager.stageX = e.stageX;
-        GameManager.stageY = e.stageY;
+	wx3_function(5030);
+        GameManager_wx3.stageX = e.stageX;
+        GameManager_wx3.stageY = e.stageY;
         this.lastTouchTime = egret.getTimer();
     }
 
 
-    private timerun(): void {
-        if(!UM.gameid)
+	private wx3_functionX_12038(){console.log(76)}
+    private timerun_4261(): void {
+        if(!UM_wx3.gameid)
             return;
-        var now = TM.now();
+        var now = TM_wx3.now();
         if(!this.lastTime) {
             this.lastTime = now;
+	wx3_function(9936);
             return;
         }
         if(!DateUtil.isSameDay(this.lastTime,now))//跨0点
@@ -154,14 +174,16 @@ class GameManager {
             //DayGameManager.getInstance().passDay();
             //GuessManager.getInstance().passDay();
 
-            UserManager.getInstance().testPassDay();
-            EM.dispatch(GameEvent.client.pass_day);
+            UserManager_wx3.getInstance().testPassDay();
+	wx3_function(737);
+            EM_wx3.dispatch(GameEvent.client.pass_day);
         }
 
         WorkManager.getInstance().onTimer();
         FightManager.getInstance().onTimer();
         TaskManager.getInstance().onTimer();
-        EM.dispatch(GameEvent.client.timer);
+	wx3_function(6941);
+        EM_wx3.dispatch(GameEvent.client.timer);
 
         //if(UM.friendtime == 0){  //拿过日志了
         //    if(now%30 == 0) //5分钟请求一次
@@ -178,14 +200,16 @@ class GameManager {
 
     //取现在到晚上12点还差的时间
     public getZeroCD(){
-        return this.getZeroTime() - TM.now();
+        return this.getZeroTime() - TM_wx3.now();
     }
+	private wx3_functionX_12039(){console.log(7360)}
     public getZeroTime(){
-        var d= DateUtil.timeToChineseDate(TM.now());
+        var d= DateUtil.timeToChineseDate(TM_wx3.now());
         d.setMinutes(0);
         d.setSeconds(0);
         d.setMilliseconds(0);
         d.setHours(24);
+	wx3_function(7161);
 
         return Math.floor(d.getTime()/1000);
     }
@@ -194,6 +218,7 @@ class GameManager {
 
 
 class App {
+	private wx3_functionX_12040(){console.log(6268)}
     public static touchEvent: string = egret.TouchEvent.TOUCH_TAP;
     
     public constructor() {
@@ -208,6 +233,7 @@ class App {
         let _iphoneXR = /iphone/gi.test(navigator.userAgent) && (hh == 896 && ww == 414);
         return _iphoneX || _iphoneXR;
     }
+	private wx3_functionX_12041(){console.log(8241)}
     	
     public static get isMobile():boolean{
         return egret.MainContext.deviceType == egret.MainContext.DEVICE_MOBILE;
@@ -217,6 +243,7 @@ class App {
         var ua:string = navigator.userAgent.toLowerCase();
         return ua.indexOf('android') != -1;
     }
+	private wx3_functionX_12042(){console.log(9677)}
     public static get isIOS():boolean{
         //var Agents:string[] = ["Android", "iPhone",  "SymbianOS", "Windows Phone",  "iPad", "iPod"];
         var ua:string = navigator.userAgent.toLowerCase();
@@ -245,51 +272,51 @@ if(window["wx"])
     var wx =  window["wx"];
 
     wx.onError(function(res){
-        UM.upDateUserData();
+        UM_wx3.upDateUserData();
         //var str = "onError:" + ("openid:" + _get["openid"] + "--") + res.message + "--" + res.stack;
         //this.sendClientError(str);
     });
 
     wx.onHide(function(res){
-        if(!GameManager.stage)
+        if(!GameManager_wx3.stage)
             return;
-        UM.upDateUserData();
-        SoundManager.getInstance().stopBgSound();
-        GameManager.stage.dispatchEventWith(egret.Event.DEACTIVATE);
+        UM_wx3.upDateUserData();
+        SoundManager_wx3.getInstance().stopBgSound();
+        GameManager_wx3.stage.dispatchEventWith(egret.Event.DEACTIVATE);
         console.log('hide')
         //GameUI.getInstance().cleanTouch();
     });
 
     wx.onShow(function(res){
-        if(!GameManager.stage)
+        if(!GameManager_wx3.stage)
             return;
         if(PKManager_wx3.getInstance().isPKing && !MainPKUI_wx3.getInstance().finish)
-            SoundManager.getInstance().playSound('pkbg');
+            SoundManager_wx3.getInstance().playSound('pkbg');
         else
-            SoundManager.getInstance().playSound('bg');
-        GameManager.stage.dispatchEventWith(egret.Event.ACTIVATE);
-        GameManager.getInstance().onShowFun && GameManager.getInstance().onShowFun();
-        GameManager.getInstance().onShowFun = null;
+            SoundManager_wx3.getInstance().playSound('bg');
+        GameManager_wx3.stage.dispatchEventWith(egret.Event.ACTIVATE);
+        GameManager_wx3.getInstance().onShowFun && GameManager_wx3.getInstance().onShowFun();
+        GameManager_wx3.getInstance().onShowFun = null;
         //GameUI.getInstance().cleanTouch();
         console.log('show')
 
 
-        if(GameManager.getInstance().changeUserTime)
+        if(GameManager_wx3.getInstance().changeUserTime)
         {
-            console.log(TM.now() - GameManager.getInstance().changeUserTime)
-            if(TM.now() - GameManager.getInstance().changeUserTime > 30) //停留超过30秒
+            console.log(TM_wx3.now() - GameManager_wx3.getInstance().changeUserTime)
+            if(TM_wx3.now() - GameManager_wx3.getInstance().changeUserTime > 30) //停留超过30秒
             {
-                UM.coinObj.shareNum ++;
-                UM.needUpUser = true;
-                var arr = SharedObjectManager.getInstance().getMyValue('exchangeUserAppid')|| [];
-                arr.unshift(GameManager.getInstance().changeUserID)
+                UM_wx3.coinObj.shareNum ++;
+                UM_wx3.needUpUser = true;
+                var arr = SharedObjectManager_wx3.getInstance().getMyValue('exchangeUserAppid')|| [];
+                arr.unshift(GameManager_wx3.getInstance().changeUserID)
                 if(arr.length > 5)
                     arr.length = 5;
-                if(UM.coinObj.shareNum <= 3)
+                if(UM_wx3.coinObj.shareNum <= 3)
                     MyWindow.ShowTips('体验完成，可领取奖励！')
             }
         }
-        GameManager.getInstance().changeUserTime = 0;
+        GameManager_wx3.getInstance().changeUserTime = 0;
     });
     //wx.exitMiniProgram(function(res){
     //    if(!GameManager.stage)

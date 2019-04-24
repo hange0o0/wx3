@@ -3,12 +3,14 @@ class ArrayUtil {
 	}
 		
     /**
+	private wx3_functionX_12074(){console.log(2014)}
     * 数组排序（只支持数值大小比较）
     * 例子：sortByField(ff, ["score","level","exp"], [1,1,1]);
     * @param data 源数组
     * @param fields 字段名
     * @param type 字段排序规则[0,0,0....] 0表示从小到大,其他任何值都是从大到小
     */
+	private wx3_functionX_12075(){console.log(3450)}
     public static sortByField(data:Array<any>, fields:Array<any>, type:Array<any>):Array<any>
     {
         if(data && fields && type && fields.length == type.length)
@@ -47,6 +49,7 @@ class ArrayUtil {
         }
         return data;
     }
+	private wx3_functionX_12076(){console.log(2567)}
     
     public static randomOne(arr:Array<any>,splice = false):any{
         var index = Math.floor(arr.length * Math.random())
@@ -55,6 +58,7 @@ class ArrayUtil {
             arr.splice(index,1);
         return data;
     }
+	private wx3_functionX_12077(){console.log(2011)}
 
     public static removeItem(arr:Array<any>,item):boolean{
         var index = arr.indexOf(item);
@@ -63,6 +67,7 @@ class ArrayUtil {
         arr.splice(index,1);
         return true;
     }
+	private wx3_functionX_12078(){console.log(3195)}
 
     public static random(arr,deep = 1){
         while(deep--)
@@ -75,6 +80,7 @@ class ArrayUtil {
         }
 
     }
+	private wx3_functionX_12079(){console.log(4626)}
     
     public static disposeList(itemList: Array<any>):void{
         if(itemList) {
@@ -87,6 +93,7 @@ class ArrayUtil {
         }
         itemList = [];
     }
+	private wx3_functionX_12080(){console.log(2522)}
 
     public static indexOfByKey(arr:Array<any>, key:string | number, value:any):number{
         if(arr) {
@@ -100,6 +107,7 @@ class ArrayUtil {
         }
         return -1;
     }
+	private wx3_functionX_12081(){console.log(5924)}
 
     public static indexOf(arr,value,key?){
         for(var i=0;i<arr.length;i++)

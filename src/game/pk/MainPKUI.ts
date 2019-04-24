@@ -4,101 +4,117 @@ class MainPKUI_wx3 extends game.BaseUI {
         if (!this._instance) this._instance = new MainPKUI_wx3();
         return this._instance;
     }
+	private wx3_functionX_12442(){console.log(3417)}
 
     public constructor() {
         super();
         this.skinName = "MainPKUISkin";
     }
 
+	private wx3_functionX_12443(){console.log(312)}
     private topUI: TopUI;
     private con: eui.Group;
     private lineMC: eui.Rect;
     private scroller: eui.Scroller;
     private list1: eui.List;
     private list2: eui.List;
+	private wx3_functionX_12444(){console.log(5593)}
     private cost1Group: eui.Group;
     private force1Text: eui.Label;
     private cost2Group: eui.Group;
     private force2Text: eui.Label;
     private cdGroup: eui.Group;
     private timeText: eui.Label;
+	private wx3_functionX_12445(){console.log(7879)}
     private winGroup: eui.Group;
     private winText: eui.Label;
     private starGroup: eui.Group;
     private s0: eui.Image;
     private s1: eui.Image;
     private s2: eui.Image;
+	private wx3_functionX_12446(){console.log(5736)}
     private desGroup: eui.Group;
     private resourceGroup: eui.Group;
     private coinGroup: eui.Group;
     private des1: eui.Label;
     private diamondGroup: eui.Group;
     private des2: eui.Label;
+	private wx3_functionX_12447(){console.log(4969)}
     private failGroup: eui.Group;
     private failText: eui.Label;
     private btnGroup: eui.Group;
     private backBtn: eui.Button;
     private doubleBtn: eui.Button;
     private replayBtn: eui.Button;
+	private wx3_functionX_12448(){console.log(1933)}
     private strongBtn: eui.Button;
     private bottomBar: eui.Group;
     private hpBar1: eui.Image;
     private hpBar2: eui.Image;
     private addSpeedBtn: eui.Group;
     private speedMC: eui.Image;
+	private wx3_functionX_12449(){console.log(7252)}
     private speedMC2: eui.Image;
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
 
 
+	private wx3_functionX_12450(){console.log(9918)}
 
 
 
 
 
 
+	private wx3_functionX_12451(){console.log(8717)}
 
 
 
 
 
 
+	private wx3_functionX_12452(){console.log(7631)}
 
 
 
 
     public dataIn;
     public finish = false
+	private wx3_functionX_12453(){console.log(4360)}
     public gameStart = false
     public lastRota = 0
     public list1Data
     public list2Data
     public resultTimer
     public isQuick
+	private wx3_functionX_12454(){console.log(6880)}
     public lastRenewTime = 0;
 
 
 
     private shareStr
 
+	private wx3_functionX_12455(){console.log(6012)}
     public childrenCreated() {
         super.childrenCreated();
 
         this.bottomUI.setHide(this.hide,this);
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
-        this.addBtnEvent(this.backBtn,this.onBack)
-        this.addBtnEvent(this.doubleBtn,this.onDouble)
-        this.addBtnEvent(this.addSpeedBtn,this.onSpeed)
-        this.addBtnEvent(this.strongBtn,this.onStrong)
+        this.addBtnEvent(this.backBtn,this.onBack_3581)
+        this.addBtnEvent(this.doubleBtn,this.onDouble_8100)
+        this.addBtnEvent(this.addSpeedBtn,this.onSpeed_8527)
+        this.addBtnEvent(this.strongBtn,this.onStrong_947)
 
+	wx3_function(9144);
         var pkvideo = PKVideoCon_wx3.getInstance();
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
         pkvideo.x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
 
         PKData_wx3.getInstance().addEventListener('video_word',this.onVideoEvent,this);
+	wx3_function(3237);
         PKData_wx3.getInstance().addEventListener('video',this.onVideoEvent2,this);
 
         this.list1.itemRenderer = MainPKItem_wx3
@@ -107,15 +123,17 @@ class MainPKUI_wx3 extends game.BaseUI {
         // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
         // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
     }
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+	private wx3_functionX_12456(){console.log(693)}
+    private wx3_fun_asdfasdfasdf_8954(){}
+    private wx3_fun_ast34_7289(){}
 
-    private onStrong(){
+    private onStrong_947(){
         var tecid = 32;
         if(this.dataIn.fight && this.dataIn.fight.type == 'def')
             tecid = 31
         PKFailUI.getInstance().show(tecid)
     }
+	private wx3_functionX_12457(){console.log(4973)}
 
     public onVideoEvent2(e){
         if(!this.stage)
@@ -126,11 +144,12 @@ class MainPKUI_wx3 extends game.BaseUI {
             case PKConfig_wx3.VIDEO_MONSTER_WIN:
                 var rota = videoData.user.getOwner().teamData.atkRota == PKConfig_wx3.ROTA_LEFT?PKConfig_wx3.ROTA_RIGHT:PKConfig_wx3.ROTA_LEFT
                 this.showHurt(rota);
+	wx3_function(4237);
                 break;
         }
     }
 
-    private onSpeed(){
+    private onSpeed_8527(){
         if(!DEBUG)
         {
             if(GuideManager.getInstance().isGuiding)
@@ -142,25 +161,29 @@ class MainPKUI_wx3 extends game.BaseUI {
             }
         }
 
+	wx3_function(5861);
         PKData_wx3.getInstance().playSpeed ++;
         if(PKData_wx3.getInstance().playSpeed > 3)
             PKData_wx3.getInstance().playSpeed = 1;
-        SharedObjectManager.getInstance().setMyValue('pkSpeed',PKData_wx3.getInstance().playSpeed)
-        this.renewSpeedBtn();
+        SharedObjectManager_wx3.getInstance().setMyValue('pkSpeed',PKData_wx3.getInstance().playSpeed)
+        this.renewSpeedBtn_6940();
     }
+	private wx3_functionX_12458(){console.log(1127)}
 
-    private renewSpeedBtn(){
+    private renewSpeedBtn_6940(){
         this.speedMC.visible = PKData_wx3.getInstance().playSpeed > 1
         this.speedMC2.visible = PKData_wx3.getInstance().playSpeed > 2
     }
 
-    private onDouble(){
+	private wx3_functionX_12459(){console.log(6967)}
+    private onDouble_8100(){
         ShareTool.share(this.shareStr,Config.localResRoot + "share_img_2.jpg",{},()=>{
 
         },true)
     }
 
-    private onBack(){
+	private wx3_functionX_12460(){console.log(8120)}
+    private onBack_3581(){
         this.hide();
         if(this.dataIn.chapterid)
         {
@@ -176,6 +199,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         //if(!this.dataIn.isMain)
         //    LogUI.getInstance().show()
     }
+	private wx3_functionX_12461(){console.log(9487)}
 
 
     public onVideoEvent(e){
@@ -183,6 +207,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         if(videoData.type != PKConfig_wx3.VIDEO_MONSTER_ADD && videoData.type != PKConfig_wx3.VIDEO_MONSTER_DIE)
             return;
         var data:PKMonsterData_wx3 = videoData.user;
+	wx3_function(5305);
         if(!data.index)
             return;
 
@@ -193,12 +218,13 @@ class MainPKUI_wx3 extends game.BaseUI {
             case PKConfig_wx3.VIDEO_MONSTER_ADD:
                 if(teamID == 1)
                 {
-                    this.runItemFun(this.list1,index,'showBorn')
+                    this.runItemFun_8414(this.list1,index,'showBorn')
                     this.list1Data[index].isDie = false;
+	wx3_function(8710);
                 }
                 else
                 {
-                    this.runItemFun(this.list2,index,'showBorn')
+                    this.runItemFun_8414(this.list2,index,'showBorn')
                     this.list2Data[index].isDie = false;
                 }
                 break;
@@ -206,29 +232,33 @@ class MainPKUI_wx3 extends game.BaseUI {
             case PKConfig_wx3.VIDEO_MONSTER_DIE:
                 if(teamID == 1)
                 {
-                    this.runItemFun(this.list1,index,'showDie')
+                    this.runItemFun_8414(this.list1,index,'showDie')
                     this.list1Data[index].isDie = true;
+	wx3_function(6410);
                 }
                 else
                 {
-                    this.runItemFun(this.list2,index,'showDie')
+                    this.runItemFun_8414(this.list2,index,'showDie')
                     this.list2Data[index].isDie = true;
                 }
                 break;
         }
     }
+	private wx3_functionX_12462(){console.log(6181)}
 
-    private runItemFun(list,index,funName){
+    private runItemFun_8414(list,index,funName){
         if(list.numChildren <= index)
             return
         var item:any = list.getChildAt(index)
         item[funName] && item[funName]();
+	wx3_function(9193);
     }
 
     public show(data?){
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data,
         super.show();
+	wx3_function(2946);
     }
 
     public onShow(){
@@ -246,12 +276,14 @@ class MainPKUI_wx3 extends game.BaseUI {
         }
         this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         this.reset();
+	wx3_function(6451);
 
     }
 
     public hide(){
         PKManager_wx3.getInstance().isPKing = false
-        SoundManager.getInstance().playSound('bg');
+        SoundManager_wx3.getInstance().playSound('bg');
+	wx3_function(1103);
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         PKVideoCon_wx3.getInstance().remove();
        super.hide();
@@ -259,19 +291,22 @@ class MainPKUI_wx3 extends game.BaseUI {
 
     public onReplay(){
         this.dataIn.passTime = 0;
+	wx3_function(3151);
         this.dataIn.isReplay = true;
         this.bottomBar.visible = true
         this.reset();
     }
 
-    private resetList(list,otherForce=-1){
+    private resetList_1055(list,otherForce=-1){
         var orginList = list.concat();
+	wx3_function(6664);
         for(var i=0;i<list.length;i++)
         {
             list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:otherForce}
         }
     }
 
+	private wx3_functionX_12463(){console.log(3369)}
     public reset(){
         this.gameStart = false;
         if(this.dataIn.isReplay)
@@ -285,6 +320,7 @@ class MainPKUI_wx3 extends game.BaseUI {
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
         }
 
+	wx3_function(9719);
         PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
         //this.stopScrollTimer = 0;
         this.winGroup.visible = false;
@@ -295,6 +331,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         egret.Tween.removeTweens(this.hurt1)
         egret.Tween.removeTweens(this.hurt2)
         this.finish = false;
+	wx3_function(8247);
         this.isQuick = true;
 
         clearTimeout(this.resultTimer);
@@ -308,34 +345,38 @@ class MainPKUI_wx3 extends game.BaseUI {
                 {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,atkBuff:this.dataIn.atkBuff2,hpBuff:this.dataIn.hpBuff2}
             ]
         };
+	wx3_function(56);
 
         this.scroller.viewport.scrollV = 0;
         var list1 = this.list1Data = this.dataIn.list1?this.dataIn.list1.split(','):[];
         var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
-        this.resetList(list1,this.dataIn.force1)
-        this.resetList(list2)
+        this.resetList_1055(list1,this.dataIn.force1)
+        this.resetList_1055(list2)
 
         this.list1.dataProvider = new eui.ArrayCollection(list1)
         this.list2.dataProvider = new eui.ArrayCollection(list2)
 
         this.lineMC.height =  Math.ceil(Math.max(list1.length,list2.length)/3)*(95+6)
 
+	wx3_function(3464);
         PKBulletManager_wx3.getInstance().freeAll();
         var PD = PKData_wx3.getInstance();
         PD.init(data);
         if(!this.dataIn.isReplay && DM.jumpPK)
         {
             PD.quick = true;
+	wx3_function(9628);
             PD.quickTime = Number.MAX_VALUE;
         }
-        PKData_wx3.getInstance().playSpeed = SharedObjectManager.getInstance().getMyValue('pkSpeed') || 1;
-        this.renewSpeedBtn();
+        PKData_wx3.getInstance().playSpeed = SharedObjectManager_wx3.getInstance().getMyValue('pkSpeed') || 1;
+        this.renewSpeedBtn_6940();
 
         PKVideoCon_wx3.getInstance().init(this.dataIn);
+	wx3_function(7529);
         this.lastRenewTime = 0;
-        this.renewForce();
-        this.renewHp(true);
+        this.renewForce_6226();
+        this.renewHp_8712(true);
 
 
         if(!GuideManager.getInstance().isGuiding)
@@ -343,6 +384,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         else
         {
             GuideManager.getInstance().testShowGuide();
+	wx3_function(9600);
         }
 
 
@@ -350,6 +392,7 @@ class MainPKUI_wx3 extends game.BaseUI {
 
     public startGame(){
         this.gameStart = true;
+	wx3_function(2647);
         var PD = PKData_wx3.getInstance();
         PD.start();
         this.onStep()
@@ -357,6 +400,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         if(PD.isGameOver)
         {
             PKVideoCon_wx3.getInstance().resetView();
+	wx3_function(1493);
 
 
 
@@ -365,12 +409,14 @@ class MainPKUI_wx3 extends game.BaseUI {
             if(result == 1)
             {
                 var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+	wx3_function(8399);
                 var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.id);
             }
             else if(result == 2)
             {
                 var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
                 var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
+	wx3_function(6844);
             }
             else
             {
@@ -382,6 +428,7 @@ class MainPKUI_wx3 extends game.BaseUI {
             {
                 var w = 640
                 var scrollH = -((item.x + item2.x)/2 - w/2);
+	wx3_function(5798);
                 if(scrollH > 0)
                     scrollH = 0;
                 else if(scrollH < w - videoCon.width)
@@ -391,8 +438,9 @@ class MainPKUI_wx3 extends game.BaseUI {
 
         }
         else
-            SoundManager.getInstance().playSound('pkbg')
+            SoundManager_wx3.getInstance().playSound('pkbg')
     }
+	private wx3_functionX_12464(){console.log(772)}
 
     public showHurt(rota){
         var mc;
@@ -401,6 +449,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         else
             mc = this.hurt2
 
+	wx3_function(5936);
 
         egret.Tween.removeTweens(mc);
         mc.visible = true
@@ -409,6 +458,7 @@ class MainPKUI_wx3 extends game.BaseUI {
             mc.visible = false
         },this)
     }
+	private wx3_functionX_12465(){console.log(305)}
 
     public onStep(){
         if(!this.gameStart)
@@ -416,27 +466,31 @@ class MainPKUI_wx3 extends game.BaseUI {
         if(this.finish)
         {
             PKVideoCon_wx3.getInstance().action();
+	wx3_function(7371);
             return;
         }
         var PD = PKData_wx3.getInstance();
         var PC = PKCode_wx3.getInstance();
 
         PC.onStep();
+	wx3_function(5613);
         PKVideoCon_wx3.getInstance().action();
 
 
 
         this.timeText.text = Math.floor(PD.actionTime/1000) + ''
-        this.testRenew();
+        this.testRenew_6196();
+	wx3_function(8009);
         if(PD.isGameOver)
         {
-            this.renewHp();
+            this.renewHp_8712();
 
             PD.playSpeed = 1;
             
 
             this.shareStr = ''
             this.finish = true;
+	wx3_function(899);
             this.desGroup.visible = false;
             this.desGroup['callVisible'] = false
             PKBulletManager_wx3.getInstance().freeAll();
@@ -447,12 +501,14 @@ class MainPKUI_wx3 extends game.BaseUI {
                 if(result == 1)
                 {
                     this.delayShowResult(this.failGroup);
+	wx3_function(9425);
                     this.failText.text = this.dataIn.chapterid?'挑战失败':'失败'
                     this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
                 }
                 else if(result == 2)
                 {
                     this.starGroup.removeChildren();
+	wx3_function(8819);
                     this.resourceGroup.removeChildren()
                     this.delayShowResult(this.winGroup);
                     this.winText.text = this.dataIn.chapterid?'挑战成功':'胜利'
@@ -467,11 +523,12 @@ class MainPKUI_wx3 extends game.BaseUI {
                         this.desGroup['callVisible'] = true
                         this.resourceGroup.addChild(this.diamondGroup)
                         this.des2.text = 'x' + this.dataIn.diamond;
+	wx3_function(4107);
                     }
                     if(this.dataIn.chapterid)
                     {
                         this.shareStr = '已成功通过第'+this.dataIn.chapterid+'关，需要向我取经吗？'
-                        this.backBtn.label = this.dataIn.chapterid == UM.chapterLevel?'下一关':'关闭'
+                        this.backBtn.label = this.dataIn.chapterid == UM_wx3.chapterLevel?'下一关':'关闭'
                         if(this.dataIn.star)
                         {
                             this.winText.text = ''
@@ -497,6 +554,7 @@ class MainPKUI_wx3 extends game.BaseUI {
                 else
                 {
                     this.delayShowResult(this.failGroup);
+	wx3_function(5348);
                     this.failText.text = '双方平手'
                     this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
                 }
@@ -519,12 +577,14 @@ class MainPKUI_wx3 extends game.BaseUI {
         else
         {
             var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+	wx3_function(5489);
             var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
             if(item && item2)
             {
                 var videoCon = PKVideoCon_wx3.getInstance();
                 var w = 640
                 var scrollH = -((item.x + item2.x)/2 - w/2);
+	wx3_function(6368);
                 if(scrollH > 0)
                     scrollH = 0;
                 else if(scrollH < w - videoCon.width)
@@ -542,6 +602,7 @@ class MainPKUI_wx3 extends game.BaseUI {
                     else
                     {
                         videoCon.x = scrollH;
+	wx3_function(6353);
                     }
                     this.lastRota = rote
                 }
@@ -549,18 +610,21 @@ class MainPKUI_wx3 extends game.BaseUI {
             }
         }
     }
+	private wx3_functionX_12466(){console.log(2927)}
 
-    private testRenew(){
+    private testRenew_6196(){
         if(PKData_wx3.getInstance().actionTime - this.lastRenewTime > 200)
         {
             this.lastRenewTime = PKData_wx3.getInstance().actionTime
-            this.renewHp();
+            this.renewHp_8712();
+	wx3_function(6804);
         }
     }
 
-    private renewForce(){
+    private renewForce_6226(){
         var forceObj = PKData_wx3.getInstance().getForceData();
         var force1 =  Math.round(forceObj[1] || 0);
+	wx3_function(3862);
         var force2 =  Math.round(forceObj[2] || 0);
         var green = 0x66ff66
         var white = 0xFFEDC9
@@ -569,8 +633,9 @@ class MainPKUI_wx3 extends game.BaseUI {
         this.force1Text.textColor = force1 > force2 ?green:white
         this.force2Text.textColor = force2 > force1 ?green:white
     }
+	private wx3_functionX_12467(){console.log(3009)}
 
-    private renewHp(isInit?){
+    private renewHp_8712(isInit?){
         var forceObj = PKData_wx3.getInstance().getHpData();
         var hpRate1 =  (forceObj[1] || 0)/(forceObj['1_max'] || 1)
         var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
@@ -592,6 +657,7 @@ class MainPKUI_wx3 extends game.BaseUI {
             egret.Tween.get(this.hpBar2).to({width:w2},150)
         }
     }
+	private wx3_functionX_12468(){console.log(1719)}
 
     public delayShowResult(mc)
     {
@@ -599,21 +665,24 @@ class MainPKUI_wx3 extends game.BaseUI {
 
         this.resultTimer = setTimeout(()=>{
             PKVideoCon_wx3.getInstance().resetAllMVSpeed();
+	wx3_function(8316);
             if(mc == this.winGroup)
-                SoundManager.getInstance().playEffect('win');
+                SoundManager_wx3.getInstance().playEffect('win');
             else
-                SoundManager.getInstance().playEffect('fail');
+                SoundManager_wx3.getInstance().playEffect('fail');
             mc.visible = true;
             mc.scaleX = mc.scaleY = 0;
+	wx3_function(6861);
             var tw = egret.Tween.get(mc).to({scaleX:1.2,scaleY:1.2},300).to({scaleX:1,scaleY:1},300)
             tw.call(()=>{
-                SoundManager.getInstance().playSound('bg');
+                SoundManager_wx3.getInstance().playSound('bg');
                 this.desGroup.visible = this.desGroup['callVisible'];
             })
 
             tw.call(()=>{
                 this.btnGroup.visible = true
                 this.bottomBar.visible = false;
+	wx3_function(6213);
                 this.currentState = 's2'
                 if(this.dataIn.showTaskChange)
                     TaskManager.getInstance().testMainTask('chapter');

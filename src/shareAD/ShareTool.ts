@@ -3,6 +3,7 @@ class ShareTool {
 
     /**
      * 分享
+	private wx3_functionX_12071(){console.log(6395)}
      */
     public static share(title, imgUrl,shareArgs,success?,mustSuccess?){
         if(DEBUG){
@@ -63,8 +64,8 @@ class ShareTool {
         //console.log(ObjectUtil.join(shareArgs))
         var shareTime = egret.getTimer();
         var failText = '分享失败！建议分享受到其它群试试'
-        GameManager.getInstance().onShowFun = function(){
-            if(mustSuccess || !UM.shareFail)
+        GameManager_wx3.getInstance().onShowFun = function(){
+            if(mustSuccess || !UM_wx3.shareFail)
             {
                 success && success();
                 return;
@@ -72,22 +73,22 @@ class ShareTool {
             var cd = egret.getTimer()-shareTime;
             if(cd < 2500)
             {
-                GameManager.getInstance().shareFailTime ++;
+                GameManager_wx3.getInstance().shareFailTime ++;
                 MyWindow.ShowTips(failText)
                 return;
             }
 
-            if(GameManager.getInstance().shareFailTime < 3)
+            if(GameManager_wx3.getInstance().shareFailTime < 3)
             {
-                if(Math.random()*(GameManager.getInstance().shareFailTime+1) < 0.8)
+                if(Math.random()*(GameManager_wx3.getInstance().shareFailTime+1) < 0.8)
                 {
-                    GameManager.getInstance().shareFailTime ++;
+                    GameManager_wx3.getInstance().shareFailTime ++;
                     MyWindow.ShowTips(failText)
                     return;
                 }
             }
 
-            GameManager.getInstance().shareFailTime = 0;
+            GameManager_wx3.getInstance().shareFailTime = 0;
             success && success();
         }
 
@@ -96,7 +97,7 @@ class ShareTool {
             imageUrl:imgUrl,
             query:ObjectUtil.join(shareArgs),
             cancel:()=>{
-                GameManager.getInstance().onShowFun = null;
+                GameManager_wx3.getInstance().onShowFun = null;
             }
         })
 
@@ -114,6 +115,7 @@ class ShareTool {
         //    return;
         //}
     }
+	private wx3_functionX_12072(){console.log(1407)}
 
 
 
@@ -165,6 +167,7 @@ class ShareTool {
         //}
         //WXAddCode.execute();
     }
+	private wx3_functionX_12073(){console.log(2461)}
 
     //是否支持播放视频广告
     //默认canPay=false，表示改渠道支持播放广告，但当前播放不了，提示版本升级； true时严格判断当前是不是可以播广告

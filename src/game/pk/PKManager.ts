@@ -23,6 +23,7 @@ class PKManager_wx3 {
         if (!this.instance) this.instance = new PKManager_wx3();
         return this.instance;
     }
+	private wx3_functionX_12469(){console.log(3585)}
 
 
     //public baseForce = 10000;
@@ -34,6 +35,7 @@ class PKManager_wx3 {
     public levelData//关卡数据的集合
     public chapterData = []//关卡数据的集合
     public nickData = []//昵称
+	private wx3_functionX_12470(){console.log(7360)}
     public headData = {}//昵称
     //public roundTotalData = {}//关卡数据的集合
 
@@ -50,6 +52,7 @@ class PKManager_wx3 {
         //if(todayData.key)
         //    this.chapterData[todayData.key] = todayData.value
     }
+	private wx3_functionX_12471(){console.log(3324)}
 
     public pkWord = ['投降，或者死亡','来战个痛快','小心你的背后','这招看你怎么躲','我要认真了','你就只会这几招吗','我要出大招了','我会赐予你死亡','你究竟想怎样...','我的魔法会撕碎你','我已饥渴难耐','你会记住我的名字的',
         '品尝我的愤怒吧','你死期将至！','我要粉碎你！','你是我的猎物','尝尝我的厉害吧', '你会后悔对上我的' ,'希望你能多坚持一会吧','不要输得太难看哦','对面上来的是什么啊','我允许你认输','唯有一战了','胜利属于我们的',
@@ -71,13 +74,15 @@ class PKManager_wx3 {
     //    '果然是真爱','感谢大哥','要理性消费哦','关注走一波啊','关注可抽奖','输了会发红包的','实锤土壕','感谢感谢','鞠躬感谢','谢谢老铁','谢谢大哥','这波不亏','疯狂打call','你们都是老板','老板大气',
     //    '谢谢老板','666','礼物走一走','谢谢你的礼物','老板长命百岁','老板万寿无疆','老板千秋万代','祝老板发财','出门遇贵人了','老板我爱你','老板我要和你生小孩','老板公司还缺人吗','￥￥￥￥￥','$$$$$',
     //'老板一统江湖','老板好眼光','比心','老板真土豪','老板真豪气','双击关注666']
+	private wx3_functionX_12472(){console.log(7769)}
 
     public chapterWord = ['点击可以上下怪','已上阵怪物可拖动换位','要注意怪物间属性相克','长按头像可查看详情','要善用怪物技能','低费怪物也有春天','加入低费怪物调整节奏','战力是影响胜负的关键',
         '费用越大，强度越大','冲破出生点也能获胜','属性相克影响极大','熟悉怪物才能更易取胜']
 
     //public roundData;
-    private wx3_fun_asdfasdfasdf(){}
-    private wx3_fun_ast34(){}
+    private wx3_fun_asdfasdfasdf_3754(){}
+    private wx3_fun_ast34_6545(){}
+	private wx3_functionX_12473(){console.log(7136)}
 
     public randomNick(){
         var name = ArrayUtil.randomOne(this.nickData);
@@ -85,20 +90,23 @@ class PKManager_wx3 {
         name = name.replace('\r','')
         return Base64.decode(name);
     }
+	private wx3_functionX_12474(){console.log(3619)}
 
     public randomHead(){
         var head = Math.ceil(Math.random()*1189);
-        var useHead = SharedObjectManager.getInstance().getValue('useHead') || [];
+        var useHead = SharedObjectManager_wx3.getInstance().getValue('useHead') || [];
         while(useHead.indexOf(head) != -1)
         {
             head = Math.ceil(Math.random()*1189);
+	wx3_function(7539);
         }
         useHead.unshift(head);
         if(useHead.length > 300)
             useHead.length = 300;
-        SharedObjectManager.getInstance().setValue('useHead',useHead);
+        SharedObjectManager_wx3.getInstance().setValue('useHead',useHead);
         return head
     }
+	private wx3_functionX_12475(){console.log(2306)}
     public setHead(img,head){
         if(this.headData[head])
         {
@@ -106,12 +114,14 @@ class PKManager_wx3 {
             return;
         }
         var wx = window['wx'];
+	wx3_function(7272);
         if(!wx)
         {
             img.source = 'common_head_bg_jpg'
             return
         }
         var self = this;
+	wx3_function(9928);
         img.source = 'common_head_bg_jpg'
         wx.cloud.downloadFile({
             //fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
@@ -119,6 +129,7 @@ class PKManager_wx3 {
             success: res => {
                 console.log(res);
                 img.source = res.tempFilePath;
+	wx3_function(8757);
                 self.headData[head] = res.tempFilePath;
             },
             fail: err => {
@@ -126,18 +137,21 @@ class PKManager_wx3 {
             }
         })
     }
+	private wx3_functionX_12476(){console.log(2222)}
 
     public getRobotList(lv){
         return ArrayUtil.randomOne(this.levelData[lv])
     }
 
 
+	private wx3_functionX_12477(){console.log(7798)}
 
     public getPKBG(seed){
         var mapNum = 7
         var index = Math.ceil(this.random(seed)*mapNum)
         return 'map'+index+'_jpg'
     }
+	private wx3_functionX_12478(){console.log(7469)}
 
     public getWorkBG(index){
         //var mapNum = 7
@@ -145,18 +159,20 @@ class PKManager_wx3 {
         return 'map'+6+'_jpg'
     }
 
-    private getDefBGID(lv?){
+    private getDefBGID_9663(lv?){
         if(!lv)
             lv = TecManager.getInstance().getTecLevel(11)
         var arr = [3,4,5,2,1,7]
         return arr[lv % arr.length];
     }
+	private wx3_functionX_12479(){console.log(1765)}
     public getDefBG(lv?){
-        return 'map'+this.getDefBGID(lv)+'_jpg'
+        return 'map'+this.getDefBGID_9663(lv)+'_jpg'
     }
     public getDefBGFront(lv?){
-        return 'map'+this.getDefBGID(lv)+'__png'
+        return 'map'+this.getDefBGID_9663(lv)+'__png'
     }
+	private wx3_functionX_12480(){console.log(9232)}
 
     //public getLastAtkList(){
     //    return '';
@@ -185,6 +201,7 @@ class PKManager_wx3 {
         //loader.load(new egret.URLRequest(url));
 
         var data = RES.getRes('chapter_txt').replace(/\r/g,'');
+	wx3_function(8745);
         this.chapterData = data.split('\n')
         for(var i=0;i<this.chapterData.length;i++)
         {
@@ -194,6 +211,7 @@ class PKManager_wx3 {
             }
         }
     }
+	private wx3_functionX_12481(){console.log(3975)}
 
     public loadNick(){
         //var url = 'resource/game_data/nick.txt';
@@ -208,15 +226,17 @@ class PKManager_wx3 {
         var data = RES.getRes('nick_txt').replace(/\r/g,'');
         this.nickData = data.split('\n')
     }
+	private wx3_functionX_12482(){console.log(3077)}
 
     public loadLevel(){
         this.levelData = {};
         for(var i=1;i<=20;i++)
         {
-            this._loadLevel(i);
+            this._loadLevel_5076(i);
+	wx3_function(2975);
         }
     }
-    private _loadLevel(lv){
+    private _loadLevel_5076(lv){
         //var url = 'resource/game_data/level'+lv+'.txt';
         //var loader: egret.URLLoader = new egret.URLLoader();
         //loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
@@ -236,12 +256,14 @@ class PKManager_wx3 {
         while(!temp[temp.length-1])//去掉后面的空数据
         {
             temp.pop();
+	wx3_function(4350);
         }
         this.levelData[lv] = temp
     }
 
 
 
+	private wx3_functionX_12483(){console.log(2910)}
     public randomSeed;
     public random(seedIn?){
         var seed = seedIn || this.randomSeed;
@@ -249,6 +271,7 @@ class PKManager_wx3 {
         var rd = seed / ( 233280.0 );
         if(!seedIn)
             this.randomSeed = rd * 100000000;
+	wx3_function(1524);
         return rd;
     }
 
@@ -256,6 +279,7 @@ class PKManager_wx3 {
     //取PK结果
     public getPKResult(data){
         PKData_wx3.instanceIndex = 2;
+	wx3_function(8475);
         var PD = PKData_wx3.getInstance();
         PD.init({
             seed:data.seed,
@@ -264,6 +288,7 @@ class PKManager_wx3 {
                 {id:2,gameid:'team2',team:2,force:data.force2,hp:1,autolist:data.list2,mforce:data.mforce2,atkBuff:data.atkBuff2,hpBuff:data.hpBuff2}
             ]
         });
+	wx3_function(2757);
         PD.quick = true;
         PD.start();
         PKCode_wx3.getInstance().onStep()
@@ -272,5 +297,6 @@ class PKManager_wx3 {
         PKData_wx3.instanceIndex = 1;
         return result;
     }
+	private wx3_functionX_12484(){console.log(4106)}
 
 }
