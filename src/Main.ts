@@ -184,9 +184,9 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected startCreateScene(): void {
-        CM_wx3.initData(RES.getRes("data_json"));
+        CM_wx3.initData(RES.getRes("data_txt"),'monster_base');
 	wx3_function(2602);
-        CM_wx3.initData(RES.getRes("task_json"));
+        CM_wx3.initData(RES.getRes("task_txt"),'task_base');
         CM_wx3.initFinish()
         GameManager_wx3.stage = this.stage;
         GameManager_wx3.container = this;

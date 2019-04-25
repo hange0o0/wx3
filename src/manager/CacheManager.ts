@@ -26,24 +26,28 @@ class CacheManager_wx3{
     }
 
     //初始化数据
-    public initData(data){
-        for(var s in data)
-        {
-            if(!this.table[s])
-                this.table[s] = {};
-	wx3_function(4651);
-            if(this.registerData[s])
-            {
-                var cls = this.registerData[s];
-                var key = cls.key;
-                var oo = data[s];
-                for(var ss in oo)
-                {
-                    var vo:any = new cls();
-	wx3_function(7508);
-                    vo.fill(oo[ss]);
-                    this.table[s][vo[key]] = vo;
+    public initData(data,key){
+        if(!this.table[key])
+            this.table[key] = {};
+        data = data.replace(/\r/g,'')
+        var rows = data.split('\n')
+        var fieldDelim = '\t';
+        var fields: Array<string> = String(rows[0]).split(fieldDelim);
+        for(var i: number = 1;i < rows.length;i++) {
+            var s: string = rows[i];
+            if(s != null && s != "") {
+                var cols: Array<any> = s.split(fieldDelim);
+                var cls = this.registerData[key];
+                var vo:any = new cls();
+                for(var j: number = 0;j < fields.length;j++) {
+                    var value = cols[j];
+                    if(!fields[j])
+                        continue;
+                    vo[fields[j]] = value && !isNaN(value) ? Number(value) : value;
                 }
+                vo.reInit();
+                if(vo[cls.key])
+                    this.table[key][vo[cls.key]] = vo;
             }
         }
     }
@@ -58,25 +62,6 @@ class CacheManager_wx3{
 	private wx3_functionX_11980(){console.log(2457)}
     public getCardVO(id):MonsterVO{
         return MonsterVO.getObject(id);
-    }
-
-    public loadCache(url,fun){
-        if(this.cacheLoad[url])
-        {
-            if(fun)
-                fun();
-	wx3_function(2633);
-            return;
-        }
-        GameManager_wx3.container.touchChildren = GameManager_wx3.container.touchEnabled = false;
-        RES.getResAsync(url,function(){
-            GameManager_wx3.container.touchChildren = GameManager_wx3.container.touchEnabled = true;
-            this.cacheLoad[url] = true;
-	wx3_function(6788);
-            this.initData(RES.getRes(url));
-            if(fun)
-                fun();
-        },this)
     }
 }
 

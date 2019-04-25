@@ -58,6 +58,8 @@ class MainPKUI_wx3 extends game.BaseUI {
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
+    private testGroup: eui.Group;
+    private changeUser: ChangeUserUI;
 
 
 	private wx3_functionX_12450(){console.log(9918)}
@@ -120,12 +122,19 @@ class MainPKUI_wx3 extends game.BaseUI {
         this.list1.itemRenderer = MainPKItem_wx3
         this.list2.itemRenderer = MainPKItem_wx3
 
+        if(UM_wx3.isTest)
+        {
+            this.changeUser.dataChanged();
+        }
+        else
+        {
+            MyTool.removeMC(this.testGroup)
+        }
+
         // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
         // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
     }
 	private wx3_functionX_12456(){console.log(693)}
-    private wx3_fun_asdfasdfasdf_8954(){}
-    private wx3_fun_ast34_7289(){}
 
     private onStrong_947(){
         var tecid = 32;

@@ -29,6 +29,10 @@ class TaskVO {
 
     }
 
+    public reInit(){
+
+    }
+
     public fill(data) {
         this.id = data.id;
         this.index = data.index;

@@ -55,92 +55,17 @@ class MonsterVO {
     public haveLoad = false;
     public temp = 0
 	private wx3_functionX_11876(){console.log(5733)}
-    public constructor(data?: any) {
-        if(data)
-            this.fill(data);
+    public constructor() {
 
     }
 
-	private wx3_functionX_11877(){console.log(6017)}
-    public fill(data){
-        this.width = data.width
-        this.height = data.height
-        this.atk = data.atk
-        this.type = data.type
-        this.headoff = data.headoff
-        this.heightoff = data.heightoff
-        this.atkcd = data.atkcd * 1000
-        this.cost = data.cost
-        this.space = data.space
-        this.def = data.def
-        this.cd = data.cd * 1000
-        this.num = data.num
-        //this.num2 = data.num2
-        this.atkrage = data.atkrage
-        this.level = data.level
-        this.mcnum = data.mcnum
-        this.mcheight = data.mcheight
-        this.name = data.name
-        this.des = data.des
-        this.speed = data.speed
-        this.hp = data.hp
-        this.id = data.id
-        this.sv1 = data.sv1
-        this.sv2 = data.sv2
-        this.sv3 = data.sv3
-        this.mcwidth = data.mcwidth
-        this.atk2 = data.atk2
-        this.skillcd = data.skillcd * 1000
-        this.mv_atk = data.mv_atk * 1000
-        this.mv_atk2 = data.mv_atk2
-        this.des2 = data.des2
-
-        //this.speed = 50;
-
-        //var arr = [];
-        //for(var s in MonsterVO.data)
-        //{
-        //    if(MonsterVO.data[s].level < 998)
-        //        arr.push(MonsterVO.data[s])
-        //}
-        ////console.log(arr.join(','));
-        //ArrayUtil.sortByField(arr,['level'],[0])
-        //for(var i=0;i<arr.length;i++)
-        //{
-        //    console.log(arr[i].level,arr[i].id,arr[i].name)
-        //}
-        //var arr = [];
-        ////var obj = {}
-        //for(var s in SkillVO.data)
-        //{
-        //    if(SkillVO.data[s].level < 998)
-        //    {
-        //        arr.push(SkillVO.data[s])
-        //        //if(!obj[MonsterVO.data[s].level])
-        //        //    obj[MonsterVO.data[s].level] = []
-        //        //obj[MonsterVO.data[s].level].push(MonsterVO.data[s])
-        //    }
-        //}
-        //console.log(arr.join(','));
-        //var arr = MonsterVO.
-        //ArrayUtil.sortByField(arr,['level'],[0])
-        //for(var i=0;i<arr.length;i++)
-        //{
-        //    var vo = arr[i];
-        //    console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
-        //}
-
-        //for(var s in obj)
-        //{
-        //    console.log('---------------LV.' + s + '\t\tnum:' + obj[s].length)
-        //    for(var i=0;i<obj[s].length;i++)
-        //    {
-        //        var vo = obj[s][i];
-        //        console.log('LV.' +vo.level+ '\t\tid:' + vo.id+ '\t\t' + vo.name)
-        //    }
-        //
-        //}
+    public reInit(){
+        this.atkcd = this.atkcd * 1000
+        this.cd = this.cd * 1000
+        this.skillcd = this.skillcd * 1000
+        this.mv_atk = this.mv_atk * 1000
     }
+
 	private wx3_functionX_11878(){console.log(1670)}
 
 
