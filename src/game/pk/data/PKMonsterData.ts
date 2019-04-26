@@ -1,5 +1,6 @@
 //场上的怪
 class PKMonsterData_wx3 {
+    public autoRemove = false//死后自动隐藏
     public die = false;
     public passEnd = false;//冲过了终点
 

@@ -108,6 +108,16 @@ class PKData_wx3 extends egret.EventDispatcher{
         return TM_wx3.nowMS() - this.startTime + this.speedAddTime;
     }
 
+    public getHpRateByIndex(index,team){
+        for(var i=0;i<this.monsterList.length;i++)
+        {
+            var oo = this.monsterList[i];
+            if(oo.index == index && oo.owner==team)
+                return oo.getHpRate()
+        }
+        return 0;
+    }
+
     //暂停
     public stop(){
         //if(isLast)//在最后一次行动后暂停(马上停)

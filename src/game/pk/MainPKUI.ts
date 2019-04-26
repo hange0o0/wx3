@@ -58,8 +58,6 @@ class MainPKUI_wx3 extends game.BaseUI {
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
-    private testGroup: eui.Group;
-    private changeUser: ChangeUserUI;
 
 
 	private wx3_functionX_12450(){console.log(9918)}
@@ -122,14 +120,7 @@ class MainPKUI_wx3 extends game.BaseUI {
         this.list1.itemRenderer = MainPKItem_wx3
         this.list2.itemRenderer = MainPKItem_wx3
 
-        if(UM_wx3.isTest)
-        {
-            this.changeUser.dataChanged();
-        }
-        else
-        {
-            MyTool.removeMC(this.testGroup)
-        }
+
 
         // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
         // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
@@ -212,6 +203,8 @@ class MainPKUI_wx3 extends game.BaseUI {
 
 
     public onVideoEvent(e){
+        if(!this.stage)
+            return;
         var videoData = e.data;
         if(videoData.type != PKConfig_wx3.VIDEO_MONSTER_ADD && videoData.type != PKConfig_wx3.VIDEO_MONSTER_DIE)
             return;
@@ -264,6 +257,12 @@ class MainPKUI_wx3 extends game.BaseUI {
     }
 
     public show(data?){
+        if(UM_wx3.isTest)
+        {
+            MainPKTestUI.getInstance().show(data);
+            return;
+        }
+
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data,
         super.show();
@@ -400,6 +399,11 @@ class MainPKUI_wx3 extends game.BaseUI {
     }
 
     public startGame(){
+        if(UM_wx3.isTest)
+        {
+            MainPKTestUI.getInstance().startGame();
+            return;
+        }
         this.gameStart = true;
 	wx3_function(2647);
         var PD = PKData_wx3.getInstance();

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="MainPKTestUISkin" width="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" height="1136" >
+	<e:Image source="floor_jpg" verticalCenter="0" horizontalCenter="0"/>
+    	<e:Group id="g1" verticalCenter="-50" horizontalCenter="-160" width="100"/>
+	<e:Group id="g2" verticalCenter="-50" horizontalCenter="160" width="100"/>
+	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
+	<e:Group id="winGroup" height="265" anchorOffsetY="130" horizontalCenter="0" verticalCenter="-200">
+		<e:Group x="0" y="0">
+		<e:Image x="0" y="0" source="pk_win_png"/>
+		<e:Image x="0" y="0" scaleX="-1" source="pk_win_png"/>
+		<e:layout>
+			<e:HorizontalLayout gap="0"/>
+		</e:layout>
+		</e:Group>
+		<e:Label id="winText" text="挑战成功" y="118" textColor="0xFCE492" strokeColor="0xFFFFFF" horizontalCenter="0"/>
+		<e:Group id="starGroup" y="114" horizontalCenter="0">
+		<e:Image id="s0" source="start1_png" x="0" y="0" scaleX="1.4" scaleY="1.4"/>
+		<e:Image source="start1_png" x="10" y="10" scaleX="1.4" scaleY="1.4" id="s1"/>
+		<e:Image source="start1_png" x="20" y="20" scaleX="1.4" scaleY="1.4" id="s2"/>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+		</e:Group>
+		<e:Group id="desGroup" y="260" horizontalCenter="0">
+		<e:Image source="black_bg_png" left="0" right="0" top="0" bottom="0" scale9Grid="43,7,8,42"/>
+		<e:Group id="resourceGroup" y="5" left="50" right="50">
+			<e:Group id="coinGroup" x="0" y="0">
+			<e:Image source="icon_coin_png" x="0" y="0"/>
+			<e:Label id="des1" text="Label123456" y="12" textColor="0xFFE89E" x="51"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+			<e:Group id="diamondGroup" x="0" y="0" height="46">
+			<e:Image x="0" y="0" source="icon_diamond_png" scaleX="0.9" scaleY="0.9"/>
+			<e:Label id="des2" text="Label" y="2" textColor="0xffe89e" x="41"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+			<e:layout>
+			<e:HorizontalLayout gap="40"/>
+			</e:layout>
+		</e:Group>
+		</e:Group>
+	</e:Group>
+	<e:Group id="failGroup" height="265" anchorOffsetY="130" horizontalCenter="0" verticalCenter="-200">
+		<e:Group x="0" y="0">
+		<e:Image source="pk_fail_png" x="0" y="0"/>
+		<e:Image source="pk_fail_png" x="0" y="0" scaleX="-1"/>
+		<e:layout>
+			<e:HorizontalLayout gap="0"/>
+		</e:layout>
+		</e:Group>
+		<e:Label id="failText" text="挑战失败" y="119" stroke="3" horizontalCenter="0"/>
+	</e:Group>
+	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0"/>
+    <e:Group id="btnGroup" horizontalCenter="0" verticalCenter="50">
+			<e:Button id="backBtn" label="关闭" y="0" width="150" x="0" skinName="Btn2Skin"/>
+			<e:Button id="doubleBtn" label="炫耀" y="10" width="150" x="10" skinName="Btn1Skin"/>
+			<e:Button id="replayBtn" label="回放" y="0" skinName="Btn1Skin" width="150" x="0"/>
+			<e:Button id="strongBtn" label="取胜秘笈" y="10" width="150" x="10" skinName="Btn9Skin"/>
+			<e:layout>
+			<e:HorizontalLayout gap="30"/>
+			</e:layout>
+		</e:Group>
+
+
+</e:Skin>

@@ -7,6 +7,7 @@ class PKMonsterItem_wx3 extends game.BaseItem {
              item = new PKMonsterItem_wx3();
          }
          item.needRemove = false;
+         item.visible = true;
          return item;
      }
 	private wx3_functionX_12990(){console.log(1414)}
@@ -71,6 +72,10 @@ class PKMonsterItem_wx3 extends game.BaseItem {
         PKData_wx3.getInstance().actionRecord.push(PKData_wx3.getInstance().actionTime)
         PKData_wx3.getInstance().actionRecord.push('die_mv_remove|' + (this.data && this.data.id))
         this.needRemove = true;
+        if(this.data.autoRemove)
+        {
+            this.visible = false;
+        }
 	wx3_function(2690);
 
     }
@@ -329,6 +334,26 @@ class PKMonsterItem_wx3 extends game.BaseItem {
         }
         this.bar.width = 40 * mD.getHpRate();
 
+    }
+
+    public renewHpRate()
+    {
+        this.bar.width = 40
+        var rate = PKData_wx3.getInstance().getHpRateByIndex(this.data.index,this.data.owner)
+        if(rate != 1)
+        {
+            this.barGroup.visible = true;
+            this.teamMC.visible = false;
+        }
+        egret.Tween.get(this.bar).to({width:40*rate},500)
+    }
+    public testDie()
+    {
+        var rate = PKData_wx3.getInstance().getHpRateByIndex(this.data.index,this.data.owner)
+        if(rate == 0)
+        {
+            this.die();
+        }
     }
 
 	private wx3_functionX_13004(){console.log(7586)}

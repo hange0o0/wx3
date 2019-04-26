@@ -106,11 +106,6 @@
 			<e:HorizontalLayout gap="30"/>
 			</e:layout>
 		</e:Group>
-		<e:Group id="testGroup" x="0" bottom="0" width="640" top="515">
-			<e:Rect left="0" right="0" top="0" bottom="0"/>
-			<ns1:ChangeUserUI id="changeUser" skinName="ChangeUserUISkin" y="80" x="0"/>
-			<e:Label text="体验更多小程序" horizontalCenter="0" y="30" size="26" bold="true"/>
-		</e:Group>
 		<e:Group id="bottomBar" y="460" width="640" horizontalCenter="0">
 			<e:Group x="0" y="6" width="320">
 				<e:Image source="black_bg2_png" x="0" y="0" height="50" width="320"/>

@@ -16,6 +16,7 @@ class PKFailUI extends game.BaseWindow {
     private friendBtn: eui.Button;
 	private wx3_functionX_12577(){console.log(7097)}
     private goBtn: eui.Button;
+    private goGroup: eui.Group;
 
 
 
@@ -73,6 +74,7 @@ class PKFailUI extends game.BaseWindow {
 
     public onShow(){
          this.tecText.text = '提升与战斗相关的科技等级'
+        this.goGroup.visible = !UM_wx3.isTest
 
     }
 }

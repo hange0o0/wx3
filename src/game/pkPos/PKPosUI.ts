@@ -479,6 +479,15 @@ class PKPosUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.onMonsterChange_9873) //怪物升级/升星
 
         GuideManager.getInstance().testShowGuide()
+
+        if(UM_wx3.isTest)
+        {
+            MyTool.removeMC(this.con)
+            this.defItem && MyTool.removeMC(this.defItem)
+            this.workItem && MyTool.removeMC(this.workItem)
+            this.fightItem && MyTool.removeMC(this.fightItem)
+            this.taskItem && MyTool.removeMC(this.taskItem)
+        }
     }
 
 	private wx3_functionX_12559(){console.log(4759)}

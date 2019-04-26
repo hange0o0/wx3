@@ -23,7 +23,7 @@
 			<e:Label text="邀请好友获得永久战力加成" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
 			<e:Button id="friendBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
 		</e:Group>
-		<e:Group x="30" y="30">
+		<e:Group id="goGroup" x="30" y="30">
 			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="480" height="80"/>
 			<e:Label text="提升怪物搭配技巧" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
 			<e:Button id="goBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
