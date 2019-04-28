@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TestUISkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="white_bg_png" left="0" right="0" top="0" bottom="0"/>
+	<e:Group id="blockGroup" x="0" bottom="0"/>
+	<e:Label id="titleText" text="怪物争霸天下" y="150" textColor="0x000000" size="46" bold="true" horizontalCenter="0"/>
+	<e:Label id="scoreText" text="456 米" y="60" textColor="0x000000" horizontalCenter="0" size="40" bold="true"/>
+	<e:Label id="historyText" text="历史最高：123456" y="220" textColor="0x000000" horizontalCenter="0.5"/>
+	<e:Group id="tipsGroup" horizontalCenter="0" bottom="200">
+		<e:Rect width="340" height="80" x="0" y="0" fillColor="0xffffff" strokeWeight="2" strokeColor="0x000000"/>
+		<e:Label id="tipsText" text="点击屏幕使怪物起跳" textColor="0x000000" verticalCenter="0" horizontalCenter="0" bold="true"/>
+	</e:Group>
+</e:Skin>

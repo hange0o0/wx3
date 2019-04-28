@@ -389,6 +389,13 @@ class GameUI extends game.BaseUI {
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
 
+        //UM_wx3.isTest = true;
+        if(UM_wx3.isTest)
+        {
+            TestUI.getInstance().show();
+            return;
+        }
+
 	wx3_function(1344);
         UM_wx3.testAddInvite();
         GuideManager.getInstance().isGuiding = UM_wx3.isFirst;
