@@ -1,4 +1,4 @@
-class AlertUI extends game.BaseWindow {
+class AlertUI extends game.BaseWindow_wx3 {
     public constructor() {
         super();
         this.skinName = "AlertSkin";

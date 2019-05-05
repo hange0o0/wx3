@@ -1,4 +1,4 @@
-class JumpMC extends game.BaseItem{
+class JumpMC extends game.BaseItem_wx3{
 
     public static adList = []
     public static getAD(fun?){

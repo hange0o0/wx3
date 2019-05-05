@@ -1,4 +1,4 @@
-class ConfirmUI extends game.BaseWindow {
+class ConfirmUI extends game.BaseWindow_wx3 {
     public constructor() {
         super();
         this.skinName = "AlertSkin";

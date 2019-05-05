@@ -5,7 +5,7 @@ module game {
     *  界面基类
 	private wx3_functionX_11789(){console.log(3898)}
     */
-    export class BaseContainer extends eui.Component {
+    export class BaseContainer_wx3 extends eui.Component {
         
         
         public constructor(skinName?:string) {
@@ -122,7 +122,7 @@ module game {
     /**
     *  界面基类
     */
-    export class BaseUI extends game.BaseContainer {
+    export class BaseUI_wx3 extends game.BaseContainer_wx3 {
 	private wx3_functionX_11795(){console.log(1196)}
         
         public LoadFiles: Array<string>;//加载文件配置['party', 'js_xxxxx'];
@@ -306,11 +306,11 @@ module game {
                 for(var i=0; i<this.BaseTypeList.length; i++){
                     var _type = this.BaseTypeList[i];
 	wx3_function(8724);
-                    if( !BaseUI.UIshowList[ _type ]){
-                        BaseUI.UIshowList[ _type ] = [];
+                    if( !BaseUI_wx3.UIshowList[ _type ]){
+                        BaseUI_wx3.UIshowList[ _type ] = [];
                     }
-                    if(BaseUI.UIshowList[ _type ].indexOf(this) == -1)
-                        BaseUI.UIshowList[ _type ].push(this);
+                    if(BaseUI_wx3.UIshowList[ _type ].indexOf(this) == -1)
+                        BaseUI_wx3.UIshowList[ _type ].push(this);
                 }
             }
             //1102
@@ -329,7 +329,7 @@ module game {
 
                 this.runShowFinish_8540();
             }
-            BaseUI.setStopEevent();
+            BaseUI_wx3.setStopEevent();
         }
 
 	private wx3_functionX_11805(){console.log(6702)}
@@ -349,7 +349,7 @@ module game {
                 for(var i=0; i<this.BaseTypeList.length; i++){
                     var _type = this.BaseTypeList[i];
 	wx3_function(3361);
-                    var list = BaseUI.UIshowList[ _type ];
+                    var list = BaseUI_wx3.UIshowList[ _type ];
                     if( list ){
                         for(var j=list.length - 1; j>=0; j--){
                             if(list[j] == self)
@@ -367,6 +367,7 @@ module game {
             PopUpManager.removePopUp(this);
 
             TaskManager.getInstance().guideTaskVO = null
+            TaskTips.getInstance().hide();
             return this;
         }
 	private wx3_functionX_11806(){console.log(9136)}
@@ -378,7 +379,7 @@ module game {
         // 批量关闭UI， 用法：this.BaseTypeList = [1, 2];
         // 1xxxx 2xxxx
         public static hideType = function(type){
-            var list = BaseUI.UIshowList[type];
+            var list = BaseUI_wx3.UIshowList[type];
             if(list){
                 for(var i=list.length-1; i>=0; i--){
                     list[i].hide();
@@ -390,12 +391,12 @@ module game {
         //用来记录和判断一个界面打开后 禁止马上响应交互事件（最常见的是触摸屏幕关闭界面）
         private static openTime: number;
         public static get isStopEevent():boolean{
-            return (Date.now() - BaseUI.openTime < 400); //面板打开后500秒内不响应交互事件（触摸、单击） 
+            return (Date.now() - BaseUI_wx3.openTime < 400); //面板打开后500秒内不响应交互事件（触摸、单击） 
         }
         
 	private wx3_functionX_11808(){console.log(7854)}
         public static setStopEevent() {
-            BaseUI.openTime = Date.now();
+            BaseUI_wx3.openTime = Date.now();
         }
         
         public paySound(key:string, delay?:number):void{
@@ -415,7 +416,7 @@ module game {
     /**
     *  界面基类
     */
-    export class BaseWindow extends game.BaseUI {
+    export class BaseWindow_wx3 extends game.BaseUI_wx3 {
 	private wx3_functionX_11811(){console.log(8284)}
 
         public constructor() {
@@ -433,7 +434,7 @@ module game {
 	private wx3_functionX_11813(){console.log(7169)}
     }
     
-    export class BaseItem extends eui.ItemRenderer {
+    export class BaseItem_wx3 extends eui.ItemRenderer {
         public constructor() {
             super();
 

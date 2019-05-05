@@ -1,4 +1,4 @@
-class PKCardInfoUI_wx3 extends game.BaseContainer {
+class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
 
     private static _instance: PKCardInfoUI_wx3;
     public static getInstance(): PKCardInfoUI_wx3 {
@@ -113,7 +113,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer {
 
 	private wx3_functionX_12573(){console.log(6201)}
     public hide() {
-        game.BaseUI.setStopEevent();
+        game.BaseUI_wx3.setStopEevent();
         GameManager_wx3.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove_437,this);
         MyTool.removeMC(this)
     }

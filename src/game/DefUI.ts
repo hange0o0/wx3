@@ -1,4 +1,4 @@
-class DefUI extends game.BaseItem{
+class DefUI extends game.BaseItem_wx3{
 
     private con: eui.Group;
     private bg: eui.Image;

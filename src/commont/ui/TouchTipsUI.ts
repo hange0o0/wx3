@@ -1,4 +1,4 @@
-class TouchTipsUI extends game.BaseContainer{
+class TouchTipsUI extends game.BaseContainer_wx3{
     private static instance:TouchTipsUI;
     public static getInstance() {
         if (!this.instance) this.instance = new TouchTipsUI();

@@ -1,4 +1,4 @@
-class AddCoinItem extends game.BaseItem{
+class AddCoinItem extends game.BaseItem_wx3{
 
     private static pool = [];
     public static createItem():AddCoinItem {

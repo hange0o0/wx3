@@ -1,4 +1,4 @@
-class PKState_wx3 extends game.BaseItem {
+class PKState_wx3 extends game.BaseItem_wx3 {
 
     private stateMC:eui.Image;
     private atkMV:MonsterAtkMV

@@ -1,4 +1,4 @@
-class TaskItem extends game.BaseItem{
+class TaskItem extends game.BaseItem_wx3{
 
     private nameText: eui.Label;
     private desText: eui.Label;
@@ -42,6 +42,7 @@ class TaskItem extends game.BaseItem{
                      this.data.time = TM_wx3.now();
                      this.dataChanged();
                      UM_wx3.needUpUser = true;
+                     EM_wx3.dispatch(GameEvent.client.TASK_CHANGE)
                  },
              })
          }

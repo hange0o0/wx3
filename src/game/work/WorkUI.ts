@@ -1,4 +1,4 @@
-class WorkUI extends game.BaseUI {
+class WorkUI extends game.BaseUI_wx3 {
 
     private static _instance: WorkUI;
     public static getInstance(): WorkUI {
@@ -67,6 +67,7 @@ class WorkUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.MONSTER_WORK_CHANGE,this.resetList_5054)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_ATK_CHANGE,this.resetList_5054)
         this.addPanelOpenEvent(GameEvent.client.DEF_CHANGE,this.resetList_5054)
+        this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.resetList_5054)
     }
 	private wx3_functionX_12689(){console.log(911)}
 

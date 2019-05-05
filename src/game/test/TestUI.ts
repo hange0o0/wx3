@@ -1,4 +1,4 @@
-class TestUI extends game.BaseUI {
+class TestUI extends game.BaseUI_wx3 {
 
     private static _instance: TestUI;
     public static getInstance(): TestUI {

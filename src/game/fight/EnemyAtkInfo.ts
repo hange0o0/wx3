@@ -1,4 +1,4 @@
-class EnemyAtkInfo extends game.BaseWindow {
+class EnemyAtkInfo extends game.BaseWindow_wx3 {
 
     private static _instance:EnemyAtkInfo;
 

@@ -1,4 +1,4 @@
-class FightUI extends game.BaseUI {
+class FightUI extends game.BaseUI_wx3 {
 
     private static _instance: FightUI;
     public static getInstance(): FightUI {
@@ -110,6 +110,7 @@ class FightUI extends game.BaseUI {
                 }
             }
         }
+        TaskTips.getInstance().show(['fight']);
     }
 
 	private wx3_functionX_12342(){console.log(5028)}

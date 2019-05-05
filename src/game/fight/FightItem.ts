@@ -1,4 +1,4 @@
-class FightItem extends game.BaseItem{
+class FightItem extends game.BaseItem_wx3{
 
     private headMC: eui.Image;
     private nameText: eui.Label;

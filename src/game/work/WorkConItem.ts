@@ -1,4 +1,4 @@
-class WorkConItem extends game.BaseItem{
+class WorkConItem extends game.BaseItem_wx3{
 
     private timeText: eui.Label;
     private list: eui.List;
@@ -32,6 +32,12 @@ class WorkConItem extends game.BaseItem{
                 break;
             case 'task':
                 TaskUI2.getInstance().show()
+                break;
+            case 'free':
+                WorkFreeUI.getInstance().show()
+                break;
+            case 'atk':
+                FightUI.getInstance().show()
                 break;
         }
     }

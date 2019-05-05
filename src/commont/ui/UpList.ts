@@ -1,4 +1,4 @@
-class UpList extends game.BaseContainer {
+class UpList extends game.BaseContainer_wx3 {
     public static SELECT:string = "SELECT";
     private btn: eui.Group;
     private titleText: eui.Label;

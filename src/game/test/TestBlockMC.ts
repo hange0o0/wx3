@@ -1,4 +1,4 @@
-class TestBlockMC extends game.BaseItem{
+class TestBlockMC extends game.BaseItem_wx3{
     private static pool2 = [];
     public static createItem():TestBlockMC {
         var item:TestBlockMC = this.pool2.pop();

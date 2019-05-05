@@ -1,4 +1,4 @@
-class WorkOfflineUI extends game.BaseWindow {
+class WorkOfflineUI extends game.BaseWindow_wx3 {
 
     private static _instance:WorkOfflineUI;
 

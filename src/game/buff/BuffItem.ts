@@ -1,4 +1,4 @@
-class BuffItem extends game.BaseItem{
+class BuffItem extends game.BaseItem_wx3{
 
     private headMC: eui.Image;
     private nameText: eui.Label;

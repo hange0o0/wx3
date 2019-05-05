@@ -1,4 +1,4 @@
-class MainPKUI_wx3 extends game.BaseUI {
+class MainPKUI_wx3 extends game.BaseUI_wx3 {
     private static _instance:MainPKUI_wx3;
     public static getInstance() {
         if (!this._instance) this._instance = new MainPKUI_wx3();
@@ -701,6 +701,7 @@ class MainPKUI_wx3 extends game.BaseUI {
                     TaskManager.getInstance().testMainTask('chapter');
 
                 GuideManager.getInstance().testShowGuide();
+                TaskTips.getInstance().show(['cstar','clv']);
             })
 
         },1000)

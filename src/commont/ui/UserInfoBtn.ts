@@ -4,11 +4,11 @@ class UserInfoBtn {
     private sourceBtn:eui.Image | eui.Button;
     private callFun:Function;
 	private wx3_functionX_12237(){console.log(804)}
-    private parent:game.BaseUI;
+    private parent:game.BaseUI_wx3;
     private okBtn;
     private isNew:string;
 
-    public constructor(btn:eui.Image | eui.Button, fun:Function, parent:game.BaseUI, url:string) {
+    public constructor(btn:eui.Image | eui.Button, fun:Function, parent:game.BaseUI_wx3, url:string) {
         //if(DEBUG){
         //    if(!(parent instanceof game.BaseUI)){
         //        console.error("不支持！");

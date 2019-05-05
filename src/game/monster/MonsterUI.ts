@@ -1,4 +1,4 @@
-class MonsterUI extends game.BaseUI {
+class MonsterUI extends game.BaseUI_wx3 {
 
     private static _instance: MonsterUI;
     public static getInstance(): MonsterUI {
@@ -83,6 +83,7 @@ class MonsterUI extends game.BaseUI {
         this.renewDes_9848();
         this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewList_5981)
         GuideManager.getInstance().testShowGuide()
+        TaskTips.getInstance().show(['mlv','mnum','mlv2','mnum2']);
     }
 
     private renewList_5981(){

@@ -1,4 +1,4 @@
-class PKTalkItem_wx3 extends game.BaseContainer {
+class PKTalkItem_wx3 extends game.BaseContainer_wx3 {
     private static pool = [];
     public static createItem():PKTalkItem_wx3{
         var item:PKTalkItem_wx3 = this.pool.pop();

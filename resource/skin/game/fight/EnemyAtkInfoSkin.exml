@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="EnemyAtkInfoSkin" width="500" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="EnemyAtkInfoSkin" width="500" height="380" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Group y="30" horizontalCenter="0">
+	<e:Group y="90" horizontalCenter="0">
 		<e:Image id="headMC" width="110" height="110" x="0" y="0"/>
 		<e:Group x="130" y="0" width="220">
 			<e:Label id="nameText" text="Label" textColor="0xFFD1A5" size="30" verticalAlign="middle" textAlign="left" x="0" y="0"/>
@@ -25,11 +25,15 @@
 			<e:HorizontalLayout gap="50"/>
 		</e:layout>
 	</e:Group>
-	<e:Group y="160" horizontalCenter="0">
-		<e:Image x="5" y="0" source="icon_clock2_png"/>
-		<e:Label id="arriveText" text="Label" size="22" verticalAlign="middle" textAlign="center" x="0" y="36" textColor="0xf26f6f"/>
-		<e:layout>
-		<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
-		</e:layout>
+	<e:Group y="222.23" left="10" right="10">
+		<e:Image anchorOffsetX="0" anchorOffsetY="0" source="bg1_png" scale9Grid="9,9,14,11" x="0" y="0" height="50" width="100%"/>
+		<e:Group verticalCenter="0" horizontalCenter="0">
+			<e:Image x="5" y="0" source="icon_clock2_png"/>
+			<e:Label id="arriveText" text="Label" size="22" verticalAlign="middle" textAlign="center" x="0" y="36" textColor="0xf26f6f"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" horizontalAlign="center"/>
+			</e:layout>
+		</e:Group>
 	</e:Group>
+	<e:Label text="敌袭警报" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03"/>
 </e:Skin>

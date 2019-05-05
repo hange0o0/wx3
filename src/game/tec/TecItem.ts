@@ -1,4 +1,4 @@
-class TecItem extends game.BaseItem{
+class TecItem extends game.BaseItem_wx3{
 
     private headMC: eui.Image;
     private nameText: eui.Label;

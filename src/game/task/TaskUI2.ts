@@ -1,4 +1,4 @@
-class TaskUI2 extends game.BaseWindow {
+class TaskUI2 extends game.BaseWindow_wx3 {
 
     private static _instance: TaskUI2;
     public static getInstance(): TaskUI2 {

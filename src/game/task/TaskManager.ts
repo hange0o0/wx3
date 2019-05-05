@@ -198,6 +198,7 @@ class TaskManager {
                     break;
             }
             MyWindow.ShowTips(vo.getDes() + '  ' +MyTool.createHtml( value + '/' + vo.value,0xFF0000),3000)
+            EM_wx3.dispatch(GameEvent.client.TASK_CHANGE)
         }
 
     }

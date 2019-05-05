@@ -1,4 +1,4 @@
-class PKFailUI extends game.BaseWindow {
+class PKFailUI extends game.BaseWindow_wx3 {
 
     private static _instance:PKFailUI;
 

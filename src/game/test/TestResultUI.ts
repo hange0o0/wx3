@@ -1,4 +1,4 @@
-class TestResultUI extends game.BaseWindow {
+class TestResultUI extends game.BaseWindow_wx3 {
 
     private static _instance:TestResultUI;
 

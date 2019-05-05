@@ -1,4 +1,4 @@
-class GameUI extends game.BaseUI {
+class GameUI extends game.BaseUI_wx3 {
 
     private static _instance:GameUI;
     public static getInstance() {
@@ -206,10 +206,9 @@ class GameUI extends game.BaseUI {
             if(!res.userInfo)
                 return;
             this.infoBtn.visible = false;
-	wx3_function(3290);
+            UM_wx3.renewInfo(res.userInfo)
             this.haveGetUser = true;
             this.initData_847();
-            UM_wx3.renewInfo(res.userInfo)
             return;
         }
         wx.getSetting({
@@ -218,7 +217,6 @@ class GameUI extends game.BaseUI {
                 if(res.authSetting["scope.userInfo"])//已授权
                 {
                     this.haveGetUser = true;
-	wx3_function(6763);
                     this.initData_847()
                     wx.getUserInfo({
                         success: (res) =>{

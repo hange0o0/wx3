@@ -1,4 +1,4 @@
-class DebugUI extends game.BaseUI {
+class DebugUI extends game.BaseUI_wx3 {
 
     private static _instance:DebugUI;
 

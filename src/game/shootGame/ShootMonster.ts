@@ -1,4 +1,4 @@
-class ShootMonster_wx3 extends game.BaseItem{
+class ShootMonster_wx3 extends game.BaseItem_wx3{
 
     private static pool = [];
     public static createItem():ShootMonster_wx3 {

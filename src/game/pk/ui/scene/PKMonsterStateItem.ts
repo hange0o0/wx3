@@ -1,4 +1,4 @@
-class PKMonsterStateItem_wx3 extends game.BaseItem {
+class PKMonsterStateItem_wx3 extends game.BaseItem_wx3 {
 
     private mc: eui.Image;
 

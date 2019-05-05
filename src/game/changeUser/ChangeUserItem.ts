@@ -1,4 +1,4 @@
-class ChangeUserItem extends game.BaseItem{
+class ChangeUserItem extends game.BaseItem_wx3{
 
     //"appid": "wxec9471079f8b6c27",
     //"desc": “免费抽⼤大奖，免费领奖品，再奖⼀一个亿！",

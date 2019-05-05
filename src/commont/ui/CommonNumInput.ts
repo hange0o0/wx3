@@ -3,7 +3,7 @@
  * @author 
  * 事件用法：this.numCon.addEventListener(CommonNumInput.RENEW,this.renewCoin_6127,this);
  */
-class CommonNumInput extends game.BaseItem{
+class CommonNumInput extends game.BaseItem_wx3{
 	private wx3_functionX_12184(){console.log(9592)}
     public static RENEW:string = "renew";
 	public constructor() {

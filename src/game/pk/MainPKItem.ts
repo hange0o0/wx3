@@ -1,4 +1,4 @@
-class MainPKItem_wx3 extends game.BaseItem {
+class MainPKItem_wx3 extends game.BaseItem_wx3 {
     public constructor() {
         super();
         this.skinName = "MainPKItemSkin";

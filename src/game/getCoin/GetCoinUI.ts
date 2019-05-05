@@ -1,4 +1,4 @@
-class GetCoinUI extends game.BaseWindow {
+class GetCoinUI extends game.BaseWindow_wx3 {
 
     private static _instance: GetCoinUI;
     public static getInstance(): GetCoinUI {

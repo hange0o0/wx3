@@ -1,4 +1,4 @@
-class CardImg extends game.BaseItem{
+class CardImg extends game.BaseItem_wx3{
     public constructor() {
         super();
         this.skinName = "CardImgSkin";

@@ -1,4 +1,4 @@
-class PKPosAddUI extends game.BaseWindow {
+class PKPosAddUI extends game.BaseWindow_wx3 {
 
     private static _instance: PKPosAddUI;
     public static getInstance(): PKPosAddUI {
@@ -44,6 +44,15 @@ class PKPosAddUI extends game.BaseWindow {
             WorkUI.getInstance().show()
         });
 	wx3_function(9270);
+
+    }
+
+    public onShow(){
+        if(!SharedObjectManager_wx3.getInstance().getMyValue('isShowAdd'))
+        {
+            MyWindow.Alert('当怪物数量不足时，可先把防守或挖矿的怪物撤下，待完成任务后再补充回去')
+            SharedObjectManager_wx3.getInstance().setMyValue('isShowAdd',true)
+        }
 
     }
 }

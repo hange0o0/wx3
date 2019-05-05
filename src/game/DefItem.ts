@@ -1,4 +1,4 @@
-class DefItem extends game.BaseItem{
+class DefItem extends game.BaseItem_wx3{
 
     private mc: eui.Image;
     private maskMC: eui.Image;

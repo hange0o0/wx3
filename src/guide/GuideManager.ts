@@ -71,7 +71,7 @@ class GuideManager {
                 self.showGuide();
 	wx3_function(746);
             },
-            text:'[' + UM_wx3.nick+']你好，欢迎来到怪物争霸的世界。',
+            text:'[' + (UM_wx3.nick || '')+']你好，欢迎来到怪物争霸的世界。',
         })
 
         this.addGuideObj_96({
@@ -99,7 +99,6 @@ class GuideManager {
             text:'[拖动]第三位的怪物[到第一位]，把肉盾顶到前面',
             showFun:()=>{
                 GuideUI.getInstance().handMovePos(PKPosUI.getInstance().chooseList.getChildAt(2)['hitMC'],PKPosUI.getInstance().chooseList.getChildAt(0)['hitMC']);
-	wx3_function(6411);
             }
         })
 
@@ -117,7 +116,7 @@ class GuideManager {
         })
 
         this.addGuideObj_96({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
+            mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
             text:'上阵第二个怪物',
         })
 
@@ -156,39 +155,39 @@ class GuideManager {
             text:'每升一星可使怪物[多一个分身]供你调遣',
         })
 
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().rightBtn},
-            text:'继续下一个怪物',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().upBtn},
-            text:'你要拿这个怪物去[战斗]？升级怪物就能增加其[战力]了',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().copyBtn},
-            text:'怪物多多益善啊',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().rightBtn},
-            text:'无论什么工作，[都要]怪物来完成的，所以能升就升吧',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().upBtn},
-            text:'你要拿这个怪物去[挖矿]？升级怪物就能提升[挖矿效率]了',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().copyBtn},
-            text:'多分一个，应该暂时够用了',
-        })
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().rightBtn},
+        //    text:'继续下一个怪物',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().upBtn},
+        //    text:'你要拿这个怪物去[战斗]？升级怪物就能增加其[战力]了',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().copyBtn},
+        //    text:'怪物多多益善啊',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().rightBtn},
+        //    text:'无论什么工作，[都要]怪物来完成的，所以能升就升吧',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().upBtn},
+        //    text:'你要拿这个怪物去[挖矿]？升级怪物就能提升[挖矿效率]了',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return CardInfoUI.getInstance().copyBtn},
+        //    text:'多分一个，应该暂时够用了',
+        //})
 
         this.addGuideObj_96({
             mc:function(){return CardInfoUI.getInstance().closeBtn},
-            text:'暂时就这样吧，要开始去攻打据点了',
+            text:'现在要去攻打据点了',
         })
 
         this.addGuideObj_96({

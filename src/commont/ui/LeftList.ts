@@ -1,4 +1,4 @@
-class LeftList extends game.BaseContainer {
+class LeftList extends game.BaseContainer_wx3 {
     public static SELECT:string = "SELECT";
     private btn: eui.Group;
     private img: eui.Image;

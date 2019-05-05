@@ -1,4 +1,4 @@
-class MonsterItem extends game.BaseItem{
+class MonsterItem extends game.BaseItem_wx3{
     private bg2: eui.Image;
     private cardGroup: eui.Group;
     private posGroup: eui.Group;
@@ -49,7 +49,7 @@ class MonsterItem extends game.BaseItem{
         this.bg.source = PKManager_wx3.getInstance().getDefBG();
         //this.costText.text = '费用：' + 12 +'';
 	wx3_function(1725);
-        this.costText.text = '费用：' + vo.cost +'';
+        this.setHtml(this.costText, '费用：' + this.createHtml(vo.cost,0xFFFF00));
         this.numBar.width =  num*8;
         this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(vo.id) + ''
         this.text.text = vo.name //+ '('+vo.cost+')';

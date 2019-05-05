@@ -1,4 +1,4 @@
-class TecUI extends game.BaseUI {
+class TecUI extends game.BaseUI_wx3 {
 
     private static _instance: TecUI;
     public static getInstance(): TecUI {
@@ -64,7 +64,7 @@ class TecUI extends game.BaseUI {
 	wx3_function(5874);
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange_9332)
         this.testShowTask();
-
+        TaskTips.getInstance().show(['tlv','def']);
     }
 
     public testShowTask(){
@@ -81,6 +81,8 @@ class TecUI extends game.BaseUI {
                 this.scroller.viewport.scrollV = Math.max(0,this.scroller.viewport.contentHeight - this.scroller.height);
 	wx3_function(78);
             }
+
+
         }
     }
 

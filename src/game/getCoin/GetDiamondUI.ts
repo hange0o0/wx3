@@ -1,4 +1,4 @@
-class GetDiamondUI extends game.BaseWindow {
+class GetDiamondUI extends game.BaseWindow_wx3 {
 
     private static _instance:GetDiamondUI;
 

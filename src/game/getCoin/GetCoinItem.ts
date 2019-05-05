@@ -1,4 +1,4 @@
-class GetCoinItem extends game.BaseItem {
+class GetCoinItem extends game.BaseItem_wx3 {
     public constructor() {
         super();
         this.skinName = "GetCoinItemSkin";
@@ -55,7 +55,7 @@ class GetCoinItem extends game.BaseItem {
             }
             else  if(this.data.type == 4)
             {
-                ShareTool.share('我需要你们的帮助！！',Config.localResRoot + "share_img_1.jpg",{type:1,from:UM_wx3.gameid},()=>{
+                ShareTool.share('我需要你们的帮助！！',Config.localResRoot + "share_img_2.jpg",{type:1,from:UM_wx3.gameid},()=>{
                     this.desText.text = '等待好友加入'
                     this.goBtn.visible = false;
 	wx3_function(7552);

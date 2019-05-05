@@ -1,4 +1,4 @@
-class ChapterUI extends game.BaseUI {
+class ChapterUI extends game.BaseUI_wx3 {
 
     private static _instance: ChapterUI;
     public static getInstance(): ChapterUI {
@@ -13,12 +13,13 @@ class ChapterUI extends game.BaseUI {
     public list: eui.List;
     private coinText: eui.Label;
     private energyText: eui.Label;
-	private wx3_functionX_12272(){console.log(4184)}
     private addBtn: eui.Image;
     private rightBtn: eui.Image;
     private leftBtn: eui.Image;
     private topUI: TopUI;
     private getCoinBtn: eui.Button;
+    private redMC: eui.Image;
+
 
 	private wx3_functionX_12273(){console.log(3699)}
 
@@ -58,6 +59,8 @@ class ChapterUI extends game.BaseUI {
         this.addBtnEvent(this.addBtn,this.onAddEnergy_3938)
         this.addBtnEvent(this.getCoinBtn,()=>{
             var coin = ChapterManager.getInstance().getChapterCoin();
+            if(!coin)
+                return;
 	wx3_function(8953);
             MyWindow.ShowTips('获得金币：' + MyTool.createHtml('+' + NumberUtil.addNumSeparator(coin,2),0xFBB646),1500)
             UM_wx3.addCoin(coin);
@@ -112,7 +115,8 @@ class ChapterUI extends game.BaseUI {
         var coin = ChapterManager.getInstance().getChapterCoin();
 	wx3_function(3389);
         this.coinText.text = NumberUtil.addNumSeparator(coin,2)
-        this.getCoinBtn.visible = coin > 0
+        this.redMC.visible =  ChapterManager.getInstance().getChapterCoin() > ChapterManager.getInstance().getMaxChapterCoin()*0.9
+        this.getCoinBtn.skinName = coin > 0?'Btn1Skin':'Btn3Skin'
     }
 
     private onRight_6135(){
@@ -155,6 +159,8 @@ class ChapterUI extends game.BaseUI {
         this.addPanelOpenEvent(GameEvent.client.CHAPTER_CHANGE,this.onChapterChange_9510)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer_6022)
         GuideManager.getInstance().testShowGuide()
+        TaskTips.getInstance().show(['cstar','clv']);
+
     }
 	private wx3_functionX_12280(){console.log(7895)}
 

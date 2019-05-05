@@ -1,4 +1,4 @@
-class MainPKTestUI extends game.BaseUI {
+class MainPKTestUI extends game.BaseUI_wx3 {
     private static _instance:MainPKTestUI;
     public static getInstance() {
         if (!this._instance) this._instance = new MainPKTestUI();

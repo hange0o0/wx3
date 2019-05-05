@@ -1,4 +1,4 @@
-class RankUI extends game.BaseWindow{
+class RankUI extends game.BaseWindow_wx3{
 
     private static _instance:RankUI;
     public static getInstance() {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="WorkFreeUISkin" width="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Button id="closeBtn" label="关闭" width="160" skinName="Btn1Skin" horizontalCenter="0" bottom="30"/>
+	<e:Group id="con" horizontalCenter="0" top="80" bottom="120">
+		<e:Group id="fightCon" x="10" y="10">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="420" height="80"/>
+			<e:Label text="掠夺其它玩家" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="fightBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group id="workCon" x="20" y="20">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="420" height="80"/>
+			<e:Label text="挖矿赚取金币" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="workBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group id="taskCon" x="30" y="30">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="420" height="80"/>
+			<e:Label text="完成赏金任务" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="taskBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group id="defCon" x="40" y="40">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="420" height="80"/>
+			<e:Label text="增加防守阵容怪物" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="defBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:Group id="chapterCon" x="30" y="30">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" x="0" y="0" width="420" height="80"/>
+			<e:Label text="扩张领土范围" x="10" textColor="0xFCD98D" verticalCenter="0" size="26"/>
+			<e:Button id="chapterBtn" label="前往" right="10" verticalCenter="0" skinName="Btn1Skin"/>
+		</e:Group>
+		<e:layout>
+			<e:VerticalLayout gap="15"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="分配工作" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0" stroke="3" strokeColor="0x351D03"/>
+</e:Skin>

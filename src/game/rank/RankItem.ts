@@ -1,4 +1,4 @@
-class RankItem extends game.BaseItem{
+class RankItem extends game.BaseItem_wx3{
 
     private bg: eui.Rect;
     private headMC: eui.Image;

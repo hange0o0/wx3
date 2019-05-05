@@ -27,7 +27,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190426//与服务器相同则为测试版本
+    public testVersion = 20190430//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -387,6 +387,7 @@ class UserManager_wx3 {
              chapterResetTime:0,
              chapterCoin:0,
              task:0,
+             monster:{"1":{"num":2},"35":{"num":2}},
              dayTask:[],
              fight:{},
              saveTime:0,

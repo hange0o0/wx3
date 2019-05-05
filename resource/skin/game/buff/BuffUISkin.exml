@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="BuffUISkin" width="600" height="860" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="BuffUISkin" width="600" height="880" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Label text="好友助力" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
 	<e:Image id="closeBtn" source="icon_error_png" right="-8" top="-16"/>
-	<e:Scroller id="scroller" top="195" bottom="120" bounces="false" anchorOffsetY="0" width="570" horizontalCenter="0">
+	<e:Scroller id="scroller" top="220" bottom="100" bounces="false" anchorOffsetY="0" width="570" horizontalCenter="0">
 		<e:Group anchorOffsetY="0" height="512.58" x="0" y="-157.58">
 			<e:List id="list" width="200" height="200" x="96" y="96">
 				<e:layout>
@@ -13,46 +13,51 @@
 		</e:Group>
 	</e:Scroller>
 
-	<e:Group left="8" right="8" height="130" y="70">
+	<e:Group left="10" right="10" height="150" y="75">
 		<e:Image anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" source="bg1_png" scale9Grid="9,9,14,11"/>
-		<e:Group x="10" y="3">
+		<e:Group x="5" verticalCenter="0">
 			<e:Group x="0" y="0" height="40">
-				<e:Label id="desText" text="当前新邀请好友 30个:" y="10" size="20" x="10"/>
+				<e:Group x="0" y="6">
+					<e:Image source="start1_png" x="0" y="0" scaleX="1" scaleY="1"/>
+					<e:Label id="desText" text="当前新邀请好友 30个:" y="4" size="20" x="32"/>
+				</e:Group>
 				<e:Group x="10" verticalCenter="0">
-				<e:Image source="icon_force2_png" x="0" y="0"/>
-				<e:Label id="atkText" text="战力+0%" x="45" size="22" verticalCenter="0" textColor="0xffff00"/>
+				<e:Image source="icon_force2_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
+				<e:Label id="atkText" text="战力+0%" x="32" size="22" verticalCenter="0" textColor="0xffff00"/>
 				</e:Group>
 				<e:Group x="250" verticalCenter="0">
-				<e:Image source="icon_coin_png" x="10" y="0" scaleX="0.7" scaleY="0.7"/>
-				<e:Label id="workText" text="效率+0%" x="52" size="22" verticalCenter="0" textColor="0xffff00"/>
+				<e:Image source="icon_coin_png" x="10" y="0" scaleX="0.65" scaleY="0.65"/>
+				<e:Label id="workText" text="效率+0%" x="43" size="22" verticalCenter="0" textColor="0xffff00"/>
 				</e:Group>
 				<e:layout>
 				<e:HorizontalLayout verticalAlign="middle" gap="10"/>
 				</e:layout>
 			</e:Group>
-			<e:Rect width="560" height="1" x="-56" y="535" fillColor="0x876e46"/>
+			<e:Rect width="570" height="1" x="-56" y="535" fillColor="0x876e46"/>
 			<e:Group x="0" y="42" height="40">
-				<e:Label text="邀请好友达到 1 个，解锁PK加速功能" size="20" x="0" verticalCenter="0"/>
-				<e:Label id="lock1" text="未解锁" size="22" x="493" verticalCenter="0" textColor="0xf97a7a"/>
-				<e:Image id="ok1" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="525" verticalCenter="0"/>
+				<e:Image source="start1_png" x="0" scaleX="1" scaleY="1" verticalCenter="0"/>
+				<e:Label text="邀请好友达到 1 个，解锁PK加速功能" size="20" x="32" verticalCenter="0"/>
+				<e:Label id="lock1" text="未解锁" size="22" x="500" verticalCenter="0" textColor="0xf97a7a"/>
+				<e:Image id="ok1" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="515" verticalCenter="0"/>
 			</e:Group>
-			<e:Rect width="560" height="1" x="-46" y="545" fillColor="0x876E46"/>
+			<e:Rect width="570" height="1" x="-46" y="545" fillColor="0x876E46"/>
 			<e:Group x="0" y="77" height="40">
-				<e:Label id="lock2" text="未解锁" size="22" x="493" verticalCenter="0" textColor="0xf97a7a"/>
-				<e:Label text="邀请好友达到 5 个，解锁PK加成锁定功能" size="20" x="0" verticalCenter="0"/>
-				<e:Image id="ok2" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="525" verticalCenter="0"/>
+				<e:Image source="start1_png" x="0" scaleX="1" scaleY="1" verticalCenter="0"/>
+				<e:Label id="lock2" text="未解锁" size="22" x="500" verticalCenter="0" textColor="0xf97a7a"/>
+				<e:Label text="邀请好友达到 5 个，解锁PK加成锁定功能" size="20" x="32" verticalCenter="0"/>
+				<e:Image id="ok2" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="515" verticalCenter="0"/>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="0"/>
+				<e:VerticalLayout gap="3"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>
-	<e:Group id="btnGroup" y="770" horizontalCenter="0">
+	<e:Group id="btnGroup" horizontalCenter="0" bottom="20">
 		<e:Button id="diamondBtn" label="领取钻石 x100" width="200" x="0" y="0" skinName="Btn2Skin"/>
 		<e:Button id="inviteBtn" label="邀请好友" skinName="Btn1Skin" width="200" x="0" y="0"/>
 		<e:layout>
 			<e:HorizontalLayout gap="50"/>
 		</e:layout>
 	</e:Group>
-	<e:Image source="line2_png" y="195" left="8" right="8" fillMode="repeat"/>
+	<e:Image source="line2_png" y="220" left="8" right="8" fillMode="repeat"/>
 </e:Skin>

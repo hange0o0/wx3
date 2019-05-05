@@ -1,4 +1,4 @@
-class ChapterItem extends game.BaseItem{
+class ChapterItem extends game.BaseItem_wx3{
 
     private numText: eui.Label;
     private con: eui.Group;

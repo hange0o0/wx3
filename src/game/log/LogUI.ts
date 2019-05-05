@@ -1,4 +1,4 @@
-class LogUI extends game.BaseUI {
+class LogUI extends game.BaseUI_wx3 {
 
     private static _instance: LogUI;
     public static getInstance(): LogUI {

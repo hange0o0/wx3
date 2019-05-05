@@ -1,4 +1,4 @@
-class TipsUI extends game.BaseContainer{
+class TipsUI extends game.BaseContainer_wx3{
 	private static instancePool = [];
 	private static showTips = [];
 	public static getInstance() {

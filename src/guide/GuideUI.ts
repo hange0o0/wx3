@@ -1,4 +1,4 @@
-class GuideUI extends game.BaseContainer{
+class GuideUI extends game.BaseContainer_wx3{
     private topRect: eui.Group;
     private leftRect: eui.Group;
     private rightRect: eui.Group;

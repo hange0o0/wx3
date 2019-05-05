@@ -1,4 +1,4 @@
-class BasePanel extends game.BaseContainer {
+class BasePanel extends game.BaseContainer_wx3 {
     public constructor() {
         super();
         this.skinName = "BasePanelSkin";

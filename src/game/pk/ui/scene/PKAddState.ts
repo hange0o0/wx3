@@ -1,4 +1,4 @@
-class PKAddState_wx3 extends game.BaseItem {
+class PKAddState_wx3 extends game.BaseItem_wx3 {
     private static pool = [];
     public static createItem():PKAddState_wx3{
         var item:PKAddState_wx3 = this.pool.pop();

@@ -1,4 +1,4 @@
-class CardInfoUI extends game.BaseWindow {
+class CardInfoUI extends game.BaseWindow_wx3 {
 
     private static _instance: CardInfoUI;
     public static getInstance(): CardInfoUI {
@@ -181,6 +181,7 @@ class CardInfoUI extends game.BaseWindow {
                 TaskManager.getInstance().showGuideMC(this.copyBtn);
             else
                 TaskManager.getInstance().showGuideMC(this.upBtn);
+
 	wx3_function(6213);
         }
     }
@@ -209,7 +210,6 @@ class CardInfoUI extends game.BaseWindow {
 	wx3_function(8411);
         this.diamondText.text = this.diamondCost + ''
         this.renewDiamond();
-
 
 
         //var force = 100;

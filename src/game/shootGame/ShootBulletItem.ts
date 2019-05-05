@@ -1,4 +1,4 @@
-class ShootBulletItem_wx3 extends game.BaseItem{
+class ShootBulletItem_wx3 extends game.BaseItem_wx3{
 
     private static pool = [];
     public static createItem():ShootBulletItem_wx3 {

@@ -1,4 +1,4 @@
-class TopUI extends game.BaseContainer {
+class TopUI extends game.BaseContainer_wx3 {
     public constructor() {
         super();
     }

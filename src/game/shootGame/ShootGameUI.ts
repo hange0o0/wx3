@@ -1,4 +1,4 @@
-class ShootGameUI_wx3 extends game.BaseUI {
+class ShootGameUI_wx3 extends game.BaseUI_wx3 {
 
     private static _instance: ShootGameUI_wx3;
     public static getInstance(): ShootGameUI_wx3 {

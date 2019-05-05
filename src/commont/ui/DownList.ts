@@ -3,7 +3,7 @@
  * @author
  *
  */
-class DownList extends game.BaseContainer {
+class DownList extends game.BaseContainer_wx3 {
 	private wx3_functionX_12201(){console.log(6038)}
     public static SELECT:string = "SELECT";
     private btn: eui.Group;
@@ -130,7 +130,7 @@ class DownList extends game.BaseContainer {
 
 }
 
-class DownListItem extends game.BaseItem {
+class DownListItem extends game.BaseItem_wx3 {
 	private wx3_functionX_12208(){console.log(1368)}
     private con: eui.Group;
     private img: eui.Image;

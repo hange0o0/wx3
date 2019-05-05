@@ -1,4 +1,4 @@
-class PKPosUI extends game.BaseUI {
+class PKPosUI extends game.BaseUI_wx3 {
 
     private static _instance: PKPosUI;
     public static getInstance(): PKPosUI {
@@ -477,6 +477,7 @@ class PKPosUI extends game.BaseUI {
 	wx3_function(6679);
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE_8047)
         this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.onMonsterChange_9873) //怪物升级/升星
+        this.addPanelOpenEvent(GameEvent.client.FIGHT_ATK_CHANGE,this.onMonsterChange_9873) //怪物进攻返回
 
         GuideManager.getInstance().testShowGuide()
 
@@ -541,6 +542,7 @@ class PKPosUI extends game.BaseUI {
                 this.mainCon.addChildAt(this.defItem,0);
                 this.defItem.dataChanged();
                 this.defItem.touchChildren = this.defItem.touchEnabled = false
+                TaskTips.getInstance().show(['def']);
                 break;
             case 'work':
                 if(!this.workItem){

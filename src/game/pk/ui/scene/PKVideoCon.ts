@@ -1,4 +1,4 @@
-class PKVideoCon_wx3 extends game.BaseContainer {
+class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
     private static _instance:PKVideoCon_wx3;
     public static getInstance() {
         if(!this._instance)

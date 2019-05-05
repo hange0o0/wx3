@@ -1,4 +1,4 @@
-class WorkItem extends game.BaseItem{
+class WorkItem extends game.BaseItem_wx3{
 
     private bg: eui.Image;
     private mc: eui.Image;
@@ -15,7 +15,7 @@ class WorkItem extends game.BaseItem{
 
     public childrenCreated() {
         super.childrenCreated();
-        this.addBtnEvent(this,this.onClick_1390)
+        //this.addBtnEvent(this,this.onClick_1390)
     }
 	private wx3_functionX_12659(){console.log(6300)}
 

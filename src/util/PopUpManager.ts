@@ -116,7 +116,7 @@ class PopUpManager {
 	private wx3_functionX_12155(){console.log(3046)}
 
     private static onTap(){
-         var ui:game.BaseUI = <game.BaseUI>this.shape.parent.getChildAt(this.shape.parent.numChildren-1);
+         var ui:game.BaseUI_wx3 = <game.BaseUI_wx3>this.shape.parent.getChildAt(this.shape.parent.numChildren-1);
         if(ui.canBGClose)
         {
             ui.hide();
@@ -143,7 +143,7 @@ class PopUpManager {
             for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
                 var ui = GameManager_wx3.container.getChildAt(i);
-                if(ui instanceof game.BaseWindow)
+                if(ui instanceof game.BaseWindow_wx3)
                 {
                     GameManager_wx3.container.addChildAt(this.shape,i)
                     return
@@ -159,7 +159,7 @@ class PopUpManager {
         for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
         {
             var ui = GameManager_wx3.container.getChildAt(i);
-            if(ui instanceof game.BaseUI)
+            if(ui instanceof game.BaseUI_wx3)
             {
                 var lastVisible = ui.visible;
                 if(!setVisible)
@@ -183,7 +183,7 @@ class PopUpManager {
             for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
                 var ui = GameManager_wx3.container.getChildAt(i);
-                if(ui instanceof game.BaseUI)
+                if(ui instanceof game.BaseUI_wx3)
                 {
                     //if(ui == MainPageUI.getInstance())
                     //{
@@ -205,7 +205,7 @@ class PopUpManager {
             for(var i=GameManager_wx3.container.numChildren-1 ;i>=0;i--)
             {
                 var ui = GameManager_wx3.container.getChildAt(i);
-                if(ui instanceof game.BaseUI)
+                if(ui instanceof game.BaseUI_wx3)
                 {
                     if(ui == GameUI.getInstance())
                     {

@@ -1,4 +1,4 @@
-class ChangeUserUI extends game.BaseItem {
+class ChangeUserUI extends game.BaseItem_wx3 {
 
 
 

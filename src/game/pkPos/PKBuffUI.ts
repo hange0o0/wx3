@@ -1,4 +1,4 @@
-class PKBuffUI extends game.BaseWindow {
+class PKBuffUI extends game.BaseWindow_wx3 {
 
     private static _instance: PKBuffUI;
     public static getInstance(): PKBuffUI {

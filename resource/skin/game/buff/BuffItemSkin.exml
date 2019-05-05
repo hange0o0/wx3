@@ -10,22 +10,21 @@
 	</e:Group>
 	<e:Group x="120" y="65">
 		<e:Group x="0" y="0" height="45">
-			<e:Image source="icon_force2_png" x="0" y="0"/>
-			<e:Label text="战力+50%" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
+			<e:Image source="icon_force2_png" x="0" scaleX="0.8" scaleY="0.8" verticalCenter="0"/>
+			<e:Label text="战力+50%" x="40" size="22" verticalCenter="0" textColor="0xFFDC59" bold="true"/>
 		</e:Group>
 		<e:Group height="45" x="155" y="0">
-			<e:Image x="5" source="icon_coin_png" scaleX="0.75" scaleY="0.75" verticalCenter="0"/>
-			<e:Label text="效率+10%" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
+			<e:Image x="5" source="icon_coin_png" scaleX="0.65" scaleY="0.65" verticalCenter="0"/>
+			<e:Label text="效率+10%" x="40" size="22" verticalCenter="0" textColor="0xFFDC59" bold="true"/>
 		</e:Group>
 		<e:Group x="315" height="45" y="0">
-			<e:Image x="0" source="icon_diamond_png" scaleX="0.7" scaleY="0.7" verticalCenter="0"/>
-			<e:Label text="钻石+10" x="45" size="22" verticalCenter="0" textColor="0xFFDC59"/>
+			<e:Image x="0" source="icon_diamond_png" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
+			<e:Label text="钻石+10" x="40" size="22" verticalCenter="0" textColor="0xFFDC59" bold="true"/>
 		</e:Group>
 		<e:layout>
-			<e:HorizontalLayout gap="6"/>
+			<e:HorizontalLayout gap="10"/>
 		</e:layout>
 	</e:Group>
 	<e:Image source="icon_right_png" right="30" includeIn="normal" y="12"/>
-	<e:Label id="nameText" text="Label" x="130" y="25" textColor="0xffedad" size="24"/>
-	<e:Button label="邀请好友" skinName="Btn1Skin"  right="15" visible.normal="false" width="160" y="15" scaleX="0.8" scaleY="0.8"/>
+	<e:Label id="nameText" text="Label" x="150" y="30" textColor="0xffedad" size="24"/>
 </e:Skin>

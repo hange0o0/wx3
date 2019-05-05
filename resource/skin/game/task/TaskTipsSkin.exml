@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TaskTipsSkin" width="500" height="80" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bar_bg_png" scale9Grid="11,13,187,5" left="0" right="0" top="0" bottom="0"/>
+	<e:Label id="tipsText" text="LabelLabelLabelLabelLabelLabelLabelLabelLabel" size="24" left="15" right="15" lineSpacing="8" textColor="0xffcb89" y="12"/>
+	<e:Image source="icon_error_png" y="-8" scaleX="0.5" scaleY="0.5" right="-8"/>
+</e:Skin>

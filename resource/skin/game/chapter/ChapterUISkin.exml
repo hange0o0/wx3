@@ -11,7 +11,7 @@
 			</e:List>
 		</e:Group>
 	</e:Scroller>
-	<e:Group horizontalCenter="0" bottom="20" minWidth="200">
+	<e:Group bottom="22" minWidth="200" left="200" right="20">
 		<e:Image source="bg3_png" scale9Grid="16,15,7,7" left="0" right="0" top="0" bottom="0"/>
 		<e:Group scaleX="1" scaleY="1" left="10" right="10" top="10" bottom="10">
 			<e:Image x="15.75" verticalCenter="-4" source="icon_coin_png" scaleX="0.8" scaleY="0.8"/>
@@ -37,6 +37,9 @@
 		<e:Image id="leftBtn" source="arrow1_png" verticalCenter="-3" scaleX="-0.8" scaleY="0.8" left="11"/>
 	</e:Group>
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
-	<e:Button id="getCoinBtn" label="全部收取" skinName="Btn1Skin" width="140" right="20" bottom="20"/>
+	<e:Group right="15" bottom="20">
+		<e:Button id="getCoinBtn" label="全部收取" skinName="Btn1Skin" width="140" x="0" y="0"/>
+		<e:Image id="redMC" source="red_mc_png" right="-10" top="-4"/>
+	</e:Group>
 
 </e:Skin>
