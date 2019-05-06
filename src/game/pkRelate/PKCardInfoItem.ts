@@ -38,10 +38,12 @@ class PKCardInfoItem_wx3 extends game.BaseItem_wx3 {
         //{index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0},
         this.icon.source = this.data.icon
         this.icon.scaleX = this.icon.scaleY = this.data.iconScale
+
         if(this.data.title)
         {
+            var str = this.data.up?this.createHtml(this.data.value,0x66F427):this.data.value
             this.rect.visible = true
-            this.setHtml(this.text, this.createHtml(this.data.title,0xFFB17C) + '：' +  this.data.value
+            this.setHtml(this.text, this.createHtml(this.data.title,0xFFB17C) + '：' + str
                 + (this.data.valueAdd ? this.createHtml(' +'+this.data.valueAdd,0xFFB17C) : ''))
         }
         else

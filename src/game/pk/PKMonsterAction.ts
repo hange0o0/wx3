@@ -70,6 +70,8 @@ class PKMonsterAction_wx3 {
 	wx3_function(4642);
                     user.setSkillUse(data.actionTime);
                     data.model.skillAction_wx3(user,data.target,t)
+
+
                 }
                 else if(data.type == 'skill')  //技能生效
                 {

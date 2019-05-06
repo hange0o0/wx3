@@ -11,6 +11,12 @@ class M15_wx3 extends MBase_wx3 {
         {
             user.atk += Math.ceil(user.baseAtk*user.getSkillValue(1)/100)
 
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
+                user:user,
+                keys:['atk+']
+            })
+
             //PKData.getInstance().addVideo({
             //    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
             //    user:user,

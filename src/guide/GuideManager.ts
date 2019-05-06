@@ -249,7 +249,7 @@ class GuideManager {
 	wx3_function(6457);
                 MainPKUI_wx3.getInstance().startGame()
             },
-            text:'[重点]\n要赢取胜利，关键有两点：[战力够高]和[阵容克制]！',
+            text:'[要赢取胜利，关键有两点：[战力压制] 和 [阵容克制]！',
         })
 
         this.addGuideObj_96({

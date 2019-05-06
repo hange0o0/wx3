@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="DebugTextListSkin" width="640" height="960" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect fillColor="0xFFFFFF" left="0" right="0" top="0" bottom="0"/>
+	<e:Button id="backBtn" label="返回" x="20" y="20" skinName="Btn2Skin"/>
+	<e:Scroller anchorOffsetY="0" left="10" right="10" top="100" bottom="10">
+		<e:Group>
+			<e:Label id="txt" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" x="0" y="0" width="620" textColor="0x000000" size="24" lineSpacing="5"/>
+		</e:Group>
+	</e:Scroller>
+</e:Skin>

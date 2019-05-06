@@ -201,20 +201,23 @@ class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
         var workRate = Math.floor(workCoin*(3600*1000/workCD))
 
 	wx3_function(394);
-        this.setHtml(this.desText,vo.getDes(baseForceAdd,true));
+        var color2 = 0
+        if(this.dataIn.type == 'atk' || this.dataIn.type == 'def')
+            color2 = 0x66F427
+        this.setHtml(this.desText,vo.getDes(baseForceAdd,true,color2));
 
         var arr2:any = []
         arr2.push({index:1,icon:'icon_cost_png',iconScale:1,title:'费用',value:vo.cost,valueAdd:0})
         if(this.dataIn.type != 'other')
         {
-            arr2.push({index:1,icon:'icon_coin_png',iconScale:0.6,title:'挖矿',value:workRate + ' /时',valueAdd:0})
+            arr2.push({index:1,icon:'icon_coin_png',iconScale:0.6,title:'挖矿',value:workRate + ' /时',valueAdd:0,up:this.dataIn.type == 'work'})
         }
 
-        arr2.push({index:1,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp})
+        arr2.push({index:1,icon:'icon_love_png',iconScale:0.6,title:'血量',value:hp,up:this.dataIn.type == 'atk' || this.dataIn.type == 'def'})
         if(atk)
         {
-            arr2.push({index:2,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk})
-            arr2.push({index:7,icon:'icon_atkcd_png',iconScale:1,title:'秒伤',value:Math.round(atk/(vo.atkcd/1000))})
+            arr2.push({index:2,icon:'icon_atk_png',iconScale:1,title:'攻击力',value:atk,up:this.dataIn.type == 'atk' || this.dataIn.type == 'def'})
+            arr2.push({index:7,icon:'icon_atkcd_png',iconScale:1,title:'秒伤',value:Math.round(atk/(vo.atkcd/1000)),up:this.dataIn.type == 'atk' || this.dataIn.type == 'def'})
             arr2.push({index:5,icon:'icon_clock_png',iconScale:1,title:'攻击间隔',value:MyTool.toFixed(vo.atkcd/1000,1)+'秒'})
             arr2.push({index:6,icon:'icon_rage_png',iconScale:1,title:'攻击距离',value:vo.isNearAtk()?'近战':vo.atkrage})
         }

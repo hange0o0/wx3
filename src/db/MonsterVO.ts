@@ -32,6 +32,7 @@ class MonsterVO {
     public mcnum: number;
     public mcheight: number;
     public name: string;
+    public skillname: string;
     //public num2: number;
 	private wx3_functionX_11873(){console.log(2754)}
     public des: string;
@@ -130,28 +131,28 @@ class MonsterVO {
     }
 	private wx3_functionX_11881(){console.log(246)}
 
-    public getDes(forceRate,fillColor?){
+    public getDes(forceRate,fillColor?,color2?){
         return this.des.replace('#1',this.fillColor_6867(this.sv1,fillColor)).
             replace('#2',this.fillColor_6867(this.sv2,fillColor)).
             replace('#3',this.fillColor_6867(this.sv3,fillColor)).
-            replace('$1',this.changeValue_1938(this.sv1,forceRate,fillColor)).
-            replace('$2',this.changeValue_1938(this.sv2,forceRate,fillColor) + '').
-            replace('$3',this.changeValue_1938(this.sv3,forceRate,fillColor)).
+            replace('$1',this.changeValue_1938(this.sv1,forceRate,fillColor,color2)).
+            replace('$2',this.changeValue_1938(this.sv2,forceRate,fillColor,color2) + '').
+            replace('$3',this.changeValue_1938(this.sv3,forceRate,fillColor,color2)).
             replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
     }
 	private wx3_functionX_11882(){console.log(2062)}
 
-    private fillColor_6867(str,fillColor){
+    private fillColor_6867(str,fillColor,color?){
         if(fillColor)
-            return MyTool.createHtml(str,0xFFD67F)
+            return MyTool.createHtml(str,color || 0xFFD67F)
         return str
     }
 	private wx3_functionX_11883(){console.log(2902)}
 
-    private changeValue_1938(v,forceRate,fillColor){
+    private changeValue_1938(v,forceRate,fillColor,color?){
         if(!v)
             return;
-        return this.fillColor_6867(Math.ceil(v*forceRate),fillColor);
+        return this.fillColor_6867(Math.ceil(v*forceRate),fillColor,color);
     }
 	private wx3_functionX_11884(){console.log(8583)}
 

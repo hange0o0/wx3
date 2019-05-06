@@ -25,6 +25,7 @@ class WorkOfflineUI extends game.BaseWindow_wx3 {
     private coin
     public constructor() {
         super();
+        this.canBGClose = false;
         this.skinName = "WorkOfflineUISkin";
     }
 

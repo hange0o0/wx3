@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKPosAddUISkin" width="580" height="360" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PKPosAddUISkin" width="580" height="420" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Image top="80" bottom="30" width="540" horizontalCenter="0" source="bg1_png" scale9Grid="16,19,5,5"/>
 	<e:Label text="获得更多怪物" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0" stroke="3" strokeColor="0x351D03"/>
-	<e:Group horizontalCenter="0" y="100">
-		<e:Group y="60" horizontalCenter="0">
-		<e:Label text="提升【科技革命】等级，获得新怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-		<e:Button id="tecBtn" label="前往" skinName="Btn1Skin" x="410" verticalCenter="0"/>
+	<e:Group horizontalCenter="0" y="90" width="500">
+		<e:Group y="60" horizontalCenter="0" height="80">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="升级【科技革命】，获得新怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="20" verticalCenter="0" lineSpacing="5"/>
+		<e:Button id="tecBtn" label="前往" skinName="Btn1Skin" verticalCenter="0" right="10"/>
 		</e:Group>
-		<e:Group y="130" horizontalCenter="0">
-		<e:Label text="提升怪物星级，增加怪物上限" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-		<e:Button id="monsterBtn" label="前往" skinName="Btn1Skin" x="410" verticalCenter="0"/>
+		<e:Group y="130" horizontalCenter="0" height="80">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="提升怪物星级，增加怪物上限" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="20" verticalCenter="0" lineSpacing="5"/>
+		<e:Button id="monsterBtn" label="前往" skinName="Btn1Skin" verticalCenter="0" right="10"/>
 		</e:Group>
-		<e:Group y="200" horizontalCenter="0">
-		<e:Label text="调整怪物工作，腾出空闲怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" x="0" verticalCenter="0"/>
-		<e:Button id="workBtn" label="前往" x="410" verticalCenter="0" skinName="Btn9Skin"/>
+		<e:Group y="200" horizontalCenter="0" height="80">
+			<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="调整怪物工作，腾出空闲怪物" scaleX="1" scaleY="1" size="24" textColor="0xFCDA88" verticalCenter="0" lineSpacing="5" x="20"/>
+		<e:Button id="workBtn" label="前往" verticalCenter="0" skinName="Btn9Skin" right="10"/>
 		</e:Group>
 		<e:layout>
-			<e:VerticalLayout gap="15"/>
+			<e:VerticalLayout gap="15" horizontalAlign="justify"/>
 		</e:layout>
 	</e:Group>
 	<e:Image id="closeBtn" source="icon_error_png" right="-8" top="-16"/>

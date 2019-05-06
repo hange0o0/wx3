@@ -27,7 +27,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190430//与服务器相同则为测试版本
+    public testVersion = 20190506//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -378,6 +378,7 @@ class UserManager_wx3 {
 
     private orginUserData_4330(){
          return {
+             regTime:TM_wx3.now(),   //$
              loginTime:TM_wx3.now(),   //$
              coin:10000,   //$
              diamond:50,   //$

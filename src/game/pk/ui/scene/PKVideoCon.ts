@@ -110,6 +110,7 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             item.textAlign="center"
             item.anchorOffsetX = 80;
         }
+        item.strokeColor = 0x000000
         item.alpha = 1;
         return item;
     }
@@ -222,6 +223,10 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             case PKConfig_wx3.VIDEO_MONSTER_MISS:
                 item = this.getItemByID(data.id);
                 this.playMiss(item);
+                break;
+            case PKConfig_wx3.VIDEO_MONSTER_SKILL:
+                item = this.getItemByID(data.id);
+                this.playSkillName(item,videoData.skillName);
                 break;
 
             case PKConfig_wx3.VIDEO_MONSTER_HPCHANGE:
@@ -440,6 +445,28 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
 	wx3_function(7197);
             this.freeTxt_377(txt);
         },this)
+    }
+
+
+    public playSkillName(item:PKMonsterItem_wx3,value){
+        var txt = this.createTxt_6626();
+        txt.textColor = 0xFFFFFF;
+        txt.strokeColor = 0x660000
+        wx3_function(7204);
+        txt.text = value;
+        txt.x = item.x;
+        txt.y = item.y - item.data.getVO().height - 30;
+        this.con.addChildAt(txt,item.parent.getChildIndex(item) + 1)
+        this.txtArr.push(txt);
+
+        wx3_function(6885);
+        var tw = egret.Tween.get(txt);
+        tw.wait(800).call(function(){
+            ArrayUtil.removeItem(this.txtArr,txt);
+            this.freeTxt_377(txt);
+        },this)
+
+
     }
 
     //随机一人发言

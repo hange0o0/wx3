@@ -50,14 +50,14 @@ class AtkMVCtrl_wx3 {
 
 
     ////////////////////////////////////////////////////////////////
-    private atkMV1_wx3_5083(user,target,actionTime,endTime){
+    private atkMV1_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(1)
        this.playAniOn(target.id,mBase.mvID1)
     }
 	private wx3_functionX_12788(){console.log(9102)}
 
 
-    private atkMV3_wx3_2600(user,target,actionTime,endTime){
+    private atkMV3_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         var item = PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime)
@@ -83,48 +83,48 @@ class AtkMVCtrl_wx3 {
     //    }
     //}
 
-    private atkMV31_wx3_4407(user,target,actionTime,endTime){
+    private atkMV31_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,5)
     }
 	private wx3_functionX_12790(){console.log(7587)}
 
-    private atkMV32_wx3_1663(user,target,actionTime,endTime){
+    private atkMV32_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,7)
     }
 	private wx3_functionX_12791(){console.log(1531)}
 
-    private atkMV33_wx3_4810(user,target,actionTime,endTime){
+    private atkMV33_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,1)
     }
 	private wx3_functionX_12792(){console.log(4973)}
 
-    private atkMV34_wx3_9778(user,target,actionTime,endTime){
+    private atkMV34_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,3)
     }
 	private wx3_functionX_12793(){console.log(2720)}
 
-    private atkMV35_wx3_8581(user,target,actionTime,endTime){
+    private atkMV35_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,2)
     }
 	private wx3_functionX_12794(){console.log(3125)}
 
-    private atkMV38_wx3_1198(user,target,actionTime,endTime){
+    private atkMV38_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,9)
     }
 	private wx3_functionX_12795(){console.log(5213)}
-    private atkMV43_wx3_475(user,target,actionTime,endTime){
+    private atkMV43_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(43)
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
@@ -135,7 +135,7 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12796(){console.log(3102)}
 
-    private atkMV44_wx3_5606(user,target,actionTime,endTime){
+    private atkMV44_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(44)
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
@@ -146,7 +146,7 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12797(){console.log(2177)}
 
-    private atkMV45_wx3_7376(user,target,actionTime,endTime){
+    private atkMV45_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(45)
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
@@ -157,7 +157,7 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12798(){console.log(644)}
 
-    private atkMV46_wx3_9844(user,target,actionTime,endTime){
+    private atkMV46_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(46)
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
@@ -168,13 +168,13 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12799(){console.log(6607)}
 
-    private atkMV47_wx3_7774(user,target,actionTime,endTime){
+    private atkMV47_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(47)
         this.playAniOn(target.id,mBase.mvID1)
     }
 
 	private wx3_functionX_12800(){console.log(8026)}
-    private atkMV48_wx3_6993(user,target,actionTime,endTime){
+    private atkMV48_wx3(user,target,actionTime,endTime){
         var mBase = MBase_wx3.getData(48)
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
@@ -344,12 +344,12 @@ class AtkMVCtrl_wx3 {
 
     ////////////////////////////////////////////////////////////////
     public skillMV1_wx3(user,target,actionTime,endTime){
-        this.atkMV1_wx3_5083(user,target,actionTime,endTime)
+        this.atkMV1_wx3(user,target,actionTime,endTime)
     }
 
 	private wx3_functionX_12811(){console.log(8215)}
     public skillMV3_wx3(user,target,actionTime,endTime){
-        this.atkMV3_wx3_2600(user,target,actionTime,endTime)
+        this.atkMV3_wx3(user,target,actionTime,endTime)
     }
 
     public skillMV8_wx3(user,target,actionTime,endTime){
@@ -372,7 +372,7 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12813(){console.log(5692)}
 
-    private skillMV38_wx3_4373(user,target,actionTime,endTime){
+    private skillMV38_wx3(user,target,actionTime,endTime){
         var userItem = PKVideoCon_wx3.getInstance().getItemByID(user.id);
         var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
         PKBulletManager_wx3.getInstance().createBullet(userItem,targetItem,actionTime,endTime,10)

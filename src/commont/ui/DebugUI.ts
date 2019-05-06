@@ -112,6 +112,50 @@ class DebugUI extends game.BaseUI_wx3 {
                 }
             })
         })
+
+        this.addB_3026('玩家信息',()=>{
+            window['wx'].cloud.callFunction({      //取玩家openID,
+                name: 'getServerInfo',
+                data:{},
+                complete: (res) => {
+                    var arr = (res.result)
+
+                    for(var i=0;i<arr.length;i++)
+                    {
+                        var oo = arr[i];
+                        var temp = [];
+
+                        temp.push('    据点：' + oo.chapterLevel)
+                        temp.push('    掠夺：' + oo.fight.fightNum)
+                        temp.push('    挖矿人数：' + oo.work.split(',').length)
+                        temp.push('\n')
+                        var tlv = oo.tec?(oo.tec['11'] || 1):1;
+                        temp.push('    主等级：' + tlv)
+                        var num = 6 + (tlv-1)*2;
+                        var lv = 0;
+                        for(var s in oo.monster)
+                        {
+                            lv +=  (oo.monster[s].lv || 0)
+                            num +=  (oo.monster[s].num || 1) - 1
+                        }
+                        temp.push('    怪物数量：' + num)
+                        temp.push('    怪物等级：' + lv)
+                        temp.push('\n')
+                        num = 0;
+                        for(var s in oo.tlv)
+                        {
+                            num +=  oo.tlv[s]
+                        }
+                        temp.push('    科技等级：' + num)
+                        temp.push('    分享人数：' + oo.shareUser.length)
+
+                        arr[i] = (i+1) +' ========>  ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.regTime || 0)) + ' # ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.saveTime))
+                         + '\n' + temp.join('');
+                    }
+                    DebugTextList.getInstance().show(arr);
+                }
+            })
+        })
     }
 	private wx3_functionX_12200(){console.log(3258)}
 

@@ -414,6 +414,17 @@ class PKMonsterData_wx3 {
         }
         else
             this.lastSkill = actionTime;
+
+
+        if(this.getVO().skillname)
+        {
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_MONSTER_SKILL,
+                skillName:this.getVO().skillname,
+                user:this
+            })
+        }
+
 	wx3_function(7249);
     }
 

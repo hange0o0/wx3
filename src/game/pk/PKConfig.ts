@@ -92,6 +92,8 @@ class PKConfig_wx3 {
 	private wx3_functionX_12496(){console.log(9136)}
     public static VIDEO_HERO_ADD = 28 //有英雄出现
 
+    public static VIDEO_MONSTER_SKILL = 29 //使用技能文字
+
 
 
     public static STATE_YUN = 1

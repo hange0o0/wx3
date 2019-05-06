@@ -1838,6 +1838,11 @@
 			"name":"task_txt",
 			"type":"text",
 			"url":"data/task.txt"
+		},
+		{
+			"name":"type_tips2_png",
+			"type":"image",
+			"url":"game_assets/type_tips2.png"
 		}
 	]
 }

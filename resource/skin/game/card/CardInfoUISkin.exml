@@ -2,16 +2,16 @@
 <e:Skin class="CardInfoUISkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*"  height="850" states="s1,s2"  height.s2="700">
 	<e:Group x="0" top="0" height="700" height.s2="700">
 		<ns1:PKCardInfoUI_wx3 id="item" skinName="PKCardInfoSkin" currentState="s1" minHeight="560" left="0" right="0" top="0" bottom="0" currentState.s2="s2"/>
-		<e:Image id="con" source="type_tips_png" bottom="50" x="100" horizontalCenter.s2="0"/>
-		<e:Image id="leftBtn" source="arrow1_png" left="30" bottom="60" scaleX="-1"/>
-		<e:Image id="rightBtn" source="arrow1_png" right="30" bottom="60"/>
-		<e:Group right="100" bottom="50" includeIn="s1">
+		<e:Image id="con" source="type_tips_png" bottom="50" horizontalCenter.s2="0" source.s1="type_tips2_png" horizontalCenter="0" horizontalCenter.s1="0" bottom.s1="130"/>
+		<e:Image id="leftBtn" source="arrow1_png" left="30" bottom="52" scaleX="-1"/>
+		<e:Image id="rightBtn" source="arrow1_png" right="30" bottom="52"/>
+		<e:Group bottom="45" includeIn="s1" horizontalCenter="0">
 			<e:RadioButton id="cb0" label="基础属性" x="0" y="0" skinName="MyCheckBoxSkin" selected="true"/>
 			<e:RadioButton label="工作属性" x="10" y="10" skinName="MyCheckBoxSkin" id="cb1"/>
 			<e:RadioButton label="进攻属性" x="20" y="20" skinName="MyCheckBoxSkin" id="cb2"/>
 			<e:RadioButton label="防守属性" x="30" y="30" skinName="MyCheckBoxSkin" id="cb3"/>
 			<e:layout>
-				<e:VerticalLayout gap="8"/>
+				<e:TileLayout requestedRowCount="2" horizontalGap="30"/>
 			</e:layout>
 		</e:Group>
 		<e:Label id="pageText" text="1 / 10" horizontalCenter="0" bottom="20" size="20" textColor="0xaf995b"/>
