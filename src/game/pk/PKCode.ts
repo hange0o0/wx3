@@ -28,6 +28,7 @@ class PKCode_wx3 {
             this.autoAction();
 	wx3_function(8710);
         }
+
         //console.log(cd)
         var runStart = TM_wx3.nowMS();
         while(PD.quick || cd > PKConfig_wx3.stepCD)
@@ -287,7 +288,7 @@ class PKCode_wx3 {
         PD.team1.onStateTimer();
         PD.team2.onStateTimer();
 
-        if(!PD.isGameOver)
+        if(!PD.isGameOver && !PD.isDef)
         {
             if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)
             {

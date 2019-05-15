@@ -266,15 +266,19 @@ if(window["wx"])
     window["BottomUI"] = BottomUI;
     window["TopUI"] = TopUI
     window["ChangeUserUI"] = ChangeUserUI
+    window["TaskItem"] = TaskItem
     window["wxRandomFunction"] = function(b){}
+    window["sendClientError"] = sendClientError
 
 
     var wx =  window["wx"];
 
     wx.onError(function(res){
         UM_wx3.upDateUserData();
-        //var str = "onError:" + ("openid:" + _get["openid"] + "--") + res.message + "--" + res.stack;
-        //this.sendClientError(str);
+        try{
+            var str = "onError:" + ("openid:" + UM_wx3.gameid + "--") + res.message + "--" + res.stack;
+            sendClientError(str);
+        }catch(e){}
     });
 
     wx.onHide(function(res){

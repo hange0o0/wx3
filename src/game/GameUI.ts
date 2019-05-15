@@ -204,8 +204,30 @@ class GameUI extends game.BaseUI_wx3 {
         if(res)
         {
             if(!res.userInfo)
+            {
+                this.infoBtn.visible = false;
+                if(UM_wx3.helpUser)
+                {
+                    MyWindow.Confirm('你是通过好友邀请进入的，不授权将无法完成该好友请求的帮助，是否继续？',(b)=>{
+                        if(b==1)
+                        {
+                            this.infoBtn.visible = false;
+                            this.haveGetUser = true;
+                            this.initData_847();
+                        }
+                        else
+                        {
+                            this.infoBtn.visible = true;
+                        }
+                    },['重新授权','进入游戏']);
+                    return;
+                }
+                this.infoBtn.visible = false;
+                this.haveGetUser = true;
+                this.initData_847();
                 return;
-            this.infoBtn.visible = false;
+            }
+
             UM_wx3.renewInfo(res.userInfo)
             this.haveGetUser = true;
             this.initData_847();
@@ -376,7 +398,7 @@ class GameUI extends game.BaseUI_wx3 {
         if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
         {
             this.changeUser.dataChanged()
-            this.loadText.text = '点击屏幕授权进入游戏';
+            this.loadText.text = '点击屏幕进入游戏';
 	wx3_function(6040);
             this.needShowStartBtn = false;
             this.infoBtn.visible = true;
@@ -387,15 +409,15 @@ class GameUI extends game.BaseUI_wx3 {
         if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
             return;
 
+        this.infoBtn.visible = false;
         //UM_wx3.isTest = true;
-        if(UM_wx3.isTest)
-        {
-            TestUI.getInstance().show();
-            return;
-        }
+        //if(UM_wx3.isTest)
+        //{
+        //    TestUI.getInstance().show();
+        //    return;
+        //}
 
 	wx3_function(1344);
-        UM_wx3.testAddInvite();
         GuideManager.getInstance().isGuiding = UM_wx3.isFirst;
         this.bottomGroup.visible = true;
         this.loadingGroup.visible = false;
@@ -512,10 +534,12 @@ class GameUI extends game.BaseUI_wx3 {
         if(this.visible)
         {
             this.renewList();
+            TaskManager.getInstance().addDayTask();
 	wx3_function(3764);
         }
         else
         {
+            MyTool.runListFun(this.list,'onMainHide')
             SoundManager_wx3.getInstance().playSound('bg');
         }
     }

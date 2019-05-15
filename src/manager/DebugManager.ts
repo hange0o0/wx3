@@ -470,6 +470,8 @@ class DebugManager_wx3 {
 
     public getChapterForce(id){
         var chapterData = PKManager_wx3.getInstance().chapterData[id-1]
+        if(!chapterData)
+            sendClientError('not findChapter:' + id + '--' + PKManager_wx3.getInstance().chapterData.length)
         var arr = chapterData.list1.split(',')
         var count = 0;
         var force = Math.floor(Math.pow(id - 1,1.2)*10)

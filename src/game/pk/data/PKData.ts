@@ -19,6 +19,7 @@ class PKData_wx3 extends egret.EventDispatcher{
 
 
     public currentState = 'def'
+    public isDef = false;
 
     public quick = false//快速算出结果
 	private wx3_functionX_12710(){console.log(7079)}
@@ -123,6 +124,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         //if(isLast)//在最后一次行动后暂停(马上停)
         //    this.stopTime = this.actionTime + 1;
         //else
+        if(!this.stopTime)
             this.stopTime = TM_wx3.nowMS();
     }
 	private wx3_functionX_12719(){console.log(4483)}
@@ -143,6 +145,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     public init(data){
 
 	wx3_function(1945);
+        this.isDef = data.isDef;
         this.startTime = 0;
         this.round = 1;
         this.heroStep = 0;

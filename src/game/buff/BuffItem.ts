@@ -29,7 +29,7 @@ class BuffItem extends game.BaseItem_wx3{
         if(user)
         {
             this.currentState = 'normal'
-            this.headMC.source = user.h
+            this.headMC.source = user.h || 'common_head_bg_jpg'
             this.nameText.text = user.n
         }
         else

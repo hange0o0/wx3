@@ -270,7 +270,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public onShow(){
-
+        var pkvideo = PKVideoCon_wx3.getInstance()
+        this.con.addChild(pkvideo)
+        pkvideo.y = 0;
 
         this.bottomBar.visible = true
         if(this.dataIn.isMain)

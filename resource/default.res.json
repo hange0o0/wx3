@@ -1843,6 +1843,11 @@
 			"name":"type_tips2_png",
 			"type":"image",
 			"url":"game_assets/type_tips2.png"
+		},
+		{
+			"name":"head_border_png",
+			"type":"image",
+			"url":"game_assets/head_border.png"
 		}
 	]
 }

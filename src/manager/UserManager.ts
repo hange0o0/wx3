@@ -27,7 +27,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190506//与服务器相同则为测试版本
+    public testVersion = 20190514//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -48,6 +48,8 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12058(){console.log(539)}
     public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
+    public helpUser
+    public haveGetUser
 
     public coinObj:{
         loginTime,
@@ -97,6 +99,7 @@ class UserManager_wx3 {
         this.coin = data.coin || 0;
         this.diamond = data.diamond || 0;
         this.energy = data.energy;
+        this.helpUser = data.helpUser;
         //this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
         this.chapterLevel = data.chapterLevel || 0;
@@ -156,6 +159,20 @@ class UserManager_wx3 {
         this.offlineTime = TM_wx3.now() - saveTime;
 	wx3_function(4886);
 
+        if(this.isFirst)
+        {
+            var wx = window['wx'];
+            if(wx)
+            {
+                var query = wx.getLaunchOptionsSync().query;
+                if(query.type == '1')
+                {
+                    this.helpUser = query.from
+                }
+            }
+        }
+
+        this.testAddInvite();
 
         this.localSave_3476();
     }
@@ -169,9 +186,11 @@ class UserManager_wx3 {
     public renewInfo(userInfo){
         if(!userInfo)
             return;
+        this.haveGetUser = true;
         this.nick = userInfo.nickName
         this.head = userInfo.avatarUrl
         this.gender = userInfo.gender || 1 //性别 0：未知、1：男、2：女
+        this.testAddInvite();
     }
 	private wx3_functionX_12062(){console.log(8888)}
 
@@ -328,32 +347,27 @@ class UserManager_wx3 {
         })
     }
 
-	private wx3_functionX_12065(){console.log(2795)}
-    public testAddInvite(){
-        //console.log('testAddInvite')
-        if(!this.isFirst)
-            return;
-        var wx = window['wx'];
-        if(!wx)
-            return;
-        var query = wx.getLaunchOptionsSync().query;
-        //console.log(query)
-        if(query.type == '1')
+    private testAddInvite(){
+        if(this.helpUser && this.haveGetUser)
         {
+            var wx = window['wx'];
+            if(!wx)
+                return;
             wx.cloud.callFunction({      //取玩家openID,
                 name: 'onShareIn',
                 data:{
-                    other:query.from,
-                    nick:UM_wx3.nick,
-                    head:UM_wx3.head,
+                    other:this.helpUser,
+                    nick:this.nick,
+                    head:this.head,
                 },
                 complete: (res) => {
-                     console.log(res)
+                    console.log(res)
+                    this.helpUser = null;
+                    this.needUpUser = true;
                 }
             })
         }
     }
-	private wx3_functionX_12066(){console.log(4873)}
 
     //新用户注册
     private onNewUser_8595(fun?){
@@ -443,6 +457,7 @@ class UserManager_wx3 {
             diamond:UM_wx3.diamond,
             buffDiamond:UM_wx3.buffDiamond,
             energy:UM_wx3.energy,
+            helpUser:UM_wx3.helpUser,
             work:WorkManager.getInstance().getWorkSave(),
             def:MonsterManager.getInstance().defList,
             fight:FightManager.getInstance().getFightSave(),

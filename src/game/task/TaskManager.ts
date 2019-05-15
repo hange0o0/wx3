@@ -405,16 +405,15 @@ class TaskManager {
         if(!arr)
             return;
         var needAddNum = Math.min(Math.floor((TM_wx3.now() - this.addTaskTime)/30/60), 5-arr.length,2);
-	wx3_function(8736);
+
         if(!this.addTaskTime)//首次进入onTimer
         {
-            this.addTaskTime = SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1
+            this.addTaskTime = Math.max(TM_wx3.now() + 60,SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1)
             for(var i=0;i<arr.length;i++)
             {
-                 if(!arr[i].time && TM_wx3.now() - (arr[i].create || 0) > 24*3600)//超过1天未做的要去掉
+                 if(!arr[i].time)//未做的要去掉
                 {
                     arr.splice(i,1);
-	wx3_function(1996);
                     i--;
                     needAddNum++;
                 }
@@ -424,43 +423,37 @@ class TaskManager {
         if(!this.taskFinish)
         {
             b = this.taskFinish = this.testTaskFinish();
-	wx3_function(4473);
-        }
-
-        if(needAddNum > 0)//
-        {
-            this.addTaskTime = TM_wx3.now()
-            SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
-            var list = [1,2,3,4,5,6,7,8];
-	wx3_function(4164);
-            for(var i=0;i<arr.length;i++)
-            {
-                var oo = arr[i]
-                var index = list.indexOf(oo.id);
-                if(index != -1)
-                    list.splice(index,1);
-	wx3_function(1356);
-            }
-
-            UM_wx3.needUpUser = true;
-            while(needAddNum > 0) //加入新的
-            {
-                needAddNum --;
-	wx3_function(7269);
-                var cd = Math.ceil(Math.random()*4);
-                arr.push({
-                    id:ArrayUtil.randomOne(list,true),
-                    num:Math.ceil(TecManager.getInstance().getTecLevel(11)/2),
-                    cd:cd,
-                    create:TM_wx3.now(),
-                    award:Math.ceil(UM_wx3.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
-                })
-                b = true
-                this.newRed = true;
-	wx3_function(896);
-            }
         }
         b && EM_wx3.dispatch(GameEvent.client.TASK_CHANGE);
+    }
+
+    public addDayTask(){
+        if(!this.addTaskTime || TM_wx3.now() < this.addTaskTime)
+            return;
+        if(this.guideTaskVO)
+            return;
+
+        var arr = UM_wx3.dayTask;
+        this.addTaskTime = TM_wx3.now() + 60*10;
+        SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
+        var list = [1,2,3,4,5,6,7,8];
+        for(var i=0;i<arr.length;i++)
+        {
+            var oo = arr[i]
+            var index = list.indexOf(oo.id);
+            if(index != -1)
+                list.splice(index,1);
+        }
+
+
+        var cd = Math.ceil(Math.random()*4);
+        TaskInfoUI.getInstance().show({
+            id:ArrayUtil.randomOne(list,true),
+            num:Math.ceil(TecManager.getInstance().getTecLevel(11)/2),
+            cd:cd,
+            create:TM_wx3.now(),
+            award:Math.ceil(UM_wx3.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
+        })
     }
 
     public testTaskFinish(){

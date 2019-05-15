@@ -45,7 +45,7 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
     private wx3_fun_ast34_9585(){}
 
     public init(dataIn){
-        this.bg.visible = !this.isHang;
+        this.bg.visible = !dataIn.isDef;
 
         if(this.bg.visible)
             this.bg.source = PKManager_wx3.getInstance().getPKBG(dataIn.seed);
@@ -476,13 +476,15 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
         if(Math.random() > 0.02)
             return;
         var item = this.itemArr[Math.floor(this.itemArr.length*Math.random())];
+        if(item.x < 200 || item.x > 800)
+            return;
 	wx3_function(503);
-        if(item && !item.talkItm)
+        if(item && !item.monsterMV.talkItm)
         {
             if(egret.getTimer() < this.lastTalk[item.data.atkRota])
                 return;
             item.talk();
-            this.lastTalk[item.data.atkRota] = egret.getTimer() + 3000 + Math.floor(Math.random()*2000);
+            this.lastTalk[item.data.atkRota] = egret.getTimer() + 3000 + Math.floor(Math.random()*5000);
 	wx3_function(9488);
         }
 

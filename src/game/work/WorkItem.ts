@@ -35,7 +35,6 @@ class WorkItem extends game.BaseItem_wx3{
         this.bg.source = vo.getBG()
         this.mc.source = vo.getImage()
         this.numText.text = this.data.num>1?'x'+this.data.num:''
-        console.log(this.data.id,this.data.num)
     }
 	private wx3_functionX_12661(){console.log(4574)}
 

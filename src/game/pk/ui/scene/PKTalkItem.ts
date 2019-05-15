@@ -71,7 +71,7 @@ class PKTalkItem_wx3 extends game.BaseContainer_wx3 {
             this.bg.scaleX = 1
             this.anchorOffsetX = 0.6*this.w;
         }
-        this.y = -data.showHeight();
+        this.y = -data.showHeight()*1.2;
 	wx3_function(2932);
 
     //.wait(500)

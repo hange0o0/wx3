@@ -11,6 +11,7 @@ class TaskUI2 extends game.BaseWindow_wx3 {
     private closeBtn: eui.Image;
     private scroller: eui.Scroller;
     private list: eui.List;
+    private emptyGroup: eui.Group;
 
 
 	private wx3_functionX_12635(){console.log(4255)}
@@ -82,6 +83,7 @@ class TaskUI2 extends game.BaseWindow_wx3 {
     private renewFeederTask_1556(){
         this.dataProvider.source = UM_wx3.dayTask;
         this.dataProvider.refresh();
+        this.emptyGroup.visible = UM_wx3.dayTask.length == 0
 
     }
 }

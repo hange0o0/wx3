@@ -55,7 +55,7 @@ class DefUI extends game.BaseItem_wx3{
 	wx3_function(1427);
     }
 
-    public monsterArr = [];
+    //public monsterArr = [];
 
     public childrenCreated() {
         super.childrenCreated();
@@ -112,10 +112,10 @@ class DefUI extends game.BaseItem_wx3{
         this.coinRed.visible = !TSM.openCoinUI;
 
         var monsterNum = MonsterManager.getInstance().getTotalMonsterNum();
-        if(monsterNum < 20)
-            MyTool.removeMC(this.taskBtn2)
-        else
-            this.btnGroup.addChildAt(this.taskBtn2,1)
+        //if(monsterNum < 20)
+        //    MyTool.removeMC(this.taskBtn2)
+        //else
+        //    this.btnGroup.addChildAt(this.taskBtn2,1)
         //this.taskRed.visible = true//vo && vo.value <= TSM.getTaskValue(vo)
         //if(vo)
         //{
@@ -140,44 +140,49 @@ class DefUI extends game.BaseItem_wx3{
 	private wx3_functionX_11918(){console.log(3890)}
 
     public dataChanged():void {
-        while(this.monsterArr.length > 0)
-        {
-            DefMonsterItem.freeItem(this.monsterArr.pop());
-        }
+        var pkvideo = PKVideoCon_wx3.getInstance()
+        this.con.addChild(pkvideo)
+        pkvideo.y = 0;
+        pkvideo.x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
+
+        if(!PKData_wx3.getInstance().isDef)
+            this.restartGame();
+        //while(this.monsterArr.length > 0)
+        //{
+        //    DefMonsterItem.freeItem(this.monsterArr.pop());
+        //}
         var teamCost = TecManager.getInstance().getTeamCost();
 	wx3_function(1721);
         var teamNum = TecManager.getInstance().getTeamNum();
 
         var arr = MonsterManager.getInstance().getDefArr();
-        var cost = 0;
+        //var cost = 0;
 
-        var h = 120;
-	wx3_function(385);
-        var des = Math.min(h/(arr.length-1),20)
-        var begin = (h-des*(arr.length-1))/2
-        var renewFun = ()=>{this.renewY()};
-        for(var i=0;i<arr.length;i++)
-        {
-            var id = arr[i];
-	wx3_function(6401);
-            var vo = MonsterVO.getObject(id);
-            cost += vo.cost;
-            var item = DefMonsterItem.createItem();
-            this.con.addChild(item);
-            item.load(id)
-            item.run();
-	wx3_function(5441);
-            item.scaleX = item.scaleY = 1.2;
-            item.atkRota = 0//Math.random()>0.5?1:-1;
-            //item.renewScale();
-            //item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
-            item['w'] = vo.width
-            item['renewY'] = renewFun;
-            //item.x = 20 + Math.random()*600
-            //item.x = begin + i*des
-            this.monsterArr.push(item);
-        }
-        this.renewMonsterPos_5086();
+     //   var h = 120;
+	//wx3_function(385);
+     //   var des = Math.min(h/(arr.length-1),20)
+     //   var begin = (h-des*(arr.length-1))/2
+     //   var renewFun = ()=>{this.renewY()};
+     //   for(var i=0;i<arr.length;i++)
+     //   {
+     //       var id = arr[i];
+     //       var vo = MonsterVO.getObject(id);
+     //       cost += vo.cost;
+     //       var item = DefMonsterItem.createItem();
+     //       this.con.addChild(item);
+     //       item.load(id)
+     //       item.run();
+     //       item.scaleX = item.scaleY = 1.2;
+     //       item.atkRota = 0//Math.random()>0.5?1:-1;
+     //       //item.renewScale();
+     //       //item.bottom = vo.height//*1 - 20 + 50*Math.random()// + Math.random()*80
+     //       item['w'] = vo.width
+     //       item['renewY'] = renewFun;
+     //       //item.x = 20 + Math.random()*600
+     //       //item.x = begin + i*des
+     //       this.monsterArr.push(item);
+     //   }
+     //   this.renewMonsterPos_5086();
 	wx3_function(9304);
 
         //var sortList = this.monsterArr.concat();
@@ -204,41 +209,103 @@ class DefUI extends game.BaseItem_wx3{
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
 
-        this.addDefBtn.visible = !this.isPos && this.monsterArr.length == 0
+        this.addDefBtn.visible = !this.isPos && arr.length == 0
         this.renewTask();
 	wx3_function(8021);
     }
 
-    public renewY(){
-        egret.callLater(this._renewY_958,this)
+    public restartGame(){
+        var defList = MonsterManager.getInstance().defList
+        var arr = MonsterManager.getInstance().getDefArr();
+        var cost = 0;
+       for(var i=0;i<arr.length;i++) {
+           var id = arr[i];
+           var vo = MonsterVO.getObject(id);
+           cost += vo.cost;
+       }
+        var totalCost = Math.max(5,Math.ceil(cost*0.8));
+        cost = 0;
+        var enemyList = [];
+        var monsterList = MonsterManager.getInstance().getOpenMonster()
+        while(cost < totalCost)
+        {
+            var vo2 = ArrayUtil.randomOne(monsterList)
+            enemyList.push(vo2.id);
+            cost += vo2.cost;
+        }
+
+
+        var data = {
+            isDef:true,
+            seed:Math.random()*1000000000,
+            players:[
+                {id:1,gameid:'team1',team:1,force:Math.floor(UM_wx3.maxForce*0.5),hp:100000,autolist:enemyList.join(','),mforce:{}},
+                {id:2,gameid:'team2',team:2,force:TecManager.getInstance().getDefForce() + BuffManager.getInstance().getForceAdd(),hp:100000,autolist:defList,mforce:MonsterManager.getInstance().getMonsterPKForce(defList)}
+            ]
+        };
+
+        PKBulletManager_wx3.getInstance().freeAll();
+        var PD = PKData_wx3.getInstance();
+        PD.init(data);
+        PKVideoCon_wx3.getInstance().init(data);
+        PD.start();
+        this.onStep();
+
     }
 
-	private wx3_functionX_11919(){console.log(5446)}
-    private _renewY_958(){
-        var sortList = this.monsterArr.concat();
-        ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
-        var len = sortList.length;
-        for(var i=0;i<len;i++)
+    private onStep(){
+
+        PKCode_wx3.getInstance().onStep();
+        PKVideoCon_wx3.getInstance().action();
+        var PD = PKData_wx3.getInstance();
+        PD.play();
+        if(PD.monsterList.length == 0 && PD.getPlayer(1).autoList.length == 0 && PD.getPlayer(2).autoList.length == 0)
         {
-            this.con.addChild(sortList[i]);
-	wx3_function(9649);
+            this.restartGame();
         }
     }
 
+    //public renewY(){
+    //    egret.callLater(this._renewY_958,this)
+    //}
+    //
+    //private wx3_functionX_11919(){console.log(5446)}
+    //private _renewY_958(){
+    //    var sortList = this.monsterArr.concat();
+    //    ArrayUtil.sortByField(sortList,['bottom','w'],[1,1]);
+    //    var len = sortList.length;
+    //    for(var i=0;i<len;i++)
+    //    {
+    //        this.con.addChild(sortList[i]);
+    //wx3_function(9649);
+    //    }
+    //}
+
     public onE(){
         if(!this.visible)
+        {
+            if(PKVideoCon_wx3.getInstance().parent == this.con)
+                PKData_wx3.getInstance().stop();
             return;
+        }
         MyTool.runListFun(this.defList,'onE');
+        this.onStep();
+        this.randomTalk();
 	wx3_function(1065);
-        this.renewMonsterPos_5086();
+        //this.renewMonsterPos_5086();
         //for(var i=0;i<this.monsterArr.length;i++)
         //    this.monsterArr[i].onE();
+    }
+
+    public onMainHide(){
+        if(PKVideoCon_wx3.getInstance().parent == this.con)
+            PKData_wx3.getInstance().stop();
     }
 
     public onTimer(){
         if(!this.visible)
             return;
-        this.randomTalk();
+
 	wx3_function(1087);
 
 
@@ -249,45 +316,45 @@ class DefUI extends game.BaseItem_wx3{
     //private roundLength = 760*2//单次行动的长度
     //private roundTime = 0//移动一轮需要的时间ms
     //private monsterStepTime = 0//间距移动时间ms
-    private renewMonsterPos_5086(){
-        //var round = TM.nowMS()/(this.roundTime*2)
-        var roundCD = TM_wx3.nowMS()%(this.roundTime)
-        var halfPos = this.roundLength/2;
-	wx3_function(2954);
-        var offset = (halfPos-640)/2
-
-        //roundCD -= this.monsterStepTime;
-        //if(roundCD < 0)
-        //    roundCD += this.roundTime;
-        var pos = roundCD*this.walkStep //第一个的位置
-        for(var i=0;i<this.monsterArr.length;i++)
-        {
-            var mc = this.monsterArr[i];
-	wx3_function(1823);
-
-            pos -= mc.showWidth()/2 + 10;
-            if(pos < 0)
-                pos += this.roundLength;
-
-            if(pos<halfPos)
-            {
-                mc.x = pos - offset
-                mc.renewRota(-1)
-            }
-            else
-            {
-                mc.x = this.roundLength -  pos - offset
-                mc.renewRota(1)
-            }
-
-	wx3_function(5138);
-            pos -= mc.showWidth()/2 + 10;
-            if(pos < 0)
-                pos += this.roundLength;
-            //if(i==0)
-            //console.log(mc.x,mc.bottom)
-        }
-    }
+    //private renewMonsterPos_5086(){
+    //    //var round = TM.nowMS()/(this.roundTime*2)
+    //    var roundCD = TM_wx3.nowMS()%(this.roundTime)
+    //    var halfPos = this.roundLength/2;
+    //wx3_function(2954);
+    //    var offset = (halfPos-640)/2
+    //
+    //    //roundCD -= this.monsterStepTime;
+    //    //if(roundCD < 0)
+    //    //    roundCD += this.roundTime;
+    //    var pos = roundCD*this.walkStep //第一个的位置
+    //    for(var i=0;i<this.monsterArr.length;i++)
+    //    {
+    //        var mc = this.monsterArr[i];
+    //wx3_function(1823);
+    //
+    //        pos -= mc.showWidth()/2 + 10;
+    //        if(pos < 0)
+    //            pos += this.roundLength;
+    //
+    //        if(pos<halfPos)
+    //        {
+    //            mc.x = pos - offset
+    //            mc.renewRota(-1)
+    //        }
+    //        else
+    //        {
+    //            mc.x = this.roundLength -  pos - offset
+    //            mc.renewRota(1)
+    //        }
+    //
+    //wx3_function(5138);
+    //        pos -= mc.showWidth()/2 + 10;
+    //        if(pos < 0)
+    //            pos += this.roundLength;
+    //        //if(i==0)
+    //        //console.log(mc.x,mc.bottom)
+    //    }
+    //}
 
 	private wx3_functionX_11920(){console.log(3822)}
     public defGuide(){
@@ -295,33 +362,39 @@ class DefUI extends game.BaseItem_wx3{
     }
 
 
-    private lastTalk = 0
-	private wx3_functionX_11921(){console.log(7549)}
+    //private lastTalk = 0
+	//private wx3_functionX_11921(){console.log(7549)}
     public randomTalk(){
 
         if(PKManager_wx3.getInstance().isPKing)
             return;
         if(GuideManager.getInstance().isGuiding)
             return;
-        if(egret.getTimer() < this.lastTalk)
+        if(!PKData_wx3.getInstance().isDef)
             return;
+        if(this.addDefBtn.visible)
+            return;
+        //if(egret.getTimer() < this.lastTalk)
+        //    return;
+        //this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
+        PKVideoCon_wx3.getInstance().randomTalk()
         //if(Math.random() > 0.2)
         //    return;
-	wx3_function(4966);
-        var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
-        if(item && !item.talkItm && item.x > 100 && item.x < 540)
-        {
-
-            if(item.atkRota == -1 && this.isPos)
-                return;
-            if(item.atkRota == 1 && item.x < 320)
-                return;
-            if(item.atkRota == -1 && item.x > 320)
-                return;
-            item.talk();
-	wx3_function(1274);
-            this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
-        }
+	//wx3_function(4966);
+     //   var item = this.monsterArr[Math.floor(this.monsterArr.length*Math.random())];
+     //   if(item && !item.talkItm && item.x > 100 && item.x < 540)
+     //   {
+    //
+     //       if(item.atkRota == -1 && this.isPos)
+     //           return;
+     //       if(item.atkRota == 1 && item.x < 320)
+     //           return;
+     //       if(item.atkRota == -1 && item.x > 320)
+     //           return;
+     //       item.talk();
+	//wx3_function(1274);
+     //       this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000) - this.monsterArr.length*500;
+     //   }
     }
 
 

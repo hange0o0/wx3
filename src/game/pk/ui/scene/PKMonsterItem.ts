@@ -253,9 +253,9 @@ class PKMonsterItem_wx3 extends game.BaseItem_wx3 {
     //}
 
     public setRota(rota,init?){
-        if(!init && this.monsterMV.scaleX == rota)
+        if(!init && this.monsterMV.currentMV.scaleX == rota)
             return;
-        this.monsterMV.scaleX = rota
+        this.monsterMV.currentMV.scaleX = rota
         this.list.x = rota == 1?50 + this.data.getVO().width/2:50 - this.data.getVO().width/2-30
         var mD:PKMonsterData_wx3 = this.data
         this.barGroup.horizontalCenter = mD.getVO().headoff * rota;
@@ -387,6 +387,10 @@ class PKMonsterItem_wx3 extends game.BaseItem_wx3 {
             this.stateDataArr.refresh();
         }
 
+    }
+
+    public talk(){
+        this.monsterMV.talk()
     }
 
 }
