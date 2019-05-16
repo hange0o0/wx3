@@ -140,6 +140,8 @@ class DefUI extends game.BaseItem_wx3{
 	private wx3_functionX_11918(){console.log(3890)}
 
     public dataChanged():void {
+        if(PKManager_wx3.getInstance().isPKing)
+            return;
         var pkvideo = PKVideoCon_wx3.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
@@ -254,7 +256,6 @@ class DefUI extends game.BaseItem_wx3{
     }
 
     private onStep(){
-
         PKCode_wx3.getInstance().onStep();
         PKVideoCon_wx3.getInstance().action();
         var PD = PKData_wx3.getInstance();

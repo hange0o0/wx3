@@ -193,6 +193,8 @@ class GameUI extends game.BaseUI_wx3 {
 
 	private wx3_functionX_11931(){console.log(9142)}
     private renewInfo_2620(res?){
+        if(this.haveGetUser)//防止重复授权进入
+            return;
         var wx = window['wx'];
         if(!wx)
         {

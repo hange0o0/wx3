@@ -105,12 +105,19 @@ class TaskManager {
                  break;
              }
         }
+        var lastClv = clv;
         for(var i=0;i<705;i++)//clv只支持去到708
         {
             var type = arr[i%3];
 	wx3_function(2575);
             id++;
             clv += 3;
+            if(lastClv && clv > 2150)
+            {
+                sendClientError('lastClv:' + lastClv + '   index:' + i + '   clv:' + clv)
+                lastClv = 0;
+            }
+
             this.createTask_7626(id,'clv',clv);
             id++;
             switch(type)

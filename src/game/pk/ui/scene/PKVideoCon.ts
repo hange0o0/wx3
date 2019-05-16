@@ -141,8 +141,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             str = ('monster die and not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
         else
             str = ('not die but not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
-        alert(str);
-        //sendClientError(str+'#'+PKManager.getInstance().pkType+'#'+PKData.getInstance().isReplay+'#'+PKData.getInstance().actionTime+'#'+JSON.stringify(PKData.getInstance().actionRecord));
+        //alert(str);
+        sendClientError(str+'#'+PKData_wx3.getInstance().isDef);
         return null;
     }
 	private wx3_functionX_13034(){console.log(2321)}
@@ -232,7 +232,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             case PKConfig_wx3.VIDEO_MONSTER_HPCHANGE:
                 item = this.getItemByID(data.id);
 	wx3_function(7757);
-                item.renewHp();
+                if(item)
+                    item.renewHp();
                 break;
             case PKConfig_wx3.VIDEO_MONSTER_WIN:
                 item = this.getItemByID(data.id);
@@ -259,7 +260,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             case PKConfig_wx3.VIDEO_MONSTER_NOHIT:
                 item = this.getItemByID(data.id);
 	wx3_function(756);
-                item.showMianShang();
+                if(item)
+                    item.showMianShang();
                 break;
             case PKConfig_wx3.VIDEO_MANAHP_CHANGE:
                 item = this.getItemByID(data.id);

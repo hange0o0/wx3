@@ -76,6 +76,7 @@ class PopUpManager {
                 display.scaleY = 1
                 display.x = x
                 display.y = y
+                display['showFinish'] && display['showFinish']()
             }
             else
             {
