@@ -37,11 +37,14 @@ class PKPosListItem_wx3 extends game.BaseItem_wx3 {
     private onInfo_5284(){
         if(GuideManager.getInstance().isGuiding)
             return;
+        if(this.data.add)
+            return;
         var arr = [];
 	wx3_function(5001);
         for(var i=0;i<this.data.list.length;i++)
         {
-            arr.push(this.data.list[i].id)
+            if(this.data.list[i].id)
+                arr.push(this.data.list[i].id)
         }
         CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
     }

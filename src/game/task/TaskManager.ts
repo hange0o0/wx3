@@ -439,6 +439,8 @@ class TaskManager {
             return;
         if(this.guideTaskVO)
             return;
+        if(UM_wx3.dayTask.length >= 5)
+            return;
 
         var arr = UM_wx3.dayTask;
         this.addTaskTime = TM_wx3.now() + 60*10;
