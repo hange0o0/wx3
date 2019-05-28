@@ -20,6 +20,7 @@ class DefUI extends game.BaseItem_wx3{
 	private wx3_functionX_11910(){console.log(6115)}
     private defList: eui.List;
     private redMC: eui.Image;
+    private mailBtn: eui.Image;
     private addDefBtn: eui.Button;
 
 
@@ -47,6 +48,8 @@ class DefUI extends game.BaseItem_wx3{
     private dataProvider:eui.ArrayCollection
 	private wx3_functionX_11914(){console.log(2275)}
 
+
+
     public constructor() {
         super();
         this.roundTime = Math.floor(this.roundLength/this.walkStep)
@@ -69,6 +72,13 @@ class DefUI extends game.BaseItem_wx3{
         this.addBtnEvent(this.buffBtn,this.onBuff_1268)
         this.addBtnEvent(this.coinBtn,this.onCoin_4808)
         this.addBtnEvent(this.rankBtn,this.onRank_3089)
+        this.addBtnEvent(this.mailBtn,(e)=>{
+            e.stopImmediatePropagation();
+            this.mailBtn.visible = false;
+            egret.Tween.removeTweens(this.mailBtn)
+            TaskManager.getInstance().lastShowMailTime = TM_wx3.now();
+            JumpWX4UI.getInstance().show();
+        })
 
     }
 	private wx3_functionX_11915(){console.log(4716)}
@@ -212,6 +222,13 @@ class DefUI extends game.BaseItem_wx3{
         this.dataProvider.refresh();
 
         this.addDefBtn.visible = !this.isPos && arr.length == 0
+        egret.Tween.removeTweens(this.mailBtn)
+        this.mailBtn.visible = (TM_wx3.now() - UM_wx3.regTime > 10*60) && (TM_wx3.now() - TaskManager.getInstance().lastShowMailTime > 10*60);
+        if(this.mailBtn.visible)
+        {
+            this.mailBtn.rotation = 0;
+            egret.Tween.get(this.mailBtn,{loop:true}).wait(1000).to({rotation:-10},100).to({rotation:10},100).to({rotation:-10},100).to({rotation:10},100).to({rotation:0},100)
+        }
         this.renewTask();
 	wx3_function(8021);
     }

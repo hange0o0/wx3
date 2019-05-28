@@ -22,6 +22,7 @@ class TaskManager {
     public newRed= false;
     public taskFinish= false;
     public openCoinUI = false;
+    public lastShowMailTime = 0;
 
     public autoTask:TaskVO; //自动增长的任务
 	private wx3_functionX_12613(){console.log(2042)}

@@ -54,7 +54,7 @@ class GuideManager {
         //this.guideKey = ''
 	wx3_function(6169);
         MyTool.stopClick(300);
-        egret.setTimeout(this.guideFun_8765,this,200);
+        egret.setTimeout(this.guideFun_8765,this,250);
     }
 
     //public reInit(){
@@ -127,7 +127,7 @@ class GuideManager {
 
         this.addGuideObj_96({
             mc:function(){return GameUI.getInstance().monsterBtn},
-            text:'一个怪物不够用，我们多招点怪物吧',
+            text:'怪物太少不够用，我们多招点怪物吧',
         })
 
         this.addGuideObj_96({
@@ -249,7 +249,7 @@ class GuideManager {
 	wx3_function(6457);
                 MainPKUI_wx3.getInstance().startGame()
             },
-            text:'[要赢取胜利，关键有两点：[战力压制] 和 [阵容克制]！',
+            text:'要赢取胜利，[阵容克制]起着尤其重要的作用！当然，[战力相差太多]也是不行的',
         })
 
         this.addGuideObj_96({
@@ -375,7 +375,24 @@ class GuideManager {
         PopUpManager.hideAll();
         GameUI.getInstance().endGuide();
 	wx3_function(7414);
-        TaskUI.getInstance().show();
+        //TaskUI.getInstance().show();
+
+        MyWindow.Confirm('新手引导已经结束，你有兴趣继续带领怪物争霸天下吗？',(b)=>{
+            TaskUI.getInstance().show();
+            var wx = window['wx'];
+
+            if(b==2)
+            {
+                 JumpWX4UI.getInstance().show();
+                if(wx)
+                    wx.aldSendEvent("不感兴趣")
+            }
+            else if(b==1)
+            {
+                if(wx)
+                    wx.aldSendEvent("继续争霸")
+            }
+        },['不感兴趣', '继续争霸']);
     }
 
     private addGuideObj_96(obj){

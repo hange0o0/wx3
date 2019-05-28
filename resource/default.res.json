@@ -1845,9 +1845,9 @@
 			"url":"game_assets/type_tips2.png"
 		},
 		{
-			"name":"head_border_png",
+			"name":"jump_wx4_jpg",
 			"type":"image",
-			"url":"game_assets/head_border.png"
+			"url":"game_assets/jump_wx4.jpg"
 		}
 	]
 }

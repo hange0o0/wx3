@@ -65,6 +65,7 @@
 				<e:HorizontalLayout gap="18" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
+		<e:Image id="mailBtn" source="main_mail_png" x="597" y="50" anchorOffsetX="28" anchorOffsetY="20"/>
 		<e:List id="defList" y="15" right="10" itemRendererSkinName="DefItemSkin">
 			<e:layout>
 				<e:VerticalLayout gap="10"/>

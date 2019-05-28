@@ -38,6 +38,7 @@
 		"resource/skin/game/changeUser/ChangeUserItemSkin.exml",
 		"resource/skin/game/changeUser/ChangeUserUISkin.exml",
 		"resource/skin/game/changeUser/JumpMCSkin.exml",
+		"resource/skin/game/changeUser/JumpWX4Skin.exml",
 		"resource/skin/game/chapter/ChapterItemSkin.exml",
 		"resource/skin/game/chapter/ChapterUISkin.exml",
 		"resource/skin/game/common/CardImgSkin.exml",

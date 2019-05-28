@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="JumpWX4Skin" width="440" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Label text="来自飞刀联盟的邀请" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
+	<e:Group horizontalCenter="0" bottom="40">
+		<e:Button id="cancelBtn" label="拒绝" width="150" x="0" y="0" skinName="Btn2Skin"/>
+		<e:Button id="taskBtn" label="加入联盟" skinName="Btn1Skin" width="150" x="0" y="0"/>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
+	<e:Image source="jump_wx4_jpg" y="95.12" horizontalCenter="0"/>
+	<e:Label id="nameText" text="Label" x="50" y="363.52" textColor="0xfcdcb3" bold="true"/>
+	<e:Label text="　　我们已被你那出色的表现所征服，加入我们吧，一起对抗怪物军团！" y="411.82" left="50" right="50" lineSpacing="10" size="24" textColor="0xfcdcb3"/>
+
+</e:Skin>

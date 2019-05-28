@@ -107,7 +107,7 @@ class SoundManager_wx3 {
             this.stopBgSound();
         }
         else{
-            if(MainPKUI_wx3.getInstance().visible && !PKData_wx3.getInstance().isGameOver)
+            if(MainPKUI_wx3.getInstance().stage && MainPKUI_wx3.getInstance().visible && !PKData_wx3.getInstance().isGameOver)
                 this.playSound('pkbg');
             else
                 this.playSound('bg');

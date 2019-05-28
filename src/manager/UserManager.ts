@@ -76,6 +76,7 @@ class UserManager_wx3 {
     public isFirst = false
     public hourEarn = 0;
     public offlineTime
+    public regTime
     public fill(data:any):void{
         //this.isFirst = true;     //debug
 
@@ -94,6 +95,7 @@ class UserManager_wx3 {
         var saveTime = data.saveTime;
 
         this.dbid = data._id;
+        this.regTime = data.regTime || 0;
         this.loginTime = data.loginTime || TM_wx3.now();
 	wx3_function(4489);
         this.coin = data.coin || 0;
@@ -453,6 +455,7 @@ class UserManager_wx3 {
     private getUpdataData_5960(){
         return {
             loginTime:UM_wx3.loginTime,
+            regTime:UM_wx3.regTime,
             coin:UM_wx3.coin,
             diamond:UM_wx3.diamond,
             buffDiamond:UM_wx3.buffDiamond,
