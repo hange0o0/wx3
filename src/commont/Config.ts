@@ -31,6 +31,10 @@ class Config {
     public static openRate = 10;
 
 
+    public static wx_ad = 'adunit-ee0cef82e0740714';
+    public static wx_video = 'adunit-68ddf5112545aa53';
+
+
     //public static friendLevel = 3;
     //public static gambleLevel = 20;
     //

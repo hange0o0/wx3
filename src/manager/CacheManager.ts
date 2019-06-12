@@ -16,6 +16,7 @@ class CacheManager_wx3{
         this.register_1258(MonsterVO);
 	wx3_function(1265);
         this.register_1258(TaskVO);
+        this.register_1258(SkillVO);
 
     }
 

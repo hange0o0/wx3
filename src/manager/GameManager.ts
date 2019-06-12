@@ -15,6 +15,9 @@ class GameManager_wx3 {
 	private wx3_functionX_12028(){console.log(5312)}
     public changeUserTime = 0
     public changeUserID = 0
+    public bannerAD
+
+    public bannerBG
 
     public onShowFun
     public shareFailTime = 0;
@@ -43,10 +46,15 @@ class GameManager_wx3 {
     public static paddingTop(){
         return GameManager_wx3.isLiuHai()?50:0
     }
+    public static paddingBottom(){
+        if(App.isIphoneX)
+            return 30;
+        return 0;
+    }
 	private wx3_functionX_12031(){console.log(9326)}
 
     public static get uiHeight(){
-        var h = this.stage.stageHeight - Config.adHeight;
+        var h = this.stage.stageHeight// - Config.adHeight;
 
         if(this.isLiuHai())
         {
@@ -70,13 +78,14 @@ class GameManager_wx3 {
     public init(){
         GameManager_wx3.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onTouchMove_8881,this);
         GameManager_wx3.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onTouchBegin_2672,this);
-        //this.createAD_3105();
+        this.createAD();
     }
 
-	private wx3_functionX_12034(){console.log(1664)}
-    private createAD_3105(){
+    private createAD(){
         //Config.adHeight = 200;
         if(!window['wx'])
+            return;
+        if(!Config.wx_ad)
             return;
         if(GameManager_wx3.stage.stageHeight < 1080)
             return;
@@ -84,25 +93,22 @@ class GameManager_wx3 {
 
         var btnw = Math.min(Math.pow(GameManager_wx3.stage.stageHeight/1330,1.6)*640,640)
 
-	wx3_function(3816);
         let scalex = screen.availWidth/640;
         let scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
         if(btnw * scalex < 300){ //微信限制广告宽度不能小于300
             btnw = 300 / scalex;
         }
         Config.adHeight =  btnw/640 * 224;
-	wx3_function(776);
         var  btny = GameManager_wx3.uiHeight;//给广告留的高度
         var  paddingTop = GameManager_wx3.paddingTop();
         var btnx =  (640-btnw)/2;
 
         let left = scalex * (btnx);
         let top = scaley * (btny + paddingTop);
-	wx3_function(7899);
         let width = scalex * btnw;
 
-        let bannerAd = wx.createBannerAd({
-            adUnitId: 'adunit-d406f443acb5f7d2',
+        let bannerAd = this.bannerAD = wx.createBannerAd({
+            adUnitId: Config.wx_ad,
             style: {
                 left: left,
                 top: top,
@@ -112,14 +118,12 @@ class GameManager_wx3 {
         bannerAd.onError(()=>{
             Config.adHeight = 0
             GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
-	wx3_function(7938);
         })
         bannerAd.onLoad(()=>{
 
         })
         bannerAd.onResize((res)=>{
             var hh = res.height/scalex*(640/btnw);
-	wx3_function(612);
             if(Math.abs(hh - 224)/224 > 0.02)
             {
                 Config.adHeight =  btnw/640 * hh;
@@ -130,7 +134,31 @@ class GameManager_wx3 {
         })
         bannerAd.show()
     }
-	private wx3_functionX_12035(){console.log(8759)}
+    private wx4_functionX_54600(){console.log(7039)}
+
+    public showBanner(bottom){
+        if(this.bannerAD)
+        {
+            if(!this.bannerBG)
+            {
+                this.bannerBG = new eui.Image('blace_bg_jpg')
+                this.bannerBG.width = 640;
+                this.bannerBG.height = Config.adHeight;
+            }
+            GameManager_wx3.container.addChild(this.bannerBG)
+            this.bannerBG.bottom = bottom;
+            this.bannerAD.show()
+            var scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
+            var  paddingTop = GameManager_wx3.paddingTop();
+            this.bannerAD.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop - bottom - GameManager_wx3.paddingBottom() - Config.adHeight);
+        }
+    }
+
+    public hideBanner(){
+        if(this.bannerAD)
+            this.bannerAD.hide();
+        MyTool.removeMC(this.bannerBG)
+    }
 
     public stopTimer(){
         this.timeID.stop();

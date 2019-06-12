@@ -16,6 +16,7 @@ class TecManager {
         32:{'name':'进攻加成',des:'增加怪物的进攻战力',type:'coin',v1:0,v2:3,v3:4000},
         33:{'name':'战队费用',des:'增加战斗队伍费用上限',type:'coin',v1:0,v2:3.7,v3:800},
         34:{'name':'战队容量',des:'增加战斗队伍队员上限',max:14-4,type:'coin',v1:0,v2:6,v3:3000},
+        41:{'name':'技能加成',des:'增加技能卷轴威力',type:'coin',v1:0,v2:3.2,v3:4000},
         //8:{'name':'科技革命',des:'提升主科技等级可提高其它科技的等级上限',type:'diamond',v1:0,v2:0,v3:0},
     }
 	private wx3_functionX_12647(){console.log(8431)}
@@ -50,6 +51,7 @@ class TecManager {
          switch(parseInt(id))
          {
              case 11:
+             case 41:
                  return str;
              case 21:
              case 31:

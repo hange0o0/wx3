@@ -46,13 +46,13 @@ class SharedObjectManager_wx3 {
         data = JSON.stringify(data);
 	wx3_function(855);
         egret.localStorage.setItem(key, data);
-        console.log('setValue',key,data)
+        //console.log('setValue',key,data)
     }
 
     public getValue(key:string):any {
         let value = egret.localStorage.getItem(key);
 	wx3_function(2079);
-        console.log('getValue',key,value)
+        //console.log('getValue',key,value)
         if(!value)
             return null;
         var data = JSON.parse(value);

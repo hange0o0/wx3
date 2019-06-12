@@ -9,6 +9,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     public constructor() {
         super();
         this.skinName = "MainPKUISkin";
+        this.isShowAD = true
+        this.adBottom = 0
     }
 
 	private wx3_functionX_12443(){console.log(312)}
@@ -16,6 +18,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     private con: eui.Group;
     private lineMC: eui.Rect;
     private scroller: eui.Scroller;
+    private skillList: eui.List;
     private list1: eui.List;
     private list2: eui.List;
 	private wx3_functionX_12444(){console.log(5593)}
@@ -59,26 +62,6 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
 
-
-	private wx3_functionX_12450(){console.log(9918)}
-
-
-
-
-
-
-	private wx3_functionX_12451(){console.log(8717)}
-
-
-
-
-
-
-	private wx3_functionX_12452(){console.log(7631)}
-
-
-
-
     public dataIn;
     public finish = false
 	private wx3_functionX_12453(){console.log(4360)}
@@ -94,12 +77,16 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 
     private shareStr
+    private dragTarget: eui.Image = new eui.Image();
 
 	private wx3_functionX_12455(){console.log(6012)}
     public childrenCreated() {
         super.childrenCreated();
 
+        this.skillList.itemRenderer = PKSkillItem
         this.bottomUI.setHide(this.hide,this);
+        this.dragTarget.width = 100
+        this.dragTarget.height = 100
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
         this.addBtnEvent(this.backBtn,this.onBack_3581)
@@ -121,11 +108,36 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.list2.itemRenderer = MainPKItem_wx3
 
 
-
-        // egret.Tween.get(this.speedMC,{loop:true}).to({rotation:360},3000)
-        // egret.Tween.get(this.speedMC2,{loop:true}).to({rotation:-360},3000)
+        this.skillList.addEventListener('start_drag',this.onDragStart,this);
+        this.skillList.addEventListener('end_drag',this.onDragEnd,this);
+        this.skillList.addEventListener('move_drag',this.onDragMove,this);
     }
-	private wx3_functionX_12456(){console.log(693)}
+    private onDragStart(e){
+        this.dragTarget.source = e.target.getDragSource()
+        this.dragTarget['id'] = e.target.getDragData()
+        this.stage.addChild(this.dragTarget);
+        this.dragTarget.x = e.data.x;
+        this.dragTarget.y = e.data.y;
+    }
+
+    private onDragMove(e){
+        if(!this.dragTarget.parent)
+            return;
+        this.dragTarget.x = e.data.x - this.dragTarget.width/2;
+        this.dragTarget.y = e.data.y - this.dragTarget.height/2;
+    }
+
+    private onDragEnd(e){
+        if(!this.dragTarget.parent)
+            return;
+        MyTool.removeMC(this.dragTarget)
+        var x = this.dragTarget.x + this.dragTarget.width/2
+        var y = this.dragTarget.y + this.dragTarget.height/2
+        if(y > 55 && y < 555)
+        {
+            PKData_wx3.getInstance().useSkill(this.dragTarget['id'])
+        }
+    }
 
     private onStrong_947(){
         var tecid = 32;
@@ -146,7 +158,26 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 this.showHurt(rota);
 	wx3_function(4237);
                 break;
+            case PKConfig_wx3.VIDEO_SKILL_USE:
+                this.renewSkill();
+                break;
         }
+    }
+
+    private renewSkill(){
+        var arr = []
+        for(var s in UM_wx3.skills)
+        {
+            arr.push({
+                id:s,
+                num:UM_wx3.skills[s]
+            })
+        }
+        while(arr.length < 5)
+        {
+            arr.push(null);
+        }
+        this.skillList.dataProvider = new eui.ArrayCollection(arr)
     }
 
     private onSpeed_8527(){
@@ -270,6 +301,10 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public onShow(){
+        if(Config.adHeight)
+        {
+            this.scroller.bottom = Config.adHeight;
+        }
         var pkvideo = PKVideoCon_wx3.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
@@ -322,13 +357,21 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
+            this.adBottom = 100;
+            GameManager_wx3.getInstance().showBanner(100)
             this.topUI.setTitle(this.dataIn.title || '回放')
+            this.skillList.touchChildren = this.skillList.touchEnabled = false;
         }
         else
         {
             this.currentState = 's1'
+            this.adBottom = 0;
+            GameManager_wx3.getInstance().showBanner(0)
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
+            this.skillList.touchChildren = this.skillList.touchEnabled = true;
         }
+
+        this.renewSkill();
 
 	wx3_function(9719);
         PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
@@ -490,6 +533,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         PC.onStep();
 	wx3_function(5613);
         PKVideoCon_wx3.getInstance().action();
+        MyTool.runListFun(this.skillList,'onE')
 
 
 
@@ -498,6 +542,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(8009);
         if(PD.isGameOver)
         {
+            ChapterManager.getInstance().onChapterEnd(this.dataIn)
             this.renewHp_8712();
 
             PD.playSpeed = 1;
@@ -677,6 +722,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     public delayShowResult(mc)
     {
         clearTimeout(this.resultTimer);
+        this.skillList.touchChildren = this.skillList.touchEnabled = false;
+        if(this.dataIn.showTaskChange)
+            ChapterManager.getInstance().sendGameEnd(mc == this.winGroup);
 
         this.resultTimer = setTimeout(()=>{
             PKVideoCon_wx3.getInstance().resetAllMVSpeed();
@@ -699,6 +747,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 this.bottomBar.visible = false;
 	wx3_function(6213);
                 this.currentState = 's2'
+                this.adBottom = 100;
+                GameManager_wx3.getInstance().showBanner(100)
                 if(this.dataIn.showTaskChange)
                     TaskManager.getInstance().testMainTask('chapter');
 

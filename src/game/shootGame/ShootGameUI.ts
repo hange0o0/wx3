@@ -59,6 +59,7 @@ class ShootGameUI_wx3 extends game.BaseUI_wx3 {
     public constructor() {
         super();
         this.skinName = "ShootGameUISkin";
+        this.isShowAD = true
     }
 
     public childrenCreated() {
@@ -160,7 +161,8 @@ class ShootGameUI_wx3 extends game.BaseUI_wx3 {
         {
              ShootBulletItem_wx3.freeItem(this.bulletArr.pop())
         }
-        
+
+        this.cannonGroup.bottom = Config.adHeight
         this.cdGroup.visible = false
         this.cannonGroup.visible = false
         this.coinGroup.visible = false

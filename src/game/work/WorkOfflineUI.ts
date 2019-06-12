@@ -45,7 +45,9 @@ class WorkOfflineUI extends game.BaseWindow_wx3 {
     public onShare(){
         if(this.videoIcon.visible)
         {
-            this.onAddCoin_5742()
+            ShareTool.openGDTV(()=>{
+                this.onAddCoin_5742()
+            })
             return
         }
         ShareTool.share('我需要你们的帮助！！',Config.localResRoot + "share_img_2.jpg",{},()=>{
@@ -86,7 +88,7 @@ class WorkOfflineUI extends game.BaseWindow_wx3 {
     }
 
     public onShow(){
-        this.videoIcon.visible = false;
+        this.videoIcon.visible = true;
 	wx3_function(901);
         this.coinText.text = NumberUtil.addNumSeparator(this.coin,2);
         this.desText.text = '在你离开的 '+DateUtil.getStringBySeconds(this.cd,false,2)+' 内挖矿获得了'

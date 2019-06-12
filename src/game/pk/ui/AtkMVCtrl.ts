@@ -39,12 +39,12 @@ class AtkMVCtrl_wx3 {
     }
 	private wx3_functionX_12787(){console.log(8343)}
 
-    //public sSkillMV(mid,target:PKMonsterData_wx3){
-    //    if(!PKVideoCon_wx3.getInstance().stage)
-    //        return;
-    //    if(this['skillMV' + mid])
-    //        this['skillMV' + mid](target)
-    //}
+    public sSkillMV(mid,target:PKMonsterData_wx3){
+        if(!PKVideoCon_wx3.getInstance().stage)
+            return;
+        if(this['skillMV' + mid])
+            this['skillMV' + mid](target)
+    }
 
 
 

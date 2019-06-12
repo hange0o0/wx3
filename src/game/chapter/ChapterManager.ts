@@ -23,11 +23,12 @@ class ChapterManager {
             if(UM_wx3.getEnergy() < 1)
             {
 
-                MyWindow.Confirm('体力不足,是否需要免费补满？',(b)=>{
+                MyWindow.Confirm('体力不足,是否需要观看广告并补满？',(b)=>{
                     if(b==1)
                     {
-                        this.addEnergyFull();
-	wx3_function(3343);
+                        ShareTool.openGDTV(()=>{
+                            UM_wx3.addEnergy(UM_wx3.maxEnergy);
+                        })
                     }
                 },['取消', '补满']);
                 return;
@@ -66,40 +67,46 @@ class ChapterManager {
                             force2:TecManager.getInstance().getAtkForce() + BuffManager.getInstance().getForceAdd(),
                             mforce2:MonsterManager.getInstance().getMonsterPKForce(list)
                         }
-                        var result = PKManager_wx3.getInstance().getPKResult(pkObj);
-	wx3_function(7785);
-                        if(result == 2)
-                        {
-                            PKData_wx3.instanceIndex = 2;
-                            var hpObj = PKData_wx3.getInstance().getHpData();
-                            var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
-                            if(hpRate2 >= 0.6)
-                                this.setChapterStar(id,3);
-                            else if(hpRate2 >= 0.3)
-                                this.setChapterStar(id,2);
-                            else
-                                this.setChapterStar(id,1);
-	wx3_function(6763);
-                            PKData_wx3.instanceIndex = 1;
-                            UM_wx3.addCoin(this.resultEarn.coin)
-                            UM_wx3.addDiamond(this.resultEarn.diamond)
-                            pkObj.coin = this.resultEarn.coin
-                            pkObj.diamond = this.resultEarn.diamond
-                            pkObj.star = this.resultEarn.star
-                            pkObj.showTaskChange = true
-                        }
-                        else
-                        {
-                            this.resultEarn = null;
-	wx3_function(1765);
-                        }
+
                         MainPKUI_wx3.getInstance().show(pkObj);
-                        EM_wx3.dispatch(GameEvent.client.CHAPTER_CHANGE)
+                        if(id == UM_wx3.chapterLevel + 1)
+                            this.sendGameStart(id);
+                        else
+                            this.sendKey = null
+
                     })
                 },
             })
         }
     }
+
+    public onChapterEnd(pkObj){
+        var id = pkObj.chapterid
+        var result = PKData_wx3.getInstance().getPKResult()
+        if(result == 2)
+        {
+            var hpObj = PKData_wx3.getInstance().getHpData();
+            var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
+            if(hpRate2 >= 0.6)
+                this.setChapterStar(id,3);
+            else if(hpRate2 >= 0.3)
+                this.setChapterStar(id,2);
+            else
+                this.setChapterStar(id,1);
+            UM_wx3.addCoin(this.resultEarn.coin)
+            UM_wx3.addDiamond(this.resultEarn.diamond)
+            pkObj.coin = this.resultEarn.coin
+            pkObj.diamond = this.resultEarn.diamond
+            pkObj.star = this.resultEarn.star
+            pkObj.showTaskChange = true
+        }
+        else
+        {
+            this.resultEarn = null;
+        }
+        EM_wx3.dispatch(GameEvent.client.CHAPTER_CHANGE)
+    }
+
 	private wx3_functionX_12266(){console.log(4945)}
 
     //取章节星星数
@@ -193,6 +200,40 @@ class ChapterManager {
             UM_wx3.chapterCoin = Math.min( UM_wx3.chapterCoin + num*coin,maxCoin);
         }
         return UM_wx3.chapterCoin;
+    }
+
+
+    public sendKey
+    public sendKeyName
+    public sendGameStart(key){
+        var wx = window['wx']
+        if(!wx)
+            return;
+        this.sendKey = key
+        this.sendKeyName ='第'+key+'关'
+        wx.aldStage.onStart({
+            stageId : this.sendKey, //关卡ID， 必须是1 || 2 || 1.1 || 12.2 格式  该字段必传
+            stageName : this.sendKeyName,//关卡名称，该字段必传
+            userId  : UM_wx3.gameid//用户ID
+        })
+    }
+
+    public sendGameEnd(isSuccess,info?){
+        var wx = window['wx']
+        if(!wx)
+            return;
+        if(!this.sendKey)
+            return;
+        wx.aldStage.onEnd({
+            stageId : this.sendKey,    //关卡ID 该字段必传
+            stageName : this.sendKeyName, //关卡名称  该字段必传
+            userId : UM_wx3.gameid,  //用户ID 可选
+            event : isSuccess?"complete":"fail",   //关卡完成  关卡进行中，用户触发的操作    该字段必传
+            params : {
+                desc :info   //描述
+            }
+        })
+        this.sendKey = null;
     }
 
 }

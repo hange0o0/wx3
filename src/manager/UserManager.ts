@@ -27,7 +27,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190516//与服务器相同则为测试版本
+    public testVersion = 20190606//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -45,6 +45,8 @@ class UserManager_wx3 {
     public chapterResetTime = 0;
     public chapterCoin = 0;
     public buffDiamond = 0;
+
+    public skills: any;//玩家的技能
 
 	private wx3_functionX_12058(){console.log(539)}
     public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
@@ -101,6 +103,7 @@ class UserManager_wx3 {
         this.coin = data.coin || 0;
         this.diamond = data.diamond || 0;
         this.energy = data.energy;
+        this.skills = data.skills || {201:10,202:10};
         this.helpUser = data.helpUser;
         //this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
@@ -142,6 +145,7 @@ class UserManager_wx3 {
         TecManager.getInstance().initTec(data.tec)
         MonsterManager.getInstance().initMonster(data.monster,data.def)
         FightManager.getInstance().initFight(data.fight)
+        SkillManager.getInstance().initSkill()
 
 	wx3_function(5880);
 
@@ -404,6 +408,7 @@ class UserManager_wx3 {
              chapterResetTime:0,
              chapterCoin:0,
              task:0,
+             skills:{201:10,202:10},
              monster:{"1":{"num":2},"35":{"num":2}},
              dayTask:[],
              fight:{},
@@ -461,6 +466,7 @@ class UserManager_wx3 {
             buffDiamond:UM_wx3.buffDiamond,
             energy:UM_wx3.energy,
             helpUser:UM_wx3.helpUser,
+            skills:UM_wx3.skills,
             work:WorkManager.getInstance().getWorkSave(),
             def:MonsterManager.getInstance().defList,
             fight:FightManager.getInstance().getFightSave(),

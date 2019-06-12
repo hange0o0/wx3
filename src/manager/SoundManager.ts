@@ -28,6 +28,7 @@ class SoundManager_wx3 {
     private currentChannel:egret.SoundChannel;
 	private wx3_functionX_12012(){console.log(5154)}
     private currentKey :string;
+    private wxChannel;
     private bgKey :string;
     private lastBGKey :string;
     private isLoad:boolean=false;
@@ -147,6 +148,14 @@ class SoundManager_wx3 {
         this.lastBGKey = this.bgKey;
 	wx3_function(2922);
         this.bgKey = null;
+        if(window['wx'])
+        {
+            if(this.wxChannel) {
+                this.wxChannel.destroy()
+            }
+            this.currentKey = null;
+            return;
+        }
         try{
             // if(this.tween){
             //     this.tween.pause();
@@ -168,6 +177,15 @@ class SoundManager_wx3 {
         if(GuideManager.getInstance().isGuiding)
             return;
         if(!this.soundPlaying) return;
+
+        if(window['wx'])
+        {
+            const innerAudioContext = window['wx'].createInnerAudioContext()
+            innerAudioContext.autoplay = true
+            innerAudioContext.src = "resource/sound/" + v +".mp3";
+            return;
+        }
+
         //console.log('call:',v)
         var url = "resource/sound/" + v +".mp3"
         var loader: egret.URLLoader = new egret.URLLoader();
@@ -200,13 +218,22 @@ class SoundManager_wx3 {
         if(this.bgKey == key) return;
 
 	wx3_function(5545);
-        this.bgKey = key;
+
 
         var url = "resource/sound/" + key +".mp3"
         if(this.currentKey == url) return;
+
+        this.stopBgSound();
         this.currentKey=url;
-
-
+        this.bgKey = key;
+        if(window['wx'])
+        {
+            const innerAudioContext = this.wxChannel = window['wx'].createInnerAudioContext()
+            innerAudioContext.autoplay = true
+            innerAudioContext.src =url;
+            innerAudioContext.loop =true;
+            return;
+        }
         
         try{
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SkillInfoUISkin" width="400" height="540" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="buy,info,use"  height.info="500" height.use="500">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Image id="skillMC" width="140" height="140" y="75" horizontalCenter="0"/>
+	<e:Label id="skillNameText" text="Label" y="30" horizontalCenter="0" bold="true"/>
+	<e:Label id="desText" text="Label" y="280" size="24" textColor="0xffe9a8" left="30" right="30" lineSpacing="10"/>
+	<e:Image id="closeBtn" source="icon_error_png" right="-15" top="-15"/>
+	<e:Group id="coinGroup" horizontalCenter="0" bottom="90" includeIn="buy">
+		<e:Image source="border1_png" scale9Grid="28,20,26,2" scaleX="1.1" scaleY="1.1" left="0" right="0" top="0" bottom="0" width="240"/>
+		<e:Label id="coinText" text="123456789" size="24" verticalCenter="-5" textColor="0xFFE3B7" left="44" right="55" minWidth="120"/>
+		<e:Image x="5" source="icon_coin_png" scaleX="0.8" scaleY="0.8" y="3"/>
+	</e:Group>
+	<e:Button id="btn" label="购买" skinName="Btn1Skin" width="160" horizontalCenter="0" bottom="25" skinName.info="Btn2Skin" label.info="丢弃" includeIn="buy,info"/>
+	<e:Label id="numText" text="x123" y="186" width="130" size="20" horizontalCenter="0" textAlign="right"/>
+	<e:Label id="infoText" text="拖进战场中即可使用" includeIn="use" horizontalCenter="0" bottom="30" size="22" textColor="0xfcc95a"/>
+	<ns1:PKCardInfoItem_wx3 id="item" y="227" skinName="PKCardInfoItemSkin" horizontalCenter="0"/>
+</e:Skin>

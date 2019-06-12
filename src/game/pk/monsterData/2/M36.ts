@@ -4,7 +4,7 @@ class M36_wx3 extends MBase_wx3 {
     }
 
 	private wx3_functionX_12910(){console.log(7527)}
-    public mvID1 = 119;
+    public mvID1 = 128;
     public onDie_wx3(user:PKMonsterData_wx3){
         if(user.skillTemp[36])
             return;

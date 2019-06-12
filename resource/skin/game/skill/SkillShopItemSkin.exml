@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SkillShopItemSkin" width="180" height="220" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bg11_png" scale9Grid="15,14,7,10" left="0" right="0" top="0" bottom="0"/>
+	<e:Image id="img" width="120" height="120" y="15" horizontalCenter="0"/>
+	<e:Label id="nameText" text="Label" horizontalCenter="1" textColor="0xffd1a5" size="24" verticalAlign="middle" textAlign="center" width="160" height="30" y="184.98"/>
+	<e:Group y="142.67" horizontalCenter="0">
+		<e:Image source="bg8_png" y="0" anchorOffsetX="0" anchorOffsetY="0" height="40" scale9Grid="9,9,9,9" x="0" width="150"/>
+		<e:Group horizontalCenter="0" verticalCenter="0">
+			<e:Image x="5" y="0" source="icon_coin_png" scaleX="0.6" scaleY="0.6"/>
+			<e:Label id="coinText" text="Label" textColor="0xFFD1A5" size="22" verticalAlign="middle" textAlign="center" x="0" y="36"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group id="buyFinishMC" width="120" height="120" y="15" horizontalCenter="0">
+		<e:Image source="bg8_png" scale9Grid="9,9,9,9" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="已购买" size="24" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Label id="numText" text="Label" size="20" right="40" bottom="90"/>
+</e:Skin>

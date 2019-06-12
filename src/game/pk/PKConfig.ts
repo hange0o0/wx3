@@ -93,6 +93,7 @@ class PKConfig_wx3 {
     public static VIDEO_HERO_ADD = 28 //有英雄出现
 
     public static VIDEO_MONSTER_SKILL = 29 //使用技能文字
+    public static VIDEO_SKILL_USE = 30 //使用技能文字
 
 
 

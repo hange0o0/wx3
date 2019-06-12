@@ -14,6 +14,7 @@ class GameEvent {
         BUFF_CHANGE:'BUFF_CHANGE',
         DEF_CHANGE:'DEF_CHANGE',
         TASK_CHANGE:'TASK_CHANGE',
+        SKILL_CHANGE:'SKILL_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

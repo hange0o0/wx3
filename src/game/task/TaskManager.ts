@@ -13,7 +13,7 @@ class TaskManager {
         3:{name:'收集珍珠',des:'1'},
         4:{name:'采集蘑菇',des:'1'},
         5:{name:'收集鸟蛋',des:'1'},
-        6:{name:'采果子',des:'1'},
+        6:{name:'摘果子',des:'1'},
         7:{name:'种植草药',des:'1'},
         8:{name:'清理池塘',des:'1'},
     }

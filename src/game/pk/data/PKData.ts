@@ -31,6 +31,8 @@ class PKData_wx3 extends egret.EventDispatcher{
     public round; //当前的回合
 	private wx3_functionX_12711(){console.log(6535)}
 
+    public skillUseTime = {}
+
     public jumpMV = false;
     public isGameOver = false //游戏结束
     public showTopNum = 0 //头顶显示敌人出怪的数量
@@ -72,6 +74,8 @@ class PKData_wx3 extends egret.EventDispatcher{
     public playSpeed = 1;//播放速度
     public lastDealSpeedTime = 0;//当前播放速度开始时间
     public speedAddTime = 0;//当前播放速度开始时间
+
+    public actionList = [];//玩家操作集合
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -155,6 +159,7 @@ class PKData_wx3 extends egret.EventDispatcher{
 	wx3_function(151);
         this.baseData = data;
         this.actionRecord = [];
+        this.actionList = [];
         this.quick = false
         this.quickTime = Number.MAX_VALUE
         this.history = {};
@@ -173,6 +178,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         this.monsterChange = false;
         this.beginAuto = false;
         this.currentState = 'pk';
+        this.skillUseTime = {};
 	wx3_function(5888);
         PKMonsterAction_wx3.getInstance().init()
 
@@ -248,6 +254,20 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
 	private wx3_functionX_12720(){console.log(9501)}
 
+    public useSkill(skillID){
+        SkillManager.getInstance().addSkill(skillID,-1);
+        this.skillUseTime[skillID] = this.actionTime;
+        this.actionList.push({
+            type:'skill',
+            id:skillID,
+            time:this.actionTime,
+        })
+        this.addVideo({
+            type:PKConfig_wx3.VIDEO_SKILL_USE,
+            skillID:skillID
+        })
+    }
+
     public getHpData(){
         var forceObj = {};
         for(var s in this.monsterList)
@@ -293,18 +313,19 @@ class PKData_wx3 extends egret.EventDispatcher{
         return rd;
     }
 
-    //public rand(min,max){
-    //    return min + Math.floor(this.random()*(max-min + 1))
-    //}
+    public rand(min,max){
+        return min + Math.floor(this.random()*(max-min + 1))
+    }
     //
     ////数据乱序
-    //public randSort(arr){
-    //    var self = this;
-    //    arr.sort(rdFun);
-    //    function rdFun(){
-    //        return self.random()>0.5?-1:1;
-    //    }
-    //}
+    public randSort(arr){
+        var self = this;
+        arr.sort(rdFun);
+        function rdFun(){
+            return self.random()>0.5?-1:1;
+        }
+    }
+
 	private wx3_functionX_12722(){console.log(8025)}
 
     public randomOne(arr:Array<any>,splice = false):any{

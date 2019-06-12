@@ -25,6 +25,7 @@ class GameUI extends game.BaseUI_wx3 {
     public chapterBtn: eui.Group;
     private chapterRed: eui.Image;
     public fightBtn: eui.Group;
+    public skillBtn: eui.Group;
     private fightRed: eui.Image;
     //private coinGroup: eui.Group;
     //private shopRedMC: eui.Image;
@@ -80,6 +81,9 @@ class GameUI extends game.BaseUI_wx3 {
         this.addBtnEvent(this.workBtn,this.onRank_6057)
         this.addBtnEvent(this.monsterBtn,this.onMonster_4316)
         this.addBtnEvent(this.tecBtn,this.onTec_1910)
+        this.addBtnEvent(this.skillBtn,()=>{
+            SkillUI.getInstance().show();
+        })
 
 	wx3_function(2363);
 
@@ -207,21 +211,23 @@ class GameUI extends game.BaseUI_wx3 {
         {
             if(!res.userInfo)
             {
-                this.infoBtn.visible = false;
+                //this.infoBtn.visible = false;
                 if(UM_wx3.helpUser)
                 {
-                    MyWindow.Confirm('你是通过好友邀请进入的，不授权将无法完成该好友请求的帮助，是否继续？',(b)=>{
-                        if(b==1)
-                        {
-                            this.infoBtn.visible = false;
-                            this.haveGetUser = true;
-                            this.initData_847();
+                    wx.showModal({
+                        title: '好友请求授权',
+                        showCancel:true,
+                        cancelText:'重新授权',
+                        confirmText:'进入游戏',
+                        content: '你是通过好友邀请进入的，不授权将无法完成该好友请求的帮助，是否继续？',
+                        success: (res)=> {
+                            if (res.confirm) {
+                                this.infoBtn.visible = false;
+                                this.haveGetUser = true;
+                                this.initData_847();
+                            }
                         }
-                        else
-                        {
-                            this.infoBtn.visible = true;
-                        }
-                    },['重新授权','进入游戏']);
+                    })
                     return;
                 }
                 this.infoBtn.visible = false;
@@ -434,6 +440,11 @@ class GameUI extends game.BaseUI_wx3 {
         //this.showTask();
         MyTool.removeMC(this.changeUser);
 
+        AniManager_wx3.getInstance().preLoadMV(8)
+        AniManager_wx3.getInstance().preLoadMV(103)
+        AniManager_wx3.getInstance().preLoadMV(112)
+        AniManager_wx3.getInstance().preLoadMV(128)
+        AniManager_wx3.getInstance().preLoadMV(200)
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE_5715)

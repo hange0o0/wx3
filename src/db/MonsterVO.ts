@@ -131,13 +131,13 @@ class MonsterVO {
     }
 	private wx3_functionX_11881(){console.log(246)}
 
-    public getDes(forceRate,fillColor?,color2?){
+    public getDes(level,fillColor?,color2?){
         return this.des.replace('#1',this.fillColor_6867(this.sv1,fillColor)).
             replace('#2',this.fillColor_6867(this.sv2,fillColor)).
             replace('#3',this.fillColor_6867(this.sv3,fillColor)).
-            replace('$1',this.changeValue_1938(this.sv1,forceRate,fillColor,color2)).
-            replace('$2',this.changeValue_1938(this.sv2,forceRate,fillColor,color2) + '').
-            replace('$3',this.changeValue_1938(this.sv3,forceRate,fillColor,color2)).
+            replace('$1',this.changeValue_1938(this.sv1,level,fillColor,color2)).
+            replace('$2',this.changeValue_1938(this.sv2,level,fillColor,color2) + '').
+            replace('$3',this.changeValue_1938(this.sv3,level,fillColor,color2)).
             replace('#CD',MyTool.toFixed(this.cd/1000,1) + '')   //CD初始时乘了1000
     }
 	private wx3_functionX_11882(){console.log(2062)}
@@ -149,10 +149,10 @@ class MonsterVO {
     }
 	private wx3_functionX_11883(){console.log(2902)}
 
-    private changeValue_1938(v,forceRate,fillColor,color?){
+    private changeValue_1938(v,level,fillColor,color?){
         if(!v)
             return;
-        return this.fillColor_6867(Math.ceil(v*forceRate),fillColor,color);
+        return this.fillColor_6867(Math.ceil(v*(1+level*0.5)),fillColor,color);
     }
 	private wx3_functionX_11884(){console.log(8583)}
 

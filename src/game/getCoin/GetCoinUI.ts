@@ -88,7 +88,7 @@ class GetCoinUI extends game.BaseWindow_wx3 {
         }
         //arr.push({type:4,title:'邀请X位新的好友'})
 
-        //arr.push({type:5,title:'观看广告'})
+        arr.push({type:5,title:'观看广告'})
         arr.push({type:6,title:'射击游戏'})
 
 	wx3_function(4750);

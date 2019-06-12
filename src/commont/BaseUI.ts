@@ -142,6 +142,9 @@ module game {
         public isHideFlag:boolean = true;
         public canBGClose:boolean = false;
 
+        public isShowAD = false;
+        public adBottom = 0;
+
 
         public loadData = null;
 	private wx3_functionX_11798(){console.log(4656)}
