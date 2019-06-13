@@ -5,20 +5,17 @@ class S223 extends SBase {
 
     public mvID1 = 112
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData.enemy);
+        var arr = PD.getMonsterByTeam(player.teamData.enemy);
         var targets = [];
-        var value = user.getSkillValue(1,true)
+        var value = this.getSkillValue(223,1,true)
         for(var i=0;i<arr.length;i++)
         {
             var targetEnemy = arr[i];
             if(!targetEnemy.beSkillAble())
                 continue;
-            if(targetEnemy.dieTime)
-                targetEnemy.addHp(-value*2)
-            else
-                targetEnemy.addHp(-value)
+            targetEnemy.addHp(-value)
             targets.push(targetEnemy);
         }
         return targets;

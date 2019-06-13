@@ -159,9 +159,17 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(4237);
                 break;
             case PKConfig_wx3.VIDEO_SKILL_USE:
+                this.showSkillUse(videoData.skillID);
                 this.renewSkill();
                 break;
+            case PKConfig_wx3.VIDEO_SKILL_BUFF:
+                this.renewSkillBuff();
+                break;
         }
+    }
+
+    private showSkillUse(skillID){
+        console.log('使用了技能' + skillID)
     }
 
     private renewSkill(){
@@ -372,6 +380,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         }
 
         this.renewSkill();
+        this.renewSkillBuff();
 
 	wx3_function(9719);
         PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
@@ -518,6 +527,11 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 	private wx3_functionX_12465(){console.log(305)}
 
+    private renewSkillBuff(){
+        var PD = PKData_wx3.getInstance();
+        var arr = PD.getSkillBuff();
+    }
+
     public onStep(){
         if(!this.gameStart)
             return;
@@ -534,6 +548,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(5613);
         PKVideoCon_wx3.getInstance().action();
         MyTool.runListFun(this.skillList,'onE')
+        this.renewSkillBuff();
 
 
 

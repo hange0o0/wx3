@@ -6,7 +6,9 @@ class MySkillItem extends game.BaseItem_wx3 {
 
     private mc: eui.Image;
     private rateMC: eui.Image;
+    private numGroup: eui.Group;
     private numText: eui.Label;
+
 
 
     public childrenCreated() {
@@ -41,7 +43,9 @@ class PKSkillItem extends game.BaseItem_wx3 {
 
     private mc: eui.Image;
     private rateMC: eui.Image;
+    private numGroup: eui.Group;
     private numText: eui.Label;
+
 
     public stopDrag = false
 

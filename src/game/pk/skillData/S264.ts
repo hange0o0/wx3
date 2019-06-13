@@ -3,18 +3,18 @@ class S264 extends SBase {
         super();
     }
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.monsterList.concat();
-        var cd = 1000*user.getSkillValue(1);
+        var arr = PD.getMonsterByTeam(player.teamData);
+        var cd = 1000*this.getSkillValue(264,1);
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
 
-            var buff = new PKBuffData()
+            var buff = new PKBuffData_wx3()
             buff.id = 264;
-            buff.user = user;
-            buff.addState(PKConfig.STATE_MOMIAN);
+            buff.user = player;
+            buff.addState(PKConfig_wx3.STATE_MOMIAN);
             buff.endTime = PD.actionTime + cd
             target.addBuff(buff)
         }

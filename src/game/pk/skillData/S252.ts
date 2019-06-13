@@ -4,10 +4,10 @@ class S252 extends SBase {
     }
 
     public mvID1 = 5
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData.enemy);
-        var num = user.getSkillValue(1)
+        var arr = PD.getMonsterByTeam(player.teamData.enemy);
+        var num = this.getSkillValue(252,1)
         if(arr.length > num)
         {
             PD.randSort(arr)

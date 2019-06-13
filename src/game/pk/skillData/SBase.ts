@@ -67,6 +67,8 @@ class SBase {
     }
 
 
+    public skillTimes = 1;//技能
+
     public mvID1
     public mvID2
 
@@ -85,7 +87,7 @@ class SBase {
     }
 
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
          return [];
     }
 
@@ -99,9 +101,9 @@ class SBase {
     }
 
     //通用的召唤方法
-    public addMonsterSkill(teamID,skillID,mid,type=0,noSkill?){
+    public addMonsterSkill(player,skillID,mid,type=0,noSkill?){
         var PD = PKData_wx3.getInstance();
-        var owner = PD.getPlayer(teamID);
+        var owner = player
         var atkRota = owner.teamData.atkRota;
         var item = null;
         if(type == 1)//我方前线
@@ -142,7 +144,7 @@ class SBase {
     public skill(){
         //var svo = SkillVO.getObject(user.mid);
 
-        var targets = this.onSkill(2);//技能效果
+        var targets = this.onSkill(PKData_wx3.getInstance().getPlayer(2));//玩家默认是2号位
         if(targets)
         {
             for(var i=0;i<targets.length;i++)

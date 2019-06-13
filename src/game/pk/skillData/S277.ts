@@ -3,92 +3,34 @@ class S277 extends SBase {
         super();
     }
 
-    public initSkill(user:PKPosCardData){
-        user.needRemoveListener = false
-    }
 
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var listener = new S277StateListener()
-        var teamData = PD.getPlayer(playerID).teamData;
-        listener.owner = user;
-        listener.mvID = this.mvID1;
-        listener.endTime = PD.actionTime + user.getSkillValue(3) *1000;
-        listener.x = PD.getFirstX(teamData.id) + teamData.atkRota*(PD.random()*30 + 20);
-        teamData.addStateLister(listener);
-
-
-        //加入动画图腾
-        PD.addVideo({
-            type:PKConfig.VIDEO_TOTEM_ADD,
-            totemType:1,
-            user:listener,
-            x:listener.x,
-            y:-25 + Math.random()*50
-
-        })
-        return [];
-    }
-}
-
-
-class S277StateListener extends PKStateListener {
-    public type = PKConfig.LISTENER_TIMER
-    public actionTime
-    constructor() {
-        super();
-        this.actionTime = PKData_wx3.getInstance().actionTime;
-    }
-
-    // 起作用时会调用的方法
-    public actionFun(target?:PKMonsterData){
-        var user:PKPosCardData = <PKPosCardData>this.owner;
-
-        var PD = PKData_wx3.getInstance();
-        var arr = PD.monsterList;
-        var atkrage = user.getSkillValue(1);
-        var value = user.getSkillValue(2);
+        var arr = PD.getMonsterByTeam(player.teamData);
+        var value = this.getSkillValue(277,1);
+        var cd = this.getSkillValue(277,2)*1000
         for(var i=0;i<arr.length;i++)
         {
-            var targetX:PKMonsterData = arr[i];
-            var des = Math.abs(this.x - targetX.x);
-            if(des<=atkrage)
-            {
-                if(!targetX.skillTemp['277'])
-                {
-                    targetX.skillTemp['277'] = value;
-                    targetX.addSpeed += value
-                }
-            }
-            else
-            {
-                if(targetX.skillTemp['277'])
-                {
-                    targetX.addSpeed -= targetX.skillTemp['277']
-                    targetX.skillTemp['277'] = 0;
-                }
-            }
-        }
-    }
+            var target = arr[i];
 
-    public onRemove(){
-        var PD = PKData_wx3.getInstance();
+            var buff = new PKBuffData_wx3()
+            buff.id = 277;
+            buff.value = value;
+            buff.user = player;
+            buff.addValue('addSpeed',value);
+            buff.endTime = PD.actionTime + cd;
+            target.addBuff(buff)
 
-        PD.addVideo({
-            type:PKConfig.VIDEO_TOTEM_REMOVE,
-            user:this
-        })
-
-        var arr = PD.monsterList;
-        for(var i=0;i<arr.length;i++)
-        {
-            var targetX:PKMonsterData = arr[i];
-            if(targetX.skillTemp['277'])
+            if(buff.ing)
             {
-                targetX.addSpeed -= targetX.skillTemp['277']
-                targetX.skillTemp['277'] = 0;
+                PD.addVideo({
+                    type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
+                    user:target,
+                    keys:['speed+']
+                })
             }
         }
+        return arr;
     }
 }

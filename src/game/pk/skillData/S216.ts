@@ -5,20 +5,20 @@ class S216 extends SBase {
     public mvID1 = 30
 
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
 
         var PD = PKData_wx3.getInstance();
-        var list = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
+        var list = PD.getMonsterByTeam(player.teamData);
         var targets = [];
-        var skillValue = user.getSkillValue(1);
-        var addValue = user.getSkillValue(3,true);
-        var cd = user.getSkillValue(2)*1000;
+        var skillValue = this.getSkillValue(216,1);
+        var addValue = this.getSkillValue(216,3,true);
+        var cd = this.getSkillValue(216,2)*1000;
         for(var i=0;i<list.length;i++)
         {
-            var target:PKMonsterData = list[i];
+            var target:PKMonsterData_wx3 = list[i];
 
-            var buff = new PKBuffData()
-            buff.user = user;
+            var buff = new PKBuffData_wx3()
+            buff.user = player;
             buff.id =  216;
             buff.value = skillValue;
             buff.endTime = PD.actionTime + cd;
@@ -29,7 +29,7 @@ class S216 extends SBase {
             if(buff.ing)
             {
                 PD.addVideo({
-                    type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                    type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                     user:target,
                     keys:['atk+']
                 })

@@ -3,10 +3,10 @@ class S324 extends SBase {
         super();
     }
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
-        var addValue = user.getSkillValue(1,true);
+        var arr = PD.getMonsterByTeam(player.teamData);
+        var addValue = this.getSkillValue(324,1,true);
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
@@ -14,7 +14,7 @@ class S324 extends SBase {
             target.atk += addValue
 
             PD.addVideo({
-                type:PKConfig.VIDEO_MONSTER_ADD_STATE,
+                type:PKConfig_wx3.VIDEO_MONSTER_ADD_STATE,
                 user:target,
                 keys:[type]
             })

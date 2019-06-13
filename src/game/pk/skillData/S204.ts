@@ -4,9 +4,9 @@ class S204 extends SBase {
     }
 
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
         var PD = PKData_wx3.getInstance();
-        var list = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
+        var list = PD.getMonsterByTeam(player.teamData);
         var skillValue = this.getSkillValue(204,1);
         var cd = this.getSkillValue(204,2)*1000;
         for(var i=0;i<list.length;i++)
@@ -15,7 +15,7 @@ class S204 extends SBase {
             var addValue = Math.floor(target.baseAtk * skillValue/100);
             //target.atk += addValue;
             var buff = new PKBuffData_wx3()
-            buff.user = PD.getPlayer(playerID);
+            buff.user = player;
             buff.id = 204;
             buff.value = skillValue;
             buff.endTime = PD.actionTime + cd;

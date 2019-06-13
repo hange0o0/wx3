@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="TaskItemSkin" width="520" height="120" currentState="s1" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2,s3"  height.s2="180" width.s2="440" height.s3="400" width.s3="300">
+<e:Skin class="TaskItemSkin" width="520" height="120" currentState="s1" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2,s3"  height.s2="180" width.s2="440" height.s3="360" width.s3="300">
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8" source.s3="bg1_png"/>
 	<e:Label id="nameText" text="Label" x.s1="130" y="10" size="26" bold="true" textColor="0xFFE8A5" x.s2="150" y.s2="20" y.s3="20" horizontalCenter.s3="0"/>
 	<e:Label id="desText" text="需要怪物：10" y="45" size="24" left.s1="130" lineSpacing="6" textColor="0xDDB46A" left.s2="150" y.s2="55" y.s3="223" horizontalCenter.s3="0.5"/>
 	<e:Label id="timeText" text="工作时间：1小时" y="80" size="24" left.s1="130" lineSpacing="6" textColor="0xDDB46A" left.s2="150" y.s2="90" y.s3="258" horizontalCenter.s3="0"/>
-	<e:Label text="完成奖励：" y="130" size="24" left.s2="150" left.s1="150" lineSpacing="6" textColor="0xDDB46A" includeIn="s2,s3" y.s3="310" horizontalCenter.s3="0" text.s3="完成奖励"/>
+	<e:Label text="完成奖励：" y="130" size="24" left.s2="150" left.s1="150" lineSpacing="6" textColor="0xDDB46A" includeIn="s2,s3" y.s3="310" horizontalCenter.s3="-75" text.s3="完成奖励："/>
 	<e:Image id="taskIcon" width="100" height="100" x.s1="10" verticalCenter.s2="0" verticalCenter.s1="0" x.s2="30" width.s3="150" height.s3="150" y.s3="61" horizontalCenter.s3="0"/>
-	<e:Group y="8" x.s1="360" x.s2="270" y.s2="123" y.s3="341" horizontalCenter.s3="0">
+	<e:Group y="8" x.s1="360" x.s2="270" y.s2="123" y.s3="302" horizontalCenter.s3="59">
 		<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0" source.s3="bg2_png"/>
 		<e:Image source="icon_coin_png" x="5" scaleX="0.6" scaleY="0.6" verticalCenter="0"/>
 		<e:Label id="awardText" text="Label" size="24" verticalCenter="0" right="10"/>

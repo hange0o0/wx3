@@ -5,23 +5,11 @@ class S203 extends SBase{
 
     public mvID1 = 103;
 
-
-    //
-    ////能否生效
-    //public useAble(user:PKPosCardData){
-    //    var PD = PKData.getInstance();
-    //    var arr = PD.getMonsterByTeam(user.getOwner().teamData.enemy);
-    //    return arr.length >= 3;
-    //}
-    //
-    //技能动画
-
-    //
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
 
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData.enemy);
+        var arr = PD.getMonsterByTeam(player.teamData.enemy);
         var list = []
         for(var i=0;i<arr.length;i++)
         {

@@ -612,6 +612,8 @@ class PKMonsterData_wx3 {
 	wx3_function(3350);
         }
         this.getOwner().teamData.testState(PKConfig_wx3.LISTENER_DIE,this);
+        if(!this.dieTime)
+            this.getOwner().teamData.dieList.push({mid:this.mid,x:this.x})
         MBase_wx3.getData(this.mid).onRemove_wx3(this);
         PKData_wx3.getInstance().actionRecord.push('die|' + PKData_wx3.getInstance().actionTime + '|' + this.id + '|' + this.passEnd)
     }

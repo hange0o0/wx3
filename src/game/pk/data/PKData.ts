@@ -123,6 +123,10 @@ class PKData_wx3 extends egret.EventDispatcher{
         return 0;
     }
 
+    public getSkillBuff(){
+        return this.team2.getSkillListener().concat(this.team1.getSkillListener());
+    }
+
     //暂停
     public stop(){
         //if(isLast)//在最后一次行动后暂停(马上停)
@@ -266,6 +270,8 @@ class PKData_wx3 extends egret.EventDispatcher{
             type:PKConfig_wx3.VIDEO_SKILL_USE,
             skillID:skillID
         })
+
+        SBase.getData(skillID).skill()
     }
 
     public getHpData(){
@@ -571,12 +577,12 @@ class PKData_wx3 extends egret.EventDispatcher{
         return chooseItem
     }
 
-    //public getFirstX(teamID){
-    //     var item = this.getFirstItem(teamID);
-    //    if(item)
-    //        return item.x;
-    //    return  this.getTeamByID(teamID).atkRota == PKConfig_wx3.ROTA_LEFT ? PKConfig_wx3.appearPos:PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos;
-    //}
+    public getFirstX(teamID){
+         var item = this.getFirstItem(teamID);
+        if(item)
+            return item.x;
+        return  this.getTeamByID(teamID).atkRota == PKConfig_wx3.ROTA_LEFT ? PKConfig_wx3.appearPos:PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos;
+    }
 
     //加入怪到场上
 	private wx3_functionX_12732(){console.log(2837)}

@@ -60,7 +60,7 @@ class M9StateListener extends PKStateListener_wx3 {
 
     // 起作用时会调用的方法
     public actionFun(target?:PKMonsterData_wx3){
-        var rate = this.owner.getSkillValue(1)/100;
+        var rate = (<PKMonsterData_wx3>this.owner).getSkillValue(1)/100;
 	wx3_function(38);
         var buff = new PKBuffData_wx3()
         buff.id = 9;

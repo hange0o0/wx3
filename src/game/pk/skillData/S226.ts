@@ -3,11 +3,11 @@ class S226 extends SBase {
         super();
     }
     public mvID1 = 102;
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var teamData = PD.getPlayer(playerID).teamData.enemy;
+        var teamData = player.teamData.enemy;
         var arr = PD.getMonsterByTeam(teamData);
-        var value = user.getSkillValue(1,true)
+        var value = this.getSkillValue(226,1,true)
         while(true)
         {
             var target = PD.randomOne(arr,true)

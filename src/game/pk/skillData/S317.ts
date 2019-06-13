@@ -9,7 +9,7 @@ class S317 extends SBase {
     }
 
 
-    public onSkill(playerID) {
-        return this.addMonsterSkill(user,63)
+    public onSkill(player) {
+        return this.addMonsterSkill(player,317,63)
     }
 }

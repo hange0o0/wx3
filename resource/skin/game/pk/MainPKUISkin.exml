@@ -32,7 +32,7 @@
 				<e:Image id="speedMC2" source="border_9_png" horizontalCenter="0" verticalCenter="0" x="10" y="10" scaleX="1.3" scaleY="1.3" visible="false"/>
 				<e:Label id="speedText" text="x2" y="70" size="24" horizontalCenter="0" textColor="0x3a2101" bold="true" strokeColor="0xe09e4e"/>
 			</e:Group>
-			<e:List id="skillList" width="540" height="100" x="16" verticalCenter="0">
+			<e:List id="skillList" width="540" height="110" x="16" verticalCenter="0">
 				<e:layout>
 					<e:HorizontalLayout gap="10"/>
 				</e:layout>

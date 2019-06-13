@@ -2,13 +2,13 @@ class S235 extends SBase {
     constructor() {
         super();
     }
-    public onSkill(playerID) {
+    public onSkill(player) {
         var listener = new S235StateListener()
-        var teamData = PKData_wx3.getInstance().getPlayer(playerID).teamData;
-        listener.owner = user;
+        var teamData = player.teamData;
+        listener.owner = player;
         listener.mvID = this.mvID1;
-        listener.addValue = user.getSkillValue(1,true);
-        listener.endTime = PKData_wx3.getInstance().actionTime + user.getSkillValue(2) *1000;
+        listener.addValue = this.getSkillValue(235,1,true);
+        listener.endTime = PKData_wx3.getInstance().actionTime + this.getSkillValue(235,2) *1000;
         teamData.addStateLister(listener);
         return [];
     }
@@ -19,6 +19,7 @@ class S235 extends SBase {
 
 class S235StateListener extends PKStateListener_wx3 {
     public type = PKConfig_wx3.LISTENER_CREATE
+    public isSkill = true;
     public addValue
     constructor() {
         super();

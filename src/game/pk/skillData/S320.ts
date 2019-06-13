@@ -9,7 +9,7 @@ class S320 extends SBase {
     }
 
 
-    public onSkill(playerID) {
-        return this.addMonsterSkill(user,70)
+    public onSkill(player) {
+        return this.addMonsterSkill(player,320,70)
     }
 }

@@ -47,6 +47,27 @@ class AtkMVCtrl_wx3 {
     }
 
 
+    //通用技能表现1
+    private skillMVType1(id,target,marge=0){
+        var sBase = SBase.getData(id)
+        var mv = this.playAniOn(target.id,sBase.mvID1)
+        if(mv && marge)
+            mv.y -= marge;
+        return mv;
+    }
+    //通用技能表现2
+    private skillMVType2(id,target){
+        var sBase = SBase.getData(id)
+        var mv = this.playAniOn(target.id,sBase.mvID1)
+        var marge = MonsterVO.getObject(target.mid).height/2
+        if(mv && marge)
+        {
+            mv.y -= marge;
+            mv.scaleX = mv.scaleY = 0.6
+        }
+        return mv;
+    }
+
 
 
     ////////////////////////////////////////////////////////////////
@@ -381,48 +402,63 @@ class AtkMVCtrl_wx3 {
 
 
 
+    //====================================================================
+    public skillMV203(target:PKMonsterData_wx3){
+        this.skillMVType1(203,target)
+    }
+
+    public skillMV205(target:PKMonsterData_wx3){
+        this.skillMVType1(205,target,50)
+    }
+    public skillMV206(target:PKMonsterData_wx3){
+        this.skillMVType1(206,target,50)
+    }
+    public skillMV210(target:PKMonsterData_wx3){
+        this.skillMVType1(210,target,50)
+    }
+
+    public skillMV211(target:PKMonsterData_wx3){
+        this.skillMVType1(211,target)
+    }
+
+    public skillMV216(target:PKMonsterData_wx3){
+        this.skillMVType1(216,target,50)
+    }
+
+    public skillMV222(target:PKMonsterData_wx3){
+        this.skillMVType1(222,target,50)
+    }
+
+    public skillMV223(target:PKMonsterData_wx3){
+        this.skillMVType1(223,target,40)
+    }
+
+    public skillMV226(target:PKMonsterData_wx3){
+        this.skillMVType1(226,target)
+    }
 
 
+    public skillMV252(target:PKMonsterData_wx3){
+        this.skillMVType2(252,target)
+    }
 
-	private wx3_functionX_12815(){console.log(3556)}
+    public skillMV256(target:PKMonsterData_wx3){
+        this.skillMVType1(256,target,40)
+    }
 
-    ////////////////////////////////////////////////////////////////
-    //public skillMV101(user,target,actionTime,endTime){
-    //    var mBase = MBase_wx3.getData(101)
-    //    if(user.useingHeroSkill == 4)
-    //        this.playAniOn(target.id,mBase.mvID1)
-    //}
-    //public skillMV102(user,target,actionTime,endTime){
-    //    //var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-    //    //var targetItem = PKVideoCon.getInstance().getItemByID(target.id);
-    //    //PKBulletManager.getInstance().createArrow(userItem,targetItem,actionTime,endTime)
-    //
-    //    //var userItem = PKVideoCon.getInstance().getItemByID(user.id);
-    //    var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
-    //    var id = [1,6,3,2,5][Math.min(4,user.level)]
-    //    PKBulletManager_wx3.getInstance().createBullet(null,targetItem,actionTime,endTime,id)
-    //}
-    //
-    //public skillMV108(user,target,actionTime,endTime){
-    //    var mBase = MBase_wx3.getData(108)
-    //    if(user.useingHeroSkill == 3 || user.useingHeroSkill == 2)
-    //        this.playAniOn(target.id,mBase.mvID1)
-    //}
-    //
-    ////技能动画
-    //public skillMV116(user,target,actionTime,endTime){
-    //    var mBase = MBase_wx3.getData(116)
-    //    if(user.useingHeroSkill == 3 || user.useingHeroSkill == 4)
-    //    {
-    //        var mv = this.playAniOn(target.id,mBase.mvID1)
-    //        mv && (mv.y -= 40);
-    //    }
-    //}
-    //
-    //public skillMV114(user,target,actionTime,endTime){
-    //    var mBase = MBase_wx3.getData(114)
-    //    var mvMC = this.playAniOn(target.id,mBase.mvID1)
-    //    mvMC.y -= target.getVO().height/2
-    //}
+    public skillMV259(target:PKMonsterData_wx3){
+        this.skillMVType1(259,target,40)
+    }
 
+    public skillMV262(target:PKMonsterData_wx3){
+        this.skillMVType2(262,target)
+    }
+
+    public skillMV406(target:PKMonsterData_wx3){
+        this.skillMVType2(406,target)
+    }
+
+    public skillMV407(target:PKMonsterData_wx3){
+        this.skillMVType2(407,target)
+    }
 }

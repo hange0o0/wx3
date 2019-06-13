@@ -3,11 +3,11 @@ class S245 extends SBase {
         super();
     }
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
-        var num = user.getSkillValue(1);
-        var addValue = user.getSkillValue(2,true);
+        var arr = PD.getMonsterByTeam(player.teamData);
+        var num = this.getSkillValue(245,1);
+        var addValue = this.getSkillValue(245,2,true);
         if(arr.length > num)
         {
             PD.randSort(arr)
@@ -18,7 +18,7 @@ class S245 extends SBase {
             var target = arr[i];
             target.manaHp += addValue
             PD.addVideo({
-                type:PKConfig.VIDEO_MANAHP_CHANGE,
+                type:PKConfig_wx3.VIDEO_MANAHP_CHANGE,
                 user:target,
             })
         }

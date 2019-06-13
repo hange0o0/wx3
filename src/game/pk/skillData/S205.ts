@@ -3,12 +3,12 @@ class S205 extends SBase {
         super();
     }
 
-
+    public mvID1 = 128
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
 
         var PD = PKData_wx3.getInstance();
-        var list = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
+        var list = PD.getMonsterByTeam(player.teamData);
         var targets = [];
         var skillValue = this.getSkillValue(205,1);
         var addValue = this.getSkillValue(205,3,true);
@@ -18,8 +18,8 @@ class S205 extends SBase {
             var target:PKMonsterData_wx3 = list[i];
 
             var buff = new PKBuffData_wx3()
-            buff.user = PD.getPlayer(playerID);
-            buff.id =  205;
+            buff.user = player;
+            buff.id = 205;
             buff.value = skillValue;
             buff.endTime = PD.actionTime + cd;
             buff.addValue('def',skillValue)

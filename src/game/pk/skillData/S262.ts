@@ -4,10 +4,10 @@ class S262 extends SBase {
     }
 
     public mvID1 = 166;
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.monsterList.concat();
-        var value = user.getSkillValue(1,true);
+        var arr = PD.getMonsterByTeam(player.teamData.enemy);
+        var value = this.getSkillValue(262,1,true);
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];

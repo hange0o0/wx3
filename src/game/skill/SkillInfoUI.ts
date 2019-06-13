@@ -99,7 +99,7 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
     private renewCoin(){
         if(this.showType == 'buy')
         {
-            this.coinText.text = NumberUtil.addNumSeparator(UM_wx3.coin) + '/' + NumberUtil.addNumSeparator(this.data.coin)
+            this.coinText.text = NumberUtil.addNumSeparator(UM_wx3.coin) + ' / ' + NumberUtil.addNumSeparator(this.data.coin)
         }
     }
 

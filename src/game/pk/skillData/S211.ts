@@ -5,17 +5,12 @@ class S211 extends SBase {
 
     public mvID1 = 102;
 
-    //预加载
-    public preload() {
-        super.preload()
-        MonsterVO.getObject(65).preLoad();
-    }
 
     //生效时的逻辑
-    public onSkill(playerID){
+    public onSkill(player){
 
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData.enemy);
+        var arr = PD.getMonsterByTeam(player.teamData.enemy);
         var list = []
         for(var i=0;i<arr.length;i++)
         {
@@ -29,23 +24,25 @@ class S211 extends SBase {
         }
         var item = PD.randomOne(list)
         if(!item)
+        {
             return []
+        }
 
-        var owner = PD.getPlayer(user.owner);
+        var owner = player;
         var atkRota = owner.teamData.atkRota;
 
-        var num = user.getSkillValue(1);
-        var cd = user.getSkillValue(2)*1000;
+        var num = this.getSkillValue(211,1);
+        var cd = this.getSkillValue(211,2)*1000;
         for(var i=0;i<num;i++)
         {
             var x = item.x + PD.random()*100 - 50;
             var mData = {
-                force:owner.force,
+                force:MonsterManager.getInstance().getAtkAdd(65),
                 mid:65,
-                owner:user.owner,
+                owner:owner,
                 atkRota:atkRota,
                 x:x,
-                y:-25 + Math.random()*50,
+                y:-25 + PD.random()*50,
                 lastSkill:Number.MAX_VALUE,
                 actionTime:PD.actionTime,
                 dieTime:PD.actionTime + cd

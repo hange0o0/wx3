@@ -2,6 +2,10 @@
 <e:Skin class="PKSkillItemSkin" width="100" height="105" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="border_14_png" left="0" right="0" top="0" bottom="0"/>
 	<e:Image id="mc" width="80" height="80" horizontalCenter="0" top="10"/>
-	<e:Image id="rateMC" source="black_bg_alpha_png" width="96" height="96" bottom="2" horizontalCenter="0"/>
-	<e:Label id="numText" text="10" size="20" right="5" bottom="5"/>
+	<e:Image id="rateMC" source="black_bg_alpha_png" width="96" height="106" bottom="2" horizontalCenter="0"/>
+	<e:Group id="numGroup" y="64.64" right="10">
+		<e:Image source="bg17_png" scaleX="-0.6" scaleY="0.6" x="28" y="0"/>
+		<e:Label id="numText" text="10" size="20" y="3" right="5"/>
+	</e:Group>
+	<e:Image id="lockMC" source="bg_icon_png" horizontalCenter="0" verticalCenter="0"/>
 </e:Skin>

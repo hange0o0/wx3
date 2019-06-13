@@ -24,6 +24,7 @@ class PKTeamData_wx3 {
 
     public members = [];
     public posList = []; //全队上阵的顺序
+    public dieList = [];//记录死了的单位
     public stateObj = {};  //监听队伍中的状态，触发
 	private wx3_functionX_12741(){console.log(8415)}
     constructor(obj?){
@@ -59,6 +60,13 @@ class PKTeamData_wx3 {
             this.stateObj[listener.type] = [];
 	wx3_function(6604);
         this.stateObj[listener.type].push(listener)
+
+        if(listener.isSkill)
+        {
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_SKILL_BUFF
+            })
+        }
         //console.log('add')
     }
     //
@@ -84,6 +92,7 @@ class PKTeamData_wx3 {
     }
     //
     public removeStateListerByOwner(owner){
+        var b = false
         for(var state in this.stateObj)
         {
             for(var i=0;i<this.stateObj[state].length;i++)
@@ -95,13 +104,22 @@ class PKTeamData_wx3 {
                     this.stateObj[state].splice(i,1);
                     i--;
                     listener.onRemove()
+                    if(listener.isSkill)
+                        b = true
                 }
             }
+        }
+        if(b)
+        {
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_SKILL_BUFF
+            })
         }
     }
 	private wx3_functionX_12744(){console.log(8746)}
 
     public onStateTimer(){
+        var b = false;
         for(var state in this.stateObj)
         {
             for(var i=0;i<this.stateObj[state].length;i++)
@@ -113,6 +131,8 @@ class PKTeamData_wx3 {
                     this.stateObj[state].splice(i,1);
                     i--;
                     listener.onRemove()
+                    if(listener.isSkill)
+                        b = true
                 }
                 else if(parseInt(state) == PKConfig_wx3.LISTENER_TIMER)
                 {
@@ -120,9 +140,26 @@ class PKTeamData_wx3 {
                 }
             }
         }
+        if(b)
+        {
+            PKData_wx3.getInstance().addVideo({
+                type:PKConfig_wx3.VIDEO_SKILL_BUFF
+            })
+        }
     }
-	private wx3_functionX_12745(){console.log(988)}
 
-
+    public getSkillListener(){
+        var arr = [];
+        for(var state in this.stateObj)
+        {
+            for(var i=0;i<this.stateObj[state].length;i++)
+            {
+                var listener:PKStateListener_wx3 = this.stateObj[state][i];
+                if(listener.isSkill)
+                    arr.push(listener)
+            }
+        }
+        return arr;
+    }
 
 }

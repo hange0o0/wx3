@@ -4,13 +4,13 @@ class S224 extends SBase {
 
     }
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var teamData = PD.getPlayer(playerID).teamData.enemy;
+        var teamData = player.teamData.enemy;
         var arr = PD.getMonsterByTeam(teamData);
         var targets = [];
-        var value = user.getSkillValue(2,true)
-        var rage = user.getSkillValue(1)
+        var value = this.getSkillValue(224,2,true)
+        var rage = this.getSkillValue(224,1)
         var xx = PD.getFirstX(teamData.id) - teamData.atkRota*rage;
         for(var i=0;i<arr.length;i++)
         {

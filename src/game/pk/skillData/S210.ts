@@ -3,78 +3,41 @@ class S210 extends SBase {
         super();
     }
 
-    public mvID1 = 119;
+    public mvID1 = 128;
 
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var num = this.getSkillValue(210,1);
-        var skillValue = this.getSkillValue(210,2)/100;
+        var cd = this.getSkillValue(210,2)*1000;
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
+        var arr = player.teamData.dieList;
         if(arr.length > num)
         {
-            PD.randSort(arr)
-            //arr.length = num;
+            PD.randSort(arr);
         }
-        for(var i=0;i<arr.length && num > 0;i++)
+        var list = [];
+        while(num > 0)
         {
-            var target = arr[i];
-            if(target.dieTime)
-                continue;
-            if(target.haveBuff(210))
-                continue;
-
-            var buff = new PKBuffData_wx3()
-            buff.user = PD.getPlayer(playerID);
-            buff.id = 210;
-            buff.value = skillValue;
-            buff.endTime = Number.MAX_VALUE
-            buff.addState(PKConfig_wx3.STATE_DIE)
-            buff.addState(PKConfig_wx3.STATE_REBORN);
-            target.addBuff(buff)
+            var oo = arr.pop();
+            if(!oo)
+                break;
+            var mData:any = {
+                force:MonsterManager.getInstance().getAtkAdd(oo.mid),
+                mid:oo.mid,
+                owner:player,
+                atkRota:player.teamData.atkRota,
+                x:oo.x,
+                y:-25 + PD.random()*50,
+                actionTime:PD.actionTime,
+                dieTime:PD.actionTime + cd
+            }
+            list.push(PD.addMonster(mData));
             num--;
         }
-        return arr;
-    }
-
-    public onBuff(buff:PKBuffData_wx3){
-        var PD = PKData_wx3.getInstance();
-        var target:PKMonsterData_wx3 = buff.owner;
-        if(target.reborning)
-            return;
-        target.reborning = true;
-        PKMonsterAction_wx3.getInstance().addAtkList({   //到actionTime后根据条件产生攻击事件
-            type:'delay_run',
-            fun:()=>{
-                this.delayFun(target,buff)
-            },
-            stopTestDie:true,
-            actionTime:PD.actionTime,
-            endTime:PD.actionTime + 1000
-        })
-    }
-
-    public delayFun(target:PKMonsterData_wx3,buff:PKBuffData_wx3){
-        var PD = PKData_wx3.getInstance();
-        var mid = target.mid;
-        var owner = PD.getPlayer(target.owner);
-        var atkRota = owner.teamData.atkRota;
-        var mData = {
-            force:owner.force,
-            mid:mid,
-            owner:target.owner,
-            atkRota:atkRota,
-            x:target.x,
-            y:target.y,
-            hpRate:buff.value,
-            actionTime:PD.actionTime
-        }
-
-        var monster = PD.addMonster(mData);
-        var mc = AtkMVCtrl.getInstance().playAniOn(monster.id,this.mvID1)
-        if(mc)
+        if(list.length == 0)
         {
-            mc.y -= 30
+            MyWindow.ShowTips('没有可被复活的怪物')
         }
+        return list;
     }
 }

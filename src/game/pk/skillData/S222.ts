@@ -3,15 +3,15 @@ class S222 extends SBase {
         super();
     }
 
-    public mvID1 = 30
+    public mvID1 = 128
 
-    public onSkill(playerID) {
+    public onSkill(player) {
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getMonsterByTeam(PD.getPlayer(playerID).teamData);
+        var arr = PD.getMonsterByTeam(player.teamData);
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
-            target.addHp(user.getSkillValue(1,true))
+            target.addHp(this.getSkillValue(222,1,true))
         }
         return arr;
     }
