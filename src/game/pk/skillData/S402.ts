@@ -11,16 +11,15 @@ class S402 extends SBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+            if(!target.getVO().isNearAtk())
+                continue;
             var buff = new PKBuffData_wx3()
             buff.id = 402;
             buff.value = value;
             buff.user = player;
             buff.endTime = PD.actionTime + cd;
-            if(target.getVO().isNearAtk())
-            {
-                buff.addValue('def',value);
-                var keys = ['def+']
-            }
+            buff.addValue('def',value);
+            var keys = ['def+']
 
             target.addBuff(buff)
             if(buff.ing)

@@ -135,7 +135,6 @@ class PKPlayerData_wx3 {
         for(var s in oo)
         {
             data[s] = oo[s];
-	wx3_function(5420);
         }
         return data;
     }

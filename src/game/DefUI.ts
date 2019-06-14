@@ -223,7 +223,7 @@ class DefUI extends game.BaseItem_wx3{
 
         this.addDefBtn.visible = !this.isPos && arr.length == 0
         egret.Tween.removeTweens(this.mailBtn)
-        this.mailBtn.visible = (TM_wx3.now() - UM_wx3.regTime > 10*60) && (TM_wx3.now() - TaskManager.getInstance().lastShowMailTime > 10*60);
+        this.mailBtn.visible = (TM_wx3.now() - UM_wx3.regTime > 10*60) && (TM_wx3.now() - TaskManager.getInstance().lastShowMailTime > 30*60);
         if(this.mailBtn.visible)
         {
             this.mailBtn.rotation = 0;

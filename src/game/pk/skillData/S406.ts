@@ -2,7 +2,7 @@ class S406 extends SBase {
     constructor() {
         super();
     }
-    public mvID1 = 103;
+    public mvID1 = 112;
     public onSkill(player) {
         var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(player.teamData.enemy);

@@ -39,9 +39,10 @@ class PKState_wx3 extends game.BaseItem_wx3 {
         //}
         else if(this.data == PKConfig_wx3.STATE_MODUN)
         {
-             this.initAtkMV_1736();
-	wx3_function(2266);
-            this.atkMV.load('effect1_png',0,440,128,4)
+            this.initImg_677();
+            this.stateMC.source = 'border_9_png'
+            this.stateMC.anchorOffsetX = 64/2
+            this.stateMC.anchorOffsetY = 64
         }
         else if(this.data == PKConfig_wx3.STATE_MIANSHANG)
         {
@@ -98,11 +99,16 @@ class PKState_wx3 extends game.BaseItem_wx3 {
                 this.y = 300 - mD.getVO().height -50
                 break;
             case PKConfig_wx3.STATE_MODUN:
-                this.atkMV.play()
-                var scale = (mD.getVO().height + 20)/128
-                this.x = 50 -  110/2*scale
-                this.y = 300 - mD.getVO().height-20
-                this.atkMV.scaleX = this.atkMV.scaleY = scale
+                //this.atkMV.play()
+                //var scale = (mD.getVO().height + 20)/128
+                //this.x = 50 -  110/2*scale
+                //this.y = 300 - mD.getVO().height-20
+                //this.atkMV.scaleX = this.atkMV.scaleY = scale
+
+                this.stateMC.scaleX = mD.getVO().width/64
+                this.stateMC.scaleY = mD.getVO().height/64*1.3
+                this.x = 50// -  154/4
+                this.y = 300 + this.stateMC.scaleY*2// - mD.getVO().height - 35
                 break;
             case PKConfig_wx3.STATE_MIANSHANG:
                 this.scaleX = item.monsterMV.scaleX

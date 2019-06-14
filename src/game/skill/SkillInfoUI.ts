@@ -13,8 +13,11 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
     private coinGroup: eui.Group;
     private coinText: eui.Label;
     private btn: eui.Button;
+    private numGroup: eui.Group;
     private numText: eui.Label;
+    private infoText: eui.Label;
     private item: PKCardInfoItem_wx3;
+
 
 
 
@@ -86,13 +89,16 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
         this.renew();
 
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
-        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
     }
 
-    private onTimer(){
+    private onE(){
         if(this.showType == 'buff')
         {
-            this.desText.text = ''
+            var cd = Math.max(0,this.data.endTime - PKData_wx3.getInstance().actionTime)
+            var cd1 = Math.floor(cd/1000)
+            var cd2 = Math.floor(cd/1000*100)%100
+            this.infoText.text = '效果剩余时间:' + DateUtil.getStringBySecond(cd1).substr(-5) + '′' + ('00' + cd2).substr(-2) + "″"
         }
     }
 
@@ -110,15 +116,16 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
        this.renewCoin();
         this.skillMC.source = vo.getImage();
         this.skillNameText.text = vo.name
+        this.numGroup.visible = this.showType != 'buff'
         this.numText.text = 'x' + (this.data.num || SkillManager.getInstance().getSkillNum(this.data.id));
         this.setHtml(this.desText,vo.getDes(TecManager.getInstance().getTecLevel(41),true))
 
         if(this.showType == 'use')
         {
-            this.desText.text = '拖进战场中即可使用'
+            this.infoText.text = '拖进战场中即可使用'
         }
 
-        this.onTimer();
+        this.onE();
     }
 
 

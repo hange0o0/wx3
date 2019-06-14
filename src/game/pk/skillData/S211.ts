@@ -3,7 +3,7 @@ class S211 extends SBase {
         super();
     }
 
-    public mvID1 = 102;
+    public mvID1 = 112;
 
 
     //生效时的逻辑
@@ -36,17 +36,11 @@ class S211 extends SBase {
         for(var i=0;i<num;i++)
         {
             var x = item.x + PD.random()*100 - 50;
-            var mData = {
-                force:MonsterManager.getInstance().getAtkAdd(65),
+            var mData = owner.getMonsterCreateData({
                 mid:65,
-                owner:owner,
-                atkRota:atkRota,
                 x:x,
-                y:-25 + PD.random()*50,
                 lastSkill:Number.MAX_VALUE,
-                actionTime:PD.actionTime,
-                dieTime:PD.actionTime + cd
-            }
+            })
             PD.addMonster(mData);
         }
 

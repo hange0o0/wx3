@@ -11,16 +11,15 @@ class S401 extends SBase {
         for(var i=0;i<arr.length;i++)
         {
             var target = arr[i];
+            if(target.getVO().isNearAtk())
+                continue;
             var buff = new PKBuffData_wx3()
             buff.id = 401;
             buff.value = value;
             buff.user = player;
             buff.endTime = PD.actionTime + cd;
-            if(!target.getVO().isNearAtk())
-            {
-                var keys = ['atk+']
-                buff.addValue('atk',Math.ceil(value*target.baseAtk));
-            }
+            var keys = ['atk+']
+            buff.addValue('atk',Math.ceil(value*target.baseAtk));
             target.addBuff(buff)
             if(buff.ing)
             {

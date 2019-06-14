@@ -3,7 +3,7 @@ class S259 extends SBase {
         super();
     }
 
-    public mvID1 = 111;
+    public mvID1 = 112;
     public onSkill(player) {
         var PD = PKData_wx3.getInstance();
         var arr = PD.getMonsterByTeam(player.teamData.enemy);

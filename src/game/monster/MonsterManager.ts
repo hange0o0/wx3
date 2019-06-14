@@ -103,7 +103,35 @@ class MonsterManager {
         {
             var id = arr[i];
             oo[id] = this.getForceAdd(id)
+            if(id == 72)
+                oo[65] = this.getForceAdd(65)
+            else if(id == 74)
+                oo[64] = this.getForceAdd(64)
         }
+        //带召唤的技能
+        var SM = SkillManager.getInstance();
+        if(SM.getSkillNum(211) || SM.getSkillNum(319))
+            oo[65] = this.getForceAdd(65)
+
+        if(SM.getSkillNum(313))
+            oo[41] = this.getForceAdd(41)
+
+        if(SM.getSkillNum(315))
+            oo[61] = this.getForceAdd(61)
+
+        if(SM.getSkillNum(316))
+            oo[62] = this.getForceAdd(62)
+
+        if(SM.getSkillNum(317))
+            oo[63] = this.getForceAdd(63)
+
+        if(SM.getSkillNum(320))
+            oo[70] = this.getForceAdd(70)
+
+        if(SM.getSkillNum(322))
+            oo[76] = this.getForceAdd(76)
+
+
         return oo;
     }
 	private wx3_functionX_12399(){console.log(9224)}
@@ -112,7 +140,7 @@ class MonsterManager {
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].lv = this.getMonsterLevel(id) + 1;
-        TaskManager.getInstance().testMainTask('monster')
+        TaskManager.getInstance().testMainTask('monster',id)
         EM_wx3.dispatch(GameEvent.client.MONSTER_CHANGE)
     }
 	private wx3_functionX_12400(){console.log(1146)}
@@ -121,7 +149,7 @@ class MonsterManager {
         if(!this.monsterData[id])
             this.monsterData[id] = {}
         this.monsterData[id].num = this.getMonsterNum(id) + 1;
-        TaskManager.getInstance().testMainTask('monster')
+        TaskManager.getInstance().testMainTask('monster',id)
         EM_wx3.dispatch(GameEvent.client.MONSTER_CHANGE)
     }
 	private wx3_functionX_12401(){console.log(5133)}

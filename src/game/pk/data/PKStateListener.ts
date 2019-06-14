@@ -8,7 +8,7 @@ class PKStateListener_wx3 { //图腾类，会针对状态改变进行触发
 
     public type//监听类型
 
-    public isSkill = false;
+    public isSkill = 0;
 
    // public id//唯一的ID，ID相同时，value值大的会生效
     //public value;

@@ -4,6 +4,7 @@ class S241 extends SBase {
     }
 
 
+    public mvID1 = 112;
 
     public onSkill(player) {
         var listener = new S241StateListener()
@@ -22,7 +23,7 @@ class S241 extends SBase {
 
 class S241StateListener extends PKStateListener_wx3 {
     public type = PKConfig_wx3.LISTENER_CREATE
-    public isSkill = true;
+    public isSkill = 241;
     public addValue
     constructor() {
         super();
@@ -35,5 +36,6 @@ class S241StateListener extends PKStateListener_wx3 {
         //    return;
 
         target.addHp(-this.addValue)
+        AtkMVCtrl_wx3.getInstance().sSkillMV(241,target)
     }
 }

@@ -13,8 +13,10 @@
 		<e:Image x="5" source="icon_coin_png" scaleX="0.8" scaleY="0.8" y="3"/>
 	</e:Group>
 	<e:Button id="btn" label="购买" skinName="Btn1Skin" width="160" horizontalCenter="0" bottom="25" skinName.info="Btn2Skin" label.info="丢弃" includeIn="buy,info"/>
-	<e:Image source="bg17_png" scaleX="-0.8" scaleY="0.8" right="150" y="183"/>
-	<e:Label id="numText" text="x123" y="188" width="130" size="20" horizontalCenter="0" textAlign="right" horizontalCenter.use="0" y.use="189"/>
+	<e:Group id="numGroup" x="155" y="183">
+		<e:Image source="bg17_png" scaleX="-0.8" scaleY="0.8" y="0" x="135"/>
+		<e:Label id="numText" text="x123" y="5" width="130" size="20" textAlign="right" horizontalCenter.use="0" x="0"/>
+	</e:Group>
 	<e:Label id="infoText" text="拖进战场中即可使用" includeIn="use" horizontalCenter="0" bottom="30" size="22" textColor="0xfcc95a"/>
 	<ns1:PKCardInfoItem_wx3 id="item" y="227" skinName="PKCardInfoItemSkin" horizontalCenter="0"/>
 </e:Skin>

@@ -61,6 +61,6 @@ class SkillVO {
     private changeValue_1938(v,forceRate,fillColor,color?){
         if(!v)
             return;
-        return this.fillColor_6867(Math.ceil(v*forceRate),fillColor,color);
+        return this.fillColor_6867(Math.ceil(v*(1+forceRate*0.5)),fillColor,color);
     }
 }

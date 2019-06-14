@@ -133,7 +133,7 @@ class TecManager {
         this.tecData[id] = this.getTecLevel(id) + 1;
 	wx3_function(9641);
         EM_wx3.dispatch(GameEvent.client.TEC_CHANGE)
-        TaskManager.getInstance().testMainTask('tec')
+        TaskManager.getInstance().testMainTask('tec',id)
         fun && fun();
     }
 

@@ -63,7 +63,7 @@ class AtkMVCtrl_wx3 {
         if(mv && marge)
         {
             mv.y -= marge;
-            mv.scaleX = mv.scaleY = 0.6
+            //mv.scaleX = mv.scaleY = 0.6
         }
         return mv;
     }
@@ -432,12 +432,19 @@ class AtkMVCtrl_wx3 {
     public skillMV223(target:PKMonsterData_wx3){
         this.skillMVType1(223,target,40)
     }
+    public skillMV224(target:PKMonsterData_wx3){
+        var targetItem = PKVideoCon_wx3.getInstance().getItemByID(target.id);
+        var id =2
+        PKBulletManager_wx3.getInstance().createBullet(null,targetItem,PKData_wx3.getInstance().actionTime,PKData_wx3.getInstance().actionTime + 200,id)
+    }
 
     public skillMV226(target:PKMonsterData_wx3){
         this.skillMVType1(226,target)
     }
 
-
+    public skillMV241(target:PKMonsterData_wx3){
+        this.skillMVType2(241,target)
+    }
     public skillMV252(target:PKMonsterData_wx3){
         this.skillMVType2(252,target)
     }

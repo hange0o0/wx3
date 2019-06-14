@@ -291,6 +291,7 @@ if(window["wx"])
     //window["TeamUI"] = TeamUI;
     window["MainPKUI"] = MainPKUI_wx3;
     window["PKCardInfoUI_wx3"] = PKCardInfoUI_wx3;
+    window["PKCardInfoItem_wx3"] = PKCardInfoItem_wx3;
     window["BottomUI"] = BottomUI;
     window["TopUI"] = TopUI
     window["ChangeUserUI"] = ChangeUserUI

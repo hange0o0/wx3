@@ -19,7 +19,7 @@ class S237 extends SBase {
 
 class S237StateListener extends PKStateListener_wx3 {
     public type = PKConfig_wx3.LISTENER_CREATE
-    public isSkill = true;
+    public isSkill = 237;
     public addValue
     constructor() {
         super();

@@ -258,20 +258,26 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
 	private wx3_functionX_12720(){console.log(9501)}
 
-    public useSkill(skillID){
-        SkillManager.getInstance().addSkill(skillID,-1);
+    public useSkill(skillID,stopRecord?){
+        if(!stopRecord)
+        {
+            SkillManager.getInstance().addSkill(skillID,-1);
+            this.actionList.push({
+                type:'skill',
+                id:skillID,
+                time:this.actionTime,
+            })
+        }
+
         this.skillUseTime[skillID] = this.actionTime;
-        this.actionList.push({
-            type:'skill',
-            id:skillID,
-            time:this.actionTime,
-        })
         this.addVideo({
             type:PKConfig_wx3.VIDEO_SKILL_USE,
             skillID:skillID
         })
 
         SBase.getData(skillID).skill()
+
+
     }
 
     public getHpData(){

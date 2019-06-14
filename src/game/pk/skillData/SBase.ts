@@ -123,16 +123,13 @@ class SBase {
         var cd = this.getSkillValue(skillID,2)*1000;
         for(var i=0;i<num;i++)
         {
-            var mData:any = {
-                force:MonsterManager.getInstance().getAtkAdd(mid),
+            var mData = owner.getMonsterCreateData({
                 mid:mid,
-                owner:owner,
-                atkRota:atkRota,
                 x:x,
-                y:-25 + PD.random()*50,
-                actionTime:PD.actionTime,
+                lastSkill:Number.MAX_VALUE,
                 dieTime:PD.actionTime + cd
-            }
+            })
+
             if(noSkill)
                 mData.lastSkill = Number.MAX_VALUE
             PD.addMonster(mData);

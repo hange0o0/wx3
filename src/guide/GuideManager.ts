@@ -246,6 +246,15 @@ class GuideManager {
         this.addGuideObj_96({
             fun:function(){
                 GuideUI.getInstance().hide();
+                wx3_function(6457);
+                MainPKUI_wx3.getInstance().startGame()
+            },
+            text:'在战斗的过程中，你可以把[技能拖到战场]进行使用',
+        })
+
+        this.addGuideObj_96({
+            fun:function(){
+                GuideUI.getInstance().hide();
 	wx3_function(6457);
                 MainPKUI_wx3.getInstance().startGame()
             },

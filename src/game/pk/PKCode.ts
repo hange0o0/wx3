@@ -290,6 +290,14 @@ class PKCode_wx3 {
         PD.team1.onStateTimer();
         PD.team2.onStateTimer();
 
+        for(var i=0;i<PD.actionList.length;i++)
+        {
+             if(PD.actionList[i].time == PD.actionTime)
+             {
+                 PD.useSkill(PD.actionList[i].id,true)
+             }
+        }
+
         if(!PD.isGameOver && !PD.isDef)
         {
             if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)

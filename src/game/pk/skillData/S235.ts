@@ -19,7 +19,7 @@ class S235 extends SBase {
 
 class S235StateListener extends PKStateListener_wx3 {
     public type = PKConfig_wx3.LISTENER_CREATE
-    public isSkill = true;
+    public isSkill = 235;
     public addValue
     constructor() {
         super();

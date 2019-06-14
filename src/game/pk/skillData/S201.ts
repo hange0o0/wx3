@@ -21,7 +21,7 @@ class S201 extends SBase{
 
 class S201StateListener extends PKStateListener_wx3 {
     public type = PKConfig_wx3.LISTENER_TIMER
-    public isSkill = true;
+    public isSkill = 201;
     public actionTime
     public skillValue1
     constructor() {

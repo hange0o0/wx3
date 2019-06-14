@@ -156,7 +156,7 @@ class TaskManager {
     }
 
     private lastTaskFinish = false;
-    public testMainTask(type){
+    public testMainTask(type,id?){
         if(GuideManager.getInstance().isGuiding)
             return;
         if(!this.lastTaskFinish && this.isTaskFinish())
@@ -191,9 +191,20 @@ class TaskManager {
                     {
                         return
                     }
+                    if(vo.type == 'mlv' ||  vo.type == 'mnum')
+                    {
+                        if(vo.key != id)
+                        {
+                             return
+                        }
+                    }
                     break;
                 case 'tec':
                     if(vo.type != 'tlv')
+                    {
+                        return
+                    }
+                    if(vo.key != id)
                     {
                         return
                     }
@@ -408,6 +419,7 @@ class TaskManager {
 
 	private wx3_functionX_12620(){console.log(5382)}
     public addTaskTime = 0;
+    public addTaskNum = 0
     public onTimer(){
         var arr = UM_wx3.dayTask;
         if(!arr)
@@ -416,7 +428,7 @@ class TaskManager {
 
         if(!this.addTaskTime)//首次进入onTimer
         {
-            this.addTaskTime = Math.max(TM_wx3.now() + 60,SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1)
+            this.addTaskTime = Math.max(TM_wx3.now() + 5*60,SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1)
             for(var i=0;i<arr.length;i++)
             {
                  if(!arr[i].time)//未做的要去掉
@@ -444,7 +456,7 @@ class TaskManager {
             return;
 
         var arr = UM_wx3.dayTask;
-        this.addTaskTime = TM_wx3.now() + 60*10;
+        this.addTaskTime = TM_wx3.now() + 60*10 + this.addTaskNum*3*60;
         SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
         var list = [1,2,3,4,5,6,7,8];
         for(var i=0;i<arr.length;i++)
@@ -464,6 +476,7 @@ class TaskManager {
             create:TM_wx3.now(),
             award:Math.ceil(UM_wx3.hourEarn*Math.pow(cd,1.1)*(0.8+0.2*Math.random()))
         })
+        this.addTaskNum ++;
     }
 
     public testTaskFinish(){

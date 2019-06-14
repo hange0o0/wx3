@@ -2,7 +2,7 @@ class S216 extends SBase {
     constructor() {
         super();
     }
-    public mvID1 = 30
+    public mvID1 = 128
 
     //生效时的逻辑
     public onSkill(player){

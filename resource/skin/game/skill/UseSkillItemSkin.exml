@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="UseSkillItemSkin" height="60" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="200">
+	<e:Image source="bg13_png" scale9Grid="16,15,7,7" left="0" right="0" top="0" bottom="0"/>
+	<e:Label id="skillText" text="卷轴商店" size="22" verticalCenter="0" textColor="0xF7DFA0" y="224" left="60" right="20" textAlign="center"/>
+	<e:Image id="skillMC" width="40" height="40" x="10" verticalCenter="0"/>
+</e:Skin>

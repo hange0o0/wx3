@@ -33,8 +33,8 @@ class PKConfig_wx3 {
 	private wx3_functionX_12488(){console.log(7341)}
     public static gameTime = 5*60; //游戏时间,超出算平
     public static maxMonsterSpace = 30; //同时存活怪的占位
-    public static floorWidth = 800//1300; //战场宽度
-    public static appearPos = 100//出现的位置
+    public static floorWidth = 700//1300; //战场宽度
+    public static appearPos = 150//出现的位置
     //public static diamondPos = 200//出现的位置
     public static remainCD = 3000//能出兵后没出兵保持的时间
     //public static maxMP = 20; //MP上限

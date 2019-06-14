@@ -21,16 +21,13 @@ class S210 extends SBase {
             var oo = arr.pop();
             if(!oo)
                 break;
-            var mData:any = {
-                force:MonsterManager.getInstance().getAtkAdd(oo.mid),
+
+            var mData = player.getMonsterCreateData({
                 mid:oo.mid,
-                owner:player,
-                atkRota:player.teamData.atkRota,
                 x:oo.x,
-                y:-25 + PD.random()*50,
-                actionTime:PD.actionTime,
+                lastSkill:Number.MAX_VALUE,
                 dieTime:PD.actionTime + cd
-            }
+            })
             list.push(PD.addMonster(mData));
             num--;
         }

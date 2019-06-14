@@ -13,56 +13,54 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.adBottom = 0
     }
 
-	private wx3_functionX_12443(){console.log(312)}
     private topUI: TopUI;
     private con: eui.Group;
     private lineMC: eui.Rect;
     private scroller: eui.Scroller;
-    private skillList: eui.List;
     private list1: eui.List;
     private list2: eui.List;
-	private wx3_functionX_12444(){console.log(5593)}
+    private chooseGroup: eui.Group;
+    private addSpeedBtn: eui.Group;
+    private speedMC: eui.Image;
+    private speedMC2: eui.Image;
+    private speedText: eui.Label;
+    private skillList: eui.List;
+    private skillBuffList: eui.List;
     private cost1Group: eui.Group;
     private force1Text: eui.Label;
     private cost2Group: eui.Group;
     private force2Text: eui.Label;
+    private bottomBar: eui.Group;
+    private hpBar1: eui.Image;
+    private hpBar2: eui.Image;
     private cdGroup: eui.Group;
     private timeText: eui.Label;
-	private wx3_functionX_12445(){console.log(7879)}
     private winGroup: eui.Group;
     private winText: eui.Label;
     private starGroup: eui.Group;
     private s0: eui.Image;
     private s1: eui.Image;
     private s2: eui.Image;
-	private wx3_functionX_12446(){console.log(5736)}
     private desGroup: eui.Group;
     private resourceGroup: eui.Group;
     private coinGroup: eui.Group;
     private des1: eui.Label;
     private diamondGroup: eui.Group;
     private des2: eui.Label;
-	private wx3_functionX_12447(){console.log(4969)}
     private failGroup: eui.Group;
     private failText: eui.Label;
     private btnGroup: eui.Group;
     private backBtn: eui.Button;
     private doubleBtn: eui.Button;
     private replayBtn: eui.Button;
-	private wx3_functionX_12448(){console.log(1933)}
     private strongBtn: eui.Button;
-    private bottomBar: eui.Group;
-    private hpBar1: eui.Image;
-    private hpBar2: eui.Image;
-    private addSpeedBtn: eui.Group;
-    private speedMC: eui.Image;
-	private wx3_functionX_12449(){console.log(7252)}
-    private speedMC2: eui.Image;
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private bottomUI: BottomUI;
 
+
     public dataIn;
+    public lastAction; //上次操作
     public finish = false
 	private wx3_functionX_12453(){console.log(4360)}
     public gameStart = false
@@ -84,9 +82,12 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         super.childrenCreated();
 
         this.skillList.itemRenderer = PKSkillItem
+        this.skillBuffList.itemRenderer = PKSkillBuffItem
+        this.skillBuffList.touchChildren = true;
         this.bottomUI.setHide(this.hide,this);
         this.dragTarget.width = 100
         this.dragTarget.height = 100
+        this.dragTarget.alpha = 0.5
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
         this.addBtnEvent(this.backBtn,this.onBack_3581)
@@ -169,21 +170,30 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     private showSkillUse(skillID){
-        console.log('使用了技能' + skillID)
+        UseSkillItem.showMV(skillID,this)
+        //console.log('使用了技能' + skillID)
     }
 
     private renewSkill(){
         var arr = []
-        for(var s in UM_wx3.skills)
+        if(this.dataIn.isReplay)
         {
-            arr.push({
-                id:s,
-                num:UM_wx3.skills[s]
-            })
+            while(arr.length < 5)
+              arr.push({disable:true})
         }
-        while(arr.length < 5)
+        else
         {
-            arr.push(null);
+            for(var s in UM_wx3.skills)
+            {
+                arr.push({
+                    id:s,
+                    num:UM_wx3.skills[s]
+                })
+            }
+            while(arr.length < 5)
+            {
+                arr.push(null);
+            }
         }
         this.skillList.dataProvider = new eui.ArrayCollection(arr)
     }
@@ -210,8 +220,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	private wx3_functionX_12458(){console.log(1127)}
 
     private renewSpeedBtn_6940(){
-        this.speedMC.visible = PKData_wx3.getInstance().playSpeed > 1
-        this.speedMC2.visible = PKData_wx3.getInstance().playSpeed > 2
+        this.speedText.text =  'x' + PKData_wx3.getInstance().playSpeed;
+        //this.speedMC.visible = PKData_wx3.getInstance().playSpeed > 1
+        //this.speedMC2.visible = PKData_wx3.getInstance().playSpeed > 2
     }
 
 	private wx3_functionX_12459(){console.log(6967)}
@@ -309,6 +320,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public onShow(){
+        this.lastAction = []
         if(Config.adHeight)
         {
             this.scroller.bottom = Config.adHeight;
@@ -347,6 +359,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(3151);
         this.dataIn.isReplay = true;
         this.bottomBar.visible = true
+        this.lastAction = PKData_wx3.getInstance().actionList.concat();
         this.reset();
     }
 
@@ -362,6 +375,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	private wx3_functionX_12463(){console.log(3369)}
     public reset(){
         this.gameStart = false;
+        this.addSpeedBtn.visible = true
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
@@ -379,8 +393,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             this.skillList.touchChildren = this.skillList.touchEnabled = true;
         }
 
-        this.renewSkill();
-        this.renewSkillBuff();
+
 
 	wx3_function(9719);
         PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
@@ -425,6 +438,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         PKBulletManager_wx3.getInstance().freeAll();
         var PD = PKData_wx3.getInstance();
         PD.init(data);
+        if(this.lastAction.length)
+            PD.actionList = this.lastAction;
+        console.log(PD.actionList)
         if(!this.dataIn.isReplay && DM.jumpPK)
         {
             PD.quick = true;
@@ -439,6 +455,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.lastRenewTime = 0;
         this.renewForce_6226();
         this.renewHp_8712(true);
+        this.renewSkill();
+        this.renewSkillBuff();
 
 
         if(!GuideManager.getInstance().isGuiding)
@@ -528,8 +546,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	private wx3_functionX_12465(){console.log(305)}
 
     private renewSkillBuff(){
+        console.log('renewSkillBuff')
         var PD = PKData_wx3.getInstance();
-        var arr = PD.getSkillBuff();
+        this.skillBuffList.dataProvider = new eui.ArrayCollection(PD.getSkillBuff());
     }
 
     public onStep(){
@@ -548,7 +567,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(5613);
         PKVideoCon_wx3.getInstance().action();
         MyTool.runListFun(this.skillList,'onE')
-        this.renewSkillBuff();
+        //this.renewSkillBuff();
 
 
 
@@ -561,7 +580,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             this.renewHp_8712();
 
             PD.playSpeed = 1;
-            
+            this.addSpeedBtn.visible = false
 
             this.shareStr = ''
             this.finish = true;
@@ -758,8 +777,9 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             })
 
             tw.call(()=>{
+                this.skillBuffList.dataProvider = new eui.ArrayCollection([]);
                 this.btnGroup.visible = true
-                this.bottomBar.visible = false;
+                //this.bottomBar.visible = false;
 	wx3_function(6213);
                 this.currentState = 's2'
                 this.adBottom = 100;
