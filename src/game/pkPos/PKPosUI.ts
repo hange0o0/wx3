@@ -333,6 +333,7 @@ class PKPosUI extends game.BaseUI_wx3 {
         this.addFreeMonsterNum(id,-1)
         this.onItemChange_5686();
         GuideManager.getInstance().testShowGuide()
+        TaskTips.getInstance().hide();
     }
 	private wx3_functionX_12550(){console.log(0)}
 

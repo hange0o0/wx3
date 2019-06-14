@@ -246,7 +246,6 @@ class GuideManager {
         this.addGuideObj_96({
             fun:function(){
                 GuideUI.getInstance().hide();
-                wx3_function(6457);
                 MainPKUI_wx3.getInstance().startGame()
             },
             text:'在战斗的过程中，你可以把[技能拖到战场]进行使用',
@@ -254,20 +253,18 @@ class GuideManager {
 
         this.addGuideObj_96({
             fun:function(){
-                GuideUI.getInstance().hide();
-	wx3_function(6457);
-                MainPKUI_wx3.getInstance().startGame()
+                self.endGuide_3532();
             },
-            text:'要赢取胜利，[阵容克制]起着尤其重要的作用！当然，[战力相差太多]也是不行的',
+            text:'要赢取胜利，[阵容克制]起着尤其重要的作用！当然，[战力相差太多]也是不行的哦~',
         })
 
-        this.addGuideObj_96({
-            fun:function(){
-                self.endGuide_3532();
-	wx3_function(2111);
-            },
-            text:'恭喜你取得了来到怪物世界的首利。下面就请跟着[主线任务]继续前进吧！',
-        })
+     //   this.addGuideObj_96({
+     //       fun:function(){
+     //           self.endGuide_3532();
+	//wx3_function(2111);
+     //       },
+     //       text:'恭喜你取得了来到怪物世界的首利。下面就请跟着[主线任务]继续前进吧！',
+     //   })
 
 
 

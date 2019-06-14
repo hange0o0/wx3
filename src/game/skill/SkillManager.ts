@@ -31,7 +31,7 @@ class SkillManager {
         }
         ArrayUtil.random(list);
         list.length = 9;
-        var coinRate = Math.max(1,UM_wx3.hourEarn/20000)
+        var coinRate = Math.max(1,UM_wx3.hourEarn/50000)
         for(var i=0;i<list.length;i++)
         {
             var vo = list[i];
