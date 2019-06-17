@@ -294,7 +294,10 @@ class PKCode_wx3 {
         {
              if(PD.actionList[i].time == PD.actionTime)
              {
-                 PD.useSkill(PD.actionList[i].id,true)
+                 if(PD.actionList[i].id > 200)
+                     PD.useSkill(PD.actionList[i].id,true)
+                 else
+                     PD.useMonster(PD.actionList[i].index,true)
              }
         }
 

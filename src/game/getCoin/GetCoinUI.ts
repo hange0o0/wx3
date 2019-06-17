@@ -81,11 +81,11 @@ class GetCoinUI extends game.BaseWindow_wx3 {
             //{type:1,title:'等陆第X天'},
             //{type:2,title:'X小时后可领'},
         ]
-        if(!UM_wx3.isTest && ChangeUserUI.adList.length)
-        {
-            arr.push({type:3,title:'体验更多小程序'})
-            //arr.push({type:3,title:'告诉我的好友们'})
-        }
+        //if(!UM_wx3.isTest && ChangeUserUI.adList.length)
+        //{
+        //    arr.push({type:3,title:'体验更多小程序'})
+        //    //arr.push({type:3,title:'告诉我的好友们'})
+        //}
         //arr.push({type:4,title:'邀请X位新的好友'})
 
         arr.push({type:5,title:'观看广告'})

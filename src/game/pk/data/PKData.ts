@@ -20,6 +20,9 @@ class PKData_wx3 extends egret.EventDispatcher{
 
     public currentState = 'def'
     public isDef = false;
+    public pkModel = 1;     //1普通，2手牌
+    public spaceType = 1;     //手牌模式下的二级模式
+
 
     public quick = false//快速算出结果
 	private wx3_functionX_12710(){console.log(7079)}
@@ -76,6 +79,8 @@ class PKData_wx3 extends egret.EventDispatcher{
     public speedAddTime = 0;//当前播放速度开始时间
 
     public actionList = [];//玩家操作集合
+    public handData = {};//玩家的手牌
+    public handCarList = []//所有手牌的集合
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -151,6 +156,9 @@ class PKData_wx3 extends egret.EventDispatcher{
 
     //初始化游戏
     public init(data){
+
+        this.pkModel = data.pkModel || 1;
+        this.spaceType = data.spaceType;
 
 	wx3_function(1945);
         this.isDef = data.isDef;
@@ -278,6 +286,31 @@ class PKData_wx3 extends egret.EventDispatcher{
         SBase.getData(skillID).skill()
 
 
+    }
+    public useMonster(index,stopRecord?){
+        var monsterID = this.handData[index];
+        //if(!monsterID)
+        //    return;
+        if(!stopRecord)
+        {
+            this.actionList.push({
+                type:'monster',
+                id:monsterID,
+                time:this.actionTime,
+            })
+        }
+        var mData = this.getPlayer(2).getMonsterCreateData({
+            mid:monsterID,
+        })
+
+        //给出新的牌
+        this.handData[index] = this.handCarList.shift();
+        this.addMonster(mData)
+        this.addVideo({
+            type:PKConfig_wx3.VIDEO_MONSTER_USE,
+            index:index,
+            monsterID:monsterID
+        })
     }
 
     public getHpData(){

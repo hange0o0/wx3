@@ -1838,6 +1838,46 @@
 			"name":"skill_txt",
 			"type":"text",
 			"url":"data/skill.txt"
+		},
+		{
+			"name":"door_mv_png",
+			"type":"image",
+			"url":"game_assets/door/door_mv.png"
+		},
+		{
+			"name":"door_mv_json",
+			"type":"json",
+			"url":"game_assets/door/door_mv.json"
+		},
+		{
+			"name":"space_icon_png",
+			"type":"image",
+			"url":"game_assets/space_icon.png"
+		},
+		{
+			"name":"space_4_png",
+			"type":"image",
+			"url":"game_assets/door/space_4.png"
+		},
+		{
+			"name":"space_1_png",
+			"type":"image",
+			"url":"game_assets/door/space_1.png"
+		},
+		{
+			"name":"space_2_png",
+			"type":"image",
+			"url":"game_assets/door/space_2.png"
+		},
+		{
+			"name":"space_3_png",
+			"type":"image",
+			"url":"game_assets/door/space_3.png"
+		},
+		{
+			"name":"door_bar_png",
+			"type":"image",
+			"url":"game_assets/door/door_bar.png"
 		}
 	]
 }

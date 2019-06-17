@@ -17,6 +17,7 @@ class DefUI extends game.BaseItem_wx3{
     private coinRed: eui.Image;
     private buffBtn: eui.Group;
     private rankBtn: eui.Group;
+    private spaceBtn: eui.Group;
 	private wx3_functionX_11910(){console.log(6115)}
     private defList: eui.List;
     private redMC: eui.Image;
@@ -72,6 +73,12 @@ class DefUI extends game.BaseItem_wx3{
         this.addBtnEvent(this.buffBtn,this.onBuff_1268)
         this.addBtnEvent(this.coinBtn,this.onCoin_4808)
         this.addBtnEvent(this.rankBtn,this.onRank_3089)
+
+        this.addBtnEvent(this.spaceBtn,(e)=>{
+            e.stopImmediatePropagation();
+            SpaceUI.getInstance().show();
+        })
+
         this.addBtnEvent(this.mailBtn,(e)=>{
             e.stopImmediatePropagation();
             this.mailBtn.visible = false;

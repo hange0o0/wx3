@@ -209,7 +209,10 @@ class Main extends eui.UILayer {
         //}
         //console.log('_12')
 	wx3_function(4082);
-            GameUI.getInstance().show();
+        GameUI.getInstance().show();
+        MyADManager.getInstance().getAD()
+        MyADManager.getInstance().createAD()
+
 
     }
 }

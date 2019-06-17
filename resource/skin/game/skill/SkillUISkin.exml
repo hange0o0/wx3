@@ -31,7 +31,7 @@
 		</e:layout>
 	</e:Group>
 	<e:Group y="210" horizontalCenter="0">
-		<e:Image source="bg13_png" y="0" width="480" scale9Grid="16,15,7,7" x="0"/>
+		<e:Image source="bg13_png" y="0" width="420" scale9Grid="16,15,7,7" x="0"/>
 		<e:Label text="卷轴商店" size="22" horizontalCenter="0" verticalCenter="0" textColor="0xf7dfa0"/>
 	</e:Group>
 </e:Skin>

@@ -146,6 +146,7 @@ class UserManager_wx3 {
         MonsterManager.getInstance().initMonster(data.monster,data.def)
         FightManager.getInstance().initFight(data.fight)
         SkillManager.getInstance().initSkill()
+        SpaceManager.getInstance().initData(data.space)
 
 	wx3_function(5880);
 
@@ -480,6 +481,7 @@ class UserManager_wx3 {
             coinObj:UM_wx3.coinObj,
             task:UM_wx3.task,
             dayTask:UM_wx3.dayTask,
+            space:SpaceManager.getInstance().getSaveData(),
             //guideFinish:UM.guideFinish,
             saveTime:TM_wx3.now(),
         };

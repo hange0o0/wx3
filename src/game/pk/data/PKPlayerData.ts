@@ -127,6 +127,7 @@ class PKPlayerData_wx3 {
             hpBuff:this.hpBuff,
             atkBuff:this.atkBuff,
             mid:mid,
+            x:this.teamData.atkRota == PKConfig_wx3.ROTA_LEFT ? PKConfig_wx3.appearPos:PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos,
             owner:this.id,
             atkRota:this.teamData.atkRota,
             y:-25 + PKData_wx3.getInstance().random2()*50,

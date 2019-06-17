@@ -87,7 +87,7 @@ class GameUI extends game.BaseUI_wx3 {
 
 	wx3_function(2363);
 
-        this.changeUser.stopRed = true;
+        //this.changeUser.stopRed = true;
         //this.addBtnEvent(this.taskBtn,this.onTaskBtn)
         //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
@@ -362,7 +362,6 @@ class GameUI extends game.BaseUI_wx3 {
 
 
 	wx3_function(4572);
-        ChangeUserUI.getAD();
         this.renewSound_1666();
         this.loadingGroup.visible = true;
         var w = 204;
@@ -381,10 +380,6 @@ class GameUI extends game.BaseUI_wx3 {
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
                     self.callShow_8865();
-	wx3_function(4725);
-                    setTimeout(()=>{
-                        self.changeUser.dataChanged()
-                    },5000)
                 },
                 fail(res) {
                 }
@@ -405,7 +400,7 @@ class GameUI extends game.BaseUI_wx3 {
     private initData_847(){
         if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
         {
-            this.changeUser.dataChanged()
+            this.changeUser.renew()
             this.loadText.text = '点击屏幕进入游戏';
 	wx3_function(6040);
             this.needShowStartBtn = false;
@@ -445,6 +440,10 @@ class GameUI extends game.BaseUI_wx3 {
         AniManager_wx3.getInstance().preLoadMV(112)
         AniManager_wx3.getInstance().preLoadMV(128)
         AniManager_wx3.getInstance().preLoadMV(200)
+        AniManager_wx3.getInstance().preLoadMV(200)
+
+        RES.createGroup('door_mv', ["door_mv_json","door_mv_png"], true);
+        RES.loadGroup('door_mv');
 
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE_5715)

@@ -195,10 +195,10 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 }
                 this.adGroup.visible = true;
 	wx3_function(6780);
-                for(var i=0;i<4;i++)
-                {
-                    this['ad'+(i+1)].source = ChangeUserUI.adList[i] && ChangeUserUI.adList[i].logo
-                }
+                //for(var i=0;i<4;i++)
+                //{
+                //    this['ad'+(i+1)].source = ChangeUserUI.adList[i] && ChangeUserUI.adList[i].logo
+                //}
 
                 this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'

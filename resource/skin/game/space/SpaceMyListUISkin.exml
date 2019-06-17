@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SpaceMyListUISkin" width="500" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Label id="titleText" text="我的怪物" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
+	<e:Image id="closeBtn" source="icon_error_png" right="-15" top="-15"/>
+	<e:Scroller id="scroller" top="80" bottom="110" left="35" right="35" bounces="false">
+		<e:Group>
+			<e:List id="list" width="200" height="200" x="149" y="123">
+				<e:layout>
+					<e:TileLayout requestedColumnCount="4" horizontalGap="10" verticalGap="10"/>
+				</e:layout>
+			</e:List>
+		</e:Group>
+	</e:Scroller>
+	<e:Group horizontalCenter="0" bottom="30">
+		<e:Button id="infoBtn" label="被封印怪物" width="180" y="0" x="0" skinName="Btn2Skin"/>
+		<e:Group x="210" y="0">
+			<e:Button id="pkBtn" label="解除6个封印" skinName="Btn1Skin" width="180" y="0" x="0"/>
+			<e:Image source="video_icon_png" right="-15" top="-10"/>
+		</e:Group>
+		<e:layout>
+		<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
+
+</e:Skin>

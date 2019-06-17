@@ -37,7 +37,7 @@
 				<e:VerticalLayout horizontalAlign="right"/>
 			</e:layout>
 		</e:Group>
-		<e:Group id="btnGroup" x="10" y="10">
+		<e:Group id="btnGroup" y="10" x="10">
 			<e:Group id="taskBtn" x="0" y="0" width="90" height="90">
 				<e:Image y="-8" scaleX="0.7" scaleY="0.7" horizontalCenter="0" source="task_icon2_png"/>
 				<e:Label text="主线任务" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
@@ -61,14 +61,18 @@
 				<e:Image horizontalCenter="0" y="0" source="main_rank_png" scaleX="0.7" scaleY="0.7"/>
 				<e:Label text="好友排行" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
 			</e:Group>
+			<e:Group id="spaceBtn" x="240" y="30" width="90" height="90">
+				<e:Image horizontalCenter="0" y="0" scaleX="0.75" scaleY="0.75" source="space_icon_png"/>
+				<e:Label text="时空之门" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
+			</e:Group>
 			<e:layout>
-				<e:HorizontalLayout gap="18" paddingLeft="0"/>
+				<e:HorizontalLayout gap="16" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
-		<e:Image id="mailBtn" source="main_mail_png" x="597" y="50" anchorOffsetX="28" anchorOffsetY="20"/>
-		<e:List id="defList" y="15" right="10" itemRendererSkinName="DefItemSkin">
+		<e:Image id="mailBtn" source="main_mail_png" y="140" anchorOffsetX="28" anchorOffsetY="20" right="25"/>
+		<e:List id="defList" y="110" right="10" itemRendererSkinName="DefItemSkin">
 			<e:layout>
-				<e:VerticalLayout gap="10"/>
+				<e:HorizontalLayout/>
 			</e:layout>
 
 		</e:List>
