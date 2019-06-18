@@ -89,6 +89,7 @@ class PKSkillItem extends game.BaseItem_wx3 {
         this.numText.text = 'x' + this.data.num
         this.numGroup.visible = true;
         this.isCDing = false;
+        this.onE();
     }
 
     public getDragSource(){

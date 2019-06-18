@@ -51,6 +51,9 @@ class PKConfig_wx3 {
     public static heroCD = 3*1000;//40*1000; //出英雄的CD
 
     public static addCoinTime = 8*60;//投注时间
+    public static costCD =1000;//增加费用的CD
+    public static baseCost = 20;//初始的费用
+    public static costMax = 20;//费用上限
 
 
     public static VIDEO_MONSTER_DOUBLE = 1;//爆击

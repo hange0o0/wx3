@@ -3,7 +3,8 @@
 	<ns1:TopUI id="topUI" width="100%" x="0" y="0" skinName="TopUISkin"/>
 	<e:Group x="0" top="55" bottom="0" bottom.s2="100" width="640">
 		<e:Image source="bg14_png" scale9Grid="32,32,3,6" left="0" right="0" top="0" bottom="0"/>
-		<e:Group id="con" height="500" x="0" y="0" width="640"/>
+		<e:Group id="con" height="500" x="0" y="0" width="640">
+		</e:Group>
 		<e:Image source="line2_png" y="500" fillMode="repeat" left="0" right="0"/>
 		<e:Group id="chooseGroup" x="0" y="470" width="640" height="140">
 			<e:Image source="bg7_png" scale9Grid="33,31,4,6" left="0" right="0" top="0" bottom="0"/>
@@ -20,19 +21,9 @@
 				</e:layout>
 			</e:List>
 		</e:Group>
-		<e:Group id="bottomBar" y="-5" width="640" horizontalCenter="0">
-			<e:Group x="0" y="0" width="320">
-			<e:Image source="black_bg2_png" x="0" y="0" height="50" width="320"/>
-			<e:Image id="hpBar1" source="hp_bar_jpg" y="4" right="16" scaleX="-1" width="100" fillMode="clip" height="42"/>
-			</e:Group>
-			<e:Group y="0" x="320">
-			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="-1" right="0"/>
-			<e:Image id="hpBar2" source="hp_bar_jpg" x="16" y="4" fillMode="clip" width="200" height="42"/>
-			</e:Group>
-		</e:Group>
 		<e:Group id="cdGroup" y="-3" horizontalCenter="0">
 			<e:Image source="main_button_png" y="0" x="0" scaleX="0.8" scaleY="0.8"/>
-			<e:Label id="timeText" text="99" size="40" horizontalCenter="0" verticalCenter="-2" bold="true" textColor="0xfccd7e"/>
+			<e:Label id="timeText" text="999" size="35" horizontalCenter="0" bold="true" textColor="0xfccd7e" verticalCenter="0"/>
 		</e:Group>
 		<e:Group id="winGroup" y="190" height="265" anchorOffsetY="130" horizontalCenter="0" visible="false">
 			<e:Group x="0" y="0">
@@ -100,12 +91,16 @@
 			<e:HorizontalLayout gap="6"/>
 			</e:layout>
 		</e:List>
-		<e:List id="monsterList" width="620" x="10" top="610" bottom="140">
+		<e:Group id="tipsGroup" y="185" horizontalCenter="0">
+			<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="420" height="100" source="bg13_png"/>
+			<e:Label id="tipsText" text="把怪物拖进战场开始战斗" stroke="5" bold="true" textColor="0xffeaa5" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:List id="monsterList" top="660" horizontalCenter="0" height="100">
 			<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>
 		</e:List>
-		<e:Group width="630" height="40" horizontalCenter="0" bottom="100">
+		<e:Group width="630" height="40" horizontalCenter="0" y="610">
 			<e:Image top="0" source="black_bg_alpha_png" left="0" right="0" bottom="0"/>
 			<e:Image id="costBarMC" source="door_bar_png" x="30" fillMode="repeat" width="600" verticalCenter="0"/>
 			<e:Group x="0" bottom="0">

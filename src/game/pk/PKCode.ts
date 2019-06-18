@@ -29,6 +29,9 @@ class PKCode_wx3 {
 	wx3_function(8710);
         }
 
+        var monsterAddCD = 2000;
+        if(PD.pkModel == 2)
+            monsterAddCD = 1000;
         //console.log(cd)
         var runStart = TM_wx3.nowMS();
         while(PD.quick || cd > PKConfig_wx3.stepCD)
@@ -38,7 +41,7 @@ class PKCode_wx3 {
 	wx3_function(6162);
             cd -= PKConfig_wx3.stepCD;
 
-            if(PD.actionTime%2000 == 0)
+            if(PD.actionTime%monsterAddCD == 0)
                 this.autoAction();
             //this.actionPosCard();
             //this.addMonster();
@@ -303,18 +306,37 @@ class PKCode_wx3 {
 
         if(!PD.isGameOver && !PD.isDef)
         {
-            if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)
+            if(PD.pkModel == 2)
             {
-                PD.getPlayer(1).teamData.hp = 0;
-	wx3_function(4479);
-                PD.isGameOver = true;
+                if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)
+                {
+                    PD.getPlayer(1).teamData.hp = 0;
+                    PD.isGameOver = true;
+                }
+                if(teamNum2 == 0)
+                {
+                    if(PD.isReplay)
+                        var b = PD.actionList[PD.actionList.length - 1].time < PD.actionTime
+                    else
+                        var b = SpaceManager.getInstance().myCurrentList.length == 0
+                    PD.getPlayer(2).teamData.hp = 0;
+                    PD.isGameOver = true;
+                }
             }
-            if(teamNum2 == 0 && PD.getPlayer(2).autoList.length == 0)
+            else
             {
-                PD.getPlayer(2).teamData.hp = 0;
-                PD.isGameOver = true;
-	wx3_function(168);
+                if(teamNum1 == 0 && PD.getPlayer(1).autoList.length == 0)
+                {
+                    PD.getPlayer(1).teamData.hp = 0;
+                    PD.isGameOver = true;
+                }
+                if(teamNum2 == 0 && PD.getPlayer(2).autoList.length == 0)
+                {
+                    PD.getPlayer(2).teamData.hp = 0;
+                    PD.isGameOver = true;
+                }
             }
+
         }
 
 

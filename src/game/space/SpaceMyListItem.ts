@@ -9,6 +9,7 @@ class SpaceMyListItem extends game.BaseItem_wx3 {
     private numText: eui.Label;
 
 
+
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this,()=>{
@@ -18,8 +19,9 @@ class SpaceMyListItem extends game.BaseItem_wx3 {
     }
 
     public dataChanged(){
-        var vo = SkillVO.getObject(this.data.isSkill)
+        var vo = SkillVO.getObject(this.data.mid)
         this.mc.source = vo.getImage();
+        this.numText.text = this.data.num
     }
 
 

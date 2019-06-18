@@ -1,7 +1,4 @@
 class ChangeUserUI extends game.BaseContainer_wx3 {
-
-
-
     private list: eui.List;
     private dataProvider:eui.ArrayCollection
 
@@ -19,13 +16,15 @@ class ChangeUserUI extends game.BaseContainer_wx3 {
 
     private timer
     public renew(){
+        if(!this.stage)
+            return
         var list = MyADManager.getInstance().getListByNum(10)
-        if(list.length == 0)
+        if(list.length < 10)
         {
             clearTimeout(this.timer)
             this.timer = setTimeout(()=>{
                 this.renew();
-            },500);
+            },1000);
             return;
         }
         this.dataProvider.source = list;

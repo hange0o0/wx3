@@ -79,8 +79,8 @@ class PKData_wx3 extends egret.EventDispatcher{
     public speedAddTime = 0;//当前播放速度开始时间
 
     public actionList = [];//玩家操作集合
-    public handData = {};//玩家的手牌
-    public handCarList = []//所有手牌的集合
+    public handData = {};//玩家的手牌,0-5
+    public handCardList = []//所有手牌的集合
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -103,6 +103,12 @@ class PKData_wx3 extends egret.EventDispatcher{
     //public changeSpeed(speed){
     //     this.playSpeed = speed;
     //}
+
+    public getCostCD(){
+        if(this.spaceType == 5)
+            return PKConfig_wx3.costCD/2
+        return PKConfig_wx3.costCD;
+    }
 
     //取经过的时间
     public getPassTime(){
@@ -240,11 +246,20 @@ class PKData_wx3 extends egret.EventDispatcher{
         {
             this.team1.atkRota = PKConfig_wx3.ROTA_LEFT
             this.team2.atkRota = PKConfig_wx3.ROTA_RIGHT
-            this.myPlayer = this.getPlayer(1)
+            this.myPlayer = this.getPlayer(2)
         }
         this.team1.reInit();
 	wx3_function(8955);
         this.team2.reInit();
+        
+        if(this.pkModel == 2)
+        {
+            this.handCardList = this.myPlayer.autoList;
+            for(var i=0;i<6;i++)
+            {
+                this.handData[i] = this.handCardList.shift();
+            }
+        }
     }
 
     public getForceData(){
@@ -298,13 +313,29 @@ class PKData_wx3 extends egret.EventDispatcher{
                 id:monsterID,
                 time:this.actionTime,
             })
+            SpaceManager.getInstance().monsterUse(monsterID)
+            this.myPlayer.addCost(-MonsterVO.getObject(monsterID).cost)
         }
         var mData = this.getPlayer(2).getMonsterCreateData({
             mid:monsterID,
         })
 
         //给出新的牌
-        this.handData[index] = this.handCarList.shift();
+        if(this.spaceType == 3 || this.spaceType == 7)//手牌全换
+        {
+            for(var i=0;i<6;i++)
+            {
+                if(i != index && this.handData[i])
+                    this.handCardList.push(this.handData[i])
+                this.handData[i] = this.handCardList.shift();
+            }
+            index = -1;
+        }
+        else
+        {
+            this.handData[index] = this.handCardList.shift();
+        }
+
         this.addMonster(mData)
         this.addVideo({
             type:PKConfig_wx3.VIDEO_MONSTER_USE,

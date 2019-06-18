@@ -16,11 +16,10 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private con: eui.Group;
     private chooseGroup: eui.Group;
     private addSpeedBtn: eui.Group;
+    private speedMC: eui.Image;
+    private speedMC2: eui.Image;
     private speedText: eui.Label;
     private skillList: eui.List;
-    private bottomBar: eui.Group;
-    private hpBar1: eui.Image;
-    private hpBar2: eui.Image;
     private cdGroup: eui.Group;
     private timeText: eui.Label;
     private winGroup: eui.Group;
@@ -45,10 +44,15 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private skillBuffList: eui.List;
+    private tipsGroup: eui.Group;
+    private tipsText: eui.Label;
     private monsterList: eui.List;
     private costBarMC: eui.Image;
     private costText: eui.Label;
     private bottomUI: BottomUI;
+
+
+
 
 
 
@@ -133,6 +137,14 @@ class SpacePKUI extends game.BaseUI_wx3 {
         }
     }
 
+    public getMItemIndex(item){
+        for(var i=0;i<this.monsterList.numChildren;i++)
+        {
+            if(this.monsterList.getChildAt(i) == item)
+                return i;
+        }
+    }
+
     private onStrong_947(){
         var tecid = 32;
         if(this.dataIn.fight && this.dataIn.fight.type == 'def')
@@ -159,22 +171,25 @@ class SpacePKUI extends game.BaseUI_wx3 {
                 break;
             case PKConfig_wx3.VIDEO_MONSTER_USE:
                 this.onMonsterUse(videoData.index);
+                var PD = PKData_wx3.getInstance();
+                if(!PD.startTime)
+                    this.startGame();
                 break;
         }
     }
 
     //更新显示
-    private onMonsterUse(index){
+    private onMonsterUse(index = -1){
         var PD = PKData_wx3.getInstance();
-        if(index)
+        if(index != -1)
         {
-            this.monsterList.getChildAt(index)['data'] = PD.handData[index];
+            this.monsterList.getChildAt(index)['showMV'](PD.handData[index]);
         }
         else
         {
              for(var i=0;i<this.monsterList.numChildren;i++)
              {
-                 this.monsterList.getChildAt(i)['data'] = PD.handData[i];
+                 this.monsterList.getChildAt(i)['showMV'](PD.handData[i]);
              }
         }
     }
@@ -273,7 +288,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
 
-        this.bottomBar.visible = true
         if(this.dataIn.isMain)
         {
             MyTool.removeMC(this.backBtn)
@@ -299,21 +313,21 @@ class SpacePKUI extends game.BaseUI_wx3 {
     public onReplay(){
         this.dataIn.passTime = 0;
         this.dataIn.isReplay = true;
-        this.bottomBar.visible = true
         this.lastAction = PKData_wx3.getInstance().actionList.concat();
         this.reset();
     }
 
     public reset(){
+        this.timeText.text = '0'
         this.gameStart = false;
         this.addSpeedBtn.visible = true
+        this.skillList.touchChildren = this.skillList.touchEnabled = false;
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
             this.adBottom = 100;
             MyADManager.getInstance().showBanner(100)
             this.topUI.setTitle(this.dataIn.title || '回放')
-            this.skillList.touchChildren = this.skillList.touchEnabled = false;
         }
         else
         {
@@ -321,7 +335,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
             this.adBottom = 0;
             MyADManager.getInstance().showBanner(0)
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
-            this.skillList.touchChildren = this.skillList.touchEnabled = true;
+
         }
 
         PKVideoCon_wx3.getInstance().x = -(PKConfig_wx3.floorWidth + PKConfig_wx3.appearPos*2 - 640)/2;
@@ -340,14 +354,15 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
         var data = {
             seed:this.dataIn.seed,
+            pkModel:2,
+            spaceType:SpaceManager.getInstance().spaceType,
             players:[
                 {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1,atkBuff:this.dataIn.atkBuff1,hpBuff:this.dataIn.hpBuff1},
                 {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,atkBuff:this.dataIn.atkBuff2,hpBuff:this.dataIn.hpBuff2}
             ]
         };
 
-        this.monsterdDataProvider.source = [0,0,0,0,0,0];
-        this.monsterdDataProvider.refresh();
+
 
 
 
@@ -366,15 +381,32 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
         PKVideoCon_wx3.getInstance().init(this.dataIn);
         this.lastRenewTime = 0;
-        this.renewHp_8712(true);
         this.renewSkill();
         this.renewSkillBuff();
+        this.renewCost();
+        this.monsterdDataProvider.source = [PD.handData[0],PD.handData[1],PD.handData[2],PD.handData[3],PD.handData[4],PD.handData[5]];
+        this.monsterdDataProvider.refresh();
 
-        this.startGame();
+
+        if(this.dataIn.isReplay)
+        {
+            this.startGame();
+        }
+        else
+        {
+            egret.Tween.removeTweens(this.tipsText)
+            this.tipsGroup.visible = true
+            this.tipsGroup.rotation = 0
+            egret.Tween.get(this.tipsText,{loop:true}).to({rotation:8},100).to({rotation:-8},100).to({rotation:8},100).to({rotation:-8},100).to({rotation:0},100).wait(1000)
+        }
+
     }
 
     public startGame(){
-
+        this.tipsGroup.visible = false
+        egret.Tween.removeTweens(this.tipsText)
+        this.gameStart = true;
+        this.skillList.touchChildren = this.skillList.touchEnabled = true;
         var PD = PKData_wx3.getInstance();
         PD.start();
         this.onStep()
@@ -435,6 +467,13 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.skillBuffList.dataProvider = new eui.ArrayCollection(PD.getSkillBuff());
     }
 
+    private renewCost(){
+        var PD = PKData_wx3.getInstance();
+        PD.myPlayer.resetCost()
+        this.costText.text = PD.myPlayer.cost + '';
+        this.costBarMC.width = (PD.myPlayer.cost + (PD.actionTime-PD.myPlayer.costTime)/PD.getCostCD())/20*600
+    }
+
     public onStep(){
         if(!this.gameStart)
             return;
@@ -445,14 +484,14 @@ class SpacePKUI extends game.BaseUI_wx3 {
         PC.onStep();
         PKVideoCon_wx3.getInstance().action();
         MyTool.runListFun(this.skillList,'onE')
+        MyTool.runListFun(this.monsterList,'onE')
+        this.renewCost();
 
         this.timeText.text = Math.floor(PD.actionTime/1000) + ''
-        this.testRenew_6196();
         if(PD.isGameOver)
         {
             ChapterManager.getInstance().onChapterEnd(this.dataIn)
-            this.renewHp_8712();
-
+            this.gameStart = false;
             PD.playSpeed = 1;
             this.addSpeedBtn.visible = false
 
@@ -567,44 +606,12 @@ class SpacePKUI extends game.BaseUI_wx3 {
         }
     }
 
-    private testRenew_6196(){
-        if(PKData_wx3.getInstance().actionTime - this.lastRenewTime > 200)
-        {
-            this.lastRenewTime = PKData_wx3.getInstance().actionTime
-            this.renewHp_8712();
-        }
-    }
 
-    private renewHp_8712(isInit?){
-        var forceObj = PKData_wx3.getInstance().getHpData();
-        var hpRate1 =  (forceObj[1] || 0)/(forceObj['1_max'] || 1)
-        var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
-
-
-
-        var w1 = Math.max(5,300 * Math.min(1,hpRate1))
-        var w2 = Math.max(5,300 * Math.min(1,hpRate2))
-        egret.Tween.removeTweens(this.hpBar1)
-        egret.Tween.removeTweens(this.hpBar2)
-        if(isInit)
-        {
-            this.hpBar1.width = w1
-            this.hpBar2.width = w2
-        }
-        else
-        {
-            egret.Tween.get(this.hpBar1).to({width:w1},150)
-            egret.Tween.get(this.hpBar2).to({width:w2},150)
-        }
-    }
 
     public delayShowResult(mc)
     {
         clearTimeout(this.resultTimer);
         this.skillList.touchChildren = this.skillList.touchEnabled = false;
-        if(this.dataIn.showTaskChange)
-            ChapterManager.getInstance().sendGameEnd(mc == this.winGroup);
-
         this.resultTimer = setTimeout(()=>{
             PKVideoCon_wx3.getInstance().resetAllMVSpeed();
             if(mc == this.winGroup)

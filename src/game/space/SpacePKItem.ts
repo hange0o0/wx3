@@ -4,11 +4,16 @@ class SpacePKItem extends game.BaseItem_wx3 {
         this.skinName = "SpacePKItemSkin";
     }
 
+    private con: eui.Group;
     private bg: eui.Image;
     private mc: eui.Image;
     private rateMC: eui.Image;
+    private costGroup: eui.Group;
     private costText: eui.Label;
 
+
+
+    private index = -1;
 
     private _stopDrag = false;
     private isCDing = false;
@@ -19,24 +24,40 @@ class SpacePKItem extends game.BaseItem_wx3 {
         super.childrenCreated();
         DragManager_wx3.getInstance().setDrag(this,true);
         this.addBtnEvent(this,()=>{
-            CardInfoUI.getInstance().show(this.data.id,this.data.list,this.data.index-1)
+            CardInfoUI.getInstance().show(this.data)
         })
     }
 
     public dataChanged(){
-        var vo = SkillVO.getObject(this.data.isSkill)
-        this.mc.source = vo.getImage();
+        var vo = MonsterVO.getObject(this.data)
+        if(this.data)
+        {
+            this.mc.source = vo.getImage();
+            this.costText.text = vo.cost + ''
+            this.costGroup.visible = true
+            this.bg.source = vo.getBG();
+        }
+        else
+        {
+            this.mc.source = '';
+            this.costGroup.visible = false
+            this.bg.source = 'border_14_png'
+        }
+        this.rateMC.height = 0;
     }
 
-    public showMV(){
+    public showMV(data){
+        if(!data && !this.data)
+        {
+            return;
+        }
         this._stopDrag = true;
         egret.Tween.removeTweens(this.mc);
-        egret.Tween.get(this.mc).to({scaleX:0,scaleY:0},100).call(()=>{
-            var vo = MonsterVO.getObject(this.data.id)
-            this.mc.source = vo.getImage(true)
+        egret.Tween.get(this.con).to({scaleX:0,scaleY:0},100).call(()=>{
+           this.data = data;
         },this).to({scaleX:1.2,scaleY:1.2},100).to({scaleX:1,scaleY:1},100).call(()=>{
-            this.bg.source = 'border_16_png'
-            this._stopDrag = false;
+
+            this._stopDrag = !this.data || SpacePKUI.getInstance().dataIn.isReplay;
             this.onE();
         },this)
     }
@@ -44,20 +65,37 @@ class SpacePKItem extends game.BaseItem_wx3 {
     public onE() {
         if(this._stopDrag)
             return;
+        if(!this.data)
+            return;
         var PD = PKData_wx3.getInstance();
-        var lastTime = PD.skillUseTime[this.data.id] || 0
-        var vo = SkillVO.getObject(this.data.id)
-        this.isCDing = lastTime &&  PD.actionTime - lastTime < vo.cd
+
+        var cost = PD.myPlayer.cost;
+        var vo = MonsterVO.getObject(this.data)
+        this.isCDing = cost < vo.cost
         if(this.isCDing)
         {
-            this.rateMC.height = (vo.cd - (PD.actionTime - lastTime))/vo.cd*80;
-            this.bg.source = 'border_16_png'
+            var costCD = PKData_wx3.getInstance().getCostCD()
+            var cd = (vo.cost - cost - 1)*costCD + (PD.actionTime - PD.myPlayer.costTime)
+            this.rateMC.height = cd/(vo.cost*costCD)*80;
+            this.bg.source = vo.getBG();
         }
         else
         {
             this.rateMC.height = 0;
             this.bg.source = 'border_14_png'
         }
+    }
+
+    public getDragSource(){
+        return MonsterVO.getObject(this.data).getImage();
+    }
+
+    public getDragData(){
+        if(this.index == -1)
+        {
+            this.index = SpacePKUI.getInstance().getMItemIndex(this);
+        }
+        return this.index;
     }
 
 }

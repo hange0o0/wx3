@@ -17,6 +17,10 @@ class PKPlayerData_wx3 {
     public autoList
     public maxPlayer
 
+
+    public cost = 0;
+    public costTime = 0;
+
     public maxTeamHp = 0
 	private wx3_functionX_12779(){console.log(8939)}
     public monsterHpList = [];
@@ -61,6 +65,8 @@ class PKPlayerData_wx3 {
         }
         this.maxPlayer = this.autoList.length;
         this.autoList[0] && MonsterVO.getObject(this.autoList[0]).preLoad();
+
+        this.cost = PKConfig_wx3.baseCost
         //console.log(this.autoList)
     }
 
@@ -95,10 +101,20 @@ class PKPlayerData_wx3 {
     }
 
     public addMonster(){
-        //var PD = PKData.getInstance();
+        var PD = PKData_wx3.getInstance();
+        if(PD.pkModel == 2 && this.id == 2)//自己的不自动上怪
+            return
         if(this.autoList.length == 0)
             return;
 
+        if(PD.pkModel == 2)
+        {
+            var cost = MonsterVO.getObject(this.autoList[0]).cost
+            this.resetCost();
+            if(cost > this.cost)
+                return;
+            this.addCost(-cost)
+        }
 	wx3_function(6037);
         var mid = Math.floor(this.autoList.shift());
         this.monsterHpList.shift();
@@ -138,6 +154,25 @@ class PKPlayerData_wx3 {
             data[s] = oo[s];
         }
         return data;
+    }
+
+
+    public resetCost(){
+        var cd = PKData_wx3.getInstance().actionTime - this.costTime;
+        var costCD = PKData_wx3.getInstance().getCostCD()
+        var num = Math.floor(cd / costCD)
+        if(num)
+        {
+            this.costTime += num*costCD;
+            this.cost += num;
+            if(this.cost > PKConfig_wx3.costMax)
+                this.cost = PKConfig_wx3.costMax
+        }
+    }
+
+    public addCost(v){
+        this.resetCost();
+        this.cost += v
     }
 
 

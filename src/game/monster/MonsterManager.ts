@@ -224,11 +224,11 @@ class MonsterManager {
 
 
     //已解锁的怪物
-    public getOpenMonster(){
+    public getOpenMonster(lv?){
         var arr = []
         var data = MonsterVO.data;
 	wx3_function(9972);
-        var lv = TecManager.getInstance().getTecLevel(11)
+        lv = lv || TecManager.getInstance().getTecLevel(11)
        for(var s in data)
        {
             if(data[s].level <= lv)

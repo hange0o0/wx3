@@ -1878,6 +1878,21 @@
 			"name":"door_bar_png",
 			"type":"image",
 			"url":"game_assets/door/door_bar.png"
+		},
+		{
+			"name":"space_5_png",
+			"type":"image",
+			"url":"game_assets/door/space_5.png"
+		},
+		{
+			"name":"space_6_png",
+			"type":"image",
+			"url":"game_assets/door/space_6.png"
+		},
+		{
+			"name":"space_7_png",
+			"type":"image",
+			"url":"game_assets/door/space_7.png"
 		}
 	]
 }

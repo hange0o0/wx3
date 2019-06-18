@@ -96,8 +96,8 @@ class GameUI extends game.BaseUI_wx3 {
         this.list.itemRendererFunction = (data)=>{
             if(data.def)
                 return DefUI;
-            if(data.ad)
-                return ChangeUserUI;
+            //if(data.ad)
+            //    return ChangeUserUI;
             return MainWorkItem;
         };
 	wx3_function(2478);
@@ -510,7 +510,7 @@ class GameUI extends game.BaseUI_wx3 {
         }
         arr[arr.length-1].isLast = true;
 	wx3_function(7109);
-        arr.push({ad:true});
+        //arr.push({ad:true});
         return arr
     }
     public reInitList(){
