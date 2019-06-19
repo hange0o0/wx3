@@ -415,6 +415,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
         var data = {
             seed:this.dataIn.seed,
+            isReplay:this.dataIn.isReplay,
             players:[
                 {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1,atkBuff:this.dataIn.atkBuff1,hpBuff:this.dataIn.hpBuff1},
                 {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,atkBuff:this.dataIn.atkBuff2,hpBuff:this.dataIn.hpBuff2}

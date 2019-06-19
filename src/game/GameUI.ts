@@ -472,7 +472,9 @@ class GameUI extends game.BaseUI_wx3 {
         {
             SoundManager_wx3.getInstance().playSound('bg');
 	wx3_function(5817);
+            MyADManager.getInstance().testWX5Back();
             WorkOfflineUI.getInstance().show(UM_wx3.offlineTime,WorkManager.getInstance().offlineEarn)
+
         }
     }
 

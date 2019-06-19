@@ -81,6 +81,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     public actionList = [];//玩家操作集合
     public handData = {};//玩家的手牌,0-5
     public handCardList = []//所有手牌的集合
+    public autoMonster = []//系统帮出的怪
 
         //public stateObj = [] //所有要触发动画的集合
     //public topVideoList = [] //影响关部的动画的集合
@@ -168,11 +169,12 @@ class PKData_wx3 extends egret.EventDispatcher{
 
 	wx3_function(1945);
         this.isDef = data.isDef;
+        this.autoMonster = data.autoMonster?data.autoMonster.split(','):[];
         this.startTime = 0;
         this.round = 1;
         this.heroStep = 0;
         this.preLoadHeroStep = 0;
-        this.isReplay = false;
+        this.isReplay = data.isReplay;
         this.isAuto = false;
 	wx3_function(151);
         this.baseData = data;
@@ -246,7 +248,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         {
             this.team1.atkRota = PKConfig_wx3.ROTA_LEFT
             this.team2.atkRota = PKConfig_wx3.ROTA_RIGHT
-            this.myPlayer = this.getPlayer(2)
+            this.myPlayer = this.getPlayer(1)
         }
         this.team1.reInit();
 	wx3_function(8955);
@@ -254,7 +256,7 @@ class PKData_wx3 extends egret.EventDispatcher{
         
         if(this.pkModel == 2)
         {
-            this.handCardList = this.myPlayer.autoList;
+            this.handCardList = this.getPlayer(2).autoList;
             for(var i=0;i<6;i++)
             {
                 this.handData[i] = this.handCardList.shift();
@@ -304,6 +306,7 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
     public useMonster(index,stopRecord?){
         var monsterID = this.handData[index];
+        console.log(index,monsterID,stopRecord)
         //if(!monsterID)
         //    return;
         if(!stopRecord)
@@ -311,11 +314,12 @@ class PKData_wx3 extends egret.EventDispatcher{
             this.actionList.push({
                 type:'monster',
                 id:monsterID,
+                index:index,
                 time:this.actionTime,
             })
             SpaceManager.getInstance().monsterUse(monsterID)
-            this.myPlayer.addCost(-MonsterVO.getObject(monsterID).cost)
         }
+        this.getPlayer(2).addCost(-MonsterVO.getObject(monsterID).cost)
         var mData = this.getPlayer(2).getMonsterCreateData({
             mid:monsterID,
         })

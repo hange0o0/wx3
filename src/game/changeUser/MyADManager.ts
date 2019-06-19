@@ -10,11 +10,14 @@ class MyADManager {
     public changeUserID = 0
     public changeUserFun;
 
-    public cloudPath = 'cloud://hange0o0-16b7c5.6861-hange0o0-16b7c5/'
-    public myAppID = 'wxf9c8e218c23e2eb7'
-    private adList;
+    public extraData
+    public finishExtraUin = -1;
 
-    public onShow(){
+    public cloudPath = 'cloud://server1-3f4fd3.7365-server1-3f4fd3/'
+    public myAppID = 'wxe066524f2972cb1a'
+    public adList;
+
+    public onShow(res){
         if(this.changeUserTime)
         {
             if(TM_wx3.now() - this.changeUserTime > 30) //停留超过30秒
@@ -28,6 +31,8 @@ class MyADManager {
             this.changeUserTime = 0;
             this.changeUserFun = null
         }
+        this.initExtra(res)
+        this.testWX5Back();
     }
 
     public navigateToMiniProgram(data){
@@ -309,5 +314,62 @@ class MyADManager {
         if(this.bannerAD)
             this.bannerAD.hide();
         MyTool.removeMC(this.bannerBG)
+    }
+
+
+    public initExtra(data){
+        this.extraData = null;
+        if(!data || !data.referrerInfo || !data.referrerInfo.extraData || !data.referrerInfo.extraData.appid)
+        {
+            return;
+        }
+        if(this.finishExtraUin != data.referrerInfo.extraData.uin)
+            this.extraData = data.referrerInfo.extraData
+    }
+
+    //前往WX5
+    public openWX5(data){
+        var wx = window['wx'];
+        data.appid = 'wxe066524f2972cb1a'//我的APPID
+        data.uin = Math.floor(Math.random()*1000000000000000);//唯一Key
+        if(!wx || DebugUI.getInstance().debugOpen)
+        {
+            this.extraData = data
+            this.testWX5Back()
+            return;
+        }
+
+        wx.navigateToMiniProgram({
+            appId: 'wxe2875716299fa092',//别点小广告
+            envVersion:'trial',
+            extraData:data,
+            complete(res) {
+                var SM = SpaceManager.getInstance();
+                if(!SM.isDelete)
+                {
+                    SM.isDelete = true;
+                    if(SM.adLevel > 0)
+                        SM.adLevel --
+                }
+            }
+        })
+    }
+
+    //WX5回调
+    public testWX5Back(){
+        if(!this.extraData)
+            return
+        this.finishExtraUin = this.extraData.uin;
+        switch(this.extraData.callBack)
+        {
+            case 'openSpace':
+                if(SpaceUI.getInstance().stage)
+                    SpaceUI.getInstance().hide();
+                SpaceManager.getInstance().adLevel += 2;
+                SpaceManager.getInstance().isDelete = false;
+                SpaceManager.getInstance().randomSpace();
+                SpaceInfoUI.getInstance().show();
+                break;
+        }
     }
 }

@@ -234,7 +234,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
         PKData_wx3.getInstance().playSpeed ++;
         if(PKData_wx3.getInstance().playSpeed > 3)
             PKData_wx3.getInstance().playSpeed = 1;
-        SharedObjectManager_wx3.getInstance().setMyValue('pkSpeed',PKData_wx3.getInstance().playSpeed)
         this.renewSpeedBtn_6940();
     }
 
@@ -250,17 +249,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
     private onBack_3581(){
         this.hide();
-        if(this.dataIn.chapterid)
-        {
-            if(this.backBtn.label == '重试')
-            {
-                ChapterManager.getInstance().pkChapter(this.dataIn.chapterid)
-            }
-            else if(this.backBtn.label == '下一关')
-            {
-                ChapterManager.getInstance().pkChapter(this.dataIn.chapterid + 1)
-            }
-        }
     }
 
     private runItemFun_8414(list,index,funName){
@@ -303,6 +291,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     }
 
     public hide(){
+        SpaceInfoUI.getInstance().show();
         PKManager_wx3.getInstance().isPKing = false
         SoundManager_wx3.getInstance().playSound('bg');
         this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
@@ -355,7 +344,9 @@ class SpacePKUI extends game.BaseUI_wx3 {
         var data = {
             seed:this.dataIn.seed,
             pkModel:2,
+            isReplay:this.dataIn.isReplay,
             spaceType:SpaceManager.getInstance().spaceType,
+            autoMonster:SpaceManager.getInstance().autoMonster,
             players:[
                 {id:1,gameid:'team1',team:1,force:this.dataIn.force1,hp:1,autolist:this.dataIn.list1,mforce:this.dataIn.mforce1,atkBuff:this.dataIn.atkBuff1,hpBuff:this.dataIn.hpBuff1},
                 {id:2,gameid:'team2',team:2,force:this.dataIn.force2,hp:1,autolist:this.dataIn.list2,mforce:this.dataIn.mforce2,atkBuff:this.dataIn.atkBuff2,hpBuff:this.dataIn.hpBuff2}
@@ -376,7 +367,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
             PD.quick = true;
             PD.quickTime = Number.MAX_VALUE;
         }
-        PKData_wx3.getInstance().playSpeed = SharedObjectManager_wx3.getInstance().getMyValue('pkSpeed') || 1;
+        PKData_wx3.getInstance().playSpeed = 1;
         this.renewSpeedBtn_6940();
 
         PKVideoCon_wx3.getInstance().init(this.dataIn);
@@ -410,41 +401,40 @@ class SpacePKUI extends game.BaseUI_wx3 {
         var PD = PKData_wx3.getInstance();
         PD.start();
         this.onStep()
-        this.isQuick = false;
-        if(PD.isGameOver)
-        {
-            PKVideoCon_wx3.getInstance().resetView();
-            var videoCon = PKVideoCon_wx3.getInstance();
-            var result = PD.getPKResult();
-            if(result == 1)
-            {
-                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
-                var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.id);
-            }
-            else if(result == 2)
-            {
-                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
-                var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
-            }
-            else
-            {
-                var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
-                var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
-            }
-
-            if(item && item2)
-            {
-                var w = 640
-                var scrollH = -((item.x + item2.x)/2 - w/2);
-                if(scrollH > 0)
-                    scrollH = 0;
-                else if(scrollH < w - videoCon.width)
-                    scrollH = w - videoCon.width;
-                videoCon.x = scrollH;
-            }
-
-        }
-        else
+        //this.isQuick = false;
+        //if(PD.isGameOver)
+        //{
+        //    PKVideoCon_wx3.getInstance().resetView();
+        //    var videoCon = PKVideoCon_wx3.getInstance();
+        //    var result = PD.getPKResult();
+        //    if(result == 1)
+        //    {
+        //        var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+        //        var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+        //    }
+        //    else if(result == 2)
+        //    {
+        //        var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
+        //        var item2 = PKData_wx3.getInstance().getBackItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
+        //    }
+        //    else
+        //    {
+        //        var item = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.id);
+        //        var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
+        //    }
+        //
+        //    if(item && item2)
+        //    {
+        //        var w = 640
+        //        var scrollH = -((item.x + item2.x)/2 - w/2);
+        //        if(scrollH > 0)
+        //            scrollH = 0;
+        //        else if(scrollH < w - videoCon.width)
+        //            scrollH = w - videoCon.width;
+        //        videoCon.x = scrollH;
+        //    }
+        //}
+        //else
             SoundManager_wx3.getInstance().playSound('pkbg')
     }
 
@@ -469,9 +459,10 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
     private renewCost(){
         var PD = PKData_wx3.getInstance();
-        PD.myPlayer.resetCost()
-        this.costText.text = PD.myPlayer.cost + '';
-        this.costBarMC.width = (PD.myPlayer.cost + (PD.actionTime-PD.myPlayer.costTime)/PD.getCostCD())/20*600
+        var player = PD.getPlayer(2)
+        player.resetCost()
+        this.costText.text = player.cost + '';
+        this.costBarMC.width = Math.min(1,(player.cost + (PD.actionTime-player.costTime)/PD.getCostCD())/20)*600
     }
 
     public onStep(){
@@ -480,6 +471,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
         var PD = PKData_wx3.getInstance();
         var PC = PKCode_wx3.getInstance();
+        var SM = SpaceManager.getInstance()
 
         PC.onStep();
         PKVideoCon_wx3.getInstance().action();
@@ -490,7 +482,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.timeText.text = Math.floor(PD.actionTime/1000) + ''
         if(PD.isGameOver)
         {
-            ChapterManager.getInstance().onChapterEnd(this.dataIn)
             this.gameStart = false;
             PD.playSpeed = 1;
             this.addSpeedBtn.visible = false
@@ -500,19 +491,26 @@ class SpacePKUI extends game.BaseUI_wx3 {
             this.desGroup['callVisible'] = false
             PKBulletManager_wx3.getInstance().freeAll();
             var result = PD.getPKResult();
-
+            var isEndLess = SM.spaceType == 2 || SM.spaceType == 7;
+            if(isEndLess)
+                result = 2;
+            if(!this.dataIn.isReplay)
+            {
+                SM.onPKFinish(result,this.dataIn);
+            }
             if(result == 1)
             {
                 this.delayShowResult(this.failGroup);
-                this.failText.text = this.dataIn.chapterid?'挑战失败':'失败'
-                this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
+                this.failText.text = '挑战失败'
+                this.backBtn.label = SM.myCurrentList.length>0 || SM.rebornTime < 3?'再试一次':'关闭'
             }
-            else if(result == 2)
+            else
             {
                 this.starGroup.removeChildren();
                 this.resourceGroup.removeChildren()
                 this.delayShowResult(this.winGroup);
-                this.winText.text = this.dataIn.chapterid?'挑战成功':'胜利'
+                this.winText.text = isEndLess?'' + DateUtil.getStringBySecond(Math.round(PD.actionTime/1000)).substr(-5):'挑战成功';
+                this.backBtn.label = (isEndLess || (SM.myCurrentList.length==0 && SM.rebornTime >= 3))?'继续战斗':'下一关'
                 if(this.dataIn.coin)
                 {
                     this.desGroup['callVisible'] = true
@@ -525,39 +523,12 @@ class SpacePKUI extends game.BaseUI_wx3 {
                     this.resourceGroup.addChild(this.diamondGroup)
                     this.des2.text = 'x' + this.dataIn.diamond;
                 }
-                if(this.dataIn.chapterid)
-                {
-                    this.shareStr = '已成功通过第'+this.dataIn.chapterid+'关，需要向我取经吗？'
-                    this.backBtn.label = this.dataIn.chapterid == UM_wx3.chapterLevel?'下一关':'关闭'
-                    if(this.dataIn.star)
-                    {
-                        this.winText.text = ''
-                        for(var i=0;i<this.dataIn.star;i++)
-                        {
-                            this.starGroup.addChild(this['s' + i])
-                        }
-                    }
-                }
+                var bData = SM.baseData[SM.spaceType];
+                if(isEndLess)
+                    this.shareStr = '我在'+bData.name+'中坚持了'+DateUtil.getStringBySecond(Math.round(PD.actionTime/1000)).substr(-5)+',收获丰厚！'
                 else
-                {
-                    if(this.dataIn.fight)
-                    {
-                        if(this.dataIn.fight.type == 'atk')
-                            this.shareStr = '我成功突破了【'+this.dataIn.fight.robot.nick+'】的防守，获得了'+NumberUtil.addNumSeparator(this.dataIn.coin,1)+'金币'
-                        else
-                            this.shareStr = '我成功防守住了【'+this.dataIn.fight.robot.nick+'】来势汹汹的进攻，牛得不要不要的~'
-                    }
-                    this.backBtn.label = '关闭'
-                }
-
+                    this.shareStr = '我在'+bData.name+'中成功通过了第'+(SM.level-1)+'关,收获丰厚！';
             }
-            else
-            {
-                this.delayShowResult(this.failGroup);
-                this.failText.text = '双方平手'
-                this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
-            }
-
 
             if(this.shareStr)
             {
@@ -601,7 +572,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
                     }
                     this.lastRota = rote
                 }
-
             }
         }
     }
@@ -632,6 +602,11 @@ class SpacePKUI extends game.BaseUI_wx3 {
                 this.currentState = 's2'
                 this.adBottom = 100;
                 MyADManager.getInstance().showBanner(100)
+
+                if(!this.dataIn.isReplay)
+                {
+                    SpaceManager.getInstance().testFreeBorn();
+                }
             })
 
         },1000)

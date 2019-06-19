@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SpaceChooseItemSkin" width="140" height="180" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="bg" source="border_14_png" left="0" right="0" top="0" bottom="0" x="0" y="0"/>
+	<e:Image id="mc" width="110" height="110" horizontalCenter="0" x="8" y="20"/>
+	<e:Group id="costGroup" right="3" bottom="10" x="68" y="78">
+		<e:Image source="icon_cost_png" x="0" y="0" scaleX="1.2" scaleY="1.2"/>
+		<e:Label id="costText" text="12" size="20" width="30" textAlign="center" stroke="3" horizontalCenter="-1" bottom="5"/>
+	</e:Group>
+	<e:Label id="lvText" text="Label" x="10" size="24" stroke="3" bottom="15"/>
+</e:Skin>

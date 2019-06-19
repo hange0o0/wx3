@@ -25,7 +25,7 @@
 			<e:Image source="main_button_png" y="0" x="0" scaleX="0.8" scaleY="0.8"/>
 			<e:Label id="timeText" text="999" size="35" horizontalCenter="0" bold="true" textColor="0xfccd7e" verticalCenter="0"/>
 		</e:Group>
-		<e:Group id="winGroup" y="190" height="265" anchorOffsetY="130" horizontalCenter="0" visible="false">
+		<e:Group id="winGroup" y="190" height="265" anchorOffsetY="130" horizontalCenter="0">
 			<e:Group x="0" y="0">
 			<e:Image x="0" y="0" source="pk_win_png"/>
 			<e:Image x="0" y="0" scaleX="-1" source="pk_win_png"/>
@@ -65,7 +65,7 @@
 				</e:Group>
 			</e:Group>
 		</e:Group>
-		<e:Group id="failGroup" y="190" height="265" anchorOffsetY="130" horizontalCenter="0" visible="false">
+		<e:Group id="failGroup" y="190" height="265" anchorOffsetY="130" horizontalCenter="0">
 			<e:Group x="0" y="0">
 			<e:Image source="pk_fail_png" x="0" y="0"/>
 			<e:Image source="pk_fail_png" x="0" y="0" scaleX="-1"/>
@@ -105,7 +105,7 @@
 			<e:Image id="costBarMC" source="door_bar_png" x="30" fillMode="repeat" width="600" verticalCenter="0"/>
 			<e:Group x="0" bottom="0">
 				<e:Image source="icon_cost_png" x="0" y="0" scaleX="1.5" scaleY="1.5"/>
-				<e:Label text="12" size="22" width="27" textAlign="center" stroke="2" id="costText" y="20" horizontalCenter="0"/>
+				<e:Label text="12" size="22" width="30" textAlign="center" stroke="5" id="costText" y="20" horizontalCenter="0"/>
 			</e:Group>
 		</e:Group>
 	</e:Group>

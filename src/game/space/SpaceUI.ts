@@ -24,7 +24,6 @@ class SpaceUI extends game.BaseWindow_wx3 {
     public constructor() {
         super();
         this.skinName = "SpaceUISkin";
-        this.canBGClose = false
     }
 
     public childrenCreated() {
@@ -32,15 +31,30 @@ class SpaceUI extends game.BaseWindow_wx3 {
 
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.joinBtn,()=>{
+            if(UM_wx3.chapterLevel < 10)
+            {
+                MyWindow.ShowTips('通关据点10后开启')
+                return;
+            }
             var SM = SpaceManager.getInstance();
-            if( DateUtil.isSameDay(SM.addTime))
+            if(!DateUtil.isSameDay(SM.addTime))
             {
                 this.openSpace();
                 return;
             }
-            ShareTool.openGDTV(()=>{
-                this.openSpace();
-            })
+            var str = SM.adType == 'cd'?"在《别碰小广告》游戏中坚持"+SM.adValue+"秒，即可开启空间":"在《别碰小广告》游戏中获得"+SM.adValue+"分，即可开启空间"
+
+            MyWindow.Alert(str,()=>{
+                MyADManager.getInstance().openWX5({
+                    key:SM.adType,
+                    value:SM.adValue,
+                    callBack:'openSpace',
+                })
+            },'开始挑战')
+
+            //ShareTool.openGDTV(()=>{
+            //    this.openSpace();
+            //})
         })
 
         var name = 'door_mv'
@@ -58,8 +72,8 @@ class SpaceUI extends game.BaseWindow_wx3 {
 
     private openSpace(){
         SpaceManager.getInstance().randomSpace();
-        this.hide();
         SpaceInfoUI.getInstance().show();
+        this.hide();
     }
 
     public show(){
@@ -78,18 +92,19 @@ class SpaceUI extends game.BaseWindow_wx3 {
     }
 
     public onShow(){
+        AniManager_wx3.getInstance().removeAllMV()
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
-        this.addPanelOpenEvent(GameEvent.client.timerE,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
 
 
     }
 
     private onTimer(){
-        if(this.joinBtn.label == '观看广告开启')
+        if(this.joinBtn.label == '挑战开启')
         {
             var SM = SpaceManager.getInstance();
-            if( !DateUtil.isSameDay(SM.addTime))
+            if(!DateUtil.isSameDay(SM.addTime))
             {
                 this.renew();
                 return;
@@ -117,15 +132,18 @@ class SpaceUI extends game.BaseWindow_wx3 {
 
         var SM = SpaceManager.getInstance();
         var isFree = !DateUtil.isSameDay(SM.addTime);
-
-        if(isFree)
+        if(UM_wx3.chapterLevel <= 10)
+        {
+            this.joinBtn.label = '通关据点10开启'
+        }
+        else if(isFree)
         {
             this.joinBtn.label = '进入空间'
             this.timeText.text = '';
         }
         else
         {
-            this.joinBtn.label = '观看广告开启'
+            this.joinBtn.label = '挑战开启'
             this.onTimer();
         }
 

@@ -25,8 +25,9 @@ class PKCode_wx3 {
         if(PD.actionTime == 0 && !PD.beginAuto) //在开始前上的怪
         {
             PD.beginAuto = true
+            this.runActionList();
             this.autoAction();
-	wx3_function(8710);
+
         }
 
         var monsterAddCD = 2000;
@@ -43,6 +44,8 @@ class PKCode_wx3 {
 
             if(PD.actionTime%monsterAddCD == 0)
                 this.autoAction();
+            if(PD.actionTime%10000 == 0)
+                this.autoMonsterAction();
             //this.actionPosCard();
             //this.addMonster();
             //this.actionSkill();
@@ -54,8 +57,8 @@ class PKCode_wx3 {
 
             this.actionFinish();
 
-            if(PD.isReplay && PD.actionTime >= PD.replayEndTime)
-                PD.isGameOver = true;
+            //if(PD.isReplay && PD.actionTime >= PD.replayEndTime)
+            //    PD.isGameOver = true;
 	wx3_function(8018);
 
             if(PD.actionTime > PKConfig_wx3.drawTime)//5分
@@ -83,6 +86,21 @@ class PKCode_wx3 {
     ///////////////*********************************************************
 
 
+    private runActionList(){
+        var PD = PKData_wx3.getInstance();
+        if(!PD.isReplay)
+            return;
+        for(var i=0;i<PD.actionList.length;i++)
+        {
+            if(PD.actionList[i].time == PD.actionTime)
+            {
+                if(PD.actionList[i].id > 200)
+                    PD.useSkill(PD.actionList[i].id,true)
+                else
+                    PD.useMonster(PD.actionList[i].index,true)
+            }
+        }
+    }
 
     ////英雄出动
     //public heroAdd(){
@@ -128,6 +146,27 @@ class PKCode_wx3 {
                 continue
             player.addMonster();
             //player.testAddPosCard(PD.actionTime);
+        }
+    }
+
+    public autoMonsterAction(){
+        var PD = PKData_wx3.getInstance();
+
+        if(PD.pkModel == 2)//每10秒敌人会加费用
+        {
+            PD.getPlayer(1).addCost(Math.floor(PD.actionTime/1000/5))
+        }
+        if(!PD.autoMonster.length)
+            return;
+        var mid = PD.autoMonster.shift();
+        for(var i=1;i<=PD.playerNum;i++) //暂时4个玩家
+        {
+            var player = PD.playerObj[i];
+            if (!player)
+                continue
+            PKData_wx3.getInstance().addMonster(player.getMonsterCreateData({
+                mid:mid,
+            }))
         }
     }
 
@@ -293,16 +332,7 @@ class PKCode_wx3 {
         PD.team1.onStateTimer();
         PD.team2.onStateTimer();
 
-        for(var i=0;i<PD.actionList.length;i++)
-        {
-             if(PD.actionList[i].time == PD.actionTime)
-             {
-                 if(PD.actionList[i].id > 200)
-                     PD.useSkill(PD.actionList[i].id,true)
-                 else
-                     PD.useMonster(PD.actionList[i].index,true)
-             }
-        }
+
 
         if(!PD.isGameOver && !PD.isDef)
         {
@@ -316,11 +346,15 @@ class PKCode_wx3 {
                 if(teamNum2 == 0)
                 {
                     if(PD.isReplay)
-                        var b = PD.actionList[PD.actionList.length - 1].time < PD.actionTime
+                        var b = PD.actionList[PD.actionList.length - 1].time < PD.actionTime - PKConfig_wx3.stepCD
                     else
                         var b = SpaceManager.getInstance().myCurrentList.length == 0
-                    PD.getPlayer(2).teamData.hp = 0;
-                    PD.isGameOver = true;
+                    if(b)
+                    {
+                        PD.getPlayer(2).teamData.hp = 0;
+                        PD.isGameOver = true;
+                    }
+
                 }
             }
             else
@@ -339,44 +373,7 @@ class PKCode_wx3 {
 
         }
 
-
-
-        //if(!PD.isReplay)
-        //{
-        //    var player = PD.myPlayer
-        //    if(!player.autoList && player.getPosNum() == 0)
-        //    {
-        //        PD.onPosEmpty(player);
-        //    }
-        //}
-
-        //if(PD.endless && PD.actionTime >= PD.endless)
-        //{
-        //    PD.isGameOver = true;
-        //}
-        //if(PD.needcd && PD.actionTime >= PD.needcd)
-        //{
-        //    PD.isGameOver = true;
-        //}
-
-
-        //if(PD.actionTime > 60000 && (PD.monsterList.length == 0 || PD.currentState == 'def') && !PD.isGameOver)//如果1min后有一方没牌了也结束
-        //{
-        //    var b = true;
-        //    for(var s in PKData.getInstance().playerObj)
-        //    {
-        //        var player = PKData.getInstance().playerObj[s];
-        //        if(player.id == 'sys')
-        //            continue;
-        //        if(player.getPosNum() || player.getCardNum())
-        //        {
-        //            b = false;
-        //            break
-        //        }
-        //    }
-        //    if(b)
-        //        PD.isGameOver = true;
-        //}
+        this.runActionList();
     }
 	private wx3_functionX_12505(){console.log(9895)}
 

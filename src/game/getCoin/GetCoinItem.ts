@@ -48,10 +48,10 @@ class GetCoinItem extends game.BaseItem_wx3 {
         {
             if(this.data.type == 3)
             {
-                GetCoinUI.getInstance().hide();
-	wx3_function(6013);
-                GameUI.getInstance().scrollToBottom();
-                //GameUI.getInstance().hideTask();
+                ChangeJumpUI.getInstance().show('体验以上小程序'+MyTool.createHtml(30,0xFFFF00)+'秒即可获得奖励',()=>{
+                    UM_wx3.coinObj.shareNum ++;
+                    this.dataChanged();
+                })
             }
             else  if(this.data.type == 4)
             {
@@ -195,10 +195,10 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 }
                 this.adGroup.visible = true;
 	wx3_function(6780);
-                //for(var i=0;i<4;i++)
-                //{
-                //    this['ad'+(i+1)].source = ChangeUserUI.adList[i] && ChangeUserUI.adList[i].logo
-                //}
+                for(var i=0;i<4;i++)
+                {
+                    this['ad'+(i+1)].source = MyADManager.getInstance().adList[i] ? MyADManager.getInstance().adList[i].logo:''
+                }
 
                 this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'

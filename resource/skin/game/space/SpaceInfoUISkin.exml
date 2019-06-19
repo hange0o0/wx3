@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="SpaceInfoUISkin" width="500" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Label id="titleText" text="时空之门" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
+	<e:Group y="20" horizontalCenter="0">
+		<e:Image source="bg11_png" y="0" height="55" width="300" x="0" scale9Grid="19,19,9,10"/>
+		<e:Label id="titleText" text="时空之门" bold="true" textColor="0xFFEC99" stroke="3" strokeColor="0x351D03" size="30" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
 	<e:Group horizontalCenter="0" bottom="30">
 		<e:Button id="infoBtn" label="怪物信息" width="160" y="0" x="0" skinName="Btn2Skin"/>
 		<e:Button id="pkBtn" label="开始战斗" skinName="Btn1Skin" width="160" y="0" x="0"/>
@@ -12,12 +15,11 @@
 	<e:Label id="desText" text="　　进入时空之门后所有怪物会被随机传送到一个新的世界，怪物们需要适应该世界的法则并由玩家直接操控进行战斗！" size="22" textColor="0xf7e0a3" left="30" right="30" lineSpacing="10" y="420"/>
 	<e:Image id="closeBtn" source="icon_error_png" right="-15" top="-15"/>
 	<e:Image id="iconMC" source="space_1_png" y="75" horizontalCenter="0"/>
-	<e:Button id="cancelBtn" label="离开世界" skinName="Btn1Skin" width="160" y="290" horizontalCenter="0"/>
+	<e:Button id="cancelBtn" label="离开空间" skinName="Btn1Skin" width="160" y="290" horizontalCenter="0"/>
 	<e:Group y="350" horizontalCenter="0">
 		<e:Image source="black_bg_png" y="0" scale9Grid="42,7,9,42" width="360" x="0"/>
 		<e:Label id="cdText" text="挑战剩余时间：00:00:00" y="16" horizontalCenter="0" size="24" textColor="0xf2da9f"/>
 	</e:Group>
 	<e:Label id="numText" text="下次免费时间：00:00:00" textColor="0xD6A85E" horizontalCenter="0" size="20" stroke="0" bottom="100"/>
-	<e:Image source="line2_png" y="75" fillMode="repeat" left="20" right="20"/>
 
 </e:Skin>

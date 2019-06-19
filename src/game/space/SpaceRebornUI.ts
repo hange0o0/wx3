@@ -13,6 +13,8 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
 
 
 
+    private data
+    private isFree
     public constructor() {
         super();
         this.skinName = "SpaceRebornUISkin";
@@ -26,7 +28,9 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
         this.addBtnEvent(this.okBtn,this.hide)
     }
 
-    public show(data?){
+    public show(data?,isFree?){
+        this.data = data;
+        this.isFree = isFree;
         super.show()
     }
 
@@ -39,6 +43,16 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
     }
 
     public renew(){
-
+        var list = [];
+        for(var s in this.data)
+        {
+            list.push({
+                id:this.data[s],
+                list:list,
+                num:0
+            })
+        }
+        this.list.dataProvider = new eui.ArrayCollection(list);
+        this.titleText.text = this.isFree?'已为你免费解封以下怪物':'已解封的怪物'
     }
 }

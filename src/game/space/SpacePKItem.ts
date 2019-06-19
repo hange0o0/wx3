@@ -41,8 +41,9 @@ class SpacePKItem extends game.BaseItem_wx3 {
         {
             this.mc.source = '';
             this.costGroup.visible = false
-            this.bg.source = 'border_14_png'
+            this.bg.source = 'border_16_png'
         }
+        this._stopDrag = !this.data || SpacePKUI.getInstance().dataIn.isReplay;
         this.rateMC.height = 0;
     }
 
@@ -56,7 +57,6 @@ class SpacePKItem extends game.BaseItem_wx3 {
         egret.Tween.get(this.con).to({scaleX:0,scaleY:0},100).call(()=>{
            this.data = data;
         },this).to({scaleX:1.2,scaleY:1.2},100).to({scaleX:1,scaleY:1},100).call(()=>{
-
             this._stopDrag = !this.data || SpacePKUI.getInstance().dataIn.isReplay;
             this.onE();
         },this)
@@ -69,20 +69,20 @@ class SpacePKItem extends game.BaseItem_wx3 {
             return;
         var PD = PKData_wx3.getInstance();
 
-        var cost = PD.myPlayer.cost;
+        var cost = PD.getPlayer(2).cost;
         var vo = MonsterVO.getObject(this.data)
         this.isCDing = cost < vo.cost
         if(this.isCDing)
         {
             var costCD = PKData_wx3.getInstance().getCostCD()
-            var cd = (vo.cost - cost - 1)*costCD + (PD.actionTime - PD.myPlayer.costTime)
+            var cd = (vo.cost - cost)*costCD - (PD.actionTime - PD.getPlayer(2).costTime)
             this.rateMC.height = cd/(vo.cost*costCD)*80;
-            this.bg.source = vo.getBG();
+            this.bg.source = 'border_16_png'
         }
         else
         {
             this.rateMC.height = 0;
-            this.bg.source = 'border_14_png'
+            this.bg.source = vo.getBG();
         }
     }
 

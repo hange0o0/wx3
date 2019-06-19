@@ -6,8 +6,10 @@ class ChangeJumpUI extends game.BaseWindow_wx3{
         return this._instance;
     }
 
+    private closeBtn: eui.Image;
     private list: eui.List;
     private destText: eui.Label;
+
 
     public fun;
     public str;
@@ -19,7 +21,8 @@ class ChangeJumpUI extends game.BaseWindow_wx3{
     public childrenCreated() {
         super.childrenCreated();
         this.list.itemRenderer = ChangeUserItem2
-        this.setTitle('体验更多小程序')
+        this.addBtnEvent(this.closeBtn,this.hide)
+        //this.setTitle('体验更多小程序')
     }
 
     public show(str?,fun?){

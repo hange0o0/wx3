@@ -2,6 +2,7 @@ class ChangeUserItem extends game.BaseItem_wx3{
 
     private mc: eui.Image;
     private nameText: eui.Label;
+
     public constructor() {
         super();
         this.skinName = "ChangeUserItemSkin";

@@ -106,10 +106,34 @@ class DebugUI extends game.BaseUI_wx3 {
                 return;
             }
             wx.navigateToMiniProgram({
-                appId: 'wxf9c8e218c23e2eb7',
+                appId: 'wxe2875716299fa092',//别点小广告
+                envVersion:'trial',
+                extraData:{
+                    appid:'wxe066524f2972cb1a',//我的APPID
+                    uin:Math.floor(Math.random()*1000000000000000),//唯一Key
+                    key:'cd',
+                    value:30,
+                    callBack:'openSpace'
+                },
                 success(res) {
                     // 打开成功
                 }
+            })
+        })
+
+        this.addB_3026('据点++',()=>{
+            UM_wx3.chapterLevel ++;
+            MyWindow.ShowTips('据点' + UM_wx3.chapterLevel)
+        })
+
+        this.addB_3026('重置副本',()=>{
+           SpaceManager.getInstance().initData(null);
+            MyWindow.ShowTips('副本已重置')
+        })
+
+        this.addB_3026('test Jump',()=>{
+            ChangeJumpUI.getInstance().show('没有可观看的广告\n体验以上小程序'+MyTool.createHtml(30,0xFFFF00)+'秒也可获得',()=>{
+                console.log('test Jump success');
             })
         })
 

@@ -24,7 +24,6 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
     public constructor() {
         super();
         this.skinName = "SpaceInfoUISkin";
-        this.canBGClose = false
     }
 
     public childrenCreated() {
@@ -33,17 +32,15 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
         this.addBtnEvent(this.closeBtn,this.hide)
 
         this.addBtnEvent(this.pkBtn,()=>{
+            if(this.pkBtn.label == '离开空间')
+            {
+                this.exit();
+                return
+            }
             SpaceManager.getInstance().startPK()
         })
         this.addBtnEvent(this.cancelBtn,()=>{
-            MyWindow.Confirm('确定要放弃并离开这个空间吗？',(b)=>{
-                if(b==1)
-                {
-                    SpaceManager.getInstance().spaceType = 0
-                    this.hide();
-                    SpaceUI.getInstance().show();
-                }
-            },['取消', '离开']);
+            this.exit();
         })
 
         this.addBtnEvent(this.infoBtn,()=>{
@@ -53,7 +50,18 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
 
     }
 
-    public show(data?){
+    public exit(){
+        MyWindow.Confirm('确定要放弃并离开这个空间吗？',(b)=>{
+            if(b==1)
+            {
+                SpaceManager.getInstance().spaceType = 0
+                this.hide();
+                SpaceUI.getInstance().show();
+            }
+        },['取消', '离开']);
+    }
+
+    public show(){
         super.show()
     }
 
@@ -64,6 +72,7 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
     public onShow(){
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.SPACE_CHANGE,this.renew)
     }
 
     private onTimer(){
@@ -71,10 +80,11 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
         var cd = SM.maxTime - (TM_wx3.now() - SM.addTime);
         if(cd < 0)
         {
-            this.hide();
             SM.spaceType = 0;
             UM_wx3.needUpUser = true;
             MyWindow.Alert('时间已到，被空间排斥出来了')
+            egret.callLater(this.hide,this);
+            return
         }
         this.cdText.text = '挑战剩余时间：' + DateUtil.getStringBySecond(cd);
     }
@@ -85,6 +95,7 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
         this.titleText.text = data.name
         this.desText.text = data.des
         this.iconMC.source = 'space_'+SM.spaceType+'_png'
+        this.cancelBtn.visible = true;
         if(SM.level)
         {
             this.numText.text = '未被封印的怪物：' + SM.myCurrentList.length + '/'  + (SM.myCurrentList.length + SM.myDieList.length)
@@ -97,6 +108,11 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
                 default:
                     this.pkBtn.label = '第 '+SM.level+' 关';
                     break;
+            }
+            if(SM.myCurrentList.length  == 0)
+            {
+                this.pkBtn.label = '离开空间';
+                this.cancelBtn.visible = false;
             }
         }
         else

@@ -333,7 +333,7 @@ if(window["wx"])
         //GameUI.getInstance().cleanTouch();
         console.log('show')
 
-        MyADManager.getInstance().onShow();
+        MyADManager.getInstance().onShow(res);
 
         //if(GameManager_wx3.getInstance().changeUserTime)
         //{
