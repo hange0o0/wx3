@@ -3,26 +3,24 @@ class DefUI extends game.BaseItem_wx3{
     private con: eui.Group;
     private bg: eui.Image;
     private bgFront: eui.Image;
-	private wx3_functionX_11908(){console.log(5330)}
     private forceText: eui.Label;
     private numText: eui.Label;
     private costText: eui.Label;
     private btnGroup: eui.Group;
     private taskBtn: eui.Group;
     private taskRed: eui.Image;
-	private wx3_functionX_11909(){console.log(6228)}
     private taskBtn2: eui.Group;
     private taskRed2: eui.Image;
     private coinBtn: eui.Group;
     private coinRed: eui.Image;
+    private spaceBtn: eui.Group;
+    private spaceRed: eui.Image;
     private buffBtn: eui.Group;
     private rankBtn: eui.Group;
-    private spaceBtn: eui.Group;
-	private wx3_functionX_11910(){console.log(6115)}
-    private defList: eui.List;
-    private redMC: eui.Image;
     private mailBtn: eui.Image;
+    private defList: eui.List;
     private addDefBtn: eui.Button;
+
 
 
 
@@ -223,7 +221,7 @@ class DefUI extends game.BaseItem_wx3{
 
 	wx3_function(3637);
 
-        this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
+        //this.redMC.visible = arr.length < teamNum && MonsterManager.getInstance().getFreeMonster(true).length>0;
 
         this.dataProvider.source = FightManager.getInstance().getDefList();
         this.dataProvider.refresh();
@@ -316,6 +314,7 @@ class DefUI extends game.BaseItem_wx3{
         MyTool.runListFun(this.defList,'onE');
         this.onStep();
         this.randomTalk();
+        this.spaceRed.visible = UM_wx3.chapterLevel>=10 && !DateUtil.isSameDay(SpaceManager.getInstance().addTime)
 	wx3_function(1065);
         //this.renewMonsterPos_5086();
         //for(var i=0;i<this.monsterArr.length;i++)

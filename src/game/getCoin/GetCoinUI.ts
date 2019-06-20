@@ -76,7 +76,7 @@ class GetCoinUI extends game.BaseWindow_wx3 {
 
 
     public renew(){
-        console.log(UM_wx3.isTest);
+        //console.log(UM_wx3.isTest);
          var arr =[
             //{type:1,title:'等陆第X天'},
             //{type:2,title:'X小时后可领'},

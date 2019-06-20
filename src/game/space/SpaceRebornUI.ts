@@ -10,6 +10,8 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
     private titleText: eui.Label;
     private list: eui.List;
     private okBtn: eui.Button;
+    private closeBtn: eui.Image;
+
 
 
 
@@ -25,7 +27,22 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
         super.childrenCreated();
 
         this.list.itemRenderer = SpaceMyListItem
-        this.addBtnEvent(this.okBtn,this.hide)
+        this.addBtnEvent(this.closeBtn,this.hide)
+        this.addBtnEvent(this.okBtn,()=>{
+            if(this.isFree)
+            {
+                ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+                    var SM = SpaceManager.getInstance();
+                    SM.myCurrentList = SM.myCurrentList.concat(this.data)
+                    SM.rebornTime ++;
+                    UM_wx3.needUpUser = true;
+                    EM_wx3.dispatch(GameEvent.client.SPACE_CHANGE)
+                    this.hide();
+                })
+                return;
+            }
+            this.hide();
+        })
     }
 
     public show(data?,isFree?){
@@ -53,6 +70,8 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
             })
         }
         this.list.dataProvider = new eui.ArrayCollection(list);
-        this.titleText.text = this.isFree?'已为你免费解封以下怪物':'已解封的怪物'
+        this.titleText.text = this.isFree?'解封怪物':'已解封的怪物'
+        this.okBtn.label = this.isFree?'免费解封':'确定'
+        this.closeBtn.visible = this.isFree
     }
 }

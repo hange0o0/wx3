@@ -257,8 +257,13 @@ class SpaceManager {
     public testFreeBorn(){
         if(this.rebornTime < 3 && this.myDieList.length >= 6)
         {
-            this.rebornTime ++;
-            this.reborn(true);
+            var arr = []
+            for(var i=0;i<6 && this.myDieList.length>0;i++)
+            {
+                var id = ArrayUtil.randomOne(this.myDieList,true)
+                arr.push(id);
+            }
+            SpaceRebornUI.getInstance().show(arr,true);
         }
     }
 

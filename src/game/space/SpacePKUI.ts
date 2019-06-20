@@ -40,7 +40,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private backBtn: eui.Button;
     private doubleBtn: eui.Button;
     private replayBtn: eui.Button;
-    private strongBtn: eui.Button;
     private hurt1: eui.Image;
     private hurt2: eui.Image;
     private skillBuffList: eui.List;
@@ -50,6 +49,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private costBarMC: eui.Image;
     private costText: eui.Label;
     private bottomUI: BottomUI;
+    private closeBtn: eui.Button;
 
 
 
@@ -57,6 +57,9 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
 
 
+
+
+    public finish = false
     public dataIn;
     public lastAction; //上次操作
     public gameStart = false
@@ -87,9 +90,10 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
         this.addBtnEvent(this.backBtn,this.onBack_3581)
+        this.addBtnEvent(this.closeBtn,this.onBack_3581)
         this.addBtnEvent(this.doubleBtn,this.onDouble_8100)
         this.addBtnEvent(this.addSpeedBtn,this.onSpeed_8527)
-        this.addBtnEvent(this.strongBtn,this.onStrong_947)
+        //this.addBtnEvent(this.strongBtn,this.onStrong_947)
 
         var pkvideo = PKVideoCon_wx3.getInstance();
         this.con.addChild(pkvideo)
@@ -145,12 +149,12 @@ class SpacePKUI extends game.BaseUI_wx3 {
         }
     }
 
-    private onStrong_947(){
-        var tecid = 32;
-        if(this.dataIn.fight && this.dataIn.fight.type == 'def')
-            tecid = 31
-        PKFailUI.getInstance().show(tecid)
-    }
+    //private onStrong_947(){
+    //    var tecid = 32;
+    //    if(this.dataIn.fight && this.dataIn.fight.type == 'def')
+    //        tecid = 31
+    //    PKFailUI.getInstance().show(tecid)
+    //}
 
     public onVideoEvent2(e){
         if(!this.stage)
@@ -311,12 +315,14 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.gameStart = false;
         this.addSpeedBtn.visible = true
         this.skillList.touchChildren = this.skillList.touchEnabled = false;
+
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
             this.adBottom = 100;
             MyADManager.getInstance().showBanner(100)
             this.topUI.setTitle(this.dataIn.title || '回放')
+            this.monsterList.touchChildren = this.monsterList.touchEnabled = false;
         }
         else
         {
@@ -324,6 +330,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
             this.adBottom = 0;
             MyADManager.getInstance().showBanner(0)
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
+            this.monsterList.touchChildren = this.monsterList.touchEnabled = true;
 
         }
 
@@ -336,6 +343,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
         egret.Tween.removeTweens(this.hurt1)
         egret.Tween.removeTweens(this.hurt2)
         this.isQuick = true;
+        this.finish = false;
 
         clearTimeout(this.resultTimer);
         egret.Tween.removeTweens(this.failGroup)
@@ -387,6 +395,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
         {
             egret.Tween.removeTweens(this.tipsText)
             this.tipsGroup.visible = true
+            this.closeBtn.visible = true
             this.tipsGroup.rotation = 0
             egret.Tween.get(this.tipsText,{loop:true}).to({rotation:8},100).to({rotation:-8},100).to({rotation:8},100).to({rotation:-8},100).to({rotation:0},100).wait(1000)
         }
@@ -395,6 +404,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
     public startGame(){
         this.tipsGroup.visible = false
+        this.closeBtn.visible = false
         egret.Tween.removeTweens(this.tipsText)
         this.gameStart = true;
         this.skillList.touchChildren = this.skillList.touchEnabled = true;
@@ -469,6 +479,12 @@ class SpacePKUI extends game.BaseUI_wx3 {
         if(!this.gameStart)
             return;
 
+        if(this.finish)
+        {
+            PKVideoCon_wx3.getInstance().action();
+            return;
+        }
+
         var PD = PKData_wx3.getInstance();
         var PC = PKCode_wx3.getInstance();
         var SM = SpaceManager.getInstance()
@@ -482,7 +498,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.timeText.text = Math.floor(PD.actionTime/1000) + ''
         if(PD.isGameOver)
         {
-            this.gameStart = false;
+            this.finish = true;
             PD.playSpeed = 1;
             this.addSpeedBtn.visible = false
 
@@ -502,7 +518,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
             {
                 this.delayShowResult(this.failGroup);
                 this.failText.text = '挑战失败'
-                this.backBtn.label = SM.myCurrentList.length>0 || SM.rebornTime < 3?'再试一次':'关闭'
+                this.backBtn.label = '再试一次'//SM.myCurrentList.length>0 || SM.rebornTime < 3?'再试一次':'关闭'
             }
             else
             {
@@ -510,7 +526,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
                 this.resourceGroup.removeChildren()
                 this.delayShowResult(this.winGroup);
                 this.winText.text = isEndLess?'' + DateUtil.getStringBySecond(Math.round(PD.actionTime/1000)).substr(-5):'挑战成功';
-                this.backBtn.label = (isEndLess || (SM.myCurrentList.length==0 && SM.rebornTime >= 3))?'继续战斗':'下一关'
+                this.backBtn.label = (isEndLess)?'继续战斗':'下一关'
                 if(this.dataIn.coin)
                 {
                     this.desGroup['callVisible'] = true
@@ -533,12 +549,12 @@ class SpacePKUI extends game.BaseUI_wx3 {
             if(this.shareStr)
             {
                 this.btnGroup.addChild(this.doubleBtn)
-                MyTool.removeMC(this.strongBtn)
+                //MyTool.removeMC(this.strongBtn)
             }
             else
             {
                 MyTool.removeMC(this.doubleBtn)
-                this.btnGroup.addChild(this.strongBtn)
+                //this.btnGroup.addChild(this.strongBtn)
             }
             if(this.backBtn.label == '关闭')
                 MyTool.removeMC(this.backBtn)
@@ -549,13 +565,14 @@ class SpacePKUI extends game.BaseUI_wx3 {
             var item2 = PKData_wx3.getInstance().getFirstItem(PKData_wx3.getInstance().myPlayer.teamData.enemy.id);
             if(item && item2)
             {
+                var posDes = 80
                 var videoCon = PKVideoCon_wx3.getInstance();
                 var w = 640
                 var scrollH = -((item.x + item2.x)/2 - w/2);
-                if(scrollH > 0)
-                    scrollH = 0;
-                else if(scrollH < w - videoCon.width)
-                    scrollH = w - videoCon.width;
+                if(scrollH > -posDes)
+                    scrollH = -posDes;
+                else if(scrollH < w - videoCon.width + posDes)
+                    scrollH = w - videoCon.width + posDes;
                 var dec = Math.abs(videoCon.x - scrollH)
                 var rote =  videoCon.x > scrollH ?1:-1
                 if(dec > 80 || this.lastRota == rote)
@@ -582,6 +599,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     {
         clearTimeout(this.resultTimer);
         this.skillList.touchChildren = this.skillList.touchEnabled = false;
+        this.monsterList.touchChildren = this.monsterList.touchEnabled = false;
         this.resultTimer = setTimeout(()=>{
             PKVideoCon_wx3.getInstance().resetAllMVSpeed();
             if(mc == this.winGroup)

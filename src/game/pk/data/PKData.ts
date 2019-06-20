@@ -306,7 +306,6 @@ class PKData_wx3 extends egret.EventDispatcher{
     }
     public useMonster(index,stopRecord?){
         var monsterID = this.handData[index];
-        console.log(index,monsterID,stopRecord)
         //if(!monsterID)
         //    return;
         if(!stopRecord)

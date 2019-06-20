@@ -61,7 +61,7 @@ class PKCode_wx3 {
             //    PD.isGameOver = true;
 	wx3_function(8018);
 
-            if(PD.actionTime > PKConfig_wx3.drawTime)//5分
+            if(PD.pkModel != 2 && PD.actionTime > PKConfig_wx3.drawTime)//5分
                 PD.isGameOver = true;
 
             if(PD.isGameOver)

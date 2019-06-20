@@ -75,11 +75,10 @@
 			</e:Group>
 			<e:Label id="failText" text="挑战失败" y="119" stroke="3" horizontalCenter="0"/>
 		</e:Group>
-		<e:Group id="btnGroup" y="400" horizontalCenter="0" visible="false">
+		<e:Group id="btnGroup" y="400" horizontalCenter="0">
 			<e:Button id="backBtn" label="关闭" y="0" width="150" x="0" skinName="Btn2Skin"/>
 			<e:Button id="doubleBtn" label="炫耀" y="10" width="150" x="10" skinName="Btn1Skin"/>
 			<e:Button id="replayBtn" label="回放" y="0" skinName="Btn1Skin" width="150" x="0"/>
-			<e:Button id="strongBtn" label="取胜秘笈" y="10" width="150" x="10" skinName="Btn9Skin"/>
 			<e:layout>
 			<e:HorizontalLayout gap="30"/>
 			</e:layout>
@@ -110,5 +109,6 @@
 		</e:Group>
 	</e:Group>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0" includeIn="s2"/>
+	<e:Button id="closeBtn" label="返回" y="400" width="150" skinName="Btn1Skin" horizontalCenter="0"/>
 
 </e:Skin>

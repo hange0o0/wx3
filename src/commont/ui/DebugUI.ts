@@ -166,9 +166,9 @@ class DebugUI extends game.BaseUI_wx3 {
                         temp.push('    怪物等级：' + lv)
                         temp.push('\n')
                         num = 0;
-                        for(var s in oo.tlv)
+                        for(var s in oo.tec)
                         {
-                            num +=  oo.tlv[s]
+                            num +=  oo.tec[s]
                         }
                         temp.push('    科技等级：' + num)
                         temp.push('    分享人数：' + oo.shareUser.length)

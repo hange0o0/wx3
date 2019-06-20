@@ -47,6 +47,7 @@ class UserManager_wx3 {
     public buffDiamond = 0;
 
     public skills: any;//玩家的技能
+    public skillChange = false
 
 	private wx3_functionX_12058(){console.log(539)}
     public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
@@ -103,7 +104,7 @@ class UserManager_wx3 {
         this.coin = data.coin || 0;
         this.diamond = data.diamond || 0;
         this.energy = data.energy;
-        this.skills = data.skills || {201:10,202:10};
+
         this.helpUser = data.helpUser;
         //this.guideFinish = data.guideFinish;
         this.chapterStar = data.chapterStar;
@@ -126,6 +127,22 @@ class UserManager_wx3 {
                 gameNum:0,
             };
 	wx3_function(5500);
+
+        this.skillChange = data.skillChange;
+        if(!this.skillChange)
+        {
+            this.skills = data.skills || {201:10,202:10}
+            this.skillChange = true;
+        }
+        else
+        {
+            this.skills = {};
+            for(var i=0;i<data.skills2.length;i++)
+            {
+                var oo = data.skills2[i];
+                this.skills[oo.id] = oo.num;
+            }
+        }
 
         //if(!window['wx'])
         //{
@@ -459,7 +476,13 @@ class UserManager_wx3 {
     }
 
     private getUpdataData_5960(){
+        var skills = [];
+        for(var s in this.skills)
+        {
+            skills.push({id:s,num:this.skills[s]})
+        }
         return {
+            skillChange:UM_wx3.skillChange,
             loginTime:UM_wx3.loginTime,
             regTime:UM_wx3.regTime,
             coin:UM_wx3.coin,
@@ -467,7 +490,7 @@ class UserManager_wx3 {
             buffDiamond:UM_wx3.buffDiamond,
             energy:UM_wx3.energy,
             helpUser:UM_wx3.helpUser,
-            skills:UM_wx3.skills,
+            skills2:skills,
             work:WorkManager.getInstance().getWorkSave(),
             def:MonsterManager.getInstance().defList,
             fight:FightManager.getInstance().getFightSave(),

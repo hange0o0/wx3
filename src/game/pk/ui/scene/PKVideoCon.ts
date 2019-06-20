@@ -361,7 +361,7 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
         var atker = this.getItemByID(a)
         if(!atker)
         {
-            throw new Error('XXX')
+            //throw new Error('XXX')
             return;
         }
         var scale = Math.max(1,(atker.data.getVO().height)/70);
@@ -432,6 +432,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
 
     //MISS动画
     public playMiss(item){
+        if(!item)
+            return;
         var txt = this.createTxt_6626();
         txt.textColor = 0xFFFFFF;
         txt.text = 'miss';
@@ -451,6 +453,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
 
 
     public playSkillName(item:PKMonsterItem_wx3,value){
+        if(!item)
+            return;
         var txt = this.createTxt_6626();
         txt.textColor = 0xFFFFFF;
         txt.strokeColor = 0x660000
