@@ -42,6 +42,11 @@ class MainWorkItem extends game.BaseItem_wx3 {
         //this.lastMC.visible = this.data.isLast;
         this.bg.scaleX = this.data.id%2 == 1?1:-1
         this.frontBG.scaleX = this.data.id%2 == 1?1:-1
+        while(this.monsterArr.length > 0)
+        {
+            MainWorkMonsterItem.freeItem(this.monsterArr.pop());
+        }
+
         if(WorkManager.getInstance().getOpenWork() >= this.data.id)
         {
             this.showList_8836();
@@ -63,11 +68,7 @@ class MainWorkItem extends game.BaseItem_wx3 {
 
         this.currentState = 'normal'
 
-        while(this.monsterArr.length > 0)
-        {
-            MainWorkMonsterItem.freeItem(this.monsterArr.pop());
-	wx3_function(8945);
-        }
+
 
         var WM = WorkManager.getInstance();
         var arr = WM.getWorkList(this.data.id);

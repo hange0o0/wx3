@@ -181,7 +181,7 @@ class MonsterManager {
     //最多10只分身
     public getNumCost(id,num?){
         num = num || this.getMonsterNum(id)+1;
-        return this.numCost[num-2] + MonsterVO.getObject(id).level - 1;
+        return Math.floor(this.numCost[num-2]*(1+ (MonsterVO.getObject(id).level - 1)/19));
     }
 
     //增加的工作收益

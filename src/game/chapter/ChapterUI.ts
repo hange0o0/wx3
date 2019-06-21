@@ -62,7 +62,7 @@ class ChapterUI extends game.BaseUI_wx3 {
             if(!coin)
                 return;
 	wx3_function(8953);
-            MyWindow.ShowTips('获得金币：' + MyTool.createHtml('+' + NumberUtil.addNumSeparator(coin,2),0xFBB646),1500)
+            AwardTipsUI.showTips('coin',coin)
             UM_wx3.addCoin(coin);
             UM_wx3.chapterCoin = 0;
         })

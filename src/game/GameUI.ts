@@ -440,7 +440,6 @@ class GameUI extends game.BaseUI_wx3 {
         AniManager_wx3.getInstance().preLoadMV(112)
         AniManager_wx3.getInstance().preLoadMV(128)
         AniManager_wx3.getInstance().preLoadMV(200)
-        AniManager_wx3.getInstance().preLoadMV(200)
 
         RES.createGroup('door_mv', ["door_mv_json","door_mv_png"], true);
         RES.loadGroup('door_mv');

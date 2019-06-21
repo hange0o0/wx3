@@ -127,6 +127,8 @@ class FightManager {
 
 
     public save(){
+        if(UM_wx3.isOther)
+            return;
         if(!RobotVO.change)
             return;
         RobotVO.change = false;

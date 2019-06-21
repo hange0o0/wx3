@@ -85,11 +85,11 @@ class GetCoinItem extends game.BaseItem_wx3 {
         UM_wx3.addCoin(this.addCoin);
 	wx3_function(6059);
 
-        MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(this.addCoin,2),0xFFFF00),2000)
+        AwardTipsUI.showTips('coin',this.addCoin)
         if(this.addDiamond)
         {
             UM_wx3.addDiamond(this.addDiamond);
-            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml('+' + this.addDiamond,0x6ffdfd),2000)
+            AwardTipsUI.showTips('diamond',this.addDiamond)
         }
         UM_wx3.needUpUser = true;
 	wx3_function(2100);

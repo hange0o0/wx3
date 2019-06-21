@@ -52,7 +52,7 @@ class TaskItem extends game.BaseItem_wx3{
              SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',TaskManager.getInstance().addTaskTime)
              UM_wx3.addCoin(this.data.award);
 	wx3_function(3067);
-             MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(this.data.award,2),0xFFFF00),2000)
+             AwardTipsUI.showTips('coin',this.data.award)
              var index = UM_wx3.dayTask.indexOf(this.data);
              if(index != -1)
              {
@@ -67,7 +67,7 @@ class TaskItem extends game.BaseItem_wx3{
     public dataChanged():void {
          var data = this.data;
          this.nameText.text = TaskManager.getInstance().dayTaskBase[data.id].name
-         this.awardText.text = NumberUtil.addNumSeparator(data.award)
+         this.awardText.text = NumberUtil.addNumSeparator(data.award,2)
         this.taskIcon.source = 'task'+data.id+'_jpg'
         this.setHtml(this.timeText,'需要时间：'+ this.createHtml(data.cd + '小时',0xFFFFFF))
         this.setHtml(this.desText, '需要怪物：'+ this.createHtml(data.num + '个',0xFFFFFF))

@@ -13,6 +13,8 @@ class UserManager_wx3 {
     }
 	private wx3_functionX_12053(){console.log(1779)}
 
+    public isOther = false
+
     private _needUpUser = false;
     public get needUpUser(){return this._needUpUser}
     public set needUpUser(v){this._needUpUser = v;v && egret.callLater(this.localSave_3476,this)}
@@ -512,6 +514,8 @@ class UserManager_wx3 {
     }
 
     public upDateUserData(){
+        if(UM_wx3.isOther)
+            return;
         if(!this.needUpUser)
             return;
         var wx = window['wx'];
@@ -529,6 +533,8 @@ class UserManager_wx3 {
     }
 
     private localSave_3476(){
+        if(this.isOther)
+            return;
         FightManager.getInstance().save();
 	wx3_function(8901);
         SharedObjectManager_wx3.getInstance().setMyValue('localSave',this.getUpdataData_5960())
@@ -557,6 +563,8 @@ class UserManager_wx3 {
     //}
 
     public upWXChapter(){
+        if(this.isOther)
+            return;
         var wx = window['wx'];
         if(!wx)
             return;

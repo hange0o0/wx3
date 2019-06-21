@@ -125,14 +125,12 @@ class TaskManager {
             {
                 case 'def':
                     this.createTask_7626(id,type,Math.floor(DM.getChapterForce(clv)*0.8));
-	wx3_function(3161);
                     break;
                 case 'cstar':
                     this.createTask_7626(id,type,Math.floor(clv*3*0.8));
                     break;
                 case 'fight':
                     this.createTask_7626(id,type,id - 50);
-	wx3_function(1274);
                     break;
             }
         }
@@ -300,12 +298,12 @@ class TaskManager {
         if(vo.coin)
         {
             UM_wx3.addCoin(vo.coin)
-            MyWindow.ShowTips('获得金币：'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(vo.coin,2),0xFFFF00),2000)
+            AwardTipsUI.showTips('coin',vo.coin)
         }
         if(vo.diamond)
         {
             UM_wx3.addDiamond(vo.diamond)
-            MyWindow.ShowTips('获得钻石：'+MyTool.createHtml('+' + vo.diamond,0x6ffdfd),2000)
+            AwardTipsUI.showTips('diamond',vo.diamond)
         }
         UM_wx3.task = vo.id;
 	wx3_function(7615);

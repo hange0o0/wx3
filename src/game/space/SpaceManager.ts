@@ -282,7 +282,6 @@ class SpaceManager {
         {
             this.level ++
             var coin = Math.floor(Math.pow(this.level,3.4))*50
-
             if((this.level-1)%3 == 0)
                 diamond = 1;
         }

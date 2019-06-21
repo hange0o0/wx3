@@ -2,10 +2,15 @@ class AwardTipsUI extends game.BaseContainer_wx3{
     private static instancePool = [];
     private static list = [];
     private static lastShowTime = 0;
-    public static showTips(icon,text,color) {
+    private static baseData = {
+        diamond:{icon:'icon_diamond_png',color:0x6ffdfd},
+        coin:{icon:'icon_coin_png',color:0xFBB646},
+    }
+    public static showTips(type,value) {
+        var base = this.baseData[type]
         this.list.push({
-            icon:icon,
-            txt:MyTool.createHtml(text,color),
+            icon:base.icon,
+            txt:MyTool.createHtml('+' + NumberUtil.addNumSeparator(value,2),base.color),
         })
         this.showText();
     }
@@ -15,7 +20,7 @@ class AwardTipsUI extends game.BaseContainer_wx3{
         clearTimeout(this.textTimer)
         if(this.list.length == 0)
             return;
-        if(egret.getTimer() - this.lastShowTime < 500)
+        if(egret.getTimer() - this.lastShowTime < 400)
         {
             this.textTimer = setTimeout(()=>{
                 AwardTipsUI.showText()
@@ -24,8 +29,9 @@ class AwardTipsUI extends game.BaseContainer_wx3{
         }
         var instance = this.instancePool.pop()
         if (!instance)
-            instance = new TipsUI();
+            instance = new AwardTipsUI();
         instance.show(this.list.shift());
+        this.lastShowTime = egret.getTimer();
         if(this.list.length)
         {
             this.textTimer = setTimeout(()=>{
@@ -35,7 +41,8 @@ class AwardTipsUI extends game.BaseContainer_wx3{
     }
 
     public static freeItem(item){
-        this.list.push(item);
+        this.instancePool.push(item);
+        egret.Tween.removeTweens(item)
         MyTool.removeMC(item);
     }
 
@@ -53,57 +60,14 @@ class AwardTipsUI extends game.BaseContainer_wx3{
         GameManager_wx3.stage.addChild(this);
         this.setHtml(this.txt,data.txt)
         this.icon.source = data.icon;
-        egret.Tween.get(this).to({y:})
-        for(var i=0;i<TipsUI.showTips.length;i++)
-        {
-            var item =  TipsUI.showTips[i];
-            item.toY -= 70
-            egret.Tween.removeTweens(item);
-            wx3_function(8689);
-            var tw = egret.Tween.get(item);
-            tw.to({y:item.toY},Math.abs(item.toY - item.y)*2);
-        }
-        TipsUI.showTips.push(this)
-        egret.clearTimeout(this.timer);
-
-        wx3_function(5587);
-
-        //this.verticalCenter = 0;
-        GameManager_wx3.stage.addChild(this);
-        MyTool.setColorText(this.text,v);
-        if(this.text.numLines > 1)
-            this.text.textAlign = 'left'
-        else
-            this.text.textAlign = 'center'
-        this.visible = false
-        this.timer = egret.setTimeout(this.onTimer_8978,this,cd + (TipsUI.showTips.length-1)*100);
-        wx3_function(6573);
-        egret.setTimeout(function(){
-            this.visible = true
-        },this,(TipsUI.showTips.length-1)*100);
-
-        this.validateNow();
-        this.x =  (GameManager_wx3.stage.stageWidth -this.width)/2
-        this.y =  GameManager_wx3.stage.stageHeight * 0.2;
-        wx3_function(797);
-        this.toY =  this.y;
+        this.alpha = 1;
+        this.x = GameManager_wx3.stageX-200
+        this.y = GameManager_wx3.stageY-50
+        egret.Tween.get(this).to({y:this.y-150,alpha:0},1500).call(()=>{
+            AwardTipsUI.freeItem(this);
+        })
     }
 
-    private onTimer_8978(){
-        this.hide();
-    }
-    private wx3_functionX_12221(){console.log(7575)}
-
-    public hide(){
-        egret.clearTimeout(this.timer);
-        MyTool.removeMC(this);
-        PopUpManager.testShape();
-        TipsUI.instancePool.push(this)
-        var index = TipsUI.showTips.indexOf(this)
-        if(index != -1)
-            TipsUI.showTips.splice(index,1)
-    }
-    private wx3_functionX_12222(){console.log(6105)}
 
 
 }

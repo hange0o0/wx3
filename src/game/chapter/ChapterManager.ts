@@ -9,6 +9,7 @@ class ChapterManager {
 
     public maxEarn = 0;
     public resultEarn:any;
+    public diamondAward;
 
     public addEnergyFull(){
         ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
@@ -151,7 +152,7 @@ class ChapterManager {
             if(star == 3)
             {
                 delete UM_wx3.chapterStar[id];
-                this.resultEarn.diamond = Math.ceil(id/30)
+                this.resultEarn.diamond = this.getDiamond(Math.ceil(id/20))
             }
             else
                 UM_wx3.chapterStar[id] = star;
@@ -165,6 +166,28 @@ class ChapterManager {
         if(!UM_wx3.chapterResetTime)
             UM_wx3.chapterResetTime = TM_wx3.now()
 
+        var count = 0;
+        for(var s in TaskVO.data)
+        {
+            if(TaskVO.data[s].value == 817)
+                console.log(TaskVO.data[s])
+        }
+
+    }
+
+    private getDiamond(id){
+         if(!this.diamondAward)
+         {
+             this.diamondAward = [];
+             for(var i=1;i<50;i++)
+             {
+                  for(var j=0;j<i;j++)
+                  {
+                      this.diamondAward.push(i)
+                  }
+             }
+         }
+        return this.diamondAward[id-1]
     }
 	private wx3_functionX_12269(){console.log(1134)}
 

@@ -100,7 +100,7 @@ class UserInfoBtn {
             }
             this.okBtn = this.initBtn_9816(btn.width, btn.height, btn.x, btn.y, this.isNew);
         }
-        console.log(this.okBtn)
+        //console.log(this.okBtn)
         if(!this.okBtn) return;
 
 

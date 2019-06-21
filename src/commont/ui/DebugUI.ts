@@ -174,7 +174,7 @@ class DebugUI extends game.BaseUI_wx3 {
                         temp.push('    分享人数：' + oo.shareUser.length)
 
                         arr[i] = (i+1) +' ========>  ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.regTime || 0)) + ' # ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.saveTime))
-                         + '\n' + temp.join('') + '<a href="event:'+oo.openid+'">复制<a/>';
+                         + '\n' + temp.join('') + '<a href="event:'+i+'">复制<a/>';
                     }
                     DebugTextList.getInstance().show(arr,res.result);
                 }

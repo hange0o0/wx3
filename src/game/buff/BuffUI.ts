@@ -68,11 +68,11 @@ class BuffUI extends game.BaseWindow_wx3 {
         this.addBtnEvent(this.diamondBtn,()=>{
             var num = BuffManager.getInstance().getUserNum()
             var diamond = (num - UM_wx3.buffDiamond)*10;
-	wx3_function(1178);
             UM_wx3.addDiamond(diamond)
             UM_wx3.buffDiamond = num;
             MyTool.removeMC(this.diamondBtn)
-            MyWindow.ShowTips('获得钻石：+'+MyTool.createHtml(diamond,0x6ffdfd),2000)
+            AwardTipsUI.showTips('diamond',diamond)
+            //MyWindow.ShowTips('获得钻石：+'+MyTool.createHtml(diamond,0x6ffdfd),2000)
         })
 
         MyTool.addLongTouch(this.desText,()=>{
