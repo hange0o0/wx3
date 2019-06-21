@@ -14,6 +14,8 @@ class SpaceMyListUI extends game.BaseWindow_wx3 {
     private btnGroup: eui.Group;
     private infoBtn: eui.Button;
     private pkBtn: eui.Group;
+    private emptyText: eui.Label;
+
 
 
 
@@ -71,6 +73,12 @@ class SpaceMyListUI extends game.BaseWindow_wx3 {
         var SM = SpaceManager.getInstance();
         var obj = {};
         var arr = this.type == 0?SM.myCurrentList:SM.myDieList
+        if(arr.length == 0 && this.type == 1)
+        {
+            this.type = 0;
+            this.renew();
+            return;
+        }
         for(var i=0;i<arr.length;i++)
         {
             var id = arr[i];
@@ -86,8 +94,10 @@ class SpaceMyListUI extends game.BaseWindow_wx3 {
             })
         }
         this.list.dataProvider = new eui.ArrayCollection(list);
-        this.titleText.text = this.type == 0?'可上阵的怪物':'被封印的怪物'
+        this.titleText.text = this.type == 0?'可上阵的怪物(' + SM.myCurrentList.length+')':'被封印的怪物(' + SM.myDieList.length+')'
         this.infoBtn.label = this.type == 0?'被封印的怪物':'可上阵的怪物'
         this.btnGroup.visible = SM.myDieList.length > 0
+
+        this.emptyText.visible = list.length == 0;
     }
 }

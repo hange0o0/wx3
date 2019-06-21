@@ -11,6 +11,7 @@ class DebugTextList extends game.BaseUI_wx3 {
     private txt: eui.Label;
 
 
+    public otherArr;
     public constructor() {
         super();
         this.skinName = "DebugTextListSkin";
@@ -19,11 +20,21 @@ class DebugTextList extends game.BaseUI_wx3 {
     public childrenCreated() {
         super.childrenCreated();
         this.addBtnEvent(this.backBtn,this.hide)
+        this.txt.addEventListener( egret.TextEvent.LINK, ( evt:egret.TextEvent )=>{
+            console.log( evt.text );
+            for(var i=0;i<this.otherArr.length;i++)
+            {
+                 if(this.otherArr[i].openid == evt.text)
+                 {
+                     console.log(this.otherArr[i])
+                 }
+            }
+        }, this )
     }
 
-    public show(arr?){
+    public show(arr?,arr2?){
         super.show();
-        this.txt.text = arr.join('\n')
+        this.setHtml(this.txt, arr.join('\n'))
     }
 
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AwardTipsUISkin" width="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group y="0" horizontalCenter="0">
+		<e:Image id="icon" source="icon_diamond_png" x="0" y="0"/>
+		<e:Label id="txt" text="Label" x="70" size="35" verticalCenter="0" bold="true" stroke="6"/>
+	</e:Group>
+</e:Skin>

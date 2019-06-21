@@ -15,12 +15,13 @@
 	<e:Group id="btnGroup" horizontalCenter="0" bottom="30">
 		<e:Button id="infoBtn" label="被封印的怪物" width="180" y="0" x="0" skinName="Btn2Skin"/>
 		<e:Group id="pkBtn" x="210" y="0">
-			<e:Button label="解除6个封印" skinName="Btn1Skin" width="180" y="0" x="0"/>
+			<e:Button label="解除9个封印" skinName="Btn1Skin" width="180" y="0" x="0"/>
 			<e:Image source="video_icon_png" right="-15" top="-10"/>
 		</e:Group>
 		<e:layout>
 		<e:HorizontalLayout gap="30"/>
 		</e:layout>
 	</e:Group>
+	<e:Label id="emptyText" text="没有可上阵怪物，可解封增加" size="24" horizontalCenter="0" verticalCenter="-40" textColor="0xfce8ab"/>
 
 </e:Skin>

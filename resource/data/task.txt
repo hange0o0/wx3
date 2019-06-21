@@ -24,7 +24,7 @@ id	index	type	key	value	coin	diamond
 23	23	mlv2	2	4	127000	2
 24	24	tlv	33	2	138500	2
 25	25	clv		10	150500	2
-26	26	tlv	22	2	163000	2
+26	26	space		1	163000	2
 27	27	tlv	34	1	176000	2
 28	28	cstar		25	189500	3
 29	29	def		40	203500	3

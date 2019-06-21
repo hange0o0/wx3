@@ -548,7 +548,7 @@ class GameUI extends game.BaseUI_wx3 {
         if(this.visible)
         {
             this.renewList();
-            TaskManager.getInstance().addDayTask();
+
 	wx3_function(3764);
         }
         else

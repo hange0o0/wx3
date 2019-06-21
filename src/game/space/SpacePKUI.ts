@@ -20,6 +20,8 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private speedMC2: eui.Image;
     private speedText: eui.Label;
     private skillList: eui.List;
+    private force1Text: eui.Label;
+    private force2Text: eui.Label;
     private cdGroup: eui.Group;
     private timeText: eui.Label;
     private winGroup: eui.Group;
@@ -49,7 +51,10 @@ class SpacePKUI extends game.BaseUI_wx3 {
     private costBarMC: eui.Image;
     private costText: eui.Label;
     private bottomUI: BottomUI;
+    private spaceBtnGroup: eui.Group;
+    private infoBtn: eui.Button;
     private closeBtn: eui.Button;
+
 
 
 
@@ -89,10 +94,13 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.dragTarget.alpha = 0.5
 
         this.addBtnEvent(this.replayBtn,this.onReplay)
+        this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.backBtn,this.onBack_3581)
-        this.addBtnEvent(this.closeBtn,this.onBack_3581)
         this.addBtnEvent(this.doubleBtn,this.onDouble_8100)
         this.addBtnEvent(this.addSpeedBtn,this.onSpeed_8527)
+        this.addBtnEvent(this.infoBtn,()=>{
+             SpaceMyListUI.getInstance().show();
+        })
         //this.addBtnEvent(this.strongBtn,this.onStrong_947)
 
         var pkvideo = PKVideoCon_wx3.getInstance();
@@ -173,6 +181,9 @@ class SpacePKUI extends game.BaseUI_wx3 {
             case PKConfig_wx3.VIDEO_SKILL_BUFF:
                 this.renewSkillBuff();
                 break;
+            case PKConfig_wx3.VIDEO_MONSTER_ADD:
+                this.renewMonsterNum();
+                break;
             case PKConfig_wx3.VIDEO_MONSTER_USE:
                 this.onMonsterUse(videoData.index);
                 var PD = PKData_wx3.getInstance();
@@ -180,6 +191,18 @@ class SpacePKUI extends game.BaseUI_wx3 {
                     this.startGame();
                 break;
         }
+    }
+
+    private renewMonsterNum(){
+        var PD = PKData_wx3.getInstance();
+        this.force1Text.text = '剩余：' + PD.getPlayer(1).autoList.length;
+        var num = PD.handCardList.length;
+        for(var s in PD.handData)
+        {
+            if(PD.handData[s])
+                num ++;
+        }
+        this.force2Text.text = '剩余：' + num
     }
 
     //更新显示
@@ -253,6 +276,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
     private onBack_3581(){
         this.hide();
+        SpaceManager.getInstance().startPK();
     }
 
     private runItemFun_8414(list,index,funName){
@@ -290,8 +314,15 @@ class SpacePKUI extends game.BaseUI_wx3 {
             this.backBtn.label = '关闭'
         }
         this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+        this.addPanelOpenEvent(GameEvent.client.SPACE_CHANGE,this.onSpaceChange)
         this.reset();
+    }
 
+    private onSpaceChange(){
+        if(!this.finish)//未打
+        {
+            this.onBack_3581();
+        }
     }
 
     public hide(){
@@ -383,6 +414,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.renewSkill();
         this.renewSkillBuff();
         this.renewCost();
+        this.renewMonsterNum();
         this.monsterdDataProvider.source = [PD.handData[0],PD.handData[1],PD.handData[2],PD.handData[3],PD.handData[4],PD.handData[5]];
         this.monsterdDataProvider.refresh();
 
@@ -395,7 +427,15 @@ class SpacePKUI extends game.BaseUI_wx3 {
         {
             egret.Tween.removeTweens(this.tipsText)
             this.tipsGroup.visible = true
-            this.closeBtn.visible = true
+            this.spaceBtnGroup.visible = true
+            if(SpaceManager.getInstance().myDieList.length == 0)
+            {
+                MyTool.removeMC(this.infoBtn);
+            }
+            else
+            {
+                this.spaceBtnGroup.addChildAt(this.infoBtn,0)
+            }
             this.tipsGroup.rotation = 0
             egret.Tween.get(this.tipsText,{loop:true}).to({rotation:8},100).to({rotation:-8},100).to({rotation:8},100).to({rotation:-8},100).to({rotation:0},100).wait(1000)
         }
@@ -404,7 +444,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
     public startGame(){
         this.tipsGroup.visible = false
-        this.closeBtn.visible = false
+        this.spaceBtnGroup.visible = false
         egret.Tween.removeTweens(this.tipsText)
         this.gameStart = true;
         this.skillList.touchChildren = this.skillList.touchEnabled = true;

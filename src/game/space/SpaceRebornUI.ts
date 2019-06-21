@@ -34,9 +34,15 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
                 ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
                     var SM = SpaceManager.getInstance();
                     SM.myCurrentList = SM.myCurrentList.concat(this.data)
+                    for(var i=0;i<this.data.length;i++)
+                    {
+                        var index = SM.myDieList.indexOf(this.data[i]);
+                        SM.myDieList.splice(index,1)
+                    }
                     SM.rebornTime ++;
                     UM_wx3.needUpUser = true;
                     EM_wx3.dispatch(GameEvent.client.SPACE_CHANGE)
+                    MyWindow.ShowTips('解封成功')
                     this.hide();
                 })
                 return;
@@ -72,6 +78,7 @@ class SpaceRebornUI extends game.BaseWindow_wx3 {
         this.list.dataProvider = new eui.ArrayCollection(list);
         this.titleText.text = this.isFree?'解封怪物':'已解封的怪物'
         this.okBtn.label = this.isFree?'免费解封':'确定'
+        this.currentState = this.isFree?'s2':'s1'
         this.closeBtn.visible = this.isFree
     }
 }

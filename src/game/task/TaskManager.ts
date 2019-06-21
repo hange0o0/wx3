@@ -284,6 +284,8 @@ class TaskManager {
                 return UM_wx3.chapterLevel
             case 'cstar'://星星数量
                 return ChapterManager.getInstance().getTotalStar()
+            case 'space'://星星数量
+                return SpaceManager.getInstance().historyTimes;
         }
     }
 	private wx3_functionX_12619(){console.log(1812)}
@@ -361,6 +363,9 @@ class TaskManager {
                     break;
                 case 'cstar'://星星数量
                     ChapterUI.getInstance().show()
+                    break;
+                case 'space'://
+                    SpaceUI.getInstance().show()
                     break;
             }
             return true

@@ -151,15 +151,15 @@ class SpaceManager {
 
     public reborn(isFree?){
         var arr = []
-        for(var i=0;i<6 && this.myDieList.length>0;i++)
+        for(var i=0;i<9 && this.myDieList.length>0;i++)
         {
             var id = ArrayUtil.randomOne(this.myDieList,true)
             arr.push(id);
             this.myCurrentList.push(id);
         }
-        SpaceRebornUI.getInstance().show(arr,isFree);
         UM_wx3.needUpUser = true;
         EM_wx3.dispatch(GameEvent.client.SPACE_CHANGE)
+        SpaceRebornUI.getInstance().show(arr,isFree);
     }
 
     public resetType4(){
@@ -176,7 +176,6 @@ class SpaceManager {
     }
 
     public startPK(){
-
         if(!this.level)
         {
             SpaceChooseCardUI.getInstance().show();
@@ -258,9 +257,10 @@ class SpaceManager {
         if(this.rebornTime < 3 && this.myDieList.length >= 6)
         {
             var arr = []
-            for(var i=0;i<6 && this.myDieList.length>0;i++)
+            var dieList = this.myDieList.concat();
+            for(var i=0;i<6 && dieList.length>0;i++)
             {
-                var id = ArrayUtil.randomOne(this.myDieList,true)
+                var id = ArrayUtil.randomOne(dieList,true)
                 arr.push(id);
             }
             SpaceRebornUI.getInstance().show(arr,true);
@@ -270,12 +270,13 @@ class SpaceManager {
     public onPKFinish(result,data){
        if(result == 1)//loss
             return;
-        var maxDiamnd = 10;
+        this.enemyList = '';
+        var maxDiamnd = 8;
         var diamond = 0;
         if(this.spaceType == 2 || this.spaceType == 7)//endless
         {
             var coin = Math.floor(Math.pow(PKData_wx3.getInstance().actionTime/1000/3,3))*2
-            diamond = Math.floor(PKData_wx3.getInstance().actionTime/1000/30);
+            diamond = Math.floor(PKData_wx3.getInstance().actionTime/1000/35);
         }
         else
         {

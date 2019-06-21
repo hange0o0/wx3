@@ -142,7 +142,7 @@ class DebugUI extends game.BaseUI_wx3 {
                 name: 'getServerInfo',
                 data:{},
                 complete: (res) => {
-                    var arr = (res.result)
+                    var arr = (res.result).concat();
 
                     for(var i=0;i<arr.length;i++)
                     {
@@ -174,9 +174,9 @@ class DebugUI extends game.BaseUI_wx3 {
                         temp.push('    分享人数：' + oo.shareUser.length)
 
                         arr[i] = (i+1) +' ========>  ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.regTime || 0)) + ' # ' + DateUtil.formatDate('yyyy-MM-dd hh:mm',DateUtil.timeToChineseDate(oo.saveTime))
-                         + '\n' + temp.join('');
+                         + '\n' + temp.join('') + '<a href="event:'+oo.openid+'">复制<a/>';
                     }
-                    DebugTextList.getInstance().show(arr);
+                    DebugTextList.getInstance().show(arr,res.result);
                 }
             })
         })

@@ -132,7 +132,7 @@ class SpaceUI extends game.BaseWindow_wx3 {
 
         var SM = SpaceManager.getInstance();
         var isFree = !DateUtil.isSameDay(SM.addTime);
-        if(UM_wx3.chapterLevel <= 10)
+        if(UM_wx3.chapterLevel < 10)
         {
             this.joinBtn.label = '通关据点10开启'
         }

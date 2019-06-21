@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SpaceRebornUISkin" width="460" height="460" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="SpaceRebornUISkin" width="460" height="460" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="s1,s2"  height.s1="580">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Label id="titleText" text="已为你免费解封以下怪物" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
-	<e:List id="list" width="350" height="230" y="100" horizontalCenter="0">
+	<e:List id="list" width="350" height="230" y="100" horizontalCenter="0" height.s1="360">
 		<e:layout>
 		<e:TileLayout requestedColumnCount="3" horizontalGap="25" verticalGap="30"/>
 		</e:layout>

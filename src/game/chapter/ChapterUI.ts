@@ -133,6 +133,7 @@ class ChapterUI extends game.BaseUI_wx3 {
 
     public onClose(){
         this.hide();
+        TaskManager.getInstance().addDayTask();
     }
 
 	private wx3_functionX_12278(){console.log(277)}

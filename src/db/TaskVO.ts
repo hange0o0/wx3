@@ -68,6 +68,8 @@ class TaskVO {
                 return '收复'+this.value+'个据点'
             case 'cstar'://星星数量
                 return '据点总星星数达到'+this.value+'个'
+            case 'space'://星星数量
+                return '进入时空之门'+this.value+'次'
         }
     }
 	private wx3_functionX_11890(){console.log(604)}
@@ -93,6 +95,8 @@ class TaskVO {
                 return '开疆辟土'
             case 'cstar'://星星数量
                 return '声名远播'
+            case 'space'://星星数量
+                return '时空穿梭'
         }
     }
 }

@@ -21,6 +21,26 @@
 				</e:layout>
 			</e:List>
 		</e:Group>
+		<e:Group x="0" y="0">
+			<e:Image source="black_bg2_png" y="0" height="50" width="320" right="0" scaleX="-1"/>
+			<e:Group verticalCenter="0" right="55">
+			<e:Label id="force1Text" text="Label" x="49" y="0" size="24" textColor="0xFFE2A5"/>
+			<e:Image x="0" y="1.5" source="tec_slave_icon_png" scaleX="0.6" scaleY="0.6"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+		</e:Group>
+		<e:Group y="0" x="320">
+			<e:Image source="black_bg2_png" y="0" height="50" width="320" scaleX="1" right="0"/>
+			<e:Group verticalCenter="0" x="55">
+			<e:Image x="0" y="1.5" source="tec_slave_icon_png" scaleX="0.6" scaleY="0.6"/>
+			<e:Label id="force2Text" text="Label" x="49" y="0" size="24" textColor="0xFFE2A5"/>
+			<e:layout>
+				<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+			</e:Group>
+		</e:Group>
 		<e:Group id="cdGroup" y="-3" horizontalCenter="0">
 			<e:Image source="main_button_png" y="0" x="0" scaleX="0.8" scaleY="0.8"/>
 			<e:Label id="timeText" text="999" size="35" horizontalCenter="0" bold="true" textColor="0xfccd7e" verticalCenter="0"/>
@@ -109,6 +129,12 @@
 		</e:Group>
 	</e:Group>
 	<ns1:BottomUI id="bottomUI" x="0" skinName="BottomUISkin" bottom="0" includeIn="s2"/>
-	<e:Button id="closeBtn" label="返回" y="400" width="150" skinName="Btn1Skin" horizontalCenter="0"/>
+	<e:Group id="spaceBtnGroup" y="400" horizontalCenter="0">
+		<e:Button id="infoBtn" label="怪物信息" y="0" width="150" x="0" skinName="Btn2Skin"/>
+		<e:Button id="closeBtn" label="返回" y="0" width="150" skinName="Btn1Skin" x="0"/>
+		<e:layout>
+			<e:HorizontalLayout gap="30"/>
+		</e:layout>
+	</e:Group>
 
 </e:Skin>

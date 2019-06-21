@@ -36,6 +36,7 @@ class SpacePKItem extends game.BaseItem_wx3 {
             this.costText.text = vo.cost + ''
             this.costGroup.visible = true
             this.bg.source = vo.getBG();
+            this.isCDing = PKConfig_wx3.baseCost < vo.cost
         }
         else
         {
@@ -44,6 +45,7 @@ class SpacePKItem extends game.BaseItem_wx3 {
             this.bg.source = 'border_16_png'
         }
         this._stopDrag = !this.data || SpacePKUI.getInstance().dataIn.isReplay;
+
         this.rateMC.height = 0;
     }
 
