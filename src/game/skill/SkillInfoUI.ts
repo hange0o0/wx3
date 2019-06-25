@@ -56,10 +56,12 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
                 if(!UM_wx3.checkCoin(this.data.coin))
                     return;
                 this.data.isBuy = true;
+                SkillManager.getInstance().buySkill = true;
                 UM_wx3.addCoin(-this.data.coin)
                 SM.addSkill(this.data.id,this.data.num)
                 SM.saveShop();
                 this.hide();
+                TaskManager.getInstance().testMainTask('skill')
             }
         })
     }
@@ -90,6 +92,12 @@ class SkillInfoUI extends game.BaseWindow_wx3 {
 
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
+
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'skill' && this.showType == 'buy' && !this.data.isBuy)
+        {
+            TaskManager.getInstance().showGuideMC(this.btn);
+        }
     }
 
     private onE(){

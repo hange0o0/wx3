@@ -256,9 +256,7 @@ class FightManager {
         }
         if(num >= 5 && this.nextBeHitTime < t)
         {
-            this.nextBeHitTime = t;
-	wx3_function(8224);
-            this.resetNextBeHit();
+            this.nextBeHitTime = t - 120*Math.random();
         }
 
          //处理出征中的

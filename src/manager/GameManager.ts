@@ -210,6 +210,7 @@ class GameManager_wx3 {
         WorkManager.getInstance().onTimer();
         FightManager.getInstance().onTimer();
         TaskManager.getInstance().onTimer();
+        GuessManager.getInstance().onTimer();
 	wx3_function(6941);
         EM_wx3.dispatch(GameEvent.client.timer);
 
@@ -303,7 +304,7 @@ if(window["wx"])
     var wx =  window["wx"];
 
     wx.onError(function(res){
-        UM_wx3.upDateUserData();
+        UM_wx3 && UM_wx3.upDateUserData();
         try{
             var str = "onError:" + ("openid:" + UM_wx3.gameid + "--") + res.message + "--" + res.stack;
             sendClientError(str);

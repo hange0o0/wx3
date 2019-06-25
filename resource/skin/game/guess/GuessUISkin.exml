@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GuessUISkin" width="600" height="860" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
+	<e:Group y="70" horizontalCenter="0">
+		<e:Image source="black_bg_png" y="0" scale9Grid="42,7,9,42" width="460" x="0"/>
+		<e:Label id="cdText" text="挑战剩余时间：00:00:00" y="16" horizontalCenter="0" size="24" textColor="0xF2DA9F"/>
+	</e:Group>
+	<e:Label text="限时竞猜" y="25" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03"/>
+	<e:Image id="closeBtn" source="icon_error_png" right="-10" top="-15"/>
+	<e:Group bottom="10" left="10" right="10">
+		<e:Image scale9Grid="9,9,11,10" source="bg1_png" height="220" y="0" right="0" left="0"/>
+		<e:Group id="barGroup" y="30" horizontalCenter="0" width="500">
+			<e:Image source="bar_bg_png" y="30" scale9Grid="26,3,156,24" width="504" x="-2"/>
+			<e:Image id="barMC" source="bar1_png" x="0" y="32" width="250" scale9Grid="5,3,194,20"/>
+			<e:Group id="arrowGroup" x="92" y="0" width="200" anchorOffsetX="100">
+			<e:Image source="arrow3_png" y="0" scaleX="1.5" scaleY="1.5" horizontalCenter="0"/>
+			<e:Label id="costText" text="Label" y="-25" size="20" textColor="0xffeba8" horizontalCenter="0.5"/>
+			</e:Group>
+		</e:Group>
+		<e:Group horizontalCenter="0" bottom="20">
+			<e:Button id="logBtn" label="日志" x="0" y="16" width="120" skinName="Btn2Skin"/>
+			<e:Button id="okBtn" label="投注" x="10" skinName="Btn1Skin" width="180" y="0"/>
+			<e:Button id="lastBtn" label="上一期" x="10" y="26" width="120" skinName="Btn2Skin"/>
+			<e:layout>
+				<e:HorizontalLayout gap="30"/>
+			</e:layout>
+		</e:Group>
+		<e:Label id="myCostText" text="我的金币：123456" size="22" textColor="0xffe1a5" horizontalCenter="0" bottom="93"/>
+	</e:Group>
+	<e:Group y="125" horizontalCenter="0">
+		<ns1:GuessTeamUI id="team1" x="0" y="0" skinName="GuessTeamUISkin"/>
+		<ns1:GuessTeamUI id="team2" x="10" y="10" skinName="GuessTeamUISkin"/>
+		<e:layout>
+			<e:VerticalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+	<e:RadioButton id="cb1" label="投注队伍1" x="25" y="130" skinName="MyCheckBoxSkin"/>
+	<e:RadioButton id="cb2" label="投注队伍2" x="25" y="380" skinName="MyCheckBoxSkin"/>
+
+</e:Skin>

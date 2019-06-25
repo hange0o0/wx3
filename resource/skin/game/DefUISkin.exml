@@ -37,7 +37,7 @@
 				<e:VerticalLayout horizontalAlign="right"/>
 			</e:layout>
 		</e:Group>
-		<e:Group id="btnGroup" y="10" x="10">
+		<e:Group y="10" x="10">
 			<e:Group id="taskBtn" x="0" y="0" width="90" height="90">
 				<e:Image y="-8" scaleX="0.7" scaleY="0.7" horizontalCenter="0" source="task_icon2_png"/>
 				<e:Label text="主线任务" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
@@ -68,6 +68,20 @@
 			</e:Group>
 			<e:layout>
 				<e:HorizontalLayout gap="16" paddingLeft="0"/>
+			</e:layout>
+		</e:Group>
+		<e:Group id="btnGroup" y="108" x="10">
+			<e:Group id="guessBtn" x="0" y="0" width="90" height="90">
+			<e:Image y="0" horizontalCenter="-0.5" source="main_guess_png" scaleX="0.8" scaleY="0.8"/>
+			<e:Label text="限时竞猜" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
+			<e:Image id="guessRed" source="red_mc_png" right="5" y="0"/>
+			</e:Group>
+			<e:Group id="askBtn" x="0" y="0" width="90" height="90">
+			<e:Image y="-5" scaleX="0.7" scaleY="0.7" horizontalCenter="0.5" source="main_ask_png"/>
+			<e:Label text="关卡解迷" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
+			</e:Group>
+			<e:layout>
+			<e:HorizontalLayout gap="16" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
 		<e:Image id="mailBtn" source="main_mail_png" y="140" anchorOffsetX="28" anchorOffsetY="20" right="25"/>

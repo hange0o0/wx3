@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GuessLogItemSkin" width="560" height="260" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%"/>
+	<e:Rect id="lineMC" width="2" fillColor="0x4C2904" horizontalCenter="0" top="10" bottom="15"/>
+	<e:Group y="0" height="50" left="0" right="0" x="0">
+		<e:Image source="bg9_png" scale9Grid="12,12,6,5" left="5" right="5" top="5" bottom="0"/>
+		<e:Group y="8" horizontalCenter="0">
+		<e:Image source="icon_clock_png" x="0" y="6"/>
+		<e:Label id="timeText" text="2011-12-1 11:11" size="24" verticalAlign="middle" strokeColor="0x231507" textColor="0xdbd3c7" height="40" x="9" y="0"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle" gap="10"/>
+		</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group y="200" horizontalCenter="0">
+		<e:Group id="resultGroup1" minWidth="250" width="250" x="0" y="0">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="0" right="0" top="0" bottom="0"/>
+		<e:Group right="10" left="5" top="5" bottom="5">
+			<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+			<e:Label id="myText1" text="100,000" x="84" y="11" size="22"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+			<e:Image id="winMC" source="win_icon_png" scaleX="1" scaleY="1" right="-6" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="resultGroup2" minWidth="250" width="250" x="0" y="0">
+		<e:Image source="bg1_png" scale9Grid="8,8,14,14" left="0" right="0" top="0" bottom="0"/>
+		<e:Group right="10" left="5" top="5" bottom="5">
+			<e:Image source="icon_coin_png" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+			<e:Label id="myText2" text="100,000" x="84" y="11" size="22"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+		</e:Group>
+		<e:layout>
+		<e:HorizontalLayout gap="24"/>
+		</e:layout>
+	</e:Group>
+	<e:Group y="60" horizontalCenter="0">
+		<e:List id="list1" width="395" height="195" x="0" y="0" scaleX="0.68" scaleY="0.68">
+			<e:layout>
+				<e:TileLayout requestedColumnCount="4" horizontalGap="5" verticalGap="5"/>
+			</e:layout>
+		</e:List>
+		<e:List id="list2" width="395" height="195" x="10" y="10" scaleX="0.68" scaleY="0.68">
+			<e:layout>
+				<e:TileLayout requestedColumnCount="4" horizontalGap="5" verticalGap="5"/>
+			</e:layout>
+		</e:List>
+		<e:layout>
+			<e:HorizontalLayout gap="8"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

@@ -138,7 +138,6 @@ class TaskManager {
 
     private createTask_7626(id,type,value){
         var coin = Math.floor(Math.pow(id,1.3)*1000);
-	wx3_function(3520);
         var vo = new TaskVO({
             id:id,
             index:id,
@@ -284,6 +283,8 @@ class TaskManager {
                 return ChapterManager.getInstance().getTotalStar()
             case 'space'://星星数量
                 return SpaceManager.getInstance().historyTimes;
+            case 'skill'://星星数量
+                return SkillManager.getInstance().haveBuySkill();
         }
     }
 	private wx3_functionX_12619(){console.log(1812)}
@@ -410,6 +411,9 @@ class TaskManager {
             case 'cstar'://星星数量
                 this.showGuideMC(GameUI.getInstance().chapterBtn)
                 break;
+            case 'skill'://星星数量
+                this.showGuideMC(GameUI.getInstance().skillBtn)
+                break;
         }
 
 	wx3_function(5473);
@@ -423,6 +427,7 @@ class TaskManager {
 	private wx3_functionX_12620(){console.log(5382)}
     public addTaskTime = 0;
     public addTaskNum = 0
+    public showDayTask = false;
     public onTimer(){
         var arr = UM_wx3.dayTask;
         if(!arr)
@@ -431,6 +436,7 @@ class TaskManager {
 
         if(!this.addTaskTime)//首次进入onTimer
         {
+            this.showDayTask = SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime');
             this.addTaskTime = Math.max(TM_wx3.now() + 5*60,SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1)
             for(var i=0;i<arr.length;i++)
             {
@@ -450,6 +456,7 @@ class TaskManager {
         b && EM_wx3.dispatch(GameEvent.client.TASK_CHANGE);
     }
 
+
     public addDayTask(){
         if(!this.addTaskTime || TM_wx3.now() < this.addTaskTime)
             return;
@@ -461,6 +468,7 @@ class TaskManager {
         var arr = UM_wx3.dayTask;
         this.addTaskTime = TM_wx3.now() + 60*10 + this.addTaskNum*3*60;
         SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
+        this.showDayTask = true;
         var list = [1,2,3,4,5,6,7,8];
         for(var i=0;i<arr.length;i++)
         {

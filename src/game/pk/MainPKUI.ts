@@ -15,6 +15,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
     private topUI: TopUI;
     private con: eui.Group;
+    private forceGroup: eui.Group;
     private lineMC: eui.Rect;
     private scroller: eui.Scroller;
     private list1: eui.List;
@@ -343,6 +344,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.reset();
 	wx3_function(6451);
 
+        this.forceGroup.visible = !this.dataIn.isGuess && !this.dataIn.isAsk
     }
 
     public hide(){
@@ -428,7 +430,10 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
         this.resetList_1055(list1,this.dataIn.force1)
-        this.resetList_1055(list2)
+        if(this.dataIn.isGuess)
+            this.resetList_1055(list2,this.dataIn.force2)
+        else
+            this.resetList_1055(list2)
 
         this.list1.dataProvider = new eui.ArrayCollection(list1)
         this.list2.dataProvider = new eui.ArrayCollection(list2)
@@ -590,8 +595,38 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             this.desGroup['callVisible'] = false
             PKBulletManager_wx3.getInstance().freeAll();
             var result = PD.getPKResult();
-            //if(this.dataIn.isPK)
-            //{
+            if(this.dataIn.isGuess)
+            {
+                if(this.dataIn.result)
+                {
+                    var addCoin = this.dataIn['coin' + result]
+                    if(addCoin)
+                    {
+                        this.starGroup.removeChildren();
+                        this.resourceGroup.removeChildren()
+                        this.delayShowResult(this.winGroup);
+                        this.winText.text = '竞猜失败'
+
+                        this.desGroup['callVisible'] = true
+                        this.resourceGroup.addChild(this.coinGroup)
+                        this.des1.text = 'x' + NumberUtil.addNumSeparator(addCoin,2)
+                    }
+                    else
+                    {
+                        this.delayShowResult(this.failGroup);
+                        this.failText.text = '竞猜失败'
+                    }
+                }
+                else
+                {
+                    this.starGroup.removeChildren();
+                    this.resourceGroup.removeChildren()
+                    this.delayShowResult(this.winGroup);
+                    this.winText.text = '队伍'+result+'胜利'
+                }
+
+            }
+            else{
 
                 if(result == 1)
                 {
@@ -653,7 +688,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                     this.failText.text = '双方平手'
                     this.backBtn.label = this.dataIn.chapterid?'重试':'关闭'
                 }
-            //}
+            }
 
 
             if(this.shareStr)
@@ -778,8 +813,14 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             })
 
             tw.call(()=>{
+                if(CardInfoUI.getInstance().stage)
+                    CardInfoUI.getInstance().hide();
+                if(SkillInfoUI.getInstance().stage)
+                    SkillInfoUI.getInstance().hide();
+
+
                 this.skillBuffList.dataProvider = new eui.ArrayCollection([]);
-                this.btnGroup.visible = true
+                this.btnGroup.visible = !this.dataIn.isGuess
                 //this.bottomBar.visible = false;
 	wx3_function(6213);
                 this.currentState = 's2'
@@ -790,6 +831,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
                 GuideManager.getInstance().testShowGuide();
                 TaskTips.getInstance().show(['cstar','clv']);
+
+
             })
 
         },1000)

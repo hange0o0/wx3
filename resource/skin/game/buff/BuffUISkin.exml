@@ -3,7 +3,7 @@
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Label text="好友助力" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
 	<e:Image id="closeBtn" source="icon_error_png" right="-8" top="-16"/>
-	<e:Scroller id="scroller" top="220" bottom="100" bounces="false" anchorOffsetY="0" width="570" horizontalCenter="0">
+	<e:Scroller id="scroller" top="225" bottom="100" bounces="false" anchorOffsetY="0" width="560" horizontalCenter="0">
 		<e:Group anchorOffsetY="0" height="512.58" x="0" y="-157.58">
 			<e:List id="list" width="200" height="200" x="96" y="96">
 				<e:layout>
@@ -13,11 +13,11 @@
 		</e:Group>
 	</e:Scroller>
 
-	<e:Group left="10" right="10" height="150" y="75">
+	<e:Group left="20" right="20" height="150" y="75">
 		<e:Image anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" source="bg1_png" scale9Grid="9,9,14,11"/>
-		<e:Group x="5" verticalCenter="0">
+		<e:Group verticalCenter="0" right="0" left="0">
 			<e:Group x="0" y="0" height="40">
-				<e:Group x="0" y="6">
+				<e:Group x="0" y="6" width="215">
 					<e:Image source="start1_png" x="0" y="0" scaleX="1" scaleY="1"/>
 					<e:Label id="desText" text="当前新邀请好友 30个:" y="4" size="20" x="32"/>
 				</e:Group>
@@ -33,22 +33,22 @@
 				<e:HorizontalLayout verticalAlign="middle" gap="10"/>
 				</e:layout>
 			</e:Group>
-			<e:Rect width="570" height="1" x="-56" y="535" fillColor="0x876e46"/>
-			<e:Group x="0" y="42" height="40">
+			<e:Rect width="540" height="1" x="-56" y="535" fillColor="0x876e46"/>
+			<e:Group x="0" y="42" height="40" width="540">
 				<e:Image source="start1_png" x="0" scaleX="1" scaleY="1" verticalCenter="0"/>
-				<e:Label text="邀请好友达到 1 个，解锁PK加速功能" size="20" x="32" verticalCenter="0"/>
-				<e:Label id="lock1" text="未解锁" size="22" x="500" verticalCenter="0" textColor="0xf97a7a"/>
-				<e:Image id="ok1" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="515" verticalCenter="0"/>
+				<e:Label text="邀请好友 1 个，解锁PK加速功能" size="20" x="32" verticalCenter="0"/>
+				<e:Label id="lock1" text="未解锁" size="22" verticalCenter="0" textColor="0xf97a7a" right="0"/>
+				<e:Image id="ok1" source="icon_right_png" scaleX="0.6" scaleY="0.6" verticalCenter="0" right="10"/>
 			</e:Group>
-			<e:Rect width="570" height="1" x="-46" y="545" fillColor="0x876E46"/>
-			<e:Group x="0" y="77" height="40">
+			<e:Rect width="540" height="1" x="-46" y="545" fillColor="0x876E46"/>
+			<e:Group x="0" y="77" height="40" width="540">
 				<e:Image source="start1_png" x="0" scaleX="1" scaleY="1" verticalCenter="0"/>
-				<e:Label id="lock2" text="未解锁" size="22" x="500" verticalCenter="0" textColor="0xf97a7a"/>
-				<e:Label text="邀请好友达到 5 个，解锁PK加成锁定功能" size="20" x="32" verticalCenter="0"/>
-				<e:Image id="ok2" source="icon_right_png" scaleX="0.6" scaleY="0.6" x="515" verticalCenter="0"/>
+				<e:Label id="lock2" text="未解锁" size="22" verticalCenter="0" textColor="0xf97a7a" right="0"/>
+				<e:Label text="邀请好友 5 个，解锁PK加成锁定功能" size="20" x="32" verticalCenter="0"/>
+				<e:Image id="ok2" source="icon_right_png" scaleX="0.6" scaleY="0.6" verticalCenter="0" right="10"/>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="3"/>
+				<e:VerticalLayout gap="3" paddingLeft="10" paddingRight="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>
@@ -59,5 +59,5 @@
 			<e:HorizontalLayout gap="50"/>
 		</e:layout>
 	</e:Group>
-	<e:Image source="line2_png" y="220" left="8" right="8" fillMode="repeat"/>
+	<e:Image source="line2_png" y="220" left="8" right="8" fillMode="repeat" visible="false"/>
 </e:Skin>

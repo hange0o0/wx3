@@ -4,8 +4,7 @@
 	<e:Label text="主线任务" y="30" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03" size="30"/>
 	<e:Group y="75" left="35" right="35" height="195">
 		<e:Image scale9Grid="9,9,11,10" left="0" right="0" top="0" bottom="0" source="bg1_png"/>
-		<e:Group y="10" anchorOffsetX="0" horizontalCenter="0" height="160">
-			<e:Label id="taskTextTitle" text="Label" x="74" y="0" size="26" textColor="0xffe000" bold="true" height="40" textAlign="center" verticalAlign="middle" stroke="3" strokeColor="0x684012" width="100%"/>
+		<e:Group y="20" anchorOffsetX="0" horizontalCenter="0" height="160">
 			<e:Label id="taskText" text="Label" x="74" y="0" size="22" textAlign="left" height="40" verticalAlign="middle" textColor="0xffec9b"/>
 			<e:Label id="taskRateText" text="Label" x="0" y="31" size="22" textAlign="left" height="40" verticalAlign="middle" textColor="0xffec9b"/>
 			<e:Group x="0" y="105">
@@ -37,7 +36,7 @@
 				</e:layout>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout gap="0"/>
+				<e:VerticalLayout gap="10"/>
 			</e:layout>
 		</e:Group>
 	</e:Group>

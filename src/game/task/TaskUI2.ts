@@ -12,6 +12,9 @@ class TaskUI2 extends game.BaseWindow_wx3 {
     private scroller: eui.Scroller;
     private list: eui.List;
     private emptyGroup: eui.Group;
+    private emptyText: eui.Label;
+    private getTaskBtn: eui.Button;
+
 
 
 	private wx3_functionX_12635(){console.log(4255)}
@@ -33,6 +36,10 @@ class TaskUI2 extends game.BaseWindow_wx3 {
         super.childrenCreated();
 
         this.addBtnEvent(this.closeBtn,this.hide)
+        this.addBtnEvent(this.getTaskBtn,()=>{
+            TaskManager.getInstance().addTaskTime = 1
+            TaskManager.getInstance().addDayTask()
+        })
 
         this.list.itemRenderer = TaskItem
         this.scroller.viewport = this.list;
@@ -69,6 +76,33 @@ class TaskUI2 extends game.BaseWindow_wx3 {
 
     private onTimer_8524(){
         MyTool.runListFun(this.list,'onTimer')
+        if(this.emptyGroup.visible)
+        {
+            var TMM = TaskManager.getInstance()
+            if(TMM.showDayTask)
+            {
+                var cd = TMM.addTaskTime - TM_wx3.now()
+                if(cd > 0)
+                {
+                    this.emptyText.text = '下次任务发布时间：\n' + DateUtil.getStringBySecond(cd);
+                    this.getTaskBtn.visible = false;
+                    this.emptyGroup.height = 120;
+                }
+                else
+                {
+                    this.emptyText.text = '你有新的任务！'
+                    this.getTaskBtn.visible = true;
+                    this.emptyGroup.height = 180;
+                }
+            }
+            else
+            {
+                this.emptyText.text = '你有新的任务！'
+                this.getTaskBtn.visible = true;
+                this.emptyGroup.height = 180;
+            }
+
+        }
     }
 
 
@@ -84,6 +118,9 @@ class TaskUI2 extends game.BaseWindow_wx3 {
         this.dataProvider.source = UM_wx3.dayTask;
         this.dataProvider.refresh();
         this.emptyGroup.visible = UM_wx3.dayTask.length == 0
+        this.onTimer_8524();
+
+
 
     }
 }

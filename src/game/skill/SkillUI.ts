@@ -80,6 +80,23 @@ class SkillUI extends game.BaseUI_wx3 {
         this.onTimer()
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
         this.addPanelOpenEvent(GameEvent.client.SKILL_CHANGE,this.renewList)
+
+
+        var TSM = TaskManager.getInstance()
+        if(TSM.guideTaskVO && TSM.guideTaskVO.type == 'skill')
+        {
+            this.list.validateNow();
+            for(var i=0;i<this.list.numChildren;i++)
+            {
+                var mc = this.list.getChildAt(i)
+                var data = mc['data']
+                if(!data.isBuy)
+                {
+                    TaskManager.getInstance().showGuideMC(mc);
+                    break;
+                }
+            }
+        }
     }
 
     public onTimer(){

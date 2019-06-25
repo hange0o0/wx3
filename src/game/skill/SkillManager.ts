@@ -9,6 +9,7 @@ class SkillManager {
     public freeCD = 8*3600
     public freeTime = 0;
     public shopList;
+    public buySkill = false;
     public initSkill(){
         var oo = this.shopList = SharedObjectManager_wx3.getInstance().getMyValue('skill_shop_list')
         this.freeTime = SharedObjectManager_wx3.getInstance().getMyValue('skill_shop_time') || 0
@@ -16,6 +17,17 @@ class SkillManager {
         {
              this.renewShop();
         }
+    }
+
+    public haveBuySkill(){
+        if(this.buySkill)
+            return true;
+        for(var s in this.shopList)
+        {
+            if(this.shopList[s].isBuy)
+                return true;
+        }
+        return false;
     }
 
     public renewShop(isFree=false){

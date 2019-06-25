@@ -655,6 +655,13 @@ class SpacePKUI extends game.BaseUI_wx3 {
             })
 
             tw.call(()=>{
+
+                if(CardInfoUI.getInstance().stage)
+                    CardInfoUI.getInstance().hide();
+                if(SkillInfoUI.getInstance().stage)
+                    SkillInfoUI.getInstance().hide();
+
+
                 this.skillBuffList.dataProvider = new eui.ArrayCollection([]);
                 this.btnGroup.visible = true
                 this.currentState = 's2'
@@ -665,6 +672,8 @@ class SpacePKUI extends game.BaseUI_wx3 {
                 {
                     SpaceManager.getInstance().testFreeBorn();
                 }
+
+
             })
 
         },1000)

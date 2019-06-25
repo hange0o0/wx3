@@ -37,6 +37,8 @@ class DebugUI extends game.BaseUI_wx3 {
                      SharedObjectManager_wx3.getInstance().removeMyValue('lastAtkList')
                      SharedObjectManager_wx3.getInstance().removeMyValue('pkSpeed')
                      SharedObjectManager_wx3.getInstance().removeMyValue('addTaskTime')
+                     SharedObjectManager_wx3.getInstance().removeMyValue('skill_shop_list')
+                     SharedObjectManager_wx3.getInstance().removeMyValue('skill_shop_time')
                 }
             });
 	wx3_function(3786);

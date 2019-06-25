@@ -17,6 +17,9 @@ class DefUI extends game.BaseItem_wx3{
     private spaceRed: eui.Image;
     private buffBtn: eui.Group;
     private rankBtn: eui.Group;
+    private guessBtn: eui.Group;
+    private guessRed: eui.Image;
+    private askBtn: eui.Group;
     private mailBtn: eui.Image;
     private defList: eui.List;
     private addDefBtn: eui.Button;
@@ -24,7 +27,7 @@ class DefUI extends game.BaseItem_wx3{
 
 
 
-	private wx3_functionX_11911(){console.log(1519)}
+    private wx3_functionX_11911(){console.log(1519)}
 
 
 
@@ -83,6 +86,17 @@ class DefUI extends game.BaseItem_wx3{
             egret.Tween.removeTweens(this.mailBtn)
             TaskManager.getInstance().lastShowMailTime = TM_wx3.now();
             JumpWX4UI.getInstance().show();
+        })
+
+        this.addBtnEvent(this.guessBtn,(e)=>{
+            e.stopImmediatePropagation();
+            GuessUI.getInstance().show();
+        })
+
+        this.addBtnEvent(this.askBtn,(e)=>{
+            e.stopImmediatePropagation();
+            AskManager.getInstance().init();
+            AskManager.getInstance().showPK();
         })
 
     }
@@ -227,6 +241,7 @@ class DefUI extends game.BaseItem_wx3{
         this.dataProvider.refresh();
 
         this.addDefBtn.visible = !this.isPos && arr.length == 0
+        this.btnGroup.visible = !this.isPos
         egret.Tween.removeTweens(this.mailBtn)
         this.mailBtn.visible = (TM_wx3.now() - UM_wx3.regTime > 10*60) && (TM_wx3.now() - TaskManager.getInstance().lastShowMailTime > 30*60);
         if(this.mailBtn.visible)

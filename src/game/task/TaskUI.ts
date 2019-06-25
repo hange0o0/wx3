@@ -6,14 +6,11 @@ class TaskUI extends game.BaseWindow_wx3 {
             this._instance = new TaskUI();
         return this._instance;
     }
-	private wx3_functionX_12623(){console.log(90)}
-    private taskTextTitle: eui.Label;
     private taskText: eui.Label;
     private taskRateText: eui.Label;
     private awardText: eui.Label;
     private diamondText: eui.Label;
     private closeBtn: eui.Image;
-	private wx3_functionX_12624(){console.log(1945)}
     private taskBtn: eui.Button;
 
 
@@ -88,8 +85,8 @@ class TaskUI extends game.BaseWindow_wx3 {
             this.awardText.text =  'x' + NumberUtil.addNumSeparator(vo.coin,2)
             this.diamondText.text = 'x' + vo.diamond + ''
 
-            this.taskTextTitle.text = vo.getTitle();
-            this.setHtml(this.taskText, '任务要求：' + this.createHtml(vo.getDes(),0xFCF4D6));
+            //this.taskTextTitle.text = vo.getTitle();
+            this.setHtml(this.taskText, '任务要求：' + this.createHtml(vo.getDes(true),0xFCF4D6));
 	wx3_function(5322);
 
 

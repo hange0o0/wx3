@@ -45,31 +45,36 @@ class TaskVO {
     }
 	private wx3_functionX_11889(){console.log(3140)}
 
-    public getDes(){
+    public getDes(needColor?){
+        var value:any = this.value;
+        if(needColor)
+            value = MyTool.createHtml(value,0xE0A44A)
         switch(this.type)
         {
             case 'fight':
-                return '进行'+this.value+'次掠夺'
+                return '进行'+value+'次掠夺'
             case 'def':
-                return '防守战力达到'+this.value+''
+                return '防守战力达到'+value+''
             case 'mlv'://指定ID
                 var mvo = MonsterVO.getObject(this.key)
-                return '【'+mvo.name+'】达到'+this.value+'级'
+                return '【'+mvo.name+'】达到'+value+'级'
             case 'mnum': //指定ID
                 var mvo = MonsterVO.getObject(this.key)
-                return '【'+mvo.name+'】达到'+this.value+'星'
+                return '【'+mvo.name+'】达到'+value+'星'
             case 'mlv2'://等级大于v1的数量
-                return '拥有'+this.value+'个'+this.key+'级及以上怪物'
+                return '拥有'+value+'个'+this.key+'级及以上怪物'
             case 'mnum2'://数量大于v1的数量
-                return '拥有'+this.value+'个'+this.key+'星及以上怪物'
+                return '拥有'+value+'个'+this.key+'星及以上怪物'
             case 'tlv':
-                return '【'+TecManager.getInstance().tecBase[this.key].name+'】科技达到'+this.value+'级'
+                return '【'+TecManager.getInstance().tecBase[this.key].name+'】科技达到'+value+'级'
             case 'clv':
-                return '收复'+this.value+'个据点'
+                return '收复'+value+'个据点'
             case 'cstar'://星星数量
-                return '据点总星星数达到'+this.value+'个'
+                return '据点总星星数达到'+value+'个'
             case 'space'://星星数量
-                return '进入时空之门'+this.value+'次'
+                return '进入时空之门'+value+'次'
+            case 'skill'://skill
+                return '新购买技能'+value+'次'
         }
     }
 	private wx3_functionX_11890(){console.log(604)}

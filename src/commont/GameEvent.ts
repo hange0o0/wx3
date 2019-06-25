@@ -16,6 +16,7 @@ class GameEvent {
         TASK_CHANGE:'TASK_CHANGE',
         SKILL_CHANGE:'SKILL_CHANGE',
         SPACE_CHANGE:'SPACE_CHANGE',
+        GUESS_CHANGE:'GUESS_CHANGE',
 
         energy_change:'energy_change',
         red_change:'red_change',

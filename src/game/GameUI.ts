@@ -414,11 +414,11 @@ class GameUI extends game.BaseUI_wx3 {
 
         this.infoBtn.visible = false;
         //UM_wx3.isTest = true;
-        //if(UM_wx3.isTest)
-        //{
-        //    TestUI.getInstance().show();
-        //    return;
-        //}
+        if(UM_wx3.isTest)
+        {
+            TestUI.getInstance().show();
+            return;
+        }
 
 	wx3_function(1344);
         GuideManager.getInstance().isGuiding = UM_wx3.isFirst;

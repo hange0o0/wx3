@@ -324,6 +324,15 @@ class DebugManager_wx3 {
 	wx3_function(8750);
                 egret.localStorage.setItem('levelData_' +this.callLevel + '_'+ DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.levelArr.join('\n'));
             }
+            if(this.stop == 4)
+            {
+                for(var i=0;i<this.chapterArr.length;i++)
+                {
+                    this.chapterArr[i] = this.chapterArr[i].list1 + '|'+this.chapterArr[i].list2 + '|'+this.chapterArr[i].cost + '|'+this.chapterArr[i].seed + '|'+this.chapterArr[i].level
+                }
+
+                egret.localStorage.setItem('askData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.chapterArr.join('\n'));
+            }
             return;
         }
 
@@ -523,6 +532,71 @@ class DebugManager_wx3 {
     //    },this);
     //    loader.load(new egret.URLRequest(url));
     //}
+
+    private getAskLevel(index){
+        var lv = 1;
+        while(true)
+        {
+            if(index <= Math.pow(lv,1.3)*10)
+                return lv;
+            lv++
+            if(lv >=20)
+                return lv;
+        }
+    }
+
+    public createAsk(begin=1){
+        this.chapterArr = [];
+        this.repeatNum = 5;
+        this.callNum = 14;
+        this.callLevel = this.getAskLevel(begin)
+        this.callCost = 16 + Math.floor(begin/20)
+        this.finishFun = (winArr)=>{
+            var list1 = winArr[0]
+            var myCost = this.callCost;
+            var otherCost = Math.round(this.callCost*(1.1 + begin/1300));
+
+            var oo:any = {
+                level:this.callLevel,
+                list1:list1,
+                cost:myCost,
+                seed:Math.floor(Math.random() * 100000000000),
+            }
+            var num = 0;
+            do{
+                oo.list2 = this.randomList(otherCost);
+                this.testOne_1893(oo.list1,oo.list2,oo.seed);
+                if(PKData_wx3.getInstance().getPKResult() == 2)
+                {
+                    this.chapterArr.push(oo);
+                    begin++;
+                    this.callLevel = this.getAskLevel(begin)
+                    this.callCost = 16 + Math.floor(begin/20)
+                    break;
+                }
+                num ++
+                if(num >1000)
+                {
+                    this.testNum --;
+                    break;
+                }
+            }while(true);
+            return false;
+
+            //if(this.chapterArr.indexOf(list1) == -1)
+            //{
+            //    console.log(begin + ' -create')
+            //    begin++;
+            //    this.callLevel = this.getClevel_867(begin)
+            //    this.callCost = 16 + Math.floor(begin/20)
+            //    this.chapterArr.push(list1);
+            //
+            //}
+            //return false;
+        }
+        this.testRound_4658();
+        console.log('DM.stop=4')
+    }
 
 }
 

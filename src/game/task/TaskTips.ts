@@ -49,7 +49,7 @@ class TaskTips extends game.BaseContainer_wx3 {
         if(vo && this.arrIn.indexOf(vo.type) != -1 && !TSM.isTaskFinish())
         {
             var value = Math.min(TSM.getTaskValue(vo),vo.value);
-            this.setHtml(this.tipsText,'任务要求：' + this.createHtml(vo.getDes(),0xFCF4D6) + '\n' + '完 成 度：' + this.createHtml(value + '/' + vo.value,0xFCACA4));
+            this.setHtml(this.tipsText,'任务要求：' + this.createHtml(vo.getDes(true),0xFCF4D6) + '\n' + '完 成 度：' + this.createHtml(value + '/' + vo.value,0xFCACA4));
         }
         else
         {

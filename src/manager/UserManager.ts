@@ -29,7 +29,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190620//与服务器相同则为测试版本
+    public testVersion = 20190624//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -50,6 +50,9 @@ class UserManager_wx3 {
 
     public skills: any;//玩家的技能
     public skillChange = false
+    public guess
+    public askLevel
+    public askTipsLevel
 
 	private wx3_functionX_12058(){console.log(539)}
     public shareUser = [];//buff玩家的数据   openid:{head,nick,time}
@@ -119,6 +122,8 @@ class UserManager_wx3 {
         this.buffDiamond = data.buffDiamond || 0;
         this.task = data.task || 0;
         this.dayTask = data.dayTask || [];
+        this.askLevel = data.askLevel || 1;
+        this.askTipsLevel = data.askTipsLevel || 0;
 	wx3_function(1717);
         this.coinObj = data.coinObj || {
                 loginTime:TM_wx3.now(),   //登陆时间
@@ -166,6 +171,7 @@ class UserManager_wx3 {
         FightManager.getInstance().initFight(data.fight)
         SkillManager.getInstance().initSkill()
         SpaceManager.getInstance().initData(data.space)
+        GuessManager.getInstance().initData(data.guess || {})
 
 	wx3_function(5880);
 
@@ -506,6 +512,9 @@ class UserManager_wx3 {
             coinObj:UM_wx3.coinObj,
             task:UM_wx3.task,
             dayTask:UM_wx3.dayTask,
+            askLevel:UM_wx3.askLevel,
+            askTipsLevel:UM_wx3.askTipsLevel,
+            guess:GuessManager.getInstance().getSave(),
             space:SpaceManager.getInstance().getSaveData(),
             //guideFinish:UM.guideFinish,
             saveTime:TM_wx3.now(),

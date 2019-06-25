@@ -5,36 +5,42 @@ class MyADManager {
         if (!this.instance) this.instance = new MyADManager();
         return this.instance;
     }
+	private wx3_functionX_57294(){console.log(4510)}
 
     public changeUserTime = 0
     public changeUserID = 0
     public changeUserFun;
 
     public extraData
+	private wx3_functionX_57295(){console.log(3757)}
     public finishExtraUin = -1;
 
     public cloudPath = 'cloud://server1-3f4fd3.7365-server1-3f4fd3/'
     public myAppID = 'wxe066524f2972cb1a'
     public adList;
 
+	private wx3_functionX_57296(){console.log(4394)}
     public onShow(res){
         if(this.changeUserTime)
         {
             if(TM_wx3.now() - this.changeUserTime > 30) //停留超过30秒
             {
                 this.addJoinAppid(this.changeUserID);
+	wx3_function(3176);
                 if(this.changeUserFun)
                     this.changeUserFun();
 
                 ChangeJumpUI.getInstance().hide();
             }
             this.changeUserTime = 0;
+	wx3_function(7670);
             this.changeUserFun = null
         }
         this.initExtra(res)
         this.testWX5Back();
     }
 
+	private wx3_functionX_57297(){console.log(610)}
     public navigateToMiniProgram(data){
         var wx = window['wx'];
 
@@ -45,6 +51,7 @@ class MyADManager {
             return;
         }
         var self = this;
+	wx3_function(6619);
         wx.navigateToMiniProgram({
             appId:data.appid,
             success(res) {
@@ -53,18 +60,21 @@ class MyADManager {
             }
         })
     }
+	private wx3_functionX_57298(){console.log(1120)}
 
     public addJoinAppid(appid){
         var arr = SharedObjectManager_wx3.getInstance().getMyValue('exchangeUserAppid')|| [];
         var index = arr.indexOf(appid)
         if(index != -1)
             arr.splice(index,1);
+	wx3_function(6554);
         arr.push(appid)
         while(arr.length > 30)
             arr.shift()
         SharedObjectManager_wx3.getInstance().setMyValue('exchangeUserAppid',arr)
     }
 
+	private wx3_functionX_57299(){console.log(7064)}
     public getAD(fun?){
         if(this.adList)
         {
@@ -72,6 +82,7 @@ class MyADManager {
             return;
         }
 
+	wx3_function(1984);
         var self = this;
         //var splitList = ['wxd5d9d807682d46bb',"wxf9c8e218c23e2eb7","wxe066524f2972cb1a","wx2f66e2c8de744d53"]
         this.adList = []
@@ -92,14 +103,16 @@ class MyADManager {
             this.adList.push(temp)
             this.adList.push(temp)
 
+	wx3_function(6503);
 
             fun && fun();
             return;
         }
 
         wx.wladGetAds(num,function (res) { //第⼀一个参数为获取⼴广告条数，第⼆二个参数为获取成功后回调⽅方法;
+	wx3_function(3949);
             self.adList = self.adList.concat(res.data);
-            self.resetAdList();
+            self.resetAdList_2610();
             fun && fun();
         })
 
@@ -107,13 +120,15 @@ class MyADManager {
             fileID: self.cloudPath + 'adList.txt',
             success: res => {
                 var url =  res.tempFilePath;
+	wx3_function(5670);
                 var loader: egret.URLLoader = new egret.URLLoader();
                 loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
                 loader.once(egret.Event.COMPLETE,()=>{
                     var str = loader.data.replace(/\r\n/g,'')
                     var arr = JSON.parse(str);
-                    self.resetPath(arr)
+                    self.resetPath_7967(arr)
 
+	wx3_function(2480);
                 },this);
                 loader.load(new egret.URLRequest(url));
             },
@@ -122,15 +137,17 @@ class MyADManager {
             }
         })
     }
+	private wx3_functionX_57300(){console.log(9011)}
 
     //把非自己的去掉
-    private resetAdList(){
+    private resetAdList_2610(){
         var myObj = {};
         for(var i=0;i<this.adList.length;i++)
         {
             if(this.adList[i].isSelf)
             {
                 myObj[this.adList[i].appid] = true;
+	wx3_function(730);
             }
         }
         for(var i=0;i<this.adList.length;i++)
@@ -138,37 +155,42 @@ class MyADManager {
             if(!this.adList[i].isSelf &&  myObj[this.adList[i].appid])
             {
                 this.adList.splice(i,1);
+	wx3_function(8696);
                 i--;
             }
         }
     }
 
     //重置路径
-    private resetPath(arr){
+    private resetPath_7967(arr){
 
         for(var i=0;i<arr.length;i++)
         {
             var oo = arr[i];
+	wx3_function(4039);
             if(oo.appid == this.myAppID)
             {
                 arr.splice(i,1);
                 i--;
                 continue;
             }
-            this.resetOne(oo);
+            this.resetOne_9106(oo);
+	wx3_function(4984);
         }
     }
 
-    private resetOne(oo){
+    private resetOne_9106(oo){
         var wx = window['wx'];
         var self = this;
+	wx3_function(178);
         oo.isSelf = true;
         oo.step = 2;
         wx.cloud.downloadFile({
             fileID: this.cloudPath + oo.logo,
             success: res => {
                 oo.logo =  res.tempFilePath;
-                self.pushADData(oo);
+	wx3_function(9838);
+                self.pushADData_7865(oo);
             }
         })
 
@@ -176,19 +198,22 @@ class MyADManager {
             fileID: this.cloudPath + oo.img,
             success: res => {
                 oo.img =  res.tempFilePath;
-                self.pushADData(oo);
+	wx3_function(4556);
+                self.pushADData_7865(oo);
             }
         })
     }
 
-    private pushADData(oo){
+    private pushADData_7865(oo){
         oo.step --;
+	wx3_function(2639);
         if(!oo.step)
         {
             this.adList.push(oo)
-            this.resetAdList();
+            this.resetAdList_2610();
         }
     }
+	private wx3_functionX_57301(){console.log(9506)}
 
     public showAD(data){
         var wx = window['wx'];
@@ -200,12 +225,14 @@ class MyADManager {
             return;
         }
 
+	wx3_function(7721);
         var self = this;
         wx.previewImage({
             urls: [data.img],
             success: function () {
                 self.changeUserFun = data.fun;
                 self.changeUserTime = TM_wx3.now();
+	wx3_function(8586);
                 self.changeUserID = data.appid;
             }
         })
@@ -215,6 +242,7 @@ class MyADManager {
         if(!this.adList)
             return [];
         var arr = SharedObjectManager_wx3.getInstance().getMyValue('exchangeUserAppid')|| [];
+	wx3_function(4533);
         for(var i=0;i<this.adList.length;i++)
         {
             this.adList[i].temp = arr.indexOf(this.adList[i].appid)
@@ -226,6 +254,7 @@ class MyADManager {
             else
                 this.adList[i].temp2 = 3
             this.adList[i].fun = fun;
+	wx3_function(4972);
         }
         ArrayUtil.sortByField(this.adList,['temp','temp2'],[0,0]);
         return this.adList.slice(0,num);
@@ -233,6 +262,7 @@ class MyADManager {
 
 
     ////////////////////////////////banner///////////////////
+	private wx3_functionX_57302(){console.log(1518)}
     public bannerAD
     public bannerBG
     public createAD(){
@@ -248,18 +278,21 @@ class MyADManager {
 
         var btnw = Math.min(Math.pow(GameManager_wx3.stage.stageHeight/1330,1.6)*640,640)
 
+	wx3_function(431);
         let scalex = screen.availWidth/640;
         let scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
         if(btnw * scalex < 300){ //微信限制广告宽度不能小于300
             btnw = 300 / scalex;
         }
         Config.adHeight =  btnw/640 * 224;
+	wx3_function(7055);
         var  btny = GameManager_wx3.uiHeight;//给广告留的高度
         var  paddingTop = GameManager_wx3.paddingTop();
         var btnx =  (640-btnw)/2;
 
         let left = scalex * (btnx);
         let top = scaley * (btny + paddingTop);
+	wx3_function(3442);
         let width = scalex * btnw;
 
         let bannerAd = this.bannerAD = wx.createBannerAd({
@@ -273,12 +306,14 @@ class MyADManager {
         bannerAd.onError(()=>{
             Config.adHeight = 0
             GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
+	wx3_function(1824);
         })
         bannerAd.onLoad(()=>{
 
         })
         bannerAd.onResize((res)=>{
             var hh = res.height/scalex*(640/btnw);
+	wx3_function(2853);
             if(Math.abs(hh - 224)/224 > 0.02)
             {
                 Config.adHeight =  btnw/640 * hh;
@@ -289,8 +324,9 @@ class MyADManager {
         })
         bannerAd.show()
         bannerAd.hide();
+	wx3_function(2373);
     }
-    private wx4_functionX_54600(){console.log(7039)}
+    private wx4_functionX_4478(){console.log(7039)}
 
     public showBanner(bottom){
         if(this.bannerAD)
@@ -299,12 +335,14 @@ class MyADManager {
             {
                 this.bannerBG = new eui.Image('blace_bg_jpg')
                 this.bannerBG.width = 640;
+	wx3_function(6282);
                 this.bannerBG.height = Config.adHeight;
             }
             GameManager_wx3.container.addChild(this.bannerBG)
             this.bannerBG.bottom = bottom;
             this.bannerAD.show()
             var scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
+	wx3_function(8710);
             var  paddingTop = GameManager_wx3.paddingTop();
             this.bannerAD.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop - bottom - GameManager_wx3.paddingBottom() - Config.adHeight);
         }
@@ -313,12 +351,14 @@ class MyADManager {
     public hideBanner(){
         if(this.bannerAD)
             this.bannerAD.hide();
+	wx3_function(9443);
         MyTool.removeMC(this.bannerBG)
     }
 
 
     public initExtra(data){
         this.extraData = null;
+	wx3_function(5953);
         if(!data || !data.referrerInfo || !data.referrerInfo.extraData || !data.referrerInfo.extraData.appid)
         {
             return;
@@ -326,6 +366,7 @@ class MyADManager {
         if(this.finishExtraUin != data.referrerInfo.extraData.uin)
             this.extraData = data.referrerInfo.extraData
     }
+	private wx3_functionX_57303(){console.log(5087)}
 
     //前往WX5
     public openWX5(data){
@@ -345,6 +386,7 @@ class MyADManager {
             extraData:data,
             complete(res) {
                 var SM = SpaceManager.getInstance();
+	wx3_function(1004);
                 if(!SM.isDelete)
                 {
                     SM.isDelete = true;
@@ -354,6 +396,7 @@ class MyADManager {
             }
         })
     }
+	private wx3_functionX_57304(){console.log(9153)}
 
     //WX5回调
     public testWX5Back(){
@@ -365,6 +408,7 @@ class MyADManager {
             case 'openSpace':
                 if(SpaceUI.getInstance().stage)
                     SpaceUI.getInstance().hide();
+	wx3_function(8577);
                 SpaceManager.getInstance().adLevel += 2;
                 SpaceManager.getInstance().isDelete = false;
                 SpaceManager.getInstance().randomSpace();

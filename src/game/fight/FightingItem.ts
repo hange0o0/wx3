@@ -92,7 +92,8 @@ class FightingItem extends game.BaseItem_wx3{
                 this.desText.text = '战斗胜利，正在返回';
 	wx3_function(5098);
                 this.awardGroup.visible = true;
-                this.coinText.text = NumberUtil.addNumSeparator(this.data.addCoin,2)
+                this.coinText.text = '+' + NumberUtil.addNumSeparator(this.data.addCoin,2)
+                this.coinText.textColor = 0x66FF66
             }
             else
                 this.desText.text = '进攻失利，正在返回';

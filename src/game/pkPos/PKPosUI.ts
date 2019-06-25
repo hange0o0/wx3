@@ -9,46 +9,44 @@ class PKPosUI extends game.BaseUI_wx3 {
 	private wx3_functionX_12533(){console.log(9174)}
 
     private bottomUI: BottomUI;
-    private topUI: TopUI;
     private mainCon: eui.Group;
     private con: eui.Group;
     private bg: eui.Image;
-	private wx3_functionX_12534(){console.log(1436)}
     private otherForceText: eui.Label;
     private forceText: eui.Label;
     private coinText: eui.Label;
     private costText: eui.Label;
     private numText: eui.Label;
     private chooseGroup: eui.Group;
-	private wx3_functionX_12535(){console.log(2779)}
     private desText: eui.Label;
     public chooseList: eui.List;
     private scroller: eui.Scroller;
     public list: eui.List;
     private emptyGroup: eui.Group;
     private emptyText: eui.Label;
-	private wx3_functionX_12536(){console.log(4071)}
     private tecBtn: eui.Button;
     private monsterBtn: eui.Button;
     private workBtn: eui.Button;
+    private topUI: TopUI;
     private btnGroup: eui.Group;
+    private tipsBtn: eui.Group;
+    private getTipsIcon: eui.Image;
+    private videoGroup: eui.Group;
+    private videoMC: eui.Image;
     private sortBtn: eui.Group;
     private sortText: eui.Label;
-	private wx3_functionX_12537(){console.log(5623)}
-    private okText: eui.Label;
     private resetBtn: eui.Group;
     public okBtn: eui.Group;
+    private okText: eui.Label;
     public pkBtn: eui.Group;
 
 
-	private wx3_functionX_12538(){console.log(1507)}
 
 
 
 
 
-
-	private wx3_functionX_12539(){console.log(5986)}
+    private wx3_functionX_12539(){console.log(5986)}
 
     private defItem:DefUI
     private workItem:MainWorkItem
@@ -530,6 +528,7 @@ class PKPosUI extends game.BaseUI_wx3 {
         switch (this.dataIn.type)
         {
             case 'chapter':
+            case 'ask':
                 this.mainCon.addChildAt(this.con,0);
 	wx3_function(2043);
                 this.showEnemy();
@@ -832,7 +831,11 @@ class PKPosUI extends game.BaseUI_wx3 {
 
     private renew_2927(){
         this.btnGroup.removeChildren();
-        this.btnGroup.addChild(this.sortBtn)
+        if(this.dataIn.type != 'ask')
+            this.btnGroup.addChild(this.sortBtn)
+        else
+            this.btnGroup.addChild(this.tipsBtn)
+
         this.btnGroup.addChild(this.resetBtn)
         if(this.dataIn.isPK)
         {
