@@ -35,6 +35,7 @@ class PKPosListItem_wx3 extends game.BaseItem_wx3 {
 
 
     private onInfo_5284(){
+
         if(GuideManager.getInstance().isGuiding)
             return;
         if(this.data.add)
@@ -46,7 +47,10 @@ class PKPosListItem_wx3 extends game.BaseItem_wx3 {
             if(this.data.list[i].id)
                 arr.push(this.data.list[i].id)
         }
-        CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
+        if(PKPosUI.getInstance().dataIn.type == 'ask')
+            CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data),{otherForce:10000})
+        else
+            CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
     }
 	private wx3_functionX_12527(){console.log(7196)}
 
@@ -81,6 +85,9 @@ class PKPosListItem_wx3 extends game.BaseItem_wx3 {
 	wx3_function(9924);
         this.numBar.width =  num*8
         this.levelText.text = 'lv.' + MonsterManager.getInstance().getMonsterLevel(this.data.id) + ''
+
+        if(ui.dataIn.type == 'ask')
+            this.levelText.text = ''
     }
 
 }

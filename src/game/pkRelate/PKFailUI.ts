@@ -48,19 +48,20 @@ class PKFailUI extends game.BaseWindow_wx3 {
         })
 
         this.addBtnEvent(this.goBtn,()=>{
-            var wx = window['wx'];
-	wx3_function(3440);
-            if(!wx)
-            {
-                MyWindow.ShowTips('只在公网生效')
-                return;
-            }
-            wx.navigateToMiniProgram({
-                appId: 'wxf9c8e218c23e2eb7',
-                success(res) {
-                    // 打开成功
-                }
-            })
+            AskManager.getInstance().showPK();
+     //       var wx = window['wx'];
+	//wx3_function(3440);
+     //       if(!wx)
+     //       {
+     //           MyWindow.ShowTips('只在公网生效')
+     //           return;
+     //       }
+     //       wx.navigateToMiniProgram({
+     //           appId: 'wxf9c8e218c23e2eb7',
+     //           success(res) {
+     //               // 打开成功
+     //           }
+     //       })
         })
     }
 	private wx3_functionX_12580(){console.log(498)}
@@ -74,7 +75,7 @@ class PKFailUI extends game.BaseWindow_wx3 {
 
     public onShow(){
          this.tecText.text = '提升与战斗相关的科技等级'
-        this.goGroup.visible = !UM_wx3.isTest
+        //this.goGroup.visible = !UM_wx3.isTest
 
     }
 }

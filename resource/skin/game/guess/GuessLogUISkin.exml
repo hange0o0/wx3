@@ -4,7 +4,7 @@
 	<e:Label text="投注记录" y="25" bold="true" textColor="0xFFEC99" horizontalCenter="0.5" stroke="3" strokeColor="0x351D03"/>
 	<e:Image id="closeBtn" source="icon_error_png" right="-10" top="-15"/>
 	<e:Label id="desText" text="日志只保留最近20条，点击可查看对战过程" strokeColor="0x301200" size="20" horizontalCenter="0" bottom="20" textColor="0xffe9a8"/>
-	<e:Scroller id="scroller" width="560" top="70" bottom="50" horizontalCenter="0">
+	<e:Scroller id="scroller" width="570" top="70" bottom="50" horizontalCenter="0" bounces="false">
 		<e:Group>
 			<e:List id="list" width="540" anchorOffsetY="0" horizontalCenter="0" y="0" x="0" scaleX="1" scaleY="1">
 				<e:layout>

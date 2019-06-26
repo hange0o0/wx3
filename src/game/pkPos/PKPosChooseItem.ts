@@ -87,7 +87,10 @@ class PKPosChooseItem_wx3 extends game.BaseItem_wx3 {
             if(this.data.list[i])
                 arr.push(this.data.list[i].id)
         }
-        CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
+        if(PKPosUI.getInstance().dataIn.type == 'ask')
+            CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data),{otherForce:10000})
+        else
+            CardInfoUI.getInstance().show(this.data.id,arr,this.data.list.indexOf(this.data))
     }
 	private wx3_functionX_12519(){console.log(2628)}
 

@@ -32,6 +32,11 @@ class AskManager {
 
     public showPK(){
         var data = this.getGuessData();
+        if(!data)
+        {
+            MyWindow.Alert('新的关卡即将上线')
+            return;
+        }
         var enemy = {
             bgid:UM_wx3.askLevel%7 || 7,
             list:data.list1,
@@ -44,13 +49,14 @@ class AskManager {
             isPK:true,
             isAtk:true,
             enemy:enemy,
-            list2:this.getChapterChooseList(data),
+            list2:this.getAskChooseList(data),
             maxNum:data.list2.split(',').length,
             maxCost:data.cost,
             fun:(list)=>{
                 PKPosUI.getInstance().hide();
                 var pkObj:any = {
                     isAsk:true,
+                    isReplay:true,
                     title:'关卡解迷 - NO.' + UM_wx3.askLevel,
                     seed:data.seed,
                     list1:data.list1,
@@ -65,11 +71,12 @@ class AskManager {
         })
     }
 
-    public getChapterChooseList(question) {
+    public getAskChooseList(question) {
         var arr = [];
         var arr2 = [];
         var answer = question.list2.split(',')
         var data = MonsterManager.getInstance().getOpenMonster(question.level);
+        var maxMonster = Math.max(Math.min(18,Math.floor(data.length*0.6)),5)
         for (var s in data) {
             if (answer.indexOf(data[s].id + '') == -1) {
                 arr2.push(data[s])
@@ -81,7 +88,7 @@ class AskManager {
         ArrayUtil.sortByField(arr2,['id'],[0])
         var PKM = PKManager_wx3.getInstance();
         PKM.randomSeed = (question.seed * 1.66);
-        while (arr.length < 18 && arr2.length > 0)
+        while (arr.length < maxMonster && arr2.length > 0)
         {
             var index = Math.floor(PKM.random()*arr2.length)
             arr.push(arr2[index].id)

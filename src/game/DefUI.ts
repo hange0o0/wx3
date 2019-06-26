@@ -90,6 +90,11 @@ class DefUI extends game.BaseItem_wx3{
 
         this.addBtnEvent(this.guessBtn,(e)=>{
             e.stopImmediatePropagation();
+            if(UM_wx3.chapterLevel < 20)
+            {
+                MyWindow.ShowTips('通关据点20后解锁')
+                return;
+            }
             GuessUI.getInstance().show();
         })
 
@@ -330,6 +335,7 @@ class DefUI extends game.BaseItem_wx3{
         this.onStep();
         this.randomTalk();
         this.spaceRed.visible = UM_wx3.chapterLevel>=10 && !DateUtil.isSameDay(SpaceManager.getInstance().addTime)
+        this.guessRed.visible = GuessManager.getInstance().guessRed
 	wx3_function(1065);
         //this.renewMonsterPos_5086();
         //for(var i=0;i<this.monsterArr.length;i++)

@@ -68,17 +68,20 @@ class GuessLogItem extends game.BaseItem_wx3 {
         var white = 0xFFEDC9
         var red = 0xFF6666
 
-        this.myText1.text = '投注：' + NumberUtil.addNumSeparator(this.data.coin1,2)
-        if(this.data.coin1)
-            this.myText1.textColor = this.data.result==1?green:red
-        else
-            this.myText1.textColor = white
 
-        this.myText2.text = '投注：' + NumberUtil.addNumSeparator(this.data.coin2,2)
-        if(this.data.coin2)
-            this.myText2.textColor = this.data.result==2?green:red
+        if(this.data.coin1)
+            var color = this.data.result==1?green:red
         else
-            this.myText2.textColor = white
+            var color = white
+        this.setHtml(this.myText1,'投注：' + this.createHtml(NumberUtil.addNumSeparator(this.data.coin1,2),color))
+
+        if(this.data.coin2)
+            var color = this.data.result==2?green:red
+        else
+            var color = white
+        this.setHtml(this.myText2,'投注：' + this.createHtml(NumberUtil.addNumSeparator(this.data.coin2,2),color))
+
+
 
         if(this.data.result==1)
             this.resultGroup1.addChild(this.winMC)

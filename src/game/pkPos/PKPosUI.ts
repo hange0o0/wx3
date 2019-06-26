@@ -13,6 +13,7 @@ class PKPosUI extends game.BaseUI_wx3 {
     private con: eui.Group;
     private bg: eui.Image;
     private otherForceText: eui.Label;
+    private otherForceGroup: eui.Group;
     private forceText: eui.Label;
     private coinText: eui.Label;
     private costText: eui.Label;
@@ -137,6 +138,9 @@ class PKPosUI extends game.BaseUI_wx3 {
             this.hide();
 	wx3_function(5260);
             WorkUI.getInstance().show()
+        });
+        this.addBtnEvent(this.tipsBtn,()=>{
+            this.onTips();
         });
 
         this.chooseList.addEventListener('start_drag',this.onDragStart_1592,this);
@@ -366,6 +370,17 @@ class PKPosUI extends game.BaseUI_wx3 {
     }
 
     public getForce(){
+        if(this.dataIn.type == 'ask')
+        {
+            var myList = this.getMyList_2065();
+             var arr = myList?myList.split(','):[];
+            var count = 0;
+            for(var i=0;i<arr.length;i++)
+            {
+                count += MonsterVO.getObject(arr[i]).cost*(1+10000/100);
+            }
+            return count;
+        }
         return MonsterManager.getInstance().getMyListForce(this.getMyList_2065(),this.dataIn.isAtk)
     }
 	private wx3_functionX_12551(){console.log(3791)}
@@ -525,6 +540,7 @@ class PKPosUI extends game.BaseUI_wx3 {
         this.workItem && MyTool.removeMC(this.workItem)
         this.fightItem && MyTool.removeMC(this.fightItem)
         this.taskItem && MyTool.removeMC(this.taskItem)
+        this.otherForceGroup.visible = this.dataIn.type != 'ask'
         switch (this.dataIn.type)
         {
             case 'chapter':
@@ -754,7 +770,7 @@ class PKPosUI extends game.BaseUI_wx3 {
             list[i] = {id:list[i].id,list:list,index:i};
 	wx3_function(8375);
         }
-        if(list.length > 0)
+        if(list.length > 0 && this.dataIn.type != 'ask')
             list.push({add:true})
         this.dataProvider.source = list;
         this.dataProvider.refresh();
@@ -830,11 +846,15 @@ class PKPosUI extends game.BaseUI_wx3 {
     }
 
     private renew_2927(){
+
         this.btnGroup.removeChildren();
         if(this.dataIn.type != 'ask')
             this.btnGroup.addChild(this.sortBtn)
         else
+        {
             this.btnGroup.addChild(this.tipsBtn)
+            this.getTipsIcon.visible = false;
+        }
 
         this.btnGroup.addChild(this.resetBtn)
         if(this.dataIn.isPK)
@@ -857,15 +877,33 @@ class PKPosUI extends game.BaseUI_wx3 {
         this.renewByType_493();
 
 	wx3_function(5425);
-        var freeList = MonsterManager.getInstance().getFreeMonster();
         this.emptyNum = {};
-        for(var i=0;i<freeList.length;i++)
+        if(this.dataIn.type == 'ask')
         {
-            this.emptyNum[freeList[i].vo.id] = freeList[i].num;
+            for(var i=0;i<this.dataIn.list2.length;i++)
+            {
+                this.emptyNum[this.dataIn.list2[i]] = 5;
+            }
         }
+        else
+        {
+            var freeList = MonsterManager.getInstance().getFreeMonster();
+            for(var i=0;i<freeList.length;i++)
+            {
+                this.emptyNum[freeList[i].vo.id] = freeList[i].num;
+            }
+        }
+
         this.renewTopList_4865();
 	wx3_function(6015);
         this.renewDownList_4788();
+
+        this.renewTipsBtn()
+        if(UM_wx3.askTipsLevel == UM_wx3.askLevel)
+        {
+            this.showTips();
+            return;
+        }
 
         //this.reset();
     }
@@ -931,5 +969,82 @@ class PKPosUI extends game.BaseUI_wx3 {
             this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000);
 	wx3_function(7700);
         }
+    }
+
+
+    public onTips(){
+        if(UM_wx3.askTipsLevel == UM_wx3.askLevel)
+        {
+            this.showTips();
+            return;
+        }
+        if(UM_wx3.askLevel <= 10)
+        {
+            MyWindow.Confirm('本关可免费或得提示，但你确定不再想一下吗？',(b)=>{
+                if(b==1)
+                {
+                    UM_wx3.askTipsLevel = UM_wx3.askLevel;
+                    UM_wx3.needUpUser = true
+                    this.showTips()
+                }
+            },['再想想','要提示']);
+            return;
+        }
+
+        if(UM_wx3.askLevel % 5 == 0 && !UM_wx3.isTest)
+        {
+            ShareTool.share('日常推荐一个好游戏',Config.localResRoot + "share_img_2.jpg",{},()=>{
+                UM_wx3.askTipsLevel = UM_wx3.askLevel;
+                UM_wx3.needUpUser = true
+                this.showTips()
+            })
+            return;
+        }
+
+        ShareTool.openGDTV(()=>{
+            UM_wx3.askTipsLevel = UM_wx3.askLevel;
+            UM_wx3.needUpUser = true
+            this.showTips()
+        })
+
+    }
+
+    private showTips(){
+        var list:any = this.getAnswer().split(',')
+        for(var s in this.emptyNum)
+        {
+            this.emptyNum[s] = 5;
+        }
+        for(var i=0;i<list.length;i++)
+        {
+            list[i] = {id:list[i],list:list} ;
+            this.emptyNum[list[i]] --;
+        }
+        //console.log(list)
+        this.chooseDataProvider.source = list;
+        this.chooseDataProvider.refresh();
+        this.onItemChange_5686();
+        this.getTipsIcon.visible = true;
+        this.renewTipsBtn();
+    }
+
+    private renewTipsBtn(){
+        if(UM_wx3.askLevel <= 10)
+        {
+            MyTool.removeMC(this.videoMC)
+            return;
+        }
+
+        if(UM_wx3.askLevel % 5 == 0 && !UM_wx3.isTest)
+        {
+            MyTool.removeMC(this.videoMC)
+            return;
+        }
+
+        this.videoGroup.addChildAt(this.videoMC,0)
+    }
+
+    private getAnswer(){
+        return AskManager.getInstance().getGuessData().list2
     }
 }

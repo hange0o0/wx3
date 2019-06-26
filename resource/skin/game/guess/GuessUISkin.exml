@@ -9,10 +9,10 @@
 	<e:Image id="closeBtn" source="icon_error_png" right="-10" top="-15"/>
 	<e:Group bottom="10" left="10" right="10">
 		<e:Image scale9Grid="9,9,11,10" source="bg1_png" height="220" y="0" right="0" left="0"/>
-		<e:Group id="barGroup" y="30" horizontalCenter="0" width="500">
-			<e:Image source="bar_bg_png" y="30" scale9Grid="26,3,156,24" width="504" x="-2"/>
-			<e:Image id="barMC" source="bar1_png" x="0" y="32" width="250" scale9Grid="5,3,194,20"/>
-			<e:Group id="arrowGroup" x="92" y="0" width="200" anchorOffsetX="100">
+		<e:Group id="barGroup" y="5" horizontalCenter="0" width="500">
+			<e:Image source="bar_bg_png" y="55.84" scale9Grid="26,3,156,24" width="504" x="-2"/>
+			<e:Image id="barMC" source="bar1_png" x="0" y="57.84" width="250" scale9Grid="5,3,194,20"/>
+			<e:Group id="arrowGroup" x="92" y="25.84" width="200" anchorOffsetX="100">
 			<e:Image source="arrow3_png" y="0" scaleX="1.5" scaleY="1.5" horizontalCenter="0"/>
 			<e:Label id="costText" text="Label" y="-25" size="20" textColor="0xffeba8" horizontalCenter="0.5"/>
 			</e:Group>

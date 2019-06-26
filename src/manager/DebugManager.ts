@@ -230,7 +230,7 @@ class DebugManager_wx3 {
     private testRound_4658(){
         this.testNum ++;
         var arr = []
-        var n = 2048;
+        var n = 1024;
 
         var cost = this.callCost || (30 + Math.floor(Math.random()*30))
         for(var i=0;i<n;i++)
@@ -323,15 +323,6 @@ class DebugManager_wx3 {
                 //}
 	wx3_function(8750);
                 egret.localStorage.setItem('levelData_' +this.callLevel + '_'+ DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.levelArr.join('\n'));
-            }
-            if(this.stop == 4)
-            {
-                for(var i=0;i<this.chapterArr.length;i++)
-                {
-                    this.chapterArr[i] = this.chapterArr[i].list1 + '|'+this.chapterArr[i].list2 + '|'+this.chapterArr[i].cost + '|'+this.chapterArr[i].seed + '|'+this.chapterArr[i].level
-                }
-
-                egret.localStorage.setItem('askData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.chapterArr.join('\n'));
             }
             return;
         }
@@ -545,17 +536,28 @@ class DebugManager_wx3 {
         }
     }
 
+    private askBegin;
     public createAsk(begin=1){
+        this.askBegin = begin;
         this.chapterArr = [];
         this.repeatNum = 5;
         this.callNum = 14;
         this.callLevel = this.getAskLevel(begin)
         this.callCost = 16 + Math.floor(begin/20)
+
+      this.createOneAsk();
+
+        console.log('DM.stop=4')
+    }
+
+    public createOneAsk(){
+        console.log(this.askBegin)
+        this.callLevel = this.getAskLevel(this.askBegin)
+        this.callCost = 16 + Math.floor(this.askBegin/20)
+        var myCost = this.callCost;
+        this.callCost = Math.round(this.callCost*(1.1 + this.askBegin/2000));//要找一个强大的敌人
         this.finishFun = (winArr)=>{
             var list1 = winArr[0]
-            var myCost = this.callCost;
-            var otherCost = Math.round(this.callCost*(1.1 + begin/1300));
-
             var oo:any = {
                 level:this.callLevel,
                 list1:list1,
@@ -564,14 +566,13 @@ class DebugManager_wx3 {
             }
             var num = 0;
             do{
-                oo.list2 = this.randomList(otherCost);
+                oo.list2 = this.randomList(myCost);
                 this.testOne_1893(oo.list1,oo.list2,oo.seed);
                 if(PKData_wx3.getInstance().getPKResult() == 2)
                 {
                     this.chapterArr.push(oo);
-                    begin++;
-                    this.callLevel = this.getAskLevel(begin)
-                    this.callCost = 16 + Math.floor(begin/20)
+                    this.askBegin++;
+
                     break;
                 }
                 num ++
@@ -581,21 +582,24 @@ class DebugManager_wx3 {
                     break;
                 }
             }while(true);
-            return false;
 
-            //if(this.chapterArr.indexOf(list1) == -1)
-            //{
-            //    console.log(begin + ' -create')
-            //    begin++;
-            //    this.callLevel = this.getClevel_867(begin)
-            //    this.callCost = 16 + Math.floor(begin/20)
-            //    this.chapterArr.push(list1);
-            //
-            //}
-            //return false;
+            if(this.stop == 4)
+            {
+                for(var i=0;i<this.chapterArr.length;i++)
+                {
+                    this.chapterArr[i] = this.chapterArr[i].list1 + '|'+this.chapterArr[i].list2 + '|'+this.chapterArr[i].cost + '|'+this.chapterArr[i].seed + '|'+this.chapterArr[i].level
+                }
+
+                egret.localStorage.setItem('askData_' + DateUtil.formatDate('MM-dd hh:mm:ss',new Date()), this.chapterArr.join('\n'));
+                return true;
+            }
+
+            egret.callLater(this.createOneAsk,this)
+            return true;
         }
         this.testRound_4658();
-        console.log('DM.stop=4')
+
+
     }
 
 }

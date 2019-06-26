@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GuessLogItemSkin" width="560" height="260" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="GuessLogItemSkin" width="570" height="260" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<e:Image source="bg2_png" scale9Grid="9,9,11,10" x="0" y="0" width="100%" height="100%"/>
 	<e:Rect id="lineMC" width="2" fillColor="0x4C2904" horizontalCenter="0" top="10" bottom="15"/>
 	<e:Group y="0" height="50" left="0" right="0" x="0">
@@ -35,7 +35,7 @@
 		</e:Group>
 		</e:Group>
 		<e:layout>
-		<e:HorizontalLayout gap="24"/>
+		<e:HorizontalLayout gap="34"/>
 		</e:layout>
 	</e:Group>
 	<e:Group y="60" horizontalCenter="0">
@@ -50,7 +50,7 @@
 			</e:layout>
 		</e:List>
 		<e:layout>
-			<e:HorizontalLayout gap="8"/>
+			<e:HorizontalLayout gap="15"/>
 		</e:layout>
 	</e:Group>
 </e:Skin>

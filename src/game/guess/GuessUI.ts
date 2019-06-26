@@ -79,6 +79,7 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.team1.teamID = 1
         this.team2.teamID = 2
 
+        this.barGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.onMove,this)
         this.barGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.onMove,this)
 
     }
@@ -92,12 +93,13 @@ class GuessUI extends game.BaseWindow_wx3 {
             p.x = w
         this.arrowGroup.x = p.x
         this.barMC.width = p.x
-        this.chooseCoin  = Math.floor((p.x-10)/w*UM_wx3.coin);
+        this.chooseCoin  = Math.floor((p.x-10)/(w-10)*UM_wx3.coin);
         this.costText.text = NumberUtil.addNumSeparator(this.chooseCoin,2)
     }
 
     private onCBChange(e){
-        console.log(e);
+        //console.log(e);
+        this.okBtn.label = '投注队伍' + (this.cb1.selected?1:2)
     }
 
     public onClose(){
@@ -121,6 +123,12 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.onCoinChange();
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+
+        if(GuessManager.getInstance().guessRed)
+        {
+            GuessManager.getInstance().myGuess.result = 100;
+            GuessLogUI.getInstance().show();
+        }
     }
 
     private onTimer(){
@@ -129,6 +137,11 @@ class GuessUI extends game.BaseWindow_wx3 {
         {
             MyWindow.ShowTips('上一轮投注已结束，现在开始新一轮投注')
             this.renew();
+            if(GuessManager.getInstance().guessRed)
+            {
+                GuessManager.getInstance().myGuess.result = 100;
+                GuessLogUI.getInstance().show();
+            }
         }
         this.cdText.text = '离本轮投注结束还有：' + DateUtil.getStringBySecond(GM.getEndTime() - TM_wx3.now()).substr(-5)
     }
@@ -151,6 +164,7 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.team2.showList(guess.list2.split(','))
         this.team1.renewGuessCost()
         this.team2.renewGuessCost()
+        this.okBtn.label = '投注队伍' + (this.cb1.selected?1:2)
     }
 
 

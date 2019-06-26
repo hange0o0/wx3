@@ -66,7 +66,8 @@ class GuessManager {
         var index = this.getCurrentIndex();
         if(!this.currentGuess || this.currentGuess.index != index)
         {
-            this.lastGuess = ObjectUtil.clone(this.currentGuess)
+            if(this.currentGuess)
+                this.lastGuess = ObjectUtil.clone(this.currentGuess)
             SharedObjectManager_wx3.getInstance().setMyValue('last_guess',this.lastGuess)
             DM.callLevel = TecManager.getInstance().getTecLevel(11);
             DM.repeatNum = 5;
@@ -81,7 +82,7 @@ class GuessManager {
                 force2:10000,
                 mforce2:{},
             }
-            var count = 50;
+            var count = 20;
             var minObj;
             while(count--)
             {
@@ -126,7 +127,7 @@ class GuessManager {
     public getLastGuess(){
         if(!this.lastGuess || this.lastGuess.index != this.currentGuess.index-1)
         {
-             if(this.myGuess.index == this.currentGuess.index-1)
+             if(this.myGuess && this.myGuess.index == this.currentGuess.index-1)
              {
                  this.lastGuess = ObjectUtil.clone(this.myGuess)
              }

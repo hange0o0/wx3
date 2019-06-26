@@ -247,6 +247,10 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                  ChapterManager.getInstance().pkChapter(this.dataIn.chapterid + 1)
             }
         }
+        else if(this.dataIn.isAsk)
+        {
+            AskManager.getInstance().showPK()
+        }
         //if(!this.dataIn.isMain)
         //    LogUI.getInstance().show()
     }
@@ -430,7 +434,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
         this.resetList_1055(list1,this.dataIn.force1)
-        if(this.dataIn.isGuess)
+        if(this.dataIn.isGuess || this.dataIn.isAsk)
             this.resetList_1055(list2,this.dataIn.force2)
         else
             this.resetList_1055(list2)
@@ -582,7 +586,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(8009);
         if(PD.isGameOver)
         {
-            ChapterManager.getInstance().onChapterEnd(this.dataIn)
+            if(this.dataIn.chapterid && !this.dataIn.isReplay)
+                ChapterManager.getInstance().onChapterEnd(this.dataIn)
             this.renewHp_8712();
 
             PD.playSpeed = 1;
@@ -595,7 +600,38 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             this.desGroup['callVisible'] = false
             PKBulletManager_wx3.getInstance().freeAll();
             var result = PD.getPKResult();
-            if(this.dataIn.isGuess)
+            if(this.dataIn.isAsk)
+            {
+                if(result == 2)
+                {
+                    this.shareStr = '已成功通过第'+UM_wx3.askLevel+'关，需要向我取经吗？'
+                    if(!this.dataIn.addCoin)
+                    {
+                        this.dataIn.addCoin = UM_wx3.askLevel * 1000;
+                        UM_wx3.askLevel ++;
+                        UM_wx3.addCoin(this.dataIn.addCoin)
+                    }
+                    var addCoin = this.dataIn.addCoin
+                    this.starGroup.removeChildren();
+                    this.resourceGroup.removeChildren()
+                    this.delayShowResult(this.winGroup);
+                    this.winText.text = '挑战成功'
+
+                    this.desGroup['callVisible'] = true
+                    this.resourceGroup.addChild(this.coinGroup)
+                    this.des1.text = 'x' + NumberUtil.addNumSeparator(addCoin,2)
+                    this.backBtn.label = '下一关';
+
+                }
+                else
+                {
+                    this.delayShowResult(this.failGroup);
+                    this.failText.text = '挑战失败'
+                    this.backBtn.label = '重试';
+
+                }
+            }
+            else if(this.dataIn.isGuess)
             {
                 if(this.dataIn.result)
                 {
@@ -605,16 +641,19 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                         this.starGroup.removeChildren();
                         this.resourceGroup.removeChildren()
                         this.delayShowResult(this.winGroup);
-                        this.winText.text = '竞猜失败'
+                        this.winText.text = '竞猜成功'
 
                         this.desGroup['callVisible'] = true
                         this.resourceGroup.addChild(this.coinGroup)
                         this.des1.text = 'x' + NumberUtil.addNumSeparator(addCoin,2)
+                        this.backBtn.label = '关闭'
+                        this.shareStr = '轻松赚取'+addCoin+'金，我的眼光确实不错！!'
                     }
                     else
                     {
                         this.delayShowResult(this.failGroup);
                         this.failText.text = '竞猜失败'
+                        this.backBtn.label = '关闭'
                     }
                 }
                 else
@@ -623,6 +662,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                     this.resourceGroup.removeChildren()
                     this.delayShowResult(this.winGroup);
                     this.winText.text = '队伍'+result+'胜利'
+                    this.backBtn.label = '关闭'
                 }
 
             }
@@ -701,8 +741,10 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 MyTool.removeMC(this.doubleBtn)
                 this.btnGroup.addChild(this.strongBtn)
             }
-            if(this.backBtn.label == '关闭')
+            if(this.backBtn.label == '关闭' && !this.dataIn.isGuess && !this.dataIn.isAsk)
                 MyTool.removeMC(this.backBtn)
+            if(this.dataIn.isAsk || this.dataIn.isGuess)
+                MyTool.removeMC(this.strongBtn)
         }
         else
         {
@@ -820,17 +862,20 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 
                 this.skillBuffList.dataProvider = new eui.ArrayCollection([]);
-                this.btnGroup.visible = !this.dataIn.isGuess
+                this.btnGroup.visible = true
                 //this.bottomBar.visible = false;
 	wx3_function(6213);
                 this.currentState = 's2'
                 this.adBottom = 100;
                 MyADManager.getInstance().showBanner(100)
                 if(this.dataIn.showTaskChange)
+                {
                     TaskManager.getInstance().testMainTask('chapter');
+                    TaskTips.getInstance().show(['cstar','clv']);
+                }
 
                 GuideManager.getInstance().testShowGuide();
-                TaskTips.getInstance().show(['cstar','clv']);
+
 
 
             })
