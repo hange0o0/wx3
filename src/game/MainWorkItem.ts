@@ -164,6 +164,7 @@ class MainWorkItem extends game.BaseItem_wx3 {
                 current = roadCD - (current - roadCD -WM.workHideTime)
                 item.x = WM.workStart + current/roadCD*WM.workLen
             }
+            item.onE();
         }
     }
 	private wx3_functionX_11949(){console.log(6610)}

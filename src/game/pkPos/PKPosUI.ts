@@ -514,9 +514,13 @@ class PKPosUI extends game.BaseUI_wx3 {
     private onE_8047(){
         switch (this.dataIn.type)
         {
-            case 'chapter':
+            case 'chapter':       //不用break
                 this.randomTalk();
-	wx3_function(5989);
+            case 'ask':
+                for(var i=0;i<this.monsterArr.length;i++)
+                {
+                    this.monsterArr[i].onE();
+                }
                 break;
             case 'def':
                 this.defItem && this.defItem.onE();
@@ -978,7 +982,7 @@ class PKPosUI extends game.BaseUI_wx3 {
             this.showTips();
             return;
         }
-        if(UM_wx3.askLevel <= 10)
+        if(UM_wx3.askLevel <= 3)
         {
             MyWindow.Confirm('本关可免费或得提示，但你确定不再想一下吗？',(b)=>{
                 if(b==1)
@@ -1029,7 +1033,8 @@ class PKPosUI extends game.BaseUI_wx3 {
     }
 
     private renewTipsBtn(){
-        if(UM_wx3.askLevel <= 10)
+        this.videoGroup.visible = UM_wx3.askLevel != UM_wx3.askTipsLevel
+        if(UM_wx3.askLevel <= 3)
         {
             MyTool.removeMC(this.videoMC)
             return;
@@ -1042,9 +1047,22 @@ class PKPosUI extends game.BaseUI_wx3 {
         }
 
         this.videoGroup.addChildAt(this.videoMC,0)
+        this.videoGroup.visible = UM_wx3.askLevel != UM_wx3.askTipsLevel
     }
 
     private getAnswer(){
         return AskManager.getInstance().getGuessData().list2
+    }
+
+    public guidePos(){
+        var list = []
+        for(var s in this.emptyNum)
+        {
+            this.emptyNum[s] = 0;
+            list.push( {id:s,list:list} )
+        }
+        this.chooseDataProvider.source = list;
+        this.chooseDataProvider.refresh();
+        this.onItemChange_5686();
     }
 }

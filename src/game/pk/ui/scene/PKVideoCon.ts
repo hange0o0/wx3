@@ -133,16 +133,16 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
             if(item.data.id == id)
                 return item;
         }
-        var str = ''
-        var mvo = PKData_wx3.getInstance().getMonsterByID(id);
-        if(!mvo)
-            str = ('can not find monster:' + id + '|' + PKData_wx3.getInstance().monsterID)
-        else if(mvo.die)
-            str = ('monster die and not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
-        else
-            str = ('not die but not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
-        //alert(str);
-        sendClientError(str+'#'+PKData_wx3.getInstance().isDef);
+        //var str = ''
+        //var mvo = PKData_wx3.getInstance().getMonsterByID(id);
+        //if(!mvo)
+        //    str = ('can not find monster:' + id + '|' + PKData_wx3.getInstance().monsterID)
+        //else if(mvo.die)
+        //    str = ('monster die and not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
+        //else
+        //    str = ('not die but not find:' + id + '|' + PKData_wx3.getInstance().monsterID)
+        ////alert(str);
+        //sendClientError(str+'#'+PKData_wx3.getInstance().isDef);
         return null;
     }
 	private wx3_functionX_13034(){console.log(2321)}
@@ -316,6 +316,10 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
                 PKData_wx3.getInstance().actionRecord.push('mv_remove|' + (item.data && item.data.id))
                 i--;
 	wx3_function(353);
+            }
+            else
+            {
+                item.onE();
             }
         }
         PKBulletManager_wx3.getInstance().actionAll()

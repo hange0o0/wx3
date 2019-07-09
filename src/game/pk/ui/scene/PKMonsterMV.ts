@@ -89,6 +89,10 @@ class PKMonsterMV_wx3 extends eui.Group {
          this.monsterMV.load(id)
      }
 
+    public onE(){
+        this.monsterMV && this.monsterMV.onE();
+    }
+
     private fireDie_7572(){
         this.dispatchEventWith('mv_die')
     }

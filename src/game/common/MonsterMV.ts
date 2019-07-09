@@ -106,12 +106,12 @@ class MonsterMV extends eui.Group {
 	private wx3_functionX_12303(){console.log(3422)}
     public play(){
         this.runing = true
-        EM_wx3.addEventListener(GameEvent.client.timerE,this.onE,this)
+        //EM_wx3.addEventListener(GameEvent.client.timerE,this.onE,this)
     }
 
     public stop(){
         this.runing = false
-        EM_wx3.removeEventListener(GameEvent.client.timerE,this.onE,this)
+        //EM_wx3.removeEventListener(GameEvent.client.timerE,this.onE,this)
     }
 	private wx3_functionX_12304(){console.log(5514)}
 
@@ -131,6 +131,10 @@ class MonsterMV extends eui.Group {
     }
 
     public onE(){
+        if(!this.runing)
+            return;
+        if(!this.stage)
+            return;
         var w = this.mw
         var h = this.mh
         var speed = (this.speed || 0);

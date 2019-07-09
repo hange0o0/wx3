@@ -297,6 +297,7 @@ if(window["wx"])
     window["TopUI"] = TopUI
     window["ChangeUserUI"] = ChangeUserUI
     window["TaskItem"] = TaskItem
+    window["GuessTeamUI"] = GuessTeamUI
     window["wxRandomFunction"] = function(b){}
     window["sendClientError"] = sendClientError
 

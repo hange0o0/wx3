@@ -24,6 +24,8 @@ class GuideUI extends game.BaseContainer_wx3{
     private mc
 
 
+    public mv = new MonsterMV();
+
 	private wx3_functionX_11967(){console.log(748)}
     private static instance: GuideUI;
     public static getInstance() {
@@ -52,6 +54,14 @@ class GuideUI extends game.BaseContainer_wx3{
         this.tipsGroup.touchChildren = this.tipsGroup.touchEnabled = false;
 
         this.handMC.x = this.handMC.y = 0
+
+        this.tipsGroup.addChildAt(this.mv,0)
+        this.mv.y = 30
+        this.mv.x = 40
+        this.mv.scaleX = -2
+        this.mv.scaleY = 2;
+        this.mv.load(65)
+        this.mv.stand()
 
     }
 
@@ -137,6 +147,8 @@ class GuideUI extends game.BaseContainer_wx3{
         text = text.replace(/\[/g,'<font color="#E0A44A">').replace(/\]/g,'<\/font>')
         this.setHtml(this.tipTxt,text);
 
+        this.mv.atk()
+
         this.testAnyClickShow_171();
 	wx3_function(5519);
 
@@ -173,6 +185,7 @@ class GuideUI extends game.BaseContainer_wx3{
         MyTool.removeMC(this);
         egret.Tween.removeTweens(this.anyClick)
         this.handStop_8754();
+        EM_wx3.removeEventListener(GameEvent.client.timerE,this.onE,this)
     }
 	private wx3_functionX_11975(){console.log(2306)}
 
@@ -195,11 +208,15 @@ class GuideUI extends game.BaseContainer_wx3{
         MyTool.removeMC(this.handMC);
     }
 
+    private onE(){
+        this.mv && this.mv.onE();
+    }
 
     public show(dataIn){
 
 	wx3_function(4835);
 
+        EM_wx3.addEventListener(GameEvent.client.timerE,this.onE,this)
 
         var mc = this.mc = dataIn.mc;
         var text = dataIn.text;

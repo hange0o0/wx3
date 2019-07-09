@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GuessTeamUISkin" width="560" height="250" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="GuessTeamUISkin" width="560" height="280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="con" left="0" right="0" top="0" bottom="0" scrollEnabled="true" touchChildren="false">
 		<e:Image id="bg" horizontalCenter="0" bottom="-50" x="320" y="300" scaleX="0.8" scaleY="0.8"/>
 	</e:Group>

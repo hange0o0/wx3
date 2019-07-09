@@ -313,7 +313,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
             this.btnGroup.addChildAt(this.backBtn,0)
             this.backBtn.label = '关闭'
         }
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onStep)
         this.addPanelOpenEvent(GameEvent.client.SPACE_CHANGE,this.onSpaceChange)
         this.reset();
     }
@@ -329,7 +329,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
         SpaceInfoUI.getInstance().show();
         PKManager_wx3.getInstance().isPKing = false
         SoundManager_wx3.getInstance().playSound('bg');
-        this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
         PKVideoCon_wx3.getInstance().remove();
         super.hide();
     }
@@ -447,7 +446,8 @@ class SpacePKUI extends game.BaseUI_wx3 {
         this.spaceBtnGroup.visible = false
         egret.Tween.removeTweens(this.tipsText)
         this.gameStart = true;
-        this.skillList.touchChildren = this.skillList.touchEnabled = true;
+        if(!this.dataIn.isReplay)
+            this.skillList.touchChildren = this.skillList.touchEnabled = true;
         var PD = PKData_wx3.getInstance();
         PD.start();
         this.onStep()

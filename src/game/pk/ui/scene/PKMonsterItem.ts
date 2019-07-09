@@ -164,6 +164,10 @@ class PKMonsterItem_wx3 extends game.BaseItem_wx3 {
 
     }
 
+    public onE(){
+        this.monsterMV.onE();
+    }
+
     private initStateMV_3565(s){
         var mD:PKMonsterData_wx3 = this.data
         var id = parseInt(s)

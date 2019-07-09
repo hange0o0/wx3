@@ -27,6 +27,7 @@ class AskManager {
    }
 
     public getGuessData(){
+        this.init();
         return this.askData[UM_wx3.askLevel-1];
     }
 

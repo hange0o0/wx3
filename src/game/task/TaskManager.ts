@@ -427,7 +427,6 @@ class TaskManager {
 	private wx3_functionX_12620(){console.log(5382)}
     public addTaskTime = 0;
     public addTaskNum = 0
-    public showDayTask = false;
     public onTimer(){
         var arr = UM_wx3.dayTask;
         if(!arr)
@@ -436,7 +435,6 @@ class TaskManager {
 
         if(!this.addTaskTime)//首次进入onTimer
         {
-            this.showDayTask = SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime');
             this.addTaskTime = Math.max(TM_wx3.now() + 5*60,SharedObjectManager_wx3.getInstance().getMyValue('addTaskTime') || 1)
             for(var i=0;i<arr.length;i++)
             {
@@ -466,9 +464,8 @@ class TaskManager {
             return;
 
         var arr = UM_wx3.dayTask;
-        this.addTaskTime = TM_wx3.now() + 60*10 + this.addTaskNum*3*60;
+        this.addTaskTime = TM_wx3.now() + Math.min(3600,60*10 + this.addTaskNum*10*60);
         SharedObjectManager_wx3.getInstance().setMyValue('addTaskTime',this.addTaskTime)
-        this.showDayTask = true;
         var list = [1,2,3,4,5,6,7,8];
         for(var i=0;i<arr.length;i++)
         {

@@ -11,6 +11,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
     private type: eui.Image;
     private nameText: eui.Label;
     private cardGroup: eui.Group;
+    public nameGroup: eui.Group;
     private bg: eui.Image;
     private desText: eui.Label;
 	private wx3_functionX_12567(){console.log(8368)}
@@ -47,6 +48,10 @@ class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
 
     public childrenCreated() {
         super.childrenCreated();
+
+        this.addBtnEvent(this.nameGroup,()=>{
+             CardTipsUI.getInstance().show();
+        })
 
         this.list.itemRenderer = PKCardInfoItem_wx3
 
@@ -129,6 +134,7 @@ class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
         this.bg.source = PKManager_wx3.getInstance().getPKBG(1)
         this.heroItem.load(this.dataIn.mid)
         this.heroItem.stand();
+
 	wx3_function(5444);
 
         this.setHtml(this.nameText, vo.name +this.createHtml( '（'+vo.des2+'）',0xFFE6BA,22));
@@ -239,5 +245,9 @@ class PKCardInfoUI_wx3 extends game.BaseContainer_wx3 {
         //else
         //    arr2.push({index:0,icon:'',iconScale:1,title:'',value:'',valueAdd:0});
         this.list.dataProvider = new eui.ArrayCollection(arr2)
+    }
+
+    public onE(){
+        this.heroItem.onE();
     }
 }

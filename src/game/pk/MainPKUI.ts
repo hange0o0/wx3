@@ -344,7 +344,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             this.btnGroup.addChildAt(this.backBtn,0)
             this.backBtn.label = '关闭'
         }
-        this.addEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onStep)
         this.reset();
 	wx3_function(6451);
 
@@ -355,7 +355,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         PKManager_wx3.getInstance().isPKing = false
         SoundManager_wx3.getInstance().playSound('bg');
 	wx3_function(1103);
-        this.removeEventListener(egret.Event.ENTER_FRAME,this.onStep,this)
+        //this.removeEventListener(egret.Event.T,this.onStep,this)
         PKVideoCon_wx3.getInstance().remove();
        super.hide();
     }
@@ -374,7 +374,10 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(6664);
         for(var i=0;i<list.length;i++)
         {
-            list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:otherForce}
+            if(otherForce == -1)
+                list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:PKData_wx3.getInstance().getPlayer(2).getMonsterForce(list[i])}
+            else
+                list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:otherForce}
         }
     }
 
@@ -430,19 +433,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(56);
 
         this.scroller.viewport.scrollV = 0;
-        var list1 = this.list1Data = this.dataIn.list1?this.dataIn.list1.split(','):[];
-        var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
 
-        this.resetList_1055(list1,this.dataIn.force1)
-        if(this.dataIn.isGuess || this.dataIn.isAsk)
-            this.resetList_1055(list2,this.dataIn.force2)
-        else
-            this.resetList_1055(list2)
-
-        this.list1.dataProvider = new eui.ArrayCollection(list1)
-        this.list2.dataProvider = new eui.ArrayCollection(list2)
-
-        this.lineMC.height =  Math.ceil(Math.max(list1.length,list2.length)/3)*(95+6)
 
 	wx3_function(3464);
         PKBulletManager_wx3.getInstance().freeAll();
@@ -467,6 +458,20 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.renewHp_8712(true);
         this.renewSkill();
         this.renewSkillBuff();
+
+        var list1 = this.list1Data = this.dataIn.list1?this.dataIn.list1.split(','):[];
+        var list2 = this.list2Data = this.dataIn.list2?this.dataIn.list2.split(','):[];
+
+        this.resetList_1055(list1,this.dataIn.force1)
+        if(this.dataIn.isGuess || this.dataIn.isAsk)
+            this.resetList_1055(list2,this.dataIn.force2)
+        else
+            this.resetList_1055(list2)
+
+        this.list1.dataProvider = new eui.ArrayCollection(list1)
+        this.list2.dataProvider = new eui.ArrayCollection(list2)
+
+        this.lineMC.height =  Math.ceil(Math.max(list1.length,list2.length)/3)*(95+6)
 
 
         if(!GuideManager.getInstance().isGuiding)

@@ -78,7 +78,9 @@ class WorkUI extends game.BaseUI_wx3 {
         var v = this.scroller.viewport.scrollV;
 	wx3_function(9297);
         this.renew();
-        this.validateNow();
+        try{
+            this.validateNow();
+        }catch(e){}
         this.scroller.viewport.scrollV = v;
     }
 

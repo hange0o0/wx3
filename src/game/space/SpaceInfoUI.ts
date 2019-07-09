@@ -93,7 +93,7 @@ class SpaceInfoUI extends game.BaseWindow_wx3 {
         var SM = SpaceManager.getInstance();
          var data = SM.baseData[SM.spaceType];
         this.titleText.text = data.name
-        this.desText.text = data.des
+        this.desText.text = '　　' + data.des
         this.iconMC.source = 'space_'+SM.spaceType+'_png'
         this.cancelBtn.visible = true;
         if(SM.level)

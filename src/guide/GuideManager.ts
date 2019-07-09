@@ -104,7 +104,7 @@ class GuideManager {
 
         this.addGuideObj_96({
             mc:function(){return PKPosUI.getInstance().okBtn},
-            text:'保存防守阵容，这下家园就暂时安全了吧',
+            text:'保存防守阵容，这下家园就暂时就安全了吧',
         })
 
         this.addGuideObj_96({
@@ -127,7 +127,7 @@ class GuideManager {
 
         this.addGuideObj_96({
             mc:function(){return GameUI.getInstance().monsterBtn},
-            text:'怪物太少不够用，我们多招点怪物吧',
+            text:'怪物太少不够用，让我们多招点怪物吧',
         })
 
         this.addGuideObj_96({
@@ -136,18 +136,18 @@ class GuideManager {
         })
 
         this.addGuideObj_96({
-            mc:function(){return CardInfoUI.getInstance().con},
-            text:'这里显示的是怪物间属性相克关系',
-            hideHand:true,
-            fun:function(){
-                self.showGuide();
-	wx3_function(2206);
-            },
+            mc:function(){return CardInfoUI.getInstance().item.nameGroup},
+            text:'点击查看怪物间属性相克关系',
+        })
+        this.addGuideObj_96({
+            mc:function(){return CardTipsUI.getInstance().closeBtn},
+            toBottom:true,
+            text:'克制方对被克制方会有[攻击和防御加成]',
         })
 
         this.addGuideObj_96({
             mc:function(){return CardInfoUI.getInstance().upBtn},
-            text:'升级怪物可强化该怪物的[战斗属性]及[挖矿效率]',
+            text:'升级怪物可强化怪物的[战斗属性]及[挖矿效率]',
         })
 
         this.addGuideObj_96({
@@ -192,39 +192,43 @@ class GuideManager {
 
         this.addGuideObj_96({
             mc:function(){return GameUI.getInstance().chapterBtn},
-            text:'开始收复第一个据点吧',
+            text:'点击开始收复第一个据点吧',
         })
 
         this.addGuideObj_96({
             mc:function(){return ChapterUI.getInstance().list.getChildAt(0)},
-            text:'每个收复的据点会为[你源源不断地产出金币]，首次达[3星]还可获得[钻石]奖励，',
+            text:'每个已收复的据点都会为你[源源不断地产出金币]，首次达[3星]还可以获得[钻石]奖励',
         })
 
-        this.addGuideObj_96({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
-            text:'上阵个怪物',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
-            text:'上阵下一个怪物,会直接去到队伍第一个空位',
-        })
-
-
-
-        this.addGuideObj_96({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
-            text:'上阵第三个怪物',
-        })
-
-        this.addGuideObj_96({
-            mc:function(){return PKPosUI.getInstance().list.getChildAt(2)},
-            text:'上阵第四个怪物',
-        })
+        //this.addGuideObj_96({
+        //    mc:function(){return PKPosUI.getInstance().list.getChildAt(0)},
+        //    text:'上阵个怪物',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return PKPosUI.getInstance().list.getChildAt(3)},
+        //    text:'上阵下一个怪物,会直接去到队伍第一个空位',
+        //})
+        //
+        //
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return PKPosUI.getInstance().list.getChildAt(1)},
+        //    text:'上阵第三个怪物',
+        //})
+        //
+        //this.addGuideObj_96({
+        //    mc:function(){return PKPosUI.getInstance().list.getChildAt(2)},
+        //    text:'上阵第四个怪物',
+        //})
 
         this.addGuideObj_96({
             mc:function(){return PKPosUI.getInstance().pkBtn},
-            text:'开始战斗',
+            beforeFun:function(){
+                PKPosUI.getInstance().guidePos()
+            },
+            toBottom:200,
+            text:'我已为你布置好阵容了，直接开始战斗吧',
         })
 
         this.addGuideObj_96({
@@ -248,14 +252,14 @@ class GuideManager {
                 GuideUI.getInstance().hide();
                 MainPKUI_wx3.getInstance().startGame()
             },
-            text:'在战斗的过程中，你可以把[技能拖到战场]进行使用',
+            text:'在战斗的过程中，你可以把[技能拖到战场中]进行使用',
         })
 
         this.addGuideObj_96({
             fun:function(){
                 self.endGuide_3532();
             },
-            text:'要赢取胜利，[阵容克制]起着尤其重要的作用！当然，[战力相差太多]也是不行的哦~',
+            text:'要赢取胜利，[阵容克制]起着尤其重要的作用！当然，[战力相差太多]也是[不行]的~',
         })
 
      //   this.addGuideObj_96({
@@ -383,7 +387,7 @@ class GuideManager {
 	wx3_function(7414);
         //TaskUI.getInstance().show();
 
-        MyWindow.Confirm('新手引导已经结束，你有兴趣继续带领怪物争霸天下吗？',(b)=>{
+        MyWindow.Confirm('新手引导已经结束，你有兴趣继续带领怪物们一起争霸天下吗？',(b)=>{
             TaskUI.getInstance().show();
             var wx = window['wx'];
 

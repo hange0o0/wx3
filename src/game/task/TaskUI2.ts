@@ -17,7 +17,8 @@ class TaskUI2 extends game.BaseWindow_wx3 {
 
 
 
-	private wx3_functionX_12635(){console.log(4255)}
+
+    private wx3_functionX_12635(){console.log(4255)}
 
 
 
@@ -37,8 +38,11 @@ class TaskUI2 extends game.BaseWindow_wx3 {
 
         this.addBtnEvent(this.closeBtn,this.hide)
         this.addBtnEvent(this.getTaskBtn,()=>{
-            TaskManager.getInstance().addTaskTime = 1
-            TaskManager.getInstance().addDayTask()
+            ShareTool.openGDTV(()=>{
+                TaskManager.getInstance().addTaskTime = 1
+                TaskManager.getInstance().addDayTask()
+            })
+
         })
 
         this.list.itemRenderer = TaskItem
@@ -71,6 +75,7 @@ class TaskUI2 extends game.BaseWindow_wx3 {
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer_8524)
         this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.renewFeederTask_1556)
+        TaskManager.getInstance().addDayTask()
     }
 	private wx3_functionX_12640(){console.log(6866)}
 
@@ -79,29 +84,15 @@ class TaskUI2 extends game.BaseWindow_wx3 {
         if(this.emptyGroup.visible)
         {
             var TMM = TaskManager.getInstance()
-            if(TMM.showDayTask)
+            var cd = TMM.addTaskTime - TM_wx3.now()
+            if(cd > 0)
             {
-                var cd = TMM.addTaskTime - TM_wx3.now()
-                if(cd > 0)
-                {
-                    this.emptyText.text = '下次任务发布时间：\n' + DateUtil.getStringBySecond(cd);
-                    this.getTaskBtn.visible = false;
-                    this.emptyGroup.height = 120;
-                }
-                else
-                {
-                    this.emptyText.text = '你有新的任务！'
-                    this.getTaskBtn.visible = true;
-                    this.emptyGroup.height = 180;
-                }
+                this.emptyText.text = '下次任务发布：' + DateUtil.getStringBySecond(cd).substr(-5);
             }
             else
             {
-                this.emptyText.text = '你有新的任务！'
-                this.getTaskBtn.visible = true;
-                this.emptyGroup.height = 180;
+                TaskManager.getInstance().addDayTask()
             }
-
         }
     }
 
@@ -117,7 +108,7 @@ class TaskUI2 extends game.BaseWindow_wx3 {
     private renewFeederTask_1556(){
         this.dataProvider.source = UM_wx3.dayTask;
         this.dataProvider.refresh();
-        this.emptyGroup.visible = UM_wx3.dayTask.length == 0
+        this.emptyGroup.visible = UM_wx3.dayTask.length < 5
         this.onTimer_8524();
 
 

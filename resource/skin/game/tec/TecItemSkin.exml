@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="TecItemSkin" width="630" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
-	<e:Image id="headMC" width="116" height="116" x="0" verticalCenter="0"/>
+	<e:Image id="headMC" width="110" height="110" x="5" verticalCenter="0"/>
 	<e:Label id="nameText" text="Label" x="130" y="10" size="26" bold="true" textColor="0xffe8a5"/>
-	<e:Label id="desText" text="Label" y="50" size="24" left="130" right="180" lineSpacing="6" textColor="0xddb46a"/>
+	<e:Label id="desText" text="Label" y="50" size="24" left="130" right="180" lineSpacing="6" textColor="0xedd4af"/>
 	<e:Group id="upGroup" y="8" right="10">
 		<e:Group y="0" x="0">
 			<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>

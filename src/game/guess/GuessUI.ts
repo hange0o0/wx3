@@ -64,11 +64,13 @@ class GuessUI extends game.BaseWindow_wx3 {
             {
                 GM.myGuess.coin1 += this.chooseCoin;
                 this.team1.renewGuessCost()
+                this.team1.giftTalk(this.chooseCoin)
             }
             else
             {
                 GM.myGuess.coin2 += this.chooseCoin;
                 this.team2.renewGuessCost()
+                this.team2.giftTalk(this.chooseCoin)
             }
             UM_wx3.addCoin(-this.chooseCoin)
             this.resetChooseCoin()
@@ -97,7 +99,13 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.costText.text = NumberUtil.addNumSeparator(this.chooseCoin,2)
     }
 
-    private onCBChange(e){
+    public setChoose(teamID){
+        this.cb1.selected = teamID == 1;
+        this.cb2.selected = teamID == 2;
+        this.onCBChange();
+    }
+
+    private onCBChange(){
         //console.log(e);
         this.okBtn.label = '投注队伍' + (this.cb1.selected?1:2)
     }
@@ -123,12 +131,18 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.onCoinChange();
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.onCoinChange)
         this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
 
         if(GuessManager.getInstance().guessRed)
         {
             GuessManager.getInstance().myGuess.result = 100;
             GuessLogUI.getInstance().show();
         }
+    }
+
+    private onE(){
+        this.team1.onE()
+        this.team2.onE()
     }
 
     private onTimer(){
@@ -144,6 +158,8 @@ class GuessUI extends game.BaseWindow_wx3 {
             }
         }
         this.cdText.text = '离本轮投注结束还有：' + DateUtil.getStringBySecond(GM.getEndTime() - TM_wx3.now()).substr(-5)
+        this.team1.randomTalk()
+        this.team2.randomTalk()
     }
 
     private resetChooseCoin(){
@@ -165,6 +181,7 @@ class GuessUI extends game.BaseWindow_wx3 {
         this.team1.renewGuessCost()
         this.team2.renewGuessCost()
         this.okBtn.label = '投注队伍' + (this.cb1.selected?1:2)
+        this.cdText.text = '离本轮投注结束还有：' + DateUtil.getStringBySecond( GuessManager.getInstance().getEndTime() - TM_wx3.now()).substr(-5)
     }
 
 

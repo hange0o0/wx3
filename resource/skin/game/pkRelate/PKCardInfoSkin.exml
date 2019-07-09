@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="PKCardInfoSkin" width="560" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"  states="s1,s2" >
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
-	<e:Group y="20" x="210">
+	<e:Group id="nameGroup" y="20" x="210">
 		<e:Image id="type" source="icon_type1_png" scaleX="0.6" scaleY="0.6" y="5.6000000000000405" x="0"/>
 		<e:Label id="nameText" text="苦顶替" x="45" y="8.980000000000018" size="24" stroke="3" verticalAlign="bottom" strokeColor="0x281502" textColor="0xffffff" bold="true"/>
 		<e:layout>

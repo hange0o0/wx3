@@ -24,7 +24,11 @@ class SpacePKItem extends game.BaseItem_wx3 {
         super.childrenCreated();
         DragManager_wx3.getInstance().setDrag(this,true);
         this.addBtnEvent(this,()=>{
-            CardInfoUI.getInstance().show(this.data)
+            CardInfoUI.getInstance().show(this.data,null,null,{otherForce:PKData_wx3.getInstance().getPlayer(2).getMonsterForce(this.data)})
+
+            //if(otherForce == -1)
+            //    list[i]  = {id:list[i],isDie:true,index:i+1,list:orginList,otherForce:PKData_wx3.getInstance().getPlayer(2).getMonsterForce(list[i])}
+            //else
         })
     }
 

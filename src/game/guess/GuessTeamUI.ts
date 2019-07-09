@@ -46,9 +46,10 @@ class GuessTeamUI extends game.BaseItem_wx3 {
                     list.push(this.monsterArr[j].id)
                 }
                 CardInfoUI.getInstance().show(mc.id,list,i,{otherForce:10000});
-                break;
+                return;;
             }
         }
+        GuessUI.getInstance().setChoose(this.teamID)
     }
 
 
@@ -114,7 +115,7 @@ class GuessTeamUI extends game.BaseItem_wx3 {
             item.currentMV.scaleX = Math.abs(item.currentMV.scaleX);
             if(this.teamID == 1)
                 item.currentMV.scaleX *= -1
-            item.bottom = -10+vo.height*0.5;
+            item.bottom = -10+vo.height*0.6;
             item['w'] = vo.width
             item.x = begin + i*des
             this.monsterArr.push(item);
@@ -142,6 +143,13 @@ class GuessTeamUI extends game.BaseItem_wx3 {
         {
             var otherCoin =  myGuess['coin' + (this.teamID == 1?2:1)]
             this.setHtml(this.myText,this.createHtml('我的投注：',0xFFCC8C) +this.createHtml(NumberUtil.addNumSeparator(parseInt(coin)),coin>otherCoin?0x00ff00:0xffffff));
+        }
+    }
+
+    public onE(){
+        for(var i=0;i<this.monsterArr.length;i++)
+        {
+            this.monsterArr[i].onE();
         }
     }
 

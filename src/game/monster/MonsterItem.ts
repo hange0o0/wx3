@@ -11,7 +11,7 @@ class MonsterItem extends game.BaseItem_wx3{
     private levelText: eui.Label;
 
 	private wx3_functionX_12412(){console.log(1986)}
-    public heroItem
+    public heroItem:PKMonsterMV_wx3
 
 
     public constructor() {
@@ -62,8 +62,9 @@ class MonsterItem extends game.BaseItem_wx3{
         {
             this.heroItem.load(vo.id)
             this.heroItem.stand();
+            this.heroItem.y = 170 - (150-vo.height)/4
 	wx3_function(2628);
-            this.heroItem.stop();
+            //this.heroItem.stop();
             var TSM = TaskManager.getInstance()
             if(TSM.guideTaskVO && (TSM.guideTaskVO.type == 'mnum' || TSM.guideTaskVO.type == 'mlv') && TSM.guideTaskVO.key == vo.id)
             {
@@ -80,6 +81,10 @@ class MonsterItem extends game.BaseItem_wx3{
         this.redMC.visible = UM_wx3.diamond >=  MonsterManager.getInstance().getNumCost(vo.id) ||
             UM_wx3.coin >= MonsterManager.getInstance().getLevelCost(vo.id);
 	wx3_function(5843);
+    }
+
+    public onE(){
+        this.heroItem.onE()
     }
 
 

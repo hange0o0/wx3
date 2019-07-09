@@ -111,6 +111,7 @@ class ShootMonster_wx3 extends game.BaseItem_wx3{
         {
             return;
         }
+        this.mc.onE()
         this.x += this.data.atkRota * Math.round(this.data.speed)/10*20/60;
 	wx3_function(4105);
         if(this.data.atkRota == 1)

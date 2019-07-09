@@ -74,7 +74,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 UM_wx3.coinObj.gameNum ++;
 	wx3_function(8323);
                 this.dataChanged();
-                ShootGameUI_wx3.getInstance().show(this.getCoin_9848(0.25));
+                ShootGameUI_wx3.getInstance().show(this.getCoin_9848(0.5));
             }
             return;
         }
@@ -250,7 +250,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
                 //this.diamondMC.visible = coinObj.videoAwardNum < 3;
                 this.addDiamond = 1
-                this.addCoin = this.getCoin_9848(0.3);
+                this.addCoin = this.getCoin_9848(0.4);
 	wx3_function(500);
                 break;
             case 6: // 射击游戏

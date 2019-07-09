@@ -8,7 +8,7 @@ class CardInfoUI extends game.BaseWindow_wx3 {
     }
 	private wx3_functionX_12360(){console.log(6839)}
 
-    private item: PKCardInfoUI_wx3;
+    public item: PKCardInfoUI_wx3;
     public con: eui.Image;
     private leftBtn: eui.Image;
     public rightBtn: eui.Image;
@@ -166,11 +166,27 @@ class CardInfoUI extends game.BaseWindow_wx3 {
 
     public onShow(){
 
+        this.nextAtkTime = TM_wx3.now() + 3 + 7*Math.random();;
 	wx3_function(2896);
         this.renew();
         this.addPanelOpenEvent(GameEvent.client.COIN_CHANGE,this.renewCoin)
         this.addPanelOpenEvent(GameEvent.client.DIAMOND_CHANGE,this.renewDiamond)
+        this.addPanelOpenEvent(GameEvent.client.timer,this.onTimer)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
 
+    }
+
+    public onE(){
+        this.item.onE();
+    }
+
+    private nextAtkTime
+    private onTimer(){
+        if(TM_wx3.now() > this.nextAtkTime)
+        {
+            this.item.heroItem.atk();
+            this.nextAtkTime = TM_wx3.now() + 3 + 7*Math.random();
+        }
     }
 
 	private wx3_functionX_12373(){console.log(884)}

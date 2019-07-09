@@ -99,7 +99,7 @@ class GuessManager {
                     var hpRate2 =  (forceObj[2] || 0)/(forceObj['2_max'] || 1)
                     PKData_wx3.instanceIndex = 1;
                     var rate = Math.max(hpRate1,hpRate2)
-                    if(rate < 0.05)
+                    if(rate < 0.1)
                     {
                         minObj = null;
                         break;

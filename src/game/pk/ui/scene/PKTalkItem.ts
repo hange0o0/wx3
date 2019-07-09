@@ -49,7 +49,7 @@ class PKTalkItem_wx3 extends game.BaseContainer_wx3 {
 
 
         if(type == 1)
-            this.text.text = PKManager_wx3.getInstance().testWord[Math.floor(Math.random()*PKManager_wx3.getInstance().testWord.length)];
+            this.text.text = PKManager_wx3.getInstance().costWord[Math.floor(Math.random()*PKManager_wx3.getInstance().costWord.length)];
         else
         if(type == 2)
             this.text.text = PKManager_wx3.getInstance().chapterWord[Math.floor(Math.random()*PKManager_wx3.getInstance().chapterWord.length)];

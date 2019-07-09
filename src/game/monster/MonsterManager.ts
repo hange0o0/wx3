@@ -174,7 +174,7 @@ class MonsterManager {
 
         lv = lv || this.getMonsterLevel(id)+1;
         var vo = MonsterVO.getObject(id);
-        return  MyTool.reInit(Math.pow(lv + (1+lv/10)*vo.level/10,2.5)*1000,3);
+        return  MyTool.reInit(Math.pow(lv + (1+lv/10)*vo.level/10,2.6)*1000,3);
     }
 	private wx3_functionX_12404(){console.log(4783)}
 

@@ -6,22 +6,24 @@ class PKBuffUI extends game.BaseWindow_wx3 {
             this._instance = new PKBuffUI();
         return this._instance;
     }
-	private wx3_functionX_12692(){console.log(1422)}
+
 
     private atkBar: eui.Image;
     private atkText: eui.Label;
     private atkArrow: eui.Image;
     private lock1: eui.Image;
     private hpBar: eui.Image;
-	private wx3_functionX_12693(){console.log(3677)}
     private hpText: eui.Label;
     private hpArrow: eui.Image;
     private lock2: eui.Image;
     private btnGroup: eui.Group;
+    private refreshBtnGroup: eui.Group;
     private refreshBtn: eui.Button;
+    private videoBtn: eui.Image;
     private pkBtn: eui.Button;
-	private wx3_functionX_12694(){console.log(3575)}
     private desText: eui.Label;
+
+
 
 
 
@@ -33,7 +35,7 @@ class PKBuffUI extends game.BaseWindow_wx3 {
 
     private fun;
     private currentStep;
-    private maxStep = 5;
+    private maxStep = 3;
 	private wx3_functionX_12696(){console.log(6775)}
 
 
@@ -96,40 +98,77 @@ class PKBuffUI extends game.BaseWindow_wx3 {
     public onRefresh(){
         if(this.currentStep <= 0)
         {
-            MyWindow.ShowTips('步数已用完，请点击【进入战斗】开始挑战')
+            ShareTool.openGDTV(()=>{
+                this.refresh(true);
+            })
             return;
         }
         this.currentStep --;
-	wx3_function(7152);
+        this.refresh(false);
 
 
-        var hp = this.isLock2?this.hpAdd:Math.round(Math.random()*30)
-        var atk = this.isLock1?this.atkAdd:Math.round(Math.random()*30)
+
+
+
+    }
+
+    private refresh(isVideo){
+        if(isVideo)
+        {
+            var hp = this.isLock2?this.hpAdd:this.hpAdd + Math.ceil(Math.random()*(30 - this.hpAdd))
+            var atk = this.isLock1?this.atkAdd:this.atkAdd + Math.ceil(Math.random()*(30 - this.atkAdd))
+        }
+        else
+        {
+            var hp = this.isLock2?this.hpAdd:Math.round(Math.random()*30)
+            var atk = this.isLock1?this.atkAdd:Math.round(Math.random()*30)
+        }
+
 
         this.atkArrow.visible = atk != this.atkAdd;
-	wx3_function(6433);
         this.atkArrow.source = atk > this.atkAdd?'arrow5_png':'arrow4_png'
 
         this.hpArrow.visible = hp != this.hpAdd;
         this.hpArrow.source = hp > this.hpAdd?'arrow5_png':'arrow4_png'
 
         this.hpAdd = hp;
-	wx3_function(3045);
         this.atkAdd = atk;
 
         this.renewShow_9454();
     }
 
     private renewShow_9454(){
-        this.desText.text =  '剩余刷新次数：'+this.currentStep+'次'
+        if(this.atkAdd == 30 && this.hpAdd == 30)
+        {
+            MyTool.removeMC(this.refreshBtnGroup)
+            this.desText.text =  '加成已达上限，马上开始战半吧！'
+        }
+        else if(this.currentStep > 0)
+        {
+            this.btnGroup.addChildAt(this.refreshBtnGroup,0)
+            this.videoBtn.visible = false
+            this.refreshBtn.label = '免费刷新'
+            this.refreshBtn.skinName = 'Btn8Skin'
+            this.desText.text =  '免费刷新次数：'+this.currentStep+'次'
+        }
+        else
+        {
+            this.btnGroup.addChildAt(this.refreshBtnGroup,0)
+            this.videoBtn.visible = true
+            this.refreshBtn.label = '再次刷新'
+            this.refreshBtn.skinName = 'Btn1Skin'
+            this.desText.text =  '观看广告继续刷新，加成必定增加'
+        }
+
+
         this.atkText.text = '攻击 +'+this.atkAdd + '%'
         this.hpText.text = '血量 +'+this.hpAdd + '%'
         this.atkBar.scrollRect = new egret.Rectangle(0,0,204 * this.atkAdd/30,50)
         this.hpBar.scrollRect = new egret.Rectangle(0,0,204 * this.hpAdd/30,50)
-        if(this.currentStep <= 0)
-            MyTool.removeMC(this.refreshBtn)
-        else
-            this.btnGroup.addChildAt(this.refreshBtn,0)
+        //if(this.currentStep <= 0)
+        //    MyTool.removeMC(this.refreshBtn)
+        //else
+        //    this.btnGroup.addChildAt(this.refreshBtn,0)
     }
 	private wx3_functionX_12701(){console.log(8558)}
 
@@ -168,8 +207,8 @@ class PKBuffUI extends game.BaseWindow_wx3 {
 
     public renew(){
 
-        this.hpAdd = Math.round(Math.random()*30)
-        this.atkAdd = Math.round(Math.random()*30)
+        this.hpAdd = Math.round(Math.random()*25)
+        this.atkAdd = Math.round(Math.random()*25)
         this.atkArrow.visible = false
         this.hpArrow.visible = false
         this.currentStep = this.maxStep;

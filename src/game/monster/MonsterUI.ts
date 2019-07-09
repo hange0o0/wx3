@@ -82,8 +82,13 @@ class MonsterUI extends game.BaseUI_wx3 {
 	wx3_function(4540);
         this.renewDes_9848();
         this.addPanelOpenEvent(GameEvent.client.MONSTER_CHANGE,this.renewList_5981)
+        this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
         GuideManager.getInstance().testShowGuide()
         TaskTips.getInstance().show(['mlv','mnum','mlv2','mnum2']);
+    }
+
+    private onE(){
+        MyTool.runListFun(this.list,'onE');
     }
 
     private renewList_5981(){

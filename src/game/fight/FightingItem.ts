@@ -89,14 +89,14 @@ class FightingItem extends game.BaseItem_wx3{
             cd = robot.distanceTime*2 - cd;
             if(this.data.result == 2)
             {
-                this.desText.text = '战斗胜利，正在返回';
+                this.desText.text = '战斗胜利，正在返回..';
 	wx3_function(5098);
                 this.awardGroup.visible = true;
                 this.coinText.text = '+' + NumberUtil.addNumSeparator(this.data.addCoin,2)
                 this.coinText.textColor = 0x66FF66
             }
             else
-                this.desText.text = '进攻失利，正在返回';
+                this.desText.text = '进攻失利，正在返回..';
             if(UM_wx3.isTest)
             {
                 this.currentState = 's2'
@@ -111,7 +111,7 @@ class FightingItem extends game.BaseItem_wx3{
         {
             cd = this.data.backTime - TM_wx3.now();
 	wx3_function(8745);
-            this.desText.text = '正在撤回中'
+            this.desText.text = '正在撤回中..'
             if(UM_wx3.isTest)
             {
                 this.currentState = 's2'
@@ -127,7 +127,7 @@ class FightingItem extends game.BaseItem_wx3{
         {
             cd = robot.distanceTime - cd;
 	wx3_function(7565);
-            this.desText.text = '正在前往目的地'
+            this.desText.text = '正在前往目的地..'
             this.btn.label = '撤回'
             this.currentState = 's1'
         }
