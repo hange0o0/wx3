@@ -8,19 +8,22 @@ class MonsterUI extends game.BaseUI_wx3 {
     }
 	private wx3_functionX_12435(){console.log(1827)}
 
+
+    private topGroup: eui.Group;
+    private desText: eui.Label;
+    private addBtn: eui.Image;
     private scroller: eui.Scroller;
     public list: eui.List;
     private topUI: TopUI;
     private bottomUI: BottomUI;
     private sortBtn: eui.Group;
-	private wx3_functionX_12436(){console.log(1766)}
     private sortText: eui.Label;
-    private desText: eui.Label;
 
 
 
 
-	private wx3_functionX_12437(){console.log(9217)}
+
+    private wx3_functionX_12437(){console.log(9217)}
 
     private sortIndex = 0
     private sortBase= [
@@ -48,6 +51,19 @@ class MonsterUI extends game.BaseUI_wx3 {
 	wx3_function(2483);
         this.list.itemRenderer = MonsterItem
         this.addBtnEvent(this.sortBtn,this.onSort_5969)
+        this.addBtnEvent(this.topGroup,()=>{
+            if(TecManager.getInstance().getTecLevel(11) >= TecManager.getInstance().tecBase[11].max)
+                return;
+            MyWindow.Confirm('升级'+this.createHtml('【'+TecManager.getInstance().tecBase[11].name+'】',0xFFD86D)+'可获得更多怪物，是否前往升级？',(b)=>{
+                if(b==1)
+                {
+                    this.hide();
+                    TaskManager.getInstance().guideTaskVO = TaskVO.getObject(17);
+                   TecUI.getInstance().show();
+
+                }
+            },['知道了', '前往升级']);
+        })
     }
 
     private onSort_5969(){
@@ -85,6 +101,10 @@ class MonsterUI extends game.BaseUI_wx3 {
         this.addPanelOpenEvent(GameEvent.client.timerE,this.onE)
         GuideManager.getInstance().testShowGuide()
         TaskTips.getInstance().show(['mlv','mnum','mlv2','mnum2']);
+        if(TecManager.getInstance().getTecLevel(11) >= TecManager.getInstance().tecBase[11].max)
+        {
+            MyTool.removeMC(this.addBtn)
+        }
     }
 
     private onE(){

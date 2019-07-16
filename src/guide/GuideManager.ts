@@ -393,7 +393,7 @@ class GuideManager {
 
             if(b==2)
             {
-                 JumpWX4UI.getInstance().show();
+                 JumpWX4UI.getInstance().show(true);
                 if(wx)
                     wx.aldSendEvent("不感兴趣")
             }

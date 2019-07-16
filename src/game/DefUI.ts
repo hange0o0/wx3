@@ -23,6 +23,7 @@ class DefUI extends game.BaseItem_wx3{
     private mailBtn: eui.Image;
     private defList: eui.List;
     private addDefBtn: eui.Button;
+    private feedBackBtn: eui.Button;
 
 
 
@@ -75,6 +76,10 @@ class DefUI extends game.BaseItem_wx3{
         this.addBtnEvent(this.coinBtn,this.onCoin_4808)
         this.addBtnEvent(this.rankBtn,this.onRank_3089)
 
+        this.addBtnEvent(this.feedBackBtn,(e)=>{
+            e.stopImmediatePropagation();
+            FeedBackUI.getInstance().show();
+        })
         this.addBtnEvent(this.spaceBtn,(e)=>{
             e.stopImmediatePropagation();
             SpaceUI.getInstance().show();

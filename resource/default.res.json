@@ -1908,6 +1908,11 @@
 			"name":"ask_txt",
 			"type":"text",
 			"url":"game_data/ask.txt"
+		},
+		{
+			"name":"main_note_png",
+			"type":"image",
+			"url":"game_assets/main_note.png"
 		}
 	]
 }

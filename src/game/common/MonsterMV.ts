@@ -9,7 +9,7 @@ class MonsterMV extends eui.Group {
     private atkMV:MonsterAtkMV;
 
 
-    public frameTotal = 40//播放完一轮需要的帧数
+    public frameTotal = 20//40//播放完一轮需要的帧数
 	private wx3_functionX_12299(){console.log(8705)}
 
     public state = 2;

@@ -12,6 +12,7 @@ class JumpWX4UI extends game.BaseWindow_wx3 {
     private nameText: eui.Label;
 
 
+    private fromGuide;
     public constructor() {
         super();
         this.skinName = "JumpWX4Skin";
@@ -27,7 +28,10 @@ class JumpWX4UI extends game.BaseWindow_wx3 {
             {
                 wx.aldSendEvent("拒绝跳往wx4")
             }
-
+            if(this.fromGuide)
+            {
+                FeedBackUI.getInstance().show();
+            }
         })
         this.addBtnEvent(this.taskBtn,()=>{
             var wx = window['wx'];
@@ -51,7 +55,8 @@ class JumpWX4UI extends game.BaseWindow_wx3 {
     }
 
 
-    public show(){
+    public show(fromGuide?){
+        this.fromGuide = fromGuide
         super.show()
     }
 

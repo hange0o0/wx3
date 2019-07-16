@@ -515,8 +515,14 @@ class PKPosUI extends game.BaseUI_wx3 {
         switch (this.dataIn.type)
         {
             case 'chapter':       //不用break
-                this.randomTalk();
+                this.randomTalk(0);
+                for(var i=0;i<this.monsterArr.length;i++)
+                {
+                    this.monsterArr[i].onE();
+                }
+                break;
             case 'ask':
+                this.randomTalk(2);
                 for(var i=0;i<this.monsterArr.length;i++)
                 {
                     this.monsterArr[i].onE();
@@ -958,7 +964,7 @@ class PKPosUI extends game.BaseUI_wx3 {
 	private wx3_functionX_12565(){console.log(1836)}
 
     private lastTalk = 0;
-    public randomTalk(){
+    public randomTalk(talkID){
         if(!this.dataIn.enemy)
             return;
         if(Math.random() > 0.3)
@@ -969,7 +975,7 @@ class PKPosUI extends game.BaseUI_wx3 {
         {
             if(egret.getTimer() < this.lastTalk)
                 return;
-            item.talk(2);
+            item.talk(talkID);
             this.lastTalk = egret.getTimer() + 3000 + Math.floor(Math.random()*5000);
 	wx3_function(7700);
         }

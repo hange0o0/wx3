@@ -47,6 +47,7 @@
 		"resource/skin/game/common/CardImgSkin.exml",
 		"resource/skin/game/DefItemSkin.exml",
 		"resource/skin/game/DefUISkin.exml",
+		"resource/skin/game/FeedBackUISkin.exml",
 		"resource/skin/game/fight/EnemyAtkInfoSkin.exml",
 		"resource/skin/game/fight/FightingItemSkin.exml",
 		"resource/skin/game/fight/FightItemSkin.exml",

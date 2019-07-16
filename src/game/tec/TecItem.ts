@@ -2,13 +2,14 @@ class TecItem extends game.BaseItem_wx3{
 
     private headMC: eui.Image;
     private nameText: eui.Label;
+    private levelText: eui.Label;
     private desText: eui.Label;
-	private wx3_functionX_12643(){console.log(9333)}
     private upGroup: eui.Group;
-    private barMC: eui.Rect;  //150
+    private barMC: eui.Rect;
     private iconMC: eui.Image;
     private valueText: eui.Label;
     private upBtn: eui.Button;
+
 
 	private wx3_functionX_12644(){console.log(4733)}
 
@@ -45,7 +46,8 @@ class TecItem extends game.BaseItem_wx3{
         var lv = TecManager.getInstance().getTecLevel(data.id);
 	wx3_function(5907);
         this.headMC.source = Config.localResRoot2 + 'skill/skill'+data.id+'.jpg';
-        this.nameText.text = data.name + '（LV.'+lv+'）';
+        this.nameText.text = data.name ;
+        this.levelText.text =  '（LV.'+lv+'）';
         this.setHtml(this.desText, TecManager.getInstance().getDes(data.id));
 
         this.iconMC.source = data.type=='diamond'?'icon_diamond_png':'icon_coin_png'

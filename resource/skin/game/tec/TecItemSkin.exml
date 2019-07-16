@@ -2,8 +2,14 @@
 <e:Skin class="TecItemSkin" width="630" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image left="0" right="0" top="0" bottom="0" source="bg2_png" scale9Grid="15,8,7,8"/>
 	<e:Image id="headMC" width="110" height="110" x="5" verticalCenter="0"/>
-	<e:Label id="nameText" text="Label" x="130" y="10" size="26" bold="true" textColor="0xffe8a5"/>
-	<e:Label id="desText" text="Label" y="50" size="24" left="130" right="180" lineSpacing="6" textColor="0xedd4af"/>
+	<e:Group x="130" y="10">
+		<e:Label id="nameText" text="Label" x="0" y="0" size="26" bold="true" textColor="0xffd86d" stroke="2" strokeColor="0x5b3915"/>
+		<e:Label id="levelText" text="Label" x="10" y="10" size="22" textColor="0x9fff75"/>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="bottom" gap="10"/>
+		</e:layout>
+	</e:Group>
+	<e:Label id="desText" text="Label" y="50" size="24" left="130" right="180" lineSpacing="8" strokeColor="0x725123" textColor="0xfff8e5"/>
 	<e:Group id="upGroup" y="8" right="10">
 		<e:Group y="0" x="0">
 			<e:Image source="bg1_png" scale9Grid="8,8,14,14" width="150" height="40" x="0" y="0"/>
