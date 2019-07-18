@@ -138,6 +138,8 @@ class CardInfoUI extends game.BaseWindow_wx3 {
 
 
     public show(v?,list?,index=-1,sp?){
+        if(!MonsterVO.getObject(v))
+            return
         this.data = v;
         this.list = list
         this.index = index;
