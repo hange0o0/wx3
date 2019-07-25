@@ -90,7 +90,7 @@ class PKMonsterMV_wx3 extends eui.Group {
      }
 
     public onE(){
-        this.monsterMV && this.monsterMV.onE();
+        //this.monsterMV && this.monsterMV.onE();
     }
 
     private fireDie_7572(){

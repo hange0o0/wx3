@@ -1,12 +1,16 @@
 {
 	"groups":[
 		{
-			"keys":"border_5_png,border_6_png,border_7_png,border_8_png,border_14_png,change_icon_png,close_btn2_png,icon_atk_png,icon_atk2_png,icon_atk3_png,icon_atkcd_png,icon_atkhp_png,icon_clock_png,icon_clock2_png,icon_disable_png,icon_empty_png,icon_error_png,icon_force2_png,icon_pos_png,icon_rage_png,icon_right_png,icon_skill_png,icon_speed_png,icon_times_png,talk_bg_png,copy_btn_png,border_16_png,main_button_png,icon_test_png,icon_wenhao_png,icon_wenhao2_png,bg_icon_png,font1_fnt,log_btn_png,rank_btn_png,sound_btn1_png,sound_btn2_png,coin_btn_png,pk_mv_json,pk_mv_png,rect_1_png,guide_1_png,chapter_btn_png,state1_png,icon_vs_png,buff_5_png,buff_42_png,buff_41_png,buff_31_png,buff_3_png,buff_25_png,buff_24_png,buff_23_png,buff_22_png,buff_21_png,buff_2_png,buff_15_png,buff_13_png,buff_12_png,buff_11_png,buff_1_png,bar_bg_png,bar2_png,bar1_png,loading_ani_png,loading_ani_json,line2_png,line_png,icon_type3_png,icon_type2_png,icon_type1_png,icon_type0_png,icon_setting_png,icon_lock_png,icon_force_png,icon_diamond_png,icon_def2_png,icon_def1_png,icon_cost_bg_png,icon_cost_png,icon_coin_png,guide2_png,btn4_png,btn3_png,btn2_png,btn1_png,border_4_png,border_15_png,border_13_png,border_10_png,border3_png,border2_png,border1_png,bg9_png,bg8_png,bg7_png,bg6_png,bg5_png,bg4_png,bg3_png,bg2_png,bg18_png,bg17_png,bg16_png,bg15_png,bg14_png,bg13_png,bg12_png,bg11_png,bg10_png,bg1_png,start2_png,start1_png,red_mc_png,ui_loading_png,type_tips_png,title_bg4_png,tab4_png,tab2_png,tab1_png,black3_png,main_work_png,main_chapter_png,main_fight_png,main_hero_png,main_rank_png,main_slave_png,main_tec_png,guide_mv_json,guide_mv_png,video_icon_png,blace_bg_jpg,loading_logo_png,main_bg_png,white_bg_png,chapter_txt,level1_txt,level2_txt,level3_txt,level4_txt,level5_txt,level6_txt,level7_txt,level8_txt,level9_txt,level10_txt,level11_txt,level12_txt,level13_txt,level14_txt,level15_txt,level16_txt,level17_txt,level18_txt,level19_txt,level20_txt,nick_txt,data_txt,task_txt,main_skill_png,skill_txt,ask_txt",
+			"keys":"border_6_png,border_7_png,border_8_png,border_14_png,change_icon_png,close_btn2_png,icon_atk_png,icon_atk2_png,icon_atk3_png,icon_atkcd_png,icon_atkhp_png,icon_clock_png,icon_clock2_png,icon_disable_png,icon_empty_png,icon_error_png,icon_force2_png,icon_pos_png,icon_rage_png,icon_right_png,icon_speed_png,icon_times_png,talk_bg_png,copy_btn_png,border_16_png,main_button_png,icon_test_png,bg_icon_png,sound_btn1_png,sound_btn2_png,pk_mv_json,pk_mv_png,rect_1_png,state1_png,icon_vs_png,buff_5_png,buff_42_png,buff_41_png,buff_31_png,buff_3_png,buff_25_png,buff_24_png,buff_23_png,buff_22_png,buff_21_png,buff_2_png,buff_15_png,buff_13_png,buff_12_png,buff_11_png,buff_1_png,bar_bg_png,bar2_png,bar1_png,line2_png,line_png,icon_type3_png,icon_type2_png,icon_type1_png,icon_lock_png,icon_force_png,icon_diamond_png,icon_def1_png,icon_cost_bg_png,icon_cost_png,icon_coin_png,guide2_png,btn4_png,btn3_png,btn2_png,btn1_png,border_4_png,border_15_png,border_13_png,border_10_png,border3_png,border2_png,border1_png,bg9_png,bg8_png,bg7_png,bg6_png,bg5_png,bg4_png,bg3_png,bg2_png,bg18_png,bg17_png,bg16_png,bg15_png,bg14_png,bg13_png,bg12_png,bg11_png,bg10_png,bg1_png,start2_png,start1_png,red_mc_png,ui_loading_png,type_tips_png,title_bg4_png,tab2_png,tab1_png,black3_png,main_work_png,main_chapter_png,main_fight_png,main_hero_png,main_rank_png,main_slave_png,main_tec_png,guide_mv_json,guide_mv_png,video_icon_png,blace_bg_jpg,loading_logo_png,main_bg_png,white_bg_png,chapter_txt,level1_txt,level2_txt,level3_txt,level4_txt,level5_txt,level6_txt,level7_txt,level8_txt,level9_txt,level10_txt,level11_txt,level12_txt,level13_txt,level14_txt,level15_txt,level16_txt,level17_txt,level18_txt,level19_txt,level20_txt,nick_txt,data_txt,task_txt,main_skill_png,skill_txt,ask_txt",
 			"name":"preload_png"
 		},
 		{
 			"keys":"black_bg_png,black_bg2_png,border_9_png,pk_hurt_png,m_shadow_mc_png",
 			"name":"preload_png32"
+		},
+		{
+			"keys":"enemy42_png,enemy43_png,enemy44_png,enemy45_png,enemy46_png,enemy48_png,enemy61_png,enemy62_png,enemy63_png,enemy64_png,enemy65_png,enemy66_png,enemy67_png,enemy68_png,enemy69_png,enemy70_png,enemy71_png,enemy72_png,enemy73_png,enemy74_png,enemy76_png,480_json,600_json,960_json,enemy1_png,enemy2_png,enemy3_png,enemy4_png,enemy5_png,enemy6_png,enemy7_png,enemy9_png,enemy10_png,enemy11_png,enemy13_png,enemy14_png,enemy15_png,enemy16_png,enemy17_png,enemy18_png,enemy31_png,enemy32_png,enemy33_png,enemy34_png,enemy35_png,enemy36_png,enemy38_png,enemy39_png,enemy40_png,enemy41_png",
+			"name":"monster"
 		}
 	],
 	"resources":[
@@ -212,21 +216,10 @@
 			"url":"game_assets/tab2.png"
 		},
 		{
-			"name":"title_bg1_png",
-			"scale9grid":"29,5,13,30",
-			"type":"image",
-			"url":"game_assets/title_bg1.png"
-		},
-		{
 			"name":"bg14_png",
 			"scale9grid":"32,32,3,6",
 			"type":"image",
 			"url":"game_assets/bg14.png"
-		},
-		{
-			"name":"random_btn_png",
-			"type":"image",
-			"url":"game_assets/random_btn.png"
 		},
 		{
 			"name":"title_bg4_png",
@@ -274,11 +267,6 @@
 			"url":"game_assets/icon_lock.png"
 		},
 		{
-			"name":"tab4_png",
-			"type":"image",
-			"url":"game_assets/tab4.png"
-		},
-		{
 			"name":"ui_loading_png",
 			"type":"image",
 			"url":"game_assets/ui_loading.png"
@@ -287,11 +275,6 @@
 			"name":"icon_cost_png",
 			"type":"image",
 			"url":"game_assets/icon_cost.png"
-		},
-		{
-			"name":"icon_setting_png",
-			"type":"image",
-			"url":"game_assets/icon_setting.png"
 		},
 		{
 			"name":"icon_cost_bg_png",
@@ -314,21 +297,6 @@
 			"url":"game_assets/red_mc.png"
 		},
 		{
-			"name":"main_bag_png",
-			"type":"image",
-			"url":"game_assets/main_bag.png"
-		},
-		{
-			"name":"main_card_png",
-			"type":"image",
-			"url":"game_assets/main_card.png"
-		},
-		{
-			"name":"main_pk_png",
-			"type":"image",
-			"url":"game_assets/main_pk.png"
-		},
-		{
 			"name":"main_slave_png",
 			"type":"image",
 			"url":"game_assets/main_slave.png"
@@ -342,11 +310,6 @@
 			"name":"icon_def1_png",
 			"type":"image",
 			"url":"game_assets/icon_def1.png"
-		},
-		{
-			"name":"icon_def2_png",
-			"type":"image",
-			"url":"game_assets/icon_def2.png"
 		},
 		{
 			"name":"main_mail_png",
@@ -435,11 +398,6 @@
 			"url":"game_assets/type_tips.png"
 		},
 		{
-			"name":"replay_mc_png",
-			"type":"image",
-			"url":"game_assets/replay_mc.png"
-		},
-		{
 			"name":"icon_vs_png",
 			"type":"image",
 			"url":"game_assets/pk/icon_vs.png"
@@ -468,21 +426,6 @@
 			"name":"bar2_png",
 			"type":"image",
 			"url":"game_assets/pk/bar2.png"
-		},
-		{
-			"name":"1th_png",
-			"type":"image",
-			"url":"game_assets/step2/1th.png"
-		},
-		{
-			"name":"2th_png",
-			"type":"image",
-			"url":"game_assets/step2/2th.png"
-		},
-		{
-			"name":"3th_png",
-			"type":"image",
-			"url":"game_assets/step2/3th.png"
 		},
 		{
 			"name":"arror4_png",
@@ -518,21 +461,6 @@
 			"name":"back_btn_png",
 			"type":"image",
 			"url":"game_assets/step2/back_btn.png"
-		},
-		{
-			"name":"block1_png",
-			"type":"image",
-			"url":"game_assets/step2/block1.png"
-		},
-		{
-			"name":"block2_png",
-			"type":"image",
-			"url":"game_assets/step2/block2.png"
-		},
-		{
-			"name":"border_5_png",
-			"type":"image",
-			"url":"game_assets/step2/border_5.png"
 		},
 		{
 			"name":"border_6_png",
@@ -640,16 +568,6 @@
 			"url":"game_assets/step2/icon_force2.png"
 		},
 		{
-			"name":"icon_like_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_like.png"
-		},
-		{
-			"name":"icon_monster_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_monster.png"
-		},
-		{
 			"name":"icon_pos_png",
 			"type":"image",
 			"url":"game_assets/step2/icon_pos.png"
@@ -665,11 +583,6 @@
 			"url":"game_assets/step2/icon_right.png"
 		},
 		{
-			"name":"icon_skill_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_skill.png"
-		},
-		{
 			"name":"icon_speed_png",
 			"type":"image",
 			"url":"game_assets/step2/icon_speed.png"
@@ -680,46 +593,6 @@
 			"url":"game_assets/step2/icon_times.png"
 		},
 		{
-			"name":"icon_unlike_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_unlike.png"
-		},
-		{
-			"name":"monster_all_icon_png",
-			"type":"image",
-			"url":"game_assets/step2/monster_all_icon.png"
-		},
-		{
-			"name":"skill_all_icon_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_all_icon.png"
-		},
-		{
-			"name":"skill_type1_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_type1.png"
-		},
-		{
-			"name":"skill_type2_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_type2.png"
-		},
-		{
-			"name":"skill_type3_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_type3.png"
-		},
-		{
-			"name":"skill_type4_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_type4.png"
-		},
-		{
-			"name":"skill_type5_png",
-			"type":"image",
-			"url":"game_assets/step2/skill_type5.png"
-		},
-		{
 			"name":"tab3_png",
 			"type":"image",
 			"url":"game_assets/step2/tab3.png"
@@ -728,31 +601,6 @@
 			"name":"talk_bg_png",
 			"type":"image",
 			"url":"game_assets/step2/talk_bg.png"
-		},
-		{
-			"name":"title_bg2_png",
-			"type":"image",
-			"url":"game_assets/step2/title_bg2.png"
-		},
-		{
-			"name":"title_bg3_png",
-			"type":"image",
-			"url":"game_assets/step2/title_bg3.png"
-		},
-		{
-			"name":"title_bg6_png",
-			"type":"image",
-			"url":"game_assets/step2/title_bg6.png"
-		},
-		{
-			"name":"title_bg7_png",
-			"type":"image",
-			"url":"game_assets/step2/title_bg7.png"
-		},
-		{
-			"name":"title_bg8_png",
-			"type":"image",
-			"url":"game_assets/step2/title_bg8.png"
 		},
 		{
 			"name":"black_bg_png",
@@ -775,21 +623,6 @@
 			"url":"game_assets/png32/pk_hurt.png"
 		},
 		{
-			"name":"loading_ani_json",
-			"type":"json",
-			"url":"game_assets/loading_ani.json"
-		},
-		{
-			"name":"loading_ani_png",
-			"type":"image",
-			"url":"game_assets/loading_ani.png"
-		},
-		{
-			"name":"icon_fight_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_fight.png"
-		},
-		{
 			"name":"gift_mc_png",
 			"type":"image",
 			"url":"game_assets/step2/gift_mc.png"
@@ -803,11 +636,6 @@
 			"name":"border_16_png",
 			"type":"image",
 			"url":"game_assets/step2/border_16.png"
-		},
-		{
-			"name":"icon_card_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_card.png"
 		},
 		{
 			"name":"tec_slave_icon_png",
@@ -838,46 +666,6 @@
 			"name":"icon_test_png",
 			"type":"image",
 			"url":"game_assets/step2/icon_test.png"
-		},
-		{
-			"name":"icon_wenhao_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_wenhao.png"
-		},
-		{
-			"name":"icon_wenhao2_png",
-			"type":"image",
-			"url":"game_assets/step2/icon_wenhao2.png"
-		},
-		{
-			"name":"hero_bg0_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg0.png"
-		},
-		{
-			"name":"hero_bg1_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg1.png"
-		},
-		{
-			"name":"hero_bg2_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg2.png"
-		},
-		{
-			"name":"hero_bg3_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg3.png"
-		},
-		{
-			"name":"hero_bg4_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg4.png"
-		},
-		{
-			"name":"hero_bg5_png",
-			"type":"image",
-			"url":"game_assets/step2/hero_bg5.png"
 		},
 		{
 			"name":"m_shadow_mc_png",
@@ -970,24 +758,9 @@
 			"url":"game_assets/pk/buff/buff_XX.png"
 		},
 		{
-			"name":"icon_type0_png",
-			"type":"image",
-			"url":"game_assets/icon_type0.png"
-		},
-		{
 			"name":"bg_icon_png",
 			"type":"image",
 			"url":"game_assets/step2/bg_icon.png"
-		},
-		{
-			"name":"replay_mc2_png",
-			"type":"image",
-			"url":"game_assets/replay_mc2.png"
-		},
-		{
-			"name":"note_icon_png",
-			"type":"image",
-			"url":"game_assets/note_icon.png"
 		},
 		{
 			"name":"bullet1_png",
@@ -1390,21 +1163,6 @@
 			"url":"game_assets/win_icon.png"
 		},
 		{
-			"name":"font1_fnt",
-			"type":"font",
-			"url":"game_assets/font1.fnt"
-		},
-		{
-			"name":"log_btn_png",
-			"type":"image",
-			"url":"game_assets/log_btn.png"
-		},
-		{
-			"name":"rank_btn_png",
-			"type":"image",
-			"url":"game_assets/rank_btn.png"
-		},
-		{
 			"name":"sound_btn1_png",
 			"type":"image",
 			"url":"game_assets/sound_btn1.png"
@@ -1415,19 +1173,9 @@
 			"url":"game_assets/sound_btn2.png"
 		},
 		{
-			"name":"coin_btn_png",
-			"type":"image",
-			"url":"game_assets/coin_btn.png"
-		},
-		{
 			"name":"rect_1_png",
 			"type":"image",
 			"url":"game_assets/rect_1.png"
-		},
-		{
-			"name":"guide_1_png",
-			"type":"image",
-			"url":"game_assets/guide_1.png"
 		},
 		{
 			"name":"share_img_1_jpg",
@@ -1438,11 +1186,6 @@
 			"name":"share_img_2_jpg",
 			"type":"image",
 			"url":"game_assets/share_img_2.jpg"
-		},
-		{
-			"name":"chapter_btn_png",
-			"type":"image",
-			"url":"game_assets/chapter_btn.png"
 		},
 		{
 			"name":"wx_btn_info_png",
@@ -1470,11 +1213,6 @@
 			"url":"game_assets/coin_bg3.jpg"
 		},
 		{
-			"name":"coin_bg4_jpg",
-			"type":"image",
-			"url":"game_assets/coin_bg4.jpg"
-		},
-		{
 			"name":"coin_bg2_jpg",
 			"type":"image",
 			"url":"game_assets/coin_bg2.jpg"
@@ -1488,16 +1226,6 @@
 			"name":"energy_icon_png",
 			"type":"image",
 			"url":"game_assets/energy_icon.png"
-		},
-		{
-			"name":"view_mc_png",
-			"type":"image",
-			"url":"game_assets/view_mc.png"
-		},
-		{
-			"name":"dig_pass_png",
-			"type":"image",
-			"url":"game_assets/dig_pass.png"
 		},
 		{
 			"name":"map2__png",
@@ -1590,24 +1318,9 @@
 			"url":"game_assets/black_bg_alpha.png"
 		},
 		{
-			"name":"invite_btn_png",
-			"type":"image",
-			"url":"game_assets/invite_btn.png"
-		},
-		{
 			"name":"floor_jpg",
 			"type":"image",
 			"url":"game_assets/floor.jpg"
-		},
-		{
-			"name":"coin_bg5_jpg",
-			"type":"image",
-			"url":"game_assets/coin_bg5.jpg"
-		},
-		{
-			"name":"coin_bg6_jpg",
-			"type":"image",
-			"url":"game_assets/coin_bg6.jpg"
 		},
 		{
 			"name":"cannon_png",
@@ -1820,11 +1533,6 @@
 			"url":"data/task.txt"
 		},
 		{
-			"name":"type_tips2_png",
-			"type":"image",
-			"url":"game_assets/type_tips2.png"
-		},
-		{
 			"name":"jump_wx4_jpg",
 			"type":"image",
 			"url":"game_assets/jump_wx4.jpg"
@@ -1913,6 +1621,21 @@
 			"name":"main_note_png",
 			"type":"image",
 			"url":"game_assets/main_note.png"
+		},
+		{
+			"name":"480_json",
+			"type":"json",
+			"url":"game_assets2/monster/480.json"
+		},
+		{
+			"name":"600_json",
+			"type":"json",
+			"url":"game_assets2/monster/600.json"
+		},
+		{
+			"name":"960_json",
+			"type":"json",
+			"url":"game_assets2/monster/960.json"
 		}
 	]
 }

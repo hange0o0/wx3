@@ -379,7 +379,10 @@ class GameUI extends game.BaseUI_wx3 {
             const loadTask = wx.loadSubpackage({
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
-                    self.callShow_8865();
+                    RES.loadGroup('monster')
+                    egret.callLater(()=>{
+                        self.callShow_8865();
+                    },this)
                 },
                 fail(res) {
                 }
@@ -392,7 +395,10 @@ class GameUI extends game.BaseUI_wx3 {
             })
             return;
         }
-        this.callShow_8865();
+        RES.loadGroup('monster')
+        egret.callLater(()=>{
+            self.callShow_8865();
+        },this)
     }
 	private wx3_functionX_11938(){console.log(4212)}
 
@@ -414,11 +420,7 @@ class GameUI extends game.BaseUI_wx3 {
 
         this.infoBtn.visible = false;
         //UM_wx3.isTest = true;
-        if(UM_wx3.isTest)
-        {
-            TestUI.getInstance().show();
-            return;
-        }
+
 
 	wx3_function(1344);
         GuideManager.getInstance().isGuiding = UM_wx3.isFirst;

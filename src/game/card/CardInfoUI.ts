@@ -29,7 +29,7 @@ class CardInfoUI extends game.BaseWindow_wx3 {
     public copyBtn: eui.Button;
 	private wx3_functionX_12363(){console.log(4855)}
     public closeBtn: eui.Image;
-    public bottomCloseBtn: eui.Image;
+    //public bottomCloseBtn: eui.Image;
 
 
 
@@ -65,7 +65,7 @@ class CardInfoUI extends game.BaseWindow_wx3 {
         super.childrenCreated();
 
         this.addBtnEvent(this.closeBtn,this.hide)
-        this.addBtnEvent(this.bottomCloseBtn,this.hide)
+        //this.addBtnEvent(this.bottomCloseBtn,this.hide)
         this.addBtnEvent(this.leftBtn,this.onLeft_2960)
         this.addBtnEvent(this.rightBtn,this.onRight_3286)
         this.addBtnEvent(this.upBtn,this.onUp)

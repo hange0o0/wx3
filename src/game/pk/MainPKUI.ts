@@ -312,11 +312,6 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public show(data?){
-        if(UM_wx3.isTest)
-        {
-            MainPKTestUI.getInstance().show(data);
-            return;
-        }
 
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data,
@@ -486,11 +481,6 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public startGame(){
-        if(UM_wx3.isTest)
-        {
-            MainPKTestUI.getInstance().startGame();
-            return;
-        }
         this.gameStart = true;
 	wx3_function(2647);
         var PD = PKData_wx3.getInstance();

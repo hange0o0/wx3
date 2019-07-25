@@ -287,11 +287,6 @@ class SpacePKUI extends game.BaseUI_wx3 {
     }
 
     public show(data?){
-        if(UM_wx3.isTest)
-        {
-            MainPKTestUI.getInstance().show(data);
-            return;
-        }
 
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data

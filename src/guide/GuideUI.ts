@@ -209,7 +209,7 @@ class GuideUI extends game.BaseContainer_wx3{
     }
 
     private onE(){
-        this.mv && this.mv.onE();
+        //this.mv && this.mv.onE();
     }
 
     public show(dataIn){
