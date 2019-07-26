@@ -34,6 +34,8 @@ class MonsterUI extends game.BaseUI_wx3 {
         {key:'type',name:'阵营\n排序',color:0xFF00FF}
     ]
 	private wx3_functionX_12438(){console.log(1168)}
+
+    private dataProvider = new eui.ArrayCollection([]);
     public constructor() {
         super();
         this.skinName = "MonsterUISkin";
@@ -50,6 +52,7 @@ class MonsterUI extends game.BaseUI_wx3 {
         this.scroller.viewport = this.list;
 	wx3_function(2483);
         this.list.itemRenderer = MonsterItem
+        this.list.dataProvider = this.dataProvider
         this.addBtnEvent(this.sortBtn,this.onSort_5969)
         this.addBtnEvent(this.topGroup,()=>{
             if(TecManager.getInstance().getTecLevel(11) >= TecManager.getInstance().tecBase[11].max)
@@ -170,7 +173,8 @@ class MonsterUI extends game.BaseUI_wx3 {
             list[i] = {vo:list[i],list:list};
 	wx3_function(7540);
         }
-        this.list.dataProvider = new eui.ArrayCollection(list);
+        this.dataProvider.source = list;
+        this.dataProvider.refresh()
     }
 
 }

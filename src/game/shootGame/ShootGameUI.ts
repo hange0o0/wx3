@@ -198,6 +198,7 @@ class ShootGameUI_wx3 extends game.BaseUI_wx3 {
                 this.cdGroup.visible = true
                 this.cannonGroup.visible = true
                 this.coinGroup.visible = true
+                this.diamondGroup.visible = true
                 this.tipText.visible = true
                 this.tipText.alpha = 1;
 	wx3_function(3688);
