@@ -260,6 +260,7 @@ class GameUI extends game.BaseUI_wx3 {
                 else
                 {
                     this.needShowStartBtn = true;
+                    this.initData_847()
                     //this.infoBtn.visible = true;
                 }
             }

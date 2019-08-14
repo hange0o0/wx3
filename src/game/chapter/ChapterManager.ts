@@ -86,6 +86,10 @@ class ChapterManager {
         var result = PKData_wx3.getInstance().getPKResult()
         if(result == 2)
         {
+            if(UM_wx3.chapterLevel<id && id%5==0)
+            {
+                pkObj.showInsertAD = true
+            }
             var hpObj = PKData_wx3.getInstance().getHpData();
             var hpRate2 =  (hpObj[2] || 0)/(hpObj['2_max'] || 1)
             if(hpRate2 >= 0.6)

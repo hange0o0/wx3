@@ -78,6 +78,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     private shareStr
     private dragTarget: eui.Image = new eui.Image();
 
+    public showTimes = 0;
+
 	private wx3_functionX_12455(){console.log(6012)}
     public childrenCreated() {
         super.childrenCreated();
@@ -276,13 +278,15 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 if(teamID == 1)
                 {
                     this.runItemFun_8414(this.list1,index,'showBorn')
-                    this.list1Data[index].isDie = false;
+                    if(this.list1Data[index])
+                        this.list1Data[index].isDie = false;
 	wx3_function(8710);
                 }
                 else
                 {
                     this.runItemFun_8414(this.list2,index,'showBorn')
-                    this.list2Data[index].isDie = false;
+                    if(this.list2Data[index])
+                        this.list2Data[index].isDie = false;
                 }
                 break;
 
@@ -290,13 +294,15 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 if(teamID == 1)
                 {
                     this.runItemFun_8414(this.list1,index,'showDie')
-                    this.list1Data[index].isDie = true;
+                    if(this.list1Data[index])
+                        this.list1Data[index].isDie = true;
 	wx3_function(6410);
                 }
                 else
                 {
                     this.runItemFun_8414(this.list2,index,'showDie')
-                    this.list2Data[index].isDie = true;
+                    if(this.list2Data[index])
+                        this.list2Data[index].isDie = true;
                 }
                 break;
         }
@@ -312,7 +318,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     }
 
     public show(data?){
-
+        this.showTimes ++;
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data,
         super.show();
@@ -872,7 +878,8 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 GuideManager.getInstance().testShowGuide();
 
 
-
+                if(this.showTimes%8 == 0)
+                    MyADManager.getInstance().showInsert();
             })
 
         },1000)

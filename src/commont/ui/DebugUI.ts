@@ -139,6 +139,10 @@ class DebugUI extends game.BaseUI_wx3 {
             })
         })
 
+        this.addB_3026('插屏广告',()=>{
+            MyADManager.getInstance().showInsert()
+        })
+
         this.addB_3026('玩家信息',()=>{
             window['wx'].cloud.callFunction({      //取玩家openID,
                 name: 'getServerInfo',

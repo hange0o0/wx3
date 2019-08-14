@@ -33,6 +33,7 @@ class Config {
 
     public static wx_ad = 'adunit-ee0cef82e0740714';
     public static wx_video = 'adunit-68ddf5112545aa53';
+    public static wx_insert = 'adunit-c0f828bc54d63ff7';
 
 
     //public static friendLevel = 3;

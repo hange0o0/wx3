@@ -72,6 +72,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     public resultTimer
     public isQuick
     public lastRenewTime = 0;
+    public showTimes = 0;
 
 
 
@@ -287,7 +288,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     }
 
     public show(data?){
-
+        this.showTimes ++;
         PKManager_wx3.getInstance().isPKing = true
         this.dataIn = data
         super.show();
@@ -668,7 +669,8 @@ class SpacePKUI extends game.BaseUI_wx3 {
                     SpaceManager.getInstance().testFreeBorn();
                 }
 
-
+                if(this.showTimes%5 == 0)
+                    MyADManager.getInstance().showInsert();
             })
 
         },1000)
