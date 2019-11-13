@@ -59,6 +59,7 @@
 		"resource/skin/game/guess/GuessLogUISkin.exml",
 		"resource/skin/game/guess/GuessTeamUISkin.exml",
 		"resource/skin/game/guess/GuessUISkin.exml",
+		"resource/skin/game/LoadingUISkin.exml",
 		"resource/skin/game/log/LogItemSkin.exml",
 		"resource/skin/game/log/LogUISkin.exml",
 		"resource/skin/game/MainWorkItemSkin.exml",

@@ -34,6 +34,8 @@ class Config {
     public static wx_ad = 'adunit-ee0cef82e0740714';
     public static wx_video = 'adunit-68ddf5112545aa53';
     public static wx_insert = 'adunit-c0f828bc54d63ff7';
+    public static myAppID = 'wxe066524f2972cb1a'
+
 
 
     //public static friendLevel = 3;
@@ -54,10 +56,40 @@ class Config {
     public static equalValue = 1000;
 
 
+    public static isZJ: boolean = false;
+    public static isQQ: boolean = false;
+    public static isWX: boolean = false;
+    public static serverPath = 'https://www.hangegame.com/wx7_server/'
     public static init(){
+        this.isZJ = window['iszj']
+        this.isQQ = window['isQQ']
+        this.isWX = window['wx']
+        if(this.isZJ)
+        {
+            this.isWX = false;
 
+            this.wx_ad = '1101e9f3jjj97238i1';
+            this.wx_video = '84a9kg52hc511ci052';
+            this.wx_insert = '';
+            this.myAppID = 'tt803ef6831f144a40';
+            this.serverPath = 'https://www.hangegame.com/wx7_server/zj/'
+        }
+
+        if(this.isQQ)
+        {
+            this.isWX = false;
+            this.wx_ad = '';
+            this.wx_video = '';
+            this.wx_insert = '';
+            this.myAppID = '1109869435';
+
+            this.serverPath = 'https://www.hangegame.com/wx7_server/qq/'
+        }
     }
-	private wx3_functionX_11824(){console.log(8401)}
+
+    public static getShare(id){
+        return Config.localResRoot + "share_img_2.jpg"
+    }
 
     private static createImg(name,path=''){
         return {

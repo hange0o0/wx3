@@ -1,4 +1,4 @@
-var UM_wx3:UserManager_wx3,TM_wx3:TimeManager_wx3,EM_wx3:EventManager_wx3 ,CM_wx3:CacheManager_wx3,DM:DebugManager_wx3
+var UM_wx3:UserManager_wx3,TM_wx3:TimeManager,EM_wx3:EventManager_wx3 ,CM_wx3:CacheManager_wx3,DM:DebugManager_wx3
 class Main extends eui.UILayer {
     /**
      * 加载进度界面
@@ -40,12 +40,13 @@ class Main extends eui.UILayer {
 
 
         UM_wx3 = UserManager_wx3.getInstance();
-        TM_wx3 = TimeManager_wx3.getInstance();
+        TM_wx3 = TimeManager.getInstance();
         EM_wx3 = EventManager_wx3.getInstance();
         CM_wx3 = CacheManager_wx3.getInstance();
 	wx3_function(5202);
         DM = DebugManager_wx3.getInstance();
         Config.initURLRequest();
+        Config.init()
         console.log('_1a')
     }
 
@@ -213,7 +214,9 @@ class Main extends eui.UILayer {
         MyADManager.getInstance().getAD()
         MyADManager.getInstance().createAD()
         window['wx'] && MyADManager.getInstance().initExtra(window['wx'].getLaunchOptionsSync())
-        GameUI.getInstance().show();
+        //GameUI.getInstance().show();
+
+        LoadingUI.getInstance().show();
 
     }
 }

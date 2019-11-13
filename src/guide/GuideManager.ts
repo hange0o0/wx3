@@ -386,23 +386,29 @@ class GuideManager {
         GameUI.getInstance().endGuide();
 	wx3_function(7414);
         //TaskUI.getInstance().show();
+        if(Config.isWX)
+        {
+            MyWindow.Confirm('新手引导已经结束，你有兴趣继续带领怪物们一起争霸天下吗？',(b)=>{
+                TaskUI.getInstance().show();
+                var wx = window['wx'];
 
-        MyWindow.Confirm('新手引导已经结束，你有兴趣继续带领怪物们一起争霸天下吗？',(b)=>{
+                if(b==2)
+                {
+                    JumpWX4UI.getInstance().show(true);
+                    if(wx)
+                        wx.aldSendEvent("不感兴趣")
+                }
+                else if(b==1)
+                {
+                    if(wx)
+                        wx.aldSendEvent("继续争霸")
+                }
+            },['不感兴趣', '继续争霸']);
+        }
+        else
+        {
             TaskUI.getInstance().show();
-            var wx = window['wx'];
-
-            if(b==2)
-            {
-                 JumpWX4UI.getInstance().show(true);
-                if(wx)
-                    wx.aldSendEvent("不感兴趣")
-            }
-            else if(b==1)
-            {
-                if(wx)
-                    wx.aldSendEvent("继续争霸")
-            }
-        },['不感兴趣', '继续争霸']);
+        }
     }
 
     private addGuideObj_96(obj){

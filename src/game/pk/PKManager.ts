@@ -112,6 +112,12 @@ class PKManager_wx3 {
     }
 	private wx3_functionX_12475(){console.log(2306)}
     public setHead(img,head){
+        if(!Config.isWX)
+        {
+            img.source = 'https://www.hangegame.com/avatar/'+head+'.jpg'
+            return
+        }
+
         if(this.headData[head])
         {
             img.source = this.headData[head];
@@ -125,7 +131,6 @@ class PKManager_wx3 {
             return
         }
         var self = this;
-	wx3_function(9928);
         img.source = 'common_head_bg_jpg'
         wx.cloud.downloadFile({
             //fileID: 'cloud://hange0o0-2-57ae87.6861-hange0o0-2-57ae87/level/level_'+head+'.txt',
@@ -133,7 +138,6 @@ class PKManager_wx3 {
             success: res => {
                 console.log(res);
                 img.source = res.tempFilePath;
-	wx3_function(8757);
                 self.headData[head] = res.tempFilePath;
             },
             fail: err => {

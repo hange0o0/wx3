@@ -230,6 +230,28 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 	private wx3_functionX_12459(){console.log(6967)}
     private onDouble_8100(){
+        if(Config.isZJ)
+        {
+            ZijieScreenBtn.e.awardPublish(()=>{
+                var arr = []
+                if(this.dataIn.coin)
+                {
+                    UM_wx3.addCoin(this.dataIn.coin);
+                    arr.push('金币+'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(this.dataIn.coin,2),0xFFFF00))
+                }
+                if(this.dataIn.diamond)
+                {
+                    UM_wx3.addDiamond(this.dataIn.diamond);
+                    arr.push('钻石+'+MyTool.createHtml('+' + NumberUtil.addNumSeparator(this.dataIn.diamond,2),0x75CFF9))
+                }
+
+                MyWindow.ShowTips('发布成功，获得' + arr.join('，') ,1000)
+                MyTool.removeMC(this.doubleBtn)
+                SoundManager_wx3.getInstance().playEffect('coin')
+            })
+           return;
+        }
+
         ShareTool.share(this.shareStr,Config.localResRoot + "share_img_2.jpg",{},()=>{
 
         },true)
@@ -350,6 +372,13 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(6451);
 
         this.forceGroup.visible = !this.dataIn.isGuess && !this.dataIn.isAsk
+
+
+        if(ZijieScreenBtn.e && !this.dataIn.isReplay)
+        {
+            ZijieScreenBtn.e.init();
+            ZijieScreenBtn.e.start();
+        }
     }
 
     public hide(){
@@ -734,6 +763,16 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
             if(this.shareStr)
             {
+                if(Config.isZJ && (this.dataIn.coin || this.dataIn.diamond))
+                {
+                    this.doubleBtn.label = '双倍'
+                    this.doubleBtn.icon = 'zj_video_icon_png'
+                }
+                else
+                {
+                    this.doubleBtn.label = '炫耀'
+                    this.doubleBtn.icon = ''
+                }
                 this.btnGroup.addChild(this.doubleBtn)
                 MyTool.removeMC(this.strongBtn)
             }
@@ -880,6 +919,12 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
                 if(this.showTimes%8 == 0)
                     MyADManager.getInstance().showInsert();
+
+
+                ZijieScreenBtn.e.stop();
+
+
+
             })
 
         },1000)

@@ -182,9 +182,8 @@ class ArrowMC_wx3 extends egret.DisplayObjectContainer{
         var rate = (t - this.beginTime)/(this.endTime - this.beginTime);
 	wx3_function(2021);
         var dis = Math.abs(this.toMC.x - this.fromMC.x);
-        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2
-        var toY = this.toMC.y - this.toMC.data.getVO().height/2
-
+        var fromY = this.fromMC.y - this.fromMC.data.getVO().height/2;
+        var toY = this.toMC.y - this.toMC.data.getVO().height/2;
         if(rate<=0.5)
         {
             var addY = dis*rate;

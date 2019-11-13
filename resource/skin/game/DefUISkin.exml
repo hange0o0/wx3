@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="DefUISkin" width="640" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="DefUISkin" width="640" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2" >
 	<e:Group id="con" left="0" right="0" bottom="0" touchChildren="false" height="500" scrollEnabled="false">
 		<e:Image id="bg" bottom="0" y="300" scaleY="1" horizontalCenter="0"/>
 	</e:Group>
@@ -7,7 +7,7 @@
 	<e:Image source="black4_png" x="0" bottom="-3" width="640" height="25" visible="false"/>
 	<e:Image source="black3_png" y="0" height="50" left="0" right="0" visible="false"/>
 	<e:Image source="border1_png" height="70" y="-10" width="700" horizontalCenter="0" scale9Grid="28,20,26,2" visible="false"/>
-	<e:Group x="0" height="50" width="640" y="-190">
+	<e:Group id="btnGroup" x="0" height="50" width="640" y="-190">
 		<e:Image top="0" source="black_bg2_png" width="320" right="0" scaleX="-1" height="127.21" anchorOffsetY="0" visible="false"/>
 		<e:Group y="8" right="20" visible="false">
 			<e:Group x="-13.000000000000057" y="76" scaleX="1" scaleY="1">
@@ -37,6 +37,10 @@
 				<e:VerticalLayout horizontalAlign="right"/>
 			</e:layout>
 		</e:Group>
+		<e:Group id="feedBackBtn" x="10" y="108" width="90" height="90">
+			<e:Image y="0" horizontalCenter="-0.5" scaleX="0.75" scaleY="0.75" source="main_note_png"/>
+			<e:Label text="意见反馈" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
+		</e:Group>
 		<e:Group y="10" x="10">
 			<e:Group id="taskBtn" x="0" y="0" width="90" height="90">
 				<e:Image y="-8" scaleX="0.7" scaleY="0.7" horizontalCenter="0" source="task_icon2_png"/>
@@ -58,11 +62,11 @@
 				<e:Image id="spaceRed" source="red_mc_png" right="5" y="0"/>
 				<e:Label text="时空之门" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
 			</e:Group>
-			<e:Group id="buffBtn" x="110" y="10" width="90" height="90">
+			<e:Group id="buffBtn" x="110" y="10" width="90" height="90" includeIn="s1">
 				<e:Image horizontalCenter="0" source="main_slave_png" y="-25" scaleX="1.1" scaleY="1.1"/>
 				<e:Label text="好友助力" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
 			</e:Group>
-			<e:Group id="rankBtn" x="230" y="20" width="90" height="90">
+			<e:Group id="rankBtn" x="230" y="20" width="90" height="90" includeIn="s1">
 				<e:Image horizontalCenter="0" y="0" source="main_rank_png" scaleX="0.7" scaleY="0.7"/>
 				<e:Label text="好友排行" bottom="0" horizontalCenter="0" size="20" stroke="3" textColor="0xFBB646" bold="true"/>
 			</e:Group>
@@ -70,7 +74,7 @@
 				<e:HorizontalLayout gap="16" paddingLeft="0"/>
 			</e:layout>
 		</e:Group>
-		<e:Group id="btnGroup" y="108" x="10">
+		<e:Group y="108" x="10" x.s1="115" y.s2="10" x.s2="430">
 			<e:Group id="askBtn" x="0" y="0" width="90" height="90">
 				<e:Image y="-5" scaleX="0.7" scaleY="0.7" horizontalCenter="0.5" source="main_ask_png"/>
 				<e:Label text="关卡解迷" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
@@ -79,10 +83,6 @@
 			<e:Image y="0" horizontalCenter="-0.5" source="main_guess_png" scaleX="0.8" scaleY="0.8"/>
 			<e:Label text="限时竞猜" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
 			<e:Image id="guessRed" source="red_mc_png" right="5" y="0"/>
-			</e:Group>
-			<e:Group id="feedBackBtn" x="10" y="10" width="90" height="90">
-				<e:Image y="0" horizontalCenter="-0.5" scaleX="0.75" scaleY="0.75" source="main_note_png"/>
-				<e:Label text="意见反馈" size="20" stroke="3" textColor="0xFBB646" bold="true" horizontalCenter="0" bottom="0"/>
 			</e:Group>
 			<e:layout>
 			<e:HorizontalLayout gap="16" paddingLeft="0"/>

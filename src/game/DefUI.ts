@@ -109,6 +109,14 @@ class DefUI extends game.BaseItem_wx3{
             AskManager.getInstance().showPK();
         })
 
+        if(Config.isWX)
+            this.currentState = 's1'
+        else
+        {
+            this.currentState = 's2'
+            MyTool.removeMC(this.mailBtn)
+        }
+
     }
 	private wx3_functionX_11915(){console.log(4716)}
 

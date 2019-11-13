@@ -13,7 +13,7 @@ class DateUtil {
     //是不是同一周
     public static isSameWeek(time1: number,time2?: number): boolean {
         if(Boolean(time2) == false)
-            time2 = TimeManager_wx3.getInstance().now();
+            time2 = TimeManager.getInstance().now();
         return DateUtil.getWeekDec(time1,time2) == 0;
     }
 	private wx3_functionX_12087(){console.log(4408)}
@@ -33,7 +33,7 @@ class DateUtil {
             oft = offset;
 
         if(Boolean(time2) == false)
-            time2 = TimeManager_wx3.getInstance().now();
+            time2 = TimeManager.getInstance().now();
         time1 -= oft;
         time2 -= oft;
 
@@ -52,7 +52,7 @@ class DateUtil {
         if(isZero)
             ttt = 0;
         var t1 = time + ttt;
-        var t2 = TimeManager_wx3.getInstance().now() + ttt;
+        var t2 = TimeManager.getInstance().now() + ttt;
         var date1 = DateUtil.timeToChineseDate(t1);
         var date2 = DateUtil.timeToChineseDate(t2);
         if(t1 >= t2) {
@@ -67,7 +67,7 @@ class DateUtil {
     public static isThisDate(time: number): boolean {
         time += DateUtil.offsetTime;
         var date1 = DateUtil.timeToChineseDate(time);
-        var date2 = DateUtil.timeToChineseDate(TimeManager_wx3.getInstance().now());
+        var date2 = DateUtil.timeToChineseDate(TimeManager.getInstance().now());
         return date1.getDate() == date2.getDate();
     }
 	private wx3_functionX_12091(){console.log(5285)}
@@ -75,7 +75,7 @@ class DateUtil {
     //判断时间戳是否是当前月
     public static isThisMonth(time: number): boolean {
         var date1 = DateUtil.timeToChineseDate(time);
-        var date2 = DateUtil.timeToChineseDate(TimeManager_wx3.getInstance().now());
+        var date2 = DateUtil.timeToChineseDate(TimeManager.getInstance().now());
         return date1.getMonth() == date2.getMonth()
     }
 	private wx3_functionX_12092(){console.log(9158)}
@@ -156,7 +156,7 @@ class DateUtil {
     */
 	private wx3_functionX_12096(){console.log(1757)}
     public static getNextDateTimeByHours(h: number): number {
-        var now = TimeManager_wx3.getInstance().now();
+        var now = TimeManager.getInstance().now();
         var date = new Date(now * 1000);
         var diffMinus = -480 - date.getTimezoneOffset();//和本地时区的 分钟间隔
         var localMinutes = (h - date.getHours()) * 60 + diffMinus//转换为本地时间
@@ -176,7 +176,7 @@ class DateUtil {
     */
 	private wx3_functionX_12098(){console.log(4855)}
     public static getNextChineseDateByHours(h: number,date: Date): Date {
-        date = date || TimeManager_wx3.getInstance().chineseDate();
+        date = date || TimeManager.getInstance().chineseDate();
         if(date.getHours() >= h)
             date.setDate(date.getDate() + 1);
         date.setHours(0);

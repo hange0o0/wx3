@@ -44,9 +44,9 @@ class GetCoinUI extends game.BaseWindow_wx3 {
     public show(){
         UM_wx3.testPassDay();
 
-        UM_wx3.renewFriendNew(()=>{
+        //UM_wx3.renewFriendNew(()=>{
             super.show()
-        })
+        //})
 
     }
 	private wx3_functionX_12378(){console.log(231)}
@@ -83,6 +83,7 @@ class GetCoinUI extends game.BaseWindow_wx3 {
         ]
         //if(!UM_wx3.isTest && ChangeUserUI.adList.length)
         //{
+        if(Config.isWX)
             arr.push({type:3,title:'体验更多小程序'})
             //arr.push({type:3,title:'告诉我的好友们'})
         //}

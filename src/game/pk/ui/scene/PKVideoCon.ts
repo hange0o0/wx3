@@ -237,7 +237,8 @@ class PKVideoCon_wx3 extends game.BaseContainer_wx3 {
                 break;
             case PKConfig_wx3.VIDEO_MONSTER_WIN:
                 item = this.getItemByID(data.id);
-                item.winRemove();
+                if(item)
+                    item.winRemove();
                 break;
             case PKConfig_wx3.VIDEO_MONSTER_ADD_STATE:
                 item = this.getItemByID(data.id);

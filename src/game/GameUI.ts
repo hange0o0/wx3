@@ -12,60 +12,26 @@ class GameUI extends game.BaseUI_wx3 {
         this.skinName = "GameUISkin";
     }
 
-	private wx3_functionX_11923(){console.log(4873)}
+
     private scroller: eui.Scroller;
     public list: eui.List;
     private bottomGroup: eui.Group;
-    //private buffBtn: eui.Group;
-    //private buffRed: eui.Image;
     private workBtn: eui.Group;
-    public tecBtn: eui.Group;
     public monsterBtn: eui.Group;
-	private wx3_functionX_11924(){console.log(4143)}
     public chapterBtn: eui.Group;
     private chapterRed: eui.Image;
     public fightBtn: eui.Group;
-    public skillBtn: eui.Group;
     private fightRed: eui.Image;
-    //private coinGroup: eui.Group;
-    //private shopRedMC: eui.Image;
+    public tecBtn: eui.Group;
+    public skillBtn: eui.Group;
+    private coinGroup: eui.Group;
     private coinText: eui.Label;
     private diamondGroup: eui.Group;
-	private wx3_functionX_11925(){console.log(1801)}
     private diamondText: eui.Label;
     private soundBtn: eui.Image;
-    private loadingGroup: eui.Group;
-    private changeUser: ChangeUserUI;
-    private startBtn: eui.Image;
-    private loadText: eui.Label;
-	private wx3_functionX_11926(){console.log(3962)}
-    private barGroup: eui.Group;
-    private barMC: eui.Rect;
-
-    //private taskGroup: eui.Group;
-    //private taskText: eui.Label;
-    //private taskText2: eui.Label;
-    //private taskBtn: eui.Group;
-    //private taskBtn2: eui.Group;
-    //private taskRed: eui.Image;
 
 
 
-	private wx3_functionX_11927(){console.log(5235)}
-
-
-
-
-
-
-	private wx3_functionX_11928(){console.log(3743)}
-
-    private infoBtn:UserInfoBtn
-    private haveGetInfo = false;
-    private haveLoadFinish = false;
-    private haveGetUser = false;
-    private needShowStartBtn = false;
-	private wx3_functionX_11929(){console.log(895)}
 
     private firstShow = true;
     private dataProvider:eui.ArrayCollection;
@@ -85,11 +51,6 @@ class GameUI extends game.BaseUI_wx3 {
             SkillUI.getInstance().show();
         })
 
-	wx3_function(2363);
-
-        //this.changeUser.stopRed = true;
-        //this.addBtnEvent(this.taskBtn,this.onTaskBtn)
-        //this.addBtnEvent(this.taskBtn2,this.onTaskBtn)
 
         this.scroller.viewport = this.list
         this.dataProvider = this.list.dataProvider = new eui.ArrayCollection([])
@@ -100,14 +61,7 @@ class GameUI extends game.BaseUI_wx3 {
             //    return ChangeUserUI;
             return MainWorkItem;
         };
-	wx3_function(2478);
 
-        this.infoBtn = new UserInfoBtn(this.startBtn, (res)=>{
-            this.renewInfo_2620(res);
-        }, this, Config.localResRoot + "wx_btn_info.png");
-        this.infoBtn.visible = false;
-        this.startBtn.visible = false;
-	wx3_function(4400);
 
         MyTool.addLongTouch(this.soundBtn,()=>{
             if(DEBUG)
@@ -118,176 +72,47 @@ class GameUI extends game.BaseUI_wx3 {
             if(DebugUI.getInstance().debugOpen && !SoundManager_wx3.getInstance().soundPlaying)
             {
                 DebugUI.getInstance().show();
-	wx3_function(1261);
             }
         },this)
         //this.addBtnEvent(this.taskGroup,this.onTask)
+
+        if(Config.isZJ)
+        {
+            new ZijieScreenBtn();
+        }
 
     }
 
     public scrollToWork(){
         this.scroller.viewport.scrollV = Math.max(0,(500+320+100) -this.scroller.height)
     }
-	private wx3_functionX_11930(){console.log(8442)}
-
-    //private onTaskBtn(){
-    //    this.taskBtn.visible = this.taskBtn2.visible = false;
-    //    egret.Tween.removeTweens(this.taskGroup)
-    //    if(this.taskGroup.x == 0)
-    //    {
-    //        egret.Tween.get(this.taskGroup).to({x:-600},300).call(this.renewTaskRed,this);
-    //    }
-    //    else
-    //    {
-    //        egret.Tween.get(this.taskGroup).to({x:20},200).to({x:0},100).call(this.renewTaskRed,this);
-    //    }
-    //}
-
-    //private renewTaskRed(){
-    //    this.taskRed.visible = this.taskGroup.x == -600 && TaskManager.getInstance().isTaskFinish()
-    //    this.taskBtn.visible = this.taskGroup.x == -600
-    //    this.taskBtn2.visible = !this.taskBtn.visible
-    //}
-
-    //public hideTask(){
-    //    this.taskGroup.x = -600;
-    //    this.renewTaskRed();
-    //}
-    //public showTask(){
-    //    this.taskGroup.x = -600;
-    //    this.onTaskBtn();
-    //}
 
     public showDefGuide(){
         this.scroller.viewport.scrollV = 0;
-	wx3_function(9452);
         this.scroller.validateNow()
         MyTool.runListFun(this.list,'defGuide')
 
     }
 
-    //private onTask(e){
-    //    e.stopImmediatePropagation();
-    //    TaskManager.getInstance().onTaskGo();
-    //}
-    //
-    //public renewTask(){
-    //    var TSM = TaskManager.getInstance();
-    //    var vo = TSM.getCurrentTask();
-    //    if(vo)
-    //    {
-    //        var value = Math.min(TSM.getTaskValue(vo),vo.value);
-    //        this.setHtml(this.taskText,vo.getDes() + '  ' + this.createHtml(value + '/' + vo.value,0xFFECA5))
-    //        if(value<vo.value)
-    //        {
-    //            this.taskText2.text = '去完成>>'
-    //            this.taskText2.textColor = 0xFCB33C
-    //        }
-    //        else
-    //        {
-    //            this.taskText2.text = '【领取奖励】'
-    //            this.taskText2.textColor = 0x70F45F
-    //        }
-    //    }
-    //    else
-    //    {
-    //        this.taskGroup.visible = false;
-    //    }
-    //}
 
-	private wx3_functionX_11931(){console.log(9142)}
-    private renewInfo_2620(res?){
-        if(this.haveGetUser)//防止重复授权进入
-            return;
-        var wx = window['wx'];
-        if(!wx)
-        {
-            this.haveGetUser = true;
-            this.initData_847();
-	wx3_function(7575);
-            return;
-        }
-        if(res)
-        {
-            if(!res.userInfo)
-            {
-                //this.infoBtn.visible = false;
-                if(UM_wx3.helpUser)
-                {
-                    wx.showModal({
-                        title: '好友请求授权',
-                        showCancel:true,
-                        cancelText:'重新授权',
-                        confirmText:'进入游戏',
-                        content: '你是通过好友邀请进入的，不授权将无法完成该好友请求的帮助，是否继续？',
-                        success: (res)=> {
-                            if (res.confirm) {
-                                this.infoBtn.visible = false;
-                                this.haveGetUser = true;
-                                this.initData_847();
-                            }
-                        }
-                    })
-                    return;
-                }
-                this.infoBtn.visible = false;
-                this.haveGetUser = true;
-                this.initData_847();
-                return;
-            }
 
-            UM_wx3.renewInfo(res.userInfo)
-            this.haveGetUser = true;
-            this.initData_847();
-            return;
-        }
-        wx.getSetting({
-            success: (res) =>{
-                console.log(res.authSetting)
-                if(res.authSetting["scope.userInfo"])//已授权
-                {
-                    this.haveGetUser = true;
-                    this.initData_847()
-                    wx.getUserInfo({
-                        success: (res) =>{
-                            var userInfo = res.userInfo
-                            UM_wx3.renewInfo(userInfo)
-                            //UM.head = userInfo.avatarUrl
-                            //UM.gender = userInfo.gender || 1 //性别 0：未知、1：男、2：女
-                        }
-                    })
-                }
-                else
-                {
-                    this.needShowStartBtn = true;
-                    this.initData_847()
-                    //this.infoBtn.visible = true;
-                }
-            }
-        })
-    }
-	private wx3_functionX_11932(){console.log(7326)}
 
     private onMonster_4316(){
         MonsterUI.getInstance().show();
     }
     private onTec_1910(){
         TecUI.getInstance().show();
-	wx3_function(2268);
     }
     private onRank_6057(){
         WorkUI.getInstance().show();
     }
 
-
-	private wx3_functionX_11933(){console.log(6589)}
     private onSetting_5735(){
         SoundManager_wx3.getInstance().soundPlaying = !SoundManager_wx3.getInstance().soundPlaying
         SoundManager_wx3.getInstance().bgPlaying = !SoundManager_wx3.getInstance().bgPlaying
         this.renewSound_1666();
 
     }
-	private wx3_functionX_11934(){console.log(8359)}
     private onChapter_6043(){
         ChapterUI.getInstance().show();
         //CoinGameUI.getInstance().show();
@@ -296,18 +121,13 @@ class GameUI extends game.BaseUI_wx3 {
     private renewSound_1666(){
         this.soundBtn.source = SoundManager_wx3.getInstance().bgPlaying?'sound_btn1_png':'sound_btn2_png'
     }
-	private wx3_functionX_11935(){console.log(7696)}
 
     public onFight(){
         FightUI.getInstance().show()
-        //LogUI.getInstance().show();
-        //this.mainPKUI.hide();
-        //this.team1.visible = this.team2.visible = !this.mainPKUI.visible
     }
 
     public onShop(){
         GetCoinUI.getInstance().show();
-	wx3_function(4735);
     }
 
     public scrollToBottom(){
@@ -316,127 +136,33 @@ class GameUI extends game.BaseUI_wx3 {
             this.scroller.viewport.scrollV = this.scroller.viewport.contentHeight - this.scroller.height
         },this)
     }
-	private wx3_functionX_11936(){console.log(8772)}
 
     public show(){
         super.show();
     }
 
-    private callShow_8865(){
-        this.loadText.text = '初始化中'
-
-
-        //var index = PKManager.getInstance().getTodayIndex();
-        //PKManager.getInstance().loadLevelData(()=>{
-        //PKManager.getInstance().loadLevelData(index,(data)=>{
-            //PKManager.getInstance().initData(index,data);
-            if(this.needShowStartBtn)
-            {
-                this.haveLoadFinish = true;
-	wx3_function(9924);
-                this.initData_847();
-                return;
-            }
-            setTimeout(()=>{
-                this.haveLoadFinish = true;
-                this.initData_847();
-	wx3_function(8646);
-            },1000)
-        //})
-
-    }
-
-
-
-	private wx3_functionX_11937(){console.log(682)}
 
     public onShow(){
-        PKManager_wx3.getInstance().loadLevel();//处理等级数据，玩家登录后有可能会用到
-        PKManager_wx3.getInstance().loadNick();//处理等级数据，玩家登录后有可能会用到
-        PKManager_wx3.getInstance().loadChapter(); //任务生成会用到
-        var self = this;
-	wx3_function(6796);
+
+
+
         this.bottomGroup.visible = false;
         this.coinText.text = '???'
         this.diamondText.text = '???'
 
 
-
-	wx3_function(4572);
         this.renewSound_1666();
-        this.loadingGroup.visible = true;
-        var w = 204;
-        this.barMC.width = w;
-        self.loadText.text = '正在加载素材，请耐心等候..'
-        this.renewInfo_2620();
-	wx3_function(396);
-        UM_wx3.getUserInfo(()=>{
-            this.haveGetInfo = true;
-            this.initData_847();
-        });
-        var wx =  window["wx"];
-        if(wx)
-        {
-            const loadTask = wx.loadSubpackage({
-                name: 'assets2', // name 可以填 name 或者 root
-                success(res) {
-                    RES.loadGroup('monster')
-                    egret.callLater(()=>{
-                        self.callShow_8865();
-                    },this)
-                },
-                fail(res) {
-                }
-            })
-
-            loadTask.onProgressUpdate(res => {
-                self.barMC.width = w*res.progress/100;
-	wx3_function(4123);
-                self.loadText.text = '正在加载素材..' + res.progress + '%'
-            })
-            return;
-        }
-        RES.loadGroup('monster')
-        egret.callLater(()=>{
-            self.callShow_8865();
-        },this)
-    }
-	private wx3_functionX_11938(){console.log(4212)}
 
 
-    private initData_847(){
-        if(this.haveLoadFinish && this.haveGetInfo && !this.haveGetUser && this.needShowStartBtn)
-        {
-            this.changeUser.renew()
-            this.loadText.text = '点击屏幕进入游戏';
-	wx3_function(6040);
-            this.needShowStartBtn = false;
-            this.infoBtn.visible = true;
-            this.barGroup.visible = false;
-            return;
-            //this.loadText.text = '用户授权后可进入游戏'
-        }
-        if(!this.haveLoadFinish || !this.haveGetInfo  || !this.haveGetUser)
-            return;
-
-        this.infoBtn.visible = false;
-        //UM_wx3.isTest = true;
-
-
-	wx3_function(1344);
         GuideManager.getInstance().isGuiding = UM_wx3.isFirst;
         this.bottomGroup.visible = true;
-        this.loadingGroup.visible = false;
         this.showIndex = -1;
         this.reInitList()
         this.onTimer();
-	wx3_function(148);
         this.onCoinChange_8520();
         this.onDimaondChange_1194();
 
-        //this.renewTask();
-        //this.showTask();
-        MyTool.removeMC(this.changeUser);
+
 
         AniManager_wx3.getInstance().preLoadMV(8)
         AniManager_wx3.getInstance().preLoadMV(103)
@@ -458,37 +184,24 @@ class GameUI extends game.BaseUI_wx3 {
         this.addPanelOpenEvent(GameEvent.client.BUFF_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.FIGHT_CHANGE,this.renewList)
         this.addPanelOpenEvent(GameEvent.client.TASK_CHANGE,this.onTaskChange_2584)
-        //this.addPanelOpenEvent(GameEvent.client.pass_day,this.onPassDay)
-	wx3_function(7175);
+
         this.firstShow = false;
 
         TaskManager.getInstance().init();
         if(GuideManager.getInstance().isGuiding)
         {
             GuideManager.getInstance().init();
-	wx3_function(3295);
             GuideManager.getInstance().showGuide();
             GuideManager.getInstance().enableScrollV(this.scroller);
         }
         else
         {
             SoundManager_wx3.getInstance().playSound('bg');
-	wx3_function(5817);
             MyADManager.getInstance().testWX5Back();
             WorkOfflineUI.getInstance().show(UM_wx3.offlineTime,WorkManager.getInstance().offlineEarn)
 
         }
     }
-
-
-    //private onPassDay(){
-    //    var index = PKManager.getInstance().getTodayIndex();
-    //    PKManager.getInstance().loadLevelData(index,(data)=>{
-    //        PKManager.getInstance().initData(index,data);
-    //    })
-    //}
-
-	private wx3_functionX_11939(){console.log(9452)}
 
     private onTaskChange_2584(){
         MyTool.runListFun(this.list,'renewTask')
@@ -496,14 +209,12 @@ class GameUI extends game.BaseUI_wx3 {
 
     public endGuide(){
         this.scroller.viewport.scrollV = 0;
-	wx3_function(9615);
         GuideManager.getInstance().enableScrollV(this.scroller);
     }
 
     public renewList(){
          MyTool.renewList(this.list)
     }
-	private wx3_functionX_11940(){console.log(4328)}
 
     private getListArr_8306(){
         var arr:any =  [{def:true}]

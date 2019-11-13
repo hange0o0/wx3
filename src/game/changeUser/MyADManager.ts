@@ -16,8 +16,9 @@ class MyADManager {
     public finishExtraUin = -1;
 
     public cloudPath = 'cloud://server1-3f4fd3.7365-server1-3f4fd3/'
-    public myAppID = 'wxe066524f2972cb1a'
+
     public adList;
+    public isCallADHide = false
 
 	private wx3_functionX_57296(){console.log(4394)}
     public onShow(res){
@@ -77,6 +78,11 @@ class MyADManager {
 	private wx3_functionX_57299(){console.log(7064)}
     public getAD(fun?){
         if(this.adList)
+        {
+            fun && fun();
+            return;
+        }
+        if(Config.isZJ || Config.isQQ)
         {
             fun && fun();
             return;
@@ -168,7 +174,7 @@ class MyADManager {
         {
             var oo = arr[i];
 	wx3_function(4039);
-            if(oo.appid == this.myAppID)
+            if(oo.appid == Config.myAppID)
             {
                 arr.splice(i,1);
                 i--;
@@ -262,10 +268,10 @@ class MyADManager {
 
 
     ////////////////////////////////banner///////////////////
-	private wx3_functionX_57302(){console.log(1518)}
     public bannerAD
     public bannerBG
     public insertAD
+    public callADBottom
     public createAD(){
         //Config.adHeight = 200;
         if(!window['wx'])
@@ -276,24 +282,32 @@ class MyADManager {
             return;
         var wx = window['wx']
 
+        if(!wx.createBannerAd)
+            return;
+
 
         var btnw = Math.min(Math.pow(GameManager_wx3.stage.stageHeight/1330,1.6)*640,640)
 
-	wx3_function(431);
         let scalex = screen.availWidth/640;
         let scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
         if(btnw * scalex < 300){ //微信限制广告宽度不能小于300
             btnw = 300 / scalex;
         }
-        Config.adHeight =  btnw/640 * 224;
-	wx3_function(7055);
         var  btny = GameManager_wx3.uiHeight;//给广告留的高度
+
+        if(Config.isZJ){//字节广告限制了宽度为 128-208
+            if(btnw * scalex > 208) btnw = 208 / scalex;
+            else if(btnw * scalex < 128) btnw = 128 / scalex;
+            //btny = GameManager_wx4.uiHeight - Math.min(btnw * 9/16, 224);//给广告留的高度(因为界面留空是按微信224留的空，不是取的实际广告高度，故这里要取最大224避免广告遮住上方的内容)
+        }
+
+        Config.adHeight =  btnw/640 * 224;
+
         var  paddingTop = GameManager_wx3.paddingTop();
         var btnx =  (640-btnw)/2;
 
         let left = scalex * (btnx);
         let top = scaley * (btny + paddingTop);
-	wx3_function(3442);
         let width = scalex * btnw;
 
         let bannerAd = this.bannerAD = wx.createBannerAd({
@@ -307,24 +321,44 @@ class MyADManager {
         bannerAd.onError(()=>{
             Config.adHeight = 0
             GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
-	wx3_function(1824);
         })
         bannerAd.onLoad(()=>{
-
+            if(this.isCallADHide)
+            {
+                bannerAd.hide();
+                this.isCallADHide = false;
+            }
         })
         bannerAd.onResize((res)=>{
+            var btnw = res.width/scalex;
+            var btnx =  (640-btnw)/2;
+            bannerAd.style.left = scalex * (btnx);
+
+
             var hh = res.height/scalex*(640/btnw);
-	wx3_function(2853);
-            if(Math.abs(hh - 224)/224 > 0.02)
+            //if(Math.abs(hh - 224)/224 > 0.02)
+            //{
+            Config.adHeight =  btnw/640 * hh;
+            console.log(res,btnw,Config.adHeight )
+            GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
+            //bannerAd.style.top = scaley * (GameManager_wx4.uiHeight + paddingTop);
+
+            this.bannerAD.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop - (this.callADBottom || 0) - GameManager_wx3.paddingBottom() - Config.adHeight);
+            //}
+
+            if(this.isCallADHide)
             {
-                Config.adHeight =  btnw/640 * hh;
-                GameManager_wx3.stage.dispatchEventWith(egret.Event.RESIZE);
-                bannerAd.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop);
+                bannerAd.hide();
+                this.isCallADHide = false;
             }
+            //
+
             //console.log(res,scalex,scaley,GameManager.stage.stageHeight)
         })
+        this.isCallADHide = true;
         bannerAd.show()
-        bannerAd.hide();
+
+
 
         if (wx.createInterstitialAd && Config.wx_insert){
             this.insertAD = wx.createInterstitialAd({
@@ -342,25 +376,27 @@ class MyADManager {
         })
     }
 
+
     public showBanner(bottom){
         if(this.bannerAD)
         {
+            this.isCallADHide = false;
             if(!this.bannerBG)
             {
                 this.bannerBG = new eui.Image('blace_bg_jpg')
                 this.bannerBG.width = 640;
-	wx3_function(6282);
                 this.bannerBG.height = Config.adHeight;
             }
             GameManager_wx3.container.addChild(this.bannerBG)
             this.bannerBG.bottom = bottom;
             this.bannerAD.show()
             var scaley = screen.availHeight/GameManager_wx3.stage.stageHeight;
-	wx3_function(8710);
             var  paddingTop = GameManager_wx3.paddingTop();
             this.bannerAD.style.top = scaley * (GameManager_wx3.uiHeight + paddingTop - bottom - GameManager_wx3.paddingBottom() - Config.adHeight);
+            this.callADBottom = bottom
         }
     }
+
 
     public hideBanner(){
         if(this.bannerAD)
