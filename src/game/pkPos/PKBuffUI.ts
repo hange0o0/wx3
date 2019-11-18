@@ -1,6 +1,6 @@
 class PKBuffUI extends game.BaseWindow_wx3 {
 
-    private static _instance: PKBuffUI;
+    public static _instance: PKBuffUI;
     public static getInstance(): PKBuffUI {
         if(!this._instance)
             this._instance = new PKBuffUI();
@@ -22,6 +22,8 @@ class PKBuffUI extends game.BaseWindow_wx3 {
     private videoBtn: eui.Image;
     private pkBtn: eui.Button;
     private desText: eui.Label;
+    public cb: eui.CheckBox;
+
 
 
 
@@ -61,6 +63,18 @@ class PKBuffUI extends game.BaseWindow_wx3 {
         this.addBtnEvent(this.refreshBtn,this.onRefresh)
         this.addBtnEvent(this.lock1,()=>{this.onLock(1)})
         this.addBtnEvent(this.lock2,()=>{this.onLock(2)})
+
+        if(!Config.isWX)
+        {
+            MyTool.removeMC(this.lock1)
+            MyTool.removeMC(this.lock2)
+        }
+
+        this.cb.selected = true;
+        if(ZijieScreenBtn.e)
+            this.currentState = 's2'
+        else
+            this.currentState = 's1'
     }
 	private wx3_functionX_12698(){console.log(3919)}
 
@@ -177,6 +191,15 @@ class PKBuffUI extends game.BaseWindow_wx3 {
         this.hide();
         this.fun(this.atkAdd,this.hpAdd)
         this.hide();
+
+        if(this.cb.selected)
+        {
+            if(ZijieScreenBtn.e)
+            {
+                ZijieScreenBtn.e.init();
+                ZijieScreenBtn.e.start();
+            }
+        }
 	wx3_function(8989);
     }
 

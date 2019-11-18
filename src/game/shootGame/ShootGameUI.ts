@@ -59,7 +59,7 @@ class ShootGameUI_wx3 extends game.BaseUI_wx3 {
     public constructor() {
         super();
         this.skinName = "ShootGameUISkin";
-        this.isShowAD = true
+        this.isShowAD = !UM_wx3.isTest
     }
 
     public childrenCreated() {
@@ -163,6 +163,8 @@ class ShootGameUI_wx3 extends game.BaseUI_wx3 {
         }
 
         this.cannonGroup.bottom = Config.adHeight
+        if(UM_wx3.isTest)
+            this.cannonGroup.bottom = 10
         this.cdGroup.visible = false
         this.cannonGroup.visible = false
         this.coinGroup.visible = false

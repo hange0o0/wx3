@@ -29,7 +29,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20190624//与服务器相同则为测试版本
+    public testVersion = 20191113//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;

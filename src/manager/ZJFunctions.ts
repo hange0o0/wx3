@@ -166,6 +166,7 @@ class ZijieScreenBtn extends game.BaseContainer_wx3{
     public awardPublish(fun:Function){
         this.publish(()=>{
 
+            UM_wx3.coinObj.shareNum ++;
             fun && fun();
         })
     }

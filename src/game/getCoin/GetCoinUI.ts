@@ -85,6 +85,8 @@ class GetCoinUI extends game.BaseWindow_wx3 {
         //{
         if(Config.isWX)
             arr.push({type:3,title:'体验更多小程序'})
+        else if(Config.isZJ)
+            arr.push({type:7,title:'录屏分享'})
             //arr.push({type:3,title:'告诉我的好友们'})
         //}
         //arr.push({type:4,title:'邀请X位新的好友'})

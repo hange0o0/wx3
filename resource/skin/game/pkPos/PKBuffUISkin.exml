@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PKBuffUISkin" width="560" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="PKBuffUISkin" width="560" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="s1,s2"  height.s2="460">
 	<e:Image scale9Grid="26,25,6,7" x="0" y="0" width="100%" height="100%" source="bg13_png"/>
 	<e:Image source="bg1_png" scale9Grid="8,8,14,14" y="85" anchorOffsetX="0" anchorOffsetY="0" height="200" left="30" right="30"/>
 	<e:Group y="110" horizontalCenter="0">
@@ -49,4 +49,5 @@
 		</e:layout>
 	</e:Group>
 	<e:Label id="desText" text="剩余刷新次数：5次" y="245" horizontalCenter="0" size="24" textColor="0xf4ba7c"/>
+	<e:CheckBox id="cb" label="开启录屏，胜利后分享获得双倍奖励" includeIn="s2" horizontalCenter="0" skinName="MyCheckBoxSkin" bottom="125"/>
 </e:Skin>

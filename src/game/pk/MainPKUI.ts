@@ -79,6 +79,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
     private dragTarget: eui.Image = new eui.Image();
 
     public showTimes = 0;
+    public zjShare = false
 
 	private wx3_functionX_12455(){console.log(6012)}
     public childrenCreated() {
@@ -206,7 +207,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         {
             if(GuideManager.getInstance().isGuiding)
                 return;
-            if(BuffManager.getInstance().getUserNum()<1)
+            if(Config.isWX && BuffManager.getInstance().getUserNum()<1)
             {
                 MyWindow.ShowTips('在【好友助力】中解锁PK加速功能')
                 return;
@@ -230,7 +231,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 	private wx3_functionX_12459(){console.log(6967)}
     private onDouble_8100(){
-        if(Config.isZJ)
+        if(this.zjShare)
         {
             ZijieScreenBtn.e.awardPublish(()=>{
                 var arr = []
@@ -374,11 +375,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
         this.forceGroup.visible = !this.dataIn.isGuess && !this.dataIn.isAsk
 
 
-        if(ZijieScreenBtn.e && !this.dataIn.isReplay)
-        {
-            ZijieScreenBtn.e.init();
-            ZijieScreenBtn.e.start();
-        }
+
     }
 
     public hide(){
@@ -761,12 +758,14 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
             }
 
 
+            this.zjShare = false
             if(this.shareStr)
             {
-                if(Config.isZJ && (this.dataIn.coin || this.dataIn.diamond))
+                if(Config.isZJ && (this.dataIn.coin || this.dataIn.diamond) && ZijieScreenBtn.e && ZijieScreenBtn.e.step == 2)
                 {
-                    this.doubleBtn.label = '双倍'
+                    this.doubleBtn.label = '  双倍'
                     this.doubleBtn.icon = 'zj_video_icon_png'
+                    this.zjShare = true
                 }
                 else
                 {
@@ -922,8 +921,6 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 
                 ZijieScreenBtn.e.stop();
-
-
 
             })
 

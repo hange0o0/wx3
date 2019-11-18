@@ -76,6 +76,13 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 this.dataChanged();
                 ShootGameUI_wx3.getInstance().show(this.getCoin_9848(0.5));
             }
+            else if(this.data.type == 7)
+            {
+                GetCoinUI.getInstance().hide();
+                ChapterManager.getInstance().pkChapter(UM_wx3.chapterLevel+1)
+                if(PKBuffUI._instance && PKBuffUI._instance.cb)
+                    PKBuffUI._instance.cb.selected = true
+            }
             return;
         }
         if(!this.canAward)
@@ -106,13 +113,15 @@ class GetCoinItem extends game.BaseItem_wx3 {
             //    break;
             case 3:   //{type:3,title:'告诉我的好友们'},
                 UM_wx3.coinObj.shareAward ++;
-	wx3_function(7156);
                 break;
             //case 4: // {type:4,title:'邀请X位新的好友'},
             //    UM.coinObj.newAward ++;
             //    break;
             case 5: //
                 UM_wx3.coinObj.videoAwardNum ++;
+                break;
+            case 7:   //{type:3,title:'告诉我的好友们'},
+                UM_wx3.coinObj.shareAward ++;
                 break;
         }
         this.dataChanged();
@@ -277,6 +286,33 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 this.canAward = true;
 	wx3_function(9354);
 
+                break;
+
+            case 7:
+                if(coinObj.shareAward >= 3)
+                {
+                    this.awardMC.visible = true;
+                    this.goBtn.visible = false
+                }
+                else
+                {
+                    if(coinObj.shareNum > coinObj.shareAward)
+                    {
+                        this.goBtn.label = '领取'
+                        this.canAward = true;
+                    }
+                    else
+                    {
+                        this.goBtn.skinName = 'Btn2Skin'
+                        this.goBtn.label = '前往'
+                        this.goWork = true
+                    }
+                }
+                this.adGroup.visible = false;
+                this.bg.source = 'coin_bg1_jpg'
+                this.titleText.text = '挑战关卡胜利并分享录屏（'+coinObj.shareNum+'/3）'
+                this.addDiamond = 1
+                this.addCoin = this.getCoin_9848(0.3);
                 break;
 
         }
