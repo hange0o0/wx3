@@ -350,10 +350,13 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
     public onShow(){
         this.lastAction = []
-        if(Config.adHeight)
-        {
-            this.scroller.bottom = Config.adHeight;
-        }
+        //if(Config.adHeight)
+        //{
+        //    this.scroller.bottom = Config.adHeight;
+        //}
+        //if(Config.isZJ)
+            this.scroller.bottom = 0;
+
         var pkvideo = PKVideoCon_wx3.getInstance()
         this.con.addChild(pkvideo)
         pkvideo.y = 0;
@@ -384,6 +387,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 	wx3_function(1103);
         //this.removeEventListener(egret.Event.T,this.onStep,this)
         PKVideoCon_wx3.getInstance().remove();
+        ADIconManager.getInstance().hideAll()
        super.hide();
     }
 
@@ -410,24 +414,31 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
 
 	private wx3_functionX_12463(){console.log(3369)}
     public reset(){
+        ADIconManager.getInstance().hideAll()
         this.gameStart = false;
         this.addSpeedBtn.visible = true
         if(this.dataIn.isReplay)
         {
             this.currentState = 's2'
-            this.adBottom = 100;
-            MyADManager.getInstance().showBanner(100)
+            //this.adBottom = 100;
+            //MyADManager.getInstance().showBanner(100)
             this.topUI.setTitle(this.dataIn.title || '回放')
             this.skillList.touchChildren = this.skillList.touchEnabled = false;
         }
         else
         {
             this.currentState = 's1'
-            this.adBottom = 0;
-            MyADManager.getInstance().showBanner(0)
+            //this.adBottom = 0;
+            //MyADManager.getInstance().showBanner(0)
             this.topUI.setTitle(this.dataIn.title || '战斗进行中...')
             this.skillList.touchChildren = this.skillList.touchEnabled = true;
         }
+        //if(Config.isZJ)
+        //{
+            MyADManager.getInstance().hideBanner()
+            this.scroller.bottom = 0;
+            this.bottomUI.bottom = 0
+        //}
 
 
 
@@ -907,6 +918,7 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 this.currentState = 's2'
                 this.adBottom = 100;
                 MyADManager.getInstance().showBanner(100)
+                this.scroller.bottom = Config.adHeight;
                 if(this.dataIn.showTaskChange)
                 {
                     TaskManager.getInstance().testMainTask('chapter');
@@ -919,11 +931,23 @@ class MainPKUI_wx3 extends game.BaseUI_wx3 {
                 if(this.showTimes%8 == 0)
                     MyADManager.getInstance().showInsert();
 
+                if(Config.isZJ)
+                {
+                    this.adBottom = 0;
+                    MyADManager.getInstance().showBanner(0)
+                    this.bottomUI.bottom = Config.adHeight
+                }
+                else
+                {
+                    this.bottomUI.bottom = 0;
+                }
+                ADIconManager.getInstance().showIcon('result')
 
-                ZijieScreenBtn.e.stop();
+                ZijieScreenBtn.e && ZijieScreenBtn.e.stop();
 
             })
 
         },1000)
     }
+
 }

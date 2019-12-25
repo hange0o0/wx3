@@ -91,7 +91,10 @@ class WorkOfflineUI extends game.BaseWindow_wx3 {
         this.videoIcon.visible = true;
 	wx3_function(901);
         this.coinText.text = NumberUtil.addNumSeparator(this.coin,2);
-        this.desText.text = '在你离开的 '+DateUtil.getStringBySeconds(this.cd,false,2)+' 内挖矿获得了'
+        if(this.cd > 7*24*3600)
+            this.desText.text = '在你离开的漫长时间里，怪物们挖矿获得了'
+        else
+            this.desText.text = '在你离开的 '+DateUtil.getStringBySeconds(this.cd,false,2)+' 内挖矿获得了'
         if(this.cd >= 3600 && !UM_wx3.isTest)
         //if(true)
         {

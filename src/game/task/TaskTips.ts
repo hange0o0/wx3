@@ -17,7 +17,7 @@ class TaskTips extends game.BaseContainer_wx3 {
 
     public childrenCreated() {
         super.childrenCreated();
-        this.bottom = 10
+        this.bottom = 10 + GameManager_wx3.paddingBottom()
         this.right = 10
         this.addBtnEvent(this,this.hide)
     }

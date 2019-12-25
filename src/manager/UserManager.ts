@@ -29,7 +29,7 @@ class UserManager_wx3 {
 
 	private wx3_functionX_12055(){console.log(5490)}
     public isTest;
-    public testVersion = 20191113//与服务器相同则为测试版本
+    public testVersion = 20191223//与服务器相同则为测试版本
     public shareFail;
 
     public gameid: string;
@@ -369,7 +369,7 @@ class UserManager_wx3 {
                         this.isTest = res.result.testVersion == this.testVersion;
                         this.shareFail = res.result.shareFail;
                         //console.log(11)
-                        TimeManager.getInstance().initlogin(res.result.time)
+                        TimeManager.getInstance().initlogin(Math.round(res.result.time/1000))
                         //console.log(res.result.time)
                         this.loginUser(fun)
                     },

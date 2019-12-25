@@ -42,6 +42,16 @@ class SpaceUI extends game.BaseWindow_wx3 {
                 this.openSpace();
                 return;
             }
+
+            if(this.joinBtn.label == '观看广告开启')
+            {
+                ShareTool.openGDTV(()=>{
+                    this.openSpace();
+                })
+                return;
+            }
+
+
             var str = SM.adType == 'cd'?"在《别碰小广告》游戏中坚持"+SM.adValue+"秒，即可开启空间":"在《别碰小广告》游戏中获得"+SM.adValue+"分，即可开启空间"
 
             MyWindow.Alert(str,()=>{
@@ -101,7 +111,7 @@ class SpaceUI extends game.BaseWindow_wx3 {
     }
 
     private onTimer(){
-        if(this.joinBtn.label == '挑战开启')
+        if(this.joinBtn.label == '挑战开启' || this.joinBtn.label == '观看广告开启')
         {
             var SM = SpaceManager.getInstance();
             if(!DateUtil.isSameDay(SM.addTime))
@@ -143,7 +153,10 @@ class SpaceUI extends game.BaseWindow_wx3 {
         }
         else
         {
-            this.joinBtn.label = '挑战开启'
+            if(Config.isZJ)
+                this.joinBtn.label = '观看广告开启'
+            else
+                this.joinBtn.label = '挑战开启'
             this.onTimer();
         }
 

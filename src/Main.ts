@@ -213,6 +213,7 @@ class Main extends eui.UILayer {
 
         MyADManager.getInstance().getAD()
         MyADManager.getInstance().createAD()
+        ADIconManager.getInstance().init()
         window['wx'] && MyADManager.getInstance().initExtra(window['wx'].getLaunchOptionsSync())
         //GameUI.getInstance().show();
 

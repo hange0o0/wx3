@@ -33,6 +33,7 @@ class ChangeJumpUI extends game.BaseWindow_wx3{
         }
         this.fun = fun;
         this.str = str;
+        this.isSuccess = false;
         super.show();
     }
 
@@ -40,12 +41,35 @@ class ChangeJumpUI extends game.BaseWindow_wx3{
         this.renew();
     }
 
+    private isSuccess = false;
     public renew(){
         this.setHtml(this.destText, this.str);
+
+        if(ADIconManager.getInstance().showIcon('changeJump'))
+        {
+            this.list.visible = false;
+            GameManager_wx3.getInstance().addTestHide((res)=>{
+                if(res.targetAction == 9)
+                {
+                    this.isSuccess = true;
+                }
+            })
+
+            GameManager_wx3.getInstance().addTestShow((res)=>{
+                if(this.isSuccess)
+                {
+                    this.fun();
+                    this.hide()
+                }
+            })
+            return;
+        }
         this.list.dataProvider = new eui.ArrayCollection(MyADManager.getInstance().getListByNum(9,this.fun))
     }
 
     public hide(){
         super.hide();
+        ADIconManager.getInstance().hideAll();
+        GameManager_wx3.getInstance().cleanAllTest();
     }
 }

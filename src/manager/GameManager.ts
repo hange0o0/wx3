@@ -81,6 +81,34 @@ class GameManager_wx3 {
         //this.createAD();
     }
 
+    public cleanAllTest(){
+        this.testHideArr.length = 0
+        this.testShowArr.length = 0
+    }
+
+    public addTestHide(fun){
+        this.testHideArr.push(fun);
+    }
+    public addTestShow(fun){
+        this.testShowArr.push(fun);
+    }
+
+    private testHideArr = []
+    private testShowArr = []
+    public testHide(res){
+        while(this.testHideArr[0])
+        {
+            this.testHideArr.shift()(res);
+        }
+    }
+
+    public testShow(res){
+        while(this.testShowArr[0])
+        {
+            this.testShowArr.shift()(res);
+        }
+    }
+
     //private createAD(){
     //    //Config.adHeight = 200;
     //    if(!window['wx'])
@@ -322,6 +350,7 @@ if(window["wx"])
     wx.onHide(function(res){
         if(!GameManager_wx3.stage)
             return;
+        GameManager_wx3.getInstance().testHide(res)
         UM_wx3.upDateUserData();
         SoundManager_wx3.getInstance().stopBgSound();
         GameManager_wx3.stage.dispatchEventWith(egret.Event.DEACTIVATE);
@@ -332,6 +361,7 @@ if(window["wx"])
     wx.onShow(function(res){
         if(!GameManager_wx3.stage)
             return;
+        GameManager_wx3.getInstance().testShow(res)
         if(PKManager_wx3.getInstance().isPKing && !MainPKUI_wx3.getInstance().finish)
             SoundManager_wx3.getInstance().playSound('pkbg');
         else

@@ -17,12 +17,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
     private desText: eui.Label;
     //private diamondMC: eui.Image;
     private awardMC: eui.Image;
-    private adGroup: eui.Group;
-	private wx3_functionX_12345(){console.log(8081)}
-    private ad1: eui.Image;
-    private ad2: eui.Image;
-    private ad3: eui.Image;
-    private ad4: eui.Image;
+
 
 
 	private wx3_functionX_12346(){console.log(8594)}
@@ -129,7 +124,6 @@ class GetCoinItem extends game.BaseItem_wx3 {
     }
 
     public dataChanged(){
-        this.adGroup.visible = false;
         this.canAward = false;
         this.goWork = false;
 	wx3_function(5730);
@@ -202,17 +196,12 @@ class GetCoinItem extends game.BaseItem_wx3 {
                         this.goWork = true
                     }
                 }
-                this.adGroup.visible = true;
-	wx3_function(6780);
-                for(var i=0;i<4;i++)
-                {
-                    this['ad'+(i+1)].source = MyADManager.getInstance().adList[i] ? MyADManager.getInstance().adList[i].logo:''
-                }
+
 
                 this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '体验任意小程序30秒（'+coinObj.shareNum+'/3）'
                 //this.diamondMC.visible = coinObj.shareAward < 3;
-                this.addDiamond = 1
+                this.addDiamond = 3
                 this.addCoin = this.getCoin_9848(0.3);
 	wx3_function(8444);
                 break;
@@ -258,7 +247,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
                 this.bg.source = 'coin_bg2_jpg'
                 this.titleText.text = '观看广告（'+coinObj.videoAwardNum+'/3）'
                 //this.diamondMC.visible = coinObj.videoAwardNum < 3;
-                this.addDiamond = 1
+                this.addDiamond = 3
                 this.addCoin = this.getCoin_9848(0.4);
 	wx3_function(500);
                 break;
@@ -275,7 +264,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
                     this.goWork = true
                 }
                 this.bg.source = 'coin_bg3_jpg'
-                this.addDiamond = 1;
+                this.addDiamond = 3;
 	wx3_function(7415);
                 this.titleText.text = '炮击怪物（'+coinObj.gameNum+'/3）'
                 break;
@@ -308,10 +297,9 @@ class GetCoinItem extends game.BaseItem_wx3 {
                         this.goWork = true
                     }
                 }
-                this.adGroup.visible = false;
                 this.bg.source = 'coin_bg1_jpg'
                 this.titleText.text = '挑战关卡胜利并分享录屏（'+coinObj.shareNum+'/3）'
-                this.addDiamond = 1
+                this.addDiamond = 3
                 this.addCoin = this.getCoin_9848(0.3);
                 break;
 
@@ -320,6 +308,7 @@ class GetCoinItem extends game.BaseItem_wx3 {
         if(this.addDiamond)
         {
              this.awardGroup.addChild(this.diamondGroup);
+            this.addDiamondText.text= '+' + this.addDiamond;
 	wx3_function(5093);
         }
         else

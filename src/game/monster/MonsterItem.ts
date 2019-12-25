@@ -29,6 +29,7 @@ class MonsterItem extends game.BaseItem_wx3{
         this.heroItem.y = 170
         this.heroItem.scaleX = this.heroItem.scaleY = 1.2
         this.cardGroup.addChild(this.heroItem);
+        //this.cardGroup.mask = new egret.Rectangle(0,0,this.cardGroup.width,this.cardGroup.height)
 	wx3_function(2810);
     }
 

@@ -37,7 +37,7 @@
 		</e:Group>
 		<e:Group id="resultDiamondGroup" horizontalCenter="0" y="240">
 			<e:Image x="0" y="0" source="icon_diamond_png"/>
-			<e:Label text="x1" x="72" y="30" size="24" textColor="0x7ddbfd"/>
+			<e:Label text="x3" x="72" y="30" size="24" textColor="0x7ddbfd"/>
 			<e:layout>
 			<e:HorizontalLayout verticalAlign="middle"/>
 			</e:layout>

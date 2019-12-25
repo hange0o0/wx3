@@ -180,8 +180,11 @@ class LoadingUI extends game.BaseUI_wx3 {
                 name: 'assets2', // name 可以填 name 或者 root
                 success(res) {
                     console.log(res)
-                    RES.loadGroup('monster')
-                    self.callShow();
+                    ADIconManager.getInstance().showIcon('loading')
+                    RES.loadGroup('monster');
+                    setTimeout(()=>{
+                        self.callShow();
+                    },1000)
                     setTimeout(()=>{
                         self.changeUser.renew()
                     },5000)
@@ -237,5 +240,10 @@ class LoadingUI extends game.BaseUI_wx3 {
             this.initData();
         },1000)
 
+    }
+
+    public hide(){
+        ADIconManager.getInstance().hideAll()
+        super.hide();
     }
 }

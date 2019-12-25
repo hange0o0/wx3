@@ -115,6 +115,7 @@ class TaskManager {
             clv += 3;
             if(lastClv && clv > 2150)
             {
+                return;
                 sendClientError('lastClv:' + lastClv + '   index:' + i + '   clv:' + clv)
                 lastClv = 0;
             }

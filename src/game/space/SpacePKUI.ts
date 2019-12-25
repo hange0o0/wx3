@@ -326,6 +326,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
         PKManager_wx3.getInstance().isPKing = false
         SoundManager_wx3.getInstance().playSound('bg');
         PKVideoCon_wx3.getInstance().remove();
+        ADIconManager.getInstance().hideAll()
         super.hide();
     }
 
@@ -337,6 +338,7 @@ class SpacePKUI extends game.BaseUI_wx3 {
     }
 
     public reset(){
+        ADIconManager.getInstance().hideAll()
         this.timeText.text = '0'
         this.gameStart = false;
         this.addSpeedBtn.visible = true
@@ -671,8 +673,11 @@ class SpacePKUI extends game.BaseUI_wx3 {
 
                 if(this.showTimes%5 == 0)
                     MyADManager.getInstance().showInsert();
+
+                ADIconManager.getInstance().showIcon('result')
             })
 
         },1000)
     }
+
 }
